@@ -1,0 +1,96 @@
+//
+//  PrefixHeader.pch
+//  DemoApp
+//
+//  Created by Zinkham on 15/10/21.
+//  Copyright © 2015年 Zinkham. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <AVFoundation/AVFoundation.h>
+#import "BaseViewController.h"
+#import "Macro.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIView+Indictor.h"
+#import "JQFMDB.h"
+#import "AFNetworkClient.h"
+#import "NetworkTool.h"
+#import "TYAlertView.h"
+#import "UIView+TYAlertView.h"
+#import "NSString+Size.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
+#import "NSDictionary+Additions.h"
+#import "UIScrollView+EmptyDataSet.h"
+#import "ToastHelper.h"
+#import "IQKeyboardManager.h"
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "UIRefreshControl+AFNetworking.h"
+#import "MJRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "CATCommon.h"
+#import "UINavigationController+ZHCustomNav.h"
+#import "MBProgressHUD.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import "UITableView+FDTemplateLayoutCell.h"
+#import "HwcCustomUISwitch.h"
+#import "MBProgressHUD+SGQRCode.h"
+#import "MPHttpClient.h"
+#import "Urls.h"
+#import <WebKit/WebKit.h>
+#import "NoticeConst.h"
+
+#import "UITools.h"
+#import "UIView+MJExtension.h"
+#import "UIViewExt.h"
+#import "JSONModel.h"
+#import "Models.h"
+#import "NSArray+Shuffle.h"
+#import "NSString+Decimal.h"
+#import "JJException.h"
+
+#import "WalletManager.h"
+#import "FchainTool.h"
+#import "CACache.h"
+#import <Masonry/Masonry.h>
+
+#import "CommonHeader.h"
+#import <Masonry.h>
+#import "UITools.h"
+#import "MPHttpClient.h"
+#import "URLInterface.h"
+#import "Macros.h"
+#import "UIColor+Y_StockChart.h"
+#import "Theme.h"
+#import "UIView+SetRect.h"
+#import "NSString+IsEmptyStr.h"
+#import <SVProgressHUD.h>
+#import "UIImage+ImageEffects.h"
+#import "UIViewController+helper.h"
+#import "MPTools.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
+#import "MPayMacros.h"
+#import <MJRefresh/MJRefresh.h>
+#import "NSArray+Shuffle.h"
+
+#import <MJExtension/MJExtension.h>
+#import "UserManager.h"
+#import "CustomView.h"
+#import "JKBigDecimal.h"
+
+#import "SWFingerprintLock.h"
+#import "VisitDAppsRecordManager.h"
+#import "WBQRCodeVC.h"
+
+#import "TokenWalletProject-Swift.h"
+
+#endif
+
+#endif 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./built-1.js"></script>
+    <script src="./web3.js"></script>
+</head>
+
+<script>
+    var web3 = new Web3("http://114.115.173.246:18545")
+    
+    function genAddrFromPrivateKey(privatekey) {
+        var kp = brew.KeyPair.genFromPrikey(privatekey);
+        return kp.hexAddress
+    }
+    /*
+            将参数转换成 64长度，前边补 0
+         */
+        function toChainParam(value) {
+            var char64 = "0000000000000000000000000000000000000000000000000000000000000000"
+            var realValue = char64.substring(0, char64.length - value.length)
+            realValue += value
+            return realValue
+        }
+        /*
+        privatekey: 私钥
+        to: 转出到
+        nonce: 交易次数 十进制
+        contract: token 合约地址
+        amount: 单位  wei 十进制
+        */
+        function getTransactionC20Tx(privatekey, to, nonce, contract, amount) {
+            var kp =
+                brew.KeyPair.genFromPrikey(
+                    privatekey);
+            kp.nonce = Number(nonce).valueOf();
+            // a9059cbb000000000000000000000000fc85cd6c929847621f77bda95ea645f46df2af530000000000000000000000000000000000000000000000000de0b6b3a7640000
+            var data = "a9059cbb" + toChainParam(to) + toChainParam(Number(amount).toString(16))
+            var sign = brew.rpc.signCallContract({ keypair: kp }, ""
+                , {
+                    "contract": contract,
+                    "data": data, "amount": amount
+                })
+            return sign.tx
+        }
+
+
+        function wraperExportKeystore(privatekey, password) {
+            var kp = brew.KeyPair.genCVNFromPrikey(privatekey);
+            return JSON.stringify( brew.keystore.exportJSON(kp, password));
+        }
+
+        function wraperImportKeystore(keystore,password){
+            var kp = brew.keystore.json2KeyPair(JSON.parse(keystore),password)
+            return JSON.stringify({privateKey:kp.hexPrikey,address:"CVN" + kp.hexAddress})
+        }
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+//
+//  GCSPrefixHeader.pch
+//  GCSWallet
+//
+//  Created by MM on 2020/10/12.
+//
+
+#ifndef GCSPrefixHeader_pch
+#define GCSPrefixHeader_pch
+
+//#import <YYKit.h>
+//#import "ErrorHeader.h"
+//#import "CommonHeader.h"
+#import <Masonry.h>
+#import "UITools.h"
+#import "MPHttpClient.h"
+#import "URLInterface.h"
+#import "Macros.h"
+#import "LCAlertView.h"
+#import "UIColor+Y_StockChart.h"
+#import "Theme.h"
+#import "UIView+SetRect.h"
+#import <SVProgressHUD.h>
+#import "UIImage+ImageEffects.h"
+#import "ZZCustomView.h"
+#import "UIViewController+helper.h"
+#import "MPTools.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
+#import "MPayMacros.h"
+#import <MJRefresh/MJRefresh.h>
+#import "NSArray+Shuffle.h"
+#import "WalletDataSource.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* GCSPrefixHeader_pch */

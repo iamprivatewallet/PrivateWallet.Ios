@@ -1,0 +1,156 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - BigInt (5.2.0)
+  - CocoaSecurity (1.2.4)
+  - CryptoSwift (1.4.3)
+  - DZNEmptyDataSet (1.8.1)
+  - FDFullscreenPopGesture (1.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GMEllipticCurveCrypto (1.3)
+  - IQKeyboardManager (6.5.6)
+  - JJException (0.2.11):
+    - JJException/All (= 0.2.11)
+  - JJException/All (0.2.11):
+    - JJException/ARC
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/MRC
+    - JJException/Swizzle
+  - JJException/ARC (0.2.11):
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/DeallocBlock (0.2.11)
+  - JJException/Main (0.2.11)
+  - JJException/MRC (0.2.11):
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/Swizzle (0.2.11)
+  - JSONModel (1.8.0)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.2.0)
+  - MJExtension (3.4.1)
+  - MJRefresh (3.4.3)
+  - PNChart (0.8.9):
+    - UICountingLabel (~> 1.2.0)
+  - PromiseKit (6.15.3):
+    - PromiseKit/CorePromise (= 6.15.3)
+    - PromiseKit/Foundation (= 6.15.3)
+    - PromiseKit/UIKit (= 6.15.3)
+  - PromiseKit/CorePromise (6.15.3)
+  - PromiseKit/Foundation (6.15.3):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.15.3):
+    - PromiseKit/CorePromise
+  - RDVTabBarController (1.3.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - secp256k1.c (0.1.2)
+  - Starscream (4.0.4)
+  - SVProgressHUD (2.2.5)
+  - UICountingLabel (1.2.0)
+  - "UITableView+FDTemplateLayoutCell (1.6)"
+  - web3swift (2.5.0):
+    - BigInt (~> 5.2.0)
+    - CryptoSwift (~> 1.4.2)
+    - PromiseKit (~> 6.15.3)
+    - secp256k1.c (~> 0.1)
+    - Starscream (~> 4.0.4)
+
+DEPENDENCIES:
+  - AFNetworking (= 4.0.1)
+  - CocoaSecurity (= 1.2.4)
+  - DZNEmptyDataSet
+  - FDFullscreenPopGesture
+  - FMDB
+  - GMEllipticCurveCrypto
+  - IQKeyboardManager
+  - JJException (= 0.2.11)
+  - JSONModel
+  - Masonry
+  - MBProgressHUD
+  - MJExtension (= 3.4.1)
+  - MJRefresh
+  - PNChart
+  - RDVTabBarController
+  - SDWebImage (= 5.11.1)
+  - SVProgressHUD
+  - "UITableView+FDTemplateLayoutCell (= 1.6)"
+  - web3swift (= 2.5.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - BigInt
+    - CocoaSecurity
+    - CryptoSwift
+    - JJException
+    - MJExtension
+    - PromiseKit
+    - SDWebImage
+    - secp256k1.c
+    - Starscream
+    - "UITableView+FDTemplateLayoutCell"
+    - web3swift
+  trunk:
+    - DZNEmptyDataSet
+    - FDFullscreenPopGesture
+    - FMDB
+    - GMEllipticCurveCrypto
+    - IQKeyboardManager
+    - JSONModel
+    - Masonry
+    - MBProgressHUD
+    - MJRefresh
+    - PNChart
+    - RDVTabBarController
+    - SVProgressHUD
+    - UICountingLabel
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  BigInt: f668a80089607f521586bbe29513d708491ef2f7
+  CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
+  CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GMEllipticCurveCrypto: dff32bc22d2bfd73d6cbac841faeb40f8d79ce7f
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  JJException: 738a5379392769edca40815ec14cd895a000d9e7
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
+  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
+  RDVTabBarController: 28a5c6546b9991cf2712d59947324c6b06603e14
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+  "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
+  web3swift: 31ecb7a7da543f851344cdd64badea94c439b0d9
+
+PODFILE CHECKSUM: 6d7f5525ef9ecb628e6c4af6606afdbd2ed55d7b
+
+COCOAPODS: 1.11.2

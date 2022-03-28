@@ -1,0 +1,6 @@
+framework module Web3WebView {
+  umbrella header "Web3WebView.h"
+
+  export *
+  module * { export * }
+}
