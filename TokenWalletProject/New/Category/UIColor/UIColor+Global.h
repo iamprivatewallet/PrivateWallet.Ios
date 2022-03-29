@@ -1,0 +1,27 @@
+//
+//  UIColor+Global.h
+//  TokenWalletProject
+//
+//  Created by mnz on 2022/3/29.
+//  Copyright © 2022 Zinkham. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface UIColor (Global)
+
++ (UIColor *)g_bgColor;
++ (UIColor *)g_primaryColor;
++ (UIColor *)g_primaryTextColor;
++ (UIColor *)g_placeholderColor;
++ (UIColor *)g_lineColor;
++ (UIColor *)g_shadowColor;
++ (UIColor *)g_textColor;
++ (UIColor *)g_boldTextColor;
++ (UIColor *)g_grayTextColor;
+
+@end
+
+NS_ASSUME_NONNULL_END

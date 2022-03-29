@@ -89,6 +89,8 @@
 #import "VisitDAppsRecordManager.h"
 #import "WBQRCodeVC.h"
 
+#import "GlobalCategory.h"
+
 #import "TokenWalletProject-Swift.h"
 
 #endif

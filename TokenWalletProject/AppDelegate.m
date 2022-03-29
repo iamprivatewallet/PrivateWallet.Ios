@@ -9,10 +9,10 @@
 #import "AppDelegate.h"
 #import "RootTabBarController.h"
 #import "UserManager.h"
-#import "FirstInputViewController.h"
 #import "ETHServerMananger.h"
 #import "FchainTool.h"
 #import "VersionTool.h"
+#import "PW_FirstChooseViewController.h"
 
 @interface AppDelegate () <UIGestureRecognizerDelegate>
 
@@ -103,8 +103,8 @@
 }
 -(void)switchToCreateWalletVC
 {
-    if (![self.rootController isKindOfClass:[FirstInputViewController class]]) {
-        self.rootController = [[FirstInputViewController alloc] init];
+    if (![self.rootController isKindOfClass:[PW_FirstChooseViewController class]]) {
+        self.rootController = [[PW_FirstChooseViewController alloc] init];
         self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:self.rootController];
         self.rootNavigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
         

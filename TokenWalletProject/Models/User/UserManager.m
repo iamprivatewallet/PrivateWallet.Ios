@@ -95,7 +95,8 @@
 - (void)logout
 {
     self.currentUser.user_is_login = NO;
-    [self saveCurrentUser:self.currentUser];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:User_Info_Key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     NSArray *walletArray = [[WalletManager shareWalletManager] getWallets];
     for (int i = 0; i < walletArray.count; ++i) {
         Wallet *wallet = walletArray[i];

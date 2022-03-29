@@ -6,4 +6,25 @@
   Copyright © 2022 Zinkham. All rights reserved.
 */
 
-text="文本";
+text_confirm="确认";
+
+text_import="导入";
+text_create="创建";
+text_importWallet="导入钱包";
+text_importExistWallet="导入已有钱包";
+text_privateKey="私钥";
+text_privateKeyTip="通过输入明文私钥导入";
+text_mnemonicWord="助记词";
+text_mnemonicWordTip="通过输入助记词导入";
+text_privateKeyImport="私钥导入";
+text_inputPrivateKeyTip="请输入明文私钥或扫二维码";
+text_walletName="钱包名称";
+text_setTradePwd="设置交易密码";
+text_setTradePwdTip="密码不少于8位，且包含数字、字母";
+text_inputAgain="再次输入";
+text_mnemonicWordImport="助记词导入";
+text_inputmnemonicWordTip="请输入助记词并以空格分开或扫二维码";
+text_advancedMode="高级模式";
+text_setWalletPath="设置钱包路径";
+text_createWallet="创建钱包";
+text_createWalletTip="请妥善保管交易密码，一旦丢失，不可找回！";

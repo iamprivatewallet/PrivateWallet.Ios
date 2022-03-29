@@ -26,7 +26,7 @@
 
     self.fd_interactivePopDisabled = NO;
     [self setNeedsStatusBarAppearanceUpdate];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor g_bgColor];
 }
 - (void)requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
     [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
@@ -40,6 +40,12 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
+- (void)setNavNoLineTitle:(NSString *)title {
+    [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:YES];
+}
+- (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
+    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
+}
 - (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine{
     [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil  title:title isNoLine:isNoLine isWhiteBg:NO];
 }
@@ -49,30 +55,30 @@
 }
 
 - (void)setNavTitleWithLeftItem:(NSString *)title {
-    [self initTitleBarWithLeftBtnImg:IMAGE(@"nav_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:NO isWhiteBg:NO];
+    [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:NO isWhiteBg:NO];
 }
 - (void)setNav_NoLine_WithLeftItem:(NSString *)title isWhiteBg:(BOOL)isWhiteBg{
-    [self initTitleBarWithLeftBtnImg:IMAGE(@"nav_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:isWhiteBg];
+    [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:isWhiteBg];
 
 }
 - (void)setNav_NoLine_WithLeftItem:(NSString *)title {
-    [self initTitleBarWithLeftBtnImg:IMAGE(@"nav_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:NO];
+    [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:NO];
 }
 
 - (void)setNavTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction{
     [self initTitleWithTitle:title rightImage:rightImg rightTitle:nil rightAction:rightAction isNoLine:NO];
 }
 - (void)setNavTitleWithLeftItem:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction{
-    [self initTitleWithTitle:title leftImg:IMAGE(@"nav_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:NO];
+    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:NO];
 }
 - (void)setNav_NoLine_WithLeftItem:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction{
-    [self initTitleWithTitle:title leftImg:IMAGE(@"nav_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
+    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
 }
 - (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{
     [self initTitleWithTitle:title leftImg:IMAGE(leftImg) leftAction:leftAction rightImage:rightImg rightAction:rightAction isNoLine:isNoLine];
 }
 - (void)setNavTitleWithLeftItem:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{    
-    [self initBarWithTitle:title leftImg:IMAGE(@"nav_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction bgColor:[UIColor navAndTabBackColor] isWhiteStyle:NO isNoLine:isNoLine];
+    [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction bgColor:[UIColor navAndTabBackColor] isWhiteStyle:NO isNoLine:isNoLine];
 }
 - (void)setNavTitle:(NSString *)title leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction rightTitle:(NSString *)rightTitle  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{
     [self initTitle:title leftTitle:leftTitle leftAction:leftAction rightTitle:rightTitle rightAction:rightAction isNoLine:isNoLine];
@@ -131,15 +137,14 @@
     [_rightBtn addTarget:self action:rightAction forControlEvents:(UIControlEventTouchUpInside)];
     [_naviBar addSubview:_rightBtn];
     [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_naviBar).offset(-CGFloatScale(10));
+        make.right.equalTo(_naviBar).offset(-CGFloatScale(20));
         make.bottom.equalTo(_naviBar).offset(-5);
     }];
 }
 -(void)initTitleBarWithLeftBtnImg:(UIImage*)image leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction title:(NSString*)title isNoLine:(BOOL)isNoLine isWhiteBg:(BOOL)isWhiteBg{
     _naviBar = [UIView new];
     if (isWhiteBg) {
-        _naviBar.backgroundColor = [UIColor whiteColor];
-
+        _naviBar.backgroundColor = [UIColor g_bgColor];
     }else{
         _naviBar.backgroundColor = NAV_BACKCOLOR;
 
@@ -169,18 +174,19 @@
         make.centerX.equalTo(_naviBar);
         make.height.mas_equalTo(25);
     }];
-    [UITools setLableProperties:_titleLable withColor:[UIColor blackColor] andFont:GCSFontRegular(16)];
+    [UITools setLableProperties:_titleLable withColor:[UIColor g_boldTextColor] andFont:GCSFontSemibold(16)];
     _titleLable.text = title;
 //    }
     
     if (leftAction) {
-    
-      _leftBtn = [UIButton new];
-      [_naviBar addSubview:_leftBtn];
-      [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.left.equalTo(_naviBar).offset(CGFloatScale(10));
-          make.centerY.equalTo(_titleLable.mas_centerY);
-      }];
+        _leftBtn = [UIButton new];
+        [_naviBar addSubview:_leftBtn];
+        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_naviBar).offset(CGFloatScale(10));
+            make.centerY.equalTo(_titleLable.mas_centerY);
+            make.width.offset(30);
+            make.height.offset(35);
+        }];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
             [_leftBtn setTitleColor:[UIColor im_blueColor] forState:UIControlStateNormal];
@@ -188,7 +194,7 @@
         }else{
             [_leftBtn setImage:image forState:UIControlStateNormal];
         }
-      [_leftBtn addTarget:self action:leftAction forControlEvents:UIControlEventTouchUpInside];
+        [_leftBtn addTarget:self action:leftAction forControlEvents:UIControlEventTouchUpInside];
         
     }
 }
@@ -222,11 +228,7 @@
         make.centerX.equalTo(_naviBar);
         make.height.mas_equalTo(25);
     }];
-    if (isWhiteStyle) {
-        [UITools setLableProperties:_titleLable withColor:[UIColor whiteColor] andFont:GCSFontMedium(16)];
-    }else{
-        [UITools setLableProperties:_titleLable withColor:[UIColor im_textColor_three] andFont:GCSFontMedium(16)];
-    }
+    [UITools setLableProperties:_titleLable withColor:[UIColor g_boldTextColor] andFont:GCSFontSemibold(16)];
     _titleLable.text = title;
 //    }
     
@@ -236,6 +238,8 @@
       [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
           make.left.equalTo(_naviBar).offset(CGFloatScale(10));
           make.centerY.equalTo(_titleLable.mas_centerY);
+          make.width.offset(30);
+          make.height.offset(35);
       }];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
@@ -255,7 +259,7 @@
         [_rightBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_naviBar addSubview:_rightBtn];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(_naviBar).offset(-CGFloatScale(10));
+            make.right.equalTo(_naviBar).offset(-CGFloatScale(20));
             make.centerY.equalTo(self.titleLable.mas_centerY);
         }];
     }
@@ -283,7 +287,7 @@
     [_rightBtn addTarget:self action:rightAction forControlEvents:(UIControlEventTouchUpInside)];
     [_naviBar addSubview:_rightBtn];
     [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_naviBar).offset(-CGFloatScale(10));
+        make.right.equalTo(_naviBar).offset(-CGFloatScale(20));
         make.centerY.equalTo(self.titleLable.mas_centerY);
     }];
 }
@@ -307,7 +311,7 @@
     
     [_naviBar addSubview:_rightBtn];
     [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_naviBar).offset(-CGFloatScale(10));
+        make.right.equalTo(_naviBar).offset(-CGFloatScale(20));
         make.centerY.equalTo(self.titleLable.mas_centerY);
     }];
 }
@@ -325,7 +329,7 @@
     }
     [_naviBar addSubview:_rightBtn];
     [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_naviBar).offset(-CGFloatScale(10));
+        make.right.equalTo(_naviBar).offset(-CGFloatScale(20));
         make.centerY.equalTo(self.titleLable.mas_centerY);
     }];
 }

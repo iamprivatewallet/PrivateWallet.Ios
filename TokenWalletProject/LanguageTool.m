@@ -65,14 +65,14 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
                 }
             }];
             if(!isFind){
-                [LanguageTool setLanguage:@"en"];
+                [LanguageTool setLanguage:self.languages.firstObject.type];
             }
         }
         lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
         NSString *path = [[NSBundle mainBundle] pathForResource:lan ofType:@"lproj"];
         if(path==nil){
             path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-            [LanguageTool setLanguage:@"en"];
+            [LanguageTool setLanguage:self.languages.firstObject.type];
         }
         if(path){
             _bundle = [[NSBundle alloc] initWithPath:path];

@@ -53,6 +53,8 @@
 
 -(void)initTitleBarWithLeftBtnImg:(UIImage*)image leftAction:(SEL)leftAction title:(NSString*)title isNoLine:(BOOL)isNoLine;
 
+- (void)setNavNoLineTitle:(NSString *)title;
+- (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;
 //只显示标题
 - (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine;
 

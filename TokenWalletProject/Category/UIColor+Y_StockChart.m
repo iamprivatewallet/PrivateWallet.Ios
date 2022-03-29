@@ -79,7 +79,7 @@
     return COLORFORRGB(0xfafcfc);
 }
 +(UIColor *)im_blueColor{
-    return COLORFORRGB(0x10d574);
+    return COLORFORRGB(0x12D674);
 }
 +(UIColor *)im_redColor{
     return COLORFORRGB(0xf37678);

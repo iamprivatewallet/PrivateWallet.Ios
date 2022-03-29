@@ -195,6 +195,14 @@
 		5C9BAB6C27D9EACC0029988A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6E27D9EACC0029988A /* InfoPlist.strings */; };
 		5C9BAB7127DA04D70029988A /* Language.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7027DA04D70029988A /* Language.plist */; };
 		5CA2E2C427BE4FF7002E2930 /* MOSWalletContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */; };
+		5CB76B0F27F2E2990068E967 /* PW_FirstChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B0E27F2E2990068E967 /* PW_FirstChooseViewController.m */; };
+		5CB76B1527F2E9430068E967 /* UIColor+Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1427F2E9430068E967 /* UIColor+Global.m */; };
+		5CB76B1827F2ECC20068E967 /* PW_BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1727F2ECC20068E967 /* PW_BaseViewController.m */; };
+		5CB76B1B27F2EE7D0068E967 /* PW_ImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1A27F2EE7D0068E967 /* PW_ImportViewController.m */; };
+		5CB76B1E27F2FD250068E967 /* PW_PrivateKeyImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1D27F2FD250068E967 /* PW_PrivateKeyImportViewController.m */; };
+		5CB76B2127F2FD3C0068E967 /* PW_MnemonicImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */; };
+		5CB76B2527F306D40068E967 /* UITextField+PW_Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */; };
+		5CB76B2927F31A9B0068E967 /* PW_CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */; };
 		5CB8BB9127E0799A00C73976 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */; };
 		5CB8BB9927E1C6D800C73976 /* MessageTransferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */; };
 		5CB8BB9A27E1C6D900C73976 /* MessageTransferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9827E1C6D800C73976 /* MessageTransferCell.xib */; };
@@ -795,6 +803,23 @@
 		5C9BAB6F27D9EACF0029988A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5C9BAB7027DA04D70029988A /* Language.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Language.plist; sourceTree = "<group>"; };
 		5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MOSWalletContractTool.swift; sourceTree = "<group>"; };
+		5CB76B0D27F2E2990068E967 /* PW_FirstChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_FirstChooseViewController.h; sourceTree = "<group>"; };
+		5CB76B0E27F2E2990068E967 /* PW_FirstChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_FirstChooseViewController.m; sourceTree = "<group>"; };
+		5CB76B1327F2E9430068E967 /* UIColor+Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Global.h"; sourceTree = "<group>"; };
+		5CB76B1427F2E9430068E967 /* UIColor+Global.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Global.m"; sourceTree = "<group>"; };
+		5CB76B1627F2ECC20068E967 /* PW_BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BaseViewController.h; sourceTree = "<group>"; };
+		5CB76B1727F2ECC20068E967 /* PW_BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BaseViewController.m; sourceTree = "<group>"; };
+		5CB76B1927F2EE7D0068E967 /* PW_ImportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ImportViewController.h; sourceTree = "<group>"; };
+		5CB76B1A27F2EE7D0068E967 /* PW_ImportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ImportViewController.m; sourceTree = "<group>"; };
+		5CB76B1C27F2FD250068E967 /* PW_PrivateKeyImportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_PrivateKeyImportViewController.h; sourceTree = "<group>"; };
+		5CB76B1D27F2FD250068E967 /* PW_PrivateKeyImportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_PrivateKeyImportViewController.m; sourceTree = "<group>"; };
+		5CB76B1F27F2FD3C0068E967 /* PW_MnemonicImportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MnemonicImportViewController.h; sourceTree = "<group>"; };
+		5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MnemonicImportViewController.m; sourceTree = "<group>"; };
+		5CB76B2327F306D40068E967 /* UITextField+PW_Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+PW_Global.h"; sourceTree = "<group>"; };
+		5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PW_Global.m"; sourceTree = "<group>"; };
+		5CB76B2627F307B40068E967 /* GlobalCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalCategory.h; sourceTree = "<group>"; };
+		5CB76B2727F31A9A0068E967 /* PW_CreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_CreateViewController.h; sourceTree = "<group>"; };
+		5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_CreateViewController.m; sourceTree = "<group>"; };
 		5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		5CB8BB9627E1C6D800C73976 /* MessageTransferCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTransferCell.h; sourceTree = "<group>"; };
 		5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTransferCell.m; sourceTree = "<group>"; };
@@ -1495,6 +1520,7 @@
 			children = (
 				5A8FD9521D2DFC270015D6C0 /* AppDelegate.h */,
 				5A8FD9531D2DFC270015D6C0 /* AppDelegate.m */,
+				5CB76B0727F2E15D0068E967 /* New */,
 				99D2CA1C2537F77200C1C196 /* Tools */,
 				99D2CA1B2537F74800C1C196 /* Headers */,
 				1FA8EFC621CFD9EC00B4E28E /* Busniess */,
@@ -2313,6 +2339,102 @@
 				5C71192F27BB7ABC00FE9B51 /* Web3WebView.framework */,
 			);
 			path = Web3WebView;
+			sourceTree = "<group>";
+		};
+		5CB76B0727F2E15D0068E967 /* New */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B1127F2E9170068E967 /* Category */,
+				5CB76B1027F2E9110068E967 /* Tool */,
+				5CB76B0C27F2E1CA0068E967 /* Base */,
+				5CB76B0827F2E1A00068E967 /* Create */,
+			);
+			path = New;
+			sourceTree = "<group>";
+		};
+		5CB76B0827F2E1A00068E967 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B0B27F2E1C00068E967 /* Model */,
+				5CB76B0A27F2E1BB0068E967 /* View */,
+				5CB76B0927F2E1B60068E967 /* Controller */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		5CB76B0927F2E1B60068E967 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B0D27F2E2990068E967 /* PW_FirstChooseViewController.h */,
+				5CB76B0E27F2E2990068E967 /* PW_FirstChooseViewController.m */,
+				5CB76B1927F2EE7D0068E967 /* PW_ImportViewController.h */,
+				5CB76B1A27F2EE7D0068E967 /* PW_ImportViewController.m */,
+				5CB76B1C27F2FD250068E967 /* PW_PrivateKeyImportViewController.h */,
+				5CB76B1D27F2FD250068E967 /* PW_PrivateKeyImportViewController.m */,
+				5CB76B1F27F2FD3C0068E967 /* PW_MnemonicImportViewController.h */,
+				5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */,
+				5CB76B2727F31A9A0068E967 /* PW_CreateViewController.h */,
+				5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CB76B0A27F2E1BB0068E967 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CB76B0B27F2E1C00068E967 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CB76B0C27F2E1CA0068E967 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B1627F2ECC20068E967 /* PW_BaseViewController.h */,
+				5CB76B1727F2ECC20068E967 /* PW_BaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		5CB76B1027F2E9110068E967 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		5CB76B1127F2E9170068E967 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B2627F307B40068E967 /* GlobalCategory.h */,
+				5CB76B2227F306960068E967 /* UITextField */,
+				5CB76B1227F2E91D0068E967 /* UIColor */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		5CB76B1227F2E91D0068E967 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B1327F2E9430068E967 /* UIColor+Global.h */,
+				5CB76B1427F2E9430068E967 /* UIColor+Global.m */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		5CB76B2227F306960068E967 /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B2327F306D40068E967 /* UITextField+PW_Global.h */,
+				5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */,
+			);
+			path = UITextField;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3220,8 +3342,9 @@
 		5A8FD9441D2DFC270015D6C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PW_;
 				LastUpgradeCheck = 1320;
-				ORGANIZATIONNAME = Zinkham;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					5A8FD94B1D2DFC270015D6C0 = {
 						CreatedOnToolsVersion = 7.2;
@@ -3523,6 +3646,7 @@
 				5AF5D1741D2F7CBA004070D7 /* NSInvocation+Bb.m in Sources */,
 				5AF5D15D1D2F7CBA004070D7 /* NSData+Hash.m in Sources */,
 				99D2CA2C2537F7EC00C1C196 /* UITools.m in Sources */,
+				5CB76B1827F2ECC20068E967 /* PW_BaseViewController.m in Sources */,
 				5E0799F721D28A3A00924407 /* Wrappers.pbobjc.m in Sources */,
 				992EF0FF26A96D7D00F70A94 /* AddCurrencyViewController.m in Sources */,
 				9937C8AF270402820064BBC3 /* AllDAppsViewController.m in Sources */,
@@ -3530,6 +3654,7 @@
 				5AF5D1991D2F7CBA004070D7 /* NSString+UrlEncode.m in Sources */,
 				5B02FD5C21FFF6460040025E /* FTPopOverMenu.m in Sources */,
 				1FC48D3121E217FF00A49C77 /* MBProgressHUD+SGQRCode.m in Sources */,
+				5CB76B1E27F2FD250068E967 /* PW_PrivateKeyImportViewController.m in Sources */,
 				5AF5D1951D2F7CBA004070D7 /* NSString+Ruby.m in Sources */,
 				5E0799FA21D28A3A00924407 /* Struct.pbobjc.m in Sources */,
 				5CA2E2C427BE4FF7002E2930 /* MOSWalletContractTool.swift in Sources */,
@@ -3544,6 +3669,7 @@
 				99D804D126A5861700E9B5F8 /* FirstInputViewController.m in Sources */,
 				9929D59D26C3AFC80066F1D6 /* AddressBookCell.m in Sources */,
 				7918E5F721B2835100A21339 /* ScanSuccessJumpVC.m in Sources */,
+				5CB76B2127F2FD3C0068E967 /* PW_MnemonicImportViewController.m in Sources */,
 				99D804D926A6AD6100E9B5F8 /* CreateIDViewController.m in Sources */,
 				992EF10826AA70B300F70A94 /* MnemonicsConfirmVC.m in Sources */,
 				79AA81E521CFBCAB00C7D510 /* FSOpenSSL.mm in Sources */,
@@ -3639,6 +3765,7 @@
 				99D2C9F02537F66000C1C196 /* BaseViewController.m in Sources */,
 				1FA8EF7921B824F900B4E28E /* TYAlertController.m in Sources */,
 				1FA8EF7021B824F900B4E28E /* TYAlertView.m in Sources */,
+				5CB76B1B27F2EE7D0068E967 /* PW_ImportViewController.m in Sources */,
 				9926E16526FDC98900FDF442 /* MessageCenterItemsView.m in Sources */,
 				5C6A966B27E9CE860027D7BB /* VersionTool.m in Sources */,
 				9926E15626F33FFC00FDF442 /* CurrencyInfoModel.m in Sources */,
@@ -3661,6 +3788,7 @@
 				5E0799FB21D28A3A00924407 /* GPBCodedInputStream.m in Sources */,
 				992E0F0A26CCAC4800E1C31B /* FchainTool.m in Sources */,
 				5C71193127BB7ABC00FE9B51 /* MOSETHGasModel.m in Sources */,
+				5CB76B2927F31A9B0068E967 /* PW_CreateViewController.m in Sources */,
 				5AF5D1AD1D2F7CBA004070D7 /* CATransaction+AnimateWithDuration.m in Sources */,
 				5B02FD5A21FFF6460040025E /* YKDrawLineView.m in Sources */,
 				79C9B35A21ABEE2E007BA751 /* SKTagButton.m in Sources */,
@@ -3686,9 +3814,11 @@
 				1FCE189921AAFA5600328D78 /* ZYBannerView.m in Sources */,
 				5AF5D3441D335C9A004070D7 /* DTTimePeriodGroup.m in Sources */,
 				9926E00526E2100200FDF442 /* GasPriceModel.m in Sources */,
+				5CB76B2527F306D40068E967 /* UITextField+PW_Global.m in Sources */,
 				99D804D626A6709500E9B5F8 /* BrowseViewController.m in Sources */,
 				5AF5D1A01D2F7CBA004070D7 /* NSURLConnection+SelfSigned.m in Sources */,
 				5AF5D1961D2F7CBA004070D7 /* NSString+Score.m in Sources */,
+				5CB76B0F27F2E2990068E967 /* PW_FirstChooseViewController.m in Sources */,
 				5B02FD5B21FFF6460040025E /* YKUIConfig.m in Sources */,
 				5AF5D1681D2F7CBA004070D7 /* NSDictionary+Additions.m in Sources */,
 				7944858F21D1D26200DB9110 /* NSString+Decimal.m in Sources */,
@@ -3713,6 +3843,7 @@
 				9929D59726C275230066F1D6 /* AddNewAddressVC.m in Sources */,
 				992E0F0E26CCB4DC00E1C31B /* User.m in Sources */,
 				992EF19726B8D7DA00F70A94 /* ManageViewController.m in Sources */,
+				5CB76B1527F2E9430068E967 /* UIColor+Global.m in Sources */,
 				7918E5FA21B2837D00A21339 /* SGWebView.m in Sources */,
 				992EF18726B3CADF00F70A94 /* AddCurrencyCell.m in Sources */,
 				1FA8EF7221B824F900B4E28E /* TYAlertScaleFadeAnimation.m in Sources */,
@@ -3977,7 +4108,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4046,7 +4177,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

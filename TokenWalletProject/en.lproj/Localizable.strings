@@ -6,4 +6,25 @@
   Copyright © 2022 Zinkham. All rights reserved.
 */
 
-text="text";
+text_confirm="Confirm";
+
+text_import="Import";
+text_create="Create";
+text_importWallet="Import wallet";
+text_importExistWallet="Import existing wallet";
+text_privateKey="Private key";
+text_privateKeyTip="Import by entering the plaintext private key";
+text_mnemonicWord="Mnemonic word";
+text_mnemonicWordTip="Import by input mnemonic";
+text_privateKeyImport="Private key import";
+text_inputPrivateKeyTip="Enter the plaintext private key or scan the QR code";
+text_walletName="Name of the wallet";
+text_setTradePwd="Set transaction password";
+text_setTradePwdTip="The password must contain at least eight digits and letters";
+text_inputAgain="Input again";
+text_mnemonicWordImport="Mnemonic word import";
+text_inputmnemonicWordTip="Please enter mnemonic words and separate them with Spaces or scan the qr code";
+text_advancedMode="Advanced mode";
+text_setWalletPath="Setting the wallet Path";
+text_createWallet="Create wallet";
+text_createWalletTip="Please keep the transaction password properly, once lost, can not be retrieved!";
