@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_BaseViewController : BaseViewController
 
+- (void)showSuccess:(NSString *)text;
+- (void)showError:(NSString *)text;
+
 @end
 
 NS_ASSUME_NONNULL_END

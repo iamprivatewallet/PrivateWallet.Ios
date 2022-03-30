@@ -21,7 +21,12 @@
     }
     return self;
 }
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self makeViews];
+}
 - (void)makeViews{
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     self.backgroundColor = [UIColor im_inputBgColor];
     self.layer.cornerRadius = 8;
     self.layer.borderColor = [UIColor im_borderLineColor].CGColor;

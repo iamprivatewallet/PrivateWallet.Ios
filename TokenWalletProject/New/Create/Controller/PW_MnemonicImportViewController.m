@@ -191,7 +191,7 @@
         make.centerY.equalTo(titleLb);
     }];
     self.mnemonicTF = [[UITextField alloc] init];
-    [self.mnemonicTF setPlaceholder:LocalizedStr(@"text_inputmnemonicWordTip")];
+    [self.mnemonicTF setPlaceholder:LocalizedStr(@"text_inputMnemonicWordTip")];
     self.mnemonicTF.font = [UIFont systemFontOfSize:14];
     self.mnemonicTF.textColor = [UIColor g_textColor];
     self.mnemonicTF.clearButtonMode = UITextFieldViewModeWhileEditing;

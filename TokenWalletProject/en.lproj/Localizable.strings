@@ -7,6 +7,7 @@
 */
 
 text_confirm="Confirm";
+text_changeGroup="换一组";
 
 text_import="Import";
 text_create="Create";
@@ -23,8 +24,16 @@ text_setTradePwd="Set transaction password";
 text_setTradePwdTip="The password must contain at least eight digits and letters";
 text_inputAgain="Input again";
 text_mnemonicWordImport="Mnemonic word import";
-text_inputmnemonicWordTip="Please enter mnemonic words and separate them with Spaces or scan the qr code";
+text_inputMnemonicWordTip="Please enter mnemonic words and separate them with Spaces or scan the qr code";
 text_advancedMode="Advanced mode";
 text_setWalletPath="Setting the wallet Path";
 text_createWallet="Create wallet";
 text_createWalletTip="Please keep the transaction password properly, once lost, can not be retrieved!";
+text_backupWallet="Backup wallet";
+text_backupMnemonics="备份助记词";
+text_backupMnemonicsDesc="请妥善保管助记词，拥有助记词等于拥有钱包的一切权力";
+text_backupMnemonicsTip="请按顺序抄写助记词并确保正确，请勿截图、拍照";
+text_backupMnemonicsTip1="•  请勿将助记词提供给任何人。";
+text_backupMnemonicsTip2="•  妥善保管助记词，以便未来恢复钱包使用。";
+text_backupMnemonicsTip3="•  尚未备份助记词，请勿轻易删除APP。";
+text_haveBackupVerify="我已备份，现在验证";

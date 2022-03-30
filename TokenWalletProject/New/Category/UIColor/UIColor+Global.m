@@ -10,6 +10,19 @@
 
 @implementation UIColor (Global)
 
++ (UIColor *)g_successColor {
+    return COLORFORRGB(0x1AC190);
+}
++ (UIColor *)g_errorColor {
+    return COLORFORRGB(0xDD4E41);
+}
++ (UIColor *)g_warnColor {
+    return COLORFORRGB(0xD87948);
+}
++ (UIColor *)g_warnBgColor {
+    return COLORFORRGB(0xFFEFE6);
+}
+
 + (UIColor *)g_bgColor {
     return [UIColor whiteColor];
 }
@@ -36,6 +49,10 @@
 }
 + (UIColor *)g_grayTextColor {
     return COLORFORRGB(0x919CAA);
+}
+
++ (UIColor *)g_borderColor {
+    return COLORFORRGB(0xEEF0F3);
 }
 
 @end

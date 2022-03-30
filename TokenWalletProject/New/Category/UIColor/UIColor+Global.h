@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (Global)
 
++ (UIColor *)g_successColor;
++ (UIColor *)g_errorColor;
++ (UIColor *)g_warnColor;
++ (UIColor *)g_warnBgColor;
+
 + (UIColor *)g_bgColor;
 + (UIColor *)g_primaryColor;
 + (UIColor *)g_primaryTextColor;
@@ -21,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_textColor;
 + (UIColor *)g_boldTextColor;
 + (UIColor *)g_grayTextColor;
+
++ (UIColor *)g_borderColor;
 
 @end
 

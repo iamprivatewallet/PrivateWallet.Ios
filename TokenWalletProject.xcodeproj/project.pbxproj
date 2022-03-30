@@ -203,6 +203,9 @@
 		5CB76B2127F2FD3C0068E967 /* PW_MnemonicImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */; };
 		5CB76B2527F306D40068E967 /* UITextField+PW_Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */; };
 		5CB76B2927F31A9B0068E967 /* PW_CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */; };
+		5CB76B2D27F447070068E967 /* PW_ToastTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2C27F447060068E967 /* PW_ToastTool.m */; };
+		5CB76B3127F458C40068E967 /* PW_BackupWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */; };
+		5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */; };
 		5CB8BB9127E0799A00C73976 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */; };
 		5CB8BB9927E1C6D800C73976 /* MessageTransferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */; };
 		5CB8BB9A27E1C6D900C73976 /* MessageTransferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9827E1C6D800C73976 /* MessageTransferCell.xib */; };
@@ -817,9 +820,16 @@
 		5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MnemonicImportViewController.m; sourceTree = "<group>"; };
 		5CB76B2327F306D40068E967 /* UITextField+PW_Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+PW_Global.h"; sourceTree = "<group>"; };
 		5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+PW_Global.m"; sourceTree = "<group>"; };
-		5CB76B2627F307B40068E967 /* GlobalCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalCategory.h; sourceTree = "<group>"; };
+		5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_GlobalCategory.h; sourceTree = "<group>"; };
 		5CB76B2727F31A9A0068E967 /* PW_CreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_CreateViewController.h; sourceTree = "<group>"; };
 		5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_CreateViewController.m; sourceTree = "<group>"; };
+		5CB76B2B27F447060068E967 /* PW_ToastTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ToastTool.h; sourceTree = "<group>"; };
+		5CB76B2C27F447060068E967 /* PW_ToastTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ToastTool.m; sourceTree = "<group>"; };
+		5CB76B2E27F44B640068E967 /* PW_Tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Tool.h; sourceTree = "<group>"; };
+		5CB76B2F27F458C30068E967 /* PW_BackupWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BackupWalletViewController.h; sourceTree = "<group>"; };
+		5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BackupWalletViewController.m; sourceTree = "<group>"; };
+		5CB76B3327F45D2A0068E967 /* PW_ViewTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ViewTool.h; sourceTree = "<group>"; };
+		5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ViewTool.m; sourceTree = "<group>"; };
 		5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		5CB8BB9627E1C6D800C73976 /* MessageTransferCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTransferCell.h; sourceTree = "<group>"; };
 		5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTransferCell.m; sourceTree = "<group>"; };
@@ -2375,6 +2385,8 @@
 				5CB76B2027F2FD3C0068E967 /* PW_MnemonicImportViewController.m */,
 				5CB76B2727F31A9A0068E967 /* PW_CreateViewController.h */,
 				5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */,
+				5CB76B2F27F458C30068E967 /* PW_BackupWalletViewController.h */,
+				5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2405,6 +2417,9 @@
 		5CB76B1027F2E9110068E967 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5CB76B2A27F4405E0068E967 /* Toast */,
+				5CB76B3227F45D0E0068E967 /* View */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2412,7 +2427,7 @@
 		5CB76B1127F2E9170068E967 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				5CB76B2627F307B40068E967 /* GlobalCategory.h */,
+				5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */,
 				5CB76B2227F306960068E967 /* UITextField */,
 				5CB76B1227F2E91D0068E967 /* UIColor */,
 			);
@@ -2435,6 +2450,24 @@
 				5CB76B2427F306D40068E967 /* UITextField+PW_Global.m */,
 			);
 			path = UITextField;
+			sourceTree = "<group>";
+		};
+		5CB76B2A27F4405E0068E967 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B2B27F447060068E967 /* PW_ToastTool.h */,
+				5CB76B2C27F447060068E967 /* PW_ToastTool.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		5CB76B3227F45D0E0068E967 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B3327F45D2A0068E967 /* PW_ViewTool.h */,
+				5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3616,6 +3649,7 @@
 				992EF20D26BBCCAB00F70A94 /* ExportKeystoreAndPrivateKeyVC.m in Sources */,
 				5CB8BBAA27E1CE9100C73976 /* MessageSystemModel.m in Sources */,
 				9937C8A92702F5720064BBC3 /* DAppsTableViewCell.m in Sources */,
+				5CB76B2D27F447070068E967 /* PW_ToastTool.m in Sources */,
 				9929D59A26C276280066F1D6 /* ChooseAddressCell.m in Sources */,
 				5AF5D1891D2F7CBA004070D7 /* NSMutableString+Ruby.m in Sources */,
 				992EF17326B15BF200F70A94 /* BackupAlertMainView.m in Sources */,
@@ -3830,6 +3864,7 @@
 				9926E16226FD789400FDF442 /* MessageCenterViewController.m in Sources */,
 				7918E5F521B2835100A21339 /* WCQRCodeVC.m in Sources */,
 				9926DFFC26E0C07B00FDF442 /* NodeModel.m in Sources */,
+				5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */,
 				5E0799EC21D28A3A00924407 /* GPBMessage.m in Sources */,
 				5AF5D1571D2F7CBA004070D7 /* NSArray+SafeAccess.m in Sources */,
 				992EF16026AFF59F00F70A94 /* MangeWalletsVC.m in Sources */,
@@ -3892,6 +3927,7 @@
 				5AF5D16B1D2F7CBA004070D7 /* NSDictionary+Merge.m in Sources */,
 				992E0F1726CCD8E200E1C31B /* ETHTransfer.m in Sources */,
 				7918E5EC21B27E8800A21339 /* SGQRCodeObtain.m in Sources */,
+				5CB76B3127F458C40068E967 /* PW_BackupWalletViewController.m in Sources */,
 				1FCE189721AAFA5600328D78 /* ZYBannerFooter.m in Sources */,
 				992E0F2F26CCD9CC00E1C31B /* ETHTokenCoin.m in Sources */,
 				5AF5D1611D2F7CBA004070D7 /* NSDate+Extension.m in Sources */,

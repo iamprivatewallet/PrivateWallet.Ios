@@ -89,7 +89,8 @@
 #import "VisitDAppsRecordManager.h"
 #import "WBQRCodeVC.h"
 
-#import "GlobalCategory.h"
+#import "PW_GlobalCategory.h"
+#import "PW_Tool.h"
 
 #import "TokenWalletProject-Swift.h"
 
