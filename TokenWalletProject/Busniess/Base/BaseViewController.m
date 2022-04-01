@@ -41,7 +41,11 @@
     return UIStatusBarStyleDefault;
 }
 - (void)setNavNoLineTitle:(NSString *)title {
-    [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:YES];
+    if(self.navigationController.viewControllers.count>1){
+        [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:YES];
+    }else{
+        [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil title:title isNoLine:YES isWhiteBg:NO];
+    }
 }
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
     [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
@@ -76,6 +80,9 @@
 }
 - (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{
     [self initTitleWithTitle:title leftImg:IMAGE(leftImg) leftAction:leftAction rightImage:rightImg rightAction:rightAction isNoLine:isNoLine];
+}
+- (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine isWhiteBg:(BOOL)isWhiteBg {
+    [self initTitleWithTitle:title leftImg:IMAGE(leftImg) leftAction:leftAction rightImage:rightImg rightAction:rightAction isNoLine:isNoLine isWhiteBg:isWhiteBg];
 }
 - (void)setNavTitleWithLeftItem:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{    
     [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction bgColor:[UIColor navAndTabBackColor] isWhiteStyle:NO isNoLine:isNoLine];
@@ -146,8 +153,7 @@
     if (isWhiteBg) {
         _naviBar.backgroundColor = [UIColor g_bgColor];
     }else{
-        _naviBar.backgroundColor = NAV_BACKCOLOR;
-
+        _naviBar.backgroundColor = [UIColor clearColor];
     }
     [self.view addSubview:_naviBar];
     [_naviBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -182,10 +188,8 @@
         _leftBtn = [UIButton new];
         [_naviBar addSubview:_leftBtn];
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_naviBar).offset(CGFloatScale(10));
+            make.left.equalTo(_naviBar).offset(CGFloatScale(20));
             make.centerY.equalTo(_titleLable.mas_centerY);
-            make.width.offset(30);
-            make.height.offset(35);
         }];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
@@ -236,10 +240,8 @@
       _leftBtn = [UIButton new];
       [_naviBar addSubview:_leftBtn];
       [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.left.equalTo(_naviBar).offset(CGFloatScale(10));
+          make.left.equalTo(_naviBar).offset(CGFloatScale(20));
           make.centerY.equalTo(_titleLable.mas_centerY);
-          make.width.offset(30);
-          make.height.offset(35);
       }];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
@@ -317,7 +319,10 @@
 }
 
 - (void)initTitleWithTitle:(NSString *)title leftImg:(UIImage*)leftImg leftAction:(SEL)leftAction rightImage:(NSString *)rightImage rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{
-    [self initTitleBarWithLeftBtnImg:leftImg leftTitle:nil leftAction:leftAction title:title isNoLine:isNoLine isWhiteBg:NO];
+    [self initTitleWithTitle:title leftImg:leftImg leftAction:leftAction rightImage:rightImage rightAction:rightAction isNoLine:isNoLine isWhiteBg:YES];
+}
+- (void)initTitleWithTitle:(NSString *)title leftImg:(UIImage*)leftImg leftAction:(SEL)leftAction rightImage:(NSString *)rightImage rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine isWhiteBg:(BOOL)isWhiteBg {
+    [self initTitleBarWithLeftBtnImg:leftImg leftTitle:nil leftAction:leftAction title:title isNoLine:isNoLine isWhiteBg:isWhiteBg];
     _rightBtn = [[UIButton alloc]initWithFrame:CGRectZero];
     [_rightBtn setImage:ImageNamed(rightImage) forState:UIControlStateNormal];
     [_rightBtn setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];

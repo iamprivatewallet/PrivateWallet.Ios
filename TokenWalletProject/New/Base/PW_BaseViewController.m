@@ -18,19 +18,25 @@
     [super viewDidLoad];
     
 }
+- (UIUserInterfaceStyle)overrideUserInterfaceStyle {
+    return UIUserInterfaceStyleLight;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 - (void)showSuccess:(NSString *)text {
     [PW_ToastTool showSucees:text toView:self.view];
 }
 - (void)showError:(NSString *)text {
     [PW_ToastTool showError:text toView:self.view];
 }
-- (void)toast:(NSString *)text {//1.5s dismiss
+- (void)showToast:(NSString *)text {//1.5s dismiss
     [[ToastHelper sharedToastHelper] toast:text];
 }
-- (void)showToast:(NSString *)text {
+- (void)showMessage:(NSString *)text {
     [[ToastHelper sharedToastHelper] showToast:text];
 }
-- (void)dismissToast {
+- (void)dismissMessage {
     [[ToastHelper sharedToastHelper] dismissToast];
 }
 

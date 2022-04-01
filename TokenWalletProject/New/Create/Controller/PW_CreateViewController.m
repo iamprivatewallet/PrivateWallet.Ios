@@ -85,13 +85,13 @@
 - (void)pwdTFDidBegin:(UITextField *)sender {
     if (sender==self.pwdTF) {
         if ([self.pwdTF.text isEmptyStr]) {
-            [self showToast:LocalizedStr(@"text_inputPwdTip")];
+            [self showMessage:LocalizedStr(@"text_inputPwdTip")];
         }
     }
 }
 - (void)pwdTFDidEnd:(UITextField *)sender {
     if (sender==self.pwdTF) {
-        [self dismissToast];
+        [self dismissMessage];
     }
 }
 - (void)makeViews {

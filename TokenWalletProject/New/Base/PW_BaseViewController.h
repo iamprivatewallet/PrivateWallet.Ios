@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showSuccess:(NSString *)text;
 - (void)showError:(NSString *)text;
-- (void)toast:(NSString *)text;
 - (void)showToast:(NSString *)text;
-- (void)dismissToast;
+- (void)showMessage:(NSString *)text;
+- (void)dismissMessage;
 
 @end
 

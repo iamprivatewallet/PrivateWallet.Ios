@@ -73,6 +73,7 @@
 - (void)setNav_NoLine_WithLeftItem:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;
 //自定义左右图片
 - (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine;
+- (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine isWhiteBg:(BOOL)isWhiteBg;
 //自定义右边文字
 - (void)setNavTitleWithLeftItem:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine;
 //自定义左右文字

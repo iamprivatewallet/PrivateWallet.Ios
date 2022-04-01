@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "RootTabBarController.h"
+#import "PW_TabBarViewController.h"
+#import "PW_NavigationController.h"
 #import "UserManager.h"
 #import "ETHServerMananger.h"
 #import "FchainTool.h"
@@ -35,8 +36,8 @@
     if (!User_manager.currentUser.user_name) {
         [self switchToCreateWalletVC];
     }else{
-        self.rootController = [[RootTabBarController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.rootController];
+        self.rootController = [[PW_TabBarViewController alloc] init];
+        PW_NavigationController *nav = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
         self.window.rootViewController = nav;
         [self.window makeKeyAndVisible];
     }
@@ -88,9 +89,9 @@
 
 -(void)switchToTabBarController
 {
-    if (![self.rootController isKindOfClass:[RootTabBarController class]]) {
-        self.rootController = [[RootTabBarController alloc] init];
-        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:self.rootController];
+    if (![self.rootController isKindOfClass:[PW_TabBarViewController class]]) {
+        self.rootController = [[PW_TabBarViewController alloc] init];
+        self.rootNavigationController = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
         self.rootNavigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
         CATransition *transition = [CATransition animation];
         transition.duration = 0.3f;
@@ -112,11 +113,6 @@
         [self.window makeKeyAndVisible];
     }
 }
--(void)switchToWelcomeController
-{
-    
-}
-
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     

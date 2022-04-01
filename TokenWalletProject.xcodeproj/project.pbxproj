@@ -224,6 +224,13 @@
 		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
 		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
 		5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */; };
+		5CE7ACCB27F6EC2200E2188D /* PW_TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACCA27F6EC2200E2188D /* PW_TabBarViewController.m */; };
+		5CE7ACD227F6ED2100E2188D /* PW_WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */; };
+		5CE7ACD827F6EDB900E2188D /* PW_WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACD727F6EDB900E2188D /* PW_WalletViewController.m */; };
+		5CE7ACE427F6EE1200E2188D /* PW_MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACE327F6EE1200E2188D /* PW_MarketViewController.m */; };
+		5CE7ACE727F6EE1F00E2188D /* PW_DappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */; };
+		5CE7ACEA27F6EE2800E2188D /* PW_MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACE927F6EE2800E2188D /* PW_MoreViewController.m */; };
+		5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -870,6 +877,20 @@
 		5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+PW_String.m"; sourceTree = "<group>"; };
 		5CE7ACC627F6E25C00E2188D /* NSArray+PW_Array.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+PW_Array.h"; sourceTree = "<group>"; };
 		5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PW_Array.m"; sourceTree = "<group>"; };
+		5CE7ACC927F6EC2200E2188D /* PW_TabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TabBarViewController.h; sourceTree = "<group>"; };
+		5CE7ACCA27F6EC2200E2188D /* PW_TabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TabBarViewController.m; sourceTree = "<group>"; };
+		5CE7ACD027F6ED2100E2188D /* PW_WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WebViewController.h; sourceTree = "<group>"; };
+		5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WebViewController.m; sourceTree = "<group>"; };
+		5CE7ACD627F6EDB900E2188D /* PW_WalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletViewController.h; sourceTree = "<group>"; };
+		5CE7ACD727F6EDB900E2188D /* PW_WalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletViewController.m; sourceTree = "<group>"; };
+		5CE7ACE227F6EE1200E2188D /* PW_MarketViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketViewController.h; sourceTree = "<group>"; };
+		5CE7ACE327F6EE1200E2188D /* PW_MarketViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketViewController.m; sourceTree = "<group>"; };
+		5CE7ACE527F6EE1F00E2188D /* PW_DappViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappViewController.h; sourceTree = "<group>"; };
+		5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappViewController.m; sourceTree = "<group>"; };
+		5CE7ACE827F6EE2800E2188D /* PW_MoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MoreViewController.h; sourceTree = "<group>"; };
+		5CE7ACE927F6EE2800E2188D /* PW_MoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MoreViewController.m; sourceTree = "<group>"; };
+		5CE7ACEB27F6EE9600E2188D /* PW_NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NavigationController.h; sourceTree = "<group>"; };
+		5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NavigationController.m; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -2379,6 +2400,10 @@
 				5CB76B1027F2E9110068E967 /* Tool */,
 				5CB76B0C27F2E1CA0068E967 /* Base */,
 				5CB76B0827F2E1A00068E967 /* Create */,
+				5CE7ACCC27F6EC8B00E2188D /* Wallet */,
+				5CE7ACCD27F6EC9500E2188D /* Market */,
+				5CE7ACCE27F6ECBB00E2188D /* Dapp */,
+				5CE7ACCF27F6ECCF00E2188D /* More */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -2433,6 +2458,12 @@
 			children = (
 				5CB76B1627F2ECC20068E967 /* PW_BaseViewController.h */,
 				5CB76B1727F2ECC20068E967 /* PW_BaseViewController.m */,
+				5CE7ACEB27F6EE9600E2188D /* PW_NavigationController.h */,
+				5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */,
+				5CE7ACC927F6EC2200E2188D /* PW_TabBarViewController.h */,
+				5CE7ACCA27F6EC2200E2188D /* PW_TabBarViewController.m */,
+				5CE7ACD027F6ED2100E2188D /* PW_WebViewController.h */,
+				5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2543,6 +2574,138 @@
 				5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */,
 			);
 			path = NSArray;
+			sourceTree = "<group>";
+		};
+		5CE7ACCC27F6EC8B00E2188D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACD327F6ED9300E2188D /* Controller */,
+				5CE7ACD527F6ED9F00E2188D /* Model */,
+				5CE7ACD427F6ED9A00E2188D /* View */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		5CE7ACCD27F6EC9500E2188D /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACD927F6EDEE00E2188D /* Controller */,
+				5CE7ACDA27F6EDEE00E2188D /* Model */,
+				5CE7ACDB27F6EDEE00E2188D /* View */,
+			);
+			path = Market;
+			sourceTree = "<group>";
+		};
+		5CE7ACCE27F6ECBB00E2188D /* Dapp */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACDF27F6EDFB00E2188D /* Controller */,
+				5CE7ACE027F6EDFB00E2188D /* Model */,
+				5CE7ACE127F6EDFB00E2188D /* View */,
+			);
+			path = Dapp;
+			sourceTree = "<group>";
+		};
+		5CE7ACCF27F6ECCF00E2188D /* More */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACDC27F6EDF400E2188D /* Controller */,
+				5CE7ACDD27F6EDF400E2188D /* Model */,
+				5CE7ACDE27F6EDF500E2188D /* View */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		5CE7ACD327F6ED9300E2188D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACD627F6EDB900E2188D /* PW_WalletViewController.h */,
+				5CE7ACD727F6EDB900E2188D /* PW_WalletViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CE7ACD427F6ED9A00E2188D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CE7ACD527F6ED9F00E2188D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CE7ACD927F6EDEE00E2188D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACE227F6EE1200E2188D /* PW_MarketViewController.h */,
+				5CE7ACE327F6EE1200E2188D /* PW_MarketViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CE7ACDA27F6EDEE00E2188D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CE7ACDB27F6EDEE00E2188D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CE7ACDC27F6EDF400E2188D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACE827F6EE2800E2188D /* PW_MoreViewController.h */,
+				5CE7ACE927F6EE2800E2188D /* PW_MoreViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CE7ACDD27F6EDF400E2188D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CE7ACDE27F6EDF500E2188D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CE7ACDF27F6EDFB00E2188D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACE527F6EE1F00E2188D /* PW_DappViewController.h */,
+				5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CE7ACE027F6EDFB00E2188D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CE7ACE127F6EDFB00E2188D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3682,12 +3845,14 @@
 				5AF5D1811D2F7CBA004070D7 /* NSObject+EasyCopy.m in Sources */,
 				99D2CA2E2537F7EC00C1C196 /* LCAlertView.m in Sources */,
 				5AF5D1A81D2F7CBA004070D7 /* CAAnimation+Blocks.m in Sources */,
+				5CE7ACE727F6EE1F00E2188D /* PW_DappViewController.m in Sources */,
 				992EF1A026B92C1D00F70A94 /* CreateWalletView.m in Sources */,
 				5AF5D16F1D2F7CBA004070D7 /* NSException+Trace.m in Sources */,
 				5AF5D22C1D2F7CBA004070D7 /* UINavigationController+ZHCustomNav.m in Sources */,
 				5E0799FE21D28A3A00924407 /* GPBArray.m in Sources */,
 				5AF5D1861D2F7CBA004070D7 /* NSObject+Runtime.m in Sources */,
 				992EF21326BBCF4800F70A94 /* ExportCopyTextView.m in Sources */,
+				5CE7ACEA27F6EE2800E2188D /* PW_MoreViewController.m in Sources */,
 				992E0F6026D5EF9600E1C31B /* TransferPayView.m in Sources */,
 				5AF5D1931D2F7CBA004070D7 /* NSString+RegexCategory.m in Sources */,
 				5E079A3B21D3C90A00924407 /* tommath.c in Sources */,
@@ -3750,6 +3915,7 @@
 				5E0799F921D28A3A00924407 /* FieldMask.pbobjc.m in Sources */,
 				5AF5D1651D2F7CBA004070D7 /* NSDate+TimeAgo.m in Sources */,
 				5AF5D1AA1D2F7CBA004070D7 /* CALayer+UIColor.m in Sources */,
+				5CE7ACD827F6EDB900E2188D /* PW_WalletViewController.m in Sources */,
 				5AF5D1781D2F7CBA004070D7 /* NSDecimalNumber+Extensions.m in Sources */,
 				1FA8EF7421B824F900B4E28E /* TYAlertController+TransitionAnimate.m in Sources */,
 				9926E15226F1E41B00FDF442 /* SWFingerprintLock.m in Sources */,
@@ -3819,9 +3985,11 @@
 				7908588821B50A2600616897 /* NSArray+Shuffle.m in Sources */,
 				992EF21626BBCF5700F70A94 /* ExportCopyCodeView.m in Sources */,
 				5AF5D18C1D2F7CBA004070D7 /* NSString+DictionaryValue.m in Sources */,
+				5CE7ACCB27F6EC2200E2188D /* PW_TabBarViewController.m in Sources */,
 				7918E5F621B2835100A21339 /* WBQRCodeVC.m in Sources */,
 				992E0F1126CCB53300E1C31B /* UserManager.m in Sources */,
 				5E7896C221ECDC2900097301 /* CACache.m in Sources */,
+				5CE7ACE427F6EE1200E2188D /* PW_MarketViewController.m in Sources */,
 				5AF5D1671D2F7CBA004070D7 /* NSDateFormatter+Make.m in Sources */,
 				5E0799F821D28A3A00924407 /* Empty.pbobjc.m in Sources */,
 				5AF5D1981D2F7CBA004070D7 /* NSString+Trims.m in Sources */,
@@ -3862,6 +4030,7 @@
 				5AF5D1691D2F7CBA004070D7 /* NSDictionary+Block.m in Sources */,
 				5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */,
 				9929D58B26C122380066F1D6 /* SecretFreeViewController.m in Sources */,
+				5CE7ACD227F6ED2100E2188D /* PW_WebViewController.m in Sources */,
 				5AF5D1701D2F7CBA004070D7 /* NSFileHandle+readLine.m in Sources */,
 				5AF5D16E1D2F7CBA004070D7 /* NSDictionary+XML.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
@@ -4051,6 +4220,7 @@
 				992EF21026BBCEFC00F70A94 /* ExportTopView.m in Sources */,
 				992E0F5726D4FDA900E1C31B /* AssetSortView.m in Sources */,
 				5AF5D1751D2F7CBA004070D7 /* NSInvocation+Block.m in Sources */,
+				5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */,
 				992EF17626B250C000F70A94 /* MainTopWalletView.m in Sources */,
 				9937C894270161830064BBC3 /* CustomCurrencyVC.m in Sources */,
 				9926DFF526DFAE3500FDF442 /* NodeSetTableCell.m in Sources */,

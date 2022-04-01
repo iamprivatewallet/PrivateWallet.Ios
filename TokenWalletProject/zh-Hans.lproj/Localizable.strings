@@ -14,6 +14,11 @@ text_success="成功";
 text_fail="失败";
 text_error="错误";
 
+tabbar_wallet="钱包";
+tabbar_market="市场";
+tabbar_browser="浏览器";
+tabbar_more="更多";
+
 text_import="导入";
 text_create="创建";
 text_importWallet="导入钱包";

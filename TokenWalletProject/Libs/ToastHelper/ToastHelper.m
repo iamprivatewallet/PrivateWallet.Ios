@@ -15,8 +15,7 @@
 
 @implementation ToastHelper
 
-+ (ToastHelper *)sharedToastHelper
-{
++ (ToastHelper *)sharedToastHelper {
     
     static ToastHelper *instance = nil;
     static dispatch_once_t onceToken;
@@ -26,16 +25,13 @@
     return instance;
 }
 
--(void)dealloc
-{
+- (void)dealloc {
     ReleaseClass;
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
--(instancetype)init
-{
+- (instancetype)init {
     if (self = [super init]) {
-        
         label = [[UILabel alloc] initWithFrame:CGRectMake(15, StatusHeight, SCREEN_WIDTH-30, NavAndStatusHeight-StatusHeight)];
         label.backgroundColor = [UIColor clearColor];
         label.numberOfLines = 1;
@@ -48,7 +44,10 @@
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, NavAndStatusHeight)];
         bgView.backgroundColor = [UIColor g_primaryColor];
         [bgView addSubview:label];
-        
+        UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] init];
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionUp;
+        [swipeGesture addTarget:self action:@selector(dismissToast)];
+        [bgView addGestureRecognizer:swipeGesture];
     }
     return self;
 }
@@ -75,7 +74,6 @@
         } completion:^(BOOL finished) {
             
         }];
-        
     });
 }
 
@@ -96,12 +94,10 @@
         } completion:^(BOOL finished) {
             
         }];
-        
     });
 }
 
--(void)dismissToast
-{
+- (void)dismissToast {
     bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);
     [UIView animateWithDuration:.1 animations:^{
         self->bgView.frame = CGRectMake(0,-NavAndStatusHeight, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);

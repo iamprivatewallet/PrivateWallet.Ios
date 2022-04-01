@@ -15,9 +15,6 @@
 @property (strong, nonatomic) UINavigationController *rootNavigationController;
 
 -(void)switchToTabBarController;
-
--(void)switchToWelcomeController;
-
 -(void)switchToCreateWalletVC;
 
 @end
