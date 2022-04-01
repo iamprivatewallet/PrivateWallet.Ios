@@ -56,25 +56,21 @@
     return self;
 }
 
--(BOOL)isLogin
-{
+-(BOOL)isLogin {
     return self.currentUser.user_is_login;
 }
--(BOOL)isBackup
-{
+-(BOOL)isBackup {
     return self.currentUser.user_is_backup;
 }
 // 用户登录
-- (void)loginWithUserName:(NSString *)username
+- (BOOL)loginWithUserName:(NSString *)username
              withPassword:(NSString *)password
                 withPwTip:(NSString *)tips
              withMnemonic:(NSString *)mnemonic
-             isBackup:(BOOL)isBackup
-
-{
-    if (username.length <= 0 || password.length <= 0) {
-        [[ToastHelper sharedToastHelper] toast:@"登录失败"];
-        return;
+             isBackup:(BOOL)isBackup {
+    if (password.length <= 0) {
+        [[ToastHelper sharedToastHelper] toast:LocalizedStr(@"text_fail")];
+        return NO;
     }
     User *user= [[User alloc] init];
     user.user_name = username;
@@ -89,6 +85,7 @@
     user.current_chainId = kETHChainId;
     SetUserDefaultsForKey(@"1", @"isFirstTransfer");
     [self saveCurrentUser:user];
+    return YES;
 }
 
 // 用户登出

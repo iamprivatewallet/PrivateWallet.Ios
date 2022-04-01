@@ -44,6 +44,20 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
     }
     return _languages;
 }
+- (LanguageModel *)languageDefault {
+    if(!_languageDefault){
+        NSArray *array = [LanguageTool shared].languages;
+        __block LanguageModel *model = array.firstObject;
+        [array enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if(obj.isDefault){
+                model = obj;
+                *stop = YES;
+            }
+        }];
+        _languageDefault = model;
+    }
+    return _languageDefault;
+}
 - (NSBundle *)bundle {
     if(!_bundle){
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
@@ -65,14 +79,14 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
                 }
             }];
             if(!isFind){
-                [LanguageTool setLanguage:self.languages.firstObject.type];
+                [LanguageTool setLanguage:self.languageDefault.type];
             }
         }
         lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
         NSString *path = [[NSBundle mainBundle] pathForResource:lan ofType:@"lproj"];
         if(path==nil){
             path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-            [LanguageTool setLanguage:self.languages.firstObject.type];
+            [LanguageTool setLanguage:self.languageDefault.type];
         }
         if(path){
             _bundle = [[NSBundle alloc] initWithPath:path];
@@ -103,6 +117,15 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
 + (NSString *)localizedString:(NSString *)key table:(nullable NSString *)name {
     NSString *str = [[LanguageTool shared].bundle localizedStringForKey:key value:@"" table:name];
     return str ? : @"";
+}
++ (UIImage *)imageName:(NSString *)imageName {
+    LanguageModel *model = [LanguageTool currentLanguage];
+    if(model.isDefault){
+        return [UIImage imageNamed:imageName];
+    }else{
+        NSString *langType = [model.type componentsSeparatedByString:@"-"].firstObject;
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@_%@",imageName,langType]];
+    }
 }
 
 @end

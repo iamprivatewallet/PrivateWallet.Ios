@@ -12,11 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface User : NSObject
 @property (copy, nonatomic) NSString<Optional> *user_name;
-
 @property (copy, nonatomic) NSString<Optional> *user_pass;
-
 @property (copy, nonatomic) NSString<Optional> *user_pass_tip;
-
 @property (copy, nonatomic) NSString<Optional> *user_mnemonic;
 
 @property (assign, nonatomic) BOOL user_is_backup;

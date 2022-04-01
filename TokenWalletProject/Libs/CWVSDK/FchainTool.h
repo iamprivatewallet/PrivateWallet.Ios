@@ -25,6 +25,9 @@ typedef enum WalletType {
 
 //根据助记词恢复身份
 + (void)restoreWalletWithMnemonic:(NSString*)str password:(NSString*)password block:(void(^)(NSString *result))block;
++ (void)restoreWalletWithPrivateKey:(NSString*)privateKey password:(NSString*)password block:(void(^)(NSString *result))block;
++ (void)restoreWalletWithMnemonic:(NSString*)str walletName:(NSString *)walletName password:(NSString*)password block:(void(^)(NSString *result))block;
++ (void)restoreWalletWithPrivateKey:(NSString*)privateKey walletName:(NSString *)walletName password:(NSString*)password block:(void(^)(NSString *result))block;
 
 //根据 助记词、用户名 生成  ETH && HECO && BSC 钱包
 + (void)genWalletsWithMnemonic:(NSString*)mnemonic createList:(NSArray *)list block:(void(^)(BOOL sucess))block;

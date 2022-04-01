@@ -8,6 +8,11 @@
 
 text_confirm="Confirm";
 text_changeGroup="换一组";
+text_myUnderstand="我已了解";
+text_nextStep="下一步";
+text_success="成功";
+text_fail="失败";
+text_error="错误";
 
 text_import="Import";
 text_create="Create";
@@ -37,3 +42,10 @@ text_backupMnemonicsTip1="•  请勿将助记词提供给任何人。";
 text_backupMnemonicsTip2="•  妥善保管助记词，以便未来恢复钱包使用。";
 text_backupMnemonicsTip3="•  尚未备份助记词，请勿轻易删除APP。";
 text_haveBackupVerify="我已备份，现在验证";
+text_backupAlertTitle="请勿截图、拍照";
+text_backupAlertDesc="请妥善保管助记词，且不要提供给任何人！";
+text_verifyMnemonic="验证助记词";
+text_verifyMnemonicTip="请按您抄写的顺序点击填充，确保备份正确";
+text_verifyMnemonicError="助记词顺序不对，请校对";
+text_finishedWalletCreate="完成钱包创建";
+text_mnemonicsError="请正确填写助记词";

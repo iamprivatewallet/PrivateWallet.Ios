@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UITextField *pwdTF;
 @property (nonatomic, strong) UITextField *againPwdTF;
 
+@property (nonatomic, weak) UIButton *sureBtn;
+
 @end
 
 @implementation PW_CreateViewController
@@ -28,13 +30,69 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_createWallet") rightImg:@"icon_share" rightAction:@selector(shareAction)];
     [self makeViews];
+    RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *walletName,NSString *pwd,NSString *againPwd){
+        return @(walletName.length && pwd.length && againPwd.length);
+    }];
 }
 - (void)shareAction {
     
 }
 - (void)createAction {
-    PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *walletName = [self.walletNameTF.text trim];
+    if ([walletName isEmptyStr]) {
+        [self showError:LocalizedStr(@"text_walletNameInputError")];
+        return;
+    }
+    NSString *pwdStr = self.pwdTF.text;
+    if (![pwdStr judgePassWordLegal]) {
+        [self showError:LocalizedStr(@"text_pwdFormatError")];
+        return;
+    }
+    if (![pwdStr isEqualToString:self.againPwdTF.text]) {
+        [self showError:LocalizedStr(@"text_pwdDisagreeError")];
+        return;
+    }
+    [self.view showLoadingIndicator];
+    //创建助记词
+    [FchainTool generateMnemonicBlock:^(NSString * _Nonnull result) {
+        [self.view hideLoadingIndicator];
+        [self createWalletWithWordStr:result];
+    }];
+}
+- (void)createWalletWithWordStr:(NSString *)wordStr{
+    NSString *pwdStr = self.pwdTF.text;
+    self.sureBtn.userInteractionEnabled = NO;
+    [self.view showLoadingIndicator];
+    if ([User_manager loginWithUserName:@"" withPassword:pwdStr withPwTip:@"" withMnemonic:wordStr isBackup:NO]){
+        [FchainTool genWalletsWithMnemonic:wordStr createList:@[@"ETH"] block:^(BOOL sucess) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            if (sucess) {
+                NSArray *list = [[WalletManager shareWalletManager] getWallets];
+                if (list.count>0) {
+                    [User_manager updateChooseWallet:list[0]];
+                }
+                [self showSuccess:LocalizedStr(@"text_success")];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
+                    vc.wordStr = wordStr;
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
+            }
+        }];
+    }
+}
+- (void)pwdTFDidBegin:(UITextField *)sender {
+    if (sender==self.pwdTF) {
+        if ([self.pwdTF.text isEmptyStr]) {
+            [self showToast:LocalizedStr(@"text_inputPwdTip")];
+        }
+    }
+}
+- (void)pwdTFDidEnd:(UITextField *)sender {
+    if (sender==self.pwdTF) {
+        [self dismissToast];
+    }
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -99,14 +157,9 @@
         make.left.offset(20);
         make.right.offset(-20);
     }];
-    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [sureBtn setTitle:LocalizedStr(@"text_create") forState:UIControlStateNormal];
-    sureBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    [sureBtn setTitleColor:[UIColor g_primaryTextColor] forState:UIControlStateNormal];
-    sureBtn.layer.cornerRadius = 16;
-    sureBtn.backgroundColor = [UIColor g_primaryColor];
-    [sureBtn addTarget:self action:@selector(createAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_create") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(createAction)];
     [self.contentView addSubview:sureBtn];
+    self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(warnView.mas_bottom).offset(45);
         make.height.offset(55);
@@ -161,6 +214,8 @@
     self.pwdTF.keyboardType = UIKeyboardTypeAlphabet;
     self.pwdTF.textContentType = UITextContentTypePassword;
     self.pwdTF.secureTextEntry = YES;
+    [self.pwdTF addTarget:self action:@selector(pwdTFDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.pwdTF addTarget:self action:@selector(pwdTFDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
     [self.pwdView addSubview:self.pwdTF];
     [self.pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);

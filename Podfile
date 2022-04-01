@@ -22,6 +22,8 @@ pod 'SVProgressHUD'
 pod 'MJExtension', '3.4.1'
 pod 'web3swift', '2.5.0'
 pod 'CocoaSecurity', '1.2.4'
+pod 'ReactiveObjC', '3.1.1'
+pod 'LBXScan', '~> 2.5'
 end
 
 target "TokenWalletProjectTests" do

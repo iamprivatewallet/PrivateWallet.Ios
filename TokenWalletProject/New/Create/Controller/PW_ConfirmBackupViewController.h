@@ -1,8 +1,8 @@
 //
-//  PW_BackupWalletViewController.h
+//  PW_ConfirmBackupViewController.h
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/3/30.
+//  Created by mnz on 2022/3/31.
 //  Copyright © 2022 . All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PW_BackupWalletViewController : PW_BaseViewController
+@interface PW_ConfirmBackupViewController : PW_BaseViewController
 
 @property (nonatomic, copy) NSString *wordStr;
 

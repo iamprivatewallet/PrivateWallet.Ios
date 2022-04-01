@@ -39,6 +39,7 @@
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
     titleLb.textColor = isSuccess?[UIColor g_successColor]:[UIColor g_errorColor];
+    titleLb.numberOfLines = 0;
     titleLb.text = text;
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -59,7 +60,7 @@
     HUD.square = NO;
     HUD.margin = 20;
     [contentView layoutIfNeeded];
-    UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
+    UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].delegate.window.safeAreaInsets;
     CGFloat offsetY = (SCREEN_HEIGHT-safeAreaInsets.top-safeAreaInsets.bottom)*0.5-44-contentView.bounds.size.height;
     HUD.offset = CGPointMake(0, -offsetY);
     HUD.userInteractionEnabled = NO;

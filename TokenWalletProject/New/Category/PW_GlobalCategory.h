@@ -11,5 +11,8 @@
 
 #import "UIColor+Global.h"
 #import "UITextField+PW_Global.h"
+#import "UIBUtton+PW_Block.h"
+#import "NSString+PW_String.h"
+#import "NSArray+PW_Array.h"
 
 #endif /* GlobalCategory_h */

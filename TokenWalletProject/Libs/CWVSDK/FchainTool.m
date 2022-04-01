@@ -23,7 +23,7 @@
 }
 
 //根据助记词恢复身份
-+ (NSString*)restoreWalletWithMnemonic:(NSString*)mnemonic password:(NSString *)password{
++ (NSString*)restoreWalletWithMnemonic:(NSString*)mnemonic walletName:(NSString *)walletName password:(NSString *)password{
     NSString * mainPriKey = [Bip44 mnemonicToHDPrivateKey:mnemonic passwd:@""];
     NSLog(@"eth mainPriKey::%@",mainPriKey);
     NSString * addr = [Bip44 getAddress:mainPriKey index:0];
@@ -33,30 +33,52 @@
     NSString * ownerStr = @"identity_name";
     NSString * pubkey = @"eth";
     
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    NSArray *list = @[@"ETH"];
+    NSDictionary *dic = @{
+        @"type":@"ETH",
+        @"walletName":walletName,
+        @"walletPassword":password,
+        @"owner":ownerStr,
+        @"mnemonic":mnemonic,
+        @"pubKey":pubkey,
+        @"priKey":prikey,
+        @"address":[addr formatToEth],
+        @"isImport":@"0",
+        @"totalBalance":@"0",
+        @"coinCount":@(0),
+        @"isOpenID":@"0",
+    };
+    Wallet *wallet = [Wallet mj_objectWithKeyValues:dic];
+    [[WalletManager shareWalletManager] saveWallet:wallet];
     
-    for (int i = 0; i<list.count; i++) {
-        NSDictionary *dic = @{
-            @"type":list[i],
-            @"walletName":list[i],
-            @"walletPassword":password,
-            @"owner":ownerStr,
-            @"mnemonic":mnemonic,
-            @"pubKey":pubkey,
-            @"priKey":prikey,
-            @"address":[addr formatToEth],
-            @"isImport":@"0",
-            @"totalBalance":@"0",
-            @"coinCount":@(0),
-            @"isOpenID":@"0",
+    return ownerStr;
+}
 
-        };
-        Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
-        [arr addObject:wallet];
+//根据私钥导入钱包
++ (NSString*)restoreWalletWithPrivateKey:(NSString *)privateKey walletName:(NSString *)walletName password:(NSString *)password{
+    KeyPair kp = [EthereumUtils genFromPrikey:privateKey];
+    NSString *address = [KeyPairHelper hexAddress:kp];
+    NSString *pubKey = [KeyPairHelper hexPubkey:kp];
+    if ([address isEqualToString:@"undefined"]) {
+        return nil;
     }
-    [[WalletManager shareWalletManager] saveWallets:arr];
-    
+    NSString *ownerStr = @"identity_name";
+    NSDictionary *dic = @{
+        @"type":@"ETH",
+        @"walletName":walletName,
+        @"walletPassword":password,
+        @"walletPasswordTips":@"",
+        @"owner":ownerStr,
+        @"mnemonic":@"nothing",
+        @"pubKey":pubKey,
+        @"priKey":privateKey,
+        @"address":[address formatToEth],
+        @"isImport":@"0",
+        @"totalBalance":@"0",
+        @"coinCount":@(0),
+        @"isOpenID":@"0",
+    };
+    Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
+    [[WalletManager shareWalletManager] saveWallet:wallet];
     return ownerStr;
 }
 
@@ -378,10 +400,40 @@
 }
 
 //根据助记词恢复身份
-+ (void)restoreWalletWithMnemonic:(NSString*)str password:(NSString*)password block:(void(^)(NSString *result))block
-{
++ (void)restoreWalletWithMnemonic:(NSString*)str password:(NSString*)password block:(void(^)(NSString *result))block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *username = [self restoreWalletWithMnemonic:str password:password];
+        NSString *username = [self restoreWalletWithMnemonic:str walletName:@"ETH" password:password];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (block) {
+                block(username);
+            }
+        });
+    });
+}
+//根据私钥恢复身份
++ (void)restoreWalletWithPrivateKey:(NSString*)privateKey password:(NSString*)password block:(void(^)(NSString *result))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *username = [self restoreWalletWithPrivateKey:privateKey walletName:@"ETH" password:password];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (block) {
+                block(username);
+            }
+        });
+    });
+}
++ (void)restoreWalletWithMnemonic:(NSString*)str walletName:(NSString *)walletName password:(NSString*)password block:(void(^)(NSString *result))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *username = [self restoreWalletWithMnemonic:str walletName:walletName password:password];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (block) {
+                block(username);
+            }
+        });
+    });
+}
++ (void)restoreWalletWithPrivateKey:(NSString*)privateKey walletName:(NSString *)walletName password:(NSString*)password block:(void(^)(NSString *result))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *username = [self restoreWalletWithPrivateKey:privateKey walletName:walletName password:password];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (block) {
                 block(username);

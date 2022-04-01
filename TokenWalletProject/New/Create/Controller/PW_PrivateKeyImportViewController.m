@@ -7,6 +7,7 @@
 //
 
 #import "PW_PrivateKeyImportViewController.h"
+#import "PW_ScanTool.h"
 
 @interface PW_PrivateKeyImportViewController ()
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UITextField *walletNameTF;
 @property (nonatomic, strong) UITextField *pwdTF;
 @property (nonatomic, strong) UITextField *againPwdTF;
+@property (nonatomic, weak) UIButton *sureBtn;
 
 @end
 
@@ -28,15 +30,62 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_privateKeyImport") rightImg:@"icon_scan" rightAction:@selector(scanAction)];
     [self makeViews];
+    RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.privateKeyTF.rac_textSignal,self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *privateKey,NSString *walletName,NSString *pwd,NSString *againPwd){
+        return @(privateKey.length && walletName.length && pwd.length && againPwd.length);
+    }];
 }
 - (void)scanAction {
-    
+    [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
+        self.privateKeyTF.text = result;
+    }];
 }
 - (void)infoAction {
     
 }
 - (void)sureAction {
-    
+    NSString *privateKeyStr = [self.privateKeyTF.text trim];
+    if ([privateKeyStr isEmptyStr]) {
+        [self showError:LocalizedStr(@"text_privateKeyInputError")];
+        return;
+    }
+    NSString *pwdStr = self.pwdTF.text;
+    NSString *walletName = [self.walletNameTF.text trim];
+    if ([walletName isEmptyStr]) {
+        [self showError:LocalizedStr(@"text_walletNameInputError")];
+        return;
+    }
+    if (![pwdStr judgePassWordLegal]) {
+        [self showError:LocalizedStr(@"text_pwdFormatError")];
+        return;
+    }
+    if (pwdStr.length<8) {
+        [self showError:LocalizedStr(@"text_pwdFormatError")];
+        return;
+    }
+    if (![pwdStr isEqualToString:self.againPwdTF.text]) {
+        [self showError:LocalizedStr(@"text_pwdDisagreeError")];
+        return;
+    }
+    self.sureBtn.userInteractionEnabled = NO;
+    [self.view showLoadingIndicator];
+    [FchainTool restoreWalletWithPrivateKey:privateKeyStr walletName:walletName password:pwdStr block:^(NSString * _Nonnull result) {
+        [self.view hideLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = YES;
+        if([result isNoEmpty]){
+            if ([User_manager loginWithUserName:result withPassword:pwdStr withPwTip:@"" withMnemonic:@"" isBackup:YES]){
+                [self showSuccess:LocalizedStr(@"text_success")];
+                NSArray *list = [[WalletManager shareWalletManager] getWallets];
+                if (list.count>0) {
+                    [User_manager updateChooseWallet:list[0]];
+                    [TheAppDelegate switchToTabBarController];
+                }else{
+                    [self showError:LocalizedStr(@"text_error")];
+                }
+            }
+        }else{
+            [self showError:LocalizedStr(@"text_error")];
+        }
+    }];
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -115,6 +164,7 @@
     sureBtn.backgroundColor = [UIColor g_primaryColor];
     [sureBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:sureBtn];
+    self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(pwdView.mas_bottom).offset(40);
         make.height.offset(55);

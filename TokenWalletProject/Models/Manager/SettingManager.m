@@ -37,58 +37,39 @@
     Wallet *wallet = [[[WalletManager shareWalletManager] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
     return wallet;
 }
--(BOOL)isUseTouchID
-{
+-(BOOL)isUseTouchID{
     NSNumber *obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"isUseTouchID"];
     return   obj ? [obj boolValue] : NO;
 }
-
--(void)setIsUseTouchID:(BOOL)isUseTouchID
-{
+-(void)setIsUseTouchID:(BOOL)isUseTouchID {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:isUseTouchID] forKey:@"isUseTouchID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
--(BOOL)isFirstTransfer
-{
+-(BOOL)isFirstTransfer {
     NSNumber *obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"isFirstTransfer"];
     return   obj ? [obj boolValue] : NO;
 }
--(void)setIsUserFirstTransfer:(BOOL)isFirstTransfer
-{
+-(void)setIsUserFirstTransfer:(BOOL)isFirstTransfer {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:isFirstTransfer] forKey:@"isFirstTransfer"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
--(NSString *)langage
-{
+-(NSString *)langage {
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"langage"];
     return   obj ? : @"简体中文";
 }
-
--(void)setLangage:(NSString *)langage
-{
+-(void)setLangage:(NSString *)langage {
     [[NSUserDefaults standardUserDefaults] setObject:langage forKey:@"langage"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
--(NSString *)money
-{
+-(NSString *)money {
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:@"money"];
-    return   obj ? : @"CNY";
+    return obj ? : @"CNY";
 }
-
--(void)setMoney:(NSString *)money
-{
+-(void)setMoney:(NSString *)money {
     [[NSUserDefaults standardUserDefaults] setObject:money forKey:@"money"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
-
--(void)setNode:(NSString *)node chianId:(NSString *)chianId {
-     [[NSUserDefaults standardUserDefaults] setObject:node forKey:chianId];
-     [[NSUserDefaults standardUserDefaults] synchronize];
-}
--(int)getNodeChainId{
+-(int)getNodeChainId {
     NSString *chainId = User_manager.currentUser.current_chainId;
     return [chainId intValue];
 }
@@ -120,14 +101,16 @@
         return @"";
     }
 }
--(NSString *)getNodeWithChainId:(NSString *)chainId
-{
+-(void)setNode:(NSString *)node chianId:(NSString *)chianId {
+     [[NSUserDefaults standardUserDefaults] setObject:node forKey:chianId];
+     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)getNodeWithChainId:(NSString *)chainId {
     NSString *obj = [[NSUserDefaults standardUserDefaults] objectForKey:chainId];
     NSString *obj1 = [[NSUserDefaults standardUserDefaults] objectForKey:chainId.hexString];
-    return obj ? : (obj1 ? : [self getNodeArrayWithChainId:chainId].firstObject);
+    return [obj isNoEmpty] ? obj : ([obj1 isNoEmpty] ? obj1 : [self getNodeArrayWithChainId:chainId].firstObject);
 }
--(NSString *)getNodeNameWithChainId:(NSString *)chainId
-{
+-(NSString *)getNodeNameWithChainId:(NSString *)chainId {
     if ([chainId isEqualToString:kETHChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kETHChainId]) {
         return @"Ethereum Mainnet";
     } else if ([chainId isEqualToString:kHECOChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kHECOChainId]) {

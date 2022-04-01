@@ -7,6 +7,7 @@
 //
 
 #import "PW_BackupWalletViewController.h"
+#import "PW_ConfirmBackupViewController.h"
 
 @interface PW_BackupWalletViewController ()
 
@@ -30,7 +31,11 @@
     
 }
 - (void)verifyAction {
-    
+    [PW_TipTool showBackupTipSureBlock:^{
+        PW_ConfirmBackupViewController *vc = [[PW_ConfirmBackupViewController alloc] init];
+        vc.wordStr = self.wordStr;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -72,7 +77,6 @@
     mnemonicsView.layer.shadowOffset = CGSizeMake(0, 2);
     mnemonicsView.layer.shadowRadius = 8;
     mnemonicsView.layer.shadowOpacity = 1;
-//    mnemonicsView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 190)].CGPath;
     [self.contentView addSubview:mnemonicsView];
     self.mnemonicsView = mnemonicsView;
     [mnemonicsView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,15 +84,15 @@
         make.right.offset(-20);
         make.top.equalTo(tipLb.mas_bottom).offset(16);
     }];
-    UIButton *changeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [changeBtn setTitleColor:[UIColor g_grayTextColor] forState:UIControlStateNormal];
-    [changeBtn setTitle:LocalizedStr(@"text_changeGroup") forState:UIControlStateNormal];
-    [changeBtn addTarget:self action:@selector(changeAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:changeBtn];
-    [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mnemonicsView.mas_bottom).offset(15);
-        make.right.offset(-28);
-    }];
+//    UIButton *changeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [changeBtn setTitleColor:[UIColor g_grayTextColor] forState:UIControlStateNormal];
+//    [changeBtn setTitle:LocalizedStr(@"text_changeGroup") forState:UIControlStateNormal];
+//    [changeBtn addTarget:self action:@selector(changeAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:changeBtn];
+//    [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.mnemonicsView.mas_bottom).offset(15);
+//        make.right.offset(-28);
+//    }];
     UILabel *tip1Label = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupMnemonicsTip1") fontSize:13 textColor:[UIColor g_grayTextColor]];
     [self.contentView addSubview:tip1Label];
     UILabel *tip2Label = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupMnemonicsTip2") fontSize:13 textColor:[UIColor g_grayTextColor]];
@@ -96,7 +100,7 @@
     UILabel *tip3Label = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupMnemonicsTip3") fontSize:13 textColor:[UIColor g_grayTextColor]];
     [self.contentView addSubview:tip3Label];
     [tip1Label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(changeBtn.mas_bottom).offset(32);
+        make.top.equalTo(mnemonicsView.mas_bottom).offset(32);
         make.left.offset(25);
         make.right.offset(-25);
     }];
@@ -122,8 +126,8 @@
     [self updateMnemonicsItems];
 }
 - (void)updateMnemonicsItems {
+    NSArray *textArr = [self.wordStr componentsSeparatedByString:@" "];
     [self.mnemonicsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    NSArray *textArr = @[@"Dog",@"Text",@"Big",@"Dog",@"Text",@"Big",@"Dog",@"Text",@"Big"];
     NSInteger column = 3;
     CGFloat padding = 20;
     CGFloat rowSpace = 15;

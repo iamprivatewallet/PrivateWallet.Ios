@@ -7,6 +7,8 @@
 		<string>en</string>
 		<key>name</key>
 		<string>English</string>
+		<key>isDefault</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>type</key>

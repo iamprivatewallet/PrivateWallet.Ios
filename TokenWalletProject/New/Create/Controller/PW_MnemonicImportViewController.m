@@ -7,6 +7,7 @@
 //
 
 #import "PW_MnemonicImportViewController.h"
+#import "PW_ScanTool.h"
 
 @interface PW_MnemonicImportViewController ()
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UITextField *walletPathTF;
 @property (nonatomic, strong) UITextField *pwdTF;
 @property (nonatomic, strong) UITextField *againPwdTF;
+@property (nonatomic, weak) UIButton *sureBtn;
 
 @property (nonatomic, assign) BOOL showAdvancedMode;
 
@@ -33,9 +35,14 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_mnemonicWordImport") rightImg:@"icon_scan" rightAction:@selector(scanAction)];
     [self makeViews];
+    RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.mnemonicTF.rac_textSignal,self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *mnemonic,NSString *walletName,NSString *pwd,NSString *againPwd){
+        return @(mnemonic.length && walletName.length && pwd.length && againPwd.length);
+    }];
 }
 - (void)scanAction {
-    
+    [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
+        self.mnemonicTF.text = result;
+    }];
 }
 - (void)infoAction {
     
@@ -51,7 +58,56 @@
     }];
 }
 - (void)sureAction {
-    
+    NSString *mnemonicStr = [self.mnemonicTF.text trim];
+    NSArray *array = [mnemonicStr componentsSeparatedByString:@" "];
+    NSMutableString *wordStr = [[NSMutableString alloc] init];
+    NSInteger wordCount = 0;
+    for (NSInteger i = 0; i < array.count; i++) {
+        NSString *subStr = [array objectAtIndex:i];
+        if ([subStr isEqualToString:@""]) {
+            continue;
+        }
+        [wordStr appendString:subStr];
+        if (i != array.count-1) {
+            [wordStr appendString:@" "];
+        }
+        wordCount++;
+    }
+    if (wordCount != 12) {
+        [self showError:LocalizedStr(@"text_mnemonicsError")];
+        return;
+    }
+    NSString *pwdStr = self.pwdTF.text;
+    NSString *walletName = [self.walletNameTF.text trim];
+    if ([walletName isEmptyStr]) {
+        [self showError:LocalizedStr(@"text_walletNameInputError")];
+        return;
+    }
+    if (![pwdStr judgePassWordLegal]) {
+        [self showError:LocalizedStr(@"text_pwdFormatError")];
+        return;
+    }
+    if (![pwdStr isEqualToString:self.againPwdTF.text]) {
+        [self showError:LocalizedStr(@"text_pwdDisagreeError")];
+        return;
+    }
+    NSString *fixWordStr = [wordStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.sureBtn.userInteractionEnabled = NO;
+    [self.view showLoadingIndicator];
+    [FchainTool restoreWalletWithMnemonic:fixWordStr walletName:walletName password:pwdStr block:^(NSString * _Nonnull result) {
+        [self.view hideLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = YES;
+        if([User_manager loginWithUserName:result withPassword:pwdStr withPwTip:@"" withMnemonic:fixWordStr isBackup:YES]){
+            [self showSuccess:LocalizedStr(@"text_success")];
+            NSArray *list = [[WalletManager shareWalletManager] getWallets];
+            if (list.count>0) {
+                [User_manager updateChooseWallet:list[0]];
+                [TheAppDelegate switchToTabBarController];
+            }else{
+                [self showError:LocalizedStr(@"text_error")];
+            }
+        }
+    }];
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -151,14 +207,9 @@
         make.right.offset(-20);
         make.height.mas_equalTo(160);
     }];
-    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [sureBtn setTitle:LocalizedStr(@"text_confirm") forState:UIControlStateNormal];
-    sureBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    [sureBtn setTitleColor:[UIColor g_primaryTextColor] forState:UIControlStateNormal];
-    sureBtn.layer.cornerRadius = 16;
-    sureBtn.backgroundColor = [UIColor g_primaryColor];
-    [sureBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
     [self.contentView addSubview:sureBtn];
+    self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(pwdView.mas_bottom).offset(40);
         make.height.offset(55);

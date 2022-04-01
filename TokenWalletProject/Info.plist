@@ -114,15 +114,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>CVN想要访问您的相机</string>
+	<string>Private Wallet想要访问您的相机</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>验证面容</string>
+	<string>Private Wallet想要访问验证面容</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>CVN想要访问您的位置</string>
+	<string>Private Wallet想要访问您的位置</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>CVN想要访问您的麦克风</string>
+	<string>Private Wallet想要访问您的麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CVN想要访问您的相册</string>
+	<string>Private Wallet想要访问您的相册</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>iconfont.ttf</string>

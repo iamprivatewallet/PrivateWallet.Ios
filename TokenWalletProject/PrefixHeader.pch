@@ -91,6 +91,7 @@
 
 #import "PW_GlobalCategory.h"
 #import "PW_Tool.h"
+#import <ReactiveObjC/ReactiveObjC.h>
 
 #import "TokenWalletProject-Swift.h"
 

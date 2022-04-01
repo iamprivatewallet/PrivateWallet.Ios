@@ -43,6 +43,11 @@ PODS:
     - JJException/Swizzle
   - JJException/Swizzle (0.2.11)
   - JSONModel (1.8.0)
+  - LBXScan (2.5.1):
+    - LBXScan/All (= 2.5.1)
+  - LBXScan/All (2.5.1):
+    - LBXScan/Types (~> 2.2)
+  - LBXScan/Types (2.5.1)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.4.1)
@@ -59,6 +64,7 @@ PODS:
   - PromiseKit/UIKit (6.15.3):
     - PromiseKit/CorePromise
   - RDVTabBarController (1.3.0)
+  - ReactiveObjC (3.1.1)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -84,12 +90,14 @@ DEPENDENCIES:
   - IQKeyboardManager
   - JJException (= 0.2.11)
   - JSONModel
+  - LBXScan (~> 2.5)
   - Masonry
   - MBProgressHUD
   - MJExtension (= 3.4.1)
   - MJRefresh
   - PNChart
   - RDVTabBarController
+  - ReactiveObjC (= 3.1.1)
   - SDWebImage (= 5.11.1)
   - SVProgressHUD
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
@@ -102,8 +110,10 @@ SPEC REPOS:
     - CocoaSecurity
     - CryptoSwift
     - JJException
+    - LBXScan
     - MJExtension
     - PromiseKit
+    - ReactiveObjC
     - SDWebImage
     - secp256k1.c
     - Starscream
@@ -136,6 +146,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JJException: 738a5379392769edca40815ec14cd895a000d9e7
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
+  LBXScan: 90ca10d0c38fb4a5a6980d7782354f3f69f50093
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
@@ -143,6 +154,7 @@ SPEC CHECKSUMS:
   PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   RDVTabBarController: 28a5c6546b9991cf2712d59947324c6b06603e14
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
@@ -151,6 +163,6 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   web3swift: 31ecb7a7da543f851344cdd64badea94c439b0d9
 
-PODFILE CHECKSUM: 6d7f5525ef9ecb628e6c4af6606afdbd2ed55d7b
+PODFILE CHECKSUM: 96156023b45ec39d759902bd94bee08a4031e7e2
 
 COCOAPODS: 1.11.2

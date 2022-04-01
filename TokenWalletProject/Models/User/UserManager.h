@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)sharedInstance;
 // 用户登录
-- (void)loginWithUserName:(NSString *)username
+- (BOOL)loginWithUserName:(NSString *)username
              withPassword:(NSString *)password
                 withPwTip:(NSString *)tips
              withMnemonic:(NSString *)mnemonic

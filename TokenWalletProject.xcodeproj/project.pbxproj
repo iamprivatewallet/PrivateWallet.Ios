@@ -206,6 +206,9 @@
 		5CB76B2D27F447070068E967 /* PW_ToastTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B2C27F447060068E967 /* PW_ToastTool.m */; };
 		5CB76B3127F458C40068E967 /* PW_BackupWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */; };
 		5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */; };
+		5CB76B3A27F57DB30068E967 /* PW_TipTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3927F57DB20068E967 /* PW_TipTool.m */; };
+		5CB76B3E27F582190068E967 /* UIButton+PW_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B3D27F582190068E967 /* UIButton+PW_Block.m */; };
+		5CB76B4127F5916F0068E967 /* PW_ConfirmBackupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B4027F5916E0068E967 /* PW_ConfirmBackupViewController.m */; };
 		5CB8BB9127E0799A00C73976 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */; };
 		5CB8BB9927E1C6D800C73976 /* MessageTransferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */; };
 		5CB8BB9A27E1C6D900C73976 /* MessageTransferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CB8BB9827E1C6D800C73976 /* MessageTransferCell.xib */; };
@@ -217,6 +220,10 @@
 		5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB427E212A700C73976 /* BrowseWebViewController.m */; };
 		5CB8BBB827E3084E00C73976 /* TokenChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB727E3084E00C73976 /* TokenChainModel.m */; };
 		5CB8BBBB27E30DBD00C73976 /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */; };
+		5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */; };
+		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
+		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
+		5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -830,6 +837,12 @@
 		5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BackupWalletViewController.m; sourceTree = "<group>"; };
 		5CB76B3327F45D2A0068E967 /* PW_ViewTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ViewTool.h; sourceTree = "<group>"; };
 		5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ViewTool.m; sourceTree = "<group>"; };
+		5CB76B3827F57DB20068E967 /* PW_TipTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TipTool.h; sourceTree = "<group>"; };
+		5CB76B3927F57DB20068E967 /* PW_TipTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TipTool.m; sourceTree = "<group>"; };
+		5CB76B3C27F582190068E967 /* UIButton+PW_Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+PW_Block.h"; sourceTree = "<group>"; };
+		5CB76B3D27F582190068E967 /* UIButton+PW_Block.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PW_Block.m"; sourceTree = "<group>"; };
+		5CB76B3F27F5916E0068E967 /* PW_ConfirmBackupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ConfirmBackupViewController.h; sourceTree = "<group>"; };
+		5CB76B4027F5916E0068E967 /* PW_ConfirmBackupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ConfirmBackupViewController.m; sourceTree = "<group>"; };
 		5CB8BB9027E0799A00C73976 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		5CB8BB9627E1C6D800C73976 /* MessageTransferCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTransferCell.h; sourceTree = "<group>"; };
 		5CB8BB9727E1C6D800C73976 /* MessageTransferCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTransferCell.m; sourceTree = "<group>"; };
@@ -849,6 +862,14 @@
 		5CB8BBB927E30DBD00C73976 /* NetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTool.h; sourceTree = "<group>"; };
 		5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTool.m; sourceTree = "<group>"; };
 		5CB8BBBC27E311FC00C73976 /* NoticeConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeConst.h; sourceTree = "<group>"; };
+		5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanTool.h; sourceTree = "<group>"; };
+		5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanTool.m; sourceTree = "<group>"; };
+		5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanViewController.h; sourceTree = "<group>"; };
+		5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanViewController.m; sourceTree = "<group>"; };
+		5CE7ACC227F5DC6B00E2188D /* NSString+PW_String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+PW_String.h"; sourceTree = "<group>"; };
+		5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+PW_String.m"; sourceTree = "<group>"; };
+		5CE7ACC627F6E25C00E2188D /* NSArray+PW_Array.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+PW_Array.h"; sourceTree = "<group>"; };
+		5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PW_Array.m"; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -2387,6 +2408,8 @@
 				5CB76B2827F31A9A0068E967 /* PW_CreateViewController.m */,
 				5CB76B2F27F458C30068E967 /* PW_BackupWalletViewController.h */,
 				5CB76B3027F458C30068E967 /* PW_BackupWalletViewController.m */,
+				5CB76B3F27F5916E0068E967 /* PW_ConfirmBackupViewController.h */,
+				5CB76B4027F5916E0068E967 /* PW_ConfirmBackupViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2418,8 +2441,10 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5CB76B3627F57D080068E967 /* Alert */,
 				5CB76B2A27F4405E0068E967 /* Toast */,
 				5CB76B3227F45D0E0068E967 /* View */,
+				5CE7ACBA27F5CE4900E2188D /* Scan */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2430,6 +2455,9 @@
 				5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */,
 				5CB76B2227F306960068E967 /* UITextField */,
 				5CB76B1227F2E91D0068E967 /* UIColor */,
+				5CB76B3B27F582030068E967 /* UIButton */,
+				5CE7ACC127F5DC4900E2188D /* NSString */,
+				5CE7ACC527F6E24300E2188D /* NSArray */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2468,6 +2496,53 @@
 				5CB76B3427F45D2A0068E967 /* PW_ViewTool.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5CB76B3627F57D080068E967 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B3827F57DB20068E967 /* PW_TipTool.h */,
+				5CB76B3927F57DB20068E967 /* PW_TipTool.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		5CB76B3B27F582030068E967 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				5CB76B3C27F582190068E967 /* UIButton+PW_Block.h */,
+				5CB76B3D27F582190068E967 /* UIButton+PW_Block.m */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		5CE7ACBA27F5CE4900E2188D /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */,
+				5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */,
+				5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */,
+				5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		5CE7ACC127F5DC4900E2188D /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACC227F5DC6B00E2188D /* NSString+PW_String.h */,
+				5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
+		5CE7ACC527F6E24300E2188D /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACC627F6E25C00E2188D /* NSArray+PW_Array.h */,
+				5CE7ACC727F6E25C00E2188D /* NSArray+PW_Array.m */,
+			);
+			path = NSArray;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3509,6 +3584,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JJException/JJException.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
+				"${BUILT_PRODUCTS_DIR}/LBXScan/LBXScan.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -3516,6 +3592,7 @@
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -3537,6 +3614,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJException.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXScan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -3544,6 +3622,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
@@ -3620,6 +3699,7 @@
 				994AA0F226CA07390062F9AF /* AdvancedModeVC.m in Sources */,
 				5AF5D1A41D2F7CBA004070D7 /* NSUserDefaults+SafeAccess.m in Sources */,
 				992EF16C26B142FF00F70A94 /* UseSettingViewController.m in Sources */,
+				5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */,
 				9937C8B7271672810064BBC3 /* BrowseModel.m in Sources */,
 				5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */,
 				994AA0F826CA3CE10062F9AF /* MinerFeeCell.m in Sources */,
@@ -3637,6 +3717,7 @@
 				99D804DC26A6AD7E00E9B5F8 /* RecoveryIDViewController.m in Sources */,
 				5AF5D1801D2F7CBA004070D7 /* NSObject+Blocks.m in Sources */,
 				5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */,
+				5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */,
 				5AF5D16A1D2F7CBA004070D7 /* NSDictionary+JSONString.m in Sources */,
 				5AF5D26D1D2F7D03004070D7 /* CATCommon.m in Sources */,
 				992EF19D26B924E900F70A94 /* AddWalletViewController.m in Sources */,
@@ -3676,6 +3757,7 @@
 				1FAF8D8E21E64A12003BC8EF /* UIView+Indictor.m in Sources */,
 				5AF5D19A1D2F7CBA004070D7 /* NSString+UUID.m in Sources */,
 				5E0799F521D28A3A00924407 /* Api.pbobjc.m in Sources */,
+				5CB76B3E27F582190068E967 /* UIButton+PW_Block.m in Sources */,
 				1FA8EF7821B824F900B4E28E /* TYBaseAnimation.m in Sources */,
 				5AF5D1741D2F7CBA004070D7 /* NSInvocation+Bb.m in Sources */,
 				5AF5D15D1D2F7CBA004070D7 /* NSData+Hash.m in Sources */,
@@ -3808,6 +3890,7 @@
 				992EF17926B2511300F70A94 /* MainTableViewCell.m in Sources */,
 				9929D59126C255730066F1D6 /* PasswordTipsVC.m in Sources */,
 				5CB8BBB827E3084E00C73976 /* TokenChainModel.m in Sources */,
+				5CB76B3A27F57DB30068E967 /* PW_TipTool.m in Sources */,
 				5AF5D17F1D2F7CBA004070D7 /* NSObject+AutoCoding.m in Sources */,
 				5AF5D1791D2F7CBA004070D7 /* NSNumber+CGFloat.m in Sources */,
 				9937C8972701AE0B0064BBC3 /* HotAssetsTableViewCell.m in Sources */,
@@ -3882,6 +3965,7 @@
 				7918E5FA21B2837D00A21339 /* SGWebView.m in Sources */,
 				992EF18726B3CADF00F70A94 /* AddCurrencyCell.m in Sources */,
 				1FA8EF7221B824F900B4E28E /* TYAlertScaleFadeAnimation.m in Sources */,
+				5CB76B4127F5916F0068E967 /* PW_ConfirmBackupViewController.m in Sources */,
 				992EF20426BA6B0400F70A94 /* ImportWalletVC.m in Sources */,
 				992EF16326B00E3F00F70A94 /* TokenAlertView.m in Sources */,
 				9937C8AC270339C80064BBC3 /* DAppsWebAlertView.m in Sources */,
@@ -3910,6 +3994,7 @@
 				5A8FD9511D2DFC270015D6C0 /* main.m in Sources */,
 				5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */,
 				5B02FD5921FFF6460040025E /* YKYLineView.m in Sources */,
+				5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */,
 				9929D59426C26DCB0066F1D6 /* ChooseAddressTypeVC.m in Sources */,
 				9926DFEF26DF7C0500FDF442 /* NodeTableViewCell.m in Sources */,
 				5E079A2221D3C5F200924407 /* sha256.cpp in Sources */,
@@ -3954,6 +4039,7 @@
 				992E0F7426D8D95D00E1C31B /* MyAllAssetsVC.m in Sources */,
 				992E0F7126D8D94700E1C31B /* MainAssetManageVC.m in Sources */,
 				9937C8A62702BA340064BBC3 /* DAppsCollectionViewCell.m in Sources */,
+				5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */,
 				5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */,
 				79AA81E621CFBCAB00C7D510 /* brewchain.mm in Sources */,
 				99D2CA452537F81C00C1C196 /* UIColor+Y_StockChart.m in Sources */,
@@ -4141,6 +4227,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -4210,6 +4297,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

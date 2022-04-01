@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_grayTextColor;
 
 + (UIColor *)g_borderColor;
++ (UIColor *)g_maskColor;
 
 @end
 

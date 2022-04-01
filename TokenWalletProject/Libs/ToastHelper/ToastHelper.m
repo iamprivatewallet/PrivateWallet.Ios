@@ -40,38 +40,38 @@
         label.backgroundColor = [UIColor clearColor];
         label.numberOfLines = 1;
         label.textAlignment = NSTextAlignmentLeft;
-        label.textColor = [UIColor whiteColor];
-        label.font = GCSFontRegular(14);
+        label.textColor = [UIColor g_primaryTextColor];
+        label.font = GCSFontMedium(14);
         label.numberOfLines = 0;
         isShowing = NO;
         
         bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, NavAndStatusHeight)];
-        bgView.backgroundColor = [UIColor im_btnSelectColor];
+        bgView.backgroundColor = [UIColor g_primaryColor];
         [bgView addSubview:label];
         
     }
     return self;
 }
 
-- (void)toast:(NSString *)textString afterDelay:(CGFloat)delay
-{
+- (void)toast:(NSString *)textString afterDelay:(CGFloat)delay {
     [self performSelector:@selector(toast:) withObject:textString afterDelay:delay inModes:@[NSRunLoopCommonModes]];
 }
 
-- (void)toast:(NSString *)textString
-{
+- (void)toast:(NSString *)textString {
     if (isShowing) {
         return;
     }
     isShowing = YES;
+    CGFloat text_h = [textString heightWithFont:self->label.font constrainedToWidth:SCREEN_WIDTH-30];
+    CGFloat view_h = StatusHeight+text_h+20;
     dispatch_async(dispatch_get_main_queue(), ^{
         self->label.text = textString;
         [TheAppDelegate.window addSubview:self->bgView];
         [self performSelector:@selector(dismissToast) withObject:nil afterDelay:1.5f inModes:@[NSRunLoopCommonModes]];
-        
-        self->bgView.frame = CGRectMake(0, -NavAndStatusHeight, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);
-        [UIView animateWithDuration:.1 animations:^{
-            self->bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);
+        self->bgView.frame = CGRectMake(0, -view_h, [UIScreen mainScreen].bounds.size.width, view_h);
+        self->label.frame = CGRectMake(15, StatusHeight+5, SCREEN_WIDTH-30, text_h);
+        [UIView animateWithDuration:0.25 animations:^{
+            self->bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, view_h);
         } completion:^(BOOL finished) {
             
         }];
@@ -84,16 +84,15 @@
         return;
     }
     isShowing = YES;
-    CGFloat text_h = [textString heightWithFont:GCSFontRegular(14) constrainedToWidth:SCREEN_WIDTH-30];
+    CGFloat text_h = [textString heightWithFont:self->label.font constrainedToWidth:SCREEN_WIDTH-30];
     CGFloat view_h = StatusHeight+text_h+20;
     dispatch_async(dispatch_get_main_queue(), ^{
         self->label.text = textString;
         [TheAppDelegate.window addSubview:self->bgView];
         self->bgView.frame = CGRectMake(0, -view_h, [UIScreen mainScreen].bounds.size.width, view_h);
-        [UIView animateWithDuration:.1 animations:^{
+        self->label.frame = CGRectMake(15, StatusHeight+5, SCREEN_WIDTH-30, text_h);
+        [UIView animateWithDuration:0.25 animations:^{
             self->bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, view_h);
-            self->label.frame = CGRectMake(15, StatusHeight+5, SCREEN_WIDTH-30, text_h);
-
         } completion:^(BOOL finished) {
             
         }];

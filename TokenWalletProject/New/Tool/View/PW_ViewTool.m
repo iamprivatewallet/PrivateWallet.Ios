@@ -36,9 +36,18 @@
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:weight];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];
+    [btn setTitleColor:[titleColor colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
     btn.layer.cornerRadius = cornerRadius;
-    btn.backgroundColor = backgroundColor;
-    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    btn.layer.masksToBounds = YES;
+    if(backgroundColor){
+        UIImage *normalImage = [UIImage imageWithColor:backgroundColor size:CGSizeMake(1, 1)];
+        UIImage *disabledImage = [UIImage imageWithColor:[backgroundColor colorWithAlphaComponent:0.5] size:CGSizeMake(1, 1)];
+        [btn setBackgroundImage:normalImage forState:UIControlStateNormal];
+        [btn setBackgroundImage:disabledImage forState:UIControlStateDisabled];
+    }
+    if(target&&action){
+        [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
     return btn;
 }
 
