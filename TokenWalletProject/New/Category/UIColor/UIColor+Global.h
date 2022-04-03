@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (Global)
 
++ (UIColor *)g_hex:(NSString *)hexStr;
++ (UIColor *)g_hex:(NSString *)hexStr alpha:(CGFloat)alpha;
+
 + (UIColor *)g_successColor;
 + (UIColor *)g_errorColor;
 + (UIColor *)g_warnColor;

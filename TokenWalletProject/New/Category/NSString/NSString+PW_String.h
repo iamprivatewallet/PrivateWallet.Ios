@@ -12,7 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (PW_String)
 
+- (void)pasteboard;
+
 - (BOOL)judgePassWordLegal;
+
+- (NSString *)showShortAddress;
+- (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
 
 @end
 

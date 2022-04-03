@@ -7,6 +7,7 @@
 //
 
 #import "PW_ViewTool.h"
+#import "PW_Button.h"
 
 @implementation PW_ViewTool
 
@@ -31,6 +32,19 @@
 + (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
     return [self buttonTitle:title fontSize:fontSize weight:UIFontWeightSemibold titleColor:titleColor cornerRadius:cornerRadius backgroundColor:backgroundColor target:target action:action];
 }
++ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action {
+    PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [btn layoutWithEdgeInsetStyle:PW_ButtonEdgeInsetStyleLeft spaceBetweenImageAndTitle:5];
+    btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:UIFontWeightSemibold];
+    [btn setTitleColor:titleColor forState:UIControlStateNormal];
+    [btn setTitleColor:[titleColor colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
+    if(target&&action){
+        [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
+    return btn;
+}
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitle:title forState:UIControlStateNormal];
@@ -44,6 +58,20 @@
         UIImage *disabledImage = [UIImage imageWithColor:[backgroundColor colorWithAlphaComponent:0.5] size:CGSizeMake(1, 1)];
         [btn setBackgroundImage:normalImage forState:UIControlStateNormal];
         [btn setBackgroundImage:disabledImage forState:UIControlStateDisabled];
+    }
+    if(target&&action){
+        [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
+    return btn;
+}
++ (UIButton *)buttonImageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action {
+    return [self buttonImageName:imageName selectedImage:nil target:target action:action];
+}
++ (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action {
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    if(![selectedImage isEmptyStr]){
+        [btn setImage:[UIImage imageNamed:selectedImage] forState:UIControlStateSelected];
     }
     if(target&&action){
         [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];

@@ -73,7 +73,7 @@
                     [User_manager updateChooseWallet:list[0]];
                 }
                 [self showSuccess:LocalizedStr(@"text_success")];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
                     vc.wordStr = wordStr;
                     [self.navigationController pushViewController:vc animated:YES];
@@ -183,7 +183,7 @@
         make.left.offset(15);
     }];
     self.walletNameTF = [[UITextField alloc] init];
-    [self.walletNameTF setPlaceholder:@"ETH-1"];
+    [self.walletNameTF pw_setPlaceholder:@"ETH-1"];
     self.walletNameTF.font = [UIFont systemFontOfSize:14];
     self.walletNameTF.textColor = [UIColor g_textColor];
     self.walletNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -207,7 +207,7 @@
         make.left.offset(15);
     }];
     self.pwdTF = [[UITextField alloc] init];
-    [self.pwdTF setPlaceholder:LocalizedStr(@"text_setTradePwdTip")];
+    [self.pwdTF pw_setPlaceholder:LocalizedStr(@"text_setTradePwdTip")];
     self.pwdTF.font = [UIFont systemFontOfSize:14];
     self.pwdTF.textColor = [UIColor g_textColor];
     self.pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -233,7 +233,7 @@
         make.height.offset(1);
     }];
     self.againPwdTF = [[UITextField alloc] init];
-    [self.againPwdTF setPlaceholder:LocalizedStr(@"text_inputAgain")];
+    [self.againPwdTF pw_setPlaceholder:LocalizedStr(@"text_inputAgain")];
     self.againPwdTF.font = [UIFont systemFontOfSize:14];
     self.againPwdTF.textColor = [UIColor g_textColor];
     self.againPwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;

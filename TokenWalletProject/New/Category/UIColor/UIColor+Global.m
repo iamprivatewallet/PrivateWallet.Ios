@@ -10,6 +10,31 @@
 
 @implementation UIColor (Global)
 
++ (UIColor *)g_hex:(NSString *)hexStr {
+    return [self g_hex:hexStr alpha:1];
+}
++ (UIColor *)g_hex:(NSString *)hexStr alpha:(CGFloat)alpha {
+    if([hexStr hasPrefix:@"0x"]){
+        hexStr = [hexStr substringFromIndex:2];
+    }else if ([hexStr hasPrefix:@"#"]) {
+        hexStr = [hexStr substringFromIndex:1];
+    }
+    if (hexStr.length != 6) {
+        return [UIColor clearColor];
+    }
+    NSRange range = NSMakeRange(0, 2);
+    NSString *redStr = [hexStr substringWithRange:range];
+    range.location = 2;
+    NSString *greenStr = [hexStr substringWithRange:range];
+    range.location = 4;
+    NSString *blueStr = [hexStr substringWithRange:range];
+    unsigned int red, green, blue;
+    [[NSScanner scannerWithString:redStr] scanHexInt:&red];
+    [[NSScanner scannerWithString:greenStr] scanHexInt:&green];
+    [[NSScanner scannerWithString:blueStr] scanHexInt:&blue];
+    return [UIColor colorWithRed:red / 255.0f  green:green / 255.0f blue:blue / 255.0f alpha:alpha];
+}
+
 + (UIColor *)g_successColor {
     return COLORFORRGB(0x1AC190);
 }

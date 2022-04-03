@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tabBar.translucent = NO;
+    self.tabBar.backgroundColor = [UIColor g_bgColor];
     [self setupTab];
 }
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {

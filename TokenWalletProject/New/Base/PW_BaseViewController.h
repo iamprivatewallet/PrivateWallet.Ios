@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_BaseViewController : BaseViewController
 
+- (void)requestData;
+- (void)requestPath:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 - (void)showSuccess:(NSString *)text;
 - (void)showError:(NSString *)text;
 - (void)showToast:(NSString *)text;

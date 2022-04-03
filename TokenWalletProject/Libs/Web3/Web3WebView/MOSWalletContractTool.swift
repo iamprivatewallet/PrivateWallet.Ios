@@ -204,7 +204,7 @@ class MOSWalletContractTool: NSObject {
         transactionOptions.callOnBlock = .latest
         DispatchQueue.global(qos: .background).async {
             do {
-                if((MOSWalletTool.shared().web3.provider.network?.chainID ?? 0) != SettingManager.sharedInstance().getNodeChainId()){
+                if(MOSWalletTool.shared().web3.provider.network != nil&&(MOSWalletTool.shared().web3.provider.network?.chainID ?? 0) != SettingManager.sharedInstance().getNodeChainId()){
                     DispatchQueue.main.async {
                         completionBlock(nil, "chainId error")
                     }

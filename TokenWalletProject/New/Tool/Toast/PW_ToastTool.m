@@ -61,7 +61,7 @@
     HUD.margin = 20;
     [contentView layoutIfNeeded];
     UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].delegate.window.safeAreaInsets;
-    CGFloat offsetY = (SCREEN_HEIGHT-safeAreaInsets.top-safeAreaInsets.bottom)*0.5-44-contentView.bounds.size.height;
+    CGFloat offsetY = (SCREEN_HEIGHT-safeAreaInsets.top-safeAreaInsets.bottom)*0.5-44-contentView.bounds.size.height-HUD.margin;
     HUD.offset = CGPointMake(0, -offsetY);
     HUD.userInteractionEnabled = NO;
     HUD.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;

@@ -242,7 +242,7 @@
         make.centerY.equalTo(titleLb);
     }];
     self.mnemonicTF = [[UITextField alloc] init];
-    [self.mnemonicTF setPlaceholder:LocalizedStr(@"text_inputMnemonicWordTip")];
+    [self.mnemonicTF pw_setPlaceholder:LocalizedStr(@"text_inputMnemonicWordTip")];
     self.mnemonicTF.font = [UIFont systemFontOfSize:14];
     self.mnemonicTF.textColor = [UIColor g_textColor];
     self.mnemonicTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -267,7 +267,7 @@
         make.left.offset(15);
     }];
     self.walletPathTF = [[UITextField alloc] init];
-    [self.walletPathTF setPlaceholder:@"m/44’/60’/0’/0/0"];
+    [self.walletPathTF pw_setPlaceholder:@"m/44’/60’/0’/0/0"];
     self.walletPathTF.font = [UIFont systemFontOfSize:14];
     self.walletPathTF.textColor = [UIColor g_textColor];
     self.walletPathTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -292,7 +292,7 @@
         make.left.offset(15);
     }];
     self.walletNameTF = [[UITextField alloc] init];
-    [self.walletNameTF setPlaceholder:@"ETH-1"];
+    [self.walletNameTF pw_setPlaceholder:@"ETH-1"];
     self.walletNameTF.font = [UIFont systemFontOfSize:14];
     self.walletNameTF.textColor = [UIColor g_textColor];
     self.walletNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -316,7 +316,7 @@
         make.left.offset(15);
     }];
     self.pwdTF = [[UITextField alloc] init];
-    [self.pwdTF setPlaceholder:LocalizedStr(@"text_setTradePwdTip")];
+    [self.pwdTF pw_setPlaceholder:LocalizedStr(@"text_setTradePwdTip")];
     self.pwdTF.font = [UIFont systemFontOfSize:14];
     self.pwdTF.textColor = [UIColor g_textColor];
     self.pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -340,7 +340,7 @@
         make.height.offset(1);
     }];
     self.againPwdTF = [[UITextField alloc] init];
-    [self.againPwdTF setPlaceholder:LocalizedStr(@"text_inputAgain")];
+    [self.againPwdTF pw_setPlaceholder:LocalizedStr(@"text_inputAgain")];
     self.againPwdTF.font = [UIFont systemFontOfSize:14];
     self.againPwdTF.textColor = [UIColor g_textColor];
     self.againPwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;

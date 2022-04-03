@@ -13,6 +13,7 @@ text_nextStep="下一步";
 text_success="成功";
 text_fail="失败";
 text_error="错误";
+text_copySuccess="复制成功";
 
 tabbar_wallet="钱包";
 tabbar_market="市场";
@@ -59,3 +60,10 @@ text_pwdDisagreeError="密码不一致";
 text_walletNameInputError="请输入钱包名称";
 text_privateKeyInputError="请输入私钥";
 text_inputPwdTip="该密码将作为钱包的交易密码。\nPrivate Wallet 不会存储密码，也无法帮你找回，请务必妥善保管密码。";
+
+text_assets="资产";
+text_transfer="转账";
+text_collection="收款";
+text_currency="币种";
+text_searchDappCurrency="搜索DAPP或币种";
+text_backupTip="钱包未备份助记词，为了资产安全，请务必备份助记词";

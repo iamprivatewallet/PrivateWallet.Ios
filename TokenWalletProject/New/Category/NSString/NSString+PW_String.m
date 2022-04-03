@@ -10,6 +10,10 @@
 
 @implementation NSString (PW_String)
 
+- (void)pasteboard {
+    [UIPasteboard generalPasteboard].string = self;
+}
+
 - (BOOL)judgePassWordLegal {
     NSString *pass = self;
     // 验证密码长度
@@ -45,6 +49,18 @@
 //        return NO;
 //    }
     return YES;
+}
+
+- (NSString *)showShortAddress {
+    return [self showAddressHead:14 tail:4];
+}
+- (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail {
+    if([self isNoEmpty]&&self.length>=18){
+        NSString *headStr = [self substringToIndex:14];
+        NSString *tailStr = [self substringFromIndex:self.length-4];
+        return [NSString stringWithFormat:@"%@...%@",headStr,tailStr];
+    }
+    return self;
 }
 
 @end

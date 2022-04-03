@@ -231,6 +231,15 @@
 		5CE7ACE727F6EE1F00E2188D /* PW_DappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */; };
 		5CE7ACEA27F6EE2800E2188D /* PW_MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACE927F6EE2800E2188D /* PW_MoreViewController.m */; };
 		5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */; };
+		5CE7ACF127F8367E00E2188D /* UIImage+PW_Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACF027F8367D00E2188D /* UIImage+PW_Image.m */; };
+		5CE7ACF627F841B100E2188D /* PW_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACF527F841B000E2188D /* PW_Button.m */; };
+		5CE7ACFB27F84D9000E2188D /* UIView+PW_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACFA27F84D8F00E2188D /* UIView+PW_View.m */; };
+		5CE7ACFF27F85B4200E2188D /* PW_TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACFE27F85B4200E2188D /* PW_TableView.m */; };
+		5CE7AD0327F8624700E2188D /* PW_BaseTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0227F8624700E2188D /* PW_BaseTableCell.m */; };
+		5CE7AD0627F8628900E2188D /* PW_WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0527F8628900E2188D /* PW_WalletCell.m */; };
+		5CE7AD0927F98EA100E2188D /* PW_BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0827F98EA100E2188D /* PW_BaseModel.m */; };
+		5CE7AD0C27F98F0A00E2188D /* PW_TokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */; };
+		5CE7AD1127F99AC300E2188D /* PW_ContractTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -891,6 +900,26 @@
 		5CE7ACE927F6EE2800E2188D /* PW_MoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MoreViewController.m; sourceTree = "<group>"; };
 		5CE7ACEB27F6EE9600E2188D /* PW_NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NavigationController.h; sourceTree = "<group>"; };
 		5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NavigationController.m; sourceTree = "<group>"; };
+		5CE7ACEF27F8367D00E2188D /* UIImage+PW_Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+PW_Image.h"; sourceTree = "<group>"; };
+		5CE7ACF027F8367D00E2188D /* UIImage+PW_Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PW_Image.m"; sourceTree = "<group>"; };
+		5CE7ACF427F841B000E2188D /* PW_Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Button.h; sourceTree = "<group>"; };
+		5CE7ACF527F841B000E2188D /* PW_Button.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Button.m; sourceTree = "<group>"; };
+		5CE7ACF927F84D8F00E2188D /* UIView+PW_View.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+PW_View.h"; sourceTree = "<group>"; };
+		5CE7ACFA27F84D8F00E2188D /* UIView+PW_View.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+PW_View.m"; sourceTree = "<group>"; };
+		5CE7ACFD27F85B4200E2188D /* PW_TableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TableView.h; sourceTree = "<group>"; };
+		5CE7ACFE27F85B4200E2188D /* PW_TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TableView.m; sourceTree = "<group>"; };
+		5CE7AD0027F85B7F00E2188D /* PW_ViewGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ViewGlobal.h; sourceTree = "<group>"; };
+		5CE7AD0127F8624600E2188D /* PW_BaseTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BaseTableCell.h; sourceTree = "<group>"; };
+		5CE7AD0227F8624700E2188D /* PW_BaseTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BaseTableCell.m; sourceTree = "<group>"; };
+		5CE7AD0427F8628900E2188D /* PW_WalletCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletCell.h; sourceTree = "<group>"; };
+		5CE7AD0527F8628900E2188D /* PW_WalletCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletCell.m; sourceTree = "<group>"; };
+		5CE7AD0727F98EA100E2188D /* PW_BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BaseModel.h; sourceTree = "<group>"; };
+		5CE7AD0827F98EA100E2188D /* PW_BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BaseModel.m; sourceTree = "<group>"; };
+		5CE7AD0A27F98F0A00E2188D /* PW_TokenModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenModel.h; sourceTree = "<group>"; };
+		5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenModel.m; sourceTree = "<group>"; };
+		5CE7AD0F27F99AC300E2188D /* PW_ContractTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ContractTool.h; sourceTree = "<group>"; };
+		5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ContractTool.m; sourceTree = "<group>"; };
+		5CE7AD1427F9AA9D00E2188D /* PW_Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Constant.h; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -2396,6 +2425,9 @@
 		5CB76B0727F2E15D0068E967 /* New */ = {
 			isa = PBXGroup;
 			children = (
+				5CE7AD1327F9AA8000E2188D /* Other */,
+				5CE7AD1227F99AC900E2188D /* ContractTool */,
+				5CE7ACF227F8419400E2188D /* View */,
 				5CB76B1127F2E9170068E967 /* Category */,
 				5CB76B1027F2E9110068E967 /* Tool */,
 				5CB76B0C27F2E1CA0068E967 /* Base */,
@@ -2464,6 +2496,10 @@
 				5CE7ACCA27F6EC2200E2188D /* PW_TabBarViewController.m */,
 				5CE7ACD027F6ED2100E2188D /* PW_WebViewController.h */,
 				5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */,
+				5CE7AD0127F8624600E2188D /* PW_BaseTableCell.h */,
+				5CE7AD0227F8624700E2188D /* PW_BaseTableCell.m */,
+				5CE7AD0727F98EA100E2188D /* PW_BaseModel.h */,
+				5CE7AD0827F98EA100E2188D /* PW_BaseModel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2484,11 +2520,13 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */,
+				5CE7ACF827F84D5B00E2188D /* UIView */,
 				5CB76B2227F306960068E967 /* UITextField */,
 				5CB76B1227F2E91D0068E967 /* UIColor */,
 				5CB76B3B27F582030068E967 /* UIButton */,
 				5CE7ACC127F5DC4900E2188D /* NSString */,
 				5CE7ACC527F6E24300E2188D /* NSArray */,
+				5CE7ACEE27F8362800E2188D /* UIImage */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2628,6 +2666,8 @@
 		5CE7ACD427F6ED9A00E2188D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5CE7AD0427F8628900E2188D /* PW_WalletCell.h */,
+				5CE7AD0527F8628900E2188D /* PW_WalletCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2635,6 +2675,8 @@
 		5CE7ACD527F6ED9F00E2188D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5CE7AD0A27F98F0A00E2188D /* PW_TokenModel.h */,
+				5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2706,6 +2748,69 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5CE7ACEE27F8362800E2188D /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACEF27F8367D00E2188D /* UIImage+PW_Image.h */,
+				5CE7ACF027F8367D00E2188D /* UIImage+PW_Image.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		5CE7ACF227F8419400E2188D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7AD0027F85B7F00E2188D /* PW_ViewGlobal.h */,
+				5CE7ACFC27F85B2800E2188D /* UITableView */,
+				5CE7ACF327F8419C00E2188D /* UIButton */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CE7ACF327F8419C00E2188D /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACF427F841B000E2188D /* PW_Button.h */,
+				5CE7ACF527F841B000E2188D /* PW_Button.m */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		5CE7ACF827F84D5B00E2188D /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACF927F84D8F00E2188D /* UIView+PW_View.h */,
+				5CE7ACFA27F84D8F00E2188D /* UIView+PW_View.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		5CE7ACFC27F85B2800E2188D /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACFD27F85B4200E2188D /* PW_TableView.h */,
+				5CE7ACFE27F85B4200E2188D /* PW_TableView.m */,
+			);
+			path = UITableView;
+			sourceTree = "<group>";
+		};
+		5CE7AD1227F99AC900E2188D /* ContractTool */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7AD0F27F99AC300E2188D /* PW_ContractTool.h */,
+				5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */,
+			);
+			path = ContractTool;
+			sourceTree = "<group>";
+		};
+		5CE7AD1327F9AA8000E2188D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7AD1427F9AA9D00E2188D /* PW_Constant.h */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3860,6 +3965,8 @@
 				992E0FCD26DE1CC100E1C31B /* WalletCoinModel.m in Sources */,
 				99D2CA292537F7EC00C1C196 /* ZZCustomView.m in Sources */,
 				9926E00826E632DD00FDF442 /* ReadServiceView.m in Sources */,
+				5CE7ACF127F8367E00E2188D /* UIImage+PW_Image.m in Sources */,
+				5CE7AD0927F98EA100E2188D /* PW_BaseModel.m in Sources */,
 				1FE0545321CFDC36009DA9CD /* JQFMDB.m in Sources */,
 				994AA0F226CA07390062F9AF /* AdvancedModeVC.m in Sources */,
 				5AF5D1A41D2F7CBA004070D7 /* NSUserDefaults+SafeAccess.m in Sources */,
@@ -3881,6 +3988,7 @@
 				996DC0662542A1E40081F28F /* MineViewController.m in Sources */,
 				99D804DC26A6AD7E00E9B5F8 /* RecoveryIDViewController.m in Sources */,
 				5AF5D1801D2F7CBA004070D7 /* NSObject+Blocks.m in Sources */,
+				5CE7AD0627F8628900E2188D /* PW_WalletCell.m in Sources */,
 				5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */,
 				5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */,
 				5AF5D16A1D2F7CBA004070D7 /* NSDictionary+JSONString.m in Sources */,
@@ -3893,6 +4001,7 @@
 				1FA8EF7621B824F900B4E28E /* TYAlertDropDownAnimation.m in Sources */,
 				994AA0F526CA3A230062F9AF /* MinersfeeSettingVC.m in Sources */,
 				992EF20D26BBCCAB00F70A94 /* ExportKeystoreAndPrivateKeyVC.m in Sources */,
+				5CE7ACFB27F84D9000E2188D /* UIView+PW_View.m in Sources */,
 				5CB8BBAA27E1CE9100C73976 /* MessageSystemModel.m in Sources */,
 				9937C8A92702F5720064BBC3 /* DAppsTableViewCell.m in Sources */,
 				5CB76B2D27F447070068E967 /* PW_ToastTool.m in Sources */,
@@ -3900,6 +4009,7 @@
 				5AF5D1891D2F7CBA004070D7 /* NSMutableString+Ruby.m in Sources */,
 				992EF17326B15BF200F70A94 /* BackupAlertMainView.m in Sources */,
 				5AF5D3431D335C9A004070D7 /* DTTimePeriodCollection.m in Sources */,
+				5CE7ACFF27F85B4200E2188D /* PW_TableView.m in Sources */,
 				992EF17C26B27B5600F70A94 /* MainNavTitleView.m in Sources */,
 				9926E05F26E78D4200FDF442 /* NSString+IsEmptyStr.m in Sources */,
 				5AF5D15E1D2F7CBA004070D7 /* NSData+SDDataCache.m in Sources */,
@@ -3979,6 +4089,7 @@
 				5AF5D1621D2F7CBA004070D7 /* NSDate+Formatter.m in Sources */,
 				992E0F5426D4E7F700E1C31B /* AssetTopView.m in Sources */,
 				5AF5D1591D2F7CBA004070D7 /* NSData+APNSToken.m in Sources */,
+				5CE7ACF627F841B100E2188D /* PW_Button.m in Sources */,
 				5AF5D1641D2F7CBA004070D7 /* NSDate+Reporting.m in Sources */,
 				996E41A0271EB1B6009EDC17 /* AssetCoinModel.m in Sources */,
 				992E0F4E26D4E6FF00E1C31B /* AssetManagementVC.m in Sources */,
@@ -4045,6 +4156,7 @@
 				5E0799F121D28A3A00924407 /* Type.pbobjc.m in Sources */,
 				992E0F6E26D8CD7A00E1C31B /* AllAssetsViewController.m in Sources */,
 				992EF1A626B944A100F70A94 /* CreateWalletVC.m in Sources */,
+				5CE7AD0C27F98F0A00E2188D /* PW_TokenModel.m in Sources */,
 				994AA0EF26C662860062F9AF /* TransferView.m in Sources */,
 				5AD11EDB1D3F4CAA007A0976 /* ToastHelper.m in Sources */,
 				99D2C9F02537F66000C1C196 /* BaseViewController.m in Sources */,
@@ -4065,6 +4177,7 @@
 				9937C8972701AE0B0064BBC3 /* HotAssetsTableViewCell.m in Sources */,
 				5AF5D16D1D2F7CBA004070D7 /* NSDictionary+URL.m in Sources */,
 				9926E06226E85DA700FDF442 /* SubscribeToMailView.m in Sources */,
+				5CE7AD1127F99AC300E2188D /* PW_ContractTool.m in Sources */,
 				5E0799EE21D28A3A00924407 /* GPBUtilities.m in Sources */,
 				5AF5D14D1D2F7CBA004070D7 /* NSManagedObject+DictionaryExport.m in Sources */,
 				5AF5D17A1D2F7CBA004070D7 /* NSNumber+RomanNumerals.m in Sources */,
@@ -4184,6 +4297,7 @@
 				5CB76B3127F458C40068E967 /* PW_BackupWalletViewController.m in Sources */,
 				1FCE189721AAFA5600328D78 /* ZYBannerFooter.m in Sources */,
 				992E0F2F26CCD9CC00E1C31B /* ETHTokenCoin.m in Sources */,
+				5CE7AD0327F8624700E2188D /* PW_BaseTableCell.m in Sources */,
 				5AF5D1611D2F7CBA004070D7 /* NSDate+Extension.m in Sources */,
 				79C9B35721ABEE2E007BA751 /* HexColors.m in Sources */,
 				7918E5ED21B27E8800A21339 /* SGQRCodeScanView.m in Sources */,

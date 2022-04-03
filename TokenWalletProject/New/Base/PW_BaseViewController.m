@@ -18,6 +18,12 @@
     [super viewDidLoad];
     
 }
+- (void)requestData {
+    
+}
+- (void)requestPath:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
+    [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
+}
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
     return UIUserInterfaceStyleLight;
 }

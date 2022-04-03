@@ -19,7 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (UILabel *)labelText:(NSString *)text fontSize:(CGFloat)size weight:(UIFontWeight)weight textColor:(UIColor *)color;
 
 + (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(nullable UIColor *)backgroundColor target:(nullable id)target action:(nullable SEL)action;
++ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(nullable UIColor *)backgroundColor target:(nullable id)target action:(nullable SEL)action;
++ (UIButton *)buttonImageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
++ (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action;
 
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowColor:(UIColor *)shadowColor shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;

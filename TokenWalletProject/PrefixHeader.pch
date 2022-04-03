@@ -90,7 +90,9 @@
 #import "WBQRCodeVC.h"
 
 #import "PW_GlobalCategory.h"
+#import "PW_ViewGlobal.h"
 #import "PW_Tool.h"
+#import "PW_Constant.h"
 #import <ReactiveObjC/ReactiveObjC.h>
 
 #import "TokenWalletProject-Swift.h"

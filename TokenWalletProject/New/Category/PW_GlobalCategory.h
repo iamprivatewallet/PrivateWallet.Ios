@@ -14,5 +14,7 @@
 #import "UIBUtton+PW_Block.h"
 #import "NSString+PW_String.h"
 #import "NSArray+PW_Array.h"
+#import "UIImage+PW_Image.h"
+#import "UIView+PW_View.h"
 
 #endif /* GlobalCategory_h */
