@@ -7,11 +7,27 @@
 //
 
 #import "NSString+PW_String.h"
+#import "NSDate+Helper.h"
 
 @implementation NSString (PW_String)
 
++ (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval {
+    return [self timeStrTimeInterval:timeInterval format:@"yyyy-MM-dd HH:mm:ss"];
+}
++ (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval format:(NSString *)format {
+    NSTimeInterval interval = timeInterval/1000;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    return [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+}
+
 - (void)pasteboard {
+    [self pasteboardToast:NO];
+}
+- (void)pasteboardToast:(BOOL)toast {
     [UIPasteboard generalPasteboard].string = self;
+    if (toast) {
+        [PW_ToastTool showSucees:LocalizedStr(@"text_copySuccess")];
+    }
 }
 
 - (BOOL)judgePassWordLegal {

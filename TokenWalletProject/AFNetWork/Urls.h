@@ -24,6 +24,8 @@ static NSString * const WalletUserAgreementUrl = @"https://privatewallet.gitbook
 //网络请求url
 static NSString * const APPWalletBaseURL = @"https://chain.kimchiii.com";
 
+//币种详情
+static NSString * const WalletTokenDetailURL = @"wallet/getTransactionInfo";
 //币种icon
 static NSString * const WalletTokenIconURL = @"api/wallet/token/icon";
 //币种汇率

@@ -49,7 +49,7 @@
             User_manager.currentUser.user_is_backup = YES;
             [User_manager saveTask];
         }
-        [PW_ToastTool showSucees:LocalizedStr(@"text_finishedWalletCreate") toView:self.view];
+        [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
         [TheAppDelegate switchToTabBarController];
     }
 }
@@ -64,11 +64,11 @@
             }
         }
         if(!isEqual){
-            [PW_ToastTool showError:LocalizedStr(@"text_verifyMnemonicError") toView:self.view];
+            [self showError:LocalizedStr(@"text_verifyMnemonicError")];
         }
         return isEqual&&self.seletedArr.count==self.wordArr.count;
     }else{
-        [PW_ToastTool showError:LocalizedStr(@"text_verifyMnemonicError") toView:self.view];
+        [self showError:LocalizedStr(@"text_verifyMnemonicError")];
         return NO;
     }
 }

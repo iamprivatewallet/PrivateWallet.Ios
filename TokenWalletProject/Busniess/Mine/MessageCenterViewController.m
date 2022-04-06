@@ -79,7 +79,7 @@
         @"pageSize":@"20"
     };
     NSString *urlStr = index==0?WalletMessageHashPageURL:WalletMessageSysPageURL;
-    [self requestWallet:urlStr params:params completeBlock:^(id data) {
+    [self requestApi:urlStr params:params completeBlock:^(id data) {
         if(index==0){
             [self.hashTableView.mj_header endRefreshing];
             NSArray *array = data[@"content"];

@@ -97,7 +97,7 @@ WBQRCodeDelegate
         return;
     }
     [self.view showLoadingIndicator];
-    [self requestWallet:WalletTokenChainURL params:nil completeBlock:^(id data) {
+    [self requestApi:WalletTokenChainURL params:nil completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         self.chainTypeArr = [TokenChainModel mj_objectArrayWithKeyValuesArray:data];
         NSMutableArray *titleArr = [[NSMutableArray alloc] init];
@@ -123,7 +123,7 @@ WBQRCodeDelegate
         return;
     }
     [self.tableView reloadData];
-    [self requestWallet:WalletDappListURL params:@{@"chainId":model.chainId} completeBlock:^(id data) {
+    [self requestApi:WalletDappListURL params:@{@"chainId":model.chainId} completeBlock:^(id data) {
         self.appsList = [BrowseRecordsModel mj_objectArrayWithKeyValuesArray:data];
         model.dappList = self.appsList;
         [self.tableView reloadData];

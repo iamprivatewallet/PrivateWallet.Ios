@@ -27,7 +27,7 @@
 - (void)checkImportWallet {
     User *user = User_manager.currentUser;
     Wallet *wallet = [[[WalletManager shareWalletManager] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
-    [MOSWeb3Tool changeOrImportWalletWithAddress:user.chooseWallet_address mnemonics:wallet.mnemonic password:wallet.walletPassword];
+    [MOSWeb3Tool changeOrImportWalletWithAddress:user.chooseWallet_address mnemonics:wallet.mnemonic privateKey:wallet.priKey password:wallet.walletPassword];
 }
 - (NSString * _Nullable)getCurrentAddress {
     return User_manager.currentUser.chooseWallet_address;

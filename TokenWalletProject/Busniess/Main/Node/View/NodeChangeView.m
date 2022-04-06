@@ -61,7 +61,7 @@
 }
 
 - (void)makeNodeModel{
-//    [NetworkTool requestWallet:WalletTokenChainURL params:nil completeBlock:^(id  _Nonnull data) {
+//    [NetworkTool requestApi:WalletTokenChainURL params:nil completeBlock:^(id  _Nonnull data) {
 //        
 //    } errBlock:^(NSString * _Nonnull msg) {
 //        

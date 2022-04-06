@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) UIButton *rightBtn;
 
-- (void)requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
+- (void)requestApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 
 - (UIImage*)compressImage:(UIImage*)sourceImage toTargetWidth:(CGFloat)targetWidth;
 

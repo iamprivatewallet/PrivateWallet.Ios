@@ -10,6 +10,7 @@
 #import "PW_ScanTool.h"
 #import "PW_WalletCell.h"
 #import "PW_ContractTool.h"
+#import "PW_TokenDetailViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -24,6 +25,7 @@
 @property (nonatomic, weak) UILabel *totalAssetsLb;
 
 @property (nonatomic, strong) PW_TableView *tableView;
+@property (nonatomic, strong) UIView *addCurrencyView;
 @property (nonatomic, weak) UIView *backupTipView;
 
 @property (nonatomic, strong) NSMutableArray<PW_TokenModel *> *coinList;
@@ -79,9 +81,10 @@
     SetUserDefaultsForKey(btn.selected?@"1":@"0", kHiddenWalletAmount);
     [UserDefaults synchronize];
     [self refreshHeader];
+    [self.tableView reloadData];
 }
 - (void)copyAction {
-    [self.currentWallet.address pasteboard];
+    [self.currentWallet.address pasteboardToast:YES];
     [self showSuccess:LocalizedStr(@"text_copySuccess")];
 }
 - (void)transferAction {
@@ -91,6 +94,9 @@
     
 }
 - (void)editAction {
+    
+}
+- (void)addCurrencyAction {
     
 }
 - (void)hiddenSmallAction:(UIButton *)btn {
@@ -123,13 +129,12 @@
     model.price = @"0";
     model.tokenDecimals = 18;
     model.isDefault = YES;
-    model.currentWallet = self.currentWallet;
     [self.coinList addObject:model];
     [self.tableView reloadData];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     [self.view showLoadingIndicator];
-    [self requestPath:WalletTokenIconURL params:@{@"tokenChain":chainId} completeBlock:^(id  _Nonnull data) {
+    [self pw_requestApi:WalletTokenIconURL params:@{@"tokenChain":chainId} completeBlock:^(id  _Nonnull data) {
         dispatch_semaphore_signal(semaphore);
         [self.view hideLoadingIndicator];
         NSArray *array = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
@@ -137,6 +142,7 @@
         [self loadCacheCoinList];
     } errBlock:^(NSString * _Nonnull msg) {
         dispatch_semaphore_signal(semaphore);
+        [self loadCacheCoinList];
         [self.view hideLoadingIndicator];
         [self showError:msg];
     }];
@@ -154,7 +160,6 @@
             model.tokenAmount = @"0";
             model.price = @"0";
             model.tokenDecimals = obj.tokenDecimals.integerValue;
-            model.currentWallet = self.currentWallet;
             [self.coinList addObject:model];
         }
     }];
@@ -178,7 +183,7 @@
     if ([self.currentWallet.type isEqualToString:@"CVN"]) {
         [self loadCVNAllCoin];
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self requestWallet:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
+            [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
                 [self.tableView reloadData];
                 [self refreshCVNTotal];
@@ -187,7 +192,7 @@
     }else{
         [self loadAllBalance];
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self requestWallet:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
+            [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
                 [self.tableView reloadData];
                 [self refreshTotal];
@@ -206,7 +211,11 @@
     }
 }
 - (void)nodeUpdate:(NSNotification *)noti {
-//    [self chooseNodeWithModel:noti.object];
+    NodeModel *model = noti.object;
+    if ([model isKindOfClass:[NodeModel class]]) {
+        [self refreshHeader];
+        [self requestData];
+    }
 }
 - (void)getWallets{
     NSArray *list = [[WalletManager shareWalletManager] getWallets];
@@ -317,7 +326,9 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_TokenDetailViewController *vc = [PW_TokenDetailViewController new];
+    vc.model = self.coinList[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - View
 - (void)makeViews {
@@ -538,8 +549,26 @@
         [_tableView registerClass:[PW_WalletCell class] forCellReuseIdentifier:@"PW_WalletCell"];
         _tableView.rowHeight = 70;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = self.addCurrencyView;
     }
     return _tableView;
+}
+- (UIView *)addCurrencyView {
+    if (!_addCurrencyView) {
+        _addCurrencyView = [[UIView alloc] init];
+        _addCurrencyView.frame = CGRectMake(0, 0, 0, 54);
+        UIButton *addCurrencyBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addCurrency") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addCurrencyAction)];
+        addCurrencyBtn.frame = CGRectMake(20, 10, SCREEN_WIDTH-40, 44);
+        [addCurrencyBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
+        [_addCurrencyView addSubview:addCurrencyBtn];
+        [addCurrencyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(10);
+            make.left.offset(20);
+            make.right.offset(-20);
+            make.height.offset(44);
+        }];
+    }
+    return _addCurrencyView;
 }
 - (NSMutableArray<PW_TokenModel *> *)coinList {
     if (!_coinList) {

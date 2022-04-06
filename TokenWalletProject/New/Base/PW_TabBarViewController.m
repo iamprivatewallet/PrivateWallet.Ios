@@ -24,6 +24,11 @@
     
     self.tabBar.translucent = NO;
     self.tabBar.backgroundColor = [UIColor g_bgColor];
+    [self.tabBar setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, -3) radius:8];
+    self.tabBar.barTintColor = [UIColor g_bgColor];
+//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+//    line.backgroundColor = [UIColor g_lineColor];
+//    [self.tabBar addSubview:line];
     [self setupTab];
 }
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
@@ -50,10 +55,6 @@
     moreNac.tabBarItem = [self tabbarItemTitle:LocalizedStr(@"tabbar_more") imageNamed:@"icon_tabbar_more"];
     
     self.viewControllers = @[walletNac,marketNac,dappNac,moreNac];
-    self.tabBar.barTintColor = [UIColor g_bgColor];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
-    line.backgroundColor = [UIColor g_lineColor];
-    [self.tabBar addSubview:line];
 }
 - (UITabBarItem *)tabbarItemTitle:(NSString *)title imageNamed:(NSString *)imageNamed {
     UITabBarItem *item = [[UITabBarItem alloc] init];

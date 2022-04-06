@@ -32,7 +32,7 @@
     [self loadData];
 }
 - (void)loadData {
-    [self requestWallet:WalletMessageSysItemURL params:@{@"id":self.mid} completeBlock:^(id data) {
+    [self requestApi:WalletMessageSysItemURL params:@{@"id":self.mid} completeBlock:^(id data) {
         self.scrollView.hidden = NO;
         self.model = [MessageSystemModel mj_objectWithKeyValues:data];
         [self makeData];

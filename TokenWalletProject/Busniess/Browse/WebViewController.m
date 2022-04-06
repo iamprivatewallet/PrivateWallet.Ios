@@ -133,6 +133,7 @@
 - (void)makeViews{
     self.view.backgroundColor = [UIColor whiteColor];
     self.webView = [[Web3WebView alloc] init];
+//    self.webView = [[WKWebView alloc] init];
     // UI代理
 //    self.webView .UIDelegate = self;
 //    // 导航代理

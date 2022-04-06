@@ -15,7 +15,7 @@
     [self requestAppVersionUserTake:NO completeBlock:nil];
 }
 + (void)requestAppVersionUserTake:(BOOL)userTake completeBlock:(void(^ _Nullable)(BOOL))completeBlock {
-    [NetworkTool requestWallet:WalletVersionLastURL params:@{@"type":@"iOS",@"languageCode":@"zh_CN"} completeBlock:^(id _Nonnull data) {
+    [NetworkTool requestApi:WalletVersionLastURL params:@{@"type":@"iOS",@"languageCode":@"zh_CN"} completeBlock:^(id _Nonnull data) {
         VersionModel *model = [VersionModel mj_objectWithKeyValues:data];
         UpgradePopUpView *view = [UpgradePopUpView showUpgradePopUpViewWithModel:model userTake:userTake];
         if(completeBlock){

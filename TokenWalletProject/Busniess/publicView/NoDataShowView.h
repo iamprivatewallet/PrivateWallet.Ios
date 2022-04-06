@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NoDataShowView : UIView
 
-+(NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text;
-+(NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text offsetY:(CGFloat)offsetY;
--(void)dismissView;
++ (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text;
++ (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text offsetY:(CGFloat)offsetY;
+@property (nonatomic, assign) CGFloat offsetY;
+- (void)dismissView;
 
 @end
 

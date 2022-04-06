@@ -15,6 +15,25 @@
 @end
 
 @implementation PW_Button
+@synthesize normalFont = _normalFont;
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    self.titleLabel.font = selected?self.selectedFont:self.normalFont;
+}
+- (void)setNormalFont:(UIFont *)normalFont {
+    _normalFont = normalFont;
+    self.titleLabel.font = normalFont;
+}
+- (UIFont *)normalFont {
+    if (!_normalFont) {
+        _normalFont = self.titleLabel.font;
+    }
+    return _normalFont;
+}
+- (UIFont *)selectedFont {
+    return _selectedFont?_selectedFont:self.normalFont;
+}
 
 /*
  * @param style：根据枚举设置ImageView和titleLabel的样式

@@ -102,7 +102,7 @@
         @"isTop":@"1"
     };
     [self.view showLoadingIndicator];
-    [self requestWallet:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
+    [self requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         self.searchList = [AssetCoinModel mj_objectArrayWithKeyValuesArray:data];
         [self.searchList enumerateObjectsUsingBlock:^(AssetCoinModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {

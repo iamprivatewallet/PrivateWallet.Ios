@@ -29,10 +29,15 @@ class MOSWeb3Tool: NSObject {
         SettingManager.sharedInstance().checkImportWallet();
     }
     @objc
-    public class func changeOrImportWallet(address: String, mnemonics: String, password: String) {
+    public class func changeOrImportWallet(address: String, mnemonics: String, privateKey: String, password: String) {
         if(!MOSWalletTool.hasWallet() || MOSWalletTool.getCurrentAddress() != address) {
             MOSWalletTool.logoutWallet();
-            let address = MOSWalletTool.createOrImportWallet(mnemonics, password: password)
+            var address: String? = "";
+            if(mnemonics == nil||mnemonics.count==0) {
+                address = MOSWalletTool.importWallet(privateKey, password: password)
+            }else{
+                address = MOSWalletTool.createOrImportWallet(mnemonics, password: password)
+            }
             WQJLog(address)
         }
     }

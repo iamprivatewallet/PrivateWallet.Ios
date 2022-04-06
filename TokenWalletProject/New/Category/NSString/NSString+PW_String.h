@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (PW_String)
 
++ (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval;
++ (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval format:(NSString *)format;
+
 - (void)pasteboard;
+- (void)pasteboardToast:(BOOL)toast;
 
 - (BOOL)judgePassWordLegal;
 

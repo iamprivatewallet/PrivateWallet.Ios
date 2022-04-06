@@ -110,7 +110,7 @@ BackupAlertMainViewDelegate
         @"tokenChain":chainId,
     };
     [self.view showLoadingIndicator];
-    [self requestWallet:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
+    [self requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         NSArray *list = data;
         [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -283,7 +283,7 @@ BackupAlertMainViewDelegate
     if ([self.ethWallet.type isEqualToString:@"CVN"]) {
         [self loadCVNAllCoin];
         [self.coinList enumerateObjectsUsingBlock:^(WalletCoinModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self requestWallet:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
+            [self requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.usdtPrice = NSStringWithFormat(@"%@",data);
                 [self.tableView reloadData];
                 [self refreshCVNTotal];
@@ -292,7 +292,7 @@ BackupAlertMainViewDelegate
     }else{
         [self loadETHAllBalance];
         [self.coinList enumerateObjectsUsingBlock:^(WalletCoinModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self requestWallet:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
+            [self requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.usdtPrice = NSStringWithFormat(@"%@",data);
                 [self.tableView reloadData];
                 [self refreshTotal];

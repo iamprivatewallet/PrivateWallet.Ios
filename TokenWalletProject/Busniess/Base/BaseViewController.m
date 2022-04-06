@@ -28,8 +28,8 @@
     [self setNeedsStatusBarAppearanceUpdate];
     self.view.backgroundColor = [UIColor g_bgColor];
 }
-- (void)requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
-    [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
+- (void)requestApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
+    [NetworkTool requestApi:path params:params completeBlock:completeBlock errBlock:errBlock];
 }
 - (BOOL)prefersStatusBarHidden {
     return NO;

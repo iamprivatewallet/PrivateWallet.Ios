@@ -30,5 +30,12 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    if (viewControllers.count > 0) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
 
 @end

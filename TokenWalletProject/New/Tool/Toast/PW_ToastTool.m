@@ -11,11 +11,13 @@
 
 @implementation PW_ToastTool
 
-+ (void)showError:(NSString *)error toView:(UIView *)view {
-    [self showText:error isSucces:NO toView:view];
++ (void)showError:(NSString *)error {
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    [self showText:error isSucces:NO toView:window];
 }
-+ (void)showSucees:(NSString *)success toView:(UIView *)view {
-    [self showText:success isSucces:YES toView:view];
++ (void)showSucees:(NSString *)success {
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    [self showText:success isSucces:YES toView:window];
 }
 + (void)showText:(NSString *)text isSucces:(BOOL)isSuccess toView:(UIView *)view {
     if(view==nil){
@@ -61,7 +63,7 @@
     HUD.margin = 20;
     [contentView layoutIfNeeded];
     UIEdgeInsets safeAreaInsets = [UIApplication sharedApplication].delegate.window.safeAreaInsets;
-    CGFloat offsetY = (SCREEN_HEIGHT-safeAreaInsets.top-safeAreaInsets.bottom)*0.5-44-contentView.bounds.size.height-HUD.margin;
+    CGFloat offsetY = (SCREEN_HEIGHT-safeAreaInsets.top-safeAreaInsets.bottom)*0.5-44-contentView.bounds.size.height*0.5-HUD.margin*0.5;
     HUD.offset = CGPointMake(0, -offsetY);
     HUD.userInteractionEnabled = NO;
     HUD.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;

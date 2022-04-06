@@ -79,6 +79,9 @@
 + (UIColor *)g_borderColor {
     return COLORFORRGB(0xEEF0F3);
 }
++ (UIColor *)g_dottedColor {
+    return COLORFORRGB(0xB0B8C4);
+}
 + (UIColor *)g_maskColor {
     return COLORFORRGBA(0x112947,0.4);
 }
