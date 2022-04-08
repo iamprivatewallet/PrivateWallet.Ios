@@ -8,6 +8,9 @@
 
 #import "PW_TokenDetailViewController.h"
 #import "PW_TokenDetailCell.h"
+#import "PW_CollectionViewController.h"
+#import "PW_TokenInfoViewController.h"
+#import "PW_TokenTradeDetailViewController.h"
 
 typedef enum : NSUInteger {
     kFilterTypeAll=0,
@@ -39,7 +42,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_question" rightAction:@selector(questionAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_question" rightAction:@selector(infoAction)];
     [self makeViews];
     self.noDataView.offsetY = 100;
     if(![User_manager.currentUser.chooseWallet_type isEqualToString:@"CVN"]&&(self.model.tokenDecimals==0||[self.model.tokenAmount isEmptyStr]||self.model.tokenAmount.doubleValue==0)){
@@ -77,14 +80,18 @@ typedef enum : NSUInteger {
     }
     [self refreshTopData];
 }
-- (void)questionAction {
-    
+- (void)infoAction {
+    PW_TokenInfoViewController *vc = [[PW_TokenInfoViewController alloc] init];
+    vc.tokenId = self.model.tId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)transferAction {
     
 }
 - (void)collectionAction {
-    
+    PW_CollectionViewController *vc = [PW_CollectionViewController new];
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)headerBtnAction:(UIButton *)btn {
     self.selectedBtn.selected = NO;
@@ -106,8 +113,8 @@ typedef enum : NSUInteger {
     }
     NSString *type = [[SettingManager sharedInstance] getChainType];
     NSDictionary *params = @{
-        @"address":currentAddr,
-        @"type":type,
+        @"address":@"CVNcac90d43cbf534644bc1e431bcb8d6b6c82eb387",//currentAddr,
+        @"type":@"CVN",//type,
         @"contractAddress":contractAddress,
         @"page":@"0",
         @"offset":@"20",
@@ -117,13 +124,14 @@ typedef enum : NSUInteger {
         [self.view hideLoadingIndicator];
         [self.dataList removeAllObjects];
         [self.showList removeAllObjects];
-        self.dataList = [PW_TokenDetailModel mj_keyValuesArrayWithObjectArray:data];
+        self.dataList = [PW_TokenDetailModel mj_objectArrayWithKeyValuesArray:data];
         NSMutableArray *timeList = [NSMutableArray array];
         NSMutableArray *hashList = [NSMutableArray array];
         [self.dataList enumerateObjectsUsingBlock:^(PW_TokenDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             obj.tokenName = self.model.tokenName;
             obj.tokenDecimals = self.model.tokenDecimals;
             obj.tokenLogo = self.model.tokenLogo;
+            obj.transactionStatus = 1;
             obj.isOut = [obj.fromAddress isEqualToString:currentAddr];
             CGFloat transfer_time = obj.timeStamp/1000;
             [timeList addObject:@(transfer_time)];
@@ -383,7 +391,9 @@ typedef enum : NSUInteger {
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_TokenTradeDetailViewController *vc = [[PW_TokenTradeDetailViewController alloc] init];
+    vc.model = self.showList[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma make - lazy
 - (UIView *)topView {

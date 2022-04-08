@@ -30,6 +30,9 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
+}
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     NSArray *viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count > 0) {

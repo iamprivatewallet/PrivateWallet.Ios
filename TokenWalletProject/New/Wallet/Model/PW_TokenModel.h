@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_TokenModel : PW_BaseModel
 
+@property (nonatomic, copy) NSString *tokenTitle;
+@property (nonatomic, copy) NSString *webUrl;
+@property (nonatomic, copy) NSString *tokenTime;
+
 @property (nonatomic, copy) NSString *tId;
 @property (nonatomic, copy) NSString *tokenContract;
 @property (nonatomic, copy) NSString *tokenName;

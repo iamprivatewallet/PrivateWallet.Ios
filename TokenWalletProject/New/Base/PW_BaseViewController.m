@@ -17,6 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+- (UIUserInterfaceStyle)overrideUserInterfaceStyle {
+    return UIUserInterfaceStyleLight;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 - (void)makeViews {
     
@@ -29,12 +36,6 @@
 }
 - (void)pw_requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
     [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
-}
-- (UIUserInterfaceStyle)overrideUserInterfaceStyle {
-    return UIUserInterfaceStyleLight;
-}
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
 }
 - (void)showSuccess:(NSString *)text {
     [PW_ToastTool showSucees:text];

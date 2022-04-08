@@ -11,6 +11,7 @@
 #import "PW_WalletCell.h"
 #import "PW_ContractTool.h"
 #import "PW_TokenDetailViewController.h"
+#import "PW_CollectionViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -91,7 +92,9 @@
     
 }
 - (void)collectionAction {
-    
+    PW_CollectionViewController *vc = [PW_CollectionViewController new];
+    vc.model = self.coinList.firstObject;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)editAction {
     
@@ -209,6 +212,7 @@
     }else{
         self.walletAddressLb.text = [self.currentWallet.address showShortAddress];
     }
+    self.totalAssetsLb.text = [@(self.currentWallet.totalBalance).stringValue stringDownDecimal:8];
 }
 - (void)nodeUpdate:(NSNotification *)noti {
     NodeModel *model = noti.object;
@@ -427,7 +431,7 @@
         make.left.equalTo(walletNameView.mas_right).offset(12);
         make.centerY.equalTo(walletNameView);
     }];
-    UILabel *walletAddressLb = [PW_ViewTool labelSemiboldText:@"0xDFKJFKJDSKJ...DKFJKDJFKLS" fontSize:12 textColor:[UIColor whiteColor]];
+    UILabel *walletAddressLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor whiteColor]];
     [headerView addSubview:walletAddressLb];
     self.walletAddressLb = walletAddressLb;
     [walletAddressLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -443,7 +447,7 @@
         make.left.equalTo(walletAddressLb.mas_right).offset(8);
         make.centerY.equalTo(walletAddressLb);
     }];
-    UILabel *totalAssetsLb = [PW_ViewTool labelSemiboldText:@"0.00" fontSize:36 textColor:[UIColor whiteColor]];
+    UILabel *totalAssetsLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:36 textColor:[UIColor whiteColor]];
     [headerView addSubview:totalAssetsLb];
     self.totalAssetsLb = totalAssetsLb;
     [totalAssetsLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -462,7 +466,7 @@
         make.bottom.offset(-18);
         make.left.offset(26);
     }];
-    UIButton *collectionBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_transfer") fontSize:14 titleColor:[UIColor whiteColor] imageName:@"icon_collection" target:self action:@selector(collectionAction)];
+    UIButton *collectionBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_collection") fontSize:14 titleColor:[UIColor whiteColor] imageName:@"icon_collection" target:self action:@selector(collectionAction)];
     [headerView addSubview:collectionBtn];
     [collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(transferBtn.mas_right).offset(38);

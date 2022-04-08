@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addTapTarget:(nullable id)target action:(SEL)action;
 
+- (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners;
+- (void)setRadius:(CGFloat)radius size:(CGSize)size corners:(UIRectCorner)corners;
+
 - (void)setBorderColor:(UIColor *)color width:(CGFloat)width radius:(CGFloat)radius;
 
 - (void)setShadowColor:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius;
@@ -21,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setDottedLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth length:(CGFloat)length space:(CGFloat)space radius:(CGFloat)radius;
 - (void)setDottedLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth length:(CGFloat)length space:(CGFloat)space radius:(CGFloat)radius size:(CGSize)size;
+
+- (UIImage *)convertViewToImage;
 
 @end
 

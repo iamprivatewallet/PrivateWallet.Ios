@@ -16,5 +16,7 @@
 #import "NSArray+PW_Array.h"
 #import "UIImage+PW_Image.h"
 #import "UIView+PW_View.h"
+#import "UIFont+PW_Font.h"
+#import "UILabel+PW_Label.h"
 
 #endif /* GlobalCategory_h */

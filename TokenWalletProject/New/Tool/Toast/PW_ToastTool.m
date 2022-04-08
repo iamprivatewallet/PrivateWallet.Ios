@@ -36,7 +36,7 @@
     contentView.layer.cornerRadius = 22;
     contentView.layer.shadowColor = COLORFORRGBA(0xCCD0D6, 0.8).CGColor;
     contentView.layer.shadowOffset = CGSizeMake(0, 3);
-    contentView.layer.shadowRadius = 16;
+    contentView.layer.shadowRadius = 10;
     contentView.layer.shadowOpacity = 1;
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];

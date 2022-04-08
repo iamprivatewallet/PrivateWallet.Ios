@@ -57,7 +57,7 @@
     // 1、二维码滤镜
     CIFilter *fileter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     [fileter setValue:string_data forKey:@"inputMessage"];
-    [fileter setValue:@"H" forKey:@"inputCorrectionLevel"];
+    [fileter setValue:@"M" forKey:@"inputCorrectionLevel"];
     CIImage *ciImage = fileter.outputImage;
     // 2、颜色滤镜
     CIFilter *color_filter = [CIFilter filterWithName:@"CIFalseColor"];

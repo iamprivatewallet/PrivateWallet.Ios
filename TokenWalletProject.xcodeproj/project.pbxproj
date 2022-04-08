@@ -244,6 +244,13 @@
 		5CE7AD0927F98EA100E2188D /* PW_BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0827F98EA100E2188D /* PW_BaseModel.m */; };
 		5CE7AD0C27F98F0A00E2188D /* PW_TokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */; };
 		5CE7AD1127F99AC300E2188D /* PW_ContractTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */; };
+		5CEF34A427FE72330052BA15 /* PW_CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34A327FE72320052BA15 /* PW_CollectionViewController.m */; };
+		5CEF34A827FE97CD0052BA15 /* UIFont+PW_Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34A727FE97CD0052BA15 /* UIFont+PW_Font.m */; };
+		5CEF34AC27FE9BAF0052BA15 /* UILabel+PW_Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34AB27FE9BAF0052BA15 /* UILabel+PW_Label.m */; };
+		5CEF34B127FEC8220052BA15 /* PW_SharePayTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34B027FEC8210052BA15 /* PW_SharePayTool.m */; };
+		5CEF34B527FEDFB90052BA15 /* PW_ShareTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34B427FEDFB80052BA15 /* PW_ShareTool.m */; };
+		5CEF34B827FEEBDE0052BA15 /* PW_TokenInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */; };
+		5CEF34BB28001F9C0052BA15 /* PW_TokenTradeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34BA28001F9B0052BA15 /* PW_TokenTradeDetailViewController.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -933,6 +940,21 @@
 		5CE7AD0F27F99AC300E2188D /* PW_ContractTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ContractTool.h; sourceTree = "<group>"; };
 		5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ContractTool.m; sourceTree = "<group>"; };
 		5CE7AD1427F9AA9D00E2188D /* PW_Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Constant.h; sourceTree = "<group>"; };
+		5CEF34A227FE72320052BA15 /* PW_CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_CollectionViewController.h; sourceTree = "<group>"; };
+		5CEF34A327FE72320052BA15 /* PW_CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_CollectionViewController.m; sourceTree = "<group>"; };
+		5CEF34A627FE97CD0052BA15 /* UIFont+PW_Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+PW_Font.h"; sourceTree = "<group>"; };
+		5CEF34A727FE97CD0052BA15 /* UIFont+PW_Font.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+PW_Font.m"; sourceTree = "<group>"; };
+		5CEF34AA27FE9BAF0052BA15 /* UILabel+PW_Label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+PW_Label.h"; sourceTree = "<group>"; };
+		5CEF34AB27FE9BAF0052BA15 /* UILabel+PW_Label.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PW_Label.m"; sourceTree = "<group>"; };
+		5CEF34AF27FEC8210052BA15 /* PW_SharePayTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SharePayTool.h; sourceTree = "<group>"; };
+		5CEF34B027FEC8210052BA15 /* PW_SharePayTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SharePayTool.m; sourceTree = "<group>"; };
+		5CEF34B227FECE9C0052BA15 /* PW_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Header.h; sourceTree = "<group>"; };
+		5CEF34B327FEDFB80052BA15 /* PW_ShareTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ShareTool.h; sourceTree = "<group>"; };
+		5CEF34B427FEDFB80052BA15 /* PW_ShareTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareTool.m; sourceTree = "<group>"; };
+		5CEF34B627FEEBDD0052BA15 /* PW_TokenInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenInfoViewController.h; sourceTree = "<group>"; };
+		5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenInfoViewController.m; sourceTree = "<group>"; };
+		5CEF34B928001F9B0052BA15 /* PW_TokenTradeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenTradeDetailViewController.h; sourceTree = "<group>"; };
+		5CEF34BA28001F9B0052BA15 /* PW_TokenTradeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenTradeDetailViewController.m; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -2532,6 +2554,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5CEF34AE27FEC7580052BA15 /* Share */,
 				5CB76B3627F57D080068E967 /* Alert */,
 				5CB76B2A27F4405E0068E967 /* Toast */,
 				5CB76B3227F45D0E0068E967 /* View */,
@@ -2544,6 +2567,8 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */,
+				5CEF34A927FE9B9E0052BA15 /* UILabel */,
+				5CEF34A527FE97B80052BA15 /* UIFont */,
 				5CE7ACF827F84D5B00E2188D /* UIView */,
 				5CB76B2227F306960068E967 /* UITextField */,
 				5CB76B1227F2E91D0068E967 /* UIColor */,
@@ -2685,6 +2710,12 @@
 				5CE7ACD727F6EDB900E2188D /* PW_WalletViewController.m */,
 				5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */,
 				5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */,
+				5CEF34B928001F9B0052BA15 /* PW_TokenTradeDetailViewController.h */,
+				5CEF34BA28001F9B0052BA15 /* PW_TokenTradeDetailViewController.m */,
+				5CEF34B627FEEBDD0052BA15 /* PW_TokenInfoViewController.h */,
+				5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */,
+				5CEF34A227FE72320052BA15 /* PW_CollectionViewController.h */,
+				5CEF34A327FE72320052BA15 /* PW_CollectionViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2839,8 +2870,38 @@
 			isa = PBXGroup;
 			children = (
 				5CE7AD1427F9AA9D00E2188D /* PW_Constant.h */,
+				5CEF34B227FECE9C0052BA15 /* PW_Header.h */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		5CEF34A527FE97B80052BA15 /* UIFont */ = {
+			isa = PBXGroup;
+			children = (
+				5CEF34A627FE97CD0052BA15 /* UIFont+PW_Font.h */,
+				5CEF34A727FE97CD0052BA15 /* UIFont+PW_Font.m */,
+			);
+			path = UIFont;
+			sourceTree = "<group>";
+		};
+		5CEF34A927FE9B9E0052BA15 /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				5CEF34AA27FE9BAF0052BA15 /* UILabel+PW_Label.h */,
+				5CEF34AB27FE9BAF0052BA15 /* UILabel+PW_Label.m */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		5CEF34AE27FEC7580052BA15 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				5CEF34AF27FEC8210052BA15 /* PW_SharePayTool.h */,
+				5CEF34B027FEC8210052BA15 /* PW_SharePayTool.m */,
+				5CEF34B327FEDFB80052BA15 /* PW_ShareTool.h */,
+				5CEF34B427FEDFB80052BA15 /* PW_ShareTool.m */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -3775,10 +3836,9 @@
 			};
 			buildConfigurationList = 5A8FD9471D2DFC270015D6C0 /* Build configuration list for PBXProject "TokenWalletProject" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				da,
@@ -4026,6 +4086,7 @@
 				992EF19D26B924E900F70A94 /* AddWalletViewController.m in Sources */,
 				5AF5D3181D333322004070D7 /* AFNetworkClient.m in Sources */,
 				992E0F3326CCD9CC00E1C31B /* ETHTokenCoinList.m in Sources */,
+				5CEF34B527FEDFB90052BA15 /* PW_ShareTool.m in Sources */,
 				992EF10226A975F600F70A94 /* CurrencyTableViewCell.m in Sources */,
 				5AF5D1761D2F7CBA004070D7 /* NSNotificationCenter+MainThread.m in Sources */,
 				1FA8EF7621B824F900B4E28E /* TYAlertDropDownAnimation.m in Sources */,
@@ -4106,6 +4167,7 @@
 				992E0F6326D5F08900E1C31B /* RiskWarningView.m in Sources */,
 				9926DFFF26E1F5E400FDF442 /* WalletRecord.m in Sources */,
 				790521F121D0EBBD00ABF6D5 /* Wallet.m in Sources */,
+				5CEF34A427FE72330052BA15 /* PW_CollectionViewController.m in Sources */,
 				992E0FBB26DCBBA000E1C31B /* AllAssetTableCell.m in Sources */,
 				992E0F2D26CCD9CC00E1C31B /* ETHNodeList.m in Sources */,
 				5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */,
@@ -4128,6 +4190,7 @@
 				7908588821B50A2600616897 /* NSArray+Shuffle.m in Sources */,
 				992EF21626BBCF5700F70A94 /* ExportCopyCodeView.m in Sources */,
 				5AF5D18C1D2F7CBA004070D7 /* NSString+DictionaryValue.m in Sources */,
+				5CEF34A827FE97CD0052BA15 /* UIFont+PW_Font.m in Sources */,
 				5CE7ACCB27F6EC2200E2188D /* PW_TabBarViewController.m in Sources */,
 				7918E5F621B2835100A21339 /* WBQRCodeVC.m in Sources */,
 				992E0F1126CCB53300E1C31B /* UserManager.m in Sources */,
@@ -4175,6 +4238,7 @@
 				9929D58B26C122380066F1D6 /* SecretFreeViewController.m in Sources */,
 				5CE7ACD227F6ED2100E2188D /* PW_WebViewController.m in Sources */,
 				5AF5D1701D2F7CBA004070D7 /* NSFileHandle+readLine.m in Sources */,
+				5CEF34B827FEEBDE0052BA15 /* PW_TokenInfoViewController.m in Sources */,
 				5AF5D16E1D2F7CBA004070D7 /* NSDictionary+XML.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
 				994AA0EC26C511DD0062F9AF /* CollectionShareView.m in Sources */,
@@ -4187,6 +4251,7 @@
 				9926E06526E8A7C700FDF442 /* ScanCodeInfoModel.m in Sources */,
 				5E0799F121D28A3A00924407 /* Type.pbobjc.m in Sources */,
 				992E0F6E26D8CD7A00E1C31B /* AllAssetsViewController.m in Sources */,
+				5CEF34BB28001F9C0052BA15 /* PW_TokenTradeDetailViewController.m in Sources */,
 				992EF1A626B944A100F70A94 /* CreateWalletVC.m in Sources */,
 				5CE7AD0C27F98F0A00E2188D /* PW_TokenModel.m in Sources */,
 				994AA0EF26C662860062F9AF /* TransferView.m in Sources */,
@@ -4232,6 +4297,7 @@
 				5AF5D17D1D2F7CBA004070D7 /* NSObject+AppInfo.m in Sources */,
 				992E0F3F26CCDBC500E1C31B /* SettingManager.m in Sources */,
 				9937C8B3271434D90064BBC3 /* RecordModel.m in Sources */,
+				5CEF34AC27FE9BAF0052BA15 /* UILabel+PW_Label.m in Sources */,
 				9929D58E26C21CAB0066F1D6 /* ETHWalletManageVC.m in Sources */,
 				992EF10B26AA70E200F70A94 /* MnemonicsBackupVC.m in Sources */,
 				5C71193327BB7ABD00FE9B51 /* MetaMaskCallApi.m in Sources */,
@@ -4261,6 +4327,7 @@
 				9926E16226FD789400FDF442 /* MessageCenterViewController.m in Sources */,
 				7918E5F521B2835100A21339 /* WCQRCodeVC.m in Sources */,
 				9926DFFC26E0C07B00FDF442 /* NodeModel.m in Sources */,
+				5CEF34B127FEC8220052BA15 /* PW_SharePayTool.m in Sources */,
 				5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */,
 				5E0799EC21D28A3A00924407 /* GPBMessage.m in Sources */,
 				5AF5D1571D2F7CBA004070D7 /* NSArray+SafeAccess.m in Sources */,

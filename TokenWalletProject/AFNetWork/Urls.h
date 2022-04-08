@@ -24,12 +24,16 @@ static NSString * const WalletUserAgreementUrl = @"https://privatewallet.gitbook
 //网络请求url
 static NSString * const APPWalletBaseURL = @"https://chain.kimchiii.com";
 
-//币种详情
+//币种交易详情
 static NSString * const WalletTokenDetailURL = @"wallet/getTransactionInfo";
 //币种icon
 static NSString * const WalletTokenIconURL = @"api/wallet/token/icon";
+//币种详情
+static NSString * const WalletTokenItemURL = @"api/wallet/token/item";
 //币种汇率
 static NSString * const WalletTokenPriceURL = @"api/wallet/token/price";
+//币种行情
+static NSString * const WalletTickerMain = @"api/wallet/ticker/main";
 //网络管理
 static NSString * const WalletTokenChainURL = @"api/wallet/token/chain";
 //DAPP推荐
@@ -42,5 +46,7 @@ static NSString * const WalletMessageHashPageURL = @"api/wallet/message/hash/pag
 static NSString * const WalletMessageSysPageURL = @"api/wallet/message/sys/page";
 //系统消息详情
 static NSString * const WalletMessageSysItemURL = @"api/wallet/message/sys/item";
+//Banner
+static NSString * const WalletBannerListURL = @"api/wallet/banner/list";
 
 #endif /* Urls_h */

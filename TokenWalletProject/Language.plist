@@ -5,6 +5,8 @@
 	<dict>
 		<key>type</key>
 		<string>en</string>
+		<key>languageCode</key>
+		<string>en_US</string>
 		<key>name</key>
 		<string>English</string>
 		<key>isDefault</key>
@@ -13,6 +15,8 @@
 	<dict>
 		<key>type</key>
 		<string>zh-Hans</string>
+		<key>languageCode</key>
+		<string>zh_CN</string>
 		<key>name</key>
 		<string>简体中文</string>
 	</dict>

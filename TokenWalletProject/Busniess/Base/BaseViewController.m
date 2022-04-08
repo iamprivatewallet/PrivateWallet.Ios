@@ -40,6 +40,10 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
+- (void)setupWhiteNavBarTint {
+    [self.leftBtn setImage:IMAGE(@"icon_back_white") forState:UIControlStateNormal];
+    self.titleLable.textColor = [UIColor whiteColor];
+}
 - (void)setNavNoLineTitle:(NSString *)title {
     if(self.navigationController.viewControllers.count>1){
         [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:YES];
@@ -47,8 +51,18 @@
         [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil title:title isNoLine:YES isWhiteBg:NO];
     }
 }
+- (void)setNavNoLineTitle:(NSString *)title isWhiteBg:(BOOL)isWhiteBg {
+    if(self.navigationController.viewControllers.count>1){
+        [self initTitleBarWithLeftBtnImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious)  title:title isNoLine:YES isWhiteBg:isWhiteBg];
+    }else{
+        [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil title:title isNoLine:YES isWhiteBg:isWhiteBg];
+    }
+}
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
     [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
+}
+- (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction isWhiteBg:(BOOL)isWhiteBg {
+    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES isWhiteBg:isWhiteBg];
 }
 - (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine{
     [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil  title:title isNoLine:isNoLine isWhiteBg:NO];
