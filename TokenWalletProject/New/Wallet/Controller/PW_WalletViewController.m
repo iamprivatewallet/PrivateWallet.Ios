@@ -69,6 +69,9 @@
         }
     }
 }
+- (void)searchAction {
+    
+}
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
         
@@ -341,29 +344,11 @@
     [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.offset(0);
     }];
-    UITextField *searchTF = [[UITextField alloc] init];
-    UIImageView *searchIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search"]];
-    CGRect searchIvFrame = searchIv.frame;
-    searchIvFrame.origin.x = (30-searchIvFrame.size.width)*0.5;
-    searchIvFrame.origin.y = (30-searchIvFrame.size.height)*0.5;
-    searchIv.frame = searchIvFrame;
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [leftView addSubview:searchIv];
-    searchTF.leftView = leftView;
-    searchTF.leftViewMode = UITextFieldViewModeAlways;
-    searchTF.textAlignment = NSTextAlignmentCenter;
-    searchTF.textColor = [UIColor g_textColor];
-    searchTF.font = [UIFont systemFontOfSize:12];
-    searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    searchTF.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    searchTF.borderStyle = UITextBorderStyleNone;
-    searchTF.layer.cornerRadius = 17.5;
-    searchTF.backgroundColor = [UIColor g_bgColor];
-    [searchTF pw_setPlaceholder:LocalizedStr(@"text_searchDappCurrency")];
-    [searchTF addTarget:self action:@selector(searchDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
-    [searchTF addTarget:self action:@selector(searchDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
-    [self.naviBar addSubview:searchTF];
-    [searchTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchDappCurrency") fontSize:12 titleColor:[UIColor g_grayTextColor] imageName:@"icon_search" target:self action:@selector(searchAction)];
+    searchBtn.layer.cornerRadius = 17.5;
+    searchBtn.backgroundColor = [UIColor g_bgColor];
+    [self.naviBar addSubview:searchBtn];
+    [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(78);
         make.right.offset(-78);
         make.height.offset(35);

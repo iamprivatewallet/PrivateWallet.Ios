@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_collectionSuccess")];
+    [self setNavNoLineTitle:LocalizedStr(@"text_tradeDetail")];
     [self makeViews];
 }
 - (void)copySendAction {
@@ -37,7 +37,6 @@
 - (void)blockchainDetailAction {
     if([self.model.detaInfoUrl isNoEmpty]){
         BrowseWebViewController *webVc = [[BrowseWebViewController alloc] init];
-        webVc.title = @"详细信息";
         webVc.urlStr = self.model.detaInfoUrl;
         [self.navigationController pushViewController:webVc animated:YES];
     }
@@ -52,7 +51,13 @@
         make.width.equalTo(scrollView);
     }];
     UIImageView *stateIv = [[UIImageView alloc] init];
-    stateIv.image = [UIImage imageNamed:self.model.isOut?@"icon_roll_out_big":@"icon_roll_in_big"];
+    NSString *imageName = @"icon_trade_pending_big";
+    if(self.model.transactionStatus<0){
+        imageName = @"icon_trade_fail_big";
+    }else if(self.model.transactionStatus>0){
+        imageName = @"icon_trade_success_big";
+    }
+    stateIv.image = [UIImage imageNamed:imageName];
     [self.contentView addSubview:stateIv];
     NSString *amountStr = NSStringWithFormat(@"%@%@",self.model.isOut?@"-":@"+",self.model.value);
     UILabel *amountLb = [PW_ViewTool labelSemiboldText:amountStr fontSize:32 textColor:[UIColor g_boldTextColor]];
