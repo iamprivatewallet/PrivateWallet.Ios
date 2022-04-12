@@ -21,11 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_backupWallet") rightImg:@"icon_share" rightAction:@selector(shareAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_backupWallet")];
     [self makeViews];
-}
-- (void)shareAction {
-    
 }
 - (void)changeAction {
     
@@ -33,7 +30,9 @@
 - (void)verifyAction {
     [PW_TipTool showBackupTipSureBlock:^{
         PW_ConfirmBackupViewController *vc = [[PW_ConfirmBackupViewController alloc] init];
+        vc.isFirst = self.isFirst;
         vc.wordStr = self.wordStr;
+        vc.wallet = self.wallet;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }

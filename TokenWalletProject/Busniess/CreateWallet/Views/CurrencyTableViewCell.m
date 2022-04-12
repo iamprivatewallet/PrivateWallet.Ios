@@ -49,7 +49,7 @@
         make.centerY.equalTo(self.contentView);
     }];
     
-    self.titleLbl = [ZZCustomView labelInitWithView:self.contentView text:@"ETH" textColor:[UIColor im_textColor_three] font:GCSFontRegular(15)];
+    self.titleLbl = [ZZCustomView labelInitWithView:self.contentView text:@"ETH" textColor:[UIColor im_textColor_three] font:GCSFontSemibold(15)];
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconImg.mas_right).offset(15);
         make.top.equalTo(self.iconImg).offset(-5);

@@ -16,9 +16,9 @@
 }
 
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners {
-    [self setRadius:radius size:CGSizeZero corners:corners];
+    [self setRadius:radius corners:corners size:CGSizeZero];
 }
-- (void)setRadius:(CGFloat)radius size:(CGSize)size corners:(UIRectCorner)corners {
+- (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners size:(CGSize)size {
     CGSize tSize = size;
     if(size.width==0&&size.height==0){
         [self setNeedsLayout];
@@ -46,6 +46,15 @@
     [self setShadowColor:color offset:offset radius:radius path:nil];
 }
 - (void)setShadowColor:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius path:(nullable UIBezierPath *)path {
+    CGSize size = self.bounds.size;
+    if(size.width==0&&size.height==0){
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
+        size = self.bounds.size;
+        if(size.width!=0&&size.height!=0){
+            path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, size.width, size.height)];
+        }
+    }
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowOffset = offset;
     self.layer.shadowRadius = radius;

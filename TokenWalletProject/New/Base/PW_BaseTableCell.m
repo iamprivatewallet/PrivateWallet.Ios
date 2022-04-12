@@ -23,6 +23,16 @@
     // Initialization code
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    [super setHighlighted:highlighted animated:animated];
+    if (highlighted) {
+        self.backgroundColor = [UIColor g_borderColor];
+    }else{
+        self.backgroundColor = [UIColor g_bgColor];
+
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

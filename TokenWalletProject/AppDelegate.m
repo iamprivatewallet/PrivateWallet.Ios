@@ -37,8 +37,8 @@
         [self switchToCreateWalletVC];
     }else{
         self.rootController = [[PW_TabBarViewController alloc] init];
-        PW_NavigationController *nav = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
-        self.window.rootViewController = nav;
+        self.rootNavigationController = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
+        self.window.rootViewController = self.rootNavigationController;
         [self.window makeKeyAndVisible];
     }
     if (@available(iOS 13.0, *)) {
@@ -106,7 +106,7 @@
 {
     if (![self.rootController isKindOfClass:[PW_FirstChooseViewController class]]) {
         self.rootController = [[PW_FirstChooseViewController alloc] init];
-        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:self.rootController];
+        self.rootNavigationController = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
         self.rootNavigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
         
         self.window.rootViewController = self.rootNavigationController;

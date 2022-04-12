@@ -1,15 +1,15 @@
 //
-//  PW_CreateViewController.m
+//  PW_AddCreateWalletViewController.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/3/29.
+//  Created by mnz on 2022/4/12.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_CreateViewController.h"
+#import "PW_AddCreateWalletViewController.h"
 #import "PW_BackupWalletViewController.h"
 
-@interface PW_CreateViewController ()
+@interface PW_AddCreateWalletViewController ()
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, weak) UIView *walletNameView;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation PW_CreateViewController
+@implementation PW_AddCreateWalletViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,32 +53,18 @@
     //创建助记词
     [FchainTool generateMnemonicBlock:^(NSString * _Nonnull result) {
         [self.view hideLoadingIndicator];
-        [self createWalletWithWordStr:result];
+        Wallet *wallet = [[Wallet alloc] init];
+        wallet.walletName = walletName;
+        wallet.walletPassword = pwdStr;
+        wallet.walletPasswordTips = @"";
+        wallet.mnemonic = result;
+        wallet.type = self.walletType;
+        PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
+        vc.isFirst = YES;
+        vc.wordStr = result;
+        vc.wallet = wallet;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
-}
-- (void)createWalletWithWordStr:(NSString *)wordStr{
-    NSString *pwdStr = self.pwdTF.text;
-    self.sureBtn.userInteractionEnabled = NO;
-    [self.view showLoadingIndicator];
-    if ([User_manager loginWithUserName:@"" withPassword:pwdStr withPwTip:@"" withMnemonic:wordStr isBackup:NO]){
-        [FchainTool genWalletsWithMnemonic:wordStr createList:@[@"ETH"] block:^(BOOL sucess) {
-            [self.view hideLoadingIndicator];
-            self.sureBtn.userInteractionEnabled = YES;
-            if (sucess) {
-                NSArray *list = [[WalletManager shareWalletManager] getWallets];
-                if (list.count>0) {
-                    [User_manager updateChooseWallet:list[0]];
-                }
-                [self showSuccess:LocalizedStr(@"text_success")];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
-                    vc.isFirst = YES;
-                    vc.wordStr = wordStr;
-                    [self.navigationController pushViewController:vc animated:YES];
-                });
-            }
-        }];
-    }
 }
 - (void)pwdTFDidBegin:(UITextField *)sender {
     if (sender==self.pwdTF) {
@@ -171,7 +157,7 @@
 }
 - (void)createWalletNameItems {
     UILabel *titleLb = [[UILabel alloc] init];
-    titleLb.text = NSStringWithFormat(@"%@ - ETH",LocalizedStr(@"text_walletName"));
+    titleLb.text = NSStringWithFormat(@"%@ - %@",LocalizedStr(@"text_walletName"),self.walletType);
     titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
     titleLb.textColor = [UIColor g_boldTextColor];
     titleLb.layer.opacity = 0.7;
@@ -181,7 +167,7 @@
         make.left.offset(15);
     }];
     self.walletNameTF = [[UITextField alloc] init];
-    [self.walletNameTF pw_setPlaceholder:@"ETH"];
+    [self.walletNameTF pw_setPlaceholder:self.walletType];
     self.walletNameTF.font = [UIFont systemFontOfSize:14];
     self.walletNameTF.textColor = [UIColor g_textColor];
     self.walletNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -269,3 +255,4 @@
 }
 
 @end
+

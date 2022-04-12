@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_textColor;
 + (UIColor *)g_boldTextColor;
 + (UIColor *)g_grayTextColor;
++ (UIColor *)g_lightTextColor;
 
 + (UIColor *)g_borderColor;
 + (UIColor *)g_dottedColor;

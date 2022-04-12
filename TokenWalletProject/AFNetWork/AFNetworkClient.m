@@ -53,8 +53,9 @@
                               withBlock:(void(^)(id data, NSError *error))block
 {
     NSMutableDictionary *reParam = [AFNetworkClient repackageParamter:parameter];
+    reParam[@"languageCode"] = [LanguageTool currentLanguage].languageCode;
     NSDictionary *headers = @{@"languageCode":[LanguageTool currentLanguage].languageCode};
-    return [[AFNetworkClient sessionManager] POST:urlString parameters:reParam headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    return [[AFNetworkClient sessionManager] POST:urlString parameters:reParam headers:headers progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         block(responseObject, nil);

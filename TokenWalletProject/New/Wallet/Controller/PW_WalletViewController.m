@@ -12,6 +12,8 @@
 #import "PW_ContractTool.h"
 #import "PW_TokenDetailViewController.h"
 #import "PW_CollectionViewController.h"
+#import "PW_WalletView.h"
+#import "PW_SelectWalletTypeViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -39,12 +41,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavTitle:@"" leftImg:@"icon_wallet" leftAction:@selector(walletAction) rightImg:@"icon_scan" rightAction:@selector(scanAction) isNoLine:YES isWhiteBg:NO];
+    [self setNavTitle:@"" leftImg:@"icon_wallet" leftAction:@selector(createWalletAction) rightImg:@"icon_scan" rightAction:@selector(scanAction) isNoLine:YES isWhiteBg:NO];
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"RefreshCoinList_Notification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeUpdate:) name:kChainNodeUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeUpdate) name:kChainNodeUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWallets) name:kChangeWalletNotification object:nil];
     [RACObserve(self, backupTipView) subscribeNext:^(UIView * _Nullable x) {
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.currencyHeaderView.mas_bottom).offset(16);
@@ -77,8 +80,12 @@
         
     }];
 }
-- (void)walletAction {
-    
+- (void)createWalletAction {
+    PW_SelectWalletTypeViewController *vc = [[PW_SelectWalletTypeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)changeWalletAction {
+    [PW_WalletView show];
 }
 - (void)showHiddenAction:(UIButton *)btn {
     btn.selected = !btn.selected;
@@ -113,12 +120,6 @@
 }
 - (void)addAction {
     
-}
-- (void)searchDidBegin:(UITextField *)textField {
-    textField.textAlignment = NSTextAlignmentLeft;
-}
-- (void)searchDidEnd:(UITextField *)textField {
-    textField.textAlignment = NSTextAlignmentCenter;
 }
 - (void)requestData {
     [self refreshHeader];
@@ -207,7 +208,7 @@
     }
 }
 - (void)refreshHeader {
-    self.walletNameLb.text = self.currentWallet.type;
+    self.walletNameLb.text = User_manager.currentUser.current_name;
     BOOL isHidden = [GetUserDefaultsForKey(kHiddenWalletAmount) boolValue];
     self.showHiddenBtn.selected = isHidden;
     if (isHidden) {
@@ -217,12 +218,9 @@
     }
     self.totalAssetsLb.text = [@(self.currentWallet.totalBalance).stringValue stringDownDecimal:8];
 }
-- (void)nodeUpdate:(NSNotification *)noti {
-    NodeModel *model = noti.object;
-    if ([model isKindOfClass:[NodeModel class]]) {
-        [self refreshHeader];
-        [self requestData];
-    }
+- (void)nodeUpdate {
+    [self refreshHeader];
+    [self requestData];
 }
 - (void)getWallets{
     NSArray *list = [[WalletManager shareWalletManager] getWallets];
@@ -387,6 +385,7 @@
     walletNameView.layer.borderWidth = 1;
     walletNameView.layer.cornerRadius = 12;
     [headerView addSubview:walletNameView];
+    [walletNameView addTapTarget:self action:@selector(changeWalletAction)];
     [walletNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(16);
         make.left.offset(18);

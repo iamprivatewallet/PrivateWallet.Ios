@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, weak) UIView *showMnemonicsView;
 @property (nonatomic, weak) UIView *mnemonicsView;
+@property (nonatomic, weak) UIButton *nextBtn;
 
 @property (nonatomic, copy) NSArray *wordArr;
 @property (nonatomic, copy) NSArray *randomWordArr;
@@ -37,20 +38,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_createWallet") rightImg:@"icon_share" rightAction:@selector(shareAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_createWallet")];
     [self makeViews];
-}
-- (void)shareAction {
-    
 }
 - (void)nextAction {
     if([self compareSuccess]){
-        if (![User_manager isBackup]) {
-            User_manager.currentUser.user_is_backup = YES;
-            [User_manager saveTask];
+        if (self.isFirst) {
+            if (self.wallet) {//创建单个钱包
+                self.wallet.isImport = @"1";
+                self.nextBtn.userInteractionEnabled = NO;
+                [self.view showLoadingIndicator];
+                [FchainTool genWalletWithMnemonic:self.wordStr withWallet:self.wallet block:^(BOOL sucess) {
+                    [self.view hideLoadingIndicator];
+                    self.nextBtn.userInteractionEnabled = YES;
+                    if (sucess) {
+                        [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }
+                }];
+            }else{
+                if (![User_manager isBackup]) {
+                    User_manager.currentUser.user_is_backup = YES;
+                    [User_manager saveTask];
+                }
+                [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
+                [TheAppDelegate switchToTabBarController];
+            }
+        }else{
+            if (![User_manager isBackup]) {
+                User_manager.currentUser.user_is_backup = YES;
+                [User_manager saveTask];
+            }
+            [self showSuccess:LocalizedStr(@"text_backupSuccess")];
+            NSArray *array = self.navigationController.viewControllers;
+            if (array.count>2) {
+                UIViewController *vc = array[array.count-3];
+                [self.navigationController popToViewController:vc animated:YES];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
-        [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
-        [TheAppDelegate switchToTabBarController];
     }
 }
 - (BOOL)compareSuccess {
@@ -121,6 +148,7 @@
     }];
     UIButton *nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor whiteColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
     [self.contentView addSubview:nextBtn];
+    self.nextBtn = nextBtn;
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(mnemonicsView.mas_bottom).offset(35);
         make.height.offset(55);

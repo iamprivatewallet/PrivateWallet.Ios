@@ -75,6 +75,9 @@
 + (UIColor *)g_grayTextColor {
     return COLORFORRGB(0x919CAA);
 }
++ (UIColor *)g_lightTextColor {
+    return [UIColor colorWithWhite:1.0 alpha:0.7];
+}
 
 + (UIColor *)g_borderColor {
     return COLORFORRGB(0xEEF0F3);

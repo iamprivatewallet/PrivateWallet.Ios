@@ -20,6 +20,7 @@ static NSString * const WalletWebSiteUrl = @"https://chain.kimchiii.com";
 static NSString * const WalletUseDirectionsUrl = @"https://privatewallet.gitbook.io/home/v/cn/instructions";
 static NSString * const WalletFeedbackUrl = @"https://privatewallet.gitbook.io/home/v/cn/advice";
 static NSString * const WalletUserAgreementUrl = @"https://privatewallet.gitbook.io/home/v/cn/agreement";
+static NSString * const WalletReportUrl = @"https://www.privatewallet.tech/#/report";
 
 //网络请求url
 static NSString * const APPWalletBaseURL = @"https://chain.kimchiii.com";

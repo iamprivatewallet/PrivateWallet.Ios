@@ -251,6 +251,13 @@
 		5CEF34B527FEDFB90052BA15 /* PW_ShareTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34B427FEDFB80052BA15 /* PW_ShareTool.m */; };
 		5CEF34B827FEEBDE0052BA15 /* PW_TokenInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */; };
 		5CEF34BB28001F9C0052BA15 /* PW_TokenTradeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34BA28001F9B0052BA15 /* PW_TokenTradeDetailViewController.m */; };
+		5CEF34BE2803F5580052BA15 /* PW_WalletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34BD2803F5560052BA15 /* PW_WalletView.m */; };
+		5CEF34C128041ACB0052BA15 /* PW_SwitchNetworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34C028041ACA0052BA15 /* PW_SwitchNetworkView.m */; };
+		5CEF34C428041C7C0052BA15 /* PW_NetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34C328041C7C0052BA15 /* PW_NetworkModel.m */; };
+		5CEF34C7280423700052BA15 /* PW_AddWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34C62804236F0052BA15 /* PW_AddWalletViewController.m */; };
+		5CEF34CA2805264C0052BA15 /* PW_SelectWalletTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34C92805264B0052BA15 /* PW_SelectWalletTypeViewController.m */; };
+		5CEF34CD280589300052BA15 /* PW_AddCreateWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34CC2805892F0052BA15 /* PW_AddCreateWalletViewController.m */; };
+		5CEF34D0280589410052BA15 /* PW_AddImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34CF280589410052BA15 /* PW_AddImportWalletViewController.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -955,6 +962,20 @@
 		5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenInfoViewController.m; sourceTree = "<group>"; };
 		5CEF34B928001F9B0052BA15 /* PW_TokenTradeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenTradeDetailViewController.h; sourceTree = "<group>"; };
 		5CEF34BA28001F9B0052BA15 /* PW_TokenTradeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenTradeDetailViewController.m; sourceTree = "<group>"; };
+		5CEF34BC2803F5560052BA15 /* PW_WalletView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletView.h; sourceTree = "<group>"; };
+		5CEF34BD2803F5560052BA15 /* PW_WalletView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletView.m; sourceTree = "<group>"; };
+		5CEF34BF28041ACA0052BA15 /* PW_SwitchNetworkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SwitchNetworkView.h; sourceTree = "<group>"; };
+		5CEF34C028041ACA0052BA15 /* PW_SwitchNetworkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SwitchNetworkView.m; sourceTree = "<group>"; };
+		5CEF34C228041C7C0052BA15 /* PW_NetworkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NetworkModel.h; sourceTree = "<group>"; };
+		5CEF34C328041C7C0052BA15 /* PW_NetworkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NetworkModel.m; sourceTree = "<group>"; };
+		5CEF34C52804236F0052BA15 /* PW_AddWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddWalletViewController.h; sourceTree = "<group>"; };
+		5CEF34C62804236F0052BA15 /* PW_AddWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddWalletViewController.m; sourceTree = "<group>"; };
+		5CEF34C82805264B0052BA15 /* PW_SelectWalletTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SelectWalletTypeViewController.h; sourceTree = "<group>"; };
+		5CEF34C92805264B0052BA15 /* PW_SelectWalletTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SelectWalletTypeViewController.m; sourceTree = "<group>"; };
+		5CEF34CB2805892F0052BA15 /* PW_AddCreateWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCreateWalletViewController.h; sourceTree = "<group>"; };
+		5CEF34CC2805892F0052BA15 /* PW_AddCreateWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddCreateWalletViewController.m; sourceTree = "<group>"; };
+		5CEF34CE280589410052BA15 /* PW_AddImportWalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddImportWalletViewController.h; sourceTree = "<group>"; };
+		5CEF34CF280589410052BA15 /* PW_AddImportWalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddImportWalletViewController.m; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -2716,6 +2737,14 @@
 				5CEF34B727FEEBDD0052BA15 /* PW_TokenInfoViewController.m */,
 				5CEF34A227FE72320052BA15 /* PW_CollectionViewController.h */,
 				5CEF34A327FE72320052BA15 /* PW_CollectionViewController.m */,
+				5CEF34C82805264B0052BA15 /* PW_SelectWalletTypeViewController.h */,
+				5CEF34C92805264B0052BA15 /* PW_SelectWalletTypeViewController.m */,
+				5CEF34C52804236F0052BA15 /* PW_AddWalletViewController.h */,
+				5CEF34C62804236F0052BA15 /* PW_AddWalletViewController.m */,
+				5CEF34CB2805892F0052BA15 /* PW_AddCreateWalletViewController.h */,
+				5CEF34CC2805892F0052BA15 /* PW_AddCreateWalletViewController.m */,
+				5CEF34CE280589410052BA15 /* PW_AddImportWalletViewController.h */,
+				5CEF34CF280589410052BA15 /* PW_AddImportWalletViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2727,6 +2756,10 @@
 				5CE7AD0527F8628900E2188D /* PW_WalletCell.m */,
 				5C62CF9A27FD223000C1C5DC /* PW_TokenDetailCell.h */,
 				5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */,
+				5CEF34BC2803F5560052BA15 /* PW_WalletView.h */,
+				5CEF34BD2803F5560052BA15 /* PW_WalletView.m */,
+				5CEF34BF28041ACA0052BA15 /* PW_SwitchNetworkView.h */,
+				5CEF34C028041ACA0052BA15 /* PW_SwitchNetworkView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2738,6 +2771,8 @@
 				5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */,
 				5C62CF9D27FD25DA00C1C5DC /* PW_TokenDetailModel.h */,
 				5C62CF9E27FD25DA00C1C5DC /* PW_TokenDetailModel.m */,
+				5CEF34C228041C7C0052BA15 /* PW_NetworkModel.h */,
+				5CEF34C328041C7C0052BA15 /* PW_NetworkModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4079,6 +4114,7 @@
 				99D804DC26A6AD7E00E9B5F8 /* RecoveryIDViewController.m in Sources */,
 				5AF5D1801D2F7CBA004070D7 /* NSObject+Blocks.m in Sources */,
 				5CE7AD0627F8628900E2188D /* PW_WalletCell.m in Sources */,
+				5CEF34C7280423700052BA15 /* PW_AddWalletViewController.m in Sources */,
 				5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */,
 				5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */,
 				5AF5D16A1D2F7CBA004070D7 /* NSDictionary+JSONString.m in Sources */,
@@ -4182,6 +4218,7 @@
 				992EF15926AFA9F300F70A94 /* TokenMessageView.m in Sources */,
 				5AF5D1621D2F7CBA004070D7 /* NSDate+Formatter.m in Sources */,
 				992E0F5426D4E7F700E1C31B /* AssetTopView.m in Sources */,
+				5CEF34CA2805264C0052BA15 /* PW_SelectWalletTypeViewController.m in Sources */,
 				5AF5D1591D2F7CBA004070D7 /* NSData+APNSToken.m in Sources */,
 				5CE7ACF627F841B100E2188D /* PW_Button.m in Sources */,
 				5AF5D1641D2F7CBA004070D7 /* NSDate+Reporting.m in Sources */,
@@ -4194,6 +4231,7 @@
 				5CE7ACCB27F6EC2200E2188D /* PW_TabBarViewController.m in Sources */,
 				7918E5F621B2835100A21339 /* WBQRCodeVC.m in Sources */,
 				992E0F1126CCB53300E1C31B /* UserManager.m in Sources */,
+				5CEF34CD280589300052BA15 /* PW_AddCreateWalletViewController.m in Sources */,
 				5E7896C221ECDC2900097301 /* CACache.m in Sources */,
 				5CE7ACE427F6EE1200E2188D /* PW_MarketViewController.m in Sources */,
 				5AF5D1671D2F7CBA004070D7 /* NSDateFormatter+Make.m in Sources */,
@@ -4234,6 +4272,7 @@
 				5E079A2421D3C5F200924407 /* keccak.cpp in Sources */,
 				5E0799F321D28A3A00924407 /* Any.pbobjc.m in Sources */,
 				5AF5D1691D2F7CBA004070D7 /* NSDictionary+Block.m in Sources */,
+				5CEF34C428041C7C0052BA15 /* PW_NetworkModel.m in Sources */,
 				5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */,
 				9929D58B26C122380066F1D6 /* SecretFreeViewController.m in Sources */,
 				5CE7ACD227F6ED2100E2188D /* PW_WebViewController.m in Sources */,
@@ -4279,6 +4318,7 @@
 				5AF5D14D1D2F7CBA004070D7 /* NSManagedObject+DictionaryExport.m in Sources */,
 				5AF5D17A1D2F7CBA004070D7 /* NSNumber+RomanNumerals.m in Sources */,
 				992E0F3526CCD9CC00E1C31B /* ETHBalance.m in Sources */,
+				5CEF34BE2803F5580052BA15 /* PW_WalletView.m in Sources */,
 				79C9B35921ABEE2E007BA751 /* SKTagView.m in Sources */,
 				5AF5D3411D335C9A004070D7 /* DTTimePeriod.m in Sources */,
 				5E0799FB21D28A3A00924407 /* GPBCodedInputStream.m in Sources */,
@@ -4307,6 +4347,7 @@
 				5CB8BBA627E1CDCB00C73976 /* MessageSystemCell.m in Sources */,
 				5AF5D1AB1D2F7CBA004070D7 /* CAMediaTimingFunction+AdditionalEquations.m in Sources */,
 				5AF5D1511D2F7CBA004070D7 /* NSManagedObjectContext+FetchRequestsConstructors.m in Sources */,
+				5CEF34D0280589410052BA15 /* PW_AddImportWalletViewController.m in Sources */,
 				79C9B34B21ABEA6F007BA751 /* iCarousel.m in Sources */,
 				1FCE189921AAFA5600328D78 /* ZYBannerView.m in Sources */,
 				5AF5D3441D335C9A004070D7 /* DTTimePeriodGroup.m in Sources */,
@@ -4319,6 +4360,7 @@
 				5B02FD5B21FFF6460040025E /* YKUIConfig.m in Sources */,
 				5AF5D1681D2F7CBA004070D7 /* NSDictionary+Additions.m in Sources */,
 				7944858F21D1D26200DB9110 /* NSString+Decimal.m in Sources */,
+				5CEF34C128041ACB0052BA15 /* PW_SwitchNetworkView.m in Sources */,
 				5AF5D1541D2F7CBA004070D7 /* CLLocation+CH1903.m in Sources */,
 				9937C8A02701F2470064BBC3 /* DAppsCollocationView.m in Sources */,
 				5AF5D1851D2F7CBA004070D7 /* NSObject+Reflection.m in Sources */,

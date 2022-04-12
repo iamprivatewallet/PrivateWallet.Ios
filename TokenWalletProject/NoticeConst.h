@@ -10,3 +10,5 @@ static NSString * const kNetworkAvailableNotification = @"kNetworkAvailableNotif
 static NSString * const kNetworkDisabledNotification = @"kNetworkDisabledNotification";
 
 static NSString * const kChainNodeUpdateNotification = @"kChainNodeUpdateNotification";
+
+static NSString * const kChangeWalletNotification = @"kChangeWalletNotification";

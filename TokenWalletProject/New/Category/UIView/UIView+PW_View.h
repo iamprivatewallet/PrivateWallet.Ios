@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addTapTarget:(nullable id)target action:(SEL)action;
 
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners;
-- (void)setRadius:(CGFloat)radius size:(CGSize)size corners:(UIRectCorner)corners;
+- (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners size:(CGSize)size;
 
 - (void)setBorderColor:(UIColor *)color width:(CGFloat)width radius:(CGFloat)radius;
 

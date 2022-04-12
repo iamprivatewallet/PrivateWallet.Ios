@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_BackupWalletViewController : PW_BaseViewController
 
+@property (nonatomic, assign) BOOL isFirst;
 @property (nonatomic, copy) NSString *wordStr;
+@property (nonatomic, strong) Wallet *wallet;
 
 @end
 
