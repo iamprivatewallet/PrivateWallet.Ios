@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_TipTool : NSObject
 
 + (void)showBackupTipSureBlock:(void (^)(void))block;
++ (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block;
 
 @end
 

@@ -18,8 +18,9 @@
         @"method":@"eth_getBalance",
         @"params":@[walletAddress,@"latest"],
     };
+    NSString *urlStr = User_manager.currentUser.current_Node;
     //eth余额查询
-    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+    [AFNetworkClient requestPostWithUrl:urlStr withParameter:parmDic withBlock:^(id data, NSError *error) {
         if(error==nil){
             NSString *amount = [UITools bigStringWith16String:data[@"result"]];
             amount = [amount stringDownDividingBy10Power:18];
@@ -41,7 +42,8 @@
                     @"to":tokenAddress,
                     },@"latest"],
     };
-    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+    NSString *urlStr = User_manager.currentUser.current_Node;
+    [AFNetworkClient requestPostWithUrl:urlStr withParameter:parmDic withBlock:^(id data, NSError *error) {
         if(error==nil){
             NSString *amount = [UITools bigStringWith16String:data[@"result"]];
             amount = [amount stringDownDividingBy10Power:18];

@@ -14,6 +14,8 @@
 #import "PW_CollectionViewController.h"
 #import "PW_WalletView.h"
 #import "PW_SelectWalletTypeViewController.h"
+#import "PW_SearchDappCurrencyViewController.h"
+#import "PW_SearchCurrencyViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -45,7 +47,7 @@
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:@"RefreshCoinList_Notification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kRefreshCoinListNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeUpdate) name:kChainNodeUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWallets) name:kChangeWalletNotification object:nil];
     [RACObserve(self, backupTipView) subscribeNext:^(UIView * _Nullable x) {
@@ -73,7 +75,8 @@
     }
 }
 - (void)searchAction {
-    
+    PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
@@ -106,19 +109,20 @@
     vc.model = self.coinList.firstObject;
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (void)editAction {
-    
-}
-- (void)addCurrencyAction {
-    
-}
 - (void)hiddenSmallAction:(UIButton *)btn {
     btn.selected = !btn.isSelected;
     SetUserDefaultsForKey(btn.selected?@"1":@"0", kHiddenWalletSmallAmount);
     [UserDefaults synchronize];
     [self.tableView reloadData];
 }
+- (void)editAction {
+    
+}
 - (void)addAction {
+    PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)addCurrencyAction {
     
 }
 - (void)requestData {
@@ -208,7 +212,7 @@
     }
 }
 - (void)refreshHeader {
-    self.walletNameLb.text = User_manager.currentUser.current_name;
+    self.walletNameLb.text = self.currentWallet.walletName;
     BOOL isHidden = [GetUserDefaultsForKey(kHiddenWalletAmount) boolValue];
     self.showHiddenBtn.selected = isHidden;
     if (isHidden) {
@@ -519,8 +523,8 @@
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn setImage:[UIImage imageNamed:@"icon_close_warn"] forState:UIControlStateNormal];
-    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIButton * _Nonnull button) {
-        [button.superview removeFromSuperview];
+    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [sender.superview removeFromSuperview];
     }];
     [backupTipView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -193,6 +193,7 @@
         make.top.equalTo(_naviBar).offset(kStatusBarHeight + (44-25)/2);
         make.centerX.equalTo(_naviBar);
         make.height.mas_equalTo(25);
+        make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.75);
     }];
     [UITools setLableProperties:_titleLable withColor:[UIColor g_boldTextColor] andFont:GCSFontSemibold(16)];
     _titleLable.text = title;
@@ -245,6 +246,7 @@
         make.bottom.equalTo(_naviBar.mas_bottom).offset(-(44-25)/2);
         make.centerX.equalTo(_naviBar);
         make.height.mas_equalTo(25);
+        make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.75);
     }];
     [UITools setLableProperties:_titleLable withColor:[UIColor g_boldTextColor] andFont:GCSFontSemibold(16)];
     _titleLable.text = title;

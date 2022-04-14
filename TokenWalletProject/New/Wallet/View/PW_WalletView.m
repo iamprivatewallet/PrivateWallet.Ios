@@ -8,7 +8,7 @@
 
 #import "PW_WalletView.h"
 #import "PW_SwitchNetworkView.h"
-#import "PW_SelectWalletTypeViewController.h"
+#import "PW_AddCurrencyViewController.h"
 
 @interface PW_WalletView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -42,7 +42,7 @@
 }
 - (void)addWalletAction {
     [self closeAction];
-    [TheAppDelegate.rootNavigationController pushViewController:[PW_SelectWalletTypeViewController new] animated:YES];
+    [TheAppDelegate.rootNavigationController pushViewController:[PW_AddCurrencyViewController new] animated:YES];
 }
 - (void)changeNetAction {
     [self closeAction];
@@ -118,6 +118,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Wallet *wallet = self.dataList[indexPath.row];
     [User_manager updateChooseWallet:wallet];
+    if([wallet.type isEqualToString:@"ETH"]){
+        NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kETHChainId];
+        NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kETHChainId];
+        [User_manager updateCurrentNode:node chainId:kETHChainId name:name];
+    }else if([wallet.type isEqualToString:@"CVN"]){
+        NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kCVNChainId];
+        NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kCVNChainId];
+        [User_manager updateCurrentNode:node chainId:kCVNChainId name:name];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
     [self closeAction];
 }
@@ -164,6 +173,7 @@
         self.netNameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor whiteColor]];
         [contentView addSubview:self.netNameLb];
         self.netSubNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[[UIColor whiteColor] colorWithAlphaComponent:0.7]];
+        self.netSubNameLb.numberOfLines = 1;
         [contentView addSubview:self.netSubNameLb];
         UILabel *changeTipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_switchNetwork") fontSize:13 textColor:[UIColor whiteColor]];
         [contentView addSubview:changeTipLb];
@@ -176,6 +186,7 @@
         [self.netSubNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.netNameLb.mas_bottom).offset(4);
             make.left.offset(20);
+            make.right.offset(-20);
         }];
         [changeTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.offset(0);

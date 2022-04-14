@@ -38,7 +38,25 @@
     [self showLoadingIndicator];
     [NetworkTool requestApi:WalletTokenChainURL params:nil completeBlock:^(id  _Nonnull data) {
         [self hideLoadingIndicator];
-        self.dataList = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
+        [self.dataList removeAllObjects];
+        NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
+        NSString *walletType = User_manager.currentUser.chooseWallet_type;
+        for (PW_NetworkModel *model in array) {
+            if([model.rpcUrl isEmptyStr]){
+                model.rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:model.chainId];
+            }
+            if ([walletType isEqualToString:@"ETH"]) {
+                if(![model.chainId isEqualToString:@"168"]){
+                    [self.dataList addObject:model];
+                }
+            }else if([walletType isEqualToString:@"CVN"]) {
+                if([model.chainId isEqualToString:@"168"]){
+                    [self.dataList addObject:model];
+                }
+            }else{
+                [self.dataList addObject:model];
+            }
+        }
         [self.tableView reloadData];
     } errBlock:^(NSString * _Nonnull msg) {
         [self hideLoadingIndicator];
@@ -177,6 +195,7 @@
     [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLb.mas_bottom).offset(4);
         make.left.offset(20);
+        make.right.offset(-20);
     }];
 }
 #pragma mark - lazy
@@ -198,6 +217,7 @@
 - (UILabel *)subNameLb {
     if (!_subNameLb) {
         _subNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+        _subNameLb.numberOfLines = 1;
     }
     return _subNameLb;
 }

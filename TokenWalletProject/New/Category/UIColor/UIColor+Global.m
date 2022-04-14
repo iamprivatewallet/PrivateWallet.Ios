@@ -51,6 +51,9 @@
 + (UIColor *)g_bgColor {
     return [UIColor whiteColor];
 }
++ (UIColor *)g_grayBgColor {
+    return [self g_hex:@"#F4F6F9"];
+}
 + (UIColor *)g_primaryColor {
     return COLORFORRGB(0x12D674);
 }

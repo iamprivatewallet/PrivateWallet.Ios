@@ -30,6 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isTop;
 @property (nonatomic, assign) BOOL isDefault;
 
+@property (nonatomic, assign) NSInteger sortIndex;//顺序
+@property (nonatomic, copy) NSString *walletType;
+@property (nonatomic, copy) NSString *walletAddress;
+@property (nonatomic, assign) BOOL isExist;
+
 @end
 
 NS_ASSUME_NONNULL_END

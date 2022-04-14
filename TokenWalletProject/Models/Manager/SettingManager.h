@@ -38,11 +38,11 @@ static NSString * _Nonnull const kCVNRPCUrl = @"http://52.220.97.222:1235";
 
 //设置当前选的节点
 -(void)setNode:(NSString *)node chianId:(NSString *)chianId;
+-(NSString *)getNodeWithChainId:(NSString *)chainId;
 //当前选的节点
 -(int)getNodeChainId;
 -(NSString *)getChainType;
 -(NSString *)getChainCoinName;
--(NSString *)getNodeWithChainId:(NSString *)chainId;
 -(NSString *)getNodeNameWithChainId:(NSString *)chainId;
 -(NSArray *)getNodeArrayWithChainId:(NSString *)chainId;
 -(void)getNodeChainIdWithCompletionHandler:(void (^ _Nullable)(NSString * _Nullable chainId))completionHandler;

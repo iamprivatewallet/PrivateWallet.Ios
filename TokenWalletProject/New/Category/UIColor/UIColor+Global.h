@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_warnBgColor;
 
 + (UIColor *)g_bgColor;
++ (UIColor *)g_grayBgColor;
 + (UIColor *)g_primaryColor;
 + (UIColor *)g_primaryTextColor;
 + (UIColor *)g_placeholderColor;

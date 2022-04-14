@@ -221,7 +221,7 @@
         make.left.offset(15);
     }];
     self.walletNameTF = [[UITextField alloc] init];
-    [self.walletNameTF pw_setPlaceholder:@"ETH-1"];
+    [self.walletNameTF pw_setPlaceholder:@"ETH"];
     self.walletNameTF.font = [UIFont systemFontOfSize:14];
     self.walletNameTF.textColor = [UIColor g_textColor];
     self.walletNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;

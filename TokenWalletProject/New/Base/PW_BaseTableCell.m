@@ -25,11 +25,12 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     [super setHighlighted:highlighted animated:animated];
-    if (highlighted) {
-        self.backgroundColor = [UIColor g_borderColor];
-    }else{
-        self.backgroundColor = [UIColor g_bgColor];
-
+    if (self.selectionStyle != UITableViewCellSelectionStyleNone){
+        if (highlighted) {
+            self.backgroundColor = [UIColor g_grayBgColor];
+        }else{
+            self.backgroundColor = [UIColor g_bgColor];
+        }
     }
 }
 

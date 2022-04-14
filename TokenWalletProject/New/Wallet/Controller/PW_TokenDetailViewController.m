@@ -113,8 +113,8 @@ typedef enum : NSUInteger {
     }
     NSString *type = [[SettingManager sharedInstance] getChainType];
     NSDictionary *params = @{
-        @"address":@"CVNcac90d43cbf534644bc1e431bcb8d6b6c82eb387",//currentAddr,
-        @"type":@"CVN",//type,
+        @"address":currentAddr,
+        @"type":type,
         @"contractAddress":contractAddress,
         @"page":@"0",
         @"offset":@"20",
@@ -132,6 +132,7 @@ typedef enum : NSUInteger {
             obj.tokenDecimals = self.model.tokenDecimals;
             obj.tokenLogo = self.model.tokenLogo;
             obj.transactionStatus = 1;
+            obj.value = [obj.value stringDownDividingBy10Power:self.model.tokenDecimals];
             obj.isOut = [obj.fromAddress isEqualToString:currentAddr];
             CGFloat transfer_time = obj.timeStamp/1000;
             [timeList addObject:@(transfer_time)];

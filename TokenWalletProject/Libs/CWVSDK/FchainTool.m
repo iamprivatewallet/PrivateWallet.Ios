@@ -477,13 +477,13 @@
                 NSString *errorStr;
                 BOOL sucess;
                 if ([errorType isEqualToString:@"0"]) {
-                    errorStr = @"导入成功";
+                    errorStr = LocalizedStr(@"text_importSuccess");
                     sucess = YES;
                 }else if ([errorType isEqualToString:@"1"]) {
-                    errorStr = @"相应的钱包已存在";
+                    errorStr = LocalizedStr(@"text_walletAlreadyExist");
                     sucess = NO;
                 }else {
-                    errorStr = @"导入失败";
+                    errorStr = LocalizedStr(@"text_importFail");
                     sucess = NO;
                 }
                 block(errorStr, sucess);
@@ -503,13 +503,13 @@
                 NSString *errorStr;
                 BOOL sucess;
                 if ([errorType isEqualToString:@"0"]) {
-                    errorStr = @"导入成功";
+                    errorStr = LocalizedStr(@"text_importSuccess");
                     sucess = YES;
                 }else if ([errorType isEqualToString:@"1"]) {
-                    errorStr = @"相应的钱包已存在";
+                    errorStr = LocalizedStr(@"text_walletAlreadyExist");
                     sucess = NO;
                 }else {
-                    errorStr = @"导入失败";
+                    errorStr = LocalizedStr(@"text_importFail");
                     sucess = NO;
                 }
                 block(errorStr, sucess);

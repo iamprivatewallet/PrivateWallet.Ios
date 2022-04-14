@@ -10,5 +10,6 @@
 #define PW_DBGlobal_h
 
 #import "PW_TokenTradeRecordManager.h"
+#import "PW_TokenManager.h"
 
 #endif /* PW_DBGlobal_h */

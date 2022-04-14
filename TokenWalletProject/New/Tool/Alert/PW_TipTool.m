@@ -11,12 +11,13 @@
 @implementation PW_TipTool
 
 + (void)showBackupTipSureBlock:(void (^)(void))block {
+    [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
     UIView *view = [self showTipView:contentView];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [closeBtn setBackgroundImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     __weak typeof(view) weakView = view;
-    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIButton * _Nonnull button) {
+    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
     }];
     [contentView addSubview:closeBtn];
@@ -49,7 +50,7 @@
         make.right.offset(-10);
     }];
     UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_myUnderstand") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
-    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIButton * _Nonnull button) {
+    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
         if(block){
             block();
@@ -63,6 +64,111 @@
         make.height.offset(55);
         make.bottom.offset(-120);
     }];
+    [self showAnimationContentView:contentView];
+}
++ (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block {
+    [[UIApplication sharedApplication].delegate.window endEditing:YES];
+    UIView *contentView = [[UIView alloc] init];
+    UIView *view = [self showTipView:contentView];
+    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_payCheck") fontSize:17 textColor:[UIColor g_boldTextColor]];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(18);
+        make.left.offset(26);
+    }];
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
+    __weak typeof(view) weakView = view;
+    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+    }];
+    [contentView addSubview:closeBtn];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(10);
+        make.right.offset(-20);
+    }];
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_secretKey_big"]];
+    [contentView addSubview:iconIv];
+    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(50);
+        make.centerX.offset(0);
+    }];
+    UIView *pwdView = [[UIView alloc] init];
+    pwdView.backgroundColor = [UIColor g_grayBgColor];
+    [pwdView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    [contentView addSubview:pwdView];
+    [pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(iconIv.mas_bottom).offset(20);
+        make.left.offset(25);
+        make.right.offset(-25);
+        make.height.offset(55);
+    }];
+    UITextField *pwdTF = [[UITextField alloc] init];
+    pwdTF.font = [UIFont pw_semiBoldFontOfSize:14];
+    [pwdTF pw_setPlaceholder:LocalizedStr(@"text_inputTradePwd")];
+    pwdTF.textColor = [UIColor g_textColor];
+    pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    pwdTF.secureTextEntry = YES;
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        CGFloat duration = [x.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        CGRect frame = [x.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        [UIView animateWithDuration:duration animations:^{
+            contentView.transform = CGAffineTransformMakeTranslation(0, -frame.size.height);
+        }];
+    }];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillHideNotification object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        CGFloat duration = [x.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+        [UIView animateWithDuration:duration animations:^{
+            contentView.transform = CGAffineTransformIdentity;
+        }];
+    }];
+//    NSNotification *showNoti = [NSNotification notificationWithName:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addNotification:showNoti block:^(NSNotification * _Nonnull notification) {
+//        CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+//        CGRect frame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//        [UIView animateWithDuration:duration animations:^{
+//            contentView.transform = CGAffineTransformMakeTranslation(0, -frame.size.height);
+//        }];
+//    }];
+//    NSNotification *hideNoti = [NSNotification notificationWithName:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addNotification:hideNoti block:^(NSNotification *notification) {
+//        CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+//        [UIView animateWithDuration:duration animations:^{
+//            contentView.transform = CGAffineTransformIdentity;
+//        }];
+//    }];
+    [pwdView addSubview:pwdTF];
+    [pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.offset(0);
+        make.left.offset(20);
+        make.right.offset(-15);
+    }];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    RAC(sureBtn, enabled) = [RACSignal combineLatest:@[pwdTF.rac_textSignal] reduce:^id(NSString *pwd){
+        return @(pwd.length>0);
+    }];
+    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+        if(block){
+            block(pwdTF.text);
+        }
+    }];
+    [contentView addSubview:sureBtn];
+    [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(pwdTF.mas_bottom).offset(20);
+        make.left.offset(25);
+        make.right.offset(-25);
+        make.height.offset(55);
+        make.bottom.offset(-(20+SafeBottomInset));
+    }];
+    [self showAnimationContentView:contentView];
+}
++ (void)showAnimationContentView:(UIView *)contentView {
+    contentView.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT);
+    [UIView animateWithDuration:0.25 animations:^{
+        contentView.transform = CGAffineTransformIdentity;
+    } completion:nil];
 }
 + (UIView *)showTipView:(UIView *)view {
     if(view==nil){

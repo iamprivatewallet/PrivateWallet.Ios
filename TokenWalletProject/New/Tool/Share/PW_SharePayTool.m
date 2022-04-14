@@ -31,11 +31,11 @@
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn setImage:[UIImage imageNamed:@"icon_close_big"] forState:UIControlStateNormal];
-    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIButton * _Nonnull button) {
+    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [UIView animateWithDuration:0.25 animations:^{
-            button.superview.alpha = 0;
+            sender.superview.alpha = 0;
         } completion:^(BOOL finished) {
-            [button.superview removeFromSuperview];
+            [sender.superview removeFromSuperview];
         }];
     }];
     [maskView addSubview:closeBtn];
