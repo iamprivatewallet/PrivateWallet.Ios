@@ -9,10 +9,13 @@
 #import "PW_CollectionViewController.h"
 #import "SGQRCode.h"
 #import "PW_SharePayTool.h"
+#import "PW_ChooseCurrencyViewController.h"
 
 @interface PW_CollectionViewController ()
 
 @property (nonatomic, strong) UIImageView *topBgIv;
+
+@property (nonatomic, strong) UILabel *tipLb;
 
 @property (nonatomic, strong) UIView *tokenView;
 @property (nonatomic, strong) UIImageView *iconIv;
@@ -37,6 +40,15 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+- (void)changeTokenAction {
+    PW_ChooseCurrencyViewController *vc = [[PW_ChooseCurrencyViewController alloc] init];
+    vc.selectedTokenContract = self.model.tokenContract;
+    vc.chooseBlock = ^(PW_TokenModel * _Nonnull model) {
+        self.model = model;
+        [self refreshUI];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)shareAction {
     [PW_SharePayTool showPayMeViewWithAddress:self.model.tokenContract name:self.model.tokenName];
 }
@@ -44,9 +56,20 @@
     [self.model.tokenContract pasteboardToast:YES];
 }
 - (void)refreshUI {
+    self.tipLb.text = NSStringWithFormat(LocalizedStr(@"text_transferAssetsTip"),self.model.tokenName);
     [self.iconIv sd_setImageWithURL:[NSURL URLWithString:self.model.tokenLogo] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
     self.nameLb.text = self.model.tokenName;
     self.subNameLb.text = [self.model.tokenName lowercaseString];
+    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    self.addressLb.text = walletAddress;
+    NSString *tokenAddress = self.model.tokenContract;
+    NSString *str;
+    if (![walletAddress isEqualToString:self.model.tokenContract]) {
+        str = NSStringWithFormat(@"ethereum:%@?contractAddress=%@",walletAddress,tokenAddress);
+    }else{
+        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
+    }
+    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:str] size:170];
 }
 - (void)makeViews {
     self.topBgIv = [[UIImageView alloc] init];
@@ -56,6 +79,7 @@
     self.tokenView.backgroundColor = [UIColor g_bgColor];
     [self.tokenView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
     self.tokenView.layer.cornerRadius = 21;
+    [self.tokenView addTapTarget:self action:@selector(changeTokenAction)];
     [self.view addSubview:self.tokenView];
     [self.topBgIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.offset(0);
@@ -101,26 +125,18 @@
 - (void)createWarnView {
     UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_warning_light"]];
     [self.view addSubview:iconIv];
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:NSStringWithFormat(LocalizedStr(@"text_transferAssetsTip"),self.model.tokenName) fontSize:14 textColor:[UIColor whiteColor]];
-    [self.view addSubview:tipLb];
+    self.tipLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor whiteColor]];
+    [self.view addSubview:self.tipLb];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(30);
         make.top.equalTo(self.tokenView.mas_bottom).offset(16);
     }];
-    [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(iconIv);
         make.left.equalTo(iconIv.mas_right).offset(6);
     }];
 }
 - (void)createQrCodeView {
-    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
-    NSString *tokenAddress = self.model.tokenContract;
-    NSString *str;
-    if (![walletAddress isEqualToString:self.model.tokenContract]) {
-        str = NSStringWithFormat(@"ethereum:%@?contractAddress=%@",walletAddress,tokenAddress);
-    }else{
-        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
-    }
     UIView *qrView = [[UIView alloc] init];
     qrView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:qrView];
@@ -138,7 +154,6 @@
         make.centerX.offset(0);
     }];
     self.qrIv = [[UIImageView alloc] init];
-    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:str] size:170];
     [qrBodyView addSubview:self.qrIv];
     [self.qrIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
@@ -150,7 +165,7 @@
         make.top.equalTo(qrBodyView.mas_bottom).offset(15);
         make.centerX.offset(0);
     }];
-    self.addressLb = [PW_ViewTool labelSemiboldText:walletAddress fontSize:16 textColor:[UIColor g_boldTextColor]];
+    self.addressLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
     self.addressLb.textAlignment = NSTextAlignmentCenter;
     [qrView addSubview:self.addressLb];
     [self.addressLb mas_makeConstraints:^(MASConstraintMaker *make) {

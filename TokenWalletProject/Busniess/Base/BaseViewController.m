@@ -43,6 +43,7 @@
 - (void)setupWhiteNavBarTint {
     [self.leftBtn setImage:IMAGE(@"icon_back_white") forState:UIControlStateNormal];
     self.titleLable.textColor = [UIColor whiteColor];
+    self.naviBar.backgroundColor = [UIColor clearColor];
 }
 - (void)setNavNoLineTitle:(NSString *)title {
     if(self.navigationController.viewControllers.count>1){
@@ -57,6 +58,9 @@
     }else{
         [self initTitleBarWithLeftBtnImg:nil leftTitle:nil leftAction:nil title:title isNoLine:YES isWhiteBg:isWhiteBg];
     }
+}
+- (void)setNavNoLineTitle:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction {
+    [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction isWhiteBg:YES isNoLine:YES];
 }
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
     [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
@@ -99,14 +103,14 @@
     [self initTitleWithTitle:title leftImg:IMAGE(leftImg) leftAction:leftAction rightImage:rightImg rightAction:rightAction isNoLine:isNoLine isWhiteBg:isWhiteBg];
 }
 - (void)setNavTitleWithLeftItem:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{    
-    [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction bgColor:[UIColor navAndTabBackColor] isWhiteStyle:NO isNoLine:isNoLine];
+    [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction isWhiteBg:YES isNoLine:isNoLine];
 }
 - (void)setNavTitle:(NSString *)title leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction rightTitle:(NSString *)rightTitle  rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{
     [self initTitle:title leftTitle:leftTitle leftAction:leftAction rightTitle:rightTitle rightAction:rightAction isNoLine:isNoLine];
 }
 
 - (void)setNavTitle_whiteStype:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction bgColor:(UIColor *)bgColor{
-    [self initBarWithTitle:title leftImg:ImageNamed(@"backWhite") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:nil rightImage:rightImg rightAction:rightAction bgColor:bgColor isWhiteStyle:YES isNoLine:YES];
+    [self initBarWithTitle:title leftImg:ImageNamed(@"backWhite") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:nil rightImage:rightImg rightAction:rightAction isWhiteBg:YES isNoLine:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,7 +136,7 @@
 
 - (void)initWithRightTitle:(NSString*)rightTitle rightAction:(SEL)rightAction{
     _naviBar = [UIView new];
-    _naviBar.backgroundColor = [UIColor navAndTabBackColor];
+    _naviBar.backgroundColor = [UIColor g_bgColor];
    
     [self.view addSubview:_naviBar];
     [_naviBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -217,11 +221,14 @@
         
     }
 }
--(void)initBarWithTitle:(NSString*)title leftImg:(UIImage*)image leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction rightTitle:(NSString *)rightTitle rightImage:(NSString *)rightImage rightAction:(SEL)rightAction bgColor:(UIColor *)bgColor isWhiteStyle:(BOOL)isWhiteStyle isNoLine:(BOOL)isNoLine {
+-(void)initBarWithTitle:(NSString*)title leftImg:(UIImage*)image leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction rightTitle:(NSString *)rightTitle rightImage:(NSString *)rightImage rightAction:(SEL)rightAction isWhiteBg:(BOOL)isWhiteBg isNoLine:(BOOL)isNoLine {
     
     _naviBar = [UIView new];
-    _naviBar.backgroundColor = bgColor;
-   
+    if (isWhiteBg) {
+        _naviBar.backgroundColor = [UIColor g_bgColor];
+    }else{
+        _naviBar.backgroundColor = [UIColor clearColor];
+    }
     [self.view addSubview:_naviBar];
     [_naviBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);

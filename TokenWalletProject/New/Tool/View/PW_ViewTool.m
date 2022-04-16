@@ -14,6 +14,9 @@
 + (UILabel *)labelText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color {
     return [self labelText:text fontSize:size weight:UIFontWeightRegular textColor:color];
 }
++ (UILabel *)labelBoldText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color {
+    return [self labelText:text fontSize:size weight:UIFontWeightBold textColor:color];
+}
 + (UILabel *)labelSemiboldText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color {
     return [self labelText:text fontSize:size weight:UIFontWeightSemibold textColor:color];
 }
@@ -32,11 +35,13 @@
 + (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
     return [self buttonTitle:title fontSize:fontSize weight:UIFontWeightSemibold titleColor:titleColor cornerRadius:cornerRadius backgroundColor:backgroundColor target:target action:action];
 }
-+ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action {
++ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(nullable NSString *)imageName target:(nullable id)target action:(nullable SEL)action {
     PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [btn layoutWithEdgeInsetStyle:PW_ButtonEdgeInsetStyleLeft spaceBetweenImageAndTitle:5];
+    if([imageName isNoEmpty]){
+        [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [btn layoutWithEdgeInsetStyle:PW_ButtonEdgeInsetStyleLeft spaceBetweenImageAndTitle:5];
+    }
     btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:UIFontWeightSemibold];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];
     [btn setTitleColor:[titleColor colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
@@ -46,7 +51,7 @@
     return btn;
 }
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:weight];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];

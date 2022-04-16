@@ -14,12 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_ViewTool : NSObject
 
 + (UILabel *)labelText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color;
++ (UILabel *)labelBoldText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color;
 + (UILabel *)labelSemiboldText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color;
 + (UILabel *)labelMediumText:(NSString *)text fontSize:(CGFloat)size textColor:(UIColor *)color;
 + (UILabel *)labelText:(NSString *)text fontSize:(CGFloat)size weight:(UIFontWeight)weight textColor:(UIColor *)color;
 
 + (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(nullable UIColor *)backgroundColor target:(nullable id)target action:(nullable SEL)action;
-+ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
++ (UIButton *)buttonSemiboldTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(nullable NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(nullable UIColor *)backgroundColor target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonImageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action;

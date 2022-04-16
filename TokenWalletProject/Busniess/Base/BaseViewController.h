@@ -56,6 +56,7 @@
 - (void)setupWhiteNavBarTint;
 - (void)setNavNoLineTitle:(NSString *)title;
 - (void)setNavNoLineTitle:(NSString *)title isWhiteBg:(BOOL)isWhiteBg;
+- (void)setNavNoLineTitle:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction;
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction isWhiteBg:(BOOL)isWhiteBg;
 //只显示标题

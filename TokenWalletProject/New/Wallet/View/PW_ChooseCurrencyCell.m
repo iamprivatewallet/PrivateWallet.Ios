@@ -1,25 +1,25 @@
 //
-//  PW_SearchCurrencyCell.m
+//  PW_ChooseCurrencyCell.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/4/13.
+//  Created by mnz on 2022/4/15.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_SearchCurrencyCell.h"
+#import "PW_ChooseCurrencyCell.h"
 
-@interface PW_SearchCurrencyCell ()
+@interface PW_ChooseCurrencyCell ()
 
 @property (nonatomic, strong) UIView *bodyView;
 @property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *nameLb;
 @property (nonatomic, strong) UILabel *addressLb;
 @property (nonatomic, strong) UIButton *copyBtn;
-@property (nonatomic, strong) UIButton *addBtn;
+@property (nonatomic, strong) UIButton *chooseBtn;
 
 @end
 
-@implementation PW_SearchCurrencyCell
+@implementation PW_ChooseCurrencyCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -33,17 +33,12 @@
 - (void)copyAction {
     [self.model.tokenContract pasteboardToast:YES];
 }
-- (void)addAction {
-    if(self.addBlock) {
-        self.addBlock(self.model);
-    }
-}
 - (void)setModel:(PW_TokenModel *)model {
     _model = model;
     [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.tokenLogo] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
     self.nameLb.text = model.tokenName;
     self.addressLb.text = [model.tokenContract showShortAddress];
-    self.addBtn.selected = model.isExist;
+    self.chooseBtn.selected = model.isChoose;
 }
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
@@ -51,12 +46,12 @@
     [self.bodyView addSubview:self.nameLb];
     [self.bodyView addSubview:self.addressLb];
     [self.bodyView addSubview:self.copyBtn];
-    [self.bodyView addSubview:self.addBtn];
+    [self.bodyView addSubview:self.chooseBtn];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(5);
         make.left.offset(20);
         make.right.offset(-20);
-        make.bottom.offset(-8);
+        make.bottom.offset(-5);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
@@ -74,9 +69,9 @@
     [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.addressLb.mas_right).offset(8);
         make.centerY.equalTo(self.addressLb);
-        make.right.lessThanOrEqualTo(self.addBtn.mas_left).offset(-10);
+        make.right.lessThanOrEqualTo(self.chooseBtn.mas_left).offset(-10);
     }];
-    [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-15);
         make.centerY.offset(0);
     }];
@@ -86,7 +81,6 @@
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
         _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
         [_bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     }
     return _bodyView;
@@ -117,12 +111,13 @@
     }
     return _copyBtn;
 }
-- (UIButton *)addBtn {
-    if (!_addBtn) {
-        _addBtn = [PW_ViewTool buttonImageName:@"icon_currency_add" selectedImage:@"icon_currency_minus" target:self action:@selector(addAction)];
-        [_addBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+- (UIButton *)chooseBtn {
+    if (!_chooseBtn) {
+        _chooseBtn = [PW_ViewTool buttonImageName:@"icon_uncheck" selectedImage:@"icon_check" target:nil action:nil];
+        _chooseBtn.userInteractionEnabled = NO;
+        [_chooseBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     }
-    return _addBtn;
+    return _chooseBtn;
 }
 
 @end

@@ -11,5 +11,6 @@
 
 #import "PW_TableView.h"
 #import "PW_Button.h"
+#import "PW_SliderView.h"
 
 #endif /* PW_ViewGlobal_h */

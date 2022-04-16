@@ -12,10 +12,12 @@
 #import "PW_ContractTool.h"
 #import "PW_TokenDetailViewController.h"
 #import "PW_CollectionViewController.h"
+#import "PW_TransferViewController.h"
 #import "PW_WalletView.h"
 #import "PW_SelectWalletTypeViewController.h"
 #import "PW_SearchDappCurrencyViewController.h"
 #import "PW_SearchCurrencyViewController.h"
+#import "PW_CurrencyManageViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -47,7 +49,7 @@
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kRefreshCoinListNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCacheCoinList) name:kRefreshCoinListNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeUpdate) name:kChainNodeUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWallets) name:kChangeWalletNotification object:nil];
     [RACObserve(self, backupTipView) subscribeNext:^(UIView * _Nullable x) {
@@ -102,7 +104,9 @@
     [self showSuccess:LocalizedStr(@"text_copySuccess")];
 }
 - (void)transferAction {
-    
+    PW_TransferViewController *vc = [PW_TransferViewController new];
+    vc.model = self.coinList.firstObject;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)collectionAction {
     PW_CollectionViewController *vc = [PW_CollectionViewController new];
@@ -116,14 +120,16 @@
     [self.tableView reloadData];
 }
 - (void)editAction {
-    
+    PW_CurrencyManageViewController *vc = [[PW_CurrencyManageViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)addAction {
     PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)addCurrencyAction {
-    
+    PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)requestData {
     [self refreshHeader];
@@ -133,6 +139,7 @@
     NSString *coinName = [[SettingManager sharedInstance] getChainCoinName];
     PW_TokenModel *model = [[PW_TokenModel alloc] init];
     model.tokenName = coinName;
+    model.tokenSymbol = coinName;
     model.tokenLogo = AppWalletTokenIconURL(chainType,coinName);
     model.tokenChain = chainId.integerValue;
     model.tokenContract = self.currentWallet.address;
@@ -149,6 +156,9 @@
         dispatch_semaphore_signal(semaphore);
         [self.view hideLoadingIndicator];
         NSArray *array = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
+        for (PW_TokenModel *model in array) {
+            model.isDefault = YES;
+        }
         [self.coinList addObjectsFromArray:array];
         [self loadCacheCoinList];
     } errBlock:^(NSString * _Nonnull msg) {
@@ -165,6 +175,7 @@
         if(![self isExitCoinWithAddress:obj.tokenContract]){
             PW_TokenModel *model = [PW_TokenModel new];
             model.tokenName = obj.tokenSymbol;
+            model.tokenSymbol = obj.tokenSymbol;
             model.tokenLogo = obj.tokenLogo;
             model.tokenContract = obj.tokenContract;
             model.tokenChain = obj.tokenChain.integerValue;
@@ -174,6 +185,7 @@
             [self.coinList addObject:model];
         }
     }];
+    [[PW_GlobalData shared] updateCoinList:self.coinList];
     [self.tableView reloadData];
     [self refreshBalance];
 }

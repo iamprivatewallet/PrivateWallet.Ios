@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   TokenWalletProject
 
@@ -20,6 +20,7 @@ text_noData="暂无数据";
 text_copy="复制";
 text_share="分享";
 text_addSuccess="添加成功";
+text_finish="完成";
 
 tabbar_wallet="钱包";
 tabbar_market="市场";
@@ -116,3 +117,16 @@ text_recommendDapp="推荐DAPP";
 text_recommendCurrency="推荐币种";
 text_searchRecord="搜索记录";
 text_searchResult="搜索结果";
+text_currencyManage="币种管理";
+text_chooseCurrency="选择币种";
+text_transfer="转账";
+text_transferCount="转账数量";
+text_balance="余额";
+text_balanceLack="余额不足";
+text_minersFee="旷工费";
+text_custom="自定义";
+text_slow="缓慢";
+text_recommend="推荐";
+text_fast="快速";
+text_soon="很快";
+text_pleaseEnterQuantity="请输入数量";

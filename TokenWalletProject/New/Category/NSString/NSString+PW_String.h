@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)showShortAddress;
 - (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
 
+- (BOOL)isFloat;
+
 @end
 
 NS_ASSUME_NONNULL_END

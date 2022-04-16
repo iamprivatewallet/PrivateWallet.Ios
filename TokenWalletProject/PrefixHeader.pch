@@ -89,6 +89,7 @@
 #import "VisitDAppsRecordManager.h"
 #import "WBQRCodeVC.h"
 
+#import "PW_Global.h"
 #import "PW_DBGlobal.h"
 #import "PW_GlobalCategory.h"
 #import "PW_ViewGlobal.h"

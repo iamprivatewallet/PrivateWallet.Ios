@@ -9,6 +9,7 @@
 #import "PW_TokenDetailViewController.h"
 #import "PW_TokenDetailCell.h"
 #import "PW_CollectionViewController.h"
+#import "PW_TransferViewController.h"
 #import "PW_TokenInfoViewController.h"
 #import "PW_TokenTradeDetailViewController.h"
 
@@ -86,7 +87,9 @@ typedef enum : NSUInteger {
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)transferAction {
-    
+    PW_TransferViewController *vc = [PW_TransferViewController new];
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)collectionAction {
     PW_CollectionViewController *vc = [PW_CollectionViewController new];
