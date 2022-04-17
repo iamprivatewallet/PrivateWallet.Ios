@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 @property (nonatomic, strong) NSMutableArray<PW_TokenModel *> *coinList;
+@property (nonatomic, strong) PW_TokenModel *mainTokenModel;
 - (void)updateCoinList:(NSArray<PW_TokenModel *> *)coinList;
 
 @end

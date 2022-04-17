@@ -116,7 +116,7 @@ WBQRCodeDelegate
 }
 
 - (void)importKeystoreWallet{
-    if ([self.keyWordsStr isEmptyStr]) {
+    if (![self.keyWordsStr isNoEmpty]) {
         return [self showAlertViewWithText:@"请输入Keystore" actionText:@"好"];
     }
     if (self.passwordStr.length < 8) {
@@ -141,7 +141,7 @@ WBQRCodeDelegate
 
 - (void)importWordsWallet{
     //导入钱包
-    if ([self.keyWordsStr isEmptyStr]) {
+    if (![self.keyWordsStr isNoEmpty]) {
         NSString *alertStr = @"请输入私钥";
         if (self.importType == kImportWalletTypeMnemonic) {
             alertStr = @"请输入助记词";

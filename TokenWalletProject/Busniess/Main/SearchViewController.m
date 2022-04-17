@@ -124,7 +124,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self requestDataWithValue:[textField.text trim]];
-    return ![[textField.text trim] isEmptyStr];
+    return [[textField.text trim] isNoEmpty];
 }
 #pragma mark - Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

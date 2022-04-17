@@ -110,7 +110,7 @@
     for (int i = 0; i<list.count; i++) {
         NSString *typeStr = list[i];
         if([typeStr isEqualToString:@"CVN"]) {
-            if([cvn_address isEmptyStr]){
+            if(![cvn_address isNoEmpty]){
                 continue;
             }
             addressStr = cvn_address;
@@ -347,7 +347,7 @@
         value = [[dic objectForKey:@"value"] getHex];
     }
     NSString *price = [dic objectForKey:@"gas_price"];
-    if([price isEmptyStr]){
+    if(![price isNoEmpty]){
         price = @"5000000000";
     }
     int chainId = [[SettingManager sharedInstance] getNodeChainId];

@@ -190,7 +190,7 @@
     [self refreshBalance];
 }
 - (BOOL)isExitCoinWithAddress:(NSString *)address {
-    if([address isEmptyStr]){
+    if(![address isNoEmpty]){
         return NO;
     }
     __block BOOL isExit = NO;
@@ -264,7 +264,7 @@
     self.currentWallet.totalBalance = 0;
     __block CGFloat totalBalance = 0;
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
-        if(![coin.tokenAmount isEmptyStr]&&![coin.price isEmptyStr]){
+        if([coin.tokenAmount isNoEmpty]&&[coin.price isNoEmpty]){
             NSString *coinUsdt = [coin.tokenAmount stringDownMultiplyingBy:coin.price decimal:8];
             totalBalance = [[@(totalBalance).stringValue stringDownAdding:coinUsdt decimal:8] doubleValue];
         }
@@ -327,7 +327,7 @@
 - (void)refreshCVNTotal {
     self.currentWallet.totalBalance = 0;
     for (PW_TokenModel *coin in self.coinList) {
-        if(![coin.tokenAmount isEmptyStr]){
+        if([coin.tokenAmount isNoEmpty]){
             NSString *coinUsdt = [coin.tokenAmount stringDownMultiplyingBy:coin.price decimal:8];
             self.currentWallet.totalBalance += [coinUsdt doubleValue];
         }

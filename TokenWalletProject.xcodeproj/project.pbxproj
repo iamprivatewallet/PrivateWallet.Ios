@@ -215,6 +215,7 @@
 		5CB119DA28097F970006BEFB /* PW_ChooseCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D928097F970006BEFB /* PW_ChooseCurrencyCell.m */; };
 		5CB119DD280AAE6B0006BEFB /* PW_TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119DC280AAE6B0006BEFB /* PW_TransferViewController.m */; };
 		5CB119E1280ABEC70006BEFB /* PW_SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119E0280ABEC70006BEFB /* PW_SliderView.m */; };
+		5CB119E4280BA8BA0006BEFB /* PW_GasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119E3280BA8BA0006BEFB /* PW_GasModel.m */; };
 		5CB76B0F27F2E2990068E967 /* PW_FirstChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B0E27F2E2990068E967 /* PW_FirstChooseViewController.m */; };
 		5CB76B1527F2E9430068E967 /* UIColor+Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1427F2E9430068E967 /* UIColor+Global.m */; };
 		5CB76B1827F2ECC20068E967 /* PW_BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB76B1727F2ECC20068E967 /* PW_BaseViewController.m */; };
@@ -911,6 +912,8 @@
 		5CB119DC280AAE6B0006BEFB /* PW_TransferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TransferViewController.m; sourceTree = "<group>"; };
 		5CB119DF280ABEC70006BEFB /* PW_SliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SliderView.h; sourceTree = "<group>"; };
 		5CB119E0280ABEC70006BEFB /* PW_SliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SliderView.m; sourceTree = "<group>"; };
+		5CB119E2280BA8BA0006BEFB /* PW_GasModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_GasModel.h; sourceTree = "<group>"; };
+		5CB119E3280BA8BA0006BEFB /* PW_GasModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_GasModel.m; sourceTree = "<group>"; };
 		5CB76B0D27F2E2990068E967 /* PW_FirstChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_FirstChooseViewController.h; sourceTree = "<group>"; };
 		5CB76B0E27F2E2990068E967 /* PW_FirstChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_FirstChooseViewController.m; sourceTree = "<group>"; };
 		5CB76B1327F2E9430068E967 /* UIColor+Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Global.h"; sourceTree = "<group>"; };
@@ -2908,6 +2911,8 @@
 			children = (
 				5CE7AD0A27F98F0A00E2188D /* PW_TokenModel.h */,
 				5CE7AD0B27F98F0A00E2188D /* PW_TokenModel.m */,
+				5CB119E2280BA8BA0006BEFB /* PW_GasModel.h */,
+				5CB119E3280BA8BA0006BEFB /* PW_GasModel.m */,
 				5C62CF9D27FD25DA00C1C5DC /* PW_TokenDetailModel.h */,
 				5C62CF9E27FD25DA00C1C5DC /* PW_TokenDetailModel.m */,
 				5C7ED8612807F9FB00873A53 /* PW_AddCurrencyModel.h */,
@@ -4219,6 +4224,7 @@
 				5AF5D1811D2F7CBA004070D7 /* NSObject+EasyCopy.m in Sources */,
 				99D2CA2E2537F7EC00C1C196 /* LCAlertView.m in Sources */,
 				5AF5D1A81D2F7CBA004070D7 /* CAAnimation+Blocks.m in Sources */,
+				5CB119E4280BA8BA0006BEFB /* PW_GasModel.m in Sources */,
 				5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */,
 				5CE7ACE727F6EE1F00E2188D /* PW_DappViewController.m in Sources */,
 				992EF1A026B92C1D00F70A94 /* CreateWalletView.m in Sources */,

@@ -15,10 +15,4 @@
     }
     return NO;
 }
-- (BOOL)isEmptyStr{
-//    if (!self || [self isEqualToString:@""] ||[self isEqualToString:@" "] || [self isEqual:NULL] ) {
-//        return YES;
-//    }
-    return ![self isNoEmpty];
-}
 @end

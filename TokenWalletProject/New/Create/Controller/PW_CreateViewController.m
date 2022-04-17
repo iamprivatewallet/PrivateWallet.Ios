@@ -36,7 +36,7 @@
 }
 - (void)createAction {
     NSString *walletName = [self.walletNameTF.text trim];
-    if ([walletName isEmptyStr]) {
+    if (![walletName isNoEmpty]) {
         [self showError:LocalizedStr(@"text_walletNameInputError")];
         return;
     }
@@ -82,7 +82,7 @@
 }
 - (void)pwdTFDidBegin:(UITextField *)sender {
     if (sender==self.pwdTF) {
-        if ([self.pwdTF.text isEmptyStr]) {
+        if (![self.pwdTF.text isNoEmpty]) {
             [self showMessage:LocalizedStr(@"text_inputPwdTip")];
         }
     }

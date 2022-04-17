@@ -29,7 +29,7 @@
         self.titleLbl.text = model.name;
         self.detailLbl.text = model.address;
         self.describeLbl.text = model.describe;
-        if (![model.describe isEmptyStr]) {
+        if ([model.describe isNoEmpty]) {
             [self.detailLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.titleLbl);
                 make.top.equalTo(self.titleLbl.mas_bottom).offset(3);

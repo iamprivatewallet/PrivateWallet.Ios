@@ -10,10 +10,13 @@
 #import "PW_ChooseCurrencyViewController.h"
 #import "PW_SliderView.h"
 #import "PW_ScanTool.h"
+#import "PW_GasModel.h"
+#import "CVNServerMananger.h"
+#import "brewchain.h"
 
 static NSInteger SpeedFeeBtnTag = 100;
 
-@interface PW_TransferViewController ()
+@interface PW_TransferViewController () <WKUIDelegate,WKNavigationDelegate>
 
 @property (nonatomic, strong) UIImageView *topBgIv;
 
@@ -44,6 +47,12 @@ static NSInteger SpeedFeeBtnTag = 100;
 @property (nonatomic, weak) UIButton *selectedSpeedFeeBtn;
 @property (nonatomic, assign) NSInteger speedFeeIdx;
 @property (nonatomic, assign) BOOL showCustomFee;
+@property (nonatomic, strong) PW_GasToolModel *gasToolModel;
+@property (nonatomic, strong) PW_GasModel *gasModel;
+
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, strong) WKWebView *webView;
 
 @end
 
@@ -57,6 +66,12 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.speedFeeIdx = 1;
     [self makeViews];
     [self refreshUI];
+    [self requestGasData];
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:@"CVN"]) {
+        [self loadDataForGetCVNNonce];
+    }else{
+        [self loadDataForNonce];
+    }
     __weak typeof(self) weakSelf = self;
     [RACObserve(self, showCustomFee) subscribeNext:^(NSNumber * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -86,6 +101,16 @@ static NSInteger SpeedFeeBtnTag = 100;
         btn.layer.borderWidth = 2;
         btn.layer.borderColor = [[UIColor g_primaryColor] CGColor];
         strongSelf.selectedSpeedFeeBtn = btn;
+        if(x.integerValue==0){
+            strongSelf.gasModel = strongSelf.gasToolModel.slowModel;
+        }else if(x.integerValue==1){
+            strongSelf.gasModel = strongSelf.gasToolModel.recommendModel;
+        }else if(x.integerValue==2){
+            strongSelf.gasModel = strongSelf.gasToolModel.fastModel;
+        }else if(x.integerValue==3){
+            strongSelf.gasModel = strongSelf.gasToolModel.soonModel;
+        }
+        [strongSelf refreshGasUI];
     }];
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -103,7 +128,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     
 }
 - (void)customFeeAction {
-    self.showCustomFee = !self.showCustomFee;
+//    self.showCustomFee = !self.showCustomFee;
 }
 - (void)sliderValueChange:(PW_SliderView *)slider {
     
@@ -127,7 +152,34 @@ static NSInteger SpeedFeeBtnTag = 100;
         return;
     }
     NSString *address = [self.addressTF.text trim];
-    
+    if (![address isNoEmpty]) {
+        [self showError:LocalizedStr(@"text_pleaseEnterAddress")];
+        return;
+    }
+    if (![address isContract]) {
+        [self showError:LocalizedStr(@"text_addressError")];
+        return;
+    }
+    self.amount = countStr;
+    self.address = address;
+    [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+        if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
+            return [self showError:LocalizedStr(@"text_pwdError")];
+        }
+        [self transferAction];
+    }];
+}
+- (void)transferAction {
+    User *user = User_manager.currentUser;
+    if ([user.chooseWallet_type isEqualToString:@"CVN"]) {
+        if ([self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
+            [self loadTransferCVNMain];
+        }else{
+            [self loadTransferDai];
+        }
+    }else{
+        [self loadColdWalletTransferETH];
+    }
 }
 - (void)changeTokenAction {
     PW_ChooseCurrencyViewController *vc = [[PW_ChooseCurrencyViewController alloc] init];
@@ -144,6 +196,228 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.subNameLb.text = [self.model.tokenName lowercaseString];
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     self.sendAddressLb.text = [walletAddress showShortAddress];
+}
+- (void)refreshGasUI {
+    if (![self.gasModel.gas_price isNoEmpty]) {
+        return;
+    }
+    self.sliderView.value = [self.gasModel.gas_price doubleValue];
+    self.minersFeeLb.text = NSStringWithFormat(@"%@%@",self.gasModel.gas_amount,[[SettingManager sharedInstance] getChainCoinName]);
+    self.minersFeeUTLb.text = NSStringWithFormat(@"≈ $%@",self.gasModel.gas_ut_amout);
+    self.gweiLb.text = NSStringWithFormat(@"%@ GWEI",self.gasModel.gas_gwei);
+}
+- (void)requestGasData {
+    [MOSWalletContractTool estimateGasToAddress:nil value:nil completionBlock:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+        if(gas){
+            self.gasToolModel.gas_price = gasPrice;
+            self.gasToolModel.gas = gas;
+            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+            self.gasModel = self.gasToolModel.recommendModel;;
+            self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
+            self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
+            [self refreshGasUI];
+        }
+    }];
+}
+- (void)loadDataForGetCVNNonce {//CVN nonce
+    [[CVNServerMananger sharedInstance] fetchBalance:User_manager.currentUser.chooseWallet_address contractAddr:@"" resultBlock:^(ETHBalance * _Nullable data, NSError * _Nullable error) {
+        if (!error) {
+            self.model.nonce = data.nonce;
+        }
+    }];
+}
+//CVN主币 转账
+- (void)loadTransferCVNMain {
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    NSMutableString *args = [NSMutableString new];
+    JKBigDecimal *big = [[JKBigDecimal alloc]initWithString:@"1000000000000000000"];
+    JKBigDecimal *result =  [big multiply:[[JKBigDecimal alloc]initWithString:self.amount]];
+    NSString *str = [result stringValue];
+    NSArray *arr = [str componentsSeparatedByString:@"."];
+    [args appendFormat:@"[{\"address\":\"%@\",\"amount\":\"%@\"}]",[self.address formatDelCVN],arr[0]];
+    NSData *tipData = [@"" dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *results = [CWVChainUtils signTransferAddress:[User_manager.currentUser.chooseWallet_address formatDelCVN] prikey:wallet.priKey nonce:self.model.nonce exdata:[tipData toHexStr] args:args];
+    [self.view showLoadingIndicator];
+    [[CVNServerMananger sharedInstance] transfer:results resultBlock:^(id  _Nullable data, NSError * _Nullable error) {
+        [self.view hideLoadingIndicator];
+        if (data) {
+            if ([data[@"retCode"]intValue] == 1) {
+                SetUserDefaultsForKey(@"0", @"isFirstTransfer");
+                [UserDefaults synchronize];
+                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                [self saveTransferRecordWithHash:data[@"hash"]];
+                if (self.transferSuccessBlock) {
+                    self.transferSuccessBlock();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showError:data[@"retMsg"]];
+            }
+        }else{
+            [self showError:LocalizedStr(@"text_error")];
+        }
+    }];
+}
+//冷钱包转账后临时保存当前的转账记录
+- (void)saveTransferRecordWithHash:(NSString *)hash{
+    if(![hash isNoEmpty]){
+        return;
+    }
+    if(![hash hasPrefix:@"0x"]){
+        hash = NSStringWithFormat(@"0x%@",hash);
+    }
+    PW_TokenDetailModel *model = [[PW_TokenDetailModel alloc] init];
+    model.value = self.amount;
+    model.fromAddress = User_manager.currentUser.chooseWallet_address;
+    model.toAddress = self.address;
+    model.tokenName = self.model.tokenName;
+    model.timeStamp = [[NSDate new] timeIntervalSince1970]*1000;
+    model.hashStr = hash;
+    model.gasPrice = self.gasModel.gas_price;
+    model.gas = self.gasModel.gas;
+    [[PW_TokenTradeRecordManager shared] saveRecord:model];
+}
+//CVN代币 通过web代理
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    User *user = User_manager.currentUser;
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    if ([user.chooseWallet_type isEqualToString:@"CVN"]) {
+        if (![self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
+            JKBigDecimal *big = [[JKBigDecimal alloc]initWithString:@"1000000000000000000"];
+            JKBigDecimal *result =  [big multiply:[[JKBigDecimal alloc]initWithString:self.amount]];
+            NSString *str = [result stringValue];
+            NSArray *arr = [str componentsSeparatedByString:@"."];
+            //获取签名
+            NSString *keystoreJs = NSStringWithFormat(@"getTransactionC20Tx(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",wallet.priKey,self.model.nonce, [self.address formatDelCVN], self.model.tokenContract,arr[0]);
+            [webView evaluateJavaScript:keystoreJs completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                if (response) {
+                    [self transferDaiWithTx:response];
+                }
+            }];
+        }
+    }
+}
+//CVN代币 转账
+- (void)transferDaiWithTx:(NSString *)txStr{
+    [self.view showLoadingIndicator];
+    [[CVNServerMananger sharedInstance]transfer:txStr resultBlock:^(id  _Nullable data, NSError * _Nullable error) {
+        [self.view hideLoadingIndicator];
+        if (data) {
+            if ([data[@"retCode"]intValue] == 1) {
+                SetUserDefaultsForKey(@"0", @"isFirstTransfer");
+                [UserDefaults synchronize];
+                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                [self saveTransferRecordWithHash:data[@"hash"]];
+                if (self.transferSuccessBlock) {
+                    self.transferSuccessBlock();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showError:data[@"retMsg"]];
+            }
+        }else{
+            [self showError:LocalizedStr(@"text_error")];
+        }
+    }];
+}
+- (void)loadDataForNonce {//ETH nonce
+    NSDictionary *parmDic = @{
+                    @"id":@"67",
+                    @"jsonrpc":@"2.0",
+                    @"method":@"eth_getTransactionCount",
+                    @"params":@[User_manager.currentUser.chooseWallet_address,@"latest"]
+                    };
+    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+        if (data) {
+            self.model.nonce = data[@"result"];
+        }
+    }];
+}
+// 获取ETH 签名
+- (void)loadColdWalletTransferETH {
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    if ([self.model.tokenContract isEqualToString:User_manager.currentUser.chooseWallet_address]) {
+        NSDictionary *dic = @{
+            @"nonce":self.model.nonce,
+            @"to_addr":self.address,
+            @"value":[self.amount stringRaisingToPower18],
+            @"gas_price":self.gasModel.gas_price,
+            @"prikey":wallet.priKey
+        };
+        @weakify(self);
+        [FchainTool genETHTransactionSign:dic isToken:NO block:^(NSString * _Nonnull result) {
+            @strongify(self);
+            NSString *sign = NSStringWithFormat(@"0x%@",result);
+            [self ETHTransferWithSign:sign];
+        }];
+    }else{
+        //ETH代币
+        NSDictionary *dic = @{
+            @"nonce":self.model.nonce,
+            @"to_addr":self.address,
+            @"value":[self.amount stringRaisingToPower18],
+            @"gas_price":self.gasModel.gas_price,
+            @"contract_addr":self.model.tokenContract,
+            @"prikey":wallet.priKey
+        };
+        @weakify(self);
+        [FchainTool genETHTransactionSign:dic isToken:YES block:^(NSString * _Nonnull result) {
+            @strongify(self);
+            NSString *sign = NSStringWithFormat(@"0x%@",result);
+            [self ETHTransferWithSign:sign];
+        }];
+    }
+}
+//ETH 转账
+-(void)ETHTransferWithSign:(NSString *)sign {
+    NSDictionary *parmDic = @{
+                @"id":@"67",
+                @"jsonrpc":@"2.0",
+                @"method":@"eth_sendRawTransaction",
+                @"params":@[sign]
+                };
+    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+        if (data) {
+            if (data[@"error"]) {
+                if ([data[@"error"][@"code"] isEqualToString:@"-32000"]) {
+                    [self loadDataForNonce];
+                }
+                [self showToast:data[@"error"][@"message"]];
+            }else{
+                SetUserDefaultsForKey(@"0", @"isFirstTransfer");
+                [UserDefaults synchronize];
+                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                [self saveTransferRecordWithHash:data[@"result"]];
+                if (self.transferSuccessBlock) {
+                    self.transferSuccessBlock();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    if (self.codeInfoModel) {
+//                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                    }else{
+                        [self.navigationController popViewControllerAnimated:YES];
+//                    }
+                });
+            }
+        }else{
+            [self showFailMessage:error.localizedDescription];
+        }
+    }];
+}
+- (void)loadTransferDai{
+    self.webView = [[WKWebView alloc] init];
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
+    NSString *bundleStr = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
+    NSURL *pathURL = [NSURL fileURLWithPath:bundleStr];
+    if (@available(iOS 9.0, *)) {
+        [self.webView loadRequest:[NSURLRequest requestWithURL:pathURL]];
+    }
+    [self.view addSubview:self.webView];
 }
 - (void)makeViews {
     self.topBgIv = [[UIImageView alloc] init];
@@ -414,11 +688,11 @@ static NSInteger SpeedFeeBtnTag = 100;
     gasView.backgroundColor = [UIColor g_grayBgColor];
     [gasView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.customFeeView addSubview:gasView];
-    UILabel *gasPriceGweiLb = [PW_ViewTool labelBoldText:@"GWAI" fontSize:12 textColor:[UIColor g_grayTextColor]];
+    UILabel *gasPriceGweiLb = [PW_ViewTool labelBoldText:@"GWEI" fontSize:12 textColor:[UIColor g_grayTextColor]];
     [gasPriceGweiLb setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [gasPriceGweiLb setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [gasView addSubview:gasPriceGweiLb];
-    UILabel *gasGweiLb = [PW_ViewTool labelBoldText:@"GWAI" fontSize:12 textColor:[UIColor g_grayTextColor]];
+    UILabel *gasGweiLb = [PW_ViewTool labelBoldText:@"GWEI" fontSize:12 textColor:[UIColor g_grayTextColor]];
     [gasGweiLb setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [gasGweiLb setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [gasView addSubview:gasGweiLb];
@@ -488,8 +762,21 @@ static NSInteger SpeedFeeBtnTag = 100;
         _sliderView.maximumValue = 100;
         _sliderView.minimumValue = 0;
         _sliderView.continuous = NO;
+        _sliderView.userInteractionEnabled = NO;
     }
     return _sliderView;
+}
+- (PW_GasToolModel *)gasToolModel {
+    if (!_gasToolModel) {
+        _gasToolModel = [[PW_GasToolModel alloc] init];
+    }
+    return _gasToolModel;
+}
+- (PW_GasModel *)gasModel {
+    if (!_gasModel) {
+        _gasModel = self.gasToolModel.recommendModel;
+    }
+    return _gasModel;
 }
 
 @end

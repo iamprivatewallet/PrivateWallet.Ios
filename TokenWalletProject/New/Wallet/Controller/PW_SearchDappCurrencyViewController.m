@@ -142,7 +142,7 @@
     [self refreshDappDataWithValue:[textField.text trim]];
     [self requestCurrencyWithValue:[textField.text trim]];
     [textField endEditing:YES];
-    return ![[textField.text trim] isEmptyStr];
+    return [[textField.text trim] isNoEmpty];
 }
 #pragma mark - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

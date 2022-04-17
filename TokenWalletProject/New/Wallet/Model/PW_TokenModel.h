@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *createTime;
 @property (nonatomic, assign) BOOL isTop;
 @property (nonatomic, assign) BOOL isDefault;
+@property (nonatomic, copy) NSString *nonce;
 
 @property (nonatomic, assign) NSInteger sortIndex;//顺序
 @property (nonatomic, copy) NSString *walletType;

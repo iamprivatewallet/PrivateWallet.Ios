@@ -20,7 +20,7 @@
                 }
             }else{
                 NSString *msg = data[@"msg"];
-                if([msg isEmptyStr]) {
+                if(![msg isNoEmpty]) {
                     msg = data[@"message"];
                 }
                 if(errBlock) {

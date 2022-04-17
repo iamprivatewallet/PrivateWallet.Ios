@@ -267,7 +267,7 @@ BackupAlertMainViewDelegate
     [self refreshBalance];
 }
 - (BOOL)isExitCoinWithAddress:(NSString *)address {
-    if([address isEmptyStr]){
+    if(![address isNoEmpty]){
         return NO;
     }
     __block BOOL isExit = NO;
@@ -316,7 +316,7 @@ BackupAlertMainViewDelegate
     __block CGFloat totalBalance = 0;
     [self.coinList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         WalletCoinModel *coin = obj;
-        if(![coin.usableAmount isEmptyStr]&&![coin.usdtPrice isEmptyStr]){
+        if([coin.usableAmount isNoEmpty]&&[coin.usdtPrice isNoEmpty]){
             NSString *coinUsdt = [coin.usableAmount stringDownMultiplyingBy:coin.usdtPrice decimal:8];
             totalBalance = [[@(totalBalance).stringValue stringDownAdding:coinUsdt decimal:8] doubleValue];
         }
@@ -407,7 +407,7 @@ BackupAlertMainViewDelegate
 - (void)refreshCVNTotal {
     self.ethWallet.totalBalance = 0;
     for (WalletCoinModel *coin in self.coinList) {
-        if(![coin.usableAmount isEmptyStr]){
+        if([coin.usableAmount isNoEmpty]){
             NSString *coinUsdt = [coin.usableAmount stringDownMultiplyingBy:coin.usdtPrice decimal:8];
             self.ethWallet.totalBalance += [coinUsdt doubleValue];
         }

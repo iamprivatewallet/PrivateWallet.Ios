@@ -28,7 +28,7 @@
         if([model.icon hasPrefix:@"http://"]||[model.icon hasPrefix:@"https://"]){
             [self.iconImg sd_setImageWithURL:[NSURL URLWithString:model.icon] placeholderImage:ImageNamed(icon_gray)];
         }else{
-            self.iconImg.image = [model.icon isEmptyStr]?ImageNamed(icon_gray):ImageNamed(model.icon);
+            self.iconImg.image = ![model.icon isNoEmpty]?ImageNamed(icon_gray):ImageNamed(model.icon);
         }
         self.nameLbl.text = model.tokenName;
         self.amountLbl.text = NSStringWithFormat(@"余额：%@",model.usableAmount);

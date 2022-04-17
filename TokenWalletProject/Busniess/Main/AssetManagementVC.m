@@ -52,8 +52,8 @@ AssetSortViewDelegate
     [self setNav_NoLine_WithLeftItem:self.coinModel.tokenName rightImg:@"" rightAction:@selector(navRightItemAction)];
     [self makeViews];
     
-    if(![self.coinModel.currentWallet.type isEqualToString:@"CVN"]&&(self.coinModel.decimals==0||[self.coinModel.usableAmount isEmptyStr]||self.coinModel.usableAmount.doubleValue==0)){
-        if([self.coinModel.usableAmount isEmptyStr]||self.coinModel.usableAmount.doubleValue==0){
+    if(![self.coinModel.currentWallet.type isEqualToString:@"CVN"]&&(self.coinModel.decimals==0||![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0)){
+        if(![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0){
             [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.coinModel.tokenAddress completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.coinModel.decimals = decimals;
@@ -182,7 +182,7 @@ AssetSortViewDelegate
                 WalletRecord *record = obj;
                 record.is_out = [record.from_addr isEqualToString:self.coinModel.currentWallet.address];
                 record.decimals = self.coinModel.decimals;
-                if ([record.trade_id isEmptyStr]||[hashList containsObject:[record.trade_id formatDelEth]]) {
+                if (![record.trade_id isNoEmpty]||[hashList containsObject:[record.trade_id formatDelEth]]) {
                     [[WalletRecordManager shareRecordManager] deleteRecord:record];
                 }else{
                     if ([record.create_time doubleValue]/1000 > maxValue) {
@@ -227,7 +227,7 @@ AssetSortViewDelegate
         }else if([obj2 isKindOfClass:[WalletRecord class]]){
             timeStamp2 = ((WalletRecord *)obj2).create_time;
         }
-        if ([timeStamp1 isEmptyStr]||[timeStamp2 isEmptyStr]) {
+        if (![timeStamp1 isNoEmpty]||![timeStamp2 isNoEmpty]) {
             return NSOrderedAscending;
         }
         return [timeStamp2 compare:timeStamp1];
@@ -245,7 +245,7 @@ AssetSortViewDelegate
         }else if([obj2 isKindOfClass:[WalletRecord class]]){
             timeStamp2 = ((WalletRecord *)obj2).create_time;
         }
-        if ([timeStamp1 isEmptyStr]||[timeStamp2 isEmptyStr]) {
+        if (![timeStamp1 isNoEmpty]||![timeStamp2 isNoEmpty]) {
             return NSOrderedAscending;
         }
         return [timeStamp2 compare:timeStamp1];

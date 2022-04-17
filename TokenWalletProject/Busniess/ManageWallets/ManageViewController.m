@@ -192,7 +192,7 @@ UITableViewDataSource
         case 1:{
             if (indexPath.row == 1) {
                 [TokenAlertView showViewWithTitle:@"钱包名称" textField_p:self.wallet.walletName action:^(NSInteger index, NSString * _Nonnull inputText) {
-                    if (![inputText isEmptyStr]) {
+                    if ([inputText isNoEmpty]) {
                         self.wallet.walletName = inputText;
                         [[WalletManager shareWalletManager] updataWallet:self.wallet];
                         [self.tableView reloadData];

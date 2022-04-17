@@ -118,7 +118,7 @@
     self.isSearch = YES;
     [self requestCurrencyWithValue:[textField.text trim] isRecommend:NO];
     [textField endEditing:YES];
-    return ![[textField.text trim] isEmptyStr];
+    return [[textField.text trim] isNoEmpty];
 }
 #pragma mark - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -46,8 +46,8 @@ typedef enum : NSUInteger {
     [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_question" rightAction:@selector(infoAction)];
     [self makeViews];
     self.noDataView.offsetY = 100;
-    if(![User_manager.currentUser.chooseWallet_type isEqualToString:@"CVN"]&&(self.model.tokenDecimals==0||[self.model.tokenAmount isEmptyStr]||self.model.tokenAmount.doubleValue==0)){
-        if(self.model.tokenDecimals==0&&([self.model.tokenAmount isEmptyStr]||self.model.tokenAmount.doubleValue==0)){
+    if(![User_manager.currentUser.chooseWallet_type isEqualToString:@"CVN"]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
+        if(self.model.tokenDecimals==0&&(![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
             [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.model.tokenContract completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.model.tokenDecimals = decimals;
@@ -148,7 +148,7 @@ typedef enum : NSUInteger {
             obj.tokenName = self.model.tokenName;
             obj.tokenDecimals = self.model.tokenDecimals;
             obj.isOut = [obj.fromAddress isEqualToString:currentAddr];
-            if ([obj.hashStr isEmptyStr]||[hashList containsObject:[obj.hashStr formatDelEth]]) {
+            if (![obj.hashStr isNoEmpty]||[hashList containsObject:[obj.hashStr formatDelEth]]) {
                 [[PW_TokenTradeRecordManager shared] deleteRecord:obj];
             }else{
                 if (obj.timeStamp/1000 > maxValue) {
@@ -231,7 +231,7 @@ typedef enum : NSUInteger {
     [self.showList sortUsingComparator:^NSComparisonResult(PW_TokenDetailModel * _Nonnull obj1, PW_TokenDetailModel * _Nonnull obj2) {
         NSString *timeStamp1 = @(obj1.timeStamp).stringValue;
         NSString *timeStamp2 = @(obj1.timeStamp).stringValue;
-        if ([timeStamp1 isEmptyStr]||[timeStamp2 isEmptyStr]) {
+        if (![timeStamp1 isNoEmpty]||![timeStamp2 isNoEmpty]) {
             return NSOrderedAscending;
         }
         return [timeStamp2 compare:timeStamp1];

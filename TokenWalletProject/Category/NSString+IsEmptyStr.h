@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (IsEmptyStr)
 - (BOOL)isNoEmpty;
-- (BOOL)isEmptyStr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -44,13 +44,13 @@
 }
 - (void)sureAction {
     NSString *privateKeyStr = [self.privateKeyTF.text trim];
-    if ([privateKeyStr isEmptyStr]) {
+    if (![privateKeyStr isNoEmpty]) {
         [self showError:LocalizedStr(@"text_privateKeyInputError")];
         return;
     }
     NSString *pwdStr = self.pwdTF.text;
     NSString *walletName = [self.walletNameTF.text trim];
-    if ([walletName isEmptyStr]) {
+    if (![walletName isNoEmpty]) {
         [self showError:LocalizedStr(@"text_walletNameInputError")];
         return;
     }

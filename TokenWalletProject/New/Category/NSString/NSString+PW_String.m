@@ -33,7 +33,7 @@
 - (BOOL)judgePassWordLegal {
     NSString *pass = self;
     // 验证密码长度
-    if([pass isEmptyStr]||pass.length < 8) {
+    if(![pass isNoEmpty]||pass.length < 8) {
         NSLog(@"请输入8位的密码");
         return NO;
     }

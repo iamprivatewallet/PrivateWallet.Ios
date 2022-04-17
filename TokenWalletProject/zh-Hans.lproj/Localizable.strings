@@ -130,3 +130,6 @@ text_recommend="推荐";
 text_fast="快速";
 text_soon="很快";
 text_pleaseEnterQuantity="请输入数量";
+text_pleaseEnterAddress="请输入地址";
+text_addressError="地址错误";
+text_transactionBroadcast="交易已广播";

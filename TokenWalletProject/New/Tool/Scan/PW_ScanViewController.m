@@ -57,15 +57,15 @@
 
         }
     }];
-    [self setNavTitleWithLeftItem:@"Scan"];
+    [self setNavNoLineTitle:@"Scan"];
+    [self setupWhiteNavBarTint];
 }
-
-- (void)viewDidAppear:(BOOL)animated
-{
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
-   
 }
 
 //绘制扫描区域

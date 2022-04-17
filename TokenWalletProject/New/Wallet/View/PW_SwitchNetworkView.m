@@ -42,7 +42,7 @@
         NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
         NSString *walletType = User_manager.currentUser.chooseWallet_type;
         for (PW_NetworkModel *model in array) {
-            if([model.rpcUrl isEmptyStr]){
+            if(![model.rpcUrl isNoEmpty]){
                 model.rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:model.chainId];
             }
             if ([walletType isEqualToString:@"ETH"]) {

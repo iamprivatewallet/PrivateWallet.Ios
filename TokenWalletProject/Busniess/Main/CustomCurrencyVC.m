@@ -66,7 +66,7 @@
         [self showFailMessage:@"地址错误"];
         return;
     }
-    if([symbol isEmptyStr]){
+    if(![symbol isNoEmpty]){
         [self showFailMessage:@"symbol为空"];
         return;
     }

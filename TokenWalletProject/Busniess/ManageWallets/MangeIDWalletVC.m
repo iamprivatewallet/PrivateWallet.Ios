@@ -60,7 +60,7 @@ UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section == 2){
         NSString *tip = User_manager.currentUser.user_pass_tip;
-        if ([tip isEmptyStr]) {
+        if (![tip isNoEmpty]) {
             return 1;
         }
         return 2;

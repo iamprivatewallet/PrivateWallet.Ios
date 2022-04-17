@@ -36,7 +36,7 @@
     if([model.tokenLogo hasPrefix:@"http://"]||[model.tokenLogo hasPrefix:@"https://"]){
         [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.tokenLogo] placeholderImage:ImageNamed(icon_gray)];
     }else{
-        self.iconIv.image = [model.tokenLogo isEmptyStr]?ImageNamed(icon_gray):ImageNamed(model.tokenLogo);
+        self.iconIv.image = ![model.tokenLogo isNoEmpty]?ImageNamed(icon_gray):ImageNamed(model.tokenLogo);
     }
     self.nameLb.text = model.tokenName;
     self.priceLb.text = [model.price isNoEmpty]?NSStringWithFormat(@"$%@",model.price):@"--";

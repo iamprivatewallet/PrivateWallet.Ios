@@ -23,14 +23,14 @@
 
 - (NSString *)faviconURL {
     NSString *scheme = self.webView.URL.scheme;
-    if([scheme isEmptyStr]){
+    if(![scheme isNoEmpty]){
         scheme = @"http";
     }
     NSString *faviconURL = [NSString stringWithFormat:@"%@://%@/favicon.ico",scheme,self.webView.URL.host];
     return faviconURL;
 }
 - (NSString *)appName {
-    return [self.model.appName isEmptyStr]?self.webView.URL.absoluteString:self.model.appName;
+    return ![self.model.appName isNoEmpty]?self.webView.URL.absoluteString:self.model.appName;
 }
 
 - (void)viewDidLoad {

@@ -270,7 +270,7 @@ UITableViewDataSource
 //钱包名称
 - (void)changeWalletName{
     [TokenAlertView showViewWithTitle:@"钱包名称" textField_p:self.wallet.walletName action:^(NSInteger index, NSString * _Nonnull inputText) {
-//        if (![inputText isEmptyStr]) {
+//        if ([inputText isNoEmpty]) {
             self.wallet.walletName = inputText;
             [[WalletManager shareWalletManager] updataWallet:self.wallet];
             NSIndexPath *te = [NSIndexPath indexPathForRow:1 inSection:0];

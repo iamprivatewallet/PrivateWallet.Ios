@@ -75,7 +75,7 @@
 + (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    if(![selectedImage isEmptyStr]){
+    if([selectedImage isNoEmpty]){
         [btn setImage:[UIImage imageNamed:selectedImage] forState:UIControlStateSelected];
     }
     if(target&&action){

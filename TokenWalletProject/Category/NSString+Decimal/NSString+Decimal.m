@@ -243,7 +243,7 @@
 //    return hex.length > 0 ? hex : @"0";
     return hex.length > 0 ? [NSString stringWithFormat:@"0x%@",hex] : @"0x0";
 }
-- (BOOL)isTokenContract{
+- (BOOL)isContract{
     NSString *number = @"^0x[0-9a-fA-F]{40}$";
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:self];

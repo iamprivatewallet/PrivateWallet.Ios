@@ -21,6 +21,7 @@
 - (void)updateCoinList:(NSArray<PW_TokenModel *> *)coinList {
     [self.coinList removeAllObjects];
     [self.coinList addObjectsFromArray:coinList];
+    self.mainTokenModel = coinList.firstObject;
 }
 - (NSMutableArray<PW_TokenModel *> *)coinList {
     if (!_coinList) {

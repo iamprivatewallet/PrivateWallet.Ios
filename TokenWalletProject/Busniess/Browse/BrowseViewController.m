@@ -102,7 +102,7 @@ WBQRCodeDelegate
         self.chainTypeArr = [TokenChainModel mj_objectArrayWithKeyValuesArray:data];
         NSMutableArray *titleArr = [[NSMutableArray alloc] init];
         for (TokenChainModel *model in self.chainTypeArr) {
-            if(![model.title isEmptyStr]){
+            if([model.title isNoEmpty]){
                 [titleArr addObject:model.title];
             }
         }
@@ -181,7 +181,7 @@ WBQRCodeDelegate
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     BrowseRecordsModel *model = self.appsList[indexPath.row];
-    if([model.appUrl isEmptyStr]){
+    if(![model.appUrl isNoEmpty]){
         return;
     }
     WebViewController *vc = [WebViewController loadWebViewWithData:model];

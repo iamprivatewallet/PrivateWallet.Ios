@@ -93,7 +93,7 @@
     self.isSearch = YES;
     [self filterCurrencyWithValue:[textField.text trim]];
     [textField endEditing:YES];
-    return ![[textField.text trim] isEmptyStr];
+    return [[textField.text trim] isNoEmpty];
 }
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

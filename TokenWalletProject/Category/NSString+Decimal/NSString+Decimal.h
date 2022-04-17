@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)HexStringWithData:(NSData *)data;
 - (int)stringTo10;
 - (NSString *)getHex;
-- (BOOL)isTokenContract;
+- (BOOL)isContract;
 - (NSString*)formatToEth;//+0x
 - (NSString*)formatToCVN;//+cvn
 - (NSString*)contractPrefix;
