@@ -42,6 +42,10 @@
         NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
         NSString *walletType = User_manager.currentUser.chooseWallet_type;
         for (PW_NetworkModel *model in array) {
+            PW_NetworkModel *netModel = [[PW_NodeManager shared] getSelectedNodeWithChainId:model.chainId];
+            if(netModel){
+                model.rpcUrl = netModel.rpcUrl;
+            }
             if(![model.rpcUrl isNoEmpty]){
                 model.rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:model.chainId];
             }

@@ -68,7 +68,6 @@
             make.right.equalTo(self.contentView).offset(-15);
             make.centerY.equalTo(self.contentView);
             make.size.mas_equalTo(CGSizeMake(21, 21));
-
         }];
     }else{//箭头
         UIImageView *arrow = [ZZCustomView imageViewInitView:self.contentView imageName:@"arrow"];

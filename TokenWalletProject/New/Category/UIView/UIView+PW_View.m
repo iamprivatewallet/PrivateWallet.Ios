@@ -8,11 +8,35 @@
 
 #import "UIView+PW_View.h"
 
+static void * eventsBlockKey = &eventsBlockKey;
+
+@interface UIView ()
+
+@property (nonatomic, copy) PW_ViewBlock viewBlock;
+
+@end
+
 @implementation UIView (PW_View)
 
 - (void)addTapTarget:(nullable id)target action:(SEL)action {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
     [self addGestureRecognizer:tap];
+}
+- (void)addTapBlock:(PW_ViewBlock)block {
+    self.viewBlock = block;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(__tapAction:)];
+    [self addGestureRecognizer:tap];
+}
+- (void)__tapAction:(UIGestureRecognizer *)gesture {
+    if (self.viewBlock) {
+        self.viewBlock(self);
+    }
+}
+- (void)setViewBlock:(PW_ViewBlock)viewBlock {
+    objc_setAssociatedObject(self, &eventsBlockKey, viewBlock, OBJC_ASSOCIATION_COPY);
+}
+- (PW_ViewBlock)viewBlock {
+    return objc_getAssociatedObject(self, &eventsBlockKey);
 }
 
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners {
@@ -102,6 +126,14 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+- (void)setRequiredHorizontal {
+    [self setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [self setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+}
+- (void)setRequiredVertical {
+    [self setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
 }
 
 @end

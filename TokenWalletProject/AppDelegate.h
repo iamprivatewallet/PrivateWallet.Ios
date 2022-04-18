@@ -16,6 +16,7 @@
 
 -(void)switchToTabBarController;
 -(void)switchToCreateWalletVC;
+- (void)resetApp;
 
 @end
 

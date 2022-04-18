@@ -84,6 +84,15 @@
     return btn;
 }
 
++ (UITextField *)textFieldFont:(UIFont *)font color:(UIColor *)color placeholder:(NSString *)placeholder {
+    UITextField *tf = [[UITextField alloc] init];
+    tf.font = font;
+    tf.textColor = color;
+    [tf pw_setPlaceholder:placeholder];
+    tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+    return tf;
+}
+
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius {
     [self setupView:view cornerRadius:cornerRadius shadowColor:[UIColor g_shadowColor] shadowOffset:shadowOffset shadowRadius:shadowRadius];
 }

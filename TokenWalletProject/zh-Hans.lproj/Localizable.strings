@@ -6,6 +6,7 @@
   Copyright © 2022 Zinkham. All rights reserved.
 */
 
+text_cancel="取消";
 text_confirm="确认";
 text_changeGroup="换一组";
 text_myUnderstand="我已了解";
@@ -20,12 +21,25 @@ text_noData="暂无数据";
 text_copy="复制";
 text_share="分享";
 text_addSuccess="添加成功";
+text_save="保存";
+text_saveSuccess="保存成功";
 text_finish="完成";
+text_noData="暂无数据";
+text_detail="详情";
+text_noNewVersion="暂无新版本";
+text_edit="编辑";
+text_note="备注";
+text_name="名称";
+text_optional="选填";
 
 tabbar_wallet="钱包";
 tabbar_market="市场";
 tabbar_browser="浏览器";
 tabbar_more="更多";
+
+text_updateAppLatestVersion="更新至 %@ 最新版本";
+text_laterSayAgain="稍后再说";
+text_toUpdate="去更新";
 
 text_import="导入";
 text_create="创建";
@@ -133,3 +147,33 @@ text_pleaseEnterQuantity="请输入数量";
 text_pleaseEnterAddress="请输入地址";
 text_addressError="地址错误";
 text_transactionBroadcast="交易已广播";
+
+text_walletManage="钱包管理";
+text_networkManage="网络管理";
+text_appLock="应用锁";
+text_addressBook="地址薄";
+text_instructions="使用说明";
+text_suggestionsFeedback="建议与反馈";
+text_userAgreement="用户协议";
+text_aboutUs="关于我们";
+text_setup="设置";
+text_shareApp="分享APP";
+text_messageCenter="消息中心";
+text_transferNoti="转账通知";
+text_systemMessage="系统消息";
+text_shareAppText="多链数字资产钱包";
+text_updateVersion="更新版本";
+text_webSite="网站";
+text_bbs="论坛";
+text_contactUs="联系我们";
+text_multilingual="多语言";
+text_denominatedCurrency="计价货币";
+text_redRoseGreen="红涨绿跌";
+text_nodeSet="节点设置";
+text_rmb="人民币";
+text_dollar="美元";
+text_addCustomNode="添加自定义节点";
+text_addNode="添加节点";
+text_addContact="添加联系人";
+text_inputCopyAddress="输入或粘贴钱包地址";
+text_selectAddressType="选择地址类型";

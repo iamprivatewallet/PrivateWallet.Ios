@@ -15,6 +15,7 @@
 #define CVNHashDetailUrl(hashStr) [NSString stringWithFormat:@"https://scan.cvn.io/#/transactiondetail/%@",hashStr]
 
 static NSString * const AppTestflightUrl = @"https://testflight.apple.com/join/K7QgQNj3";
+static NSString * const AppDownloadUrl = @"https://privatewallet.tech/download";
 
 static NSString * const WalletWebSiteUrl = @"https://chain.kimchiii.com";
 static NSString * const WalletUseDirectionsUrl = @"https://privatewallet.gitbook.io/home/v/cn/instructions";

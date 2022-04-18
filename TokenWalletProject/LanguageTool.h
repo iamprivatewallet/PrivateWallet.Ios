@@ -34,12 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LanguageTool: NSObject
 
-@property(nonatomic, strong, nullable) NSBundle *bundle;
+@property(nonatomic, strong, nullable,) NSBundle *bundle;
 @property(nonatomic, strong) NSArray<LanguageModel *> *languages;
 @property (nonatomic, strong) LanguageModel *languageDefault;
 
 + (instancetype)shared;
-+ (void)setLanguage:(NSString *)type;
++ (void)setLanguageType:(NSString *)type;
 + (nullable LanguageModel *)currentLanguage;
 + (NSString *)localizedString:(NSString *)key;
 + (NSString *)localizedString:(NSString *)key table:(nullable NSString *)name;

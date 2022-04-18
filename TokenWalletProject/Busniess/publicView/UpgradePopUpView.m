@@ -79,7 +79,7 @@ static NSString * const LocalIgnoreVersionKey = @"LocalIgnoreVersionKey";
         make.height.mas_lessThanOrEqualTo(SCREEN_HEIGHT*0.6);
     }];
     self.titleLb = [[UILabel alloc] init];
-    self.titleLb.text = NSStringWithFormat(@"更新至 %@ 最新版本",APPName);
+    self.titleLb.text = NSStringWithFormat(LocalizedStr(@"text_updateAppLatestVersion"),APPName);
     self.titleLb.textColor = [UIColor blackColor];
     self.titleLb.font = [UIFont systemFontOfSize:18];
     self.titleLb.textAlignment = NSTextAlignmentCenter;
@@ -106,7 +106,7 @@ static NSString * const LocalIgnoreVersionKey = @"LocalIgnoreVersionKey";
     [self setTextViewText:self.model.content];
     
     self.downloadBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.downloadBtn setTitle:@"去更新" forState:UIControlStateNormal];
+    [self.downloadBtn setTitle:LocalizedStr(@"text_toUpdate") forState:UIControlStateNormal];
     self.downloadBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
     [self.downloadBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.downloadBtn.layer.cornerRadius = 6;
@@ -125,7 +125,7 @@ static NSString * const LocalIgnoreVersionKey = @"LocalIgnoreVersionKey";
     
     if(!self.model.isForce){
         UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        [closeBtn setTitle:@"稍后再说" forState:UIControlStateNormal];
+        [closeBtn setTitle:LocalizedStr(@"text_laterSayAgain") forState:UIControlStateNormal];
         [closeBtn setTitleColor:[UIColor im_blueColor] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [self.bgView addSubview:closeBtn];

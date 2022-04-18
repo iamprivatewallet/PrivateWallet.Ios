@@ -17,4 +17,6 @@
 #define PW_APPBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 #define PW_APPBundleName   [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey]
 
+#define PW_StrFormat(...) [NSString stringWithFormat:__VA_ARGS__]
+
 #endif /* PW_Header_h */

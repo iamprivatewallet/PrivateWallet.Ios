@@ -14,6 +14,7 @@
 #import "FchainTool.h"
 #import "VersionTool.h"
 #import "PW_FirstChooseViewController.h"
+#import "PW_SetUpViewController.h"
 
 @interface AppDelegate () <UIGestureRecognizerDelegate>
 
@@ -33,7 +34,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if (!User_manager.currentUser.user_name) {
+    if (![User_manager.currentUser.user_name isNoEmpty]) {
         [self switchToCreateWalletVC];
     }else{
         self.rootController = [[PW_TabBarViewController alloc] init];
@@ -111,6 +112,29 @@
         
         self.window.rootViewController = self.rootNavigationController;
         [self.window makeKeyAndVisible];
+    }
+}
+- (void)resetTabbarVc {
+    self.rootController = [[PW_TabBarViewController alloc] init];
+    self.rootNavigationController = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
+    self.window.rootViewController = self.rootNavigationController;
+    [self.window makeKeyAndVisible];
+}
+- (void)resetCreateWalletVc {
+    self.rootController = [[PW_FirstChooseViewController alloc] init];
+    self.rootNavigationController = [[PW_NavigationController alloc] initWithRootViewController:self.rootController];
+    self.window.rootViewController = self.rootNavigationController;
+    [self.window makeKeyAndVisible];
+}
+- (void)resetApp {
+    if ([User_manager.currentUser.user_name isNoEmpty]) {
+        [self resetTabbarVc];
+        if([self.rootController isKindOfClass:[UITabBarController class]]){
+            ((UITabBarController *)self.rootController).selectedIndex = 3;
+        }
+        [self.rootNavigationController pushViewController:[PW_SetUpViewController new] animated:NO];
+    }else{
+        [self resetCreateWalletVc];
     }
 }
 

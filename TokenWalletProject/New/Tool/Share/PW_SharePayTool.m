@@ -51,7 +51,7 @@
     } completion:nil];
     [self createItems:contentView address:address name:name];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [PW_ShareTool shareTitle:nil iamge:[contentView convertViewToImage] urlStr:nil];
+        [PW_ShareTool shareTitle:nil image:[contentView convertViewToImage] urlStr:nil];
     });
 }
 + (void)createItems:(UIView *)contentView address:(NSString *)address name:(NSString *)name {
@@ -156,7 +156,7 @@
         make.bottom.offset(-35);
     }];
     UIImageView *downLoadIv = [[UIImageView alloc] init];
-    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:AppTestflightUrl] size:70];
+    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:AppDownloadUrl] size:70];
     [downLoadView addSubview:downLoadIv];
     [downLoadIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);

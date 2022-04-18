@@ -84,5 +84,15 @@
     NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
     return [numberPre evaluateWithObject:self];
 }
+- (BOOL)isURL {
+    NSString *str = @"^((https|http)?:\/\/)[^\s]+";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];
+    return [predicate evaluateWithObject:self];
+}
+- (BOOL)isHttpsURL {
+    NSString *str = @"^(https:\/\/)[^\s]+.[^\s]+";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];
+    return [predicate evaluateWithObject:self];
+}
 
 @end

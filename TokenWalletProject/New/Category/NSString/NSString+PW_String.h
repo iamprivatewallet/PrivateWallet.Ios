@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
 
 - (BOOL)isFloat;
+- (BOOL)isURL;
+- (BOOL)isHttpsURL;
 
 @end
 

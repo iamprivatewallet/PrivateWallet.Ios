@@ -73,20 +73,20 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
             __block BOOL isFind = NO;
             [[LanguageTool shared].languages enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if([currentLanguage hasPrefix:obj.type]) {
-                    [LanguageTool setLanguage:obj.type];
+                    [LanguageTool setLanguageType:obj.type];
                     isFind = YES;
                     *stop = YES;
                 }
             }];
             if(!isFind){
-                [LanguageTool setLanguage:self.languageDefault.type];
+                [LanguageTool setLanguageType:self.languageDefault.type];
             }
         }
         lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
         NSString *path = [[NSBundle mainBundle] pathForResource:lan ofType:@"lproj"];
         if(path==nil){
             path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-            [LanguageTool setLanguage:self.languageDefault.type];
+            [LanguageTool setLanguageType:self.languageDefault.type];
         }
         if(path){
             _bundle = [[NSBundle alloc] initWithPath:path];
@@ -95,7 +95,7 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
     }
     return _bundle;
 }
-+ (void)setLanguage:(NSString *)type {
++ (void)setLanguageType:(NSString *)type {
     [[NSUserDefaults standardUserDefaults] setObject:type forKey:LanguageTypeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [LanguageTool shared].bundle = nil;

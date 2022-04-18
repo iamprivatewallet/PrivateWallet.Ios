@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIButton *)buttonImageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action;
 
++ (UITextField *)textFieldFont:(UIFont *)font color:(UIColor *)color placeholder:(NSString *)placeholder;
+
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowColor:(UIColor *)shadowColor shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;
 

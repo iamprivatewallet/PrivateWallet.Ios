@@ -11,5 +11,7 @@
 
 #import "PW_TokenTradeRecordManager.h"
 #import "PW_TokenManager.h"
+#import "PW_NodeManager.h"
+#import "PW_AddressBookManager.h"
 
 #endif /* PW_DBGlobal_h */

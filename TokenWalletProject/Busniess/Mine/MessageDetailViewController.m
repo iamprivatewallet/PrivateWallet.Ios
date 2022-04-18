@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     self.topCons.constant = kNavBarAndStatusBarHeight;
-    [self setNav_NoLine_WithLeftItem:@"详情"];
+    [self setNav_NoLine_WithLeftItem:LocalizedStr(@"text_detail")];
     self.scrollView.hidden = YES;
     [self loadData];
 }

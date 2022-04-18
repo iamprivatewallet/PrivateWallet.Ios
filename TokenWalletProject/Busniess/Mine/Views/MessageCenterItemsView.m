@@ -28,14 +28,14 @@ static NSInteger beginTag = 100;
 
 - (void)makeViews{
     self.backgroundColor = [UIColor navAndTabBackColor];
-    self.transferBtn = [ZZCustomView buttonInitWithView:self title:@"转账通知" titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
+    self.transferBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_transferNoti") titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
     [self.transferBtn addTarget:self action:@selector(itemBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.transferBtn.tag = beginTag;
     [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self);
         make.right.equalTo(self.mas_centerX);
     }];
-    self.systemBtn = [ZZCustomView buttonInitWithView:self title:@"系统消息" titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
+    self.systemBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_systemMessage") titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
     self.systemBtn.tag = beginTag+1;
     [self.systemBtn addTarget:self action:@selector(itemBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.systemBtn mas_makeConstraints:^(MASConstraintMaker *make) {

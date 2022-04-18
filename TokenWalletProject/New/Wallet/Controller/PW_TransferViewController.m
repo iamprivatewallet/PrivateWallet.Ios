@@ -13,6 +13,7 @@
 #import "PW_GasModel.h"
 #import "CVNServerMananger.h"
 #import "brewchain.h"
+#import "PW_AddressBookViewController.h"
 
 static NSInteger SpeedFeeBtnTag = 100;
 
@@ -125,7 +126,11 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.countTF.text = self.model.tokenAmount;
 }
 - (void)addressBookAction {
-    
+    PW_AddressBookViewController *vc = [[PW_AddressBookViewController alloc] init];
+    vc.chooseBlock = ^(PW_AddressBookModel * _Nonnull model) {
+        self.addressTF.text = model.address;
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)customFeeAction {
 //    self.showCustomFee = !self.showCustomFee;

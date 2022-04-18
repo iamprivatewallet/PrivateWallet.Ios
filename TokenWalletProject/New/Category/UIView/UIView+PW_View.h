@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^PW_ViewBlock)(UIView * _Nonnull view);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (PW_View)
 
 - (void)addTapTarget:(nullable id)target action:(SEL)action;
+- (void)addTapBlock:(PW_ViewBlock)block;
 
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners;
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners size:(CGSize)size;
@@ -26,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDottedLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth length:(CGFloat)length space:(CGFloat)space radius:(CGFloat)radius size:(CGSize)size;
 
 - (UIImage *)convertViewToImage;
+
+- (void)setRequiredHorizontal;
+- (void)setRequiredVertical;
 
 @end
 

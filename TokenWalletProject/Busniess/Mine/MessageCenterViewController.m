@@ -31,7 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNavTitleWithLeftItem:@"消息中心" rightTitle:@"全部已读" rightAction:@selector(allReadAction) isNoLine:NO];
+    
+    [self setNavNoLineTitle:LocalizedStr(@"text_messageCenter")];
     [self.rightBtn setTitleColor:[UIColor im_textColor_three] forState:UIControlStateNormal];
     self.rightBtn.titleLabel.font = GCSFontRegular(12);
     [self makeViews];
@@ -65,8 +66,8 @@
         make.left.equalTo(self.hashTableView.mas_right);
         make.top.width.height.equalTo(self.contentScrollView);
     }];
-    self.hashNoDataView = [NoDataShowView showView:self.hashTableView image:@"noResult" text:@"暂无通知"];
-    self.systemNoDataView = [NoDataShowView showView:self.systemTableView image:@"noResult" text:@"暂无消息"];
+    self.hashNoDataView = [NoDataShowView showView:self.hashTableView image:@"noResult" text:LocalizedStr(@"text_noData")];
+    self.systemNoDataView = [NoDataShowView showView:self.systemTableView image:@"noResult" text:LocalizedStr(@"text_noData")];
 }
 - (void)loadData {
     NSInteger index = self.index;
@@ -117,10 +118,6 @@
             [self.systemTableView.mj_header endRefreshing];
         }
     }];
-}
-- (void)allReadAction{
-    //全部已读
-    
 }
 - (void)itemChangeIndex:(NSInteger)index {
     self.index = index;
