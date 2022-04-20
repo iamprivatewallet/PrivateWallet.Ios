@@ -61,7 +61,7 @@
          PW_AddCurrencyModel *model = [PW_AddCurrencyModel mj_objectWithKeyValues:obj];
          [self.dataList addObject:model];
      }];
-     NSArray *arr = [[WalletManager shareWalletManager] getOrignWallets];
+     NSArray *arr = [[PW_WalletManager shared] getOrignWallets];
      for (int i = 0; i<self.dataList.count; i++) {
          PW_AddCurrencyModel *model = self.dataList[i];
          for (int j = 0; j< arr.count; j++) {

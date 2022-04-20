@@ -32,8 +32,12 @@
     self.iconIv.image = [UIImage imageNamed:model.icon];
     self.titleLb.text = model.title;
     self.detailLb.text = model.desc;
-    self.checkBtn.selected = model.isChecked;
     self.checkBtn.enabled = !model.isDefault;
+    if (model.isDefault) {
+        self.checkBtn.selected = NO;
+    }else{
+        self.checkBtn.selected = model.isChecked;
+    }
 }
 - (void)makeViews {
     self.iconIv = [[UIImageView alloc] init];

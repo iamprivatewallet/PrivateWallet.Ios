@@ -39,9 +39,18 @@
     [NetworkTool requestApi:WalletTokenChainURL params:nil completeBlock:^(id  _Nonnull data) {
         [self hideLoadingIndicator];
         [self.dataList removeAllObjects];
+        NSMutableArray *allList = [NSMutableArray array];
         NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
         NSString *walletType = User_manager.currentUser.chooseWallet_type;
         for (PW_NetworkModel *model in array) {
+            PW_NetworkModel *exitModel = [[PW_NetworkManager shared] isExistWithChainId:model.chainId];
+            if (exitModel==nil) {
+                [allList addObject:model];
+            }
+        }
+        NSArray *dbList = [[PW_NetworkManager shared] getList];
+        [allList addObjectsFromArray:dbList];
+        for (PW_NetworkModel *model in allList) {
             PW_NetworkModel *netModel = [[PW_NodeManager shared] getSelectedNodeWithChainId:model.chainId];
             if(netModel){
                 model.rpcUrl = netModel.rpcUrl;
@@ -126,6 +135,16 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_NetworkModel *model = self.dataList[indexPath.row];
+    Wallet *wallet = nil;
+    if ([model.title isEqualToString:@"CVN"]||[model.chainId isEqualToString:@"168"]) {
+        wallet = [[PW_WalletManager shared] getOriginWalletWithType:@"CVN"];
+    }else{
+        wallet = [[PW_WalletManager shared] getOriginWalletWithType:@"ETH"];
+    }
+    if (wallet&&![wallet.type isEqualToString:User_manager.currentUser.chooseWallet_type]) {
+        [User_manager updateChooseWallet:wallet];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
+    }
     [User_manager updateCurrentNode:model.rpcUrl chainId:model.chainId name:model.title];
     [[NSNotificationCenter defaultCenter] postNotificationName:kChainNodeUpdateNotification object:nil];
     [self closeAction];

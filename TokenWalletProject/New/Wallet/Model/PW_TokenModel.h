@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *walletAddress;
 @property (nonatomic, assign) BOOL isExist;
 
+@property (nonatomic, assign) BOOL isDelete;
 @property (nonatomic, assign) BOOL isChoose;
 
 @end

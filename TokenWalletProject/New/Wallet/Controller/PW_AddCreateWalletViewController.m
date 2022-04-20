@@ -31,7 +31,7 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_createWallet")];
     [self makeViews];
     RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *walletName,NSString *pwd,NSString *againPwd){
-        return @(walletName.length && pwd.length && againPwd.length);
+        return @([walletName trim].length && [pwd trim].length && [againPwd trim].length);
     }];
 }
 - (void)createAction {

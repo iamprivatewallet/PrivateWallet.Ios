@@ -23,9 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)showShortAddress;
 - (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
 
+- (BOOL)isInt;
 - (BOOL)isFloat;
 - (BOOL)isURL;
 - (BOOL)isHttpsURL;
+- (NSString *)pw_firstChar;
+- (NSString *)pw_firstCharLower;
+- (NSString *)pw_firstCharUpper;
 
 @end
 

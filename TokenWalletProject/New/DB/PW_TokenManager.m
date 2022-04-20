@@ -51,7 +51,7 @@
     JQFMDB * db = [JQFMDB shareDatabase];
     return [db jq_updateTable:table_name dicOrModel:@{@"sortIndex":@(sortIndex)} whereFormat:[NSString stringWithFormat:@"where walletAddress = '%@' and walletType = '%@' and tokenContract = '%@' and tokenChain = %ld",address,type,tokenAddress,chainId]];
 }
-- (PW_TokenModel *)isExit:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId{
+- (PW_TokenModel *)isExist:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId{
     JQFMDB * db = [JQFMDB shareDatabase];
     NSArray *records = [db jq_lookupTable:table_name dicOrModel:[PW_TokenModel class] whereFormat:[NSString stringWithFormat:@"where walletAddress = '%@' and walletType = '%@' and tokenContract = '%@' and tokenChain = %ld",walletAddress,type,tokenAddress,chainId]];
     if(records&&records.count>0){

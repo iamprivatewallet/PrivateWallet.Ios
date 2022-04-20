@@ -31,7 +31,7 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_privateKeyImport") rightImg:@"icon_scan" rightAction:@selector(scanAction)];
     [self makeViews];
     RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.privateKeyTF.rac_textSignal,self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *privateKey,NSString *walletName,NSString *pwd,NSString *againPwd){
-        return @(privateKey.length && walletName.length && pwd.length && againPwd.length);
+        return @([privateKey trim].length && [walletName trim].length && [pwd trim].length && [againPwd trim].length);
     }];
 }
 - (void)scanAction {
@@ -74,7 +74,7 @@
         if([result isNoEmpty]){
             if ([User_manager loginWithUserName:result withPassword:pwdStr withPwTip:@"" withMnemonic:@"" isBackup:YES]){
                 [self showSuccess:LocalizedStr(@"text_success")];
-                NSArray *list = [[WalletManager shareWalletManager] getWallets];
+                NSArray *list = [[PW_WalletManager shared] getWallets];
                 if (list.count>0) {
                     [User_manager updateChooseWallet:list[0]];
                     [TheAppDelegate switchToTabBarController];

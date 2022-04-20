@@ -15,6 +15,8 @@
 #import "PW_AboutUsViewController.h"
 #import "PW_SetUpViewController.h"
 #import "PW_AddressBookViewController.h"
+#import "PW_NetworkManageViewController.h"
+#import "PW_WalletManageViewController.h"
 
 @interface PW_MoreViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -42,21 +44,23 @@
     PW_GroupMoreModel *g1Model = [[PW_GroupMoreModel alloc] init];
     g1Model.dataArr = @[
         [PW_MoreModel MoreIconName:@"icon_more_wallet" title:LocalizedStr(@"text_walletManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            
+            PW_WalletManageViewController *vc = [[PW_WalletManageViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }]
     ];
     PW_GroupMoreModel *g2Model = [[PW_GroupMoreModel alloc] init];
     g2Model.dataArr = @[
         [PW_MoreModel MoreIconName:@"icon_more_network" title:LocalizedStr(@"text_networkManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            
+            PW_NetworkManageViewController *vc = [[PW_NetworkManageViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }]
     ];
-    PW_GroupMoreModel *g3Model = [[PW_GroupMoreModel alloc] init];
-    g3Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            
-        }]
-    ];
+//    PW_GroupMoreModel *g3Model = [[PW_GroupMoreModel alloc] init];
+//    g3Model.dataArr = @[
+//        [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
+//
+//        }]
+//    ];
     PW_GroupMoreModel *g4Model = [[PW_GroupMoreModel alloc] init];
     g4Model.dataArr = @[
         [PW_MoreModel MoreIconName:@"icon_more_addressBook" title:LocalizedStr(@"text_addressBook") actionBlock:^(PW_MoreModel * _Nonnull model) {
@@ -93,7 +97,7 @@
             [PW_ShareAppTool showShareApp];
         }]
     ];
-    [self.dataArr addObjectsFromArray:@[g1Model,g2Model,g3Model,g4Model,g5Model,g6Model,g7Model]];
+    [self.dataArr addObjectsFromArray:@[g1Model,g2Model,g4Model,g5Model,g6Model,g7Model]];
     [self.tableView reloadData];
 }
 - (void)openWebTitle:(NSString *)title urlStr:(NSString *)urlStr {

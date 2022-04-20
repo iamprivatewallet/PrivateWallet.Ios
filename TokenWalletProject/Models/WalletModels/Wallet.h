@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)NSString *isOpenID;//1:开启ID验证
 
+@property (nonatomic, assign) NSInteger sortIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

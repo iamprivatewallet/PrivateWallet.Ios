@@ -31,7 +31,7 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_createWallet")];
     [self makeViews];
     RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *walletName,NSString *pwd,NSString *againPwd){
-        return @(walletName.length && pwd.length && againPwd.length);
+        return @([walletName trim].length && [pwd trim].length && [againPwd trim].length);
     }];
 }
 - (void)createAction {
@@ -65,7 +65,7 @@
             [self.view hideLoadingIndicator];
             self.sureBtn.userInteractionEnabled = YES;
             if (sucess) {
-                NSArray *list = [[WalletManager shareWalletManager] getWallets];
+                NSArray *list = [[PW_WalletManager shared] getWallets];
                 if (list.count>0) {
                     [User_manager updateChooseWallet:list[0]];
                 }

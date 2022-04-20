@@ -71,7 +71,7 @@
         [self.coinList removeObjectAtIndex:indexPath.row];
         [self.tableView reloadData];
         User *user = User_manager.currentUser;
-        [[WalletCoinListManager shareManager] deleteCoin:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:@(model.tokenChain).stringValue];
+        [[PW_TokenManager shareManager] deleteCoinWalletAddress:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
         [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshCoinListNotification object:nil];
     }
 }
@@ -93,7 +93,7 @@
     User *user = User_manager.currentUser;
     for (NSInteger i=0; i<self.coinList.count; i++) {
         PW_TokenModel *model = self.coinList[i];
-        [[WalletCoinListManager shareManager] updateSortIndex:i+1 address:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:@(model.tokenChain).stringValue];
+        [[PW_TokenManager shareManager] updateSortIndex:i+1 address:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshCoinListNotification object:nil];
 }

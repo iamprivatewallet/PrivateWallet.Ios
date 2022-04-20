@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *browseUrl;
 @property (nonatomic, copy) NSString *backUrl;
 
+@property (nonatomic, assign) NSInteger sortIndex;
+
 @property (nonatomic, assign) BOOL selected;
 
 @end

@@ -49,7 +49,7 @@
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadCacheCoinList) name:kRefreshCoinListNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceRefreshCacheCoinList) name:kRefreshCoinListNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nodeUpdate) name:kChainNodeUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWallets) name:kChangeWalletNotification object:nil];
     [RACObserve(self, backupTipView) subscribeNext:^(UIView * _Nullable x) {
@@ -134,7 +134,8 @@
 - (void)requestData {
     [self refreshHeader];
     [self.coinList removeAllObjects];
-    NSString *chainId = User_manager.currentUser.current_chainId;
+    User *user = User_manager.currentUser;
+    NSString *chainId = user.current_chainId;
     NSString *chainType = [[SettingManager sharedInstance] getChainType];
     NSString *coinName = [[SettingManager sharedInstance] getChainCoinName];
     PW_TokenModel *model = [[PW_TokenModel alloc] init];
@@ -157,9 +158,15 @@
         [self.view hideLoadingIndicator];
         NSArray *array = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         for (PW_TokenModel *model in array) {
-            model.isDefault = YES;
+            PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+            if (exitModel==nil) {
+                model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
+                model.walletType = user.chooseWallet_type;
+                model.walletAddress = user.chooseWallet_address;
+                model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;
+                [[PW_TokenManager shareManager] saveCoin:model];
+            }
         }
-        [self.coinList addObjectsFromArray:array];
         [self loadCacheCoinList];
     } errBlock:^(NSString * _Nonnull msg) {
         dispatch_semaphore_signal(semaphore);
@@ -168,20 +175,21 @@
         [self showError:msg];
     }];
 }
+- (void)forceRefreshCacheCoinList {
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (PW_TokenModel *model in self.coinList) {
+        if (!model.isDefault) {
+            [tempArr addObject:model];
+        }
+    }
+    [self.coinList removeObjectsInArray:tempArr];
+    [self loadCacheCoinList];
+}
 - (void)loadCacheCoinList {
     //获取缓存里 是否有代币列表
-    NSArray *coinList = [[WalletCoinListManager shareManager] getListWithWalletAddress:self.currentWallet.address type:self.currentWallet.type chainId:User_manager.currentUser.current_chainId];
-    [coinList enumerateObjectsUsingBlock:^(AssetCoinModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if(![self isExitCoinWithAddress:obj.tokenContract]){
-            PW_TokenModel *model = [PW_TokenModel new];
-            model.tokenName = obj.tokenSymbol;
-            model.tokenSymbol = obj.tokenSymbol;
-            model.tokenLogo = obj.tokenLogo;
-            model.tokenContract = obj.tokenContract;
-            model.tokenChain = obj.tokenChain.integerValue;
-            model.tokenAmount = @"0";
-            model.price = @"0";
-            model.tokenDecimals = obj.tokenDecimals.integerValue;
+    NSArray *coinList = [[PW_TokenManager shareManager] getListWithWalletAddress:self.currentWallet.address type:self.currentWallet.type chainId:User_manager.currentUser.current_chainId.integerValue];
+    [coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
+        if(![self isExitCoinWithAddress:model.tokenContract]){
             [self.coinList addObject:model];
         }
     }];
@@ -239,7 +247,7 @@
     [self requestData];
 }
 - (void)getWallets{
-    NSArray *list = [[WalletManager shareWalletManager] getWallets];
+    NSArray *list = [[PW_WalletManager shared] getWallets];
     [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         Wallet *w = obj;
         NSString *choose_addr = User_manager.currentUser.chooseWallet_address;
@@ -271,7 +279,7 @@
     }];
     self.currentWallet.totalBalance = totalBalance;
     [self refreshHeader];
-    [[WalletManager shareWalletManager] updataWallet:self.currentWallet];
+    [[PW_WalletManager shared] updateWallet:self.currentWallet];
     [self.tableView reloadData];
 }
 //获取余额
@@ -333,7 +341,7 @@
         }
     }
     [self refreshHeader];
-    [[WalletManager shareWalletManager] updataWallet:self.currentWallet];
+    [[PW_WalletManager shared] updateWallet:self.currentWallet];
     [self.tableView reloadData];
 }
 #pragma mark - Delegate

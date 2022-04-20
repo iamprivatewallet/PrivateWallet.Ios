@@ -48,7 +48,7 @@
         @"isOpenID":@"0",
     };
     Wallet *wallet = [Wallet mj_objectWithKeyValues:dic];
-    [[WalletManager shareWalletManager] saveWallet:wallet];
+    [[PW_WalletManager shared] saveWallet:wallet];
     
     return ownerStr;
 }
@@ -78,7 +78,7 @@
         @"isOpenID":@"0",
     };
     Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
-    [[WalletManager shareWalletManager] saveWallet:wallet];
+    [[PW_WalletManager shared] saveWallet:wallet];
     return ownerStr;
 }
 
@@ -117,7 +117,7 @@
             prikeyStr = cvn_priKey;
             pubKeyStr = cvn_pubKey;
         }
-        NSArray * array = [[WalletManager shareWalletManager] selctWalletWithAddr:addressStr type:typeStr];
+        NSArray * array = [[PW_WalletManager shared] selctWalletWithAddr:addressStr type:typeStr];
         if (!array || array == nil || array.count>0) {
             continue;
         }
@@ -144,7 +144,7 @@
         [arr addObject:wallet];
     }
 
-    [[WalletManager shareWalletManager] saveWallets:arr];
+    [[PW_WalletManager shared] saveWallets:arr];
     
 }
 
@@ -174,7 +174,7 @@
         pubKeyStr = pubkey;
     }
     
-    NSArray * array = [[WalletManager shareWalletManager] selctWalletWithAddr:addressStr type:wallet.type];
+    NSArray * array = [[PW_WalletManager shared] selctWalletWithAddr:addressStr type:wallet.type];
     if (!array || array == nil || array.count>0) {
         return;
     }
@@ -200,13 +200,13 @@
     };
     
     Wallet *w = [Wallet mj_objectWithKeyValues:dic];
-    [[WalletManager shareWalletManager] saveWallet:w];
+    [[PW_WalletManager shared] saveWallet:w];
 }
 
 //根据私钥导入钱包
 + (void)importPriKey:(Wallet *)model errorBlock:(void(^)(NSString *errorType))block{
     
-    NSArray * array = [[WalletManager shareWalletManager] selctWalletWithPrikey:model.priKey type:model.type];
+    NSArray * array = [[PW_WalletManager shared] selctWalletWithPrikey:model.priKey type:model.type];
     if (!array || array == nil || array.count>0) {
         block(@"1");
         return;
@@ -251,7 +251,7 @@
         @"isOpenID":@"0",
     };
     Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
-    [[WalletManager shareWalletManager] saveWallet:wallet];
+    [[PW_WalletManager shared] saveWallet:wallet];
     
     block(@"0");
     return;
@@ -277,7 +277,7 @@
         block(@"2");
         return;
     }
-    NSArray * array = [[WalletManager shareWalletManager] selctWalletWithAddr:addr type:model.type];
+    NSArray * array = [[PW_WalletManager shared] selctWalletWithAddr:addr type:model.type];
     if (!array || array == nil || array.count>0) {
         block(@"1");
         return;
@@ -304,7 +304,7 @@
         @"isOpenID":@"0",
     };
     Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
-    [[WalletManager shareWalletManager] saveWallet:wallet];
+    [[PW_WalletManager shared] saveWallet:wallet];
 
     block(@"0");
 }

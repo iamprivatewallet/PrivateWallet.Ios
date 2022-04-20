@@ -31,7 +31,7 @@
     [self setNavNoLineTitle:NSStringWithFormat(LocalizedStr(@"text_importSomeWallet"),self.walletType) rightImg:@"icon_scan" rightAction:@selector(scanAction)];
     [self makeViews];
     RAC(self.sureBtn, enabled) = [RACSignal combineLatest:@[self.privateKeyTF.rac_textSignal,self.walletNameTF.rac_textSignal,self.pwdTF.rac_textSignal,self.againPwdTF.rac_textSignal] reduce:^id(NSString *privateKey,NSString *walletName,NSString *pwd,NSString *againPwd){
-        return @(privateKey.length && walletName.length && pwd.length && againPwd.length);
+        return @([privateKey trim].length && [walletName trim].length && [pwd trim].length && [againPwd trim].length);
     }];
 }
 - (void)scanAction {

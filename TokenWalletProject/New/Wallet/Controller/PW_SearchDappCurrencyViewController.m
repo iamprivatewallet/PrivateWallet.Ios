@@ -113,7 +113,7 @@
         self.currencyList = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         User *user = User_manager.currentUser;
         for (PW_TokenModel *model in self.currencyList) {
-            PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExit:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+            PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
             model.isExist = exitModel!=nil;
         }
         [self reloadTableSection:1];
@@ -188,7 +188,7 @@
             [strongSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
             return;
         }
-        model.sortIndex = [[WalletCoinListManager shareManager] getMaxIndex]+1;
+        model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
         model.walletType = user.chooseWallet_type;
         model.walletAddress = user.chooseWallet_address;
         model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;

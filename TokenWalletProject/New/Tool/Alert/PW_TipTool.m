@@ -11,6 +11,12 @@
 @implementation PW_TipTool
 
 + (void)showBackupTipSureBlock:(void (^)(void))block {
+    [self showBackupTipDesc:LocalizedStr(@"text_backupAlertDesc") sureBlock:block];
+}
++ (void)showBackupTipPrivateKeySureBlock:(void (^)(void))block {
+    [self showBackupTipDesc:LocalizedStr(@"text_backupAlertPrivateKeyDesc") sureBlock:block];
+}
++ (void)showBackupTipDesc:(NSString *)desc sureBlock:(void (^)(void))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
     UIView *view = [self showTipView:contentView];
@@ -41,7 +47,7 @@
         make.centerX.offset(0);
         make.right.offset(-10);
     }];
-    UILabel *descLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupAlertDesc") fontSize:14 textColor:[UIColor g_grayTextColor]];
+    UILabel *descLb = [PW_ViewTool labelMediumText:desc fontSize:14 textColor:[UIColor g_grayTextColor]];
     descLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:descLb];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {

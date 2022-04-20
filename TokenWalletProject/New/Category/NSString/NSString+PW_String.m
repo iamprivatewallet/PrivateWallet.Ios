@@ -79,10 +79,15 @@
     return self;
 }
 
+- (BOOL)isInt {
+    NSScanner *scan = [NSScanner scannerWithString:self];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
 - (BOOL)isFloat {
-    NSString *number = @"^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$";
-    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
-    return [numberPre evaluateWithObject:self];
+    NSScanner *scan = [NSScanner scannerWithString:self];
+    int val;
+    return [scan scanFloat:&val] && [scan isAtEnd];
 }
 - (BOOL)isURL {
     NSString *str = @"^((https|http)?:\/\/)[^\s]+";
@@ -93,6 +98,24 @@
     NSString *str = @"^(https:\/\/)[^\s]+.[^\s]+";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];
     return [predicate evaluateWithObject:self];
+}
+- (NSString *)pw_firstChar {
+    if (self.length == 0) return self;
+    return [NSString stringWithFormat:@"%c", [self characterAtIndex:0]];
+}
+- (NSString *)pw_firstCharLower {
+    if (self.length == 0) return self;
+    NSMutableString *string = [NSMutableString string];
+    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].lowercaseString];
+    if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
+    return string;
+}
+- (NSString *)pw_firstCharUpper {
+    if (self.length == 0) return self;
+    NSMutableString *string = [NSMutableString string];
+    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].uppercaseString];
+    if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
+    return string;
 }
 
 @end

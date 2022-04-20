@@ -34,6 +34,12 @@
     [[NSScanner scannerWithString:blueStr] scanHexInt:&blue];
     return [UIColor colorWithRed:red / 255.0f  green:green / 255.0f blue:blue / 255.0f alpha:alpha];
 }
++ (UIColor *)g_randomColor {
+    int R = (arc4random() % 256);
+    int G = (arc4random() % 256);
+    int B = (arc4random() % 256);
+    return [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1];
+}
 
 + (UIColor *)g_successColor {
     return COLORFORRGB(0x1AC190);

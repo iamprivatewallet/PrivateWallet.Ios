@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray*)getOrignWallets;
 //查询后导入钱包
 - (NSArray*)getImportWallets;
+- (Wallet *)getOriginWalletWithType:(NSString*)type;
 //查询对应类型的钱包
 - (NSArray*)selectWalletWithType:(NSString*)type;
 //删除钱包
@@ -36,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 //更新用户名
 - (void)updataWalletOwnerTo:(NSString*)toO;
 //更新价值
-- (void)updataWalletTotalValueTo:(NSString*)toO WalletType:(NSString *)type;
+//- (void)updataWalletTotalValueTo:(NSString*)toO WalletType:(NSString *)type;
 //- (void)updataWalletHiddenTo:(NSString*)hidden WalletType:(NSString *)type;
 - (void)updataWalletOpenId:(NSString*)openId WalletType:(NSString *)type;
 + (NSString*)getPriWithAddress:(NSString*)address;

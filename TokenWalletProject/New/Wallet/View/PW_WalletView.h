@@ -19,11 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface PW_WalletViewCell : PW_BaseTableCell
-
-@property (nonatomic, strong) Wallet *wallet;
-
-@end
-
-
 NS_ASSUME_NONNULL_END

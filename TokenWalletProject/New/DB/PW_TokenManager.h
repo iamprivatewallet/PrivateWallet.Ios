@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveCoin:(PW_TokenModel *)coin;
 - (BOOL)updateCoin:(PW_TokenModel *)record address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
-- (PW_TokenModel *)isExit:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
+- (PW_TokenModel *)isExist:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (void)deleteCoinWalletAddress:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (NSArray*)getListWithWalletAddress:(NSString *)walletAddress type:(NSString *)type chainId:(NSInteger)chainId;
 

@@ -77,11 +77,20 @@
     NSArray * wallets = [db jq_lookupTable:table_name dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and isImport = '1'",User_manager.currentUser.user_name]];
     return wallets;
 }
+- (Wallet *)getOriginWalletWithType:(NSString*)type {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    NSArray * wallets = [db jq_lookupTable:table_name dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and type = '%@' and isImport = '0'",User_manager.currentUser.user_name,type]];
+    if (wallets && wallets.count>0) {
+        Wallet * wallet = wallets[0];
+        return wallet;
+    }
+    return nil;
+}
 
 //删除钱包
 - (void)deleteWallet:(Wallet*)wallet{
     JQFMDB * db = [JQFMDB shareDatabase];
-    [db jq_deleteTable:table_name whereFormat:[NSString stringWithFormat:@"where address = '%@' and type = '%@' ",wallet.address,wallet.type]];
+    [db jq_deleteTable:table_name whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,wallet.address,wallet.type]];
 }
 //删除名下所有钱包
 - (BOOL)deleteAllWallets{
