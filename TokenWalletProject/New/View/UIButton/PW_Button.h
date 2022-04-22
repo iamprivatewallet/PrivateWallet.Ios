@@ -19,8 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_Button : UIButton
 
-@property (nonatomic, strong) UIFont *normalFont;
-@property (nonatomic, strong) UIFont *selectedFont;
+- (void)pw_setNormalFont:(UIFont *)normalFont selectedFont:(UIFont *)selectedFont;
 
 - (void)layoutWithEdgeInsetStyle:(PW_ButtonEdgeInsetStyle)style spaceBetweenImageAndTitle:(CGFloat)space;
 

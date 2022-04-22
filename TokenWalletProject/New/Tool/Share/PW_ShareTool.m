@@ -7,25 +7,20 @@
 //
 
 #import "PW_ShareTool.h"
+#import "PW_ShareViewModel.h"
 
 @implementation PW_ShareTool
 
-+ (void)shareTitle:(NSString *)title image:(UIImage *)image urlStr:(NSString *)urlStr {
-    [self shareTitle:title image:image urlStr:urlStr completionBlock:nil];
++ (void)shareTitle:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data {
+    [self shareIcon:[UIImage imageNamed:@"icon_logo"] title:title subTitle:subTitle data:data completionBlock:nil];
 }
-
-+ (void)shareTitle:(NSString *)title image:(UIImage *)image urlStr:(NSString *)urlStr completionBlock:(void(^)(BOOL completed))completionBlock {
-    NSURL *urlToShare = [NSURL URLWithString:urlStr];
-    NSMutableArray *activityArray = [NSMutableArray array];
-    if([title isNoEmpty]){
-        [activityArray addObject:title];
-    }
-    if(image){
-        [activityArray addObject:image];
-    }
-    if(urlToShare){
-        [activityArray addObject:urlToShare];
-    }
++ (void)shareTitle:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data completionBlock:(nullable void(^)(BOOL completed))completionBlock {
+    [self shareIcon:[UIImage imageNamed:@"icon_logo"] title:title subTitle:subTitle data:data completionBlock:completionBlock];
+}
++ (void)shareIcon:(UIImage *)icon title:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data completionBlock:(nullable void(^)(BOOL completed))completionBlock {
+    PW_ShareModel *model = [PW_ShareModel modelWithShowIcon:icon title:title subTitle:subTitle data:data];
+    PW_ShareViewModel *viewModel = [PW_ShareViewModel viewModelWithModel:model];
+    NSArray *activityArray = @[viewModel];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityArray applicationActivities:nil];
     activityVC.excludedActivityTypes = @[];
     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:activityVC animated:YES completion:nil];
@@ -35,7 +30,7 @@
         }
         if (completed) {
             NSLog(@"completed");
-            [PW_ToastTool showSucees:LocalizedStr(@"text_success")];
+            [PW_ToastTool showSucees:LocalizedStr(@"text_shareSuccess")];
         } else  {
             NSLog(@"cancled");
         }

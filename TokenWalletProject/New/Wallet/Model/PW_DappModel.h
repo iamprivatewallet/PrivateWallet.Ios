@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isTop;
 @property (nonatomic, copy) NSString *languageCode;
 
+@property (nonatomic, assign) BOOL isMore;
+
 @end
 
 NS_ASSUME_NONNULL_END

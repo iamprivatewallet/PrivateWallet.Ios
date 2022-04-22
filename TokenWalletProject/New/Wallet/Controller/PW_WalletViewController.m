@@ -82,7 +82,9 @@
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
-        
+        PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+        vc.searchStr = result;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 - (void)createWalletAction {
@@ -150,6 +152,7 @@
     model.isDefault = YES;
     [self.coinList addObject:model];
     [self.tableView reloadData];
+    [self loadCacheCoinList];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     [self.view showLoadingIndicator];
@@ -167,7 +170,7 @@
                 [[PW_TokenManager shareManager] saveCoin:model];
             }
         }
-        [self loadCacheCoinList];
+        [self forceRefreshCacheCoinList];
     } errBlock:^(NSString * _Nonnull msg) {
         dispatch_semaphore_signal(semaphore);
         [self loadCacheCoinList];

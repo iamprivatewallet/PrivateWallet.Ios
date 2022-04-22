@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval;
 + (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval format:(NSString *)format;
 
++ (NSString *)deviceUUID;
+
+- (NSString *)currency;
+
 - (void)pasteboard;
 - (void)pasteboardToast:(BOOL)toast;
 

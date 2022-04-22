@@ -20,6 +20,17 @@
     return [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
++ (NSString *)deviceUUID {
+    return [UIDevice currentDevice].identifierForVendor.UUIDString;
+}
+
+- (NSString *)currency {
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *myNumber = [f numberFromString:self];
+    return [NSNumberFormatter localizedStringFromNumber:myNumber numberStyle:NSNumberFormatterDecimalStyle];
+}
+
 - (void)pasteboard {
     [self pasteboardToast:NO];
 }
@@ -86,16 +97,16 @@
 }
 - (BOOL)isFloat {
     NSScanner *scan = [NSScanner scannerWithString:self];
-    int val;
+    float val;
     return [scan scanFloat:&val] && [scan isAtEnd];
 }
 - (BOOL)isURL {
-    NSString *str = @"^((https|http)?:\/\/)[^\s]+";
+    NSString *str = @"^((https|http)?://)[^\\s]+";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];
     return [predicate evaluateWithObject:self];
 }
 - (BOOL)isHttpsURL {
-    NSString *str = @"^(https:\/\/)[^\s]+.[^\s]+";
+    NSString *str = @"^(https://)[^\\s]+.[^\\s]+";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];
     return [predicate evaluateWithObject:self];
 }

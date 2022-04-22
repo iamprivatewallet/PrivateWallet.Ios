@@ -379,8 +379,7 @@ typedef enum : NSUInteger {
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor g_grayTextColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor g_boldTextColor] forState:UIControlStateSelected];
-    btn.normalFont = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-    btn.selectedFont = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+    [btn pw_setNormalFont:[UIFont pw_semiBoldFontOfSize:14] selectedFont:[UIFont pw_semiBoldFontOfSize:16]];
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }

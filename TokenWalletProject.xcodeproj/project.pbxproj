@@ -195,11 +195,18 @@
 		5C37A8DA280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8D9280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m */; };
 		5C37A8DD280EC75900AAA728 /* PW_LookPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8DC280EC75900AAA728 /* PW_LookPrivateKeyViewController.m */; };
 		5C37A8E0280ECF0F00AAA728 /* PW_ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8DF280ECF0F00AAA728 /* PW_ChangePwdViewController.m */; };
+		5C37A8E6280FB92100AAA728 /* PW_DappBrowserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8E5280FB92100AAA728 /* PW_DappBrowserModel.m */; };
+		5C37A8EA280FB9F100AAA728 /* UIButton+PW_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8E9280FB9F100AAA728 /* UIButton+PW_Button.m */; };
 		5C62CF9627FB0AAC00C1C5DC /* Web3WebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */; };
 		5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */; };
 		5C62CF9C27FD223100C1C5DC /* PW_TokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */; };
 		5C62CF9F27FD25DA00C1C5DC /* PW_TokenDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9E27FD25DA00C1C5DC /* PW_TokenDetailModel.m */; };
 		5C62CFA327FD333D00C1C5DC /* PW_TokenTradeRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CFA227FD333D00C1C5DC /* PW_TokenTradeRecordManager.m */; };
+		5C6712FB281131960088A1A5 /* PW_MarketHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6712FA281131960088A1A5 /* PW_MarketHeaderView.m */; };
+		5C6712FE281131EF0088A1A5 /* PW_MarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6712FD281131EF0088A1A5 /* PW_MarketCell.m */; };
+		5C671301281142780088A1A5 /* PW_MarketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C671300281142780088A1A5 /* PW_MarketModel.m */; };
+		5C671306281164BC0088A1A5 /* NSNumber+PW_Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C671305281164BB0088A1A5 /* NSNumber+PW_Number.m */; };
+		5C671309281166990088A1A5 /* PW_MarketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C671308281166990088A1A5 /* PW_MarketManager.m */; };
 		5C6A966B27E9CE860027D7BB /* VersionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6A966A27E9CE860027D7BB /* VersionTool.m */; };
 		5C71193027BB7ABC00FE9B51 /* MOSWeb3NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192627BB7ABC00FE9B51 /* MOSWeb3NetManager.m */; };
 		5C71193127BB7ABC00FE9B51 /* MOSETHGasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192827BB7ABC00FE9B51 /* MOSETHGasModel.m */; };
@@ -283,6 +290,26 @@
 		5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB427E212A700C73976 /* BrowseWebViewController.m */; };
 		5CB8BBB827E3084E00C73976 /* TokenChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB727E3084E00C73976 /* TokenChainModel.m */; };
 		5CB8BBBB27E30DBD00C73976 /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */; };
+		5CCE70B4280FDB3C00860841 /* PW_DappBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */; };
+		5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B6280FDE5800860841 /* PW_BannerModel.m */; };
+		5CCE70BA280FE41200860841 /* PW_TitlesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B9280FE41200860841 /* PW_TitlesHeaderView.m */; };
+		5CCE70BD280FE58000860841 /* PW_TitlesItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70BC280FE58000860841 /* PW_TitlesItemCell.m */; };
+		5CCE70C0280FECDC00860841 /* PW_DappBrowserItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70BF280FECDC00860841 /* PW_DappBrowserItemCell.m */; };
+		5CCE70C3280FEDF500860841 /* PW_DappChainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70C2280FEDF500860841 /* PW_DappChainCell.m */; };
+		5CCE70C6280FF43D00860841 /* PW_DappBanner2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70C5280FF43D00860841 /* PW_DappBanner2Cell.m */; };
+		5CCE70C9281006CA00860841 /* PW_DappChainItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70C8281006C900860841 /* PW_DappChainItemCell.m */; };
+		5CCE70CC28100CF400860841 /* PW_DappManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70CB28100CF300860841 /* PW_DappManager.m */; };
+		5CCE70CF28100ECF00860841 /* PW_DappRecentBrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70CE28100ECF00860841 /* PW_DappRecentBrowseViewController.m */; };
+		5CCE70D228100F9300860841 /* PW_DappRecentBrowseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70D128100F9300860841 /* PW_DappRecentBrowseCell.m */; };
+		5CCE70D628101E3300860841 /* PW_DappMoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70D528101E3300860841 /* PW_DappMoreModel.m */; };
+		5CCE70DA28101FE700860841 /* PW_DappMoreContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70D928101FE700860841 /* PW_DappMoreContentView.m */; };
+		5CCE70DD281022B400860841 /* PW_DappMoreItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70DC281022B400860841 /* PW_DappMoreItemCell.m */; };
+		5CCE70E02810EF7600860841 /* PW_ShareViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70DF2810EF7500860841 /* PW_ShareViewModel.m */; };
+		5CCE70E32810EF9B00860841 /* PW_ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70E22810EF9B00860841 /* PW_ShareModel.m */; };
+		5CCE70E92810FE6700860841 /* PW_WalletListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70E82810FE6700860841 /* PW_WalletListView.m */; };
+		5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */; };
+		5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */; };
+		5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70F12811087800860841 /* PW_MarketMenuModel.m */; };
 		5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */; };
 		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
 		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
@@ -919,6 +946,10 @@
 		5C37A8DC280EC75900AAA728 /* PW_LookPrivateKeyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_LookPrivateKeyViewController.m; sourceTree = "<group>"; };
 		5C37A8DE280ECF0F00AAA728 /* PW_ChangePwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChangePwdViewController.h; sourceTree = "<group>"; };
 		5C37A8DF280ECF0F00AAA728 /* PW_ChangePwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ChangePwdViewController.m; sourceTree = "<group>"; };
+		5C37A8E4280FB92100AAA728 /* PW_DappBrowserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBrowserModel.h; sourceTree = "<group>"; };
+		5C37A8E5280FB92100AAA728 /* PW_DappBrowserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserModel.m; sourceTree = "<group>"; };
+		5C37A8E8280FB9F100AAA728 /* UIButton+PW_Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+PW_Button.h"; sourceTree = "<group>"; };
+		5C37A8E9280FB9F100AAA728 /* UIButton+PW_Button.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PW_Button.m"; sourceTree = "<group>"; };
 		5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Web3WebView.framework; sourceTree = "<group>"; };
 		5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenDetailViewController.h; sourceTree = "<group>"; };
 		5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenDetailViewController.m; sourceTree = "<group>"; };
@@ -929,6 +960,16 @@
 		5C62CFA127FD333D00C1C5DC /* PW_TokenTradeRecordManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenTradeRecordManager.h; sourceTree = "<group>"; };
 		5C62CFA227FD333D00C1C5DC /* PW_TokenTradeRecordManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenTradeRecordManager.m; sourceTree = "<group>"; };
 		5C62CFA427FD336900C1C5DC /* PW_DBGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DBGlobal.h; sourceTree = "<group>"; };
+		5C6712F9281131960088A1A5 /* PW_MarketHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketHeaderView.h; sourceTree = "<group>"; };
+		5C6712FA281131960088A1A5 /* PW_MarketHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketHeaderView.m; sourceTree = "<group>"; };
+		5C6712FC281131EF0088A1A5 /* PW_MarketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketCell.h; sourceTree = "<group>"; };
+		5C6712FD281131EF0088A1A5 /* PW_MarketCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketCell.m; sourceTree = "<group>"; };
+		5C6712FF281142780088A1A5 /* PW_MarketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketModel.h; sourceTree = "<group>"; };
+		5C671300281142780088A1A5 /* PW_MarketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketModel.m; sourceTree = "<group>"; };
+		5C671304281164BB0088A1A5 /* NSNumber+PW_Number.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+PW_Number.h"; sourceTree = "<group>"; };
+		5C671305281164BB0088A1A5 /* NSNumber+PW_Number.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+PW_Number.m"; sourceTree = "<group>"; };
+		5C671307281166990088A1A5 /* PW_MarketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketManager.h; sourceTree = "<group>"; };
+		5C671308281166990088A1A5 /* PW_MarketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketManager.m; sourceTree = "<group>"; };
 		5C6A966927E9CE860027D7BB /* VersionTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionTool.h; sourceTree = "<group>"; };
 		5C6A966A27E9CE860027D7BB /* VersionTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionTool.m; sourceTree = "<group>"; };
 		5C71192627BB7ABC00FE9B51 /* MOSWeb3NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSWeb3NetManager.m; sourceTree = "<group>"; };
@@ -1089,6 +1130,46 @@
 		5CB8BBB927E30DBD00C73976 /* NetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTool.h; sourceTree = "<group>"; };
 		5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTool.m; sourceTree = "<group>"; };
 		5CB8BBBC27E311FC00C73976 /* NoticeConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeConst.h; sourceTree = "<group>"; };
+		5CCE70B2280FDB3C00860841 /* PW_DappBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBrowserCell.h; sourceTree = "<group>"; };
+		5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserCell.m; sourceTree = "<group>"; };
+		5CCE70B5280FDE5800860841 /* PW_BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BannerModel.h; sourceTree = "<group>"; };
+		5CCE70B6280FDE5800860841 /* PW_BannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_BannerModel.m; sourceTree = "<group>"; };
+		5CCE70B8280FE41200860841 /* PW_TitlesHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TitlesHeaderView.h; sourceTree = "<group>"; };
+		5CCE70B9280FE41200860841 /* PW_TitlesHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TitlesHeaderView.m; sourceTree = "<group>"; };
+		5CCE70BB280FE58000860841 /* PW_TitlesItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TitlesItemCell.h; sourceTree = "<group>"; };
+		5CCE70BC280FE58000860841 /* PW_TitlesItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TitlesItemCell.m; sourceTree = "<group>"; };
+		5CCE70BE280FECDC00860841 /* PW_DappBrowserItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBrowserItemCell.h; sourceTree = "<group>"; };
+		5CCE70BF280FECDC00860841 /* PW_DappBrowserItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserItemCell.m; sourceTree = "<group>"; };
+		5CCE70C1280FEDF500860841 /* PW_DappChainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappChainCell.h; sourceTree = "<group>"; };
+		5CCE70C2280FEDF500860841 /* PW_DappChainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappChainCell.m; sourceTree = "<group>"; };
+		5CCE70C4280FF43D00860841 /* PW_DappBanner2Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBanner2Cell.h; sourceTree = "<group>"; };
+		5CCE70C5280FF43D00860841 /* PW_DappBanner2Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBanner2Cell.m; sourceTree = "<group>"; };
+		5CCE70C7281006C900860841 /* PW_DappChainItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappChainItemCell.h; sourceTree = "<group>"; };
+		5CCE70C8281006C900860841 /* PW_DappChainItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappChainItemCell.m; sourceTree = "<group>"; };
+		5CCE70CA28100CF300860841 /* PW_DappManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappManager.h; sourceTree = "<group>"; };
+		5CCE70CB28100CF300860841 /* PW_DappManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappManager.m; sourceTree = "<group>"; };
+		5CCE70CD28100ECF00860841 /* PW_DappRecentBrowseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappRecentBrowseViewController.h; sourceTree = "<group>"; };
+		5CCE70CE28100ECF00860841 /* PW_DappRecentBrowseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappRecentBrowseViewController.m; sourceTree = "<group>"; };
+		5CCE70D028100F9300860841 /* PW_DappRecentBrowseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappRecentBrowseCell.h; sourceTree = "<group>"; };
+		5CCE70D128100F9300860841 /* PW_DappRecentBrowseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappRecentBrowseCell.m; sourceTree = "<group>"; };
+		5CCE70D428101E3300860841 /* PW_DappMoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappMoreModel.h; sourceTree = "<group>"; };
+		5CCE70D528101E3300860841 /* PW_DappMoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappMoreModel.m; sourceTree = "<group>"; };
+		5CCE70D828101FE700860841 /* PW_DappMoreContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappMoreContentView.h; sourceTree = "<group>"; };
+		5CCE70D928101FE700860841 /* PW_DappMoreContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappMoreContentView.m; sourceTree = "<group>"; };
+		5CCE70DB281022B400860841 /* PW_DappMoreItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappMoreItemCell.h; sourceTree = "<group>"; };
+		5CCE70DC281022B400860841 /* PW_DappMoreItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappMoreItemCell.m; sourceTree = "<group>"; };
+		5CCE70DE2810EF7500860841 /* PW_ShareViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ShareViewModel.h; sourceTree = "<group>"; };
+		5CCE70DF2810EF7500860841 /* PW_ShareViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareViewModel.m; sourceTree = "<group>"; };
+		5CCE70E12810EF9B00860841 /* PW_ShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ShareModel.h; sourceTree = "<group>"; };
+		5CCE70E22810EF9B00860841 /* PW_ShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareModel.m; sourceTree = "<group>"; };
+		5CCE70E72810FE6700860841 /* PW_WalletListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletListView.h; sourceTree = "<group>"; };
+		5CCE70E82810FE6700860841 /* PW_WalletListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletListView.m; sourceTree = "<group>"; };
+		5CCE70EA2811055F00860841 /* PW_MarketMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuView.h; sourceTree = "<group>"; };
+		5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuView.m; sourceTree = "<group>"; };
+		5CCE70ED2811073C00860841 /* PW_MarketMenuItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuItemCell.h; sourceTree = "<group>"; };
+		5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuItemCell.m; sourceTree = "<group>"; };
+		5CCE70F02811087800860841 /* PW_MarketMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuModel.h; sourceTree = "<group>"; };
+		5CCE70F12811087800860841 /* PW_MarketMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuModel.m; sourceTree = "<group>"; };
 		5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanTool.h; sourceTree = "<group>"; };
 		5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanTool.m; sourceTree = "<group>"; };
 		5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanViewController.h; sourceTree = "<group>"; };
@@ -2649,6 +2730,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		5C37A8E7280FB9D700AAA728 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				5C37A8E8280FB9F100AAA728 /* UIButton+PW_Button.h */,
+				5C37A8E9280FB9F100AAA728 /* UIButton+PW_Button.m */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
 		5C62CFA027FD327100C1C5DC /* DB */ = {
 			isa = PBXGroup;
 			children = (
@@ -2665,8 +2755,21 @@
 				5C8AAB07280D466400E4ED53 /* PW_NodeManager.m */,
 				5C8AAB18280D689000E4ED53 /* PW_AddressBookManager.h */,
 				5C8AAB19280D689000E4ED53 /* PW_AddressBookManager.m */,
+				5CCE70CA28100CF300860841 /* PW_DappManager.h */,
+				5CCE70CB28100CF300860841 /* PW_DappManager.m */,
+				5C671307281166990088A1A5 /* PW_MarketManager.h */,
+				5C671308281166990088A1A5 /* PW_MarketManager.m */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		5C671303281164950088A1A5 /* NSNumber */ = {
+			isa = PBXGroup;
+			children = (
+				5C671304281164BB0088A1A5 /* NSNumber+PW_Number.h */,
+				5C671305281164BB0088A1A5 /* NSNumber+PW_Number.m */,
+			);
+			path = NSNumber;
 			sourceTree = "<group>";
 		};
 		5C71192427BB7ABC00FE9B51 /* Web3 */ = {
@@ -2763,6 +2866,7 @@
 				5CB76B1127F2E9170068E967 /* Category */,
 				5CB76B1027F2E9110068E967 /* Tool */,
 				5CB76B0C27F2E1CA0068E967 /* Base */,
+				5CCE70E42810FDB500860841 /* Web */,
 				5CB76B0827F2E1A00068E967 /* Create */,
 				5CE7ACCC27F6EC8B00E2188D /* Wallet */,
 				5CE7ACCD27F6EC9500E2188D /* Market */,
@@ -2826,14 +2930,10 @@
 				5CE7ACEC27F6EE9600E2188D /* PW_NavigationController.m */,
 				5CE7ACC927F6EC2200E2188D /* PW_TabBarViewController.h */,
 				5CE7ACCA27F6EC2200E2188D /* PW_TabBarViewController.m */,
-				5CE7ACD027F6ED2100E2188D /* PW_WebViewController.h */,
-				5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */,
 				5CE7AD0127F8624600E2188D /* PW_BaseTableCell.h */,
 				5CE7AD0227F8624700E2188D /* PW_BaseTableCell.m */,
 				5CE7AD0727F98EA100E2188D /* PW_BaseModel.h */,
 				5CE7AD0827F98EA100E2188D /* PW_BaseModel.m */,
-				5C2B3E2D280825A900CC16CE /* PW_Web3ViewController.h */,
-				5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2855,6 +2955,8 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2627F307B40068E967 /* PW_GlobalCategory.h */,
+				5C671303281164950088A1A5 /* NSNumber */,
+				5C37A8E7280FB9D700AAA728 /* UIButton */,
 				5C7ED868280806C100873A53 /* Notification */,
 				5CEF34A927FE9B9E0052BA15 /* UILabel */,
 				5CEF34A527FE97B80052BA15 /* UIFont */,
@@ -2910,6 +3012,8 @@
 			children = (
 				5CB76B3827F57DB20068E967 /* PW_TipTool.h */,
 				5CB76B3927F57DB20068E967 /* PW_TipTool.m */,
+				5CCE70D728101FB000860841 /* View */,
+				5CCE70D328101DF100860841 /* Model */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -2921,6 +3025,55 @@
 				5CB76B3D27F582190068E967 /* UIControl+PW_Block.m */,
 			);
 			path = UIControl;
+			sourceTree = "<group>";
+		};
+		5CCE70D328101DF100860841 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE70D428101E3300860841 /* PW_DappMoreModel.h */,
+				5CCE70D528101E3300860841 /* PW_DappMoreModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5CCE70D728101FB000860841 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE70D828101FE700860841 /* PW_DappMoreContentView.h */,
+				5CCE70D928101FE700860841 /* PW_DappMoreContentView.m */,
+				5CCE70DB281022B400860841 /* PW_DappMoreItemCell.h */,
+				5CCE70DC281022B400860841 /* PW_DappMoreItemCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CCE70E42810FDB500860841 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE70E52810FDC300860841 /* Controller */,
+				5CCE70E62810FDE800860841 /* View */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		5CCE70E52810FDC300860841 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CE7ACD027F6ED2100E2188D /* PW_WebViewController.h */,
+				5CE7ACD127F6ED2100E2188D /* PW_WebViewController.m */,
+				5C2B3E2D280825A900CC16CE /* PW_Web3ViewController.h */,
+				5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CCE70E62810FDE800860841 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE70E72810FE6700860841 /* PW_WalletListView.h */,
+				5CCE70E82810FE6700860841 /* PW_WalletListView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5CE7ACBA27F5CE4900E2188D /* Scan */ = {
@@ -3093,6 +3246,10 @@
 		5CE7ACDA27F6EDEE00E2188D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5CCE70F02811087800860841 /* PW_MarketMenuModel.h */,
+				5CCE70F12811087800860841 /* PW_MarketMenuModel.m */,
+				5C6712FF281142780088A1A5 /* PW_MarketModel.h */,
+				5C671300281142780088A1A5 /* PW_MarketModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3100,6 +3257,14 @@
 		5CE7ACDB27F6EDEE00E2188D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5C6712F9281131960088A1A5 /* PW_MarketHeaderView.h */,
+				5C6712FA281131960088A1A5 /* PW_MarketHeaderView.m */,
+				5C6712FC281131EF0088A1A5 /* PW_MarketCell.h */,
+				5C6712FD281131EF0088A1A5 /* PW_MarketCell.m */,
+				5CCE70EA2811055F00860841 /* PW_MarketMenuView.h */,
+				5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */,
+				5CCE70ED2811073C00860841 /* PW_MarketMenuItemCell.h */,
+				5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3200,6 +3365,8 @@
 			children = (
 				5CE7ACE527F6EE1F00E2188D /* PW_DappViewController.h */,
 				5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */,
+				5CCE70CD28100ECF00860841 /* PW_DappRecentBrowseViewController.h */,
+				5CCE70CE28100ECF00860841 /* PW_DappRecentBrowseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3207,6 +3374,10 @@
 		5CE7ACE027F6EDFB00E2188D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C37A8E4280FB92100AAA728 /* PW_DappBrowserModel.h */,
+				5C37A8E5280FB92100AAA728 /* PW_DappBrowserModel.m */,
+				5CCE70B5280FDE5800860841 /* PW_BannerModel.h */,
+				5CCE70B6280FDE5800860841 /* PW_BannerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3214,6 +3385,22 @@
 		5CE7ACE127F6EDFB00E2188D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5CCE70B2280FDB3C00860841 /* PW_DappBrowserCell.h */,
+				5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */,
+				5CCE70BE280FECDC00860841 /* PW_DappBrowserItemCell.h */,
+				5CCE70BF280FECDC00860841 /* PW_DappBrowserItemCell.m */,
+				5CCE70C4280FF43D00860841 /* PW_DappBanner2Cell.h */,
+				5CCE70C5280FF43D00860841 /* PW_DappBanner2Cell.m */,
+				5CCE70C1280FEDF500860841 /* PW_DappChainCell.h */,
+				5CCE70C2280FEDF500860841 /* PW_DappChainCell.m */,
+				5CCE70C7281006C900860841 /* PW_DappChainItemCell.h */,
+				5CCE70C8281006C900860841 /* PW_DappChainItemCell.m */,
+				5CCE70D028100F9300860841 /* PW_DappRecentBrowseCell.h */,
+				5CCE70D128100F9300860841 /* PW_DappRecentBrowseCell.m */,
+				5CCE70B8280FE41200860841 /* PW_TitlesHeaderView.h */,
+				5CCE70B9280FE41200860841 /* PW_TitlesHeaderView.m */,
+				5CCE70BB280FE58000860841 /* PW_TitlesItemCell.h */,
+				5CCE70BC280FE58000860841 /* PW_TitlesItemCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3310,6 +3497,10 @@
 				5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */,
 				5CEF34B327FEDFB80052BA15 /* PW_ShareTool.h */,
 				5CEF34B427FEDFB80052BA15 /* PW_ShareTool.m */,
+				5CCE70E12810EF9B00860841 /* PW_ShareModel.h */,
+				5CCE70E22810EF9B00860841 /* PW_ShareModel.m */,
+				5CCE70DE2810EF7500860841 /* PW_ShareViewModel.h */,
+				5CCE70DF2810EF7500860841 /* PW_ShareViewModel.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -4361,8 +4552,10 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
@@ -4391,8 +4584,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
@@ -4464,9 +4659,12 @@
 				992E0F6026D5EF9600E1C31B /* TransferPayView.m in Sources */,
 				5AF5D1931D2F7CBA004070D7 /* NSString+RegexCategory.m in Sources */,
 				5E079A3B21D3C90A00924407 /* tommath.c in Sources */,
+				5CCE70BD280FE58000860841 /* PW_TitlesItemCell.m in Sources */,
 				5E079A0121D28A3A00924407 /* GPBCodedOutputStream.m in Sources */,
 				5CB119EA280BC3EE0006BEFB /* PW_MoreCell.m in Sources */,
 				992E0FCD26DE1CC100E1C31B /* WalletCoinModel.m in Sources */,
+				5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */,
+				5CCE70C0280FECDC00860841 /* PW_DappBrowserItemCell.m in Sources */,
 				5C8AAB17280D629600E4ED53 /* PW_AddressBookModel.m in Sources */,
 				5C37A8C5280E9ED400AAA728 /* PW_WalletManageViewController.m in Sources */,
 				5C37A8D7280EBB2400AAA728 /* PW_WalletSetModel.m in Sources */,
@@ -4482,6 +4680,7 @@
 				5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */,
 				9937C8B7271672810064BBC3 /* BrowseModel.m in Sources */,
 				5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */,
+				5C6712FB281131960088A1A5 /* PW_MarketHeaderView.m in Sources */,
 				994AA0F826CA3CE10062F9AF /* MinerFeeCell.m in Sources */,
 				5AF5D16C1D2F7CBA004070D7 /* NSDictionary+SafeAccess.m in Sources */,
 				7918E5D321B2677100A21339 /* UIViewExt.m in Sources */,
@@ -4531,17 +4730,23 @@
 				5AF5D15A1D2F7CBA004070D7 /* NSData+Base64.m in Sources */,
 				9926E0E926EC520300FDF442 /* DAppsShowAlertView.m in Sources */,
 				5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */,
+				5CCE70C3280FEDF500860841 /* PW_DappChainCell.m in Sources */,
+				5CCE70DA28101FE700860841 /* PW_DappMoreContentView.m in Sources */,
 				5AF5D19F1D2F7CBA004070D7 /* NSURL+QueryDictionary.m in Sources */,
 				992EF10E26AA9E5C00F70A94 /* WarningAlertSheetView.m in Sources */,
 				5AF5D1531D2F7CBA004070D7 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				99D2CA462537F81C00C1C196 /* UIView+SetRect.m in Sources */,
 				992EF18A26B3DE9000F70A94 /* ManageBottomView.m in Sources */,
+				5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */,
 				5A8FD9541D2DFC270015D6C0 /* AppDelegate.m in Sources */,
 				5E0799F921D28A3A00924407 /* FieldMask.pbobjc.m in Sources */,
 				5AF5D1651D2F7CBA004070D7 /* NSDate+TimeAgo.m in Sources */,
+				5CCE70E32810EF9B00860841 /* PW_ShareModel.m in Sources */,
 				5AF5D1AA1D2F7CBA004070D7 /* CALayer+UIColor.m in Sources */,
 				5CE7ACD827F6EDB900E2188D /* PW_WalletViewController.m in Sources */,
 				5AF5D1781D2F7CBA004070D7 /* NSDecimalNumber+Extensions.m in Sources */,
+				5CCE70E92810FE6700860841 /* PW_WalletListView.m in Sources */,
+				5CCE70C6280FF43D00860841 /* PW_DappBanner2Cell.m in Sources */,
 				1FA8EF7421B824F900B4E28E /* TYAlertController+TransitionAnimate.m in Sources */,
 				9926E15226F1E41B00FDF442 /* SWFingerprintLock.m in Sources */,
 				5E0799ED21D28A3A00924407 /* GPBWireFormat.m in Sources */,
@@ -4578,6 +4783,7 @@
 				99D804D126A5861700E9B5F8 /* FirstInputViewController.m in Sources */,
 				5C8AAAEE280D34C900E4ED53 /* PW_DenominatedCurrencyViewController.m in Sources */,
 				9929D59D26C3AFC80066F1D6 /* AddressBookCell.m in Sources */,
+				5CCE70C9281006CA00860841 /* PW_DappChainItemCell.m in Sources */,
 				7918E5F721B2835100A21339 /* ScanSuccessJumpVC.m in Sources */,
 				5CB76B2127F2FD3C0068E967 /* PW_MnemonicImportViewController.m in Sources */,
 				99D804D926A6AD6100E9B5F8 /* CreateIDViewController.m in Sources */,
@@ -4605,11 +4811,13 @@
 				5AF5D3451D335C9A004070D7 /* NSDate+DateTools.m in Sources */,
 				5C7ED86E2808137F00873A53 /* NSNotification+PW_Notification.m in Sources */,
 				992EF19A26B8DCB400F70A94 /* ManageTopTableViewCell.m in Sources */,
+				5CCE70B4280FDB3C00860841 /* PW_DappBrowserCell.m in Sources */,
 				99D2CA2D2537F7EC00C1C196 /* IntrinsicView.m in Sources */,
 				5AF5D1A11D2F7CBA004070D7 /* NSMutableURLRequest+Upload.m in Sources */,
 				992EF15926AFA9F300F70A94 /* TokenMessageView.m in Sources */,
 				5AF5D1621D2F7CBA004070D7 /* NSDate+Formatter.m in Sources */,
 				992E0F5426D4E7F700E1C31B /* AssetTopView.m in Sources */,
+				5C671306281164BC0088A1A5 /* NSNumber+PW_Number.m in Sources */,
 				5CEF34CA2805264C0052BA15 /* PW_SelectWalletTypeViewController.m in Sources */,
 				5AF5D1591D2F7CBA004070D7 /* NSData+APNSToken.m in Sources */,
 				5CE7ACF627F841B100E2188D /* PW_Button.m in Sources */,
@@ -4635,6 +4843,7 @@
 				5AF5D1671D2F7CBA004070D7 /* NSDateFormatter+Make.m in Sources */,
 				5E0799F821D28A3A00924407 /* Empty.pbobjc.m in Sources */,
 				5AF5D1981D2F7CBA004070D7 /* NSString+Trims.m in Sources */,
+				5CCE70D228100F9300860841 /* PW_DappRecentBrowseCell.m in Sources */,
 				992E0F3426CCD9CC00E1C31B /* ETHBalanceList.m in Sources */,
 				5E079A2521D3C5F200924407 /* base58.c in Sources */,
 				5E0799EB21D28A3A00924407 /* GPBDescriptor.m in Sources */,
@@ -4643,6 +4852,7 @@
 				992EF18D26B7A09100F70A94 /* ChooseWalletView.m in Sources */,
 				5E079A0921D3C08700924407 /* bitcoin.mm in Sources */,
 				5AF5D14E1D2F7CBA004070D7 /* NSManagedObject+Extensions.m in Sources */,
+				5C671309281166990088A1A5 /* PW_MarketManager.m in Sources */,
 				992EF20126BA681C00F70A94 /* BaseTableViewController.m in Sources */,
 				5AF5D18A1D2F7CBA004070D7 /* NSString+Base64.m in Sources */,
 				1FA8EF7721B824F900B4E28E /* TYShowAlertView.m in Sources */,
@@ -4661,6 +4871,7 @@
 				992E0F5A26D500F800E1C31B /* AssetTableCell.m in Sources */,
 				5AF5D19B1D2F7CBA004070D7 /* NSString+XML.m in Sources */,
 				992EF16626B136FB00F70A94 /* AddressBookViewController.m in Sources */,
+				5C6712FE281131EF0088A1A5 /* PW_MarketCell.m in Sources */,
 				992E0F7726D8D97A00E1C31B /* SearchViewController.m in Sources */,
 				5AF5D1A31D2F7CBA004070D7 /* NSUserDefaults+iCloudSync.m in Sources */,
 				99D2CA472537F81C00C1C196 /* UIImage+ImageEffects.m in Sources */,
@@ -4674,13 +4885,16 @@
 				5E0799F321D28A3A00924407 /* Any.pbobjc.m in Sources */,
 				5C37A8D1280EB14400AAA728 /* PW_WalletManager.m in Sources */,
 				5AF5D1691D2F7CBA004070D7 /* NSDictionary+Block.m in Sources */,
+				5CCE70CC28100CF400860841 /* PW_DappManager.m in Sources */,
 				5CA0F146280E56DC00DE8DDB /* PW_NetworkManageCell.m in Sources */,
 				5CEF34C428041C7C0052BA15 /* PW_NetworkModel.m in Sources */,
 				5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */,
 				9929D58B26C122380066F1D6 /* SecretFreeViewController.m in Sources */,
 				5CE7ACD227F6ED2100E2188D /* PW_WebViewController.m in Sources */,
+				5CCE70BA280FE41200860841 /* PW_TitlesHeaderView.m in Sources */,
 				5AF5D1701D2F7CBA004070D7 /* NSFileHandle+readLine.m in Sources */,
 				5CEF34B827FEEBDE0052BA15 /* PW_TokenInfoViewController.m in Sources */,
+				5C37A8E6280FB92100AAA728 /* PW_DappBrowserModel.m in Sources */,
 				5AF5D16E1D2F7CBA004070D7 /* NSDictionary+XML.m in Sources */,
 				5C8AAAE8280C1FE900E4ED53 /* PW_LanguageCell.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
@@ -4746,6 +4960,7 @@
 				5CEF34D92806CA510052BA15 /* PW_SearchRecommendCell.m in Sources */,
 				5CEF34D32806BE470052BA15 /* PW_SearchDappCurrencyViewController.m in Sources */,
 				5C7ED87128081C9C00873A53 /* PW_SearchHeaderView.m in Sources */,
+				5CCE70CF28100ECF00860841 /* PW_DappRecentBrowseViewController.m in Sources */,
 				5AF5D1601D2F7CBA004070D7 /* NSDate+CupertinoYankee.m in Sources */,
 				99D2C9EF2537F66000C1C196 /* BaseNavinationViewController.m in Sources */,
 				5AF5D1911D2F7CBA004070D7 /* NSString+MIME.m in Sources */,
@@ -4774,11 +4989,14 @@
 				5AF5D3441D335C9A004070D7 /* DTTimePeriodGroup.m in Sources */,
 				5CEF34DC2806D7250052BA15 /* PW_SearchCurrencyCell.m in Sources */,
 				9926E00526E2100200FDF442 /* GasPriceModel.m in Sources */,
+				5CCE70D628101E3300860841 /* PW_DappMoreModel.m in Sources */,
 				5CB76B2527F306D40068E967 /* UITextField+PW_Global.m in Sources */,
 				99D804D626A6709500E9B5F8 /* BrowseViewController.m in Sources */,
+				5C671301281142780088A1A5 /* PW_MarketModel.m in Sources */,
 				5C8AAB0B280D4B6600E4ED53 /* PW_NodeListViewController.m in Sources */,
 				5AF5D1A01D2F7CBA004070D7 /* NSURLConnection+SelfSigned.m in Sources */,
 				5AF5D1961D2F7CBA004070D7 /* NSString+Score.m in Sources */,
+				5C37A8EA280FB9F100AAA728 /* UIButton+PW_Button.m in Sources */,
 				5CB76B0F27F2E2990068E967 /* PW_FirstChooseViewController.m in Sources */,
 				5B02FD5B21FFF6460040025E /* YKUIConfig.m in Sources */,
 				5AF5D1681D2F7CBA004070D7 /* NSDictionary+Additions.m in Sources */,
@@ -4803,6 +5021,7 @@
 				5E0799E921D28A3A00924407 /* GPBExtensionRegistry.m in Sources */,
 				5AF5D1A21D2F7CBA004070D7 /* NSURLRequest+ParamsFromDictionary.m in Sources */,
 				99D2CA442537F81C00C1C196 /* NSDate+Helper.m in Sources */,
+				5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */,
 				992EF16F26B1506200F70A94 /* AboutUsViewController.m in Sources */,
 				992E0F6B26D783EF00E1C31B /* ChooseCoinTypeModel.m in Sources */,
 				5B08D8C521F80D66002CC9A8 /* HwcCustomUISwitch.m in Sources */,
@@ -4848,6 +5067,7 @@
 				5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */,
 				9929D59426C26DCB0066F1D6 /* ChooseAddressTypeVC.m in Sources */,
 				9926DFEF26DF7C0500FDF442 /* NodeTableViewCell.m in Sources */,
+				5CCE70DD281022B400860841 /* PW_DappMoreItemCell.m in Sources */,
 				5E079A2221D3C5F200924407 /* sha256.cpp in Sources */,
 				1FA8EF7321B824F900B4E28E /* TYAlertFadeAnimation.m in Sources */,
 				992E0F3626CCD9CC00E1C31B /* ETHCreateAccountResult.m in Sources */,
@@ -4860,6 +5080,7 @@
 				5CA0F14C280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m in Sources */,
 				5CB8BB9927E1C6D800C73976 /* MessageTransferCell.m in Sources */,
 				5CB119D728097F2E0006BEFB /* PW_ChooseCurrencyViewController.m in Sources */,
+				5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */,
 				5C37A8DA280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m in Sources */,
 				992EF16926B137F700F70A94 /* NoDataShowView.m in Sources */,
 				5AF5D1831D2F7CBA004070D7 /* NSObject+KVOBlocks.m in Sources */,
@@ -4916,6 +5137,7 @@
 				992E0F5726D4FDA900E1C31B /* AssetSortView.m in Sources */,
 				5AF5D1751D2F7CBA004070D7 /* NSInvocation+Block.m in Sources */,
 				5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */,
+				5CCE70E02810EF7600860841 /* PW_ShareViewModel.m in Sources */,
 				992EF17626B250C000F70A94 /* MainTopWalletView.m in Sources */,
 				9937C894270161830064BBC3 /* CustomCurrencyVC.m in Sources */,
 				9926DFF526DFAE3500FDF442 /* NodeSetTableCell.m in Sources */,
@@ -5095,6 +5317,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = TokenWalletProject/TokenWalletProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -5247,6 +5470,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = TokenWalletProject/TokenWalletProject.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

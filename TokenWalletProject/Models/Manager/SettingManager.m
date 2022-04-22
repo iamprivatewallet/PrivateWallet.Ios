@@ -84,7 +84,7 @@
     } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
         return @"CVN";
     } else {
-        return @"";
+        return @"ETH";
     }
 }
 -(NSString *)getChainCoinName {

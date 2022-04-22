@@ -19,10 +19,12 @@ static void * eventsBlockKey = &eventsBlockKey;
 @implementation UIView (PW_View)
 
 - (void)addTapTarget:(nullable id)target action:(SEL)action {
+    self.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
     [self addGestureRecognizer:tap];
 }
 - (void)addTapBlock:(PW_ViewBlock)block {
+    self.userInteractionEnabled = YES;
     self.viewBlock = block;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(__tapAction:)];
     [self addGestureRecognizer:tap];
@@ -37,6 +39,11 @@ static void * eventsBlockKey = &eventsBlockKey;
 }
 - (PW_ViewBlock)viewBlock {
     return objc_getAssociatedObject(self, &eventsBlockKey);
+}
+
+- (void)setCornerRadius:(CGFloat)radius {
+    self.layer.cornerRadius = radius;
+    self.layer.masksToBounds = YES;
 }
 
 - (void)setRadius:(CGFloat)radius corners:(UIRectCorner)corners {

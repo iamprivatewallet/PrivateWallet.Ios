@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PW_DappMoreModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showBackupTipPrivateKeySureBlock:(void (^)(void))block;
 + (void)showBackupTipDesc:(NSString *)desc sureBlock:(void (^)(void))block;
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block;
+/// dapp钱包不支持
++ (void)showDappWalletNotSupportedWithModel:(PW_DappModel *)model sureBlock:(void(^)(void))block;
+/// dapp免责声明
++ (void)showDappDisclaimerUrlStr:(NSString *)urlStr sureBlock:(void(^)(void))block;
+/// dapp
++ (void)showDappMoreTitle:(NSString *)title dataArr:(NSArray<PW_DappMoreModel *> *)dataArr sureBlock:(void(^)(PW_DappMoreModel *model))block;
 
 @end
 

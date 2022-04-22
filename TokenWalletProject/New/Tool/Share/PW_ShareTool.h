@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_ShareTool : NSObject
 
-+ (void)shareTitle:(nullable NSString *)title image:(nullable UIImage *)image urlStr:(nullable NSString *)urlStr;
-+ (void)shareTitle:(nullable NSString *)title image:(nullable UIImage *)image urlStr:(nullable NSString *)urlStr completionBlock:(nullable void(^)(BOOL completed))completionBlock;
++ (void)shareTitle:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data;
++ (void)shareTitle:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data completionBlock:(nullable void(^)(BOOL completed))completionBlock;
++ (void)shareIcon:(UIImage *)icon title:(NSString *)title subTitle:(NSString *)subTitle data:(nullable id)data completionBlock:(nullable void(^)(BOOL completed))completionBlock;
 
 @end
 

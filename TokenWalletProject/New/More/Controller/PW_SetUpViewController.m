@@ -38,7 +38,8 @@
 - (void)buildData {
     PW_SetUpModel *languageMdoel = [PW_SetUpModel SetUpIconName:@"icon_setup_language" title:LocalizedStr(@"text_multilingual") desc:[LanguageTool currentLanguage].name];
     PW_SetUpModel *denominatedModel = [PW_SetUpModel SetUpIconName:@"icon_setup_denominated" title:LocalizedStr(@"text_denominatedCurrency") desc:[PW_DenominatedCurrencyTool typeStr]];
-    PW_SetUpModel *redGreenModel = [PW_SetUpModel SetUpIconName:@"icon_setup_redGreen" title:LocalizedStr(@"text_redRoseGreen") isSwitch:[PW_RedRoseGreenFellTool isOpen]];
+    PW_SetUpModel *redGreenModel = [PW_SetUpModel SetUpIconName:@"icon_setup_redGreen" title:LocalizedStr(@"text_redRoseGreen") isSwitch:YES];
+    redGreenModel.isOpen = [PW_RedRoseGreenFellTool isOpen];
     PW_SetUpModel *nodeSetModel = [PW_SetUpModel SetUpIconName:@"icon_setup_node" title:LocalizedStr(@"text_nodeSet")];
     [self.dataArr addObjectsFromArray:@[languageMdoel,denominatedModel,redGreenModel,nodeSetModel]];
     [self.tableView reloadData];

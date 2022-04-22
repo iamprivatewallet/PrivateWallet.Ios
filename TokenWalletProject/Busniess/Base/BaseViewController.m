@@ -60,13 +60,25 @@
     }
 }
 - (void)setNavNoLineTitle:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction {
-    [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction isWhiteBg:YES isNoLine:YES];
+    if(self.navigationController.viewControllers.count>1){
+        [self initBarWithTitle:title leftImg:IMAGE(@"icon_back") leftTitle:nil leftAction:@selector(backPrecious) rightTitle:rightTitle rightImage:nil rightAction:rightAction isWhiteBg:YES isNoLine:YES];
+    }else{
+        [self initBarWithTitle:title leftImg:nil leftTitle:nil leftAction:nil rightTitle:rightTitle rightImage:nil rightAction:rightAction isWhiteBg:YES isNoLine:YES];
+    }
 }
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
-    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
+    if(self.navigationController.viewControllers.count>1){
+        [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES];
+    }else{
+        [self initTitleWithTitle:title leftImg:nil leftAction:nil rightImage:rightImg rightAction:rightAction isNoLine:YES];
+    }
 }
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction isWhiteBg:(BOOL)isWhiteBg {
-    [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES isWhiteBg:isWhiteBg];
+    if(self.navigationController.viewControllers.count>1){
+        [self initTitleWithTitle:title leftImg:IMAGE(@"icon_back") leftAction:@selector(backPrecious) rightImage:rightImg rightAction:rightAction isNoLine:YES isWhiteBg:isWhiteBg];
+    }else{
+        [self initTitleWithTitle:title leftImg:nil leftAction:nil rightImage:rightImg rightAction:rightAction isNoLine:YES isWhiteBg:isWhiteBg];
+    }
 }
 - (void)setNavNoLineTitle:(NSString *)title leftTitle:(NSString *)leftTitle rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
     [self initBarWithTitle:title leftImg:nil leftTitle:leftTitle leftAction:nil rightTitle:nil rightImage:rightImg rightAction:rightAction isWhiteBg:YES isNoLine:YES];

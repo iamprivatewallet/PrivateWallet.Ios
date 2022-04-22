@@ -35,9 +35,12 @@ static NSString * const WalletTokenItemURL = @"api/wallet/token/item";
 //币种汇率
 static NSString * const WalletTokenPriceURL = @"api/wallet/token/price";
 //币种行情
-static NSString * const WalletTickerMain = @"api/wallet/ticker/main";
+static NSString * const WalletTickerMainURL = @"api/wallet/ticker/main";
+static NSString * const WalletMarketTickerWS = @"wss://chain.kimchiii.com/ws/api/wallet/ticker";
 //网络管理
 static NSString * const WalletTokenChainURL = @"api/wallet/token/chain";
+//Dapp
+static NSString * const WalletHomeMain = @"api/wallet/home/main";
 //DAPP推荐
 static NSString * const WalletDappListURL = @"api/wallet/dapp/list";
 //APP更新

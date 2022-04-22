@@ -13,6 +13,10 @@ static NSString * _Nonnull PW_RedRoseGreenFellKey = @"RedRoseGreenFellKey";
 @implementation PW_RedRoseGreenFellTool
 
 + (void)setOpen:(BOOL)isOpen {
+    if ([self isOpen]==isOpen) {
+        return;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRedRoseGreenFellNotification object:nil];
     [[NSUserDefaults standardUserDefaults] setBool:isOpen forKey:PW_RedRoseGreenFellKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

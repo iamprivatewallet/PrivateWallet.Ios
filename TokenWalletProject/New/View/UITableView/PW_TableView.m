@@ -15,6 +15,7 @@
     if (self) {
         self.backgroundColor = [UIColor g_bgColor];
         self.separatorColor = [UIColor g_lineColor];
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }

@@ -126,9 +126,14 @@
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconIv.mas_right).offset(8);
-        make.right.offset(-10);
         make.centerY.offset(0);
     }];
+}
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+    CGSize size = layoutAttributes.size;
+    size.width = [self.nameLb.text boundingRectWithSize:CGSizeMake(MAXFLOAT, size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont pw_semiBoldFontOfSize:16]} context:nil].size.width+10+20+8+10+10;
+    layoutAttributes.size = size;
+    return layoutAttributes;
 }
 
 @end

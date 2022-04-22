@@ -19,5 +19,7 @@
 #import "UIView+PW_View.h"
 #import "UIFont+PW_Font.h"
 #import "UILabel+PW_Label.h"
+#import "UIButton+PW_Button.h"
+#import "NSNumber+PW_Number.h"
 
 #endif /* GlobalCategory_h */

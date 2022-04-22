@@ -11,6 +11,8 @@
 @interface PW_Button ()
 
 @property (nonatomic, assign) CGFloat space;
+@property (nonatomic, strong) UIFont *normalFont;
+@property (nonatomic, strong) UIFont *selectedFont;
 
 @end
 
@@ -19,7 +21,13 @@
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    self.titleLabel.font = selected?self.selectedFont:self.normalFont;
+    if (self.selectedFont) {
+        self.titleLabel.font = selected?self.selectedFont:self.normalFont;
+    }
+}
+- (void)pw_setNormalFont:(UIFont *)normalFont selectedFont:(UIFont *)selectedFont {
+    self.normalFont = normalFont;
+    self.selectedFont = selectedFont;
 }
 - (void)setNormalFont:(UIFont *)normalFont {
     _normalFont = normalFont;

@@ -51,7 +51,7 @@
     } completion:nil];
     [self createItems:contentView address:address name:name];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [PW_ShareTool shareTitle:nil image:[contentView convertViewToImage] urlStr:nil];
+        [PW_ShareTool shareTitle:nil subTitle:AppTestflightUrl data:[contentView convertViewToImage]];
     });
 }
 + (void)createItems:(UIView *)contentView address:(NSString *)address name:(NSString *)name {

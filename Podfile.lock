@@ -65,10 +65,13 @@ PODS:
     - PromiseKit/CorePromise
   - RDVTabBarController (1.3.0)
   - ReactiveObjC (3.1.1)
+  - SDCycleScrollView (1.82):
+    - SDWebImage (>= 5.0.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - secp256k1.c (0.1.2)
+  - SocketRocket (0.6.0)
   - Starscream (4.0.4)
   - SVProgressHUD (2.2.5)
   - UICountingLabel (1.2.0)
@@ -98,7 +101,9 @@ DEPENDENCIES:
   - PNChart
   - RDVTabBarController
   - ReactiveObjC (= 3.1.1)
+  - SDCycleScrollView (= 1.82)
   - SDWebImage (= 5.11.1)
+  - SocketRocket
   - SVProgressHUD
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
   - web3swift (= 2.5.0)
@@ -114,8 +119,10 @@ SPEC REPOS:
     - MJExtension
     - PromiseKit
     - ReactiveObjC
+    - SDCycleScrollView
     - SDWebImage
     - secp256k1.c
+    - SocketRocket
     - Starscream
     - "UITableView+FDTemplateLayoutCell"
     - web3swift
@@ -155,14 +162,16 @@ SPEC CHECKSUMS:
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   RDVTabBarController: 28a5c6546b9991cf2712d59947324c6b06603e14
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   web3swift: 31ecb7a7da543f851344cdd64badea94c439b0d9
 
-PODFILE CHECKSUM: 96156023b45ec39d759902bd94bee08a4031e7e2
+PODFILE CHECKSUM: 3fc6849fa24879af5ab479a6acfb752691923e20
 
 COCOAPODS: 1.11.2

@@ -12,5 +12,6 @@
 #import "PW_ToastTool.h"
 #import "PW_ViewTool.h"
 #import "PW_TipTool.h"
+#import "PW_ShareTool.h"
 
 #endif /* PW_Tool_h */

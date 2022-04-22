@@ -51,17 +51,21 @@
     return btn;
 }
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:weight];
     [btn setTitleColor:titleColor forState:UIControlStateNormal];
     [btn setTitleColor:[titleColor colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
-    btn.layer.cornerRadius = cornerRadius;
-    btn.layer.masksToBounds = YES;
+    if (cornerRadius>0) {
+        btn.layer.cornerRadius = cornerRadius;
+        btn.layer.masksToBounds = YES;
+    }
     if(backgroundColor){
         UIImage *normalImage = [UIImage imageWithColor:backgroundColor size:CGSizeMake(1, 1)];
+        UIImage *highlightImage = [UIImage imageWithColor:[backgroundColor colorWithAlphaComponent:0.8] size:CGSizeMake(1, 1)];
         UIImage *disabledImage = [UIImage imageWithColor:[backgroundColor colorWithAlphaComponent:0.5] size:CGSizeMake(1, 1)];
         [btn setBackgroundImage:normalImage forState:UIControlStateNormal];
+        [btn setBackgroundImage:highlightImage forState:UIControlStateHighlighted];
         [btn setBackgroundImage:disabledImage forState:UIControlStateDisabled];
     }
     if(target&&action){

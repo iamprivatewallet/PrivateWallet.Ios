@@ -54,6 +54,19 @@
     return COLORFORRGB(0xFFEFE6);
 }
 
++ (UIColor *)g_roseColor {
+    if ([PW_RedRoseGreenFellTool isOpen]) {
+        return [UIColor g_hex:@"#FF5E5E"];
+    }
+    return [UIColor g_hex:@"#1AC190"];
+}
++ (UIColor *)g_fallColor {
+    if ([PW_RedRoseGreenFellTool isOpen]) {
+        return [UIColor g_hex:@"#1AC190"];
+    }
+    return [UIColor g_hex:@"#FF5E5E"];
+}
+
 + (UIColor *)g_bgColor {
     return [UIColor whiteColor];
 }
@@ -83,6 +96,9 @@
 }
 + (UIColor *)g_grayTextColor {
     return COLORFORRGB(0x919CAA);
+}
++ (UIColor *)g_darkTextColor {
+    return [UIColor g_hex:@"#0A2140" alpha:0.7];
 }
 + (UIColor *)g_lightTextColor {
     return [UIColor colorWithWhite:1.0 alpha:0.7];

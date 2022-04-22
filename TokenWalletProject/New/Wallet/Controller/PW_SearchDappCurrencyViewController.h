@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_SearchDappCurrencyViewController : PW_BaseViewController
 
+@property (nonatomic, copy) NSString *searchStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

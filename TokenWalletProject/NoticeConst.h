@@ -16,3 +16,5 @@ static NSString * const kChangeWalletNotification = @"kChangeWalletNotification"
 static NSString * const kRefreshCoinListNotification = @"RefreshCoinList_Notification";
 
 static NSString * const kReloadWalletNotification = @"ReloadWalletNotification";
+
+static NSString * const kRedRoseGreenFellNotification = @"RedRoseGreenFellNotification";

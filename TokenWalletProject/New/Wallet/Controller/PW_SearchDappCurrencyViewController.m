@@ -33,6 +33,7 @@
     
     [self makeViews];
     [self requestDappData];
+    self.searchTF.text = self.searchStr;
 }
 - (void)closeAction {
     [self.navigationController popViewControllerAnimated:YES];
@@ -95,6 +96,9 @@
         [self.view hideLoadingIndicator];
         self.recommandDappList = [PW_DappModel mj_objectArrayWithKeyValuesArray:data];
         [self reloadTableSection:0];
+        if (self.isSearch) {
+            [self refreshDappDataWithValue:self.searchStr];
+        }
     } errBlock:^(NSString *msg) {
         [self.view hideLoadingIndicator];
         [self showError:msg];
@@ -136,11 +140,14 @@
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
+- (void)searchWithValue:(NSString *)value {
+    self.isSearch = YES;
+    [self refreshDappDataWithValue:[value trim]];
+    [self requestCurrencyWithValue:[value trim]];
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    self.isSearch = YES;
-    [self refreshDappDataWithValue:[textField.text trim]];
-    [self requestCurrencyWithValue:[textField.text trim]];
+    [self searchWithValue:textField.text];
     [textField endEditing:YES];
     return [[textField.text trim] isNoEmpty];
 }

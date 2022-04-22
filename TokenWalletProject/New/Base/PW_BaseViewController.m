@@ -52,11 +52,17 @@
 - (void)dismissMessage {
     [[ToastHelper sharedToastHelper] dismissToast];
 }
-
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (_noDataView) {
+        [self.view bringSubviewToFront:_noDataView];
+    }
+}
 #pragma make - lazy
 - (NoDataShowView *)noDataView {
     if(!_noDataView) {
         _noDataView = [NoDataShowView showView:self.view image:@"icon_noData" text:LocalizedStr(@"text_noData") offsetY:0];
+        _noDataView.hidden = YES;
     }
     return _noDataView;
 }
