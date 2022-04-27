@@ -13,5 +13,7 @@
 #import "PW_ViewTool.h"
 #import "PW_TipTool.h"
 #import "PW_ShareTool.h"
+#import "PW_AlertTool.h"
+#import "PW_DappAlertTool.h"
 
 #endif /* PW_Tool_h */

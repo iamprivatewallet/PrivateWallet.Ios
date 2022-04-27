@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (Global)
 
+- (UIColor *)alpha:(CGFloat)alpha;
+
 + (UIColor *)g_hex:(NSString *)hexStr;
 + (UIColor *)g_hex:(NSString *)hexStr alpha:(CGFloat)alpha;
 + (UIColor *)g_randomColor;

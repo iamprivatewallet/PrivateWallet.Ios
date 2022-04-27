@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (PW_String)
 
++ (NSString *)emptyStr:(NSString *)str;
+
 + (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval;
 + (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval format:(NSString *)format;
 

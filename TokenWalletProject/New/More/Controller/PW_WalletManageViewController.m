@@ -105,14 +105,12 @@
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         Wallet *model = self.dataList[indexPath.row];
         if (model.isImport==NO&&![User_manager isBackup]) {
-            UIAlertController *alertC = [UIAlertController alertControllerWithTitle:LocalizedStr(@"text_prompt") message:LocalizedStr(@"text_noBackupTip") preferredStyle:UIAlertControllerStyleAlert];
-            [alertC addAction:[UIAlertAction actionWithTitle:LocalizedStr(@"text_cancel") style:UIAlertActionStyleCancel handler:nil]];
-            [alertC addAction:[UIAlertAction actionWithTitle:LocalizedStr(@"text_backupMnemonics") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [PW_AlertTool showAlertTitle:LocalizedStr(@"text_prompt") desc:LocalizedStr(@"text_noBackupTip") sureBlock:^{
                 PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
                 vc.isFirst = NO;
                 vc.wordStr = User_manager.currentUser.user_mnemonic;
                 [self.navigationController pushViewController:vc animated:YES];
-            }]];
+            }];
             return;
         }
         [[PW_WalletManager shared] deleteWallet:model];

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -258,6 +258,11 @@
 		5CA2E2C427BE4FF7002E2930 /* MOSWalletContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */; };
 		5CA3463E280BF60F00E18D92 /* PW_ShareAppTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */; };
 		5CA34641280C028100E18D92 /* PW_AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA34640280C028100E18D92 /* PW_AboutUsViewController.m */; };
+		5CA451D728168872006FFA3B /* brewchain.js in Resources */ = {isa = PBXBuildFile; fileRef = 5CA451D628168872006FFA3B /* brewchain.js */; };
+		5CA451E42817D28A006FFA3B /* PW_Solana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451E32817D28A006FFA3B /* PW_Solana.swift */; };
+		5CA451E72817FA60006FFA3B /* Solana in Frameworks */ = {isa = PBXBuildFile; productRef = 5CA451E62817FA60006FFA3B /* Solana */; };
+		5CA451EA28180206006FFA3B /* SeedPhraseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */; };
+		5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */; };
 		5CB119D728097F2E0006BEFB /* PW_ChooseCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */; };
 		5CB119DA28097F970006BEFB /* PW_ChooseCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D928097F970006BEFB /* PW_ChooseCurrencyCell.m */; };
 		5CB119DD280AAE6B0006BEFB /* PW_TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119DC280AAE6B0006BEFB /* PW_TransferViewController.m */; };
@@ -310,6 +315,9 @@
 		5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */; };
 		5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */; };
 		5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70F12811087800860841 /* PW_MarketMenuModel.m */; };
+		5CE19F9D28192FA8008C37A3 /* PW_DappAlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */; };
+		5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */; };
+		5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA228193390008C37A3 /* PW_DappPayModel.m */; };
 		5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */; };
 		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
 		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
@@ -1067,6 +1075,11 @@
 		5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareAppTool.m; sourceTree = "<group>"; };
 		5CA3463F280C028000E18D92 /* PW_AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AboutUsViewController.h; sourceTree = "<group>"; };
 		5CA34640280C028100E18D92 /* PW_AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AboutUsViewController.m; sourceTree = "<group>"; };
+		5CA451D628168872006FFA3B /* brewchain.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = brewchain.js; sourceTree = "<group>"; };
+		5CA451E32817D28A006FFA3B /* PW_Solana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PW_Solana.swift; sourceTree = "<group>"; };
+		5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedPhraseGenerator.swift; sourceTree = "<group>"; };
+		5CA451EB2818F845006FFA3B /* PW_SolanaTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SolanaTest.h; sourceTree = "<group>"; };
+		5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SolanaTest.m; sourceTree = "<group>"; };
 		5CB119D528097F2E0006BEFB /* PW_ChooseCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyViewController.h; sourceTree = "<group>"; };
 		5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ChooseCurrencyViewController.m; sourceTree = "<group>"; };
 		5CB119D828097F970006BEFB /* PW_ChooseCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyCell.h; sourceTree = "<group>"; };
@@ -1170,6 +1183,12 @@
 		5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuItemCell.m; sourceTree = "<group>"; };
 		5CCE70F02811087800860841 /* PW_MarketMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuModel.h; sourceTree = "<group>"; };
 		5CCE70F12811087800860841 /* PW_MarketMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuModel.m; sourceTree = "<group>"; };
+		5CE19F9B28192FA8008C37A3 /* PW_DappAlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappAlertTool.h; sourceTree = "<group>"; };
+		5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappAlertTool.m; sourceTree = "<group>"; };
+		5CE19F9E28192FDE008C37A3 /* PW_AlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AlertTool.h; sourceTree = "<group>"; };
+		5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AlertTool.m; sourceTree = "<group>"; };
+		5CE19FA128193390008C37A3 /* PW_DappPayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappPayModel.h; sourceTree = "<group>"; };
+		5CE19FA228193390008C37A3 /* PW_DappPayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappPayModel.m; sourceTree = "<group>"; };
 		5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanTool.h; sourceTree = "<group>"; };
 		5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanTool.m; sourceTree = "<group>"; };
 		5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanViewController.h; sourceTree = "<group>"; };
@@ -1739,6 +1758,7 @@
 				5AF5D2F91D2FA0E3004070D7 /* CoreData.framework in Frameworks */,
 				5AF5D2F71D2FA0D0004070D7 /* AssetsLibrary.framework in Frameworks */,
 				5AF5D2F51D2FA0C7004070D7 /* CFNetwork.framework in Frameworks */,
+				5CA451E72817FA60006FFA3B /* Solana in Frameworks */,
 				5AF5D2F31D2FA0B9004070D7 /* Foundation.framework in Frameworks */,
 				5AF5D2F11D2FA0B0004070D7 /* CoreGraphics.framework in Frameworks */,
 				5AF5D2EF1D2FA0A5004070D7 /* SystemConfiguration.framework in Frameworks */,
@@ -2846,6 +2866,25 @@
 			path = RedRoseGreenFell;
 			sourceTree = "<group>";
 		};
+		5CA451DF2817CF03006FFA3B /* Solana */ = {
+			isa = PBXGroup;
+			children = (
+				5CA451E828180205006FFA3B /* SeedPhraseGenerator */,
+				5CA451E32817D28A006FFA3B /* PW_Solana.swift */,
+				5CA451EB2818F845006FFA3B /* PW_SolanaTest.h */,
+				5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */,
+			);
+			path = Solana;
+			sourceTree = "<group>";
+		};
+		5CA451E828180205006FFA3B /* SeedPhraseGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */,
+			);
+			path = SeedPhraseGenerator;
+			sourceTree = "<group>";
+		};
 		5CB119DE280ABEA40006BEFB /* Slider */ = {
 			isa = PBXGroup;
 			children = (
@@ -3010,6 +3049,10 @@
 		5CB76B3627F57D080068E967 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
+				5CE19F9E28192FDE008C37A3 /* PW_AlertTool.h */,
+				5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */,
+				5CE19F9B28192FA8008C37A3 /* PW_DappAlertTool.h */,
+				5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */,
 				5CB76B3827F57DB20068E967 /* PW_TipTool.h */,
 				5CB76B3927F57DB20068E967 /* PW_TipTool.m */,
 				5CCE70D728101FB000860841 /* View */,
@@ -3032,6 +3075,8 @@
 			children = (
 				5CCE70D428101E3300860841 /* PW_DappMoreModel.h */,
 				5CCE70D528101E3300860841 /* PW_DappMoreModel.m */,
+				5CE19FA128193390008C37A3 /* PW_DappPayModel.h */,
+				5CE19FA228193390008C37A3 /* PW_DappPayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3639,6 +3684,7 @@
 		5E079A2921D3C78100924407 /* js */ = {
 			isa = PBXGroup;
 			children = (
+				5CA451D628168872006FFA3B /* brewchain.js */,
 				5C34201727D7421900A2630B /* brewchain.js */,
 				99FD3FAB26DF714C00D2D3F3 /* web3.js */,
 				5B08D8C621F82406002CC9A8 /* cwv.js */,
@@ -3764,6 +3810,7 @@
 			children = (
 				992E0F0926CCAC4800E1C31B /* FchainTool.h */,
 				992E0F0826CCAC4800E1C31B /* FchainTool.m */,
+				5CA451DF2817CF03006FFA3B /* Solana */,
 				5E0799A421D28A3A00924407 /* objectivec */,
 				5E07992821D27E5A00924407 /* protobuf */,
 				5E079A0421D3C00700924407 /* SDK */,
@@ -4363,6 +4410,9 @@
 			dependencies = (
 			);
 			name = TokenWalletProject;
+			packageProductDependencies = (
+				5CA451E62817FA60006FFA3B /* Solana */,
+			);
 			productName = TokenWalletProject;
 			productReference = 5A8FD94C1D2DFC270015D6C0 /* TokenWalletProject.app */;
 			productType = "com.apple.product-type.application";
@@ -4453,6 +4503,9 @@
 				"zh-Hant",
 			);
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
+			packageReferences = (
+				5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */,
+			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4477,6 +4530,7 @@
 				5AF5D30F1D2FB562004070D7 /* demo.html in Resources */,
 				5AF5D30E1D2FB562004070D7 /* demo.css in Resources */,
 				5A8FD95C1D2DFC270015D6C0 /* Assets.xcassets in Resources */,
+				5CA451D728168872006FFA3B /* brewchain.js in Resources */,
 				5CB8BBA727E1CDCB00C73976 /* MessageSystemCell.xib in Resources */,
 				5B08D8C721F82406002CC9A8 /* cwv.js in Resources */,
 				5E079A0321D28A3A00924407 /* conformance_objc-GPBProtocolBuffers.Po in Resources */,
@@ -4543,6 +4597,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JJException/JJException.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/LBXScan/LBXScan.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -4575,6 +4630,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJException.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXScan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -4656,6 +4712,7 @@
 				5AF5D1861D2F7CBA004070D7 /* NSObject+Runtime.m in Sources */,
 				992EF21326BBCF4800F70A94 /* ExportCopyTextView.m in Sources */,
 				5CE7ACEA27F6EE2800E2188D /* PW_MoreViewController.m in Sources */,
+				5CA451EA28180206006FFA3B /* SeedPhraseGenerator.swift in Sources */,
 				992E0F6026D5EF9600E1C31B /* TransferPayView.m in Sources */,
 				5AF5D1931D2F7CBA004070D7 /* NSString+RegexCategory.m in Sources */,
 				5E079A3B21D3C90A00924407 /* tommath.c in Sources */,
@@ -4732,6 +4789,7 @@
 				5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */,
 				5CCE70C3280FEDF500860841 /* PW_DappChainCell.m in Sources */,
 				5CCE70DA28101FE700860841 /* PW_DappMoreContentView.m in Sources */,
+				5CA451E42817D28A006FFA3B /* PW_Solana.swift in Sources */,
 				5AF5D19F1D2F7CBA004070D7 /* NSURL+QueryDictionary.m in Sources */,
 				992EF10E26AA9E5C00F70A94 /* WarningAlertSheetView.m in Sources */,
 				5AF5D1531D2F7CBA004070D7 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
@@ -4754,6 +4812,7 @@
 				5AF5D19A1D2F7CBA004070D7 /* NSString+UUID.m in Sources */,
 				5E0799F521D28A3A00924407 /* Api.pbobjc.m in Sources */,
 				5CB76B3E27F582190068E967 /* UIControl+PW_Block.m in Sources */,
+				5CE19F9D28192FA8008C37A3 /* PW_DappAlertTool.m in Sources */,
 				1FA8EF7821B824F900B4E28E /* TYBaseAnimation.m in Sources */,
 				5AF5D1741D2F7CBA004070D7 /* NSInvocation+Bb.m in Sources */,
 				5AF5D15D1D2F7CBA004070D7 /* NSData+Hash.m in Sources */,
@@ -4898,6 +4957,7 @@
 				5AF5D16E1D2F7CBA004070D7 /* NSDictionary+XML.m in Sources */,
 				5C8AAAE8280C1FE900E4ED53 /* PW_LanguageCell.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
+				5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */,
 				994AA0EC26C511DD0062F9AF /* CollectionShareView.m in Sources */,
 				5E079A3A21D3C90A00924407 /* JKBigDecimal.m in Sources */,
 				77BDDCEB252AF60B0030DDAA /* MPHttpClient.m in Sources */,
@@ -5066,6 +5126,7 @@
 				5B02FD5921FFF6460040025E /* YKYLineView.m in Sources */,
 				5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */,
 				9929D59426C26DCB0066F1D6 /* ChooseAddressTypeVC.m in Sources */,
+				5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */,
 				9926DFEF26DF7C0500FDF442 /* NodeTableViewCell.m in Sources */,
 				5CCE70DD281022B400860841 /* PW_DappMoreItemCell.m in Sources */,
 				5E079A2221D3C5F200924407 /* sha256.cpp in Sources */,
@@ -5082,6 +5143,7 @@
 				5CB119D728097F2E0006BEFB /* PW_ChooseCurrencyViewController.m in Sources */,
 				5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */,
 				5C37A8DA280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m in Sources */,
+				5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */,
 				992EF16926B137F700F70A94 /* NoDataShowView.m in Sources */,
 				5AF5D1831D2F7CBA004070D7 /* NSObject+KVOBlocks.m in Sources */,
 				99D02DD926DF6BF30097F84B /* NodeChangeView.m in Sources */,
@@ -5360,7 +5422,10 @@
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TokenWalletProject/Libs/CWVSDK",
@@ -5513,7 +5578,10 @@
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TokenWalletProject/Libs/CWVSDK",
@@ -5621,7 +5689,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TokenWalletProjectTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.TokenWalletProjectTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TokenWalletProject.app/TokenWalletProject";
@@ -5636,7 +5708,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TokenWalletProjectTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.TokenWalletProjectTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TokenWalletProject.app/TokenWalletProject";
@@ -5648,7 +5724,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TokenWalletProjectUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.TokenWalletProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = TokenWalletProject;
@@ -5661,7 +5741,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TokenWalletProjectUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.TokenWalletProjectUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = TokenWalletProject;
@@ -5709,6 +5793,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ajamaica/Solana.Swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5CA451E62817FA60006FFA3B /* Solana */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */;
+			productName = Solana;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5A8FD9441D2DFC270015D6C0 /* Project object */;
 }

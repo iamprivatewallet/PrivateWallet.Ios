@@ -43,11 +43,16 @@ class MOSWeb3Tool: NSObject {
     }
     @objc
     public class func sendTransaction(_ transactionJSON: [String: Any], password: String, completionBlock: @escaping ((_ hash: String?, _ errorDesc: String?)->())) {
-        guard var transaction = EthereumTransaction.fromJSON(transactionJSON), let options = TransactionOptions.fromJSON(transactionJSON) else {
+        guard let toStr = transactionJSON["to"] as? String, let to = EthereumAddress(toStr), let valueString = transactionJSON["value"] as? String, let value = BigUInt(valueString.stripHexPrefix(), radix: 16) else {
             completionBlock(nil, "必要信息丢失")
             return
         }
-        transaction.value = transaction.value != nil ? transaction.value! : BigUInt(0)
+        var nonce = TransactionOptions.NoncePolicy.pending
+        if let nonceStr = transactionJSON["nonce"] as? String, let bigNonce = BigUInt(nonceStr.stripHexPrefix().lowercased(), radix: 16) {
+            nonce = TransactionOptions.NoncePolicy.manual(bigNonce)
+        }
+        var transaction = EthereumTransaction.init(to: to, data: Data())
+        transaction.value = value
         if let gas = transactionJSON["gas"] as? String, let gasBiguint = BigUInt(gas.stripHexPrefix().lowercased(), radix: 16) {
             transaction.gasLimit = gasBiguint
         } else if let gasLimit = transactionJSON["gasLimit"] as? String, let gasgasLimitBiguint = BigUInt(gasLimit.stripHexPrefix().lowercased(), radix: 16) {
@@ -62,12 +67,11 @@ class MOSWeb3Tool: NSObject {
             transaction.gasPrice = BigUInt(20000000000)
         }
         var transactionOptions = TransactionOptions.defaultOptions
-        transactionOptions.from = options.from
         transactionOptions.to = transaction.to
         transactionOptions.value = transaction.value
         transactionOptions.gasLimit = TransactionOptions.GasLimitPolicy.manual(transaction.gasLimit)
         transactionOptions.gasPrice = TransactionOptions.GasPricePolicy.manual(transaction.gasPrice)
-        transactionOptions.nonce = options.nonce
+        transactionOptions.nonce = nonce
         self.checkImportWallet();
         DispatchQueue.global(qos: .background).async {
             do {

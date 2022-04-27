@@ -11,6 +11,10 @@
 
 @implementation NSString (PW_String)
 
++ (NSString *)emptyStr:(NSString *)str {
+    return [str isNoEmpty] ? str : @"--";
+}
+
 + (NSString *)timeStrTimeInterval:(NSTimeInterval)timeInterval {
     return [self timeStrTimeInterval:timeInterval format:@"yyyy-MM-dd HH:mm:ss"];
 }

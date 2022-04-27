@@ -8,6 +8,7 @@
 
 #import "PW_TipTool.h"
 #import "PW_DappMoreContentView.h"
+#import "PW_AlertTool.h"
 
 @implementation PW_TipTool
 
@@ -20,7 +21,7 @@
 + (void)showBackupTipDesc:(NSString *)desc sureBlock:(void (^)(void))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [self showSheetView:contentView];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [closeBtn setBackgroundImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     __weak typeof(view) weakView = view;
@@ -71,12 +72,12 @@
         make.height.offset(55);
         make.bottom.offset(-120);
     }];
-    [self showAnimationSheetContentView:contentView];
+    [PW_AlertTool showAnimationSheetContentView:contentView];
 }
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [self showSheetView:contentView];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
     UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_payCheck") fontSize:17 textColor:[UIColor g_boldTextColor]];
     titleLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:titleLb];
@@ -169,12 +170,12 @@
         make.height.offset(55);
         make.bottom.offset(-(20+SafeBottomInset));
     }];
-    [self showAnimationSheetContentView:contentView];
+    [PW_AlertTool showAnimationSheetContentView:contentView];
 }
 + (void)showDappWalletNotSupportedWithModel:(PW_DappModel *)model sureBlock:(void(^)(void))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [self showAlertView:contentView];
+    UIView *view = [PW_AlertTool showAlertView:contentView];
     UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_prompt") fontSize:21 textColor:[UIColor g_boldTextColor]];
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -252,12 +253,12 @@
         make.left.equalTo(cancelBtn.mas_right).offset(15);
         make.right.offset(-22);
     }];
-    [self showAnimationAlertContentView:contentView];
+    [PW_AlertTool showAnimationAlertContentView:contentView];
 }
 + (void)showDappDisclaimerUrlStr:(NSString *)urlStr sureBlock:(void(^)(void))block{
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [self showAlertView:contentView];
+    UIView *view = [PW_AlertTool showAlertView:contentView];
     UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_disclaimer") fontSize:21 textColor:[UIColor g_boldTextColor]];
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -311,7 +312,7 @@
         make.centerX.offset(0);
         make.bottom.offset(-30);
     }];
-    [self showAnimationAlertContentView:contentView];
+    [PW_AlertTool showAnimationAlertContentView:contentView];
 }
 //dapp
 + (void)showDappMoreTitle:(NSString *)title dataArr:(NSArray<PW_DappMoreModel *> *)dataArr sureBlock:(void(^)(PW_DappMoreModel *model))block {
@@ -320,7 +321,7 @@
     }
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [self showSheetView:contentView];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
     UILabel *titleLb = [PW_ViewTool labelMediumText:title fontSize:15 textColor:[UIColor g_boldTextColor]];
     titleLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:titleLb];
@@ -364,66 +365,7 @@
         make.height.offset(44);
         make.bottom.offset(-SafeBottomInset);
     }];
-    [self showAnimationSheetContentView:contentView];
-}
-+ (void)showAnimationAlertContentView:(UIView *)contentView {
-    contentView.alpha = 0.0;
-    contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-    [UIView animateWithDuration:0.25 animations:^{
-        contentView.alpha = 1.0;
-        contentView.transform = CGAffineTransformIdentity;
-    } completion:nil];
-}
-+ (void)showAnimationSheetContentView:(UIView *)contentView {
-    contentView.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT);
-    [UIView animateWithDuration:0.25 animations:^{
-        contentView.transform = CGAffineTransformIdentity;
-    } completion:nil];
-}
-+ (UIView *)showAlertView:(UIView *)view {
-    if(view==nil){
-        return nil;
-    }
-    view.backgroundColor = [UIColor g_bgColor];
-    UIView *maskView = [[UIView alloc] init];
-    maskView.backgroundColor = [UIColor g_maskColor];
-    [maskView addSubview:view];
-    [[UIApplication sharedApplication].delegate.window addSubview:maskView];
-    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(25);
-        make.right.offset(-25);
-        make.centerY.offset(0);
-        make.height.mas_greaterThanOrEqualTo(50);
-    }];
-    view.layer.cornerRadius = 22;
-    return maskView;
-}
-+ (UIView *)showSheetView:(UIView *)view {
-    if(view==nil){
-        return nil;
-    }
-    view.backgroundColor = [UIColor g_bgColor];
-    UIView *maskView = [[UIView alloc] init];
-    maskView.backgroundColor = [UIColor g_maskColor];
-    [maskView addSubview:view];
-    [[UIApplication sharedApplication].delegate.window addSubview:maskView];
-    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.offset(0);
-        make.height.mas_greaterThanOrEqualTo(50);
-    }];
-    [view setNeedsLayout];
-    [view layoutIfNeeded];
-    CAShapeLayer *styleLayer = [CAShapeLayer layer];
-    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight) cornerRadii:CGSizeMake(28, 28)];
-    styleLayer.path = shadowPath.CGPath;
-    view.layer.mask = styleLayer;
-    return maskView;
+    [PW_AlertTool showAnimationSheetContentView:contentView];
 }
 
 @end

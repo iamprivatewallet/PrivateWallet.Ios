@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '12.0'
 source 'https://github.com/CocoaPods/specs.git'
 target "TokenWalletProject" do
 use_frameworks!
@@ -20,12 +20,13 @@ pod 'JJException', '0.2.11'
 pod 'GMEllipticCurveCrypto'
 pod 'SVProgressHUD'
 pod 'MJExtension', '3.4.1'
-pod 'web3swift', '2.5.0'
+pod 'web3swift', '2.6.2'
 pod 'CocoaSecurity', '1.2.4'
 pod 'ReactiveObjC', '3.1.1'
 pod 'LBXScan', '~> 2.5'
 pod 'SDCycleScrollView','1.82'
 pod 'SocketRocket', '0.6.0'
+pod 'KeychainSwift', '~> 20.0.0'
 end
 
 target "TokenWalletProjectTests" do

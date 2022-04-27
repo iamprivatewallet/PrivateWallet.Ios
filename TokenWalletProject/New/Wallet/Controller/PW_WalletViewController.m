@@ -77,6 +77,17 @@
     }
 }
 - (void)searchAction {
+    PW_DappPayModel *model = [[PW_DappPayModel alloc] init];
+    model.authorizationCount = @"100000";
+    model.value = @"100000";
+    model.symbol = @"ETH";
+    model.authorizedTokenContractAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+    model.paymentAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+    model.acceptAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+    [PW_DappAlertTool showDappConfirmPayInfo:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
+        
+    }];
+    return;
     PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

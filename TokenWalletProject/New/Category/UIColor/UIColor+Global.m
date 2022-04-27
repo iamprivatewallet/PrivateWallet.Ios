@@ -10,6 +10,10 @@
 
 @implementation UIColor (Global)
 
+- (UIColor *)alpha:(CGFloat)alpha {
+    return [self colorWithAlphaComponent:alpha];
+}
+
 + (UIColor *)g_hex:(NSString *)hexStr {
     return [self g_hex:hexStr alpha:1];
 }
