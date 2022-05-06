@@ -19,6 +19,9 @@
     self.attributedText = attributedString;
 }
 - (void)setWordSpace:(CGFloat)space {
+    if (![self.text isAllChinese]) {
+        return;
+    }
     NSString *labelText = self.text;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText attributes:@{NSKernAttributeName:@(space)}];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -28,6 +31,9 @@
 - (void)setLineSpace:(CGFloat)lineSpace wordSpace:(CGFloat)wordSpace {
     NSString *labelText = self.text;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText attributes:@{NSKernAttributeName:@(wordSpace)}];
+    if (![labelText isAllChinese]) {
+        attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+    }
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:lineSpace];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];

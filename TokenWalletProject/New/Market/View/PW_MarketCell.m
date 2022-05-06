@@ -40,7 +40,7 @@
         self.marketValueLb.text = PW_StrFormat(@"$%@",model.lastVol);
     }
     self.priceLb.text = PW_StrFormat(@"$%@",[[model.last stringDownDecimal:2] currency]);
-    self.fluctuationRangeLb.text = PW_StrFormat(@"%@%@",model.rose.floatValue>0?@"+":@"",[model.rose stringDownDecimal:2]);
+    self.fluctuationRangeLb.text = PW_StrFormat(@"%@%@%%",model.rose.floatValue>0?@"+":@"",[model.rose stringDownDecimal:2]);
     self.priceLb.textColor = self.fluctuationRangeLb.backgroundColor = model.rose.floatValue>0?[UIColor g_roseColor]:[UIColor g_fallColor];
 }
 - (void)collectionAction {
@@ -127,6 +127,7 @@
         _fluctuationRangeLb.textAlignment = NSTextAlignmentCenter;
         _fluctuationRangeLb.backgroundColor = [UIColor g_primaryColor];
         [_fluctuationRangeLb setCornerRadius:6];
+        _fluctuationRangeLb.adjustsFontSizeToFitWidth = YES;
     }
     return _fluctuationRangeLb;
 }

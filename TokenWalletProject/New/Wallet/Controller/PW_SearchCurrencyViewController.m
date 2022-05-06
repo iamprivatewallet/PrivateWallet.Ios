@@ -195,7 +195,9 @@
     headerView.title = self.isSearch?LocalizedStr(@"text_searchResult"):LocalizedStr(@"text_searchRecord");
     headerView.hideDelete = self.isSearch;
     headerView.deleteBlock = ^{
-        
+        [PW_AlertTool showSystemAlertTitle:LocalizedStr(@"text_prompt") desc:LocalizedStr(@"text_clearAllRecords") actionTitle:LocalizedStr(@"text_confirm") actionStyle:UIAlertActionStyleDestructive handler:^{
+            
+        }];
     };
     return headerView;
 }

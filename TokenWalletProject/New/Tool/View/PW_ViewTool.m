@@ -77,7 +77,7 @@
     return [self buttonImageName:imageName selectedImage:nil target:target action:action];
 }
 + (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     if([selectedImage isNoEmpty]){
         [btn setImage:[UIImage imageNamed:selectedImage] forState:UIControlStateSelected];

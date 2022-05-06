@@ -232,7 +232,9 @@
     PW_SearchDeleteHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_SearchDeleteHeaderView"];
     headerView.title = self.isSearch?LocalizedStr(@"text_currency"):LocalizedStr(@"text_searchRecord");
     headerView.deleteBlock = ^{
-        
+        [PW_AlertTool showSystemAlertTitle:LocalizedStr(@"text_prompt") desc:LocalizedStr(@"text_clearAllRecords") actionTitle:LocalizedStr(@"text_confirm") actionStyle:UIAlertActionStyleDestructive handler:^{
+            
+        }];
     };
     return headerView;
 }

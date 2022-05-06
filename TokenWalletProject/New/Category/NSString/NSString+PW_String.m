@@ -104,6 +104,23 @@
     float val;
     return [scan scanFloat:&val] && [scan isAtEnd];
 }
+- (BOOL)isAllChinese {
+    NSString *regex = @"[\u4e00-\u9fa5]+";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([self isNoEmpty]&&[pred evaluateWithObject:self]) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)isAllAlpha {
+    NSString *regex =@"[a-zA-Z]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([self isNoEmpty]&&[pred evaluateWithObject:self]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (BOOL)isURL {
     NSString *str = @"^((https|http)?://)[^\\s]+";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",str];

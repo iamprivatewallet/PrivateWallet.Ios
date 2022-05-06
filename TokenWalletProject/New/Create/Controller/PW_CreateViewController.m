@@ -63,7 +63,9 @@
     if ([User_manager loginWithUserName:@"" withPassword:pwdStr withPwTip:@"" withMnemonic:wordStr isBackup:NO]){
         [FchainTool genWalletsWithMnemonic:wordStr createList:@[@"ETH"] block:^(BOOL sucess) {
             [self.view hideLoadingIndicator];
-            self.sureBtn.userInteractionEnabled = YES;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.sureBtn.userInteractionEnabled = YES;
+            });
             if (sucess) {
                 NSArray *list = [[PW_WalletManager shared] getWallets];
                 if (list.count>0) {
@@ -76,6 +78,8 @@
                     vc.wordStr = wordStr;
                     [self.navigationController pushViewController:vc animated:YES];
                 });
+            }else{
+                [self showError:LocalizedStr(@"text_createFailure")];
             }
         }];
     }

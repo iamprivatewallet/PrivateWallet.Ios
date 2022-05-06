@@ -57,7 +57,12 @@
         vc.model = weakSelf.model;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
-    [self.dataList addObjectsFromArray:@[model1,model2,model3,model4]];
+    [self.dataList removeAllObjects];
+    if ([self.model.mnemonic isNoEmpty]) {
+        [self.dataList addObjectsFromArray:@[model1,model2,model3,model4]];
+    }else{
+        [self.dataList addObjectsFromArray:@[model1,model2,model4]];
+    }
     [self.tableView reloadData];
 }
 - (void)makeViews {

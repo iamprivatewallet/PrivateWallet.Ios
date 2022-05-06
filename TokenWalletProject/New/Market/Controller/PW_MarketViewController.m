@@ -166,6 +166,7 @@
     __weak typeof(self) weakSelf = self;
     cell.collectionBlock = ^(PW_MarketModel * _Nonnull model) {
         model.collection = !model.collection;
+        [self showSuccess:LocalizedStr(model.collection?@"text_addFavorites":@"text_removeFavorites")];
         [weakSelf addRemoveSelectionWithModel:model];
     };
     return cell;

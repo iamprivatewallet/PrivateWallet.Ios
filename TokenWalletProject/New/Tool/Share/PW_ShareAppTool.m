@@ -64,11 +64,13 @@
         make.centerX.offset(0);
     }];
     UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_shareAppText") fontSize:21 textColor:[UIColor g_textColor]];
+    tipLb.textAlignment = NSTextAlignmentCenter;
     [tipLb setWordSpace:5];
     [contentView addSubview:tipLb];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleLb.mas_bottom).offset(5);
         make.centerX.offset(0);
+        make.left.mas_greaterThanOrEqualTo(15);
     }];
     UILabel *downloadTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_scanDownloadApp") fontSize:13 textColor:[UIColor g_boldTextColor]];
     [contentView addSubview:downloadTipLb];
@@ -81,7 +83,8 @@
     [contentView addSubview:leftLineView];
     [leftLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(downloadTipLb.mas_left).offset(-20);
-        make.width.offset(80);
+        make.width.offset(80).priorityLow();
+        make.left.mas_greaterThanOrEqualTo(15);
         make.height.offset(1);
         make.centerY.equalTo(downloadTipLb);
     }];
@@ -90,7 +93,7 @@
     [contentView addSubview:rightLineView];
     [rightLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(downloadTipLb.mas_right).offset(20);
-        make.width.offset(80);
+        make.width.equalTo(leftLineView);
         make.height.offset(1);
         make.centerY.equalTo(downloadTipLb);
     }];

@@ -67,20 +67,21 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
         }
         NSString *lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
         if(lan==nil||(lan&&[lan isEqualToString:@""])){
-            //系统语言
-            NSArray *languages = [NSLocale preferredLanguages];
-            NSString *currentLanguage = languages.firstObject;
-            __block BOOL isFind = NO;
-            [[LanguageTool shared].languages enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if([currentLanguage hasPrefix:obj.type]) {
-                    [LanguageTool setLanguageType:obj.type];
-                    isFind = YES;
-                    *stop = YES;
-                }
-            }];
-            if(!isFind){
-                [LanguageTool setLanguageType:self.languageDefault.type];
-            }
+//            //系统语言
+//            NSArray *languages = [NSLocale preferredLanguages];
+//            NSString *currentLanguage = languages.firstObject;
+//            __block BOOL isFind = NO;
+//            [[LanguageTool shared].languages enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                if([currentLanguage hasPrefix:obj.type]) {
+//                    [LanguageTool setLanguageType:obj.type];
+//                    isFind = YES;
+//                    *stop = YES;
+//                }
+//            }];
+//            if(!isFind){
+//                [LanguageTool setLanguageType:self.languageDefault.type];
+//            }
+            [LanguageTool setLanguageType:self.languageDefault.type];
         }
         lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
         NSString *path = [[NSBundle mainBundle] pathForResource:lan ofType:@"lproj"];

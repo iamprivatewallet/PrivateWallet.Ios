@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isInt;
 - (BOOL)isFloat;
+- (BOOL)isAllChinese;
+- (BOOL)isAllAlpha;
 - (BOOL)isURL;
 - (BOOL)isHttpsURL;
 - (NSString *)pw_firstChar;

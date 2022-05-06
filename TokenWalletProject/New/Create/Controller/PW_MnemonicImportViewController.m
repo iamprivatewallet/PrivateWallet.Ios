@@ -97,15 +97,19 @@
     [FchainTool restoreWalletWithMnemonic:fixWordStr walletName:walletName password:pwdStr block:^(NSString * _Nonnull result) {
         [self.view hideLoadingIndicator];
         self.sureBtn.userInteractionEnabled = YES;
-        if([User_manager loginWithUserName:result withPassword:pwdStr withPwTip:@"" withMnemonic:fixWordStr isBackup:YES]){
-            [self showSuccess:LocalizedStr(@"text_success")];
-            NSArray *list = [[PW_WalletManager shared] getWallets];
-            if (list.count>0) {
-                [User_manager updateChooseWallet:list[0]];
-                [TheAppDelegate switchToTabBarController];
-            }else{
-                [self showError:LocalizedStr(@"text_error")];
+        if([result isNoEmpty]){
+            if([User_manager loginWithUserName:result withPassword:pwdStr withPwTip:@"" withMnemonic:fixWordStr isBackup:YES]){
+                [self showSuccess:LocalizedStr(@"text_finishedWalletImport")];
+                NSArray *list = [[PW_WalletManager shared] getWallets];
+                if (list.count>0) {
+                    [User_manager updateChooseWallet:list[0]];
+                    [TheAppDelegate switchToTabBarController];
+                }else{
+                    [self showError:LocalizedStr(@"text_importFailure")];
+                }
             }
+        }else{
+            [self showError:LocalizedStr(@"text_pleaseEnterCorrectMnemonicPhrase")];
         }
     }];
 }

@@ -18,6 +18,7 @@
 #import "PW_SearchDappCurrencyViewController.h"
 #import "PW_SearchCurrencyViewController.h"
 #import "PW_CurrencyManageViewController.h"
+#import "PW_SolanaTest.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -77,17 +78,28 @@
     }
 }
 - (void)searchAction {
-    PW_DappPayModel *model = [[PW_DappPayModel alloc] init];
-    model.authorizationCount = @"100000";
-    model.value = @"100000";
-    model.symbol = @"ETH";
-    model.authorizedTokenContractAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-    model.paymentAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-    model.acceptAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-    [PW_DappAlertTool showDappConfirmPayInfo:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
-        
-    }];
-    return;
+//    PW_DappPayModel *model = [[PW_DappPayModel alloc] init];
+//    model.authorizationCount = @"100000";
+//    model.value = @"100000";
+//    model.symbol = @"ETH";
+//    model.authorizedTokenContractAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+//    model.paymentAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+//    model.acceptAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
+//    [MOSWalletContractTool estimateGasToAddress:nil value:nil completionBlock:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+//        if(gas){
+//            model.gasToolModel.gas_price = gasPrice;
+//            model.gasToolModel.gas = gas;
+//            model.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+//            [PW_DappAlertTool showDappAuthorizationConfirm:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
+//
+//            }];
+////            [PW_DappAlertTool showDappConfirmPayInfo:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
+////
+////            }];
+//        }
+//    }];
+//    [PW_SolanaTest test];
+//    return;
     PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -130,7 +142,7 @@
     btn.selected = !btn.isSelected;
     SetUserDefaultsForKey(btn.selected?@"1":@"0", kHiddenWalletSmallAmount);
     [UserDefaults synchronize];
-    [self.tableView reloadData];
+    [self forceRefreshCacheCoinList];
 }
 - (void)editAction {
     PW_CurrencyManageViewController *vc = [[PW_CurrencyManageViewController alloc] init];
@@ -202,16 +214,19 @@
 - (void)loadCacheCoinList {
     //获取缓存里 是否有代币列表
     NSArray *coinList = [[PW_TokenManager shareManager] getListWithWalletAddress:self.currentWallet.address type:self.currentWallet.type chainId:User_manager.currentUser.current_chainId.integerValue];
+    BOOL isHiddenSmall = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
     [coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
-        if(![self isExitCoinWithAddress:model.tokenContract]){
-            [self.coinList addObject:model];
+        if(![self isExitsCoinWithAddress:model.tokenContract]){
+            if(!(isHiddenSmall&&model.tokenAmount.doubleValue<g_smallAmount)){
+                [self.coinList addObject:model];
+            }
         }
     }];
     [[PW_GlobalData shared] updateCoinList:self.coinList];
     [self.tableView reloadData];
     [self refreshBalance];
 }
-- (BOOL)isExitCoinWithAddress:(NSString *)address {
+- (BOOL)isExitsCoinWithAddress:(NSString *)address {
     if(![address isNoEmpty]){
         return NO;
     }

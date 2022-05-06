@@ -41,13 +41,12 @@
     self.nameLb.text = model.tokenName;
     self.priceLb.text = [model.price isNoEmpty]?NSStringWithFormat(@"$%@",model.price):@"--";
     BOOL isHidden = [GetUserDefaultsForKey(kHiddenWalletAmount) boolValue];
-    BOOL isHiddenSmall = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
-    if (isHidden||(isHiddenSmall&&model.tokenAmount.doubleValue<g_smallAmount)) {
+    if (isHidden) {
         self.amountLb.text = @"****";
         self.costLb.text = @"****";
     }else{
         self.amountLb.text = [model.tokenAmount isNoEmpty]?model.tokenAmount:@"--";
-        self.costLb.text = [model.tokenAmount isNoEmpty]?NSStringWithFormat(@"$%@",[model.tokenAmount stringDownMultiplyingBy:model.price decimal:8]):@"--";
+        self.costLb.text = [model.tokenAmount isNoEmpty]&&[model.price isNoEmpty]?NSStringWithFormat(@"$%@",[model.tokenAmount stringDownMultiplyingBy:model.price decimal:8]):@"--";
     }
 }
 

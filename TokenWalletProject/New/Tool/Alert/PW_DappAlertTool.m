@@ -8,6 +8,7 @@
 
 #import "PW_DappAlertTool.h"
 #import "PW_AlertTool.h"
+#import "PW_DappMinersFeeView.h"
 
 @implementation PW_DappAlertTool
 
@@ -77,6 +78,7 @@
         [leftLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.offset(30);
             make.top.equalTo(rightLb);
+            make.right.lessThanOrEqualTo(contentView.mas_centerX);
         }];
         [rightLb mas_makeConstraints:^(MASConstraintMaker *make) {
             if (lastView==nil) {
@@ -91,9 +93,6 @@
         lastView = rightLb;
     }
     UIView *minersFeeView = [[UIView alloc] init];
-    [minersFeeView addTapBlock:^(UIView * _Nonnull view) {
-        
-    }];
     [contentView addSubview:minersFeeView];
     [minersFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lastView.mas_bottom).offset(12);
@@ -131,6 +130,13 @@
         make.centerY.offset(0);
         make.left.offset(5);
         make.right.offset(-5);
+    }];
+    [minersFeeView addTapBlock:^(UIView * _Nonnull view) {
+        [self showDappConfirmGas:model.gasToolModel sureBlock:^(PW_GasModel * _Nonnull gasModel, NSString * _Nonnull title) {
+            model.gasModel = gasModel;
+            minersFeeLb.text = PW_StrFormat(@"%@%@($%@)",gasModel.gas_amount,model.symbol,gasModel.gas_ut_amout);
+            tagLb.text = title;
+        }];
     }];
     UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     [sureBtn setShadowColor:[[UIColor g_primaryColor] alpha:0.3] offset:CGSizeMake(0, 4) radius:8];
@@ -210,9 +216,6 @@
         lastView = rightLb;
     }
     UIView *minersFeeView = [[UIView alloc] init];
-    [minersFeeView addTapBlock:^(UIView * _Nonnull view) {
-        
-    }];
     [contentView addSubview:minersFeeView];
     [minersFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lastView.mas_bottom).offset(12);
@@ -250,6 +253,13 @@
         make.centerY.offset(0);
         make.left.offset(5);
         make.right.offset(-5);
+    }];
+    [minersFeeView addTapBlock:^(UIView * _Nonnull view) {
+        [self showDappConfirmGas:model.gasToolModel sureBlock:^(PW_GasModel * _Nonnull gasModel, NSString * _Nonnull title) {
+            model.gasModel = gasModel;
+            minersFeeLb.text = PW_StrFormat(@"%@%@($%@)",gasModel.gas_amount,model.symbol,gasModel.gas_ut_amout);
+            tagLb.text = title;
+        }];
     }];
     UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     [sureBtn setShadowColor:[[UIColor g_primaryColor] alpha:0.3] offset:CGSizeMake(0, 4) radius:8];
@@ -346,48 +356,56 @@
     }];
     [PW_AlertTool showAnimationSheetContentView:contentView];
 }
-//+ (void)showDappConfirmGas:(PW_GasModel *)model sureBlock:(void(^)(PW_GasModel *model))block {
-//    if (model==nil) {
-//        return;
-//    }
-//    [[UIApplication sharedApplication].delegate.window endEditing:YES];
-//    UIView *contentView = [[UIView alloc] init];
-//    UIView *view = [PW_AlertTool showSheetView:contentView];
-//    UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_confirmInformation") fontSize:15 textColor:[UIColor g_boldTextColor]];
-//    titleLb.textAlignment = NSTextAlignmentCenter;
-//    [contentView addSubview:titleLb];
-//    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.offset(16);
-//        make.left.offset(26);
-//    }];
-//    __weak typeof(view) weakView = view;
-//    UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close" target:nil action:nil];
-//    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
-//        [weakView removeFromSuperview];
-//    }];
-//    [contentView addSubview:closeBtn];
-//    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.offset(10);
-//        make.right.offset(-20);
-//    }];
-//
-//    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
-//    [sureBtn setShadowColor:[[UIColor g_primaryColor] alpha:0.3] offset:CGSizeMake(0, 4) radius:8];
-//    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
-//        [weakView removeFromSuperview];
-//        if (block) {
-//            block(model);
-//        }
-//    }];
-//    [contentView addSubview:sureBtn];
-//    [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(tagView.mas_bottom).offset(52);
-//        make.left.offset(25);
-//        make.right.offset(-25);
-//        make.height.offset(55);
-//        make.bottom.offset(-30-SafeBottomInset);
-//    }];
-//    [PW_AlertTool showAnimationSheetContentView:contentView];
-//}
++ (void)showDappConfirmGas:(PW_GasToolModel *)model sureBlock:(void(^)(PW_GasModel *model, NSString *title))block {
+    if (model==nil) {
+        return;
+    }
+    [[UIApplication sharedApplication].delegate.window endEditing:YES];
+    UIView *contentView = [[UIView alloc] init];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_confirmPayment") fontSize:15 textColor:[UIColor g_boldTextColor]];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(16);
+        make.left.offset(26);
+    }];
+    __weak typeof(view) weakView = view;
+    UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close" target:nil action:nil];
+    [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+    }];
+    [contentView addSubview:closeBtn];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(10);
+        make.right.offset(-20);
+    }];
+    PW_DappMinersFeeView *minersFeeView = [[PW_DappMinersFeeView alloc] init];
+    minersFeeView.toolModel = model;
+    [contentView addSubview:minersFeeView];
+    [minersFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(56);
+        make.left.offset(20);
+        make.right.offset(-20);
+        make.height.mas_greaterThanOrEqualTo(50);
+    }];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    [sureBtn setShadowColor:[[UIColor g_primaryColor] alpha:0.3] offset:CGSizeMake(0, 4) radius:8];
+    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+        if (block) {
+            block(minersFeeView.gasModel, minersFeeView.title);
+        }
+    }];
+    [contentView addSubview:sureBtn];
+    [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(minersFeeView.mas_bottom).offset(18);
+        make.left.offset(25);
+        make.right.offset(-25);
+        make.height.offset(55);
+        make.bottom.offset(-30-SafeBottomInset);
+    }];
+    [PW_AlertTool showAnimationSheetContentView:contentView];
+}
 
 @end

@@ -10,4 +10,12 @@
 
 @implementation PW_DappPayModel
 
+- (PW_GasToolModel *)gasToolModel {
+    if (!_gasToolModel) {
+        _gasToolModel = [[PW_GasToolModel alloc] init];
+        _gasModel = _gasToolModel.recommendModel;
+    }
+    return _gasToolModel;
+}
+
 @end

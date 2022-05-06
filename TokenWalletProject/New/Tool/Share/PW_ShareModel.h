@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 真正分享的内容（如果没有配置show的三个字段，直接使用data进行自动分享展示）
 /// NSURL、NSString、UIImage。。。
 @property(nonatomic, strong) id data;
-+ (instancetype)modelWithShowIcon:(UIImage *)showIcon title:(NSString *)title subTitle:(NSString *)subTitle data:(id)data;
++ (instancetype)modelWithShowIcon:(nullable UIImage *)showIcon title:(nullable NSString *)title subTitle:(nullable NSString *)subTitle data:(nullable id)data;
 
 @end
 

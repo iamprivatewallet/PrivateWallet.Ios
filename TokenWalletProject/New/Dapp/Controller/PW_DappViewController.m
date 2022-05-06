@@ -103,7 +103,7 @@
     [self.navigationController pushViewController:webVc animated:YES];
 }
 - (void)openWeb3WithModel:(PW_DappModel *)model {
-    if (![model.chainId isEqualToString:User_manager.currentUser.chooseWallet_type]) {
+    if (![model.chainId isEqualToString:User_manager.currentUser.current_chainId]) {
         [PW_TipTool showDappWalletNotSupportedWithModel:model sureBlock:^{
             [PW_WalletListView show];
         }];

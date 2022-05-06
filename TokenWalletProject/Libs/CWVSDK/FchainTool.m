@@ -29,7 +29,9 @@
     NSString * addr = [Bip44 getAddress:mainPriKey index:0];
     NSLog(@"eth addr::%@",addr);
     NSString * prikey = [Bip44 getPrivateKey:mainPriKey index:0];
-
+    if (![addr isNoEmpty]||[addr isEqualToString:@"undefined"]) {
+        return nil;
+    }
     NSString * ownerStr = @"identity_name";
     NSString * pubkey = @"eth";
     
@@ -58,7 +60,7 @@
     KeyPair kp = [EthereumUtils genFromPrikey:privateKey];
     NSString *address = [KeyPairHelper hexAddress:kp];
     NSString *pubKey = [KeyPairHelper hexPubkey:kp];
-    if ([address isEqualToString:@"undefined"]) {
+    if (![address isNoEmpty]||[address isEqualToString:@"undefined"]) {
         return nil;
     }
     NSString *ownerStr = @"identity_name";

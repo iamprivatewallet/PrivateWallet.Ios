@@ -295,6 +295,8 @@
 		5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB427E212A700C73976 /* BrowseWebViewController.m */; };
 		5CB8BBB827E3084E00C73976 /* TokenChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB727E3084E00C73976 /* TokenChainModel.m */; };
 		5CB8BBBB27E30DBD00C73976 /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */; };
+		5CC641F5282506C6002E1C46 /* PW_AppLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */; };
+		5CC641FA28250B32002E1C46 /* PW_AuthenticationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */; };
 		5CCE70B4280FDB3C00860841 /* PW_DappBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */; };
 		5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B6280FDE5800860841 /* PW_BannerModel.m */; };
 		5CCE70BA280FE41200860841 /* PW_TitlesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B9280FE41200860841 /* PW_TitlesHeaderView.m */; };
@@ -315,9 +317,11 @@
 		5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */; };
 		5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */; };
 		5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70F12811087800860841 /* PW_MarketMenuModel.m */; };
+		5CDCBC21281D303400284449 /* PW_SolanaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDCBC20281D303400284449 /* PW_SolanaConstants.swift */; };
 		5CE19F9D28192FA8008C37A3 /* PW_DappAlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */; };
 		5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */; };
 		5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA228193390008C37A3 /* PW_DappPayModel.m */; };
+		5CE19FA6281A5028008C37A3 /* PW_DappMinersFeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA5281A5028008C37A3 /* PW_DappMinersFeeView.m */; };
 		5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */; };
 		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
 		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
@@ -1143,6 +1147,10 @@
 		5CB8BBB927E30DBD00C73976 /* NetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTool.h; sourceTree = "<group>"; };
 		5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTool.m; sourceTree = "<group>"; };
 		5CB8BBBC27E311FC00C73976 /* NoticeConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeConst.h; sourceTree = "<group>"; };
+		5CC641F3282506C6002E1C46 /* PW_AppLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AppLockViewController.h; sourceTree = "<group>"; };
+		5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AppLockViewController.m; sourceTree = "<group>"; };
+		5CC641F828250B31002E1C46 /* PW_AuthenticationTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AuthenticationTool.h; sourceTree = "<group>"; };
+		5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AuthenticationTool.m; sourceTree = "<group>"; };
 		5CCE70B2280FDB3C00860841 /* PW_DappBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBrowserCell.h; sourceTree = "<group>"; };
 		5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserCell.m; sourceTree = "<group>"; };
 		5CCE70B5280FDE5800860841 /* PW_BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BannerModel.h; sourceTree = "<group>"; };
@@ -1183,12 +1191,15 @@
 		5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuItemCell.m; sourceTree = "<group>"; };
 		5CCE70F02811087800860841 /* PW_MarketMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuModel.h; sourceTree = "<group>"; };
 		5CCE70F12811087800860841 /* PW_MarketMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuModel.m; sourceTree = "<group>"; };
+		5CDCBC20281D303400284449 /* PW_SolanaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PW_SolanaConstants.swift; sourceTree = "<group>"; };
 		5CE19F9B28192FA8008C37A3 /* PW_DappAlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappAlertTool.h; sourceTree = "<group>"; };
 		5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappAlertTool.m; sourceTree = "<group>"; };
 		5CE19F9E28192FDE008C37A3 /* PW_AlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AlertTool.h; sourceTree = "<group>"; };
 		5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AlertTool.m; sourceTree = "<group>"; };
 		5CE19FA128193390008C37A3 /* PW_DappPayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappPayModel.h; sourceTree = "<group>"; };
 		5CE19FA228193390008C37A3 /* PW_DappPayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappPayModel.m; sourceTree = "<group>"; };
+		5CE19FA4281A5028008C37A3 /* PW_DappMinersFeeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappMinersFeeView.h; sourceTree = "<group>"; };
+		5CE19FA5281A5028008C37A3 /* PW_DappMinersFeeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappMinersFeeView.m; sourceTree = "<group>"; };
 		5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanTool.h; sourceTree = "<group>"; };
 		5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanTool.m; sourceTree = "<group>"; };
 		5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanViewController.h; sourceTree = "<group>"; };
@@ -1231,6 +1242,7 @@
 		5CE7AD0F27F99AC300E2188D /* PW_ContractTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ContractTool.h; sourceTree = "<group>"; };
 		5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ContractTool.m; sourceTree = "<group>"; };
 		5CE7AD1427F9AA9D00E2188D /* PW_Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Constant.h; sourceTree = "<group>"; };
+		5CECD23E2825146400EF3A8F /* TokenWalletProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TokenWalletProject.entitlements; sourceTree = "<group>"; };
 		5CEF34A227FE72320052BA15 /* PW_CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_CollectionViewController.h; sourceTree = "<group>"; };
 		5CEF34A327FE72320052BA15 /* PW_CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_CollectionViewController.m; sourceTree = "<group>"; };
 		5CEF34A627FE97CD0052BA15 /* UIFont+PW_Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+PW_Font.h"; sourceTree = "<group>"; };
@@ -1952,6 +1964,7 @@
 		5A8FD94E1D2DFC270015D6C0 /* TokenWalletProject */ = {
 			isa = PBXGroup;
 			children = (
+				5CECD23E2825146400EF3A8F /* TokenWalletProject.entitlements */,
 				5A8FD9521D2DFC270015D6C0 /* AppDelegate.h */,
 				5A8FD9531D2DFC270015D6C0 /* AppDelegate.m */,
 				5CB76B0727F2E15D0068E967 /* New */,
@@ -2578,6 +2591,7 @@
 		5AF5D22D1D2F7D03004070D7 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				5CA451DF2817CF03006FFA3B /* Solana */,
 				5C71192427BB7ABC00FE9B51 /* Web3 */,
 				9926E15126F1E41B00FDF442 /* SWFingerprintLock.h */,
 				9926E15026F1E41B00FDF442 /* SWFingerprintLock.m */,
@@ -2871,6 +2885,7 @@
 			children = (
 				5CA451E828180205006FFA3B /* SeedPhraseGenerator */,
 				5CA451E32817D28A006FFA3B /* PW_Solana.swift */,
+				5CDCBC20281D303400284449 /* PW_SolanaConstants.swift */,
 				5CA451EB2818F845006FFA3B /* PW_SolanaTest.h */,
 				5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */,
 			);
@@ -2918,9 +2933,9 @@
 		5CB76B0827F2E1A00068E967 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				5CB76B0927F2E1B60068E967 /* Controller */,
 				5CB76B0B27F2E1C00068E967 /* Model */,
 				5CB76B0A27F2E1BB0068E967 /* View */,
-				5CB76B0927F2E1B60068E967 /* Controller */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -2981,6 +2996,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5CC641F728250B22002E1C46 /* Authentication */,
 				5CEF34AE27FEC7580052BA15 /* Share */,
 				5CB76B3627F57D080068E967 /* Alert */,
 				5CB76B2A27F4405E0068E967 /* Toast */,
@@ -3070,6 +3086,15 @@
 			path = UIControl;
 			sourceTree = "<group>";
 		};
+		5CC641F728250B22002E1C46 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				5CC641F828250B31002E1C46 /* PW_AuthenticationTool.h */,
+				5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		5CCE70D328101DF100860841 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3088,6 +3113,8 @@
 				5CCE70D928101FE700860841 /* PW_DappMoreContentView.m */,
 				5CCE70DB281022B400860841 /* PW_DappMoreItemCell.h */,
 				5CCE70DC281022B400860841 /* PW_DappMoreItemCell.m */,
+				5CE19FA4281A5028008C37A3 /* PW_DappMinersFeeView.h */,
+				5CE19FA5281A5028008C37A3 /* PW_DappMinersFeeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3323,6 +3350,8 @@
 				5C37A8C4280E9ED400AAA728 /* PW_WalletManageViewController.m */,
 				5C37A8CC280EAE9000AAA728 /* PW_WalletSetViewController.h */,
 				5C37A8CD280EAE9000AAA728 /* PW_WalletSetViewController.m */,
+				5CC641F3282506C6002E1C46 /* PW_AppLockViewController.h */,
+				5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */,
 				5C37A8D8280EC29F00AAA728 /* PW_ChangeWalletNameViewController.h */,
 				5C37A8D9280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m */,
 				5C37A8DE280ECF0F00AAA728 /* PW_ChangePwdViewController.h */,
@@ -3810,7 +3839,6 @@
 			children = (
 				992E0F0926CCAC4800E1C31B /* FchainTool.h */,
 				992E0F0826CCAC4800E1C31B /* FchainTool.m */,
-				5CA451DF2817CF03006FFA3B /* Solana */,
 				5E0799A421D28A3A00924407 /* objectivec */,
 				5E07992821D27E5A00924407 /* protobuf */,
 				5E079A0421D3C00700924407 /* SDK */,
@@ -4466,9 +4494,7 @@
 				TargetAttributes = {
 					5A8FD94B1D2DFC270015D6C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 23RRG34V9B;
 						LastSwiftMigration = 1320;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -4784,6 +4810,7 @@
 				992EF17C26B27B5600F70A94 /* MainNavTitleView.m in Sources */,
 				9926E05F26E78D4200FDF442 /* NSString+IsEmptyStr.m in Sources */,
 				5AF5D15E1D2F7CBA004070D7 /* NSData+SDDataCache.m in Sources */,
+				5CC641FA28250B32002E1C46 /* PW_AuthenticationTool.m in Sources */,
 				5AF5D15A1D2F7CBA004070D7 /* NSData+Base64.m in Sources */,
 				9926E0E926EC520300FDF442 /* DAppsShowAlertView.m in Sources */,
 				5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */,
@@ -4912,6 +4939,7 @@
 				5E079A0921D3C08700924407 /* bitcoin.mm in Sources */,
 				5AF5D14E1D2F7CBA004070D7 /* NSManagedObject+Extensions.m in Sources */,
 				5C671309281166990088A1A5 /* PW_MarketManager.m in Sources */,
+				5CE19FA6281A5028008C37A3 /* PW_DappMinersFeeView.m in Sources */,
 				992EF20126BA681C00F70A94 /* BaseTableViewController.m in Sources */,
 				5AF5D18A1D2F7CBA004070D7 /* NSString+Base64.m in Sources */,
 				1FA8EF7721B824F900B4E28E /* TYShowAlertView.m in Sources */,
@@ -5042,6 +5070,7 @@
 				5C36E18528094BD20000FEE0 /* PW_GlobalData.m in Sources */,
 				5C8AAB11280D618100E4ED53 /* PW_AddressBookViewController.m in Sources */,
 				5AF5D1511D2F7CBA004070D7 /* NSManagedObjectContext+FetchRequestsConstructors.m in Sources */,
+				5CC641F5282506C6002E1C46 /* PW_AppLockViewController.m in Sources */,
 				5CEF34D0280589410052BA15 /* PW_AddImportWalletViewController.m in Sources */,
 				79C9B34B21ABEA6F007BA751 /* iCarousel.m in Sources */,
 				1FCE189921AAFA5600328D78 /* ZYBannerView.m in Sources */,
@@ -5101,6 +5130,7 @@
 				5AF5D1881D2F7CBA004070D7 /* NSSet+Block.m in Sources */,
 				5CB119E7280BC3B70006BEFB /* PW_MoreModel.m in Sources */,
 				5AF5D14C1D2F7CBA004070D7 /* NSFetchRequest+Extensions.m in Sources */,
+				5CDCBC21281D303400284449 /* PW_SolanaConstants.swift in Sources */,
 				5AF5D1A91D2F7CBA004070D7 /* CAAnimation+EasingEquations.m in Sources */,
 				5E079A3C21D3C90A00924407 /* JKBigInteger.m in Sources */,
 				994AA0FB26CA40C50062F9AF /* GasPriceTableViewCell.m in Sources */,
@@ -5380,7 +5410,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = TokenWalletProject/TokenWalletProject.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
@@ -5536,7 +5566,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = TokenWalletProject/TokenWalletProject.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;

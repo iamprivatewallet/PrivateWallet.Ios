@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *authorizedTokenContractAddress;
 @property (nonatomic, copy) NSString *paymentAddress;
 @property (nonatomic, copy) NSString *acceptAddress;
+@property (nonatomic, strong) PW_GasToolModel *gasToolModel;
 @property (nonatomic, strong) PW_GasModel *gasModel;
 
 @end

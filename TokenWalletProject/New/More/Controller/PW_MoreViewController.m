@@ -17,6 +17,7 @@
 #import "PW_AddressBookViewController.h"
 #import "PW_NetworkManageViewController.h"
 #import "PW_WalletManageViewController.h"
+#import "PW_AppLockViewController.h"
 
 @interface PW_MoreViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -55,12 +56,13 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }]
     ];
-//    PW_GroupMoreModel *g3Model = [[PW_GroupMoreModel alloc] init];
-//    g3Model.dataArr = @[
-//        [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
-//
-//        }]
-//    ];
+    PW_GroupMoreModel *g3Model = [[PW_GroupMoreModel alloc] init];
+    g3Model.dataArr = @[
+        [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
+            PW_AppLockViewController *vc = [[PW_AppLockViewController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }]
+    ];
     PW_GroupMoreModel *g4Model = [[PW_GroupMoreModel alloc] init];
     g4Model.dataArr = @[
         [PW_MoreModel MoreIconName:@"icon_more_addressBook" title:LocalizedStr(@"text_addressBook") actionBlock:^(PW_MoreModel * _Nonnull model) {

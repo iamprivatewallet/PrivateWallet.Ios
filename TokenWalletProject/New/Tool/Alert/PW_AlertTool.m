@@ -10,6 +10,19 @@
 
 @implementation PW_AlertTool
 
++ (void)showSystemAlertTitle:(NSString *)title desc:(NSString *)desc handler:(void (^)(void))handler {
+    [self showSystemAlertTitle:title desc:desc actionTitle:LocalizedStr(@"text_confirm") actionStyle:UIAlertActionStyleDefault handler:handler];
+}
++ (void)showSystemAlertTitle:(NSString *)title desc:(NSString *)desc actionTitle:(NSString *)actionTitle actionStyle:(UIAlertActionStyle)actionStyle handler:(void (^)(void))handler {
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:title message:desc preferredStyle:UIAlertControllerStyleAlert];
+    [alertC addAction:[UIAlertAction actionWithTitle:LocalizedStr(@"text_cancel") style:UIAlertActionStyleCancel handler:nil]];
+    [alertC addAction:[UIAlertAction actionWithTitle:actionTitle style:actionStyle handler:^(UIAlertAction * _Nonnull action) {
+        if (handler) {
+            handler();
+        }
+    }]];
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alertC animated:YES completion:nil];
+}
 + (void)showAlertTitle:(NSString *)title desc:(NSString *)desc sureBlock:(void (^)(void))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
