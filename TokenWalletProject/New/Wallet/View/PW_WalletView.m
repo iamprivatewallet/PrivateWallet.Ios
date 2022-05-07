@@ -8,7 +8,7 @@
 
 #import "PW_WalletView.h"
 #import "PW_SwitchNetworkView.h"
-#import "PW_AddCurrencyViewController.h"
+#import "PW_SelectWalletTypeViewController.h"
 #import "PW_WalletViewCell.h"
 
 @interface PW_WalletView () <UITableViewDelegate, UITableViewDataSource>
@@ -43,7 +43,7 @@
 }
 - (void)addWalletAction {
     [self closeAction];
-    [TheAppDelegate.rootNavigationController pushViewController:[PW_AddCurrencyViewController new] animated:YES];
+    [TheAppDelegate.rootNavigationController pushViewController:[PW_SelectWalletTypeViewController new] animated:YES];
 }
 - (void)changeNetAction {
     [self closeAction];
@@ -139,6 +139,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[PW_WalletViewCell class] forCellReuseIdentifier:@"PW_WalletViewCell"];
         _tableView.tableHeaderView = self.networkView;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addWalletView;
     }
     return _tableView;

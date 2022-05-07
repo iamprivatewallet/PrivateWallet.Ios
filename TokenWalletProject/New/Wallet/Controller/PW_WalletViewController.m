@@ -266,10 +266,11 @@
     self.showHiddenBtn.selected = isHidden;
     if (isHidden) {
         self.walletAddressLb.text = NSStringWithFormat(@"%@****",[self.currentWallet.address contractPrefix]);
+        self.totalAssetsLb.text = @"****";
     }else{
         self.walletAddressLb.text = [self.currentWallet.address showShortAddress];
+        self.totalAssetsLb.text = [@(self.currentWallet.totalBalance).stringValue stringDownDecimal:8];
     }
-    self.totalAssetsLb.text = [@(self.currentWallet.totalBalance).stringValue stringDownDecimal:8];
 }
 - (void)nodeUpdate {
     [self refreshHeader];
@@ -590,6 +591,7 @@
         [_tableView registerClass:[PW_WalletCell class] forCellReuseIdentifier:@"PW_WalletCell"];
         _tableView.rowHeight = 70;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addCurrencyView;
     }
     return _tableView;

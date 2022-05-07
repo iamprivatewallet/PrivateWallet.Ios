@@ -21,6 +21,7 @@ text_noData="暂无数据";
 text_copy="复制";
 text_share="分享";
 text_addSuccess="添加成功";
+text_addFailure="添加失败";
 text_save="保存";
 text_saveSuccess="保存成功";
 text_changeSuccess="修改成功";

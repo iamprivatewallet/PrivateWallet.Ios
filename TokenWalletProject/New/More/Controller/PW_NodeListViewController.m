@@ -116,6 +116,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 74;
         [_tableView registerClass:[PW_NodeListCell class] forCellReuseIdentifier:@"PW_NodeListCell"];
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addNodeView;
     }
     return _tableView;

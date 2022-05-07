@@ -26,7 +26,7 @@
 
 - (void)checkImportWallet {
     User *user = User_manager.currentUser;
-    Wallet *wallet = [[[WalletManager shareWalletManager] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
+    Wallet *wallet = [[[PW_WalletManager shared] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
     [MOSWeb3Tool changeOrImportWalletWithAddress:user.chooseWallet_address mnemonics:wallet.mnemonic privateKey:wallet.priKey password:wallet.walletPassword];
 }
 - (NSString * _Nullable)getCurrentAddress {
@@ -34,7 +34,7 @@
 }
 - (Wallet * _Nullable)getCurrentWallet {
     User *user = User_manager.currentUser;
-    Wallet *wallet = [[[WalletManager shareWalletManager] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
+    Wallet *wallet = [[[PW_WalletManager shared] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
     return wallet;
 }
 -(BOOL)isUseTouchID{

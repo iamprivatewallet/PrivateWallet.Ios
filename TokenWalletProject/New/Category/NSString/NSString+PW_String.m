@@ -105,20 +105,10 @@
     return [scan scanFloat:&val] && [scan isAtEnd];
 }
 - (BOOL)isAllChinese {
-    NSString *regex = @"[\u4e00-\u9fa5]+";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    if ([self isNoEmpty]&&[pred evaluateWithObject:self]) {
-        return YES;
-    }
-    return NO;
+    return [NSString isChinese:self];
 }
 - (BOOL)isAllAlpha {
-    NSString *regex =@"[a-zA-Z]*";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    if ([self isNoEmpty]&&[pred evaluateWithObject:self]) {
-        return YES;
-    }
-    return NO;
+    return [NSString isAlpha:self];
 }
 
 - (BOOL)isURL {
@@ -133,21 +123,56 @@
 }
 - (NSString *)pw_firstChar {
     if (self.length == 0) return self;
-    return [NSString stringWithFormat:@"%c", [self characterAtIndex:0]];
+    return [NSString stringWithFormat:@"%c", [self characterAtIndex:1]];
+}
+- (NSString *)pw_firstStr {
+    if (self.length == 0) return self;
+    return [NSString stringWithFormat:@"%@", [self substringToIndex:1]];
 }
 - (NSString *)pw_firstCharLower {
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
-    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].lowercaseString];
+    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:1]].lowercaseString];
     if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
     return string;
 }
 - (NSString *)pw_firstCharUpper {
     if (self.length == 0) return self;
     NSMutableString *string = [NSMutableString string];
-    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:0]].uppercaseString];
+    [string appendString:[NSString stringWithFormat:@"%c", [self characterAtIndex:1]].uppercaseString];
     if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
     return string;
+}
+- (NSString *)pw_firstStrLower {
+    if (self.length == 0) return self;
+    NSMutableString *string = [NSMutableString string];
+    [string appendString:[NSString stringWithFormat:@"%@", [self substringToIndex:1]].lowercaseString];
+    if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
+    return string;
+}
+- (NSString *)pw_firstStrUpper {
+    if (self.length == 0) return self;
+    NSMutableString *string = [NSMutableString string];
+    [string appendString:[NSString stringWithFormat:@"%@", [self substringToIndex:1]].uppercaseString];
+    if (self.length >= 2) [string appendString:[self substringFromIndex:1]];
+    return string;
+}
+
++ (BOOL)isChinese:(NSString *)str {
+    NSString *regex = @"[\u4e00-\u9fa5]+";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([str isNoEmpty]&&[pred evaluateWithObject:str]) {
+        return YES;
+    }
+    return NO;
+}
++ (BOOL)isAlpha:(NSString *)str {
+    NSString *regex =@"[a-zA-Z]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([str isNoEmpty]&&[pred evaluateWithObject:str]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

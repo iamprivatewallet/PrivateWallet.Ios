@@ -84,6 +84,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 180;
         [_tableView registerClass:[PW_AddressBookCell class] forCellReuseIdentifier:@"PW_AddressBookCell"];
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addView;
     }
     return _tableView;

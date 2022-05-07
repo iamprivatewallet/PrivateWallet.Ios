@@ -161,15 +161,33 @@
 - (void)createWallet{
     [self.view showLoadingIndicator];
     self.ensureButton.userInteractionEnabled = NO;
-    [FchainTool genWalletsWithMnemonic:User_manager.currentUser.user_mnemonic createList:self.currencyList block:^(BOOL sucess) {
-        self.ensureButton.userInteractionEnabled = YES;
-        [self.view hideLoadingIndicator];
-        if (sucess) {
-            [self showSuccess:LocalizedStr(@"text_addSuccess")];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kReloadWalletNotification object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }];
+    NSString *user_mnemonic = User_manager.currentUser.user_mnemonic;
+    if ([user_mnemonic isNoEmpty]) {
+        [FchainTool genWalletsWithMnemonic:user_mnemonic createList:self.currencyList block:^(BOOL sucess) {
+            self.ensureButton.userInteractionEnabled = YES;
+            [self.view hideLoadingIndicator];
+            if (sucess) {
+                [self showSuccess:LocalizedStr(@"text_addSuccess")];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kReloadWalletNotification object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showError:LocalizedStr(@"text_addFailure")];
+            }
+        }];
+    }else{
+        Wallet *wallet = [[PW_WalletManager shared] getOrignWallets].firstObject;
+        [FchainTool genWalletsWithPrivateKey:wallet.priKey createList:self.currencyList block:^(BOOL sucess) {
+            self.ensureButton.userInteractionEnabled = YES;
+            [self.view hideLoadingIndicator];
+            if (sucess) {
+                [self showSuccess:LocalizedStr(@"text_addSuccess")];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kReloadWalletNotification object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showError:LocalizedStr(@"text_addFailure")];
+            }
+        }];
+    }
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {

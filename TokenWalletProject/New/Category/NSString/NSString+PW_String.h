@@ -36,8 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isURL;
 - (BOOL)isHttpsURL;
 - (NSString *)pw_firstChar;
+- (NSString *)pw_firstStr;
 - (NSString *)pw_firstCharLower;
 - (NSString *)pw_firstCharUpper;
+- (NSString *)pw_firstStrLower;
+- (NSString *)pw_firstStrUpper;
+
++ (BOOL)isChinese:(NSString *)str;
++ (BOOL)isAlpha:(NSString *)str;
 
 @end
 

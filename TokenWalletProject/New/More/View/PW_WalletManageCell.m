@@ -55,10 +55,10 @@
     [self.bodyView addSubview:self.topBtn];
     [self.bodyView addSubview:self.arrowIv];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(6);
         make.left.offset(20);
         make.right.offset(-20);
-        make.bottom.offset(-12);
+        make.bottom.offset(-6);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);

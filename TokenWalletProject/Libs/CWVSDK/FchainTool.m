@@ -85,7 +85,7 @@
 }
 
 //根据 助记词、用户名 生成 HECO & ETH & BSC 钱包
-+ (void)genWalletsWithMnemonic:(NSString*)mnemonic createList:(NSArray *)list{
++ (BOOL)genWalletsWithMnemonic:(NSString*)mnemonic createList:(NSArray *)list{
     NSString * mainPriKey = [Bip44 mnemonicToHDPrivateKey:mnemonic passwd:@""];
     NSLog(@"eth mainPriKey::%@",mainPriKey);
     NSString * addr = [Bip44 getAddress:mainPriKey index:0];
@@ -99,8 +99,6 @@
     NSString *cvn_address = SPDTKey[@"hexAddress"];
     NSString *cvn_priKey = SPDTKey[@"hexPrikey"];
     NSString *cvn_pubKey = SPDTKey[@"hexPubkey"];
-    
-    
     
     NSString *userName = User_manager.currentUser.user_name;
     NSString *userPw = User_manager.currentUser.user_pass;
@@ -145,9 +143,69 @@
         Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
         [arr addObject:wallet];
     }
-
     [[PW_WalletManager shared] saveWallets:arr];
+    return arr.count>0;
+}
+//根据 私钥、用户名 生成 HECO & ETH & BSC 钱包
++ (BOOL)genWalletsWithPrivateKey:(NSString*)privateKey createList:(NSArray *)list{
+    NSString * mainPriKey = privateKey;//bug
+    NSString * addr = [Bip44 getAddress:mainPriKey index:0];
+    NSLog(@"eth addr::%@",addr);
+    NSString * prikey = [Bip44 getPrivateKey:mainPriKey index:0];
+    NSLog(@"eth prikey::%@",prikey);
+    NSString * pubkey = @"eth";
+
+    NSString *cprikey = [Bip44 getCWVPrivateKey:mainPriKey index:0];
+    NSDictionary *SPDTKey = [CWVChainUtils genFromPrikey:cprikey];
+    NSString *cvn_address = SPDTKey[@"hexAddress"];
+    NSString *cvn_priKey = SPDTKey[@"hexPrikey"];
+    NSString *cvn_pubKey = SPDTKey[@"hexPubkey"];
     
+    NSString *userName = User_manager.currentUser.user_name;
+    NSString *userPw = User_manager.currentUser.user_pass;
+
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    NSString *addressStr= addr;
+    NSString *prikeyStr= prikey;
+    NSString *pubKeyStr= pubkey;
+    for (int i = 0; i<list.count; i++) {
+        NSString *typeStr = list[i];
+        if([typeStr isEqualToString:@"CVN"]) {
+            if(![cvn_address isNoEmpty]){
+                continue;
+            }
+            addressStr = cvn_address;
+            prikeyStr = cvn_priKey;
+            pubKeyStr = cvn_pubKey;
+        }
+        NSArray * array = [[PW_WalletManager shared] selctWalletWithAddr:addressStr type:typeStr];
+        if (!array || array == nil || array.count>0) {
+            continue;
+        }
+        if([typeStr isEqualToString:@"CVN"]){
+            addressStr = [addressStr formatToCVN];
+        }else{
+            addressStr = [addressStr formatToEth];
+        }
+        NSDictionary *dic = @{
+            @"type":list[i],
+            @"walletName":list[i],
+            @"walletPassword":userPw,
+            @"owner":userName,
+            @"mnemonic":@"",
+            @"pubKey":pubKeyStr,
+            @"priKey":prikeyStr,
+            @"address":addressStr,
+            @"isImport":@"0",
+            @"totalBalance":@"0",
+            @"coinCount":@(0),
+            @"isOpenID":@"0",
+        };
+        Wallet * wallet = [Wallet mj_objectWithKeyValues:dic];
+        [arr addObject:wallet];
+    }
+    [[PW_WalletManager shared] saveWallets:arr];
+    return arr.count>0;
 }
 
 + (void)genWalletWithMnemonic:(NSString*)mnemonic withWallet:(Wallet *)wallet{
@@ -448,10 +506,20 @@
 + (void)genWalletsWithMnemonic:(NSString*)mnemonic createList:(NSArray *)list block:(void(^)(BOOL sucess))block
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self genWalletsWithMnemonic:mnemonic createList:list];
+        BOOL success = [self genWalletsWithMnemonic:mnemonic createList:list];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (block) {
-                block(YES);
+                block(success);
+            }
+        });
+    });
+}
++ (void)genWalletsWithPrivateKey:(NSString*)privateKey createList:(NSArray *)list block:(void(^)(BOOL sucess))block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BOOL success = [self genWalletsWithPrivateKey:privateKey createList:list];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (block) {
+                block(success);
             }
         });
     });

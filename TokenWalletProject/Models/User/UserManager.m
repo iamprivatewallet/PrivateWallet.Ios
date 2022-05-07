@@ -94,10 +94,10 @@
     self.currentUser.user_is_login = NO;
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:User_Info_Key];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSArray *walletArray = [[WalletManager shareWalletManager] getWallets];
+    NSArray *walletArray = [[PW_WalletManager shared] getWallets];
     for (int i = 0; i < walletArray.count; ++i) {
         Wallet *wallet = walletArray[i];
-        [[WalletManager shareWalletManager]deleteWallet:wallet];
+        [[PW_WalletManager shared] deleteWallet:wallet];
     }
   
 }
@@ -142,7 +142,7 @@
 }
 -(void)updateUserName:(NSString *)name
 {
-    [[WalletManager shareWalletManager] updataWalletOwnerTo:name];
+    [[PW_WalletManager shared] updateWalletOwner:name];
     self.currentUser.user_name = name;
     [self saveCurrentUser:self.currentUser];
 }

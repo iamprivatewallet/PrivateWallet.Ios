@@ -7,7 +7,7 @@
 //
 
 #import "PW_WalletManageViewController.h"
-#import "PW_AddCurrencyViewController.h"
+#import "PW_SelectWalletTypeViewController.h"
 #import "PW_SwitchNetworkView.h"
 #import "PW_WalletManageCell.h"
 #import "PW_WalletSetViewController.h"
@@ -54,7 +54,7 @@
     }
 }
 - (void)addWalletAction {
-    [self.navigationController pushViewController:[[PW_AddCurrencyViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[PW_SelectWalletTypeViewController alloc] init] animated:YES];
 }
 - (void)changeNetAction {
     [PW_SwitchNetworkView show];
@@ -140,6 +140,7 @@
         _tableView.rowHeight = 74;
         [_tableView registerClass:[PW_WalletManageCell class] forCellReuseIdentifier:@"PW_WalletManageCell"];
         _tableView.tableHeaderView = self.networkView;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addWalletView;
     }
     return _tableView;
@@ -156,7 +157,7 @@
             make.left.offset(20);
             make.right.offset(-20);
             make.top.offset(0);
-            make.bottom.offset(-12);
+            make.bottom.offset(-6);
         }];
         UIImage *bgImage = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-40, 74) gradientColors:@[[UIColor g_hex:@"#00D5E9"],[UIColor g_hex:@"#00A4B9"]] gradientType:PW_GradientLeftToRight cornerRadius:8];
         UIImageView *bgIv = [[UIImageView alloc] initWithImage:bgImage];
@@ -174,11 +175,11 @@
         UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_light"]];
         [contentView addSubview:arrowIv];
         [self.netNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(12);
+            make.bottom.equalTo(contentView.mas_centerY);
             make.left.offset(20);
         }];
         [self.netSubNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.netNameLb.mas_bottom).offset(4);
+            make.top.equalTo(contentView.mas_centerY).offset(6);
             make.left.offset(20);
             make.right.offset(-20);
         }];
@@ -196,13 +197,14 @@
 - (UIView *)addWalletView {
     if (!_addWalletView) {
         _addWalletView = [[UIView alloc] init];
-        _addWalletView.frame = CGRectMake(0, 0, 0, 44);
+        _addWalletView.frame = CGRectMake(0, 0, 0, 54);
         UIButton *addBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addWallet") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addWalletAction)];
-        addBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
+        addBtn.frame = CGRectMake(0, 5, SCREEN_WIDTH-40, 44);
         [addBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
         [_addWalletView addSubview:addBtn];
         [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.offset(0);
+            make.top.offset(5);
+            make.bottom.offset(-5);
             make.left.offset(20);
             make.right.offset(-20);
         }];

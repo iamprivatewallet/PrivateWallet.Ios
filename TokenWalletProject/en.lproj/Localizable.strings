@@ -21,6 +21,7 @@ text_noData="Temporarily no data";
 text_copy="Copy";
 text_share="Share";
 text_addSuccess="Add success";
+text_addFailure="Add failure";
 text_save="Save";
 text_saveSuccess="Save success";
 text_changeSuccess="Modify success";

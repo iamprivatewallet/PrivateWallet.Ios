@@ -31,7 +31,7 @@ typedef enum WalletType {
 
 //根据 助记词、用户名 生成  ETH && HECO && BSC 钱包
 + (void)genWalletsWithMnemonic:(NSString*)mnemonic createList:(NSArray *)list block:(void(^)(BOOL sucess))block;
-
++ (void)genWalletsWithPrivateKey:(NSString*)privateKey createList:(NSArray *)list block:(void(^)(BOOL sucess))block;
 //根据 助记词 创建单个钱包
 + (void)genWalletWithMnemonic:(NSString*)mnemonic withWallet:(Wallet *)wallet block:(void(^)(BOOL sucess))block;
 

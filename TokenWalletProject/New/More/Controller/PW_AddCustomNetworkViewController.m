@@ -34,6 +34,15 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_addCustomNetwork")];
     [self makeViews];
+    if (self.model) {
+        self.nameTf.text = self.model.title;
+        self.rpcUrlTf.text = self.model.rpcUrl;
+        self.chainIdTf.text = self.model.chainId;
+        self.symbolTf.text = self.model.symbol;
+        self.blockBrowserTf.text = self.model.browseUrl;
+        self.chainIdTf.enabled = NO;
+        self.chainIdTf.textColor = [UIColor g_grayTextColor];
+    }
     RAC(self.saveBtn,enabled) = [RACSignal combineLatest:@[self.nameTf.rac_textSignal,self.rpcUrlTf.rac_textSignal,self.chainIdTf.rac_textSignal] reduce:^id(NSString *name,NSString *rpcUrl,NSString *chainId){
         return @([name trim].length>0&&[rpcUrl trim].length>0&&[chainId trim].length>0);
     }];
@@ -59,20 +68,31 @@
         [self showError:PW_StrFormat(@"%@ID %@",LocalizedStr(@"text_chain"),LocalizedStr(@"text_error"))];
         return;
     }
-    if ([[PW_NetworkManager shared] isExistWithChainId:chainId]) {
-        [self showError:PW_StrFormat(@"%@ID %@",LocalizedStr(@"text_chain"),LocalizedStr(@"text_alreadyExist"))];
-        return;
-    }
-    PW_NetworkModel *model = [[PW_NetworkModel alloc] init];
-    model.sortIndex = [[PW_NetworkManager shared] getMaxIndex]+1;
-    model.title = name;
-    model.rpcUrl = rpcUrl;
-    model.chainId = chainId;
-    model.symbol = symbol;
-    model.browseUrl = blockBrowser;
-    [[PW_NetworkManager shared] saveModel:model];
-    if (self.saveBlock) {
-        self.saveBlock(model);
+    if (self.model) {
+        self.model.title = name;
+        self.model.rpcUrl = rpcUrl;
+        self.model.symbol = symbol;
+        self.model.browseUrl = blockBrowser;
+        [[PW_NetworkManager shared] updateModel:self.model];
+        if (self.saveBlock) {
+            self.saveBlock(self.model);
+        }
+    }else{
+        if ([[PW_NetworkManager shared] isExistWithChainId:chainId]) {
+            [self showError:PW_StrFormat(@"%@ID %@",LocalizedStr(@"text_chain"),LocalizedStr(@"text_alreadyExist"))];
+            return;
+        }
+        PW_NetworkModel *model = [[PW_NetworkModel alloc] init];
+        model.sortIndex = [[PW_NetworkManager shared] getMaxIndex]+1;
+        model.title = name;
+        model.rpcUrl = rpcUrl;
+        model.chainId = chainId;
+        model.symbol = symbol;
+        model.browseUrl = blockBrowser;
+        [[PW_NetworkManager shared] saveModel:model];
+        if (self.saveBlock) {
+            self.saveBlock(model);
+        }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

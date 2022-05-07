@@ -42,7 +42,7 @@ static NSString * _Nonnull PW_TableName = @"wallet_networkList";
 }
 - (BOOL)updateModel:(PW_NetworkModel *)model {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:model whereFormat:[NSString stringWithFormat:@"where chainId = '%@' and symbol = '%@' and rpcUrl = '%@'",model.chainId,model.symbol,model.rpcUrl]];
+    return [db jq_updateTable:PW_TableName dicOrModel:model whereFormat:[NSString stringWithFormat:@"where chainId = '%@'",model.chainId]];
 }
 - (BOOL)updateSortIndex:(NSInteger)sortIndex chainId:(NSString *)chainId {
     JQFMDB * db = [JQFMDB shareDatabase];

@@ -121,6 +121,15 @@
     // 3. 将源插入到数组中的目标位置
     [self.dataArr insertObject:source atIndex:destinationIndexPath.row];
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PW_NetworkModel *model = self.dataArr[indexPath.row];
+    PW_AddCustomNetworkViewController *vc = [[PW_AddCustomNetworkViewController alloc] init];
+    vc.model = model;
+    vc.saveBlock = ^(PW_NetworkModel * _Nonnull model) {
+        [tableView reloadData];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - lazy
 - (PW_TableView *)tableView {
     if(!_tableView) {
@@ -129,6 +138,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 72;
         [_tableView registerClass:[PW_NetworkManageCell class] forCellReuseIdentifier:@"PW_NetworkManageCell"];
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addView;
     }
     return _tableView;

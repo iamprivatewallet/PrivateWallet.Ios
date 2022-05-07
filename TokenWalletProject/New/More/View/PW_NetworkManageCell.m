@@ -40,7 +40,7 @@
 }
 - (void)setModel:(PW_NetworkModel *)model {
     _model = model;
-    self.iconLb.text = model.title.pw_firstChar.uppercaseString;
+    self.iconLb.text = model.title.pw_firstStr.uppercaseString;
     self.nameLb.text = model.title;
 }
 - (void)makeViews {
