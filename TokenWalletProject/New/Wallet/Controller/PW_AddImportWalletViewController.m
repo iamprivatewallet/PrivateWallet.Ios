@@ -92,6 +92,7 @@
         return;
     }
     Wallet *wallet = [[Wallet alloc] init];
+    wallet.walletName = walletName;
     wallet.walletPassword = pwdStr;
     wallet.walletPasswordTips = @"";
     wallet.type = self.walletType;
@@ -104,36 +105,73 @@
     }
 }
 - (void)importPriKeyWithWallet:(Wallet *)wallet{
-    [self.view showLoadingIndicator];
-    self.sureBtn.userInteractionEnabled = NO;
-    [FchainTool importPrikeyFromModel:wallet errorType:^(NSString * _Nonnull errorType, BOOL sucess) {
-        [self.view hideLoadingIndicator];
-        self.sureBtn.userInteractionEnabled = YES;
-        if (sucess) {
-            [self showSuccess:LocalizedStr(@"text_importSuccess")];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
-        }else{
-            [self showError:errorType];
-        }
-    }];
+    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
+        wallet.owner = User_manager.currentUser.user_name;
+        wallet.mnemonic = @"";
+        wallet.pubKey = publicKey;
+        wallet.priKey = secretKey;
+        wallet.address = publicKey;
+        wallet.isImport = @"1";
+        wallet.totalBalance = 0;
+        wallet.coinCount = @"0";
+        wallet.isOpenID = @"0";
+        [[PW_WalletManager shared] saveWallet:wallet];
+        [self showSuccess:LocalizedStr(@"text_importSuccess")];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
+        [FchainTool importPrikeyFromModel:wallet errorType:^(NSString * _Nonnull errorType, BOOL sucess) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            if (sucess) {
+                [self showSuccess:LocalizedStr(@"text_importSuccess")];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
+            }else{
+                [self showError:errorType];
+            }
+        }];
+    }
 }
 - (void)importMnemonicWithWallet:(Wallet *)wallet{
-    [self.view showLoadingIndicator];
-    self.sureBtn.userInteractionEnabled = NO;
-    [FchainTool importMnemonicFromModel:wallet errorType:^(NSString * _Nonnull errorType, BOOL sucess) {
-        [self.view hideLoadingIndicator];
-        self.sureBtn.userInteractionEnabled = YES;
-        if (sucess) {
-            [self showSuccess:LocalizedStr(@"text_importSuccess")];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
-        }else{
-            [self showError:errorType];
-        }
-    }];
+    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
+        NSString *phrase = account[@"phrase"];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
+        wallet.owner = User_manager.currentUser.user_name;
+        wallet.mnemonic = phrase;
+        wallet.pubKey = publicKey;
+        wallet.priKey = secretKey;
+        wallet.address = publicKey;
+        wallet.isImport = @"1";
+        wallet.totalBalance = 0;
+        wallet.coinCount = @"0";
+        wallet.isOpenID = @"0";
+        [[PW_WalletManager shared] saveWallet:wallet];
+        [self showSuccess:LocalizedStr(@"text_importSuccess")];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
+        [FchainTool importMnemonicFromModel:wallet errorType:^(NSString * _Nonnull errorType, BOOL sucess) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            if (sucess) {
+                [self showSuccess:LocalizedStr(@"text_importSuccess")];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
+            }else{
+                [self showError:errorType];
+            }
+        }];
+    }
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];

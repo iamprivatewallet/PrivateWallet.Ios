@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_DappAlertTool : NSObject
 
-+ (void)showDappAuthorizationConfirm:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block;
-+ (void)showDappConfirmPayInfo:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block;
++ (void)showDappAuthorizationConfirm:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block closeBlock:(void(^)(void))closeBlock;
++ (void)showDappConfirmPayInfo:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block closeBlock:(void(^)(void))closeBlock;
 + (void)showDappMaxAuthorizationCountSureBlock:(void(^)(NSString *count))block;
 + (void)showDappConfirmGas:(PW_GasToolModel *)model sureBlock:(void(^)(PW_GasModel *model, NSString *title))block;
 

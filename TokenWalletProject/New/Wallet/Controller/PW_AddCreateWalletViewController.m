@@ -49,22 +49,47 @@
         [self showError:LocalizedStr(@"text_pwdDisagreeError")];
         return;
     }
-    [self.view showLoadingIndicator];
-    //创建助记词
-    [FchainTool generateMnemonicBlock:^(NSString * _Nonnull result) {
-        [self.view hideLoadingIndicator];
+    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana createAccount];
+        NSString *phrase = account[@"phrase"];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
         Wallet *wallet = [[Wallet alloc] init];
         wallet.walletName = walletName;
         wallet.walletPassword = pwdStr;
         wallet.walletPasswordTips = @"";
-        wallet.mnemonic = result;
+        wallet.owner = User_manager.currentUser.user_name;
+        wallet.mnemonic = phrase;
+        wallet.pubKey = publicKey;
+        wallet.priKey = secretKey;
+        wallet.address = publicKey;
         wallet.type = self.walletType;
+        wallet.totalBalance = 0;
+        wallet.coinCount = @"0";
+        wallet.isOpenID = @"0";
         PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
         vc.isFirst = YES;
-        vc.wordStr = result;
+        vc.wordStr = phrase;
         vc.wallet = wallet;
         [self.navigationController pushViewController:vc animated:YES];
-    }];
+    }else{
+        //创建助记词
+        [self.view showLoadingIndicator];
+        [FchainTool generateMnemonicBlock:^(NSString * _Nonnull result) {
+            [self.view hideLoadingIndicator];
+            Wallet *wallet = [[Wallet alloc] init];
+            wallet.walletName = walletName;
+            wallet.walletPassword = pwdStr;
+            wallet.walletPasswordTips = @"";
+            wallet.mnemonic = result;
+            wallet.type = self.walletType;
+            PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
+            vc.isFirst = YES;
+            vc.wordStr = result;
+            vc.wallet = wallet;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+    }
 }
 - (void)pwdTFDidBegin:(UITextField *)sender {
     if (sender==self.pwdTF) {

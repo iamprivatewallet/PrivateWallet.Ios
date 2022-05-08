@@ -13,10 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_DappPayModel : NSObject
 
-@property (nonatomic, copy) NSString *authorizationCount;
 @property (nonatomic, copy) NSString *value;
 @property (nonatomic, copy) NSString *symbol;
-@property (nonatomic, copy) NSString *authorizedTokenContractAddress;
 @property (nonatomic, copy) NSString *paymentAddress;
 @property (nonatomic, copy) NSString *acceptAddress;
 @property (nonatomic, strong) PW_GasToolModel *gasToolModel;

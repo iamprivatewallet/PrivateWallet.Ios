@@ -75,6 +75,9 @@
     [PW_AlertTool showAnimationSheetContentView:contentView];
 }
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block {
+    [self showPayPwdSureBlock:block closeBlock:nil];
+}
++ (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block closeBlock:(void(^)(void))closeBlock {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
     UIView *view = [PW_AlertTool showSheetView:contentView];
@@ -90,6 +93,9 @@
     __weak typeof(view) weakView = view;
     [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
+        if (closeBlock) {
+            closeBlock();
+        }
     }];
     [contentView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {

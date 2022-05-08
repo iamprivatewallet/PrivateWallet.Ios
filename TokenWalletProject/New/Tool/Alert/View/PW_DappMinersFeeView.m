@@ -49,7 +49,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 - (void)setToolModel:(PW_GasToolModel *)toolModel {
     _toolModel = toolModel;
     _gasModel = toolModel.recommendModel;;
-    _title = LocalizedStr(@"text_recommend");
+    _title = LocalizedStr(@"text_avg");
     self.sliderView.minimumValue = [toolModel.slowModel.gas_price doubleValue];
     self.sliderView.maximumValue = [toolModel.soonModel.gas_price doubleValue];
     [self refreshGasUI];
@@ -128,7 +128,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self addSubview:self.sliderView];
     self.speedFeeView = [[UIView alloc] init];
     [self addSubview:self.speedFeeView];
-    NSArray *titleArr = @[LocalizedStr(@"text_slow"),LocalizedStr(@"text_recommend"),LocalizedStr(@"text_fast"),LocalizedStr(@"text_soon")];
+    NSArray *titleArr = @[LocalizedStr(@"text_slow"),LocalizedStr(@"text_avg"),LocalizedStr(@"text_fast"),LocalizedStr(@"text_soon")];
     UIView *lastBtn = nil;
     for (NSInteger i=0;i<titleArr.count;i++) {
         NSString *text = titleArr[i];

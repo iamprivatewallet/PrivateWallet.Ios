@@ -30,29 +30,24 @@ class MOSWeb3Tool: NSObject {
     }
     @objc
     public class func changeOrImportWallet(address: String, mnemonics: String, privateKey: String, password: String) {
-        if(!MOSWalletTool.hasWallet() || MOSWalletTool.getCurrentAddress() != address) {
+        if(!MOSWalletTool.hasWallet() || MOSWalletTool.getCurrentAddress().lowercased() != address.lowercased()) {
             MOSWalletTool.logoutWallet();
-            var address: String? = "";
+            var walletAddress: String? = "";
             if(mnemonics == nil||mnemonics.count==0) {
-                address = MOSWalletTool.importWallet(privateKey, password: password)
+                walletAddress = MOSWalletTool.importWallet(privateKey, password: password)
             }else{
-                address = MOSWalletTool.createOrImportWallet(mnemonics, password: password)
+                walletAddress = MOSWalletTool.createOrImportWallet(mnemonics, password: password)
             }
-            WQJLog(address)
+            WQJLog(walletAddress)
         }
     }
     @objc
     public class func sendTransaction(_ transactionJSON: [String: Any], password: String, completionBlock: @escaping ((_ hash: String?, _ errorDesc: String?)->())) {
-        guard let toStr = transactionJSON["to"] as? String, let to = EthereumAddress(toStr), let valueString = transactionJSON["value"] as? String, let value = BigUInt(valueString.stripHexPrefix(), radix: 16) else {
+        guard var transaction = EthereumTransaction.fromJSON(transactionJSON), let options = TransactionOptions.fromJSON(transactionJSON) else {
             completionBlock(nil, "必要信息丢失")
             return
         }
-        var nonce = TransactionOptions.NoncePolicy.pending
-        if let nonceStr = transactionJSON["nonce"] as? String, let bigNonce = BigUInt(nonceStr.stripHexPrefix().lowercased(), radix: 16) {
-            nonce = TransactionOptions.NoncePolicy.manual(bigNonce)
-        }
-        var transaction = EthereumTransaction.init(to: to, data: Data())
-        transaction.value = value
+        transaction.value = transaction.value != nil ? transaction.value! : BigUInt(0)
         if let gas = transactionJSON["gas"] as? String, let gasBiguint = BigUInt(gas.stripHexPrefix().lowercased(), radix: 16) {
             transaction.gasLimit = gasBiguint
         } else if let gasLimit = transactionJSON["gasLimit"] as? String, let gasgasLimitBiguint = BigUInt(gasLimit.stripHexPrefix().lowercased(), radix: 16) {
@@ -67,11 +62,12 @@ class MOSWeb3Tool: NSObject {
             transaction.gasPrice = BigUInt(20000000000)
         }
         var transactionOptions = TransactionOptions.defaultOptions
+        transactionOptions.from = options.from
         transactionOptions.to = transaction.to
         transactionOptions.value = transaction.value
         transactionOptions.gasLimit = TransactionOptions.GasLimitPolicy.manual(transaction.gasLimit)
         transactionOptions.gasPrice = TransactionOptions.GasPricePolicy.manual(transaction.gasPrice)
-        transactionOptions.nonce = nonce
+        transactionOptions.nonce = options.nonce
         self.checkImportWallet();
         DispatchQueue.global(qos: .background).async {
             do {

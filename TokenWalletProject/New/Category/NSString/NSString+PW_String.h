@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isFloat;
 - (BOOL)isAllChinese;
 - (BOOL)isAllAlpha;
+- (BOOL)isAlphaURL;
 - (BOOL)isURL;
 - (BOOL)isHttpsURL;
 - (NSString *)pw_firstChar;
@@ -44,6 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isChinese:(NSString *)str;
 + (BOOL)isAlpha:(NSString *)str;
++ (BOOL)isAlphaURL:(NSString *)str;
+
+- (BOOL)isHex;
+- (NSString *)strTo10;
+- (NSString *)strTo16;
+- (NSString *)addOxPrefix;
+- (NSString *)getStrTo16;
+- (NSString *)get16ToStr;
 
 @end
 

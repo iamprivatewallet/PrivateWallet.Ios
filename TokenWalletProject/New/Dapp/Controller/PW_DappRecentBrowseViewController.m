@@ -47,6 +47,20 @@
     cell.model = self.dataArr[indexPath.row];
     return cell;
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        PW_DappModel *model = self.dataArr[indexPath.row];
+        [[PW_DappManager shared] deleteWithUrlStr:model.appUrl];
+        [self.dataArr removeObject:model];
+        [tableView reloadData];
+    }
+}
 #pragma mark - lazy
 - (PW_TableView *)tableView {
     if(!_tableView) {

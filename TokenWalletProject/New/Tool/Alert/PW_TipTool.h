@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showBackupTipPrivateKeySureBlock:(void (^)(void))block;
 + (void)showBackupTipDesc:(NSString *)desc sureBlock:(void (^)(void))block;
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block;
++ (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block closeBlock:(nullable void(^)(void))closeBlock;
 /// dapp钱包不支持
 + (void)showDappWalletNotSupportedWithModel:(PW_DappModel *)model sureBlock:(void(^)(void))block;
 /// dapp免责声明

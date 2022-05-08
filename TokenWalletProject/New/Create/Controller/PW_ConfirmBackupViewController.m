@@ -46,16 +46,22 @@
         if (self.isFirst) {
             if (self.wallet) {//创建单个钱包
                 self.wallet.isImport = @"1";
-                self.nextBtn.userInteractionEnabled = NO;
-                [self.view showLoadingIndicator];
-                [FchainTool genWalletWithMnemonic:self.wordStr withWallet:self.wallet block:^(BOOL sucess) {
-                    [self.view hideLoadingIndicator];
-                    self.nextBtn.userInteractionEnabled = YES;
-                    if (sucess) {
-                        [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                    }
-                }];
+                if ([self.wallet.type isEqualToString:WalletTypeSolana]) {
+                    [[PW_WalletManager shared] saveWallet:self.wallet];
+                    [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }else{
+                    self.nextBtn.userInteractionEnabled = NO;
+                    [self.view showLoadingIndicator];
+                    [FchainTool genWalletWithMnemonic:self.wordStr withWallet:self.wallet block:^(BOOL sucess) {
+                        [self.view hideLoadingIndicator];
+                        self.nextBtn.userInteractionEnabled = YES;
+                        if (sucess) {
+                            [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }
+                    }];
+                }
             }else{
                 if (![User_manager isBackup]) {
                     User_manager.currentUser.user_is_backup = YES;

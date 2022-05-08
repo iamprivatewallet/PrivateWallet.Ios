@@ -396,6 +396,9 @@
     KeyPair kp = [EthereumUtils genFromPrikey:dic[@"prikey"]];
     NSLog(@"kp.prikey::%@",[KeyPairHelper hexPrikey:kp]);
     NSString * data = [self genETHTransactionData:dic];
+    if (dic[@"data"]) {
+        data = dic[@"data"];
+    }
     NSLog(@"data::%@",data);
     NSString *value;
     NSString *toAddr;
@@ -404,25 +407,29 @@
         toAddr = [dic objectForKey:@"contract_addr"];
     }else{
         toAddr = [dic objectForKey:@"to_addr"];
-        value = [[dic objectForKey:@"value"] getHex];
+        value = [dic objectForKey:@"value"];
     }
     NSString *price = [dic objectForKey:@"gas_price"];
     if(![price isNoEmpty]){
         price = @"5000000000";
     }
     int chainId = [[SettingManager sharedInstance] getNodeChainId];
-    NSString *gasLimit = @"0x7530";
-    if (chainId==1) {
-        gasLimit = @"0xea60";
+    NSString *gasLimit = [dic objectForKey:@"gas"];
+    if (![gasLimit isNoEmpty]) {
+        if (chainId==1) {
+            gasLimit = @"0xea60";
+        }else{
+            gasLimit = @"0x7530";
+        }
     }
     NSString * sign = [EthereumUtils ecSignTransaction:kp
                                nonce:dic[@"nonce"]
-                            gasPrice:[price getHex]
+                            gasPrice:[price isHex]?price:[price getHex]
 //                            gasLimit:@"0x61A80"
-                            gasLimit:gasLimit
+                            gasLimit:[gasLimit isHex]?gasLimit:[gasLimit getHex]
                                   to:toAddr
-                            hexvalue:value
-                                data:data
+                            hexvalue:[value isHex]?value:[value getHex]
+                                data:[data isHex]?data:[data getHex]
                              chainId:chainId];
     return sign;
 }

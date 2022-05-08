@@ -115,7 +115,7 @@ class MOSWalletContractTool: NSObject {
             do {
                 let gasPrice = try MOSWalletTool.shared().web3.eth.getGasPrice()
                 options.gasPrice = TransactionOptions.GasPricePolicy.manual(gasPrice)
-                let ethTransaction = EthereumTransaction(to: to, data: newExtraData)
+                let ethTransaction = EthereumTransaction(to: to, data: newExtraData, options: options)
                 let gas = try MOSWalletTool.shared().web3.eth.estimateGas(ethTransaction, transactionOptions: options)
                 DispatchQueue.main.async {
                     completionBlock("\(gasPrice)","\(gas)", nil)

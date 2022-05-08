@@ -133,6 +133,12 @@
             [self.dappList addObject:model];
         }
     }
+    if(self.dappList.count==0){
+        PW_DappModel *model = [[PW_DappModel alloc] init];
+        model.appName = value;
+        model.appUrl = value;
+        [self.dappList addObject:model];
+    }
     [self reloadTableSection:0];
 }
 - (void)reloadTableSection:(NSInteger)section {
@@ -176,9 +182,11 @@
         __weak typeof(self) weakSelf = self;
         cell.dappBlock = ^(PW_DappModel * _Nonnull model) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            PW_Web3ViewController *webVc = [[PW_Web3ViewController alloc] init];
-            webVc.model = model;
-            [strongSelf.navigationController pushViewController:webVc animated:YES];
+            [PW_TipTool showDappDisclaimerUrlStr:model.appUrl sureBlock:^{
+                PW_Web3ViewController *webVc = [[PW_Web3ViewController alloc] init];
+                webVc.model = model;
+                [strongSelf.navigationController pushViewController:webVc animated:YES];
+            }];
         };
         return cell;
     }
@@ -256,9 +264,11 @@
     if (indexPath.section==0){
         if (self.isSearch){
             PW_DappModel *model = self.dappList[indexPath.item];
-            PW_Web3ViewController *webVc = [[PW_Web3ViewController alloc] init];
-            webVc.model = model;
-            [self.navigationController pushViewController:webVc animated:YES];
+            [PW_TipTool showDappDisclaimerUrlStr:model.appUrl sureBlock:^{
+                PW_Web3ViewController *webVc = [[PW_Web3ViewController alloc] init];
+                webVc.model = model;
+                [self.navigationController pushViewController:webVc animated:YES];
+            }];
         }
     }
 }

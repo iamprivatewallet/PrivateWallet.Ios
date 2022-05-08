@@ -38,7 +38,7 @@
     NSURL *cURL = self.webView.URL;
     NSString *scheme = cURL.scheme;
     if(![scheme isNoEmpty]){
-        scheme = @"http";
+        scheme = @"https";
     }
     return [NSString stringWithFormat:@"%@://%@",scheme,(cURL.host?cURL.host:[NSURL URLWithString:self.model.appUrl].host)];
 }
@@ -51,13 +51,20 @@
     [super viewDidLoad];
     
     [self makeViews];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.model.appUrl]]];
+    NSString *urlStr = self.model.appUrl;
+    if (![urlStr isURL]) {
+        urlStr = PW_StrFormat(@"https://%@",urlStr);
+    }
+    self.model.appUrl = urlStr;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     if (![self.model.iconUrl isNoEmpty]) {
         self.model.iconUrl = [self faviconURL];
     }
     self.titleLb.text = self.model.appName;
     self.descLb.text = [self currentURL];
-    [[PW_DappManager shared] saveModel:self.model];
+    if ([self.model.appUrl isNoEmpty]) {
+        [[PW_DappManager shared] saveModel:self.model];
+    }
 }
 - (void)makeViews{
     UIView *navBarView = [[UIView alloc] init];

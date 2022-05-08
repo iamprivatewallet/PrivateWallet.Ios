@@ -13,7 +13,7 @@
 @implementation PW_DappAlertTool
 
 //dapp
-+ (void)showDappAuthorizationConfirm:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block {
++ (void)showDappAuthorizationConfirm:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block closeBlock:(nonnull void (^)(void))closeBlock {
     if (model==nil) {
         return;
     }
@@ -31,6 +31,9 @@
     UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close" target:nil action:nil];
     [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
+        if (closeBlock) {
+            closeBlock();
+        }
     }];
     [contentView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,7 +46,13 @@
         make.top.offset(65);
         make.centerX.offset(0);
     }];
-    UILabel *countLb = [PW_ViewTool labelMediumText:PW_StrFormat(@"%@ %@",model.authorizationCount,model.symbol) fontSize:16 textColor:[UIColor g_boldTextColor]];
+    NSString *countStr = model.value;
+    if ([countStr.lowercaseString isEqualToString:MaxAuthorizationCount]) {
+        countStr = LocalizedStr(@"text_unlimited");
+    }else{
+        countStr = [countStr strTo10];
+    }
+    UILabel *countLb = [PW_ViewTool labelMediumText:PW_StrFormat(@"%@ %@",countStr,model.symbol) fontSize:16 textColor:[UIColor g_boldTextColor]];
     [contentView addSubview:countLb];
     [countLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tipLb.mas_bottom).offset(10);
@@ -53,7 +62,7 @@
     UIButton *editBtn = [PW_ViewTool buttonImageName:@"icon_edit" target:nil action:nil];
     [editBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [self showDappMaxAuthorizationCountSureBlock:^(NSString * _Nonnull count) {
-            model.authorizationCount = count;
+            model.value = count;
             countLb.text = PW_StrFormat(@"%@ %@",count,model.symbol);
         }];
     }];
@@ -63,9 +72,8 @@
         make.centerY.equalTo(countLb);
     }];
     NSArray *dataArr = @[
-        @{@"title":LocalizedStr(@"text_authorizedTokenContractAddress"),@"desc":[NSString emptyStr:model.authorizedTokenContractAddress]},
         @{@"title":LocalizedStr(@"text_paymentAddress"),@"desc":[NSString emptyStr:model.paymentAddress]},
-        @{@"title":LocalizedStr(@"text_acceptAddress"),@"desc":[NSString emptyStr:model.acceptAddress]},
+        @{@"title":LocalizedStr(@"text_authorizedTokenContractAddress"),@"desc":[NSString emptyStr:model.acceptAddress]},
     ];
     UIView *lastView = nil;
     for (NSDictionary *dict in dataArr) {
@@ -124,7 +132,7 @@
         make.centerY.offset(0);
         make.height.offset(16);
     }];
-    UILabel *tagLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_recommend") fontSize:11 textColor:[UIColor g_primaryColor]];
+    UILabel *tagLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_avg") fontSize:11 textColor:[UIColor g_primaryColor]];
     [tagView addSubview:tagLb];
     [tagLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
@@ -156,7 +164,7 @@
     }];
     [PW_AlertTool showAnimationSheetContentView:contentView];
 }
-+ (void)showDappConfirmPayInfo:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block {
++ (void)showDappConfirmPayInfo:(PW_DappPayModel *)model sureBlock:(void(^)(PW_DappPayModel *model))block closeBlock:(nonnull void (^)(void))closeBlock {
     if (model==nil) {
         return;
     }
@@ -174,6 +182,9 @@
     UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close" target:nil action:nil];
     [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
+        if (closeBlock) {
+            closeBlock();
+        }
     }];
     [contentView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -247,7 +258,7 @@
         make.centerY.offset(0);
         make.height.offset(16);
     }];
-    UILabel *tagLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_recommend") fontSize:11 textColor:[UIColor g_primaryColor]];
+    UILabel *tagLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_avg") fontSize:11 textColor:[UIColor g_primaryColor]];
     [tagView addSubview:tagLb];
     [tagLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);

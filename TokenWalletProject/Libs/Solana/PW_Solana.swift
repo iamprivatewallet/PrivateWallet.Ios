@@ -9,10 +9,10 @@
 import Solana
 
 class PW_Solana: NSObject {
-//    static let network: Network = .mainnetBeta
-//    static let router = NetworkingRouter(endpoint: .mainnetBetaSolana)
-    static let network: Network = .devnet
-    static let router = NetworkingRouter(endpoint: .devnetSolana)
+    static let network: Network = .mainnetBeta
+    static let router = NetworkingRouter(endpoint: .mainnetBetaSolana)
+//    static let network: Network = .devnet
+//    static let router = NetworkingRouter(endpoint: .devnetSolana)
     private static let AccountErrorTip = "account empty";
     private static let LackInfoTip = "lack of information";
     class var solana: Solana {
@@ -30,7 +30,7 @@ class PW_Solana: NSObject {
         return self.restoreAccount(phrase: seedPhrase.getSeedPhrase())
     }
     @objc
-    class func restoreAccount(phrase: [String]) -> [String: Any]? {
+    class func restoreAccount(phrase: [String]) -> [String: String]? {
         let seedPhrase = ConcreteSeedPhrase()
         if (seedPhrase.isValid(wordlist: phrase)) {
             if let account = Account(phrase: phrase, network: PW_Solana.network, derivablePath: .default) {
@@ -40,16 +40,16 @@ class PW_Solana: NSObject {
         return nil
     }
     @objc
-    class func restoreAccount(secretKey: String) -> [String: Any]? {//no phrase
+    class func restoreAccount(secretKey: String) -> [String: String]? {//no phrase
         if let account = getAccount(secretKey: secretKey) {
             return self.accountToDict(account: account, noPhrase: true)
         }
         return nil
     }
-    class func accountToDict(account: Account, noPhrase: Bool = false) -> [String: Any] {
+    class func accountToDict(account: Account, noPhrase: Bool = false) -> [String: String] {
         let secretKey = account.secretKey.base64EncodedString();
         let phrase: [String] = noPhrase ? [] : account.phrase;
-        return ["phrase":phrase,"publicKey":account.publicKey.base58EncodedString,"secretKey":secretKey]
+        return ["phrase":phrase.joined(separator: " "),"publicKey":account.publicKey.base58EncodedString,"secretKey":secretKey]
     }
     @objc
     class func airdrop(account: String, completionBlock: @escaping ((_ result: String?, _ errorDesc: String?)->())) {

@@ -624,7 +624,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self.minersFeeView addSubview:self.sliderView];
     self.speedFeeView = [[UIView alloc] init];
     [self.minersFeeView addSubview:self.speedFeeView];
-    NSArray *titleArr = @[LocalizedStr(@"text_slow"),LocalizedStr(@"text_recommend"),LocalizedStr(@"text_fast"),LocalizedStr(@"text_soon")];
+    NSArray *titleArr = @[LocalizedStr(@"text_slow"),LocalizedStr(@"text_avg"),LocalizedStr(@"text_fast"),LocalizedStr(@"text_soon")];
     UIView *lastBtn = nil;
     for (NSInteger i=0;i<titleArr.count;i++) {
         NSString *text = titleArr[i];

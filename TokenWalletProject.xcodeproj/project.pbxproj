@@ -4530,7 +4530,7 @@
 			);
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
 			packageReferences = (
-				5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */,
+				5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */,
 			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
@@ -4623,7 +4623,6 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JJException/JJException.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/LBXScan/LBXScan.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -4656,7 +4655,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJException.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXScan.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -5825,7 +5823,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */ = {
+		5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ajamaica/Solana.Swift";
 			requirement = {
@@ -5838,7 +5836,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		5CA451E62817FA60006FFA3B /* Solana */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */;
+			package = 5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */;
 			productName = Solana;
 		};
 /* End XCSwiftPackageProductDependency section */

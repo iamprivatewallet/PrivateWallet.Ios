@@ -38,6 +38,7 @@ text_alreadyExist="已存在";
 text_prompt="提示";
 text_more="更多";
 text_pleaseTryAgain="请重试！";
+text_recommend="推荐";
 
 tabbar_wallet="钱包";
 tabbar_market="市场";
@@ -151,7 +152,7 @@ text_balance="余额";
 text_balanceLack="余额不足";
 text_custom="自定义";
 text_slow="缓慢";
-text_recommend="推荐";
+text_avg="推荐";
 text_fast="快速";
 text_soon="很快";
 text_pleaseEnterQuantity="请输入数量";
@@ -192,6 +193,7 @@ text_acceptAddress="接受地址";
 text_setMaxAuthorizationCount="设置最大授权数量";
 text_confirmInformation="确认信息";
 text_confirmPayment="确认支付";
+text_unlimited="无限制";
 
 text_walletManage="钱包管理";
 text_networkManage="网络管理";

@@ -25,19 +25,26 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_addWallet")];
     NSArray *list = @[
          @{
-             @"title":@"ETH",
+             @"title":WalletTypeETH,
              @"detailText":@"Ethereum",
              @"icon":@"icon_ETH",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
          @{
-             @"title":@"CVN",
+             @"title":WalletTypeCVN,
              @"detailText":@"cvn",
              @"icon":@"icon_CVN",
              @"isDefault":@"1",
              @"isChecked":@"1"
-         }
+         },
+//         @{
+//             @"title":WalletTypeSolana,
+//             @"detailText":@"solana",
+//             @"icon":@"icon_ETH",
+//             @"isDefault":@"1",
+//             @"isChecked":@"1"
+//         }
     ];
     [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         CurrencyInfoModel *model = [CurrencyInfoModel mj_objectWithKeyValues:obj];

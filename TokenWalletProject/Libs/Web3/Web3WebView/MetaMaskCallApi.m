@@ -91,46 +91,190 @@
             return;
         }
         NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
-//        NSString *data = dataDict[@"data"];
-//        NSString *to = dataDict[@"to"];
-//        NSString *gasPrice = dataDict[@"gasPrice"];
-//        NSString *from = dataDict[@"from"];
-        MetaMaskRepModel *tempModel = [[MetaMaskRepModel alloc] init];
-        tempModel.id = model.id;
-        tempModel.jsonrpc = model.jsonrpc;
-        tempModel.method = @"eth_getTransactionCount";
-        //pending latest
-        tempModel.params = [NSMutableArray arrayWithArray:@[[self getCurrentAddress],@"latest"]];
-        [self requestWithModel:tempModel completionHandler:^(MetaMaskRespModel * _Nullable value) {
-            if (value.result==nil) {
-                if (completionHandler) {
-                    completionHandler(value);
-                }
-                return;
+        NSString *data = dataDict[@"data"];
+        NSString *to = dataDict[@"to"];
+        NSString *gasPrice = dataDict[@"gasPrice"];
+        NSString *gas = dataDict[@"gas"];
+        NSString *from = dataDict[@"from"];
+        PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
+        payModel.value = @"0";
+        payModel.symbol = [PW_GlobalData shared].mainTokenModel.tokenSymbol;
+        payModel.paymentAddress = from;
+        payModel.acceptAddress = to;
+        payModel.gasToolModel.gas_price = [gasPrice strTo10];
+        payModel.gasToolModel.gas = [gas strTo10];
+        payModel.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+        if([data.lowercaseString hasPrefix:AuthorizationPrefix]){
+            NSString *authCount = @"0";
+            NSInteger authCountLength = 64;
+            if (data.length>authCountLength) {
+                authCount = [data substringFromIndex:data.length-authCountLength];
             }
-            dataDictNew[@"nonce"] = value.result;
-            [MOSWeb3Tool sendTransaction:dataDictNew password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable sign, NSString * _Nullable errorDesc) {
-                if (sign==nil) {
+            payModel.value = authCount;
+            [SVProgressHUD showWithStatus:nil];
+            [MOSWalletContractTool getSymbolERC20WithContractAddress:to completionBlock:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
+                [SVProgressHUD dismiss];
+                payModel.symbol = symbol;
+                [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
+//                    if (![payModel.value isEqualToString:authCount]) {
+//                        NSMutableString *value = [NSMutableString stringWithString:[payModel.value strTo16]];
+//                        if (value.length<authCountLength) {
+//                            NSInteger count = authCountLength-value.length;
+//                            for (int i=0; i<count; i++) {
+//                                [value insertString:@"0" atIndex:0];
+//                            }
+//                        }
+//                        dataDictNew[@"data"] = PW_StrFormat(@"%@%@",[data substringToIndex:data.length-authCountLength],value);
+//                    }
+                    dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16] addOxPrefix];
+                    dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16] addOxPrefix];
+                    [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+                        if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
+                            if (errorBlock) {
+                                errorBlock(LocalizedStr(@"text_pwdError"));
+                            }
+                            return;
+                        }
+                        [self callTransaction:model dataDictNew:dataDictNew completionHandler:completionHandler errorBlock:errorBlock];
+                    } closeBlock:^{
+                        if (errorBlock) {
+                            errorBlock(@"cancel");
+                        }
+                    }];
+                } closeBlock:^{
                     if (errorBlock) {
-                        errorBlock(errorDesc);
+                        errorBlock(@"cancel");
                     }
-                    return;
-                }
-                MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
-                respModel.id = model.id;
-                respModel.jsonrpc = model.jsonrpc;
-                respModel.rawResponse = @"";
-                respModel.result = @[sign];
-                if (completionHandler) {
-                    completionHandler(respModel);
+                }];
+            }];
+        }else{
+            [PW_DappAlertTool showDappConfirmPayInfo:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
+                dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16]addOxPrefix];
+                dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16]addOxPrefix];
+                [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+                    if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
+                        if (errorBlock) {
+                            errorBlock(LocalizedStr(@"text_pwdError"));
+                        }
+                        return;
+                    }
+                    [self callTransaction:model dataDictNew:dataDictNew completionHandler:completionHandler errorBlock:errorBlock];
+                } closeBlock:^{
+                    if (errorBlock) {
+                        errorBlock(@"cancel");
+                    }
+                }];
+            } closeBlock:^{
+                if (errorBlock) {
+                    errorBlock(@"cancel");
                 }
             }];
-        }];
+        }
     }else{
         //TODO 其他更多Method 统一直接使用web3的rpc协议进行请求，参数都无需做修改
         NSLog(@"method:%@ 暂不支持",model.method);
         [self requestWithModel:model completionHandler:completionHandler];
     }
+}
+- (void)callTransaction:(MetaMaskRepModel *)model dataDictNew:(NSMutableDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {
+    if(dataDictNew[@"value"]==nil){
+        dataDictNew[@"value"] = dataDictNew[@"data"];
+    }
+    MetaMaskRepModel *tempModel = [[MetaMaskRepModel alloc] init];
+    tempModel.id = model.id;
+    tempModel.jsonrpc = model.jsonrpc;
+    tempModel.method = @"eth_getTransactionCount";
+    //pending latest
+    [SVProgressHUD showWithStatus:nil];
+    tempModel.params = [NSMutableArray arrayWithArray:@[[self getCurrentAddress],@"latest"]];
+    [self requestWithModel:tempModel completionHandler:^(MetaMaskRespModel * _Nullable value) {
+        [SVProgressHUD dismiss];
+        if (value.result==nil) {
+            if (completionHandler) {
+                completionHandler(value);
+            }
+            return;
+        }
+        dataDictNew[@"nonce"] = value.result;
+        [SVProgressHUD showWithStatus:nil];
+        [self sendTransactionDict:dataDictNew completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+            [SVProgressHUD dismiss];
+            if (hash==nil) {
+                if (errorBlock) {
+                    errorBlock(errorDesc);
+                }
+                return;
+            }
+            MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
+            respModel.id = model.id;
+            respModel.jsonrpc = model.jsonrpc;
+            respModel.rawResponse = @"";
+            respModel.result = @[hash];
+            if (completionHandler) {
+                completionHandler(respModel);
+            }
+        }];
+//        [MOSWeb3Tool sendTransaction:dataDictNew password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//            [SVProgressHUD dismiss];
+//            if (sign==nil) {
+//                if (errorBlock) {
+//                    errorBlock(errorDesc);
+//                }
+//                return;
+//            }
+//            MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
+//            respModel.id = model.id;
+//            respModel.jsonrpc = model.jsonrpc;
+//            respModel.rawResponse = @"";
+//            respModel.result = @[hash];
+//            if (completionHandler) {
+//                completionHandler(respModel);
+//            }
+//        }];
+    }];
+}
+// 获取ETH 签名
+- (void)sendTransactionDict:(NSDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    NSDictionary *dic = @{
+        @"nonce":dataDictNew[@"nonce"],
+        @"to_addr":dataDictNew[@"to"],
+        @"value":@"0x0",
+        @"data":dataDictNew[@"data"],
+        @"gas_price":dataDictNew[@"gasPrice"],
+        @"gas":dataDictNew[@"gas"],
+        @"prikey":wallet.priKey
+    };
+    [FchainTool genETHTransactionSign:dic isToken:NO block:^(NSString * _Nonnull result) {
+        NSString *sign = NSStringWithFormat(@"0x%@",result);
+        [self ETHTransferWithSign:sign completionHandler:block];
+    }];
+}
+//ETH 转账
+-(void)ETHTransferWithSign:(NSString *)sign completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
+    NSDictionary *parmDic = @{
+                @"id":@"67",
+                @"jsonrpc":@"2.0",
+                @"method":@"eth_sendRawTransaction",
+                @"params":@[sign]
+                };
+    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+        if (data) {
+            if (data[@"error"]) {
+                if(block){
+                    block(nil,data[@"error"][@"message"]);
+                }
+            }else{
+                if (block) {
+                    block(data[@"result"],nil);
+                }
+            }
+        }else{
+            if(block){
+                block(nil,error.localizedDescription);
+            }
+        }
+    }];
 }
 - (void)requestWithModel:(MetaMaskRepModel *)model completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
@@ -152,36 +296,78 @@
 }
 //签名
 - (void)signDataWithMessage:(NSString *)message address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
-    [MOSWeb3Tool signPersonalMessageWithMessage:message address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-        if (errorDesc!=nil&&errorDesc.length>0) {
-            DSError *error = [[DSError alloc] init];
-            error.message = errorDesc;
-            error.code = -1;
-            respModel.error = error;
-        }
-        if (hash!=nil) {
-            respModel.result = @[hash];
-        }
-        if (completionHandler) {
-            completionHandler(respModel);
-        }
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
+        NSString *sign = NSStringWithFormat(@"0x%@",result);
+        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+            if (errorDesc!=nil&&errorDesc.length>0) {
+                DSError *error = [[DSError alloc] init];
+                error.message = errorDesc;
+                error.code = -1;
+                respModel.error = error;
+            }
+            if (hash!=nil) {
+                respModel.result = @[hash];
+            }
+            if (completionHandler) {
+                completionHandler(respModel);
+            }
+        }];
     }];
+//    [MOSWeb3Tool signPersonalMessageWithMessage:message address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//        if (errorDesc!=nil&&errorDesc.length>0) {
+//            DSError *error = [[DSError alloc] init];
+//            error.message = errorDesc;
+//            error.code = -1;
+//            respModel.error = error;
+//        }
+//        if (hash!=nil) {
+//            respModel.result = @[hash];
+//        }
+//        if (completionHandler) {
+//            completionHandler(respModel);
+//        }
+//    }];
 }
 - (void)signDataWithDict:(NSDictionary *)dict address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
-    [MOSWeb3Tool signPersonalMessageWithDict:dict address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-        if (errorDesc!=nil&&errorDesc.length>0) {
-            DSError *error = [[DSError alloc] init];
-            error.message = errorDesc;
-            error.code = -1;
-            respModel.error = error;
-        }
-        if (hash!=nil) {
-            respModel.result = @[hash];
-        }
-        if (completionHandler) {
-            completionHandler(respModel);
-        }
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    if(error){
+        data = [NSData new];
+    }
+    NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
+        NSString *sign = NSStringWithFormat(@"0x%@",result);
+        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+            if (errorDesc!=nil&&errorDesc.length>0) {
+                DSError *error = [[DSError alloc] init];
+                error.message = errorDesc;
+                error.code = -1;
+                respModel.error = error;
+            }
+            if (hash!=nil) {
+                respModel.result = @[hash];
+            }
+            if (completionHandler) {
+                completionHandler(respModel);
+            }
+        }];
     }];
+//    [MOSWeb3Tool signPersonalMessageWithDict:dict address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//        if (errorDesc!=nil&&errorDesc.length>0) {
+//            DSError *error = [[DSError alloc] init];
+//            error.message = errorDesc;
+//            error.code = -1;
+//            respModel.error = error;
+//        }
+//        if (hash!=nil) {
+//            respModel.result = @[hash];
+//        }
+//        if (completionHandler) {
+//            completionHandler(respModel);
+//        }
+//    }];
 }
 /**
  * 方法示例  第一个方法注释 适用于下面所有方法

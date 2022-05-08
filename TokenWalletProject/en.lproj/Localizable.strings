@@ -38,6 +38,7 @@ text_alreadyExist="Already exist";
 text_prompt="Tip";
 text_more="More";
 text_pleaseTryAgain="Please try again！";
+text_recommend="Recommend";
 
 tabbar_wallet="Wallet";
 tabbar_market="Marketplace";
@@ -151,7 +152,7 @@ text_balance="Balance";
 text_balanceLack="Lack of balance";
 text_custom="Customize";
 text_slow="Slow";
-text_recommend="Avg";
+text_avg="Avg";
 text_fast="Fast";
 text_soon="So fast";
 text_pleaseEnterQuantity="Please enter the quantity";
@@ -192,6 +193,7 @@ text_acceptAddress="Accept address";
 text_setMaxAuthorizationCount="Set the maximum number of entitlements";
 text_confirmInformation="Confirm the information";
 text_confirmPayment="Confirm the payment";
+text_unlimited="Unlimited";
 
 text_walletManage="Wallet management";
 text_networkManage="Network management";

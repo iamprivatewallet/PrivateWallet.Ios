@@ -79,9 +79,9 @@ class MOSWalletTool: NSObject {
             if(url==nil||urlStr.hasPrefix("http://")) {
                 url = URL(string: defaultUrlStr)
             }
-            let semaphore = DispatchSemaphore(value: 1)
-            semaphore.wait()
             if (MOSWalletTool.entityWeb3 == nil || MOSWalletTool.entityWeb3?.provider.url.absoluteString != url?.absoluteString){
+                let semaphore = DispatchSemaphore(value: 1)
+                semaphore.wait()
                 guard let provider = Web3HttpProvider(url!) else {
                     var web3 = try? Web3.new(URL(string: urlStr)!)
                     if web3==nil {
@@ -97,7 +97,6 @@ class MOSWalletTool: NSObject {
                 semaphore.signal()
                 return web3
             }else{
-                semaphore.signal()
                 return MOSWalletTool.entityWeb3!
             }
 //        }catch{
@@ -193,7 +192,8 @@ class MOSWalletTool: NSObject {
     }
     //根据私钥导入
     class func importWallet(_ privateKey: String, password: String) -> String? {
-        if let data = privateKey.data(using: .utf8), let keystore = try? EthereumKeystoreV3(privateKey: data, password: password) {
+        let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let data = Data.fromHex(formattedKey), let keystore = try? EthereumKeystoreV3(privateKey: data, password: password) {
             let keydata = try? JSONEncoder().encode(keystore.keystoreParams)
             let filePath = keyStoreFilePath()
             if FileManager.default.fileExists(atPath: filePath) {

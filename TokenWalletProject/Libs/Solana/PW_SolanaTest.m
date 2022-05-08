@@ -33,7 +33,7 @@
 //    [PW_Solana sendSOLWithSecretKey:myAccount[@"secretKey"] to:@"HZNEVMMCiukW8G85tNejcHApNimwtoJsUrNAzNnLwcnt" amount:1000000000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
 //        NSLog(@"hash==%@,error:%@",hash,errorDesc);
 //    }];
-    NSString *mintAddress = @"So11111111111111111111111111111111111111112";
+    NSString *mintAddress = PW_SolanaConstants.NATIVE_MINT_2022;
 //    [PW_Solana createTokenAccountWithMintAddress:mintAddress secretKey:account[@"secretKey"] completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
 //        NSLog(@"createTokenAccount:%@,error:%@",data,errorDesc);
 //    }];
@@ -55,6 +55,9 @@
 //            }];
 //        }];
 //    }];
+    [PW_Solana sendSPLWithMintAddress:@"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" secretKey:myAccount[@"secretKey"] to:@"HZNEVMMCiukW8G85tNejcHApNimwtoJsUrNAzNnLwcnt" amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+        NSLog(@"spl hash:%@,error:%@",hash,errorDesc);
+    }];
 }
 
 @end
