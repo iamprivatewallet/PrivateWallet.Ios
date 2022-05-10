@@ -82,7 +82,7 @@
     leftLineView.backgroundColor = [UIColor g_borderColor];
     [contentView addSubview:leftLineView];
     [leftLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(downloadTipLb.mas_left).offset(-20);
+        make.right.equalTo(downloadTipLb.mas_left).offset(-(PW_IPhoneX?20:15));
         make.width.offset(80).priorityLow();
         make.left.mas_greaterThanOrEqualTo(15);
         make.height.offset(1);
@@ -92,7 +92,7 @@
     rightLineView.backgroundColor = [UIColor g_borderColor];
     [contentView addSubview:rightLineView];
     [rightLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(downloadTipLb.mas_right).offset(20);
+        make.left.equalTo(downloadTipLb.mas_right).offset(PW_IPhoneX?20:15);
         make.width.equalTo(leftLineView);
         make.height.offset(1);
         make.centerY.equalTo(downloadTipLb);

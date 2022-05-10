@@ -75,6 +75,8 @@
         if (self.backupTipView) {
             [self.backupTipView removeFromSuperview];
         }
+    }else{
+        self.backupTipView.hidden = NO;
     }
 }
 - (void)searchAction {
@@ -451,6 +453,7 @@
     [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(8);
         make.centerY.offset(0);
+        make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.5);
     }];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_down"]];
     [walletNameView addSubview:arrowIv];
@@ -550,6 +553,7 @@
     UIView *backupTipView = [[UIView alloc] init];
     backupTipView.layer.cornerRadius = 12;
     backupTipView.backgroundColor = [UIColor g_warnBgColor];
+    backupTipView.hidden = YES;
     [self.view addSubview:backupTipView];
     self.backupTipView = backupTipView;
     [backupTipView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -591,7 +595,7 @@
         [_tableView registerClass:[PW_WalletCell class] forCellReuseIdentifier:@"PW_WalletCell"];
         _tableView.rowHeight = 70;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(10, 0, 20, 0);
         _tableView.tableFooterView = self.addCurrencyView;
     }
     return _tableView;

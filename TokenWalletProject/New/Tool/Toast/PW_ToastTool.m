@@ -33,8 +33,8 @@
     HUD.mode = MBProgressHUDModeCustomView;
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
-    contentView.layer.cornerRadius = 22;
-    contentView.layer.shadowColor = COLORFORRGBA(0xCCD0D6, 0.8).CGColor;
+    contentView.layer.cornerRadius = 20;
+    contentView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
     contentView.layer.shadowOffset = CGSizeMake(0, 3);
     contentView.layer.shadowRadius = 10;
     contentView.layer.shadowOpacity = 1;
@@ -49,6 +49,7 @@
         make.right.lessThanOrEqualTo(contentView.mas_right).offset(-20);
         make.top.offset(10);
         make.bottom.offset(-10);
+        make.height.mas_greaterThanOrEqualTo(20);
     }];
     UIImageView *iconIv = [[UIImageView alloc] init];
     iconIv.image = [UIImage imageNamed:imageName];

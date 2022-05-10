@@ -92,7 +92,7 @@ text_pleaseEnterCorrectMnemonicPhrase="请输入正确的助记词！";
 text_mnemonicsError="请正确填写助记词";
 text_pwdFormatError="密码不少于8位字符，建议混合大小写字母、数字、符号";
 text_pwdDisagreeError="两次秘密输入不一致！";
-text_walletNameInputError="请输入钱包名称";
+text_walletNameInputError="请输入钱包名称，最多10个字符";
 text_privateKeyInputError="请输入私钥";
 text_inputPwdTip="该密码将作为钱包的交易密码。\nPrivate Wallet 不会存储密码，也无法帮你找回，请务必妥善保管密码。";
 

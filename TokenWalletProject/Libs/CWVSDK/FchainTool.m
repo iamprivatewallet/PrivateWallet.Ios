@@ -424,12 +424,12 @@
     }
     NSString * sign = [EthereumUtils ecSignTransaction:kp
                                nonce:dic[@"nonce"]
-                            gasPrice:[price isHex]?price:[price getHex]
+                            gasPrice:[price hasPrefixOx]?price:[price getHex]
 //                            gasLimit:@"0x61A80"
-                            gasLimit:[gasLimit isHex]?gasLimit:[gasLimit getHex]
+                            gasLimit:[gasLimit hasPrefixOx]?gasLimit:[gasLimit getHex]
                                   to:toAddr
-                            hexvalue:[value isHex]?value:[value getHex]
-                                data:[data isHex]?data:[data getHex]
+                            hexvalue:[value hasPrefixOx]?value:[value getHex]
+                                data:[data hasPrefixOx]?data:[data getHex]
                              chainId:chainId];
     return sign;
 }

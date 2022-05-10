@@ -95,7 +95,8 @@
 //删除名下所有钱包
 - (BOOL)deleteAllWallets{
     JQFMDB * db = [JQFMDB shareDatabase];
-    BOOL isDelete = [db jq_deleteTable:table_name];
+    BOOL isDelete = [db jq_deleteAllDataFromTable:table_name];
+    [db jq_deleteTable:table_name];
     return isDelete;
 }
 

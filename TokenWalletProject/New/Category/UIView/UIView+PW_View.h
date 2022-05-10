@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDottedLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth length:(CGFloat)length space:(CGFloat)space radius:(CGFloat)radius size:(CGSize)size;
 
 - (UIImage *)convertViewToImage;
+- (UIImage *)convertViewToImageBgColor:(UIColor *)bgColor;
 
 - (void)setRequiredHorizontal;
 - (void)setRequiredVertical;

@@ -22,6 +22,8 @@
 @property (nonatomic, strong) UILabel *titleLb;
 @property (nonatomic, strong) UILabel *descLb;
 
+@property (nonatomic, strong) UIButton *backBtn;
+
 @end
 
 @implementation PW_Web3ViewController
@@ -111,6 +113,13 @@
         make.left.offset(20);
         make.centerY.offset(0);
     }];
+    self.backBtn = [PW_ViewTool buttonImageName:@"icon_back" target:self action:@selector(backAction)];
+    self.backBtn.hidden = YES;
+    [self.navContentView addSubview:self.backBtn];
+    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(closeBtn.mas_right).offset(20);
+        make.centerY.offset(0);
+    }];
     UIView *btnsView = [[UIView alloc] init];
     [btnsView setBorderColor:[UIColor g_borderColor] width:1 radius:17];
     [self.navContentView addSubview:btnsView];
@@ -159,6 +168,11 @@
 }
 - (void)closeAction {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)backAction {
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    }
 }
 - (void)walletAction {
     [PW_WalletListView show];
@@ -210,13 +224,13 @@
         NSString *title = self.webView.title;
         self.titleLb.text = title;
         self.descLb.text = [self currentURL];
-        if (![self.model.appName isNoEmpty]) {
+        if (![self.model.appName isNoEmpty]||[self.model.appName isEqualToString:self.model.appUrl]) {
             self.model.appName = self.webView.title;
             [[PW_DappManager shared] updateModel:self.model];
         }
     }else if([keyPath isEqualToString:@"canGoBack"]){
         BOOL canGoBack = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-        self.leftBtn.hidden = !canGoBack;
+        self.backBtn.hidden = !canGoBack;
     }else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }

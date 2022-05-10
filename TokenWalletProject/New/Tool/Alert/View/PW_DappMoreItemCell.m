@@ -36,11 +36,11 @@
             make.center.offset(0);
         }];
         self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_darkTextColor]];
-        self.titleLb.numberOfLines = 1;
+        self.titleLb.numberOfLines = 2;
         self.titleLb.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLb];
         [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.offset(-5);
+            make.top.equalTo(self.iconBgView.mas_bottom).offset(5);
             make.left.right.offset(0);
         }];
     }

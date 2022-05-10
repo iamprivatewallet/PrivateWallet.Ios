@@ -30,7 +30,7 @@
         }
         if (completed) {
             NSLog(@"completed");
-            [PW_ToastTool showSucees:LocalizedStr(@"text_shareSuccess")];
+//            [PW_ToastTool showSucees:LocalizedStr(@"text_shareSuccess")];
         } else  {
             NSLog(@"cancled");
         }

@@ -40,6 +40,7 @@
     self.iconIv = [[UIImageView alloc] init];
     [self.bodyView addSubview:self.iconIv];
     self.nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
+    self.nameLb.numberOfLines = 2;
     [self.bodyView addSubview:self.nameLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(20);

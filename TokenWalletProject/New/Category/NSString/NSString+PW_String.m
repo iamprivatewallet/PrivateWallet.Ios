@@ -39,6 +39,9 @@
     [self pasteboardToast:NO];
 }
 - (void)pasteboardToast:(BOOL)toast {
+    if (![self isNoEmpty]) {
+        return;
+    }
     [UIPasteboard generalPasteboard].string = self;
     if (toast) {
         [PW_ToastTool showSucees:LocalizedStr(@"text_copySuccess")];
@@ -186,7 +189,7 @@
     return NO;
 }
 
-- (BOOL)isHex {
+- (BOOL)hasPrefixOx {
     if ([self hasPrefix:@"0x"]) {
         return YES;
     }

@@ -263,6 +263,7 @@
 		5CA451E72817FA60006FFA3B /* Solana in Frameworks */ = {isa = PBXBuildFile; productRef = 5CA451E62817FA60006FFA3B /* Solana */; };
 		5CA451EA28180206006FFA3B /* SeedPhraseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */; };
 		5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */; };
+		5CA6B89F282A0C7800D3C6B4 /* NSString+PW_Rule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA6B89E282A0C7800D3C6B4 /* NSString+PW_Rule.m */; };
 		5CB119D728097F2E0006BEFB /* PW_ChooseCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */; };
 		5CB119DA28097F970006BEFB /* PW_ChooseCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D928097F970006BEFB /* PW_ChooseCurrencyCell.m */; };
 		5CB119DD280AAE6B0006BEFB /* PW_TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119DC280AAE6B0006BEFB /* PW_TransferViewController.m */; };
@@ -1084,6 +1085,8 @@
 		5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeedPhraseGenerator.swift; sourceTree = "<group>"; };
 		5CA451EB2818F845006FFA3B /* PW_SolanaTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SolanaTest.h; sourceTree = "<group>"; };
 		5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SolanaTest.m; sourceTree = "<group>"; };
+		5CA6B89D282A0C7800D3C6B4 /* NSString+PW_Rule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+PW_Rule.h"; sourceTree = "<group>"; };
+		5CA6B89E282A0C7800D3C6B4 /* NSString+PW_Rule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+PW_Rule.m"; sourceTree = "<group>"; };
 		5CB119D528097F2E0006BEFB /* PW_ChooseCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyViewController.h; sourceTree = "<group>"; };
 		5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ChooseCurrencyViewController.m; sourceTree = "<group>"; };
 		5CB119D828097F970006BEFB /* PW_ChooseCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyCell.h; sourceTree = "<group>"; };
@@ -3164,6 +3167,8 @@
 			children = (
 				5CE7ACC227F5DC6B00E2188D /* NSString+PW_String.h */,
 				5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */,
+				5CA6B89D282A0C7800D3C6B4 /* NSString+PW_Rule.h */,
+				5CA6B89E282A0C7800D3C6B4 /* NSString+PW_Rule.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -4530,7 +4535,7 @@
 			);
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
 			packageReferences = (
-				5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */,
+				5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */,
 			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
@@ -5227,6 +5232,7 @@
 				992E0F5726D4FDA900E1C31B /* AssetSortView.m in Sources */,
 				5AF5D1751D2F7CBA004070D7 /* NSInvocation+Block.m in Sources */,
 				5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */,
+				5CA6B89F282A0C7800D3C6B4 /* NSString+PW_Rule.m in Sources */,
 				5CCE70E02810EF7600860841 /* PW_ShareViewModel.m in Sources */,
 				992EF17626B250C000F70A94 /* MainTopWalletView.m in Sources */,
 				9937C894270161830064BBC3 /* CustomCurrencyVC.m in Sources */,
@@ -5823,7 +5829,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */ = {
+		5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ajamaica/Solana.Swift";
 			requirement = {
@@ -5836,7 +5842,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		5CA451E62817FA60006FFA3B /* Solana */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana.Swift" */;
+			package = 5CA451E52817FA60006FFA3B /* XCRemoteSwiftPackageReference "Solana" */;
 			productName = Solana;
 		};
 /* End XCSwiftPackageProductDependency section */

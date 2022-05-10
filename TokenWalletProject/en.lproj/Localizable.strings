@@ -92,7 +92,7 @@ text_pleaseEnterCorrectMnemonicPhrase="Please enter the correct mnemonic phraseÔ
 text_mnemonicsError="Please fill in the mnemonic correctly";
 text_pwdFormatError="The password must contain at least 8 characters, including uppercase and lowercase letters, digits, and symbols";
 text_pwdDisagreeError="The two secret inputs are inconsistentÔºÅ";
-text_walletNameInputError="Please enter a wallet name";
+text_walletNameInputError="Please enter a wallet name, Maximum 10 characters";
 text_privateKeyInputError="Please enter the private key";
 text_inputPwdTip="This password will be used as the transaction password of the wallet. \nPrivate Wallet does not store passwords and cannot retrieve them for you. Please keep your passwords safe.";
 
@@ -182,7 +182,7 @@ text_cleanAll="Clear all";
 text_moreDappTip="This service is provided by %@";
 text_refresh="Refresh";
 text_copyURL="Copy URL";
-text_browserOpen="Open in Web browser";
+text_browserOpen="Browser open";
 text_report="Report";
 text_walletList="Wallet list";
 text_authorizationConfirm="Authorization to confirm";

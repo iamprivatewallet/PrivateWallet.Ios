@@ -349,13 +349,13 @@
     [moreView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleLb.mas_bottom).offset(35);
         make.left.right.offset(0);
-        make.height.offset(80);
+        make.height.offset(90);
     }];
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor g_lineColor];
     [contentView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moreView.mas_bottom).offset(40);
+        make.top.equalTo(moreView.mas_bottom).offset(30);
         make.left.offset(25);
         make.right.offset(-25);
         make.height.offset(1);

@@ -8,7 +8,7 @@
 
 #import "PW_TokenManager.h"
 
-#define table_name @"token_wallet_coinList"
+#define table_name @"wallet_coinList"
 
 @implementation PW_TokenManager
 

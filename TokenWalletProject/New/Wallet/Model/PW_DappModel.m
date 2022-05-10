@@ -13,5 +13,22 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{@"dId":@"id",@"desc":@"description"};
 }
+- (void)setAppUrl:(NSString *)appUrl {
+    _appUrl = appUrl;
+    if (![self.iconUrl isNoEmpty]) {
+        NSURL *url = [NSURL URLWithString:appUrl];
+        NSString *scheme = url.scheme;
+        if(![scheme isNoEmpty]){
+            scheme = @"https";
+        }
+        self.iconUrl = [NSString stringWithFormat:@"%@://%@/favicon.ico",scheme,url.host];
+    }
+}
+- (NSString *)appName {
+    if ([_appName isNoEmpty]) {
+        return _appName;
+    }
+    return _appUrl;
+}
 
 @end

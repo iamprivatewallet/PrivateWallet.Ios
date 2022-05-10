@@ -123,7 +123,6 @@
     [self.noteView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:self.noteView];
     UIButton *saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
-    [saveBtn.titleLabel setWordSpace:5];
     [self.contentView addSubview:saveBtn];
     [self.nameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tokenView.mas_bottom).offset(15);

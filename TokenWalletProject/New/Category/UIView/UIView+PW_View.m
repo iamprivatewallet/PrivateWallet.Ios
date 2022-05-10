@@ -116,8 +116,10 @@ static void * eventsBlockKey = &eventsBlockKey;
     borderLayer.strokeColor = lineColor.CGColor;
     [self.layer addSublayer:borderLayer];
 }
-
 - (UIImage *)convertViewToImage {
+    return [self convertViewToImageBgColor:[UIColor g_bgColor]];
+}
+- (UIImage *)convertViewToImageBgColor:(UIColor *)bgColor {
     CGSize tSize = self.bounds.size;
     if(tSize.width==0&&tSize.height==0){
         [self setNeedsLayout];
@@ -128,7 +130,7 @@ static void * eventsBlockKey = &eventsBlockKey;
         }
     }
     UIGraphicsBeginImageContextWithOptions(tSize, NO, [UIScreen mainScreen].scale);
-    [[UIColor g_bgColor] setFill];
+    [bgColor setFill];
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

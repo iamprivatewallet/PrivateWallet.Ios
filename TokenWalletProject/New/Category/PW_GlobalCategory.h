@@ -14,6 +14,7 @@
 #import "UIControl+PW_Block.h"
 #import "NSNotificationCenter+PW_Noti.h"
 #import "NSString+PW_String.h"
+#import "NSString+PW_Rule.h"
 #import "NSArray+PW_Array.h"
 #import "UIImage+PW_Image.h"
 #import "UIView+PW_View.h"

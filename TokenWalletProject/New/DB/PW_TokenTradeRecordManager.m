@@ -9,7 +9,7 @@
 #import "PW_TokenTradeRecordManager.h"
 #import "JQFMDB.h"
 
-#define table_name @"token_trade_record"
+#define table_name @"wallet_token_trade_record"
 
 @implementation PW_TokenTradeRecordManager
 

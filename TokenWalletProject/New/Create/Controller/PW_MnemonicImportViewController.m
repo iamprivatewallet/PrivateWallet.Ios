@@ -79,7 +79,7 @@
     }
     NSString *pwdStr = self.pwdTF.text;
     NSString *walletName = [self.walletNameTF.text trim];
-    if (![walletName isNoEmpty]) {
+    if (![walletName judgeWalletName]) {
         [self showError:LocalizedStr(@"text_walletNameInputError")];
         return;
     }

@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isAlpha:(NSString *)str;
 + (BOOL)isAlphaURL:(NSString *)str;
 
-- (BOOL)isHex;
+- (BOOL)hasPrefixOx;
 - (NSString *)strTo10;
 - (NSString *)strTo16;
 - (NSString *)addOxPrefix;

@@ -97,8 +97,7 @@
     [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.iconIv.mas_bottom).offset(20);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.left.right.bottom.offset(0);
     }];
 }
 + (void)show {
@@ -129,15 +128,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Wallet *wallet = self.dataList[indexPath.row];
     [User_manager updateChooseWallet:wallet];
-    if([wallet.type isEqualToString:@"ETH"]){
-        NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kETHChainId];
-        NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kETHChainId];
-        [User_manager updateCurrentNode:node chainId:kETHChainId name:name];
-    }else if([wallet.type isEqualToString:@"CVN"]){
-        NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kCVNChainId];
-        NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kCVNChainId];
-        [User_manager updateCurrentNode:node chainId:kCVNChainId name:name];
-    }
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
     [self closeAction];
 }
@@ -150,6 +140,7 @@
         _tableView.rowHeight = 74;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[PW_WalletViewCell class] forCellReuseIdentifier:@"PW_WalletViewCell"];
+        _tableView.contentInset = UIEdgeInsetsMake(10, 0, SafeBottomInset+10, 0);
     }
     return _tableView;
 }

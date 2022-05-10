@@ -62,14 +62,14 @@
     self.subNameLb.text = [self.model.tokenName lowercaseString];
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     self.addressLb.text = walletAddress;
-    NSString *tokenAddress = self.model.tokenContract;
-    NSString *str;
-    if (![walletAddress isEqualToString:self.model.tokenContract]) {
-        str = NSStringWithFormat(@"ethereum:%@?contractAddress=%@",walletAddress,tokenAddress);
-    }else{
-        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
-    }
-    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:str] size:170];
+//    NSString *tokenAddress = self.model.tokenContract;
+//    NSString *str;
+//    if (![walletAddress isEqualToString:tokenContract]) {
+//        str = NSStringWithFormat(@"ethereum:%@?contractAddress=%@",walletAddress,tokenAddress);
+//    }else{
+//        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
+//    }
+    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:walletAddress] size:170];
 }
 - (void)makeViews {
     self.topBgIv = [[UIImageView alloc] init];
@@ -176,12 +176,10 @@
     UIButton *shareBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_share") fontSize:17 titleColor:[UIColor g_boldTextColor] imageName:@"icon_share_primary" target:self action:@selector(shareAction)];
     [shareBtn setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
     [shareBtn setBorderColor:[UIColor g_borderColor] width:1 radius:27.5];
-    [shareBtn.titleLabel setWordSpace:5];
     [qrView addSubview:shareBtn];
     UIButton *copyBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_copy") fontSize:17 titleColor:[UIColor g_boldTextColor] imageName:@"icon_copy_primary" target:self action:@selector(copyAction)];
     [copyBtn setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
     [copyBtn setBorderColor:[UIColor g_borderColor] width:1 radius:27.5];
-    [copyBtn.titleLabel setWordSpace:5];
     [qrView addSubview:copyBtn];
     [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.addressLb.mas_bottom).offset(22);

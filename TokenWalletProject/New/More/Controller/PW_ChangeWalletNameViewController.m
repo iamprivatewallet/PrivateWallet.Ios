@@ -27,11 +27,12 @@
     }];
 }
 - (void)sureAction {
-    NSString *name = [self.nameTf.text trim];
-    if (![name isNoEmpty]) {
+    NSString *walletName = [self.nameTf.text trim];
+    if (![walletName judgeWalletName]) {
+        [self showError:LocalizedStr(@"text_walletNameInputError")];
         return;
     }
-    [[PW_WalletManager shared] updateWalletName:name address:self.model.address type:self.model.type];
+    [[PW_WalletManager shared] updateWalletName:walletName address:self.model.address type:self.model.type];
     [self showSuccess:LocalizedStr(@"text_saveSuccess")];
     [self.navigationController popViewControllerAnimated:YES];
 }

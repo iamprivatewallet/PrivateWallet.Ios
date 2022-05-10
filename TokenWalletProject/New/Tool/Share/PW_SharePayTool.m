@@ -26,7 +26,7 @@
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(20);
         make.right.offset(-20);
-        make.centerY.offset(-20);
+        make.centerY.offset(-25);
         make.height.mas_greaterThanOrEqualTo(300);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -83,28 +83,29 @@
         make.top.offset(25);
         make.centerX.offset(0);
     }];
+    CGFloat qrBodyWH = 200;
+    CGFloat qrBodyInset = 40;
+    if (!PW_IPhoneX) {
+        qrBodyWH = 180;
+        qrBodyInset = 30;
+    }
     UIView *qrBodyView = [[UIView alloc] init];
     qrBodyView.backgroundColor = [UIColor g_bgColor];
     [qrBodyView setBorderColor:[UIColor g_shadowColor] width:1 radius:12];
     [bodyView addSubview:qrBodyView];
     [qrBodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.offset(200);
+        make.width.height.offset(qrBodyWH);
         make.top.equalTo(tipLb.mas_bottom).offset(15);
         make.centerX.offset(0);
     }];
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
-    NSString *str;
-    if (![walletAddress isEqualToString:address]) {
-        str = NSStringWithFormat(@"ethereum:%@?contractAddress=%@",walletAddress,address);
-    }else{
-        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
-    }
+    CGFloat qrImageWH = qrBodyWH-qrBodyInset;
     UIImageView *qrIv = [[UIImageView alloc] init];
-    qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:str] size:160];
+    qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:walletAddress] size:qrImageWH];
     [qrBodyView addSubview:qrIv];
     [qrIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
-        make.size.mas_equalTo(160);
+        make.size.mas_equalTo(qrImageWH);
     }];
     UILabel *walletAddressTipLb = [PW_ViewTool labelSemiboldText:NSStringWithFormat(@"%@%@",name,LocalizedStr(@"text_walletAddress")) fontSize:14 textColor:[UIColor g_grayTextColor]];
     [bodyView addSubview:walletAddressTipLb];
@@ -117,8 +118,8 @@
     [bodyView addSubview:addressLb];
     [addressLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(walletAddressTipLb.mas_bottom).offset(8);
-        make.left.offset(CGFloatScale(45));
-        make.right.offset(CGFloatScale(-45));
+        make.left.offset(CGFloatScale(35));
+        make.right.offset(CGFloatScale(-35));
         make.bottom.offset(-20);
     }];
     UILabel *downloadTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_scanDownloadApp") fontSize:13 textColor:[UIColor g_boldTextColor]];
@@ -131,8 +132,9 @@
     leftLineView.backgroundColor = [UIColor g_borderColor];
     [contentView addSubview:leftLineView];
     [leftLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(downloadTipLb.mas_left).offset(-20);
-        make.width.offset(80);
+        make.right.equalTo(downloadTipLb.mas_left).offset(-(PW_IPhoneX?20:15));
+        make.width.offset(80).priorityLow();
+        make.left.mas_greaterThanOrEqualTo(15);
         make.height.offset(1);
         make.centerY.equalTo(downloadTipLb);
     }];
@@ -140,8 +142,8 @@
     rightLineView.backgroundColor = [UIColor g_borderColor];
     [contentView addSubview:rightLineView];
     [rightLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(downloadTipLb.mas_right).offset(20);
-        make.width.offset(80);
+        make.left.equalTo(downloadTipLb.mas_right).offset(PW_IPhoneX?20:15);
+        make.width.equalTo(leftLineView);
         make.height.offset(1);
         make.centerY.equalTo(downloadTipLb);
     }];

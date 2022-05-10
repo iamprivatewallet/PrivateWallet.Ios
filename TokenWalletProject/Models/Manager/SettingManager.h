@@ -9,16 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Wallet.h"
 
-static NSString * _Nonnull const kETHChainId = @"1";
-static NSString * _Nonnull const kBSCChainId = @"56";
-static NSString * _Nonnull const kHECOChainId = @"128";
-static NSString * _Nonnull const kCVNChainId = @"168";
-
-static NSString * _Nonnull const kETHRPCUrl = @"https://mainnet.infura.io/v3/02979c20665f4db5a07f7f0e4fc14fb7";
-static NSString * _Nonnull const kBSCRPCUrl = @"https://bsc-dataseed1.binance.org";
-static NSString * _Nonnull const kHECORPCUrl = @"https://http-mainnet.hecochain.com";
-static NSString * _Nonnull const kCVNRPCUrl = @"http://52.220.97.222:1235";
-
 @interface SettingManager : NSObject
 
 +(instancetype)sharedInstance;

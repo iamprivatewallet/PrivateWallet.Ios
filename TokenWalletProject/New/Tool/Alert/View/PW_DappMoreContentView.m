@@ -55,7 +55,7 @@
         layout.minimumLineSpacing = 0;
         NSInteger column = 5;
         CGFloat itemW = (SCREEN_WIDTH-52)/column;
-        layout.itemSize = CGSizeMake(itemW, 80);
+        layout.itemSize = CGSizeMake(itemW, 90);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
