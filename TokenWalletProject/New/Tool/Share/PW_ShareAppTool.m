@@ -40,7 +40,7 @@
     } completion:nil];
     [self createItems:contentView];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [PW_ShareTool shareTitle:nil subTitle:AppTestflightUrl data:[contentView convertViewToImage] completionBlock:^(BOOL completed) {
+        [PW_ShareTool shareTitle:nil subTitle:AppDownloadUrl data:[contentView convertViewToImage] completionBlock:^(BOOL completed) {
             [UIView animateWithDuration:0.25 animations:^{
                 maskView.alpha = 0;
             } completion:^(BOOL finished) {
