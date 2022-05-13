@@ -58,6 +58,10 @@
     return !model.isDefault;
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    PW_TokenModel *model = self.coinList[indexPath.row];
+    if (model.isDefault) {
+        return UITableViewCellEditingStyleNone;
+    }
     return UITableViewCellEditingStyleDelete;
 }
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -26,8 +26,8 @@
     [self buildData];
 }
 - (void)buildData {
-    PW_ChooseAddressTypeModel *ethModel = [PW_ChooseAddressTypeModel IconName:@"icon_ETH" title:@"ETH" subTitle:@"Ethereum" chainId:kETHChainId selected:[self.selectedChainId isEqualToString:kETHChainId]];
-    PW_ChooseAddressTypeModel *cvnModel = [PW_ChooseAddressTypeModel IconName:@"icon_CVN" title:@"CVN" subTitle:@"Cvn" chainId:kCVNChainId selected:[self.selectedChainId isEqualToString:kCVNChainId]];
+    PW_ChooseAddressTypeModel *ethModel = [PW_ChooseAddressTypeModel IconName:@"icon_ETH" title:WalletTypeETH subTitle:@"Ethereum" chainId:kETHChainId selected:[self.selectedChainId isEqualToString:kETHChainId]];
+    PW_ChooseAddressTypeModel *cvnModel = [PW_ChooseAddressTypeModel IconName:@"icon_CVN" title:WalletTypeCVN subTitle:@"Cvn" chainId:kCVNChainId selected:[self.selectedChainId isEqualToString:kCVNChainId]];
     [self.dataArr addObjectsFromArray:@[ethModel,cvnModel]];
     [self.tableView reloadData];
 }

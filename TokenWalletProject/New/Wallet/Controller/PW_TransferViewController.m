@@ -68,7 +68,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self makeViews];
     [self refreshUI];
     [self requestGasData];
-    if ([User_manager.currentUser.chooseWallet_type isEqualToString:@"CVN"]) {
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]) {
         [self loadDataForGetCVNNonce];
     }else{
         [self loadDataForNonce];
@@ -176,7 +176,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 - (void)transferAction {
     User *user = User_manager.currentUser;
-    if ([user.chooseWallet_type isEqualToString:@"CVN"]) {
+    if ([user.chooseWallet_type isEqualToString:WalletTypeCVN]) {
         if ([self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
             [self loadTransferCVNMain];
         }else{
@@ -288,7 +288,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     User *user = User_manager.currentUser;
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-    if ([user.chooseWallet_type isEqualToString:@"CVN"]) {
+    if ([user.chooseWallet_type isEqualToString:WalletTypeCVN]) {
         if (![self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
             JKBigDecimal *big = [[JKBigDecimal alloc]initWithString:@"1000000000000000000"];
             JKBigDecimal *result =  [big multiply:[[JKBigDecimal alloc]initWithString:self.amount]];

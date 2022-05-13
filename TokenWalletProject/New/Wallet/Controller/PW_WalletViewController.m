@@ -80,28 +80,6 @@
     }
 }
 - (void)searchAction {
-//    PW_DappPayModel *model = [[PW_DappPayModel alloc] init];
-//    model.authorizationCount = @"100000";
-//    model.value = @"100000";
-//    model.symbol = @"ETH";
-//    model.authorizedTokenContractAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-//    model.paymentAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-//    model.acceptAddress = @"0xsfgowf30450jflsfjslfjeutptuwpetwnsln350";
-//    [MOSWalletContractTool estimateGasToAddress:nil value:nil completionBlock:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
-//        if(gas){
-//            model.gasToolModel.gas_price = gasPrice;
-//            model.gasToolModel.gas = gas;
-//            model.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-//            [PW_DappAlertTool showDappAuthorizationConfirm:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
-//
-//            }];
-////            [PW_DappAlertTool showDappConfirmPayInfo:model sureBlock:^(PW_DappPayModel * _Nonnull model) {
-////
-////            }];
-//        }
-//    }];
-//    [PW_SolanaTest test];
-//    return;
     PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -242,11 +220,12 @@
     return isExit;
 }
 - (void)refreshBalance {
-    if ([self.currentWallet.type isEqualToString:@"CVN"]) {
+    if ([self.currentWallet.type isEqualToString:WalletTypeCVN]) {
         [self loadCVNAllCoin];
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
+                [[PW_TokenManager shareManager] updateCoin:obj];
                 [self.tableView reloadData];
                 [self refreshCVNTotal];
             } errBlock:nil];
@@ -256,6 +235,7 @@
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
+                [[PW_TokenManager shareManager] updateCoin:obj];
                 [self.tableView reloadData];
                 [self refreshTotal];
             } errBlock:nil];
@@ -296,6 +276,7 @@
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
         [self loadETHBalanceWithCoin:coin completion:^(NSString *amount) {
             coin.tokenAmount = amount;
+            [[PW_TokenManager shareManager] updateCoin:coin];
             [self refreshTotal];
         }];
     }];
@@ -345,6 +326,7 @@
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
         [self loadCVNBalanceWithCoin:coin completion:^(NSString *amount) {
             coin.tokenAmount = [amount stringDownDecimal:6];
+            [[PW_TokenManager shareManager] updateCoin:coin];
             [self refreshCVNTotal];
         }];
     }];

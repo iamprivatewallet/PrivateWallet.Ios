@@ -43,9 +43,9 @@
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_insertTable:table_name dicOrModel:record];
 }
-- (BOOL)updateCoin:(PW_TokenModel*)record address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId{
+- (BOOL)updateCoin:(PW_TokenModel*)record {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:table_name dicOrModel:record whereFormat:[NSString stringWithFormat:@"where walletAddress = '%@' and walletType = '%@' and tokenContract = '%@' and tokenChain = %ld",address,type,tokenAddress,chainId]];
+    return [db jq_updateTable:table_name dicOrModel:record whereFormat:[NSString stringWithFormat:@"where walletAddress = '%@' and walletType = '%@' and tokenContract = '%@' and tokenChain = %ld",record.walletAddress,record.walletType,record.tokenContract,record.tokenChain]];
 }
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId{
     JQFMDB * db = [JQFMDB shareDatabase];

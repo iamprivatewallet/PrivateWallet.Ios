@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UIView *blockBrowserView;
 @property (nonatomic, strong) UITextField *blockBrowserTf;
 
+@property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UIButton *saveBtn;
 
 @end
@@ -32,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_addCustomNetwork")];
+    [self setNavNoLineTitle:LocalizedStr(self.model?@"text_editCustomNetwork":@"text_addCustomNetwork")];
     [self makeViews];
     if (self.model) {
         self.nameTf.text = self.model.title;
@@ -42,6 +43,11 @@
         self.blockBrowserTf.text = self.model.browseUrl;
         self.chainIdTf.enabled = NO;
         self.chainIdTf.textColor = [UIColor g_grayTextColor];
+        if (self.model.isDefault) {
+            self.nameTf.enabled = self.rpcUrlTf.enabled = self.symbolTf.enabled = self.blockBrowserTf.enabled = NO;
+            self.nameTf.textColor = self.rpcUrlTf.textColor = self.symbolTf.textColor = self.blockBrowserTf.textColor = [UIColor g_grayTextColor];
+            self.cancelBtn.hidden = self.saveBtn.hidden = YES;
+        }
     }
     RAC(self.saveBtn,enabled) = [RACSignal combineLatest:@[self.nameTf.rac_textSignal,self.rpcUrlTf.rac_textSignal,self.chainIdTf.rac_textSignal] reduce:^id(NSString *name,NSString *rpcUrl,NSString *chainId){
         return @([name trim].length>0&&[rpcUrl trim].length>0&&[chainId trim].length>0);
@@ -175,22 +181,22 @@
         make.right.offset(-20);
         make.height.offset(84);
     }];
-    UIButton *cancelBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_cancel") fontSize:16 titleColor:[UIColor g_boldTextColor] cornerRadius:16 backgroundColor:nil target:self action:@selector(cancelAction)];
-    [cancelBtn setBorderColor:[UIColor g_boldTextColor] width:1 radius:16];
-    [self.contentView addSubview:cancelBtn];
+    self.cancelBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_cancel") fontSize:16 titleColor:[UIColor g_boldTextColor] cornerRadius:16 backgroundColor:nil target:self action:@selector(cancelAction)];
+    [self.cancelBtn setBorderColor:[UIColor g_boldTextColor] width:1 radius:16];
+    [self.contentView addSubview:self.cancelBtn];
     self.saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
     [self.contentView addSubview:self.saveBtn];
-    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(25);
         make.top.equalTo(self.blockBrowserView.mas_bottom).offset(30);
         make.height.offset(55);
         make.bottom.offset(-20);
     }];
     [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cancelBtn.mas_right).offset(15);
-        make.top.equalTo(cancelBtn);
+        make.left.equalTo(self.cancelBtn.mas_right).offset(15);
+        make.top.equalTo(self.cancelBtn);
         make.right.offset(-25);
-        make.width.equalTo(cancelBtn);
+        make.width.equalTo(self.cancelBtn);
         make.height.offset(55);
     }];
     [self createWarnItems];

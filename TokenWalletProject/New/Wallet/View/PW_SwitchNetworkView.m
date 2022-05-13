@@ -58,11 +58,11 @@
             if(![model.rpcUrl isNoEmpty]){
                 model.rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:model.chainId];
             }
-            if ([walletType isEqualToString:@"ETH"]) {
+            if ([walletType isEqualToString:WalletTypeETH]) {
                 if(![model.chainId isEqualToString:@"168"]){
                     [self.dataList addObject:model];
                 }
-            }else if([walletType isEqualToString:@"CVN"]) {
+            }else if([walletType isEqualToString:WalletTypeCVN]) {
                 if([model.chainId isEqualToString:@"168"]){
                     [self.dataList addObject:model];
                 }
@@ -136,10 +136,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_NetworkModel *model = self.dataList[indexPath.row];
     Wallet *wallet = nil;
-    if ([model.title isEqualToString:@"CVN"]||[model.chainId isEqualToString:@"168"]) {
-        wallet = [[PW_WalletManager shared] getOriginWalletWithType:@"CVN"];
+    if ([model.title isEqualToString:WalletTypeCVN]||[model.chainId isEqualToString:kCVNChainId]) {
+        wallet = [[PW_WalletManager shared] getOriginWalletWithType:WalletTypeCVN];
     }else{
-        wallet = [[PW_WalletManager shared] getOriginWalletWithType:@"ETH"];
+        wallet = [[PW_WalletManager shared] getOriginWalletWithType:WalletTypeETH];
     }
     if (wallet&&![wallet.type isEqualToString:User_manager.currentUser.chooseWallet_type]) {
         [User_manager updateChooseWallet:wallet];

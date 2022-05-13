@@ -60,6 +60,10 @@
         [self.dataArr removeAllObjects];
         NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];
         for (PW_NetworkModel *model in array) {
+            model.isDefault = YES;
+            if(![model.rpcUrl isNoEmpty]){
+                model.rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:model.chainId];
+            }
             PW_NetworkModel *exitModel = [[PW_NetworkManager shared] isExistWithChainId:model.chainId];
             if (exitModel==nil) {
                 [[PW_NetworkManager shared] saveModel:model];
@@ -97,12 +101,18 @@
     return cell;
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    PW_NetworkModel *model = self.dataArr[indexPath.row];
+    return !model.isDefault;
 }
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    PW_NetworkModel *model = self.dataArr[indexPath.row];
+    return !model.isDefault;
 }
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PW_NetworkModel *model = self.dataArr[indexPath.row];
+    if (model.isDefault) {
+        return UITableViewCellEditingStyleNone;
+    }
     return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,6 +124,11 @@
     }
 }
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    PW_NetworkModel *destinationModel = self.dataArr[destinationIndexPath.row];
+    if(destinationModel.isDefault){
+        [tableView reloadData];
+        return;
+    }
     // 1. 将源从数组中取出
     PW_NetworkModel *source = self.dataArr[sourceIndexPath.row];
     // 2. 将源从数组中删除

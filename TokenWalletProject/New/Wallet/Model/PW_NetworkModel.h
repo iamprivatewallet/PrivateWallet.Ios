@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger sortIndex;
 
 @property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) BOOL isDefault;
 
 @end
 

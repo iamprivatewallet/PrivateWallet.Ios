@@ -15,49 +15,57 @@
 //    NSLog(@"newAccount=%@",newAccount);
     NSDictionary *myAccount = [PW_Solana restoreAccountWithPhrase:@[@"road",@"skill",@"wing",@"guess",@"pull",@"chalk",@"trend",@"harvest",@"bargain",@"much",@"jacket",@"ivory"]];
     NSLog(@"myAccount=%@",myAccount);
-    [PW_Solana getBalanceWithAccount:myAccount[@"publicKey"] completionBlock:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
-        NSLog(@"myAccount balance==%@,error:%@",balance,errorDesc);
-    }];
-    [PW_Solana getAccountInfoWithAccount:myAccount[@"publicKey"] completionBlock:^(NSDictionary<NSString *,id> * _Nullable info, NSString * _Nullable errorDesc) {
-        NSLog(@"myAccount info==%@,error:%@",info,errorDesc);
-    }];
-//    NSDictionary *account = [PW_Solana restoreAccountWithPhrase:@[@"know",@"general",@"memory",@"scheme",@"cotton",@"ship",@"knee",@"suit",@"rather",@"pet",@"donkey",@"way",@"maximum",@"similar",@"candy",@"indicate",@"blade",@"lunch",@"analyst",@"around",@"hockey",@"remove",@"nominee",@"benefit"]];
-    NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:@"46cp3plRjPYYlRhZnztmHY83tnBpknjAbvjJXRWWi6L2BZWejSvKlprtL8VhJ7CBjnGgjPy8ASt3sKFrhxIA0Q=="];
-    NSLog(@"===%@",account);
-//    [PW_Solana airdropWithAccount:@"84NyHf4EQo9mjxUdpiG1cxVd1qA6dFLYuA72cHzavqVo" completionBlock:^(NSString * _Nullable success, NSString * _Nullable errorDesc) {
-//        NSLog(@"success=%@",success);
+//    [PW_Solana getBalanceWithAccount:myAccount[@"publicKey"] completionBlock:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
+//        NSLog(@"myAccount balance==%@,error:%@",balance,errorDesc);
 //    }];
-    [PW_Solana getBalanceWithAccount:account[@"publicKey"] completionBlock:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
-        NSLog(@"balance==%@,error:%@",balance,errorDesc);
-    }];
-//    [PW_Solana sendSOLWithSecretKey:myAccount[@"secretKey"] to:@"HZNEVMMCiukW8G85tNejcHApNimwtoJsUrNAzNnLwcnt" amount:1000000000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-//        NSLog(@"hash==%@,error:%@",hash,errorDesc);
+//    [PW_Solana getAccountInfoWithAccount:myAccount[@"publicKey"] completionBlock:^(NSDictionary<NSString *,id> * _Nullable info, NSString * _Nullable errorDesc) {
+//        NSLog(@"myAccount info==%@,error:%@",info,errorDesc);
 //    }];
-    NSString *mintAddress = PW_SolanaConstants.NATIVE_MINT_2022;
-//    [PW_Solana createTokenAccountWithMintAddress:mintAddress secretKey:account[@"secretKey"] completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
-//        NSLog(@"createTokenAccount:%@,error:%@",data,errorDesc);
+    NSDictionary *account = [PW_Solana restoreAccountWithPhrase:@[@"life",@"funny",@"speak",@"broom",@"relax",@"thought",@"across",@"conduct",@"media",@"web",@"common",@"skill"]];
+    NSLog(@"account===%@",account);
+//    [PW_Solana getAccountInfoWithAccount:account[@"publicKey"] completionBlock:^(NSDictionary<NSString *,id> * _Nullable info, NSString * _Nullable errorDesc) {
+//        NSLog(@"account info==%@,error:%@",info,errorDesc);
 //    }];
-    [PW_Solana findSPLTokenDestinationAddressWithMintAddress:mintAddress destinationAddress:account[@"publicKey"] completionBlock:^(NSString * _Nullable address, NSString * _Nullable errorDesc) {
-        NSLog(@"findSPLToken:%@,error:%@",address,errorDesc);
-    }];
-//    [PW_Solana getOrCreateAssociatedTokenAccountWithSecretKey:@"mZA9MuoYEdZNTrLTo6KWEeJFIgIxHOpGLJhBVIK1SY1o32SboB0j72n1qk1YFgbJNmsM2FCGBsWqT7ZR3cPrvg==" mintAddress:mintAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//    [PW_Solana getBalanceWithAccount:account[@"publicKey"] completionBlock:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
+//        NSLog(@"account balance==%@,error:%@",balance,errorDesc);
+//    }];
+//    [PW_Solana sendSOLWithSecretKey:account[@"secretKey"] to:myAccount[@"publicKey"] amount:1000000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//        NSLog(@"sol hash==%@,error:%@",hash,errorDesc);
+//    }];
+//    NSString *tokenAddress = @"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB";
+//    [PW_Solana getOrCreateAssociatedTokenAccountWithOwner:myAccount[@"publicKey"] payerSecretKey:myAccount[@"secretKey"] mintAddress:tokenAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
 //        NSString *fromAddress = data[@"address"];
-//        NSString *hash = data[@"hash"];
-//        NSLog(@"fromAddress:%@,hash:%@,error:%@",fromAddress,hash,errorDesc);
-//    }];
-//    [PW_Solana getOrCreateAssociatedTokenAccountWithSecretKey:myAccount[@"secretKey"] mintAddress:mintAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
-//        NSLog(@"fromAddress:%@,error:%@",data,errorDesc);
-//        [PW_Solana getOrCreateAssociatedTokenAccountWithSecretKey:account[@"secretKey"] mintAddress:mintAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//        [PW_Solana getOrCreateAssociatedTokenAccountWithOwner:account[@"publicKey"] payerSecretKey:myAccount[@"secretKey"] mintAddress:tokenAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
 //            NSString *toAddress = data[@"address"];
-//            NSLog(@"toAddress:%@,error:%@",data,errorDesc);
-//            [PW_Solana sendSPLWithMintAddress:mintAddress secretKey:myAccount[@"secretKey"] to:toAddress amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-//                NSLog(@"spl hash:%@,error:%@",hash,errorDesc);
-//            }];
+//            if (toAddress != nil) {
+//                [PW_Solana sendSPLWithMintAddress:tokenAddress source:fromAddress secretKey:myAccount[@"secretKey"] to:toAddress amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//                    NSLog(@"myAccount spl hash:%@,error:%@",hash,errorDesc);
+//                }];
+//            }
 //        }];
 //    }];
-    [PW_Solana sendSPLWithMintAddress:@"Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" secretKey:myAccount[@"secretKey"] to:@"HZNEVMMCiukW8G85tNejcHApNimwtoJsUrNAzNnLwcnt" amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-        NSLog(@"spl hash:%@,error:%@",hash,errorDesc);
-    }];
+//    [PW_Solana findSPLTokenDestinationAddressWithMintAddress:tokenAddress destinationAddress:myAccount[@"publicKey"] completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//        NSLog(@"myAccount findSPLToken:%@,error:%@",data,errorDesc);
+//        NSString *fromAddress = data[@"address"];
+//        [PW_Solana getBlanceWithPubkey:fromAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//            NSLog(@"myAccount tokenBalance:%@,error:%@",data,errorDesc);
+//        }];
+//        [PW_Solana findSPLTokenDestinationAddressWithMintAddress:tokenAddress destinationAddress:account[@"publicKey"] completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//            NSLog(@"account findSPLToken:%@,error:%@",data,errorDesc);
+//            NSString *toAddress = data[@"address"];
+//            if (toAddress != nil) {
+//                [PW_Solana getBlanceWithPubkey:toAddress completionBlock:^(NSDictionary<NSString *,NSString *> * _Nullable data, NSString * _Nullable errorDesc) {
+//                    NSLog(@"account tokenBalance:%@,error:%@",data,errorDesc);
+//                }];
+//                [PW_Solana sendSPLWithMintAddress:tokenAddress source:fromAddress secretKey:myAccount[@"secretKey"] to:toAddress amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//                    NSLog(@"myAccount spl hash:%@,error:%@",hash,errorDesc);
+//                }];
+//                [PW_Solana sendSPLWithMintAddress:tokenAddress source:toAddress secretKey:account[@"secretKey"] to:fromAddress amount:10000 completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//                    NSLog(@"account spl hash:%@,error:%@",hash,errorDesc);
+//                }];
+//            }
+//        }];
+//    }];
 }
 
 @end

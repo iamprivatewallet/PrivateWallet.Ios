@@ -226,6 +226,7 @@ text_inputCopyAddress="输入或粘贴钱包地址";
 text_selectAddressType="选择地址类型";
 text_addNetwork="添加网络";
 text_addCustomNetwork="添加自定义网络";
+text_editCustomNetwork="编辑自定义网络";
 text_addCustomNetworkTip="菜鸟钱包无法验证自定网络的安全性，请务必添加可信任的自定义网络。";
 text_networkName="网络名称";
 text_added="新增";

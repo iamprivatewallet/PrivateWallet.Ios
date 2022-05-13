@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shareManager;
 - (NSInteger)getMaxIndex;
 - (void)saveCoin:(PW_TokenModel *)coin;
-- (BOOL)updateCoin:(PW_TokenModel *)record address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
+- (BOOL)updateCoin:(PW_TokenModel*)record;
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (PW_TokenModel *)isExist:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (void)deleteCoinWalletAddress:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
