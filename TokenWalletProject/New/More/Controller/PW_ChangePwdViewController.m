@@ -65,7 +65,7 @@
     UILabel *originTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_originPwd") fontSize:13 textColor:[UIColor g_boldTextColor]];
     [originView addSubview:originTipLb];
     self.originPwdTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputOrginPwd")];
-    self.originPwdTf.secureTextEntry = YES;
+    [self.originPwdTf pw_setSecureTextEntry];
     [originView addSubview:self.originPwdTf];
     [originView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(20);
@@ -91,13 +91,13 @@
     UILabel *setupTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_setTradePwd") fontSize:13 textColor:[UIColor g_boldTextColor]];
     [setupView addSubview:setupTipLb];
     self.pwdTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_setTradePwdTip")];
-    self.pwdTf.secureTextEntry = YES;
+    [self.pwdTf pw_setSecureTextEntry];
     [setupView addSubview:self.pwdTf];
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor g_lineColor];
     [setupView addSubview:lineView];
     self.againPwdTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputAgain")];
-    self.againPwdTf.secureTextEntry = YES;
+    [self.againPwdTf pw_setSecureTextEntry];
     [setupView addSubview:self.againPwdTf];
     [setupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(originView.mas_bottom).offset(15);

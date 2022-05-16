@@ -344,8 +344,7 @@
     self.pwdTF.textColor = [UIColor g_textColor];
     self.pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.pwdTF.keyboardType = UIKeyboardTypeAlphabet;
-    self.pwdTF.textContentType = UITextContentTypePassword;
-    self.pwdTF.secureTextEntry = YES;
+    [self.pwdTF pw_setSecureTextEntry];
     [self.pwdView addSubview:self.pwdTF];
     [self.pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
@@ -368,8 +367,7 @@
     self.againPwdTF.textColor = [UIColor g_textColor];
     self.againPwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.againPwdTF.keyboardType = UIKeyboardTypeAlphabet;
-    self.againPwdTF.textContentType = UITextContentTypePassword;
-    self.againPwdTF.secureTextEntry = YES;
+    [self.againPwdTF pw_setSecureTextEntry];
     [self.pwdView addSubview:self.againPwdTF];
     [self.againPwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);

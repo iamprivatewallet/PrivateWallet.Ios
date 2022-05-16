@@ -11,7 +11,7 @@
 @implementation NSString (PW_Rule)
 
 - (BOOL)judgeWalletName {
-    if (![self isNoEmpty]&&self.length<=10) {
+    if ([self isNoEmpty]&&self.length<=10) {
         return YES;
     }
     return NO;

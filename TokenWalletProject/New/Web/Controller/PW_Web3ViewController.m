@@ -86,9 +86,9 @@
     self.webView = [[Web3WebView alloc] init];
 //    self.webView = [[WKWebView alloc] init];
     // UI代理
-//    self.webView .UIDelegate = self;
+//    self.webView.UIDelegate = self;
 //    // 导航代理
-//    self.webView .navigationDelegate = self;
+//    self.webView.navigationDelegate = self;
     // 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
     self.webView.allowsBackForwardNavigationGestures = YES;
     [self.view addSubview:self.webView];

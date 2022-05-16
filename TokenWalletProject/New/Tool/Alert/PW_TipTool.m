@@ -123,7 +123,7 @@
     [pwdTF pw_setPlaceholder:LocalizedStr(@"text_inputTradePwd")];
     pwdTF.textColor = [UIColor g_textColor];
     pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    pwdTF.secureTextEntry = YES;
+    [pwdTF pw_setSecureTextEntry];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         CGFloat duration = [x.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
         CGRect frame = [x.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];

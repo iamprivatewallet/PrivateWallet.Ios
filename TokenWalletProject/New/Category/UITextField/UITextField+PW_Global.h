@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pw_setPlaceholder:(NSString *)placeholder;
 - (void)pw_setPlaceholder:(NSString *)placeholder leftImage:(nullable NSString *)leftImage;
 
+- (void)pw_setSecureTextEntry;
+
 @end
 
 NS_ASSUME_NONNULL_END

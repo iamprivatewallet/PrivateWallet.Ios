@@ -38,4 +38,9 @@
     }
 }
 
+- (void)pw_setSecureTextEntry {
+    self.textContentType = UITextContentTypeNewPassword;
+    self.secureTextEntry = YES;
+}
+
 @end
