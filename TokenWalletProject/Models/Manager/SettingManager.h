@@ -22,7 +22,6 @@
 //当前货币
 @property (nonatomic, strong) NSString *money;
 
-- (void)checkImportWallet;
 - (NSString * _Nullable)getCurrentAddress;
 - (Wallet * _Nullable)getCurrentWallet;
 

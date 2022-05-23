@@ -24,11 +24,6 @@
     return sharedInstance;
 }
 
-- (void)checkImportWallet {
-    User *user = User_manager.currentUser;
-    Wallet *wallet = [[[PW_WalletManager shared] selctWalletWithAddr:user.chooseWallet_address type:user.chooseWallet_type] firstObject];
-    [MOSWeb3Tool changeOrImportWalletWithAddress:user.chooseWallet_address mnemonics:wallet.mnemonic privateKey:wallet.priKey password:wallet.walletPassword];
-}
 - (NSString * _Nullable)getCurrentAddress {
     return User_manager.currentUser.chooseWallet_address;
 }
@@ -98,7 +93,7 @@
     } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
         return @"CVNT";
     } else {
-        return @"";
+        return @"ETH";
     }
 }
 -(void)setNode:(NSString *)node chianId:(NSString *)chianId {

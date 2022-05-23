@@ -72,7 +72,6 @@ class MOSWalletTool: NSObject {
 //            WQJLog(sender)
 //            let provider = InfuraProvider(rpcType, accessToken: rpcAccessToken)!
 //            let provider = Web3HttpProvider(URL(string: "https://bsc-dataseed1.binance.org")!)
-//            MOSWeb3Tool.checkImportWallet();
             let defaultUrlStr = kETHRPCUrl;
             let urlStr = SettingManager.sharedInstance().getCurrentNode().first as? String ?? defaultUrlStr
             var url = URL(string: urlStr)

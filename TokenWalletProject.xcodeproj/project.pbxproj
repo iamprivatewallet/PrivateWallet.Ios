@@ -213,7 +213,6 @@
 		5C71193127BB7ABC00FE9B51 /* MOSETHGasModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192827BB7ABC00FE9B51 /* MOSETHGasModel.m */; };
 		5C71193227BB7ABD00FE9B51 /* js.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5C71192D27BB7ABC00FE9B51 /* js.bundle */; };
 		5C71193327BB7ABD00FE9B51 /* MetaMaskCallApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */; };
-		5C71193727BB7C5100FE9B51 /* MOSWeb3Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193627BB7C5100FE9B51 /* MOSWeb3Tool.swift */; };
 		5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193A27BB860500FE9B51 /* WQJLog.swift */; };
 		5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */; };
 		5C71194027BCBF3D00FE9B51 /* MOSWalletTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193F27BCBF3C00FE9B51 /* MOSWalletTool.swift */; };
@@ -992,7 +991,6 @@
 		5C71192D27BB7ABC00FE9B51 /* js.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = js.bundle; sourceTree = "<group>"; };
 		5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaMaskCallApi.m; sourceTree = "<group>"; };
 		5C71193527BB7C4F00FE9B51 /* TokenWalletProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TokenWalletProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		5C71193627BB7C5100FE9B51 /* MOSWeb3Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MOSWeb3Tool.swift; sourceTree = "<group>"; };
 		5C71193A27BB860500FE9B51 /* WQJLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WQJLog.swift; sourceTree = "<group>"; };
 		5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Caculate.m"; sourceTree = "<group>"; };
 		5C71193D27BB8E0700FE9B51 /* NSString+Caculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Caculate.h"; sourceTree = "<group>"; };
@@ -2843,7 +2841,6 @@
 				5C71193A27BB860500FE9B51 /* WQJLog.swift */,
 				5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */,
 				5C71193F27BCBF3C00FE9B51 /* MOSWalletTool.swift */,
-				5C71193627BB7C5100FE9B51 /* MOSWeb3Tool.swift */,
 				5C71192C27BB7ABC00FE9B51 /* MetaMaskCallApi.h */,
 				5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */,
 				5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */,
@@ -4881,7 +4878,6 @@
 				992EF1FD26BA466500F70A94 /* UITextField+PrivateMethod.m in Sources */,
 				5CB8BBB127E1E95E00C73976 /* MessageDetailViewController.m in Sources */,
 				79C9B35821ABEE2E007BA751 /* SKTag.m in Sources */,
-				5C71193727BB7C5100FE9B51 /* MOSWeb3Tool.swift in Sources */,
 				5AF5D17C1D2F7CBA004070D7 /* NSObject+AddProperty.m in Sources */,
 				992E0F6326D5F08900E1C31B /* RiskWarningView.m in Sources */,
 				9926DFFF26E1F5E400FDF442 /* WalletRecord.m in Sources */,

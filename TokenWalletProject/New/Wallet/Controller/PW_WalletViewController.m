@@ -153,9 +153,15 @@
     model.price = @"0";
     model.tokenDecimals = 18;
     model.isDefault = YES;
-    [self.coinList addObject:model];
-    [self.tableView reloadData];
-    [self loadCacheCoinList];
+    PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+    if (exitModel==nil) {
+        model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
+        model.walletType = user.chooseWallet_type;
+        model.walletAddress = user.chooseWallet_address;
+        model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;
+        [[PW_TokenManager shareManager] saveCoin:model];
+    }
+    [self forceRefreshCacheCoinList];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     [self.view showLoadingIndicator];
@@ -182,13 +188,13 @@
     }];
 }
 - (void)forceRefreshCacheCoinList {
-    NSMutableArray *tempArr = [NSMutableArray array];
-    for (PW_TokenModel *model in self.coinList) {
-        if (!model.isDefault) {
-            [tempArr addObject:model];
-        }
-    }
-    [self.coinList removeObjectsInArray:tempArr];
+//    NSMutableArray *tempArr = [NSMutableArray array];
+//    for (PW_TokenModel *model in self.coinList) {
+//        if (!model.isDefault) {
+//            [tempArr addObject:model];
+//        }
+//    }
+    [self.coinList removeAllObjects];
     [self loadCacheCoinList];
 }
 - (void)loadCacheCoinList {

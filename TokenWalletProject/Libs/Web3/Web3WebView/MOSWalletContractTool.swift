@@ -10,6 +10,15 @@ import UIKit
 import web3swift
 import BigInt
 
+extension String {
+    func stripHexPrefix() -> String {
+        if self.hasPrefix("0x") {
+            let indexStart = self.index(self.startIndex, offsetBy: 2)
+            return String(self[indexStart...])
+        }
+        return self
+    }
+}
 class MOSWalletContractTool: NSObject {
     //转账
     @objc
@@ -115,7 +124,7 @@ class MOSWalletContractTool: NSObject {
             do {
                 let gasPrice = try MOSWalletTool.shared().web3.eth.getGasPrice()
                 options.gasPrice = TransactionOptions.GasPricePolicy.manual(gasPrice)
-                let ethTransaction = EthereumTransaction(to: to, data: newExtraData, options: options)
+                let ethTransaction = EthereumTransaction(to: to, data: newExtraData)
                 let gas = try MOSWalletTool.shared().web3.eth.estimateGas(ethTransaction, transactionOptions: options)
                 DispatchQueue.main.async {
                     completionBlock("\(gasPrice)","\(gas)", nil)

@@ -214,23 +214,6 @@
                 completionHandler(respModel);
             }
         }];
-//        [MOSWeb3Tool sendTransaction:dataDictNew password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-//            [SVProgressHUD dismiss];
-//            if (sign==nil) {
-//                if (errorBlock) {
-//                    errorBlock(errorDesc);
-//                }
-//                return;
-//            }
-//            MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
-//            respModel.id = model.id;
-//            respModel.jsonrpc = model.jsonrpc;
-//            respModel.rawResponse = @"";
-//            respModel.result = @[hash];
-//            if (completionHandler) {
-//                completionHandler(respModel);
-//            }
-//        }];
     }];
 }
 // 获取ETH 签名
@@ -314,20 +297,6 @@
             }
         }];
     }];
-//    [MOSWeb3Tool signPersonalMessageWithMessage:message address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-//        if (errorDesc!=nil&&errorDesc.length>0) {
-//            DSError *error = [[DSError alloc] init];
-//            error.message = errorDesc;
-//            error.code = -1;
-//            respModel.error = error;
-//        }
-//        if (hash!=nil) {
-//            respModel.result = @[hash];
-//        }
-//        if (completionHandler) {
-//            completionHandler(respModel);
-//        }
-//    }];
 }
 - (void)signDataWithDict:(NSDictionary *)dict address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
@@ -354,20 +323,6 @@
             }
         }];
     }];
-//    [MOSWeb3Tool signPersonalMessageWithDict:dict address:address password:User_manager.currentUser.user_pass completionBlock:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-//        if (errorDesc!=nil&&errorDesc.length>0) {
-//            DSError *error = [[DSError alloc] init];
-//            error.message = errorDesc;
-//            error.code = -1;
-//            respModel.error = error;
-//        }
-//        if (hash!=nil) {
-//            respModel.result = @[hash];
-//        }
-//        if (completionHandler) {
-//            completionHandler(respModel);
-//        }
-//    }];
 }
 /**
  * 方法示例  第一个方法注释 适用于下面所有方法
