@@ -92,7 +92,7 @@
         @"isTop":@"1"
     };
     [self.view showLoadingIndicator];
-    [self requestApi:WalletDappListURL params:paramsDict completeBlock:^(id data) {
+    [self pw_requestApi:WalletDappListURL params:paramsDict completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         self.recommandDappList = [PW_DappModel mj_objectArrayWithKeyValuesArray:data];
         [self reloadTableSection:0];
@@ -112,7 +112,7 @@
         @"isTop":@"1"
     };
     [self.view showLoadingIndicator];
-    [self requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
+    [self pw_requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         self.currencyList = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         User *user = User_manager.currentUser;

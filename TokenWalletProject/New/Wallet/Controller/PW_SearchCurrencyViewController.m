@@ -92,7 +92,7 @@
         @"isTop":isRecommend?@"1":nil,
     };
     [self.view showLoadingIndicator];
-    [self requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
+    [self pw_requestApi:WalletTokenIconURL params:paramsDict completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         NSArray *array = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         User *user = User_manager.currentUser;

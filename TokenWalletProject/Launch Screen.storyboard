@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,24 +12,39 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oUR-4g-I3d"/>
-                        <viewControllerLayoutGuide type="bottom" id="s1B-EF-wNC"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="9Pj-ZT-Phv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_bg" translatesAutoresizingMaskIntoConstraints="NO" id="9Pj-ZT-Phv">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pet_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2li-xX-QHv">
+                                <rect key="frame" x="146.66666666666666" y="256" width="97" height="152"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="private_wallet" translatesAutoresizingMaskIntoConstraints="NO" id="tR7-3q-oOZ">
+                                <rect key="frame" x="79" y="452" width="232" height="30"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Private Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kP7-b2-eeY">
+                                <rect key="frame" x="87.666666666666686" y="753" width="215" height="22"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="caE-Ot-uPG"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="9Pj-ZT-Phv" secondAttribute="trailing" id="Lgc-Q5-1wx"/>
-                            <constraint firstItem="9Pj-ZT-Phv" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ZBT-FB-I82"/>
+                            <constraint firstItem="tR7-3q-oOZ" firstAttribute="centerX" secondItem="caE-Ot-uPG" secondAttribute="centerX" id="06o-FU-jgD"/>
+                            <constraint firstItem="2li-xX-QHv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-90" id="FaE-tw-qju"/>
+                            <constraint firstItem="caE-Ot-uPG" firstAttribute="trailing" secondItem="9Pj-ZT-Phv" secondAttribute="trailing" id="Lgc-Q5-1wx"/>
+                            <constraint firstItem="2li-xX-QHv" firstAttribute="centerX" secondItem="caE-Ot-uPG" secondAttribute="centerX" id="QlX-8u-jeI"/>
+                            <constraint firstItem="tR7-3q-oOZ" firstAttribute="top" secondItem="2li-xX-QHv" secondAttribute="bottom" constant="44" id="SLO-hB-Jx5"/>
+                            <constraint firstItem="9Pj-ZT-Phv" firstAttribute="leading" secondItem="caE-Ot-uPG" secondAttribute="leading" id="ZBT-FB-I82"/>
                             <constraint firstAttribute="bottom" secondItem="9Pj-ZT-Phv" secondAttribute="bottom" id="ciJ-jV-Vw4"/>
                             <constraint firstItem="9Pj-ZT-Phv" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gdT-0x-kgs"/>
+                            <constraint firstItem="caE-Ot-uPG" firstAttribute="bottom" secondItem="kP7-b2-eeY" secondAttribute="bottom" constant="35" id="qfK-yM-0Oa"/>
+                            <constraint firstItem="kP7-b2-eeY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wpt-qM-W52"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -38,6 +54,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch" width="375" height="812"/>
+        <image name="launch_bg" width="414" height="896.66668701171875"/>
+        <image name="pet_logo" width="96.666664123535156" height="151.66667175292969"/>
+        <image name="private_wallet" width="232" height="30.333333969116211"/>
     </resources>
 </document>

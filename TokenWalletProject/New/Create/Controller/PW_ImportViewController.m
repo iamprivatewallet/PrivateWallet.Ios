@@ -34,7 +34,7 @@
     UILabel *tipLb = [[UILabel alloc] init];
     tipLb.font = [UIFont systemFontOfSize:15];
     tipLb.text = LocalizedStr(@"text_importExistWallet");
-    tipLb.textColor = [UIColor g_textColor];
+    tipLb.textColor = [UIColor g_whiteTextColor];
     [self.view addSubview:tipLb];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(10);

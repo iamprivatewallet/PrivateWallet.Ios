@@ -9,6 +9,7 @@
 #import "PW_FirstChooseViewController.h"
 #import "PW_ImportViewController.h"
 #import "PW_CreateViewController.h"
+#import "PW_BackupWalletViewController.h"
 
 @interface PW_FirstChooseViewController ()
 
@@ -31,63 +32,85 @@
 }
 - (void)makeViews {
     UIImageView *bgIv = [[UIImageView alloc] init];
-    bgIv.image = [UIImage imageNamed:@"first_bg"];
+    bgIv.image = [UIImage imageNamed:@"icon_bg"];
+    bgIv.contentMode = UIViewContentModeScaleAspectFill;
+    bgIv.clipsToBounds = YES;
     [self.view addSubview:bgIv];
     [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+        make.top.left.right.bottom.offset(0);
     }];
     UIView *contentView = [[UIView alloc] init];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(-50);
-        make.left.right.offset(0);
+        make.left.right.top.bottom.offset(0);
     }];
-    UIImageView *tipIv = [[UIImageView alloc] init];
-    tipIv.image = [UIImage imageNamed:@"first_tip"];
-    [contentView addSubview:tipIv];
-    [tipIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
-        make.left.offset(-40);
-        make.right.offset(40);
-    }];
+    UIImageView *logoIv = [[UIImageView alloc] init];
+    logoIv.image = [UIImage imageNamed:@"icon_logo_big"];
+    [contentView addSubview:logoIv];
     UIImageView *textIv = [[UIImageView alloc] init];
-    textIv.image = [UIImage imageNamed:@"first_text"];
+    textIv.image = [UIImage imageNamed:@"private_wallet"];
     [contentView addSubview:textIv];
+    UILabel *textLb = [PW_ViewTool labelText:LocalizedStr(@"text_appDesc") fontSize:17 textColor:[UIColor g_whiteTextColor]];
+    textLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:textLb];
+    [logoIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.offset(0);
+        make.bottom.equalTo(textIv.mas_top).offset(-22);
+    }];
     [textIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.offset(0);
-        make.top.equalTo(tipIv.mas_bottom).offset(-10);
+        make.bottom.equalTo(textLb.mas_top).offset(-18);
     }];
-    UIButton *importBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [importBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
-    importBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    importBtn.layer.cornerRadius = 16;
-    importBtn.layer.masksToBounds = YES;
-    importBtn.layer.borderColor = [UIColor g_primaryColor].CGColor;
-    importBtn.layer.borderWidth = 1;
-    [importBtn setTitle:LocalizedStr(@"text_import") forState:UIControlStateNormal];
-    [importBtn addTarget:self action:@selector(importAction) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:importBtn];
-    [importBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(textIv.mas_bottom).offset(48);
-        make.left.offset(25);
-        make.right.offset(-25);
+    [textLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.offset(0);
+        make.centerY.equalTo(contentView.mas_centerY).offset(-30);
+        make.left.mas_greaterThanOrEqualTo(50);
+    }];
+    UIView *importView = [[UIView alloc] init];
+    [importView setCornerRadius:8];
+    importView.layer.borderColor = [UIColor g_primaryColor].CGColor;
+    importView.layer.borderWidth = 1;
+    [importView addTapTarget:self action:@selector(importAction)];
+    [self createBtnItemsWithView:importView imageName:@"icon_import" title:LocalizedStr(@"text_import")];
+    [contentView addSubview:importView];
+    UIView *createView = [[UIView alloc] init];
+    [createView setCornerRadius:8];
+    createView.layer.borderColor = [UIColor g_primaryColor].CGColor;
+    createView.layer.borderWidth = 1;
+    [createView addTapTarget:self action:@selector(createAction)];
+    [self createBtnItemsWithView:createView imageName:@"icon_new" title:LocalizedStr(@"text_create")];
+    [contentView addSubview:createView];
+    [importView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(createView.mas_top).offset(-18);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(55);
     }];
-    UIButton *createBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [createBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    createBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    createBtn.layer.cornerRadius = 16;
-    createBtn.layer.masksToBounds = YES;
-    createBtn.backgroundColor = [UIColor g_primaryColor];
-    [createBtn setTitle:LocalizedStr(@"text_create") forState:UIControlStateNormal];
-    [createBtn addTarget:self action:@selector(createAction) forControlEvents:UIControlEventTouchUpInside];
-    [contentView addSubview:createBtn];
-    [createBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(importBtn.mas_bottom).offset(20);
-        make.left.offset(25);
-        make.right.offset(-25);
-        make.bottom.offset(0);
+    [createView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottomMargin.offset(-30);
         make.height.offset(55);
+    }];
+}
+- (void)createBtnItemsWithView:(UIView *)view imageName:(NSString *)imageName title:(NSString *)title {
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    [view addSubview:iconIv];
+    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.offset(0);
+        make.centerX.equalTo(view.mas_left).mas_offset(30);
+    }];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:title fontSize:22 textColor:[UIColor g_whiteTextColor]];
+    [view addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(view.mas_left).offset(66);
+        make.centerY.offset(0);
+    }];
+    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_white"]];
+    [view addSubview:arrowIv];
+    [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-28);
+        make.centerY.offset(0);
     }];
 }
 

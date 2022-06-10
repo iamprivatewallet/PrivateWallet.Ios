@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavTitle:@"" leftImg:@"icon_wallet" leftAction:@selector(createWalletAction) rightImg:@"icon_scan" rightAction:@selector(scanAction) isNoLine:YES isWhiteBg:NO];
+    [self setNavTitle:@"" leftImg:@"icon_wallet" leftAction:@selector(createWalletAction) rightImg:@"icon_scan" rightAction:@selector(scanAction) isNoLine:YES];
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
@@ -564,7 +564,7 @@
         make.bottom.offset(-8);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeBtn setImage:[UIImage imageNamed:@"icon_close_warn"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"icon_close_danger"] forState:UIControlStateNormal];
     [closeBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [sender.superview removeFromSuperview];
     }];

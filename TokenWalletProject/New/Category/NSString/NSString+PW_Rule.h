@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (PW_Rule)
 
 - (BOOL)judgeWalletName;
+- (BOOL)judgePassWordLegal;
 
 @end
 

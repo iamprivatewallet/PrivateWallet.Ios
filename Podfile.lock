@@ -76,7 +76,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - UICountingLabel (1.2.0)
   - "UITableView+FDTemplateLayoutCell (1.6)"
-  - web3swift (2.6.4):
+  - web3swift (2.6.5):
     - BigInt (= 5.2.0)
     - CryptoSwift (= 1.4.3)
     - PromiseKit (= 6.15.3)
@@ -106,7 +106,7 @@ DEPENDENCIES:
   - SocketRocket (= 0.6.0)
   - SVProgressHUD
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
-  - web3swift (= 2.6.4)
+  - web3swift (= 2.6.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -170,8 +170,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
-  web3swift: 54eb4f659a57e9cb746169c6dc1a8ae8bc10dd95
+  web3swift: f712c5eef8801fb2dca4e4fdafc0af4471195f03
 
-PODFILE CHECKSUM: 32eedf90cd62c9f276a46cb5cdce4d124bcf6c29
+PODFILE CHECKSUM: 6944430105d67fa29747484b090ade417e3dc1f4
 
 COCOAPODS: 1.11.2

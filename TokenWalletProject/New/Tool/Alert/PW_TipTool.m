@@ -33,31 +33,23 @@
         make.top.offset(10);
         make.right.offset(-20);
     }];
-    UIImageView *iconIv = [[UIImageView alloc] init];
-    iconIv.image = [UIImage imageNamed:@"icon_noPhoto_big"];
-    [contentView addSubview:iconIv];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(38);
-        make.centerX.offset(0);
-        make.height.offset(108);
-    }];
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_backupAlertTitle") fontSize:21 textColor:[UIColor g_boldTextColor]];
+    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_backupAlertTitle") fontSize:22 textColor:[UIColor g_boldTextColor]];
     titleLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(iconIv.mas_bottom);
+        make.top.offset(38);
         make.centerX.offset(0);
-        make.right.offset(-10);
+        make.width.equalTo(contentView).multipliedBy(0.6);
     }];
-    UILabel *descLb = [PW_ViewTool labelMediumText:desc fontSize:14 textColor:[UIColor g_grayTextColor]];
+    UILabel *descLb = [PW_ViewTool labelMediumText:desc fontSize:13 textColor:[UIColor g_grayTextColor]];
     descLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:descLb];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleLb.mas_bottom).offset(10);
         make.centerX.offset(0);
-        make.right.offset(-10);
+        make.width.equalTo(contentView).multipliedBy(0.6);
     }];
-    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_myUnderstand") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_myUnderstand") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
         if(block){
@@ -70,7 +62,7 @@
         make.centerX.offset(0);
         make.width.offset(200);
         make.height.offset(55);
-        make.bottom.offset(-120);
+        make.bottomMargin.offset(-20);
     }];
     [PW_AlertTool showAnimationSheetContentView:contentView];
 }
@@ -158,7 +150,7 @@
         make.left.offset(20);
         make.right.offset(-15);
     }];
-    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     RAC(sureBtn, enabled) = [RACSignal combineLatest:@[pwdTF.rac_textSignal] reduce:^id(NSString *pwd){
         return @(pwd.length>0);
     }];
@@ -174,7 +166,7 @@
         make.left.offset(25);
         make.right.offset(-25);
         make.height.offset(55);
-        make.bottom.offset(-(20+SafeBottomInset));
+        make.bottomMargin.offset(-20);
     }];
     [PW_AlertTool showAnimationSheetContentView:contentView];
 }
@@ -293,7 +285,7 @@
         make.left.offset(24);
         make.right.offset(-24);
     }];
-    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_myUnderstand") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_myUnderstand") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     [contentView addSubview:sureBtn];
     __weak typeof(view) weakView = view;
     [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {

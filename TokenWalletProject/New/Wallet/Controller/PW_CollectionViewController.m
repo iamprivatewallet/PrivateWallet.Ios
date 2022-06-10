@@ -32,8 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_collection") isWhiteBg:NO];
-    [self setupWhiteNavBarTint];
+    [self setNavNoLineTitle:LocalizedStr(@"text_collection")];
     [self makeViews];
     [self refreshUI];
 }

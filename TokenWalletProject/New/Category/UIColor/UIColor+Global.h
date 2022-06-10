@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_fallColor;
 
 + (UIColor *)g_bgColor;
++ (UIColor *)g_bgCardColor;
++ (UIColor *)g_darkBgColor;
 + (UIColor *)g_grayBgColor;
 + (UIColor *)g_primaryColor;
 + (UIColor *)g_primaryTextColor;
@@ -34,12 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_lineColor;
 + (UIColor *)g_shadowColor;
 + (UIColor *)g_textColor;
++ (UIColor *)g_whiteTextColor;
 + (UIColor *)g_boldTextColor;
 + (UIColor *)g_grayTextColor;
 + (UIColor *)g_darkTextColor;
 + (UIColor *)g_lightTextColor;
 
 + (UIColor *)g_borderColor;
++ (UIColor *)g_borderDarkColor;
 + (UIColor *)g_dottedColor;
 + (UIColor *)g_maskColor;
 

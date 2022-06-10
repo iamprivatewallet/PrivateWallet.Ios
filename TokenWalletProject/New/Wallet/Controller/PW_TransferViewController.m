@@ -63,7 +63,6 @@ static NSInteger SpeedFeeBtnTag = 100;
     [super viewDidLoad];
     
     [self setNavNoLineTitle:LocalizedStr(@"text_transfer") rightImg:@"icon_scan_white" rightAction:@selector(scanAction)];
-    [self setupWhiteNavBarTint];
     self.speedFeeIdx = 1;
     [self makeViews];
     [self refreshUI];
@@ -409,7 +408,7 @@ static NSInteger SpeedFeeBtnTag = 100;
                 });
             }
         }else{
-            [self showFailMessage:error.localizedDescription];
+            [self showError:error.localizedDescription];
         }
     }];
 }

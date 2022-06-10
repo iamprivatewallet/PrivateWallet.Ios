@@ -55,7 +55,7 @@
 }
 - (void)requestData {
     [self.view showLoadingIndicator];
-    [self requestApi:WalletTokenItemURL params:@{@"tokenId":self.tokenId} completeBlock:^(id data) {
+    [self pw_requestApi:WalletTokenItemURL params:@{@"tokenId":self.tokenId} completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         self.model = [PW_TokenModel mj_objectWithKeyValues:data];
         [self refreshUI];

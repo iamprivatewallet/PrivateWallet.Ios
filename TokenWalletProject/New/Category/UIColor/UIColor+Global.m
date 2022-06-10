@@ -55,7 +55,7 @@
     return COLORFORRGB(0xD87948);
 }
 + (UIColor *)g_warnBgColor {
-    return COLORFORRGB(0xFFEFE6);
+    return [UIColor g_hex:@"#FFEEF1"];
 }
 
 + (UIColor *)g_roseColor {
@@ -74,11 +74,17 @@
 + (UIColor *)g_bgColor {
     return [UIColor whiteColor];
 }
++ (UIColor *)g_bgCardColor {
+    return [self g_hex:@"#FAFAFA"];
+}
++ (UIColor *)g_darkBgColor {
+    return [self g_hex:@"#333333"];
+}
 + (UIColor *)g_grayBgColor {
     return [self g_hex:@"#F4F6F9"];
 }
 + (UIColor *)g_primaryColor {
-    return COLORFORRGB(0x12D674);
+    return [self g_hex:@"#09EC87"];
 }
 + (UIColor *)g_primaryTextColor {
     return [UIColor whiteColor];
@@ -95,6 +101,9 @@
 + (UIColor *)g_textColor {
     return COLORFORRGB(0x0A2140);
 }
++ (UIColor *)g_whiteTextColor {
+    return [UIColor whiteColor];
+}
 + (UIColor *)g_boldTextColor {
     return COLORFORRGB(0x0B2241);
 }
@@ -109,13 +118,16 @@
 }
 
 + (UIColor *)g_borderColor {
-    return COLORFORRGB(0xEEF0F3);
+    return [self g_hex:@"#F2F2F2"];
+}
++ (UIColor *)g_borderDarkColor {
+    return [self g_hex:@"#999999"];
 }
 + (UIColor *)g_dottedColor {
     return COLORFORRGB(0xB0B8C4);
 }
 + (UIColor *)g_maskColor {
-    return COLORFORRGBA(0x112947,0.4);
+    return COLORFORRGBA(0x112947,0.6);
 }
 
 @end

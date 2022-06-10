@@ -40,11 +40,6 @@
         self.window.rootViewController = self.rootNavigationController;
         [self.window makeKeyAndVisible];
     }
-    if (@available(iOS 13.0, *)) {
-        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    } else {
-        // Fallback on earlier versions
-    }
     [self setConfig];
     [self beginNetwork];
     
@@ -69,6 +64,13 @@
     [self.manager startMonitoring];
 }
 - (void)setConfig{
+    if (@available(iOS 13.0, *)) {
+        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+        [UITextField appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        [UITextView appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    } else {
+        // Fallback on earlier versions
+    }
     [JJException configExceptionCategory:JJExceptionGuardAllExceptZombie];
     [JJException startGuardException];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;

@@ -25,10 +25,10 @@
     self.navigationBar.hidden = YES;
 }
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
-    return UIUserInterfaceStyleLight;
+    return UIUserInterfaceStyleDark;
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 - (UIViewController *)childViewControllerForStatusBarStyle {
     return self.topViewController;

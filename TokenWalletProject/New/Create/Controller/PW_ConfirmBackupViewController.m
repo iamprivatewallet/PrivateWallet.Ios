@@ -107,60 +107,60 @@
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.left.right.bottom.offset(0);
     }];
+    [scrollView setRadius:28 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.bottom.offset(0);
+        make.height.greaterThanOrEqualTo(scrollView);
         make.width.equalTo(scrollView);
     }];
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_verifyMnemonic") fontSize:15 textColor:[UIColor g_boldTextColor]];
+    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_verifyMnemonic") fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.offset(25);
+        make.top.left.offset(36);
     }];
-    UILabel *descLb = [PW_ViewTool labelText:LocalizedStr(@"text_verifyMnemonicTip") fontSize:12 textColor:[UIColor g_grayTextColor]];
+    UILabel *descLb = [PW_ViewTool labelText:LocalizedStr(@"text_verifyMnemonicTip") fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.contentView addSubview:descLb];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(25);
-        make.right.offset(-25);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.top.equalTo(titleLb.mas_bottom).offset(6);
     }];
     UIView *showMnemonicsView = [[UIView alloc] init];
-    showMnemonicsView.backgroundColor = [UIColor g_bgColor];
-    showMnemonicsView.layer.cornerRadius = 8;
-    showMnemonicsView.layer.borderWidth = 2;
-    showMnemonicsView.layer.borderColor = [UIColor g_borderColor].CGColor;
+    showMnemonicsView.backgroundColor = [UIColor g_bgCardColor];
+    [showMnemonicsView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:showMnemonicsView];
     self.showMnemonicsView = showMnemonicsView;
     UIView *mnemonicsView = [[UIView alloc] init];
     [self.contentView addSubview:mnemonicsView];
     self.mnemonicsView = mnemonicsView;
     [showMnemonicsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.top.equalTo(descLb.mas_bottom).offset(12);
         make.height.equalTo(mnemonicsView);
     }];
     [mnemonicsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.top.equalTo(showMnemonicsView.mas_bottom);
     }];
     UIButton *nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor whiteColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
     [self.contentView addSubview:nextBtn];
     self.nextBtn = nextBtn;
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(mnemonicsView.mas_bottom).offset(35);
+        make.top.mas_greaterThanOrEqualTo(mnemonicsView.mas_bottom).offset(35);
         make.height.offset(55);
-        make.left.offset(25);
-        make.right.offset(-25);
-        make.bottom.offset(-40);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottom.offset(-35);
     }];
     [self updateMnemonicsItems];
 }
@@ -175,44 +175,52 @@
     CGFloat padding = 20;
     CGFloat rowSpace = 15;
     CGFloat columnSpace = 12;
-    CGFloat itemW = (SCREEN_WIDTH-40-2*padding-(column-1)*columnSpace)/column;
+    CGFloat itemW = (SCREEN_WIDTH-72-2*padding-(column-1)*columnSpace)/column;
     UIView *lastView = nil;
     NSInteger count = self.seletedArr.count;
     for (NSInteger i=0; i<count; i++) {
         NSString *text = self.seletedArr[i];
-        UIButton *button = [PW_ViewTool buttonSemiboldTitle:text fontSize:15 titleColor:[UIColor g_boldTextColor] cornerRadius:17.5 backgroundColor:nil target:nil action:nil];
-        button.layer.borderColor = [UIColor g_borderColor].CGColor;
+        UIView *bodyView = [[UIView alloc] init];
+        [self.showMnemonicsView addSubview:bodyView];
+        UIButton *button = [PW_ViewTool buttonTitle:text fontSize:13 weight:UIFontWeightRegular titleColor:[UIColor g_boldTextColor] cornerRadius:10 backgroundColor:nil target:nil action:nil];
+        button.layer.borderColor = [UIColor g_borderDarkColor].CGColor;
         button.layer.borderWidth = 1;
+        button.layer.masksToBounds = NO;
         button.tag = i;
+        [bodyView addSubview:button];
         UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         deleteBtn.tag = i;
-        [deleteBtn setBackgroundImage:[UIImage imageNamed:@"icon_close_warn"] forState:UIControlStateNormal];
+        [deleteBtn setBackgroundImage:[UIImage imageNamed:@"icon_close_danger"] forState:UIControlStateNormal];
         [deleteBtn addTarget:self action:@selector(deleteClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button addSubview:deleteBtn];
+        [bodyView addSubview:deleteBtn];
         [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.offset(-4);
-            make.top.offset(2);
+            make.centerX.equalTo(button.mas_right);
+            make.centerY.equalTo(button.mas_top);
         }];
-        [self.showMnemonicsView addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(30);
+            make.width.offset(itemW);
+            make.left.bottom.offset(0);
+        }];
+        [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
             if(lastView==nil){
-                make.top.offset(padding);
+                make.top.offset(padding-rowSpace);
             }else{
                 if(i%column>0){
                     make.top.equalTo(lastView);
                 }else{
-                    make.top.equalTo(lastView.mas_bottom).offset(rowSpace);
+                    make.top.equalTo(lastView.mas_bottom).offset(0);
                 }
             }
             if(i%column==0){
                 make.left.offset(padding);
             }else{
-                make.left.equalTo(lastView.mas_right).offset(columnSpace);
+                make.left.equalTo(lastView.mas_right).offset(0);
             }
-            make.height.offset(35);
-            make.width.offset(itemW);
+            make.height.offset(30+rowSpace);
+            make.width.offset(itemW+columnSpace);
         }];
-        lastView = button;
+        lastView = bodyView;
     }
 }
 - (void)itemClick:(UIButton *)btn {
@@ -228,16 +236,16 @@
     CGFloat padding = 20;
     CGFloat rowSpace = 15;
     CGFloat columnSpace = 12;
-    CGFloat itemW = (SCREEN_WIDTH-40-2*padding-(column-1)*columnSpace)/column;
+    CGFloat itemW = (SCREEN_WIDTH-72-2*padding-(column-1)*columnSpace)/column;
     UIView *lastView = nil;
     NSInteger count = self.randomWordArr.count;
     for (NSInteger i=0; i<count; i++) {
         NSString *text = self.randomWordArr[i];
-        UIButton *button = [PW_ViewTool buttonSemiboldTitle:text fontSize:15 titleColor:[UIColor g_boldTextColor] cornerRadius:17.5 backgroundColor:nil target:nil action:nil];
+        UIButton *button = [PW_ViewTool buttonTitle:text fontSize:13 weight:UIFontWeightRegular titleColor:[UIColor g_boldTextColor] cornerRadius:10 backgroundColor:nil target:nil action:nil];
         BOOL isSeleted = [self.seletedArr containsObject:text];
         button.enabled = !isSeleted;
         button.layer.opacity = isSeleted?0.5:1;
-        button.layer.borderColor = [UIColor g_borderColor].CGColor;
+        button.layer.borderColor = [UIColor g_borderDarkColor].CGColor;
         button.layer.borderWidth = 1;
         button.tag = i;
         [button addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -257,7 +265,7 @@
             }else{
                 make.left.equalTo(lastView.mas_right).offset(columnSpace);
             }
-            make.height.offset(35);
+            make.height.offset(30);
             make.width.offset(itemW);
             if(i==count-1){
                 make.bottom.offset(-padding);

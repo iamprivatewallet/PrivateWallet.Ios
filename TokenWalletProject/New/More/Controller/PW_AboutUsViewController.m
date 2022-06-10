@@ -59,7 +59,7 @@
     [self.navigationController pushViewController:webVc animated:YES];
 }
 - (void)requestData {
-    [self requestApi:WalletVersionLastURL params:@{@"type":@"iOS",@"languageCode":@"zh_CN"} completeBlock:^(id data) {
+    [self pw_requestApi:WalletVersionLastURL params:@{@"type":@"iOS",@"languageCode":@"zh_CN"} completeBlock:^(id data) {
         VersionModel *model = [VersionModel mj_objectWithKeyValues:data];
         self.newVersion = model.code>[APPBuild integerValue];
     } errBlock:nil];

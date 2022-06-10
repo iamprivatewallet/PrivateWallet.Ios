@@ -32,10 +32,10 @@
     [self setupTab];
 }
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
-    return UIUserInterfaceStyleLight;
+    return UIUserInterfaceStyleDark;
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 - (void)setupTab {
     PW_WalletViewController *walletVc = [PW_WalletViewController new];

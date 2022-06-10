@@ -52,8 +52,8 @@
     self.advancedModeView.hidden = !self.showAdvancedMode;
     [self.advancedModeView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.advancedModeBtn.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.mas_equalTo(self.showAdvancedMode?84:0);
     }];
 }
@@ -115,123 +115,102 @@
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.left.right.bottom.offset(0);
     }];
+    [scrollView setRadius:28 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.bottom.offset(0);
+        make.height.greaterThanOrEqualTo(scrollView);
         make.width.equalTo(scrollView);
     }];
-    UIImageView *iconIv = [[UIImageView alloc] init];
-    iconIv.image = [UIImage imageNamed:@"icon_mnemonic_big"];
-    [self.contentView addSubview:iconIv];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.offset(0);
-        make.top.offset(30);
-    }];
     UIView *mnemonicView = [[UIView alloc] init];
-    mnemonicView.backgroundColor = [UIColor g_bgColor];
-    mnemonicView.layer.cornerRadius = 8;
-    mnemonicView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    mnemonicView.layer.shadowOffset = CGSizeMake(0, 2);
-    mnemonicView.layer.shadowRadius = 8;
-    mnemonicView.layer.shadowOpacity = 1;
-    mnemonicView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
+    mnemonicView.backgroundColor = [UIColor g_bgCardColor];
+    [mnemonicView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:mnemonicView];
     self.mnemonicView = mnemonicView;
     [mnemonicView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(iconIv.mas_bottom).offset(35);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.offset(35);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.mas_equalTo(84);
     }];
-    UIButton *advancedModeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [advancedModeBtn setTitle:LocalizedStr(@"text_advancedMode") forState:UIControlStateNormal];
-    [advancedModeBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
-    advancedModeBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-    [advancedModeBtn addTarget:self action:@selector(advanceModeAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:advancedModeBtn];
-    self.advancedModeBtn = advancedModeBtn;
-    [advancedModeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(mnemonicView.mas_bottom).offset(12);
-        make.left.offset(35);
-        make.height.offset(20);
-    }];
-    UIView *advancedModeView = [[UIView alloc] init];
-    advancedModeView.backgroundColor = [UIColor g_bgColor];
-    advancedModeView.layer.cornerRadius = 8;
-    advancedModeView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    advancedModeView.layer.shadowOffset = CGSizeMake(0, 2);
-    advancedModeView.layer.shadowRadius = 8;
-    advancedModeView.layer.shadowOpacity = 1;
-    advancedModeView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
-    advancedModeView.hidden = !self.showAdvancedMode;
-    [self.contentView addSubview:advancedModeView];
-    self.advancedModeView = advancedModeView;
-    [advancedModeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(advancedModeBtn.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.mas_equalTo(self.showAdvancedMode?84:0);
-    }];
+//    UIButton *advancedModeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [advancedModeBtn setTitle:LocalizedStr(@"text_advancedMode") forState:UIControlStateNormal];
+//    [advancedModeBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
+//    advancedModeBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+//    [advancedModeBtn addTarget:self action:@selector(advanceModeAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:advancedModeBtn];
+//    self.advancedModeBtn = advancedModeBtn;
+//    [advancedModeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(mnemonicView.mas_bottom).offset(12);
+//        make.left.offset(35);
+//        make.height.offset(20);
+//    }];
+//    UIView *advancedModeView = [[UIView alloc] init];
+//    advancedModeView.backgroundColor = [UIColor g_bgColor];
+//    advancedModeView.layer.cornerRadius = 8;
+//    advancedModeView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
+//    advancedModeView.layer.shadowOffset = CGSizeMake(0, 2);
+//    advancedModeView.layer.shadowRadius = 8;
+//    advancedModeView.layer.shadowOpacity = 1;
+//    advancedModeView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
+//    advancedModeView.hidden = !self.showAdvancedMode;
+//    [self.contentView addSubview:advancedModeView];
+//    self.advancedModeView = advancedModeView;
+//    [advancedModeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(advancedModeBtn.mas_bottom).offset(15);
+//        make.left.offset(20);
+//        make.right.offset(-20);
+//        make.height.mas_equalTo(self.showAdvancedMode?84:0);
+//    }];
     UIView *walletNameView = [[UIView alloc] init];
-    walletNameView.backgroundColor = [UIColor g_bgColor];
-    walletNameView.layer.cornerRadius = 8;
-    walletNameView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    walletNameView.layer.shadowOffset = CGSizeMake(0, 2);
-    walletNameView.layer.shadowRadius = 8;
-    walletNameView.layer.shadowOpacity = 1;
-    walletNameView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
+    walletNameView.backgroundColor = [UIColor g_bgCardColor];
+    [walletNameView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:walletNameView];
     self.walletNameView = walletNameView;
     [walletNameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(advancedModeView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.equalTo(mnemonicView.mas_bottom).offset(15);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.mas_equalTo(84);
     }];
     UIView *pwdView = [[UIView alloc] init];
-    pwdView.backgroundColor = [UIColor g_bgColor];
-    pwdView.layer.cornerRadius = 8;
-    pwdView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    pwdView.layer.shadowOffset = CGSizeMake(0, 2);
-    pwdView.layer.shadowRadius = 8;
-    pwdView.layer.shadowOpacity = 1;
-    pwdView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 160)].CGPath;
+    pwdView.backgroundColor = [UIColor g_bgCardColor];
+    [pwdView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:pwdView];
     self.pwdView = pwdView;
     [pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(walletNameView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.mas_equalTo(160);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.mas_equalTo(130);
     }];
     UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
     [self.contentView addSubview:sureBtn];
     self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(pwdView.mas_bottom).offset(40);
+        make.top.mas_greaterThanOrEqualTo(pwdView.mas_bottom).offset(40);
         make.height.offset(55);
         make.left.offset(25);
         make.right.offset(-25);
         make.bottom.offset(-40);
     }];
     [self createMnemonicItems];
-    [self createAdvancedModeItems];
+//    [self createAdvancedModeItems];
     [self createWalletNameItems];
     [self createPwdItems];
 }
 - (void)createMnemonicItems {
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = LocalizedStr(@"text_mnemonicWord");
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
     titleLb.textColor = [UIColor g_boldTextColor];
-    titleLb.layer.opacity = 0.7;
     [self.mnemonicView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);
@@ -256,15 +235,17 @@
         make.left.offset(18);
         make.right.offset(-15);
         make.top.equalTo(titleLb.mas_bottom).offset(0);
-        make.height.offset(50);
+        make.bottom.offset(-5);
     }];
 }
 - (void)createAdvancedModeItems {
+    if (self.advancedModeView==nil) {
+        return;
+    }
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = LocalizedStr(@"text_setWalletPath");
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
     titleLb.textColor = [UIColor g_boldTextColor];
-    titleLb.layer.opacity = 0.7;
     [self.advancedModeView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);
@@ -281,15 +262,14 @@
         make.left.offset(18);
         make.right.offset(-15);
         make.top.equalTo(titleLb.mas_bottom).offset(0);
-        make.height.offset(50);
+        make.bottom.offset(-5);
     }];
 }
 - (void)createWalletNameItems {
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = NSStringWithFormat(@"%@ - ETH",LocalizedStr(@"text_walletName"));
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
     titleLb.textColor = [UIColor g_boldTextColor];
-    titleLb.layer.opacity = 0.7;
     [self.walletNameView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);
@@ -305,15 +285,14 @@
         make.left.offset(18);
         make.right.offset(-15);
         make.top.equalTo(titleLb.mas_bottom).offset(0);
-        make.height.offset(50);
+        make.bottom.offset(-5);
     }];
 }
 - (void)createPwdItems {
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = LocalizedStr(@"text_setTradePwd");
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
     titleLb.textColor = [UIColor g_boldTextColor];
-    titleLb.layer.opacity = 0.7;
     [self.pwdView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);
@@ -331,13 +310,13 @@
         make.left.offset(18);
         make.right.offset(-15);
         make.top.equalTo(titleLb.mas_bottom).offset(0);
-        make.height.offset(50);
+        make.height.offset(45);
     }];
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor g_lineColor];
     [self.pwdView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.pwdTF.mas_bottom).offset(5);
+        make.top.equalTo(self.pwdTF.mas_bottom).offset(0);
         make.left.offset(18);
         make.right.offset(-15);
         make.height.offset(1);
@@ -353,8 +332,8 @@
     [self.againPwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.right.offset(-15);
-        make.top.equalTo(lineView.mas_bottom).offset(10);
-        make.height.offset(50);
+        make.top.equalTo(lineView.mas_bottom).offset(0);
+        make.height.offset(45);
     }];
 }
 

@@ -261,7 +261,7 @@
     [self.warnView addSubview:iconIv];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
-        make.left.offset(10);
+        make.left.offset(20);
     }];
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.font = [UIFont systemFontOfSize:12 weight:UIFontWeightSemibold];
@@ -271,9 +271,9 @@
     [self.warnView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(iconIv.mas_right).offset(10);
-        make.top.offset(8);
-        make.right.offset(-10);
-        make.bottom.offset(-8);
+        make.top.offset(18);
+        make.right.offset(-35);
+        make.bottom.offset(-18);
     }];
 }
 

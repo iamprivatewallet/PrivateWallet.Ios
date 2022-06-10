@@ -29,7 +29,7 @@
 }
 - (void)requestData {
     [self.view showLoadingIndicator];
-    [self requestApi:WalletTokenChainURL params:nil completeBlock:^(id data) {
+    [self pw_requestApi:WalletTokenChainURL params:nil completeBlock:^(id data) {
         [self.view hideLoadingIndicator];
         [self.dataArr removeAllObjects];
         NSArray *array = [PW_NetworkModel mj_objectArrayWithKeyValuesArray:data];

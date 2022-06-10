@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pasteboard;
 - (void)pasteboardToast:(BOOL)toast;
 
-- (BOOL)judgePassWordLegal;
-
 - (NSString *)showShortAddress;
 - (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
 

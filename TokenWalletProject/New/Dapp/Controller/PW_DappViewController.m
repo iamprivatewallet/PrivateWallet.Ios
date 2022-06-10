@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:@"" rightImg:@"icon_scan" rightAction:@selector(scanAction) isWhiteBg:NO];
+    [self setNavNoLineTitle:@"" rightImg:@"icon_scan" rightAction:@selector(scanAction)];
     [self makeViews];
     [self requestData];
 }
