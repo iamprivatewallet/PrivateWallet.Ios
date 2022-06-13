@@ -60,15 +60,15 @@
 
 + (UIColor *)g_roseColor {
     if ([PW_RedRoseGreenFellTool isOpen]) {
-        return [UIColor g_hex:@"#FF5E5E"];
+        return [UIColor g_hex:@"#C1272D"];
     }
-    return [UIColor g_hex:@"#1AC190"];
+    return [UIColor g_hex:@"#1BD779"];
 }
 + (UIColor *)g_fallColor {
     if ([PW_RedRoseGreenFellTool isOpen]) {
-        return [UIColor g_hex:@"#1AC190"];
+        return [UIColor g_hex:@"#1BD779"];
     }
-    return [UIColor g_hex:@"#FF5E5E"];
+    return [UIColor g_hex:@"#C1272D"];
 }
 
 + (UIColor *)g_bgColor {
@@ -79,6 +79,9 @@
 }
 + (UIColor *)g_darkBgColor {
     return [self g_hex:@"#333333"];
+}
++ (UIColor *)g_darkGradientStartColor {
+    return [self g_hex:@"#4D4D4D"];
 }
 + (UIColor *)g_grayBgColor {
     return [self g_hex:@"#F4F6F9"];
@@ -93,25 +96,25 @@
     return COLORFORRGB(0x919CAA);
 }
 + (UIColor *)g_lineColor {
-    return COLORFORRGB(0xEDF0F3);
+    return [UIColor g_hex:@"#F5F5F5"];
 }
 + (UIColor *)g_shadowColor {
     return COLORFORRGBA(0xCCD0D6, 0.3);
 }
 + (UIColor *)g_textColor {
-    return COLORFORRGB(0x0A2140);
+    return [UIColor g_hex:@"#333333"];
 }
 + (UIColor *)g_whiteTextColor {
     return [UIColor whiteColor];
 }
 + (UIColor *)g_boldTextColor {
-    return COLORFORRGB(0x0B2241);
+    return [self g_textColor];
 }
 + (UIColor *)g_grayTextColor {
-    return COLORFORRGB(0x919CAA);
+    return [UIColor g_hex:@"#CCCCCC"];
 }
 + (UIColor *)g_darkTextColor {
-    return [UIColor g_hex:@"#0A2140" alpha:0.7];
+    return [UIColor g_hex:@"#999999"];
 }
 + (UIColor *)g_lightTextColor {
     return [UIColor colorWithWhite:1.0 alpha:0.7];
@@ -127,7 +130,7 @@
     return COLORFORRGB(0xB0B8C4);
 }
 + (UIColor *)g_maskColor {
-    return COLORFORRGBA(0x112947,0.6);
+    return [self g_hex:@"#000000" alpha:0.6];
 }
 
 @end

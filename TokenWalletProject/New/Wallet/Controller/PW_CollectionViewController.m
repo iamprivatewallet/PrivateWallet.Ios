@@ -85,7 +85,7 @@
         make.height.offset(248);
     }];
     [self.tokenView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.offset(20);
         make.height.offset(42);
     }];

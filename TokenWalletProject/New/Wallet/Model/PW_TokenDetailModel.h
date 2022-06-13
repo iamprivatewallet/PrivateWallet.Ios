@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *tokenLogo;
 @property (nonatomic, assign) NSTimeInterval timeStamp;
+@property (nonatomic, copy) NSString *timeStr;
 @property (nonatomic, copy) NSString *hashStr;
 @property (nonatomic, copy) NSString *fromAddress;
 @property (nonatomic, copy) NSString *toAddress;

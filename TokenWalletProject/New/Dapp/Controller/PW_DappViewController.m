@@ -12,13 +12,15 @@
 #import <SDCycleScrollView.h>
 #import "PW_DappBrowserCell.h"
 #import "PW_DappBrowserModel.h"
-#import "PW_TitlesHeaderView.h"
-#import "PW_DappChainCell.h"
+#import "PW_TitleHeaderView.h"
+#import "PW_SegmentedHeaderView.h"
 #import "PW_DappBanner2Cell.h"
 #import "PW_WebViewController.h"
 #import "PW_Web3ViewController.h"
 #import "PW_DappRecentBrowseViewController.h"
 #import "PW_WalletListView.h"
+#import "PW_DappCell.h"
+#import "PW_DappChainBrowserCell.h"
 
 @interface PW_DappViewController () <SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -31,7 +33,6 @@
 @property (nonatomic, copy) NSArray *dappRecentBrowseArr;
 
 @property (nonatomic, assign) NSInteger section1Idx;
-@property (nonatomic, assign) NSInteger section2Idx;
 
 @end
 
@@ -40,7 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:@"" rightImg:@"icon_scan" rightAction:@selector(scanAction)];
+    [self setNavNoLineTitle:@"" rightImg:@"icon_scan_white" rightAction:@selector(scanAction)];
+    [self setupNavBgPurple];
     [self makeViews];
     [self requestData];
 }
@@ -55,20 +57,17 @@
     PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)menuChangeAction {
+    
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.dappRecentBrowseArr = [[PW_DappManager shared] getList];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (void)makeViews {
-    UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"first_bg"]];
-    [self.view insertSubview:bgIv atIndex:0];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
-    }];
-    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchDappCurrency") fontSize:12 titleColor:[UIColor g_grayTextColor] imageName:@"icon_search" target:self action:@selector(searchAction)];
-    searchBtn.layer.cornerRadius = 17.5;
-    searchBtn.backgroundColor = [UIColor g_bgColor];
+    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchDappCurrency") fontSize:12 titleColor:[UIColor g_grayTextColor] imageName:@"icon_search_white" target:self action:@selector(searchAction)];
+    [searchBtn setBackgroundImage:[UIImage imageNamed:@"icon_search_bg"] forState:UIControlStateNormal];
     searchBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.naviBar addSubview:searchBtn];
@@ -78,9 +77,17 @@
         make.height.offset(35);
         make.bottom.offset(-5);
     }];
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
+        make.top.offset(0);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -122,7 +129,7 @@
 }
 #pragma mark - tableDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
@@ -135,7 +142,9 @@
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             PW_DappBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappBrowserCell"];
-            if (self.section1Idx==0) {
+            if (self.section1Idx==0) {//hot
+                cell.dataArr = @[];
+            }else if (self.section1Idx==1) {
                 if (self.model.dappTop.count>5) {
                     cell.dataArr = [self.model.dappTop subarrayWithRange:NSMakeRange(0, 4)];
                 }else{
@@ -162,31 +171,29 @@
             return cell;
         }
     }
-    PW_DappChainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappChainCell"];
-    if (self.section2Idx==0) {
-        cell.dataArr = self.model.dapp_1;
-    }else if (self.section2Idx==1) {
-        cell.dataArr = self.model.dapp_56;
-    }else if (self.section2Idx==2) {
-        cell.dataArr = self.model.dapp_128;
+    if (indexPath.section==1) {
+        PW_DappCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappCell"];
+        cell.dataArr = self.model.dapp;
+        cell.clickBlock = ^(PW_DappModel * _Nonnull model) {
+            [weakSelf openWeb3WithModel:model];
+        };
+        return cell;
     }
-    cell.clickBlock = ^(PW_DappModel * _Nonnull model) {
-        [weakSelf openWeb3WithModel:model];
+    PW_DappChainBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappChainBrowserCell"];
+//    cell.dataArr = nil;
+    cell.clickBlock = ^(PW_DappChainBrowserModel * _Nonnull model) {
+        
     };
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
+        if (indexPath.row==1) {
+            return 136;
+        }
         return 80;
     }
-    NSArray *dataArr = @[];
-    if (self.section2Idx==0) {
-        dataArr = self.model.dapp_1;
-    }else if (self.section2Idx==1) {
-        dataArr = self.model.dapp_56;
-    }else if (self.section2Idx==2) {
-        dataArr = self.model.dapp_128;
-    }
+    NSArray *dataArr = self.model.dapp;
     if (dataArr&&dataArr.count>0) {
         NSInteger column = 2;
         NSInteger row = ((NSInteger)dataArr.count/column)+(dataArr.count%column>0?1:0);
@@ -195,29 +202,31 @@
     return 10;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    PW_TitlesHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_TitlesHeaderView"];
     if (section==0) {
-        view.titleArr = @[LocalizedStr(@"text_recommend"),LocalizedStr(@"text_browse")];
+        PW_SegmentedHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_SegmentedHeaderView"];
+        [view configurationItems:@[@"Hot",@"Favorites",@"Browse"]];
         view.selectedIndex = self.section1Idx;
+        __weak typeof(self) weakSelf = self;
+        view.clickBlock = ^(NSInteger idx) {
+            weakSelf.section1Idx = idx;
+            [weakSelf.tableView reloadData];
+        };
+        return view;
     }else{
-        view.titleArr = @[@"ETH",@"BSC",@"HECO"];
-        view.selectedIndex = self.section2Idx;
-    }
-    __weak typeof(self) weakSelf = self;
-    view.clickBlock = ^(NSInteger idx) {
-        if (section==0) {
-            if (weakSelf.section1Idx != idx) {
-                weakSelf.section1Idx = idx;
-                [weakSelf.tableView reloadData];
-            }
+        PW_TitleHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_TitleHeaderView"];
+        if (section==1) {
+            view.title = @"Dapp";
         }else{
-            if (weakSelf.section2Idx != idx) {
-                weakSelf.section2Idx = idx;
-                [weakSelf.tableView reloadData];
-            }
+            view.title = @"Browser";
         }
-    };
-    return view;
+        return view;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section==0) {
+        return 90;
+    }
+    return 55;
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {
@@ -228,12 +237,14 @@
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_DappBrowserCell class] forCellReuseIdentifier:@"PW_DappBrowserCell"];
         [_tableView registerClass:[PW_DappBanner2Cell class] forCellReuseIdentifier:@"PW_DappBanner2Cell"];
-        [_tableView registerClass:[PW_DappChainCell class] forCellReuseIdentifier:@"PW_DappChainCell"];
-        [_tableView registerClass:[PW_TitlesHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_TitlesHeaderView"];
+        [_tableView registerClass:[PW_DappCell class] forCellReuseIdentifier:@"PW_DappCell"];
+        [_tableView registerClass:[PW_DappChainBrowserCell class] forCellReuseIdentifier:@"PW_DappChainBrowserCell"];
+        [_tableView registerClass:[PW_SegmentedHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_SegmentedHeaderView"];
+        [_tableView registerClass:[PW_TitleHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_TitleHeaderView"];
         _tableView.rowHeight = 70;
         _tableView.sectionHeaderHeight = 55;
-        _tableView.sectionFooterHeight = 5;
-        _tableView.contentInset = UIEdgeInsetsMake(20, 0, 20, 0);
+        _tableView.sectionFooterHeight = 10;
+        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 20, 0);
         _tableView.tableHeaderView = self.headerView;
     }
     return _tableView;
@@ -261,7 +272,7 @@
         _sdScrollView.pageDotColor = [UIColor g_bgColor];
         _sdScrollView.backgroundColor = [UIColor g_grayBgColor];
         _sdScrollView.layer.masksToBounds = YES;
-        _sdScrollView.layer.cornerRadius = 15;
+        _sdScrollView.layer.cornerRadius = 8;
     }
     return _sdScrollView;
 }

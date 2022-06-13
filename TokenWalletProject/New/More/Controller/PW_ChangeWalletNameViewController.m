@@ -47,7 +47,7 @@
     self.nameTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:17] color:[UIColor g_textColor] placeholder:self.model.walletName];
     [nameView addSubview:self.nameTf];
     [nameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.offset(20);
         make.right.offset(-20);
         make.height.offset(84);

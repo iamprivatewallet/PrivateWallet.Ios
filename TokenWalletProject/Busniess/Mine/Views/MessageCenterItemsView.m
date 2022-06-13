@@ -27,28 +27,22 @@ static NSInteger beginTag = 100;
 }
 
 - (void)makeViews{
-    self.backgroundColor = [UIColor navAndTabBackColor];
-    self.transferBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_transferNoti") titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
+    self.backgroundColor = [UIColor g_darkBgColor];
+    self.transferBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_transferNoti") titleColor:[UIColor g_whiteTextColor] titleFont:GCSFontRegular(13)];
     [self.transferBtn addTarget:self action:@selector(itemBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.transferBtn.tag = beginTag;
     [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self);
         make.right.equalTo(self.mas_centerX);
     }];
-    self.systemBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_systemMessage") titleColor:[UIColor im_textColor_three] titleFont:GCSFontRegular(13)];
+    self.systemBtn = [ZZCustomView buttonInitWithView:self title:LocalizedStr(@"text_systemMessage") titleColor:[UIColor g_whiteTextColor] titleFont:GCSFontRegular(13)];
     self.systemBtn.tag = beginTag+1;
     [self.systemBtn addTarget:self action:@selector(itemBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.systemBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.bottom.equalTo(self);
         make.left.equalTo(self.mas_centerX);
     }];
-    UIView *line = [ZZCustomView viewInitWithView:self bgColor:[UIColor im_borderLineColor]];
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-        make.bottom.equalTo(self);
-        make.height.equalTo(@1);
-    }];
-    self.bottomLine = [ZZCustomView viewInitWithView:self bgColor:[UIColor blackColor]];
+    self.bottomLine = [ZZCustomView viewInitWithView:self bgColor:[UIColor g_bgColor]];
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.transferBtn);
         make.bottom.equalTo(self.transferBtn);

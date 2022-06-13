@@ -14,9 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_DappBrowserModel : PW_BaseModel
 
-@property (nonatomic, copy) NSArray<PW_DappModel *> *dapp_1;
-@property (nonatomic, copy) NSArray<PW_DappModel *> *dapp_56;
-@property (nonatomic, copy) NSArray<PW_DappModel *> *dapp_128;
+@property (nonatomic, copy) NSArray<PW_DappModel *> *dapp;
 @property (nonatomic, copy) NSArray<PW_DappModel *> *dappTop;
 @property (nonatomic, copy) NSArray<PW_BannerModel *> *banner_1_1;
 @property (nonatomic, copy) NSArray<PW_BannerModel *> *banner_2_2;

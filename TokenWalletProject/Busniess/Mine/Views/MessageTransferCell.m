@@ -24,11 +24,11 @@
     // Initialization code
 }
 
-- (void)setModel:(WalletRecord *)model {
+- (void)setModel:(PW_TokenDetailModel *)model {
     _model = model;
-    self.titleLb.text = NSStringWithFormat(@"%@: %@ %@",model.token_name,model.amount,model.is_out?@"转账成功":@"收款成功");
-    self.descLb.text = NSStringWithFormat(@"%@: %@",model.is_out?@"收款地址":@"发送地址",model.is_out?model.to_addr:model.from_addr);
-    self.timeLb.text = model.create_time;
+    self.titleLb.text = NSStringWithFormat(@"%@: %@ %@",model.tokenName,model.value,model.isOut?LocalizedStr(@"text_tradeSuccess"):LocalizedStr(@"text_collectionSuccess"));
+    self.descLb.text = NSStringWithFormat(@"%@: %@",model.isOut?@"to:":@"from:",model.isOut?model.toAddress:model.fromAddress);
+    self.timeLb.text = model.timeStr;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

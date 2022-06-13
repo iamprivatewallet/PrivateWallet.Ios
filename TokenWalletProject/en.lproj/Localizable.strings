@@ -41,8 +41,8 @@ text_pleaseTryAgain="Please try again！";
 text_recommend="Recommend";
 
 tabbar_wallet="Wallet";
-tabbar_market="Marketplace";
-tabbar_browser="Web browser";
+tabbar_market="Market";
+tabbar_browser="Browse";
 tabbar_more="More";
 
 text_updateAppLatestVersion="Update to %@ latest version";
@@ -99,7 +99,7 @@ text_inputPwdTip="This password will be used as the transaction password of the 
 
 text_assets="Assets";
 text_transfer="Transfer";
-text_collection="Collect payment";
+text_collection="Receive";
 text_currency="Currency";
 text_searchDappCurrency="Search for DAPP or Currency";
 text_searchCurrencyContract="Currency name or Contract address";
@@ -122,6 +122,7 @@ text_tradeDetail="Transaction details";
 text_collectionSuccess="Payment success";
 text_pending="In the confirmation";
 text_tradeFail="Transaction failure";
+text_tradeSuccess="Transaction success";
 text_sendAddress="Sending Address";
 text_receiveAddress="Receiving address";
 text_minersFee="Gas Fee";
@@ -162,9 +163,9 @@ text_addressError="Address wrong";
 text_transactionBroadcast="Transaction broadcast";
 text_clearAllRecords="Clear all histories";
 
-text_quotation="Quotes";
-text_selfSelection="Optional";
-text_mainstreamCurrency="Mainstream currency";
+text_markets="Markets";
+text_selfSelection="Favorites";
+text_mainstreamCurrency="Main";
 text_marketValue="Market Cap";
 text_price="Price";
 text_fluctuationRange="Price change";

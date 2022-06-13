@@ -10,7 +10,9 @@
 
 @interface PW_MoreCell ()
 
-@property (nonatomic, strong) UIView *bodyView;
+@property (nonatomic, strong) UIImageView *iconIv;
+@property (nonatomic, strong) UILabel *titleLb;
+@property (nonatomic, strong) UIView *lineView;
 
 @end
 
@@ -24,74 +26,40 @@
     }
     return self;
 }
-- (void)setDataArr:(NSArray<PW_MoreModel *> *)dataArr {
-    _dataArr = dataArr;
-    [self.bodyView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    UIView *lastView = nil;
-    for (NSInteger i=0; i<dataArr.count; i++) {
-        UIView *rowView = [self createRow:dataArr[i]];
-        [self.bodyView addSubview:rowView];
-        [rowView mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (lastView) {
-                make.top.equalTo(lastView.mas_bottom);
-            }else{
-                make.top.offset(0);
-            }
-            make.left.right.offset(0);
-            make.height.equalTo(self.bodyView).multipliedBy(1.0/dataArr.count);
-        }];
-        lastView = rowView;
-    }
+- (void)setModel:(PW_MoreModel *)model {
+    _model = model;
+    self.iconIv.image = [UIImage imageNamed:model.iconName];
+    self.titleLb.text = model.title;
 }
-- (UIView *)createRow:(PW_MoreModel *)model {
-    UIView *rowView = [[UIView alloc] init];
-    [rowView addTapBlock:^(UIView * _Nonnull view) {
-        if(model.actionBlock){
-            model.actionBlock(model);
-        }
-    }];
-    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:model.iconName]];
-    [rowView addSubview:iconIv];
-    UILabel *titleLb = [PW_ViewTool labelText:model.title fontSize:15 textColor:[UIColor g_textColor]];
-    [rowView addSubview:titleLb];
+- (void)makeViews {
+    self.iconIv = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.iconIv];
+    self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
+    [self.contentView addSubview:self.titleLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
-    [rowView addSubview:arrowIv];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(15);
+    [self.contentView addSubview:arrowIv];
+    self.lineView = [[UIView alloc] init];
+    self.lineView.backgroundColor = [UIColor g_lineColor];
+    [self.contentView addSubview:self.lineView];
+    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(26);
         make.centerY.offset(0);
+        make.width.height.mas_equalTo(66);
     }];
-    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(iconIv.mas_right).offset(10);
+    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconIv.mas_right).offset(8);
         make.centerY.offset(0);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
+        make.right.offset(-36);
         make.centerY.offset(0);
     }];
-    return rowView;
-}
-- (void)makeViews {
-    self.bodyView = [[UIView alloc] init];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
-    self.bodyView.layer.cornerRadius = 8;
-    [self.bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.contentView addSubview:self.bodyView];
-    [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.bottom.offset(0);
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottom.offset(0);
+        make.height.mas_equalTo(1);
     }];
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

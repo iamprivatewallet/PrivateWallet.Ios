@@ -9,7 +9,7 @@
 #import "PW_MoreViewController.h"
 #import "PW_MoreModel.h"
 #import "PW_MoreCell.h"
-#import "MessageCenterViewController.h"
+#import "PW_MessageCenterViewController.h"
 #import "PW_ShareAppTool.h"
 #import "BrowseWebViewController.h"
 #import "PW_AboutUsViewController.h"
@@ -22,7 +22,7 @@
 @interface PW_MoreViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) PW_TableView *tableView;
-@property (nonatomic, strong) NSMutableArray<PW_GroupMoreModel *> *dataArr;
+@property (nonatomic, strong) NSMutableArray<PW_MoreModel *> *dataArr;
 
 @end
 
@@ -37,69 +37,48 @@
     [self makeViews];
 }
 - (void)notiAction {
-    MessageCenterViewController *vc = [MessageCenterViewController new];
+    PW_MessageCenterViewController *vc = [PW_MessageCenterViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)buildData {
     __weak typeof(self) weakSelf = self;
-    PW_GroupMoreModel *g1Model = [[PW_GroupMoreModel alloc] init];
-    g1Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_wallet" title:LocalizedStr(@"text_walletManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_WalletManageViewController *vc = [[PW_WalletManageViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }]
-    ];
-    PW_GroupMoreModel *g2Model = [[PW_GroupMoreModel alloc] init];
-    g2Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_network" title:LocalizedStr(@"text_networkManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_NetworkManageViewController *vc = [[PW_NetworkManageViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }]
-    ];
-    PW_GroupMoreModel *g3Model = [[PW_GroupMoreModel alloc] init];
-    g3Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_AppLockViewController *vc = [[PW_AppLockViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }]
-    ];
-    PW_GroupMoreModel *g4Model = [[PW_GroupMoreModel alloc] init];
-    g4Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_addressBook" title:LocalizedStr(@"text_addressBook") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_AddressBookViewController *vc = [[PW_AddressBookViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }]
-    ];
-    PW_GroupMoreModel *g5Model = [[PW_GroupMoreModel alloc] init];
-    g5Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_instructions" title:LocalizedStr(@"text_instructions") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            [weakSelf openWebTitle:model.title urlStr:WalletUseDirectionsUrl];
-        }],
-        [PW_MoreModel MoreIconName:@"icon_more_advice" title:LocalizedStr(@"text_suggestionsFeedback") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            [weakSelf openWebTitle:model.title urlStr:WalletFeedbackUrl];
-        }],
-        [PW_MoreModel MoreIconName:@"icon_more_agreement" title:LocalizedStr(@"text_userAgreement") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            [weakSelf openWebTitle:model.title urlStr:WalletUserAgreementUrl];
-        }],
-        [PW_MoreModel MoreIconName:@"icon_more_abount" title:LocalizedStr(@"text_aboutUs") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_AboutUsViewController *vc = [[PW_AboutUsViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }],
-    ];
-    PW_GroupMoreModel *g6Model = [[PW_GroupMoreModel alloc] init];
-    g6Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_setup" title:LocalizedStr(@"text_setup") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            PW_SetUpViewController *vc = [[PW_SetUpViewController alloc] init];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }]
-    ];
-    PW_GroupMoreModel *g7Model = [[PW_GroupMoreModel alloc] init];
-    g7Model.dataArr = @[
-        [PW_MoreModel MoreIconName:@"icon_more_share" title:LocalizedStr(@"text_shareApp") actionBlock:^(PW_MoreModel * _Nonnull model) {
-            [PW_ShareAppTool showShareApp];
-        }]
-    ];
-    [self.dataArr addObjectsFromArray:@[g1Model,g2Model,g4Model,g5Model,g6Model,g7Model]];
+    PW_MoreModel *walletModel = [PW_MoreModel MoreIconName:@"icon_more_wallet" title:LocalizedStr(@"text_walletManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_WalletManageViewController *vc = [[PW_WalletManageViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    PW_MoreModel *networkModel = [PW_MoreModel MoreIconName:@"icon_more_network" title:LocalizedStr(@"text_networkManage") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_NetworkManageViewController *vc = [[PW_NetworkManageViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+//    PW_MoreModel *lockModel = [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
+//        PW_AppLockViewController *vc = [[PW_AppLockViewController alloc] init];
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
+//    }];
+    PW_MoreModel *addressBookModel = [PW_MoreModel MoreIconName:@"icon_more_addressBook" title:LocalizedStr(@"text_addressBook") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_AddressBookViewController *vc = [[PW_AddressBookViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    PW_MoreModel *instructionsModel = [PW_MoreModel MoreIconName:@"icon_more_instructions" title:LocalizedStr(@"text_instructions") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        [weakSelf openWebTitle:model.title urlStr:WalletUseDirectionsUrl];
+    }];
+    PW_MoreModel *adviceModel = [PW_MoreModel MoreIconName:@"icon_more_advice" title:LocalizedStr(@"text_suggestionsFeedback") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        [weakSelf openWebTitle:model.title urlStr:WalletFeedbackUrl];
+    }];
+    PW_MoreModel *agreementModel = [PW_MoreModel MoreIconName:@"icon_more_agreement" title:LocalizedStr(@"text_userAgreement") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        [weakSelf openWebTitle:model.title urlStr:WalletUserAgreementUrl];
+    }];
+    PW_MoreModel *aboutModel = [PW_MoreModel MoreIconName:@"icon_more_abount" title:LocalizedStr(@"text_aboutUs") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_AboutUsViewController *vc = [[PW_AboutUsViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    PW_MoreModel *setupModel = [PW_MoreModel MoreIconName:@"icon_more_setup" title:LocalizedStr(@"text_setup") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_SetUpViewController *vc = [[PW_SetUpViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    PW_MoreModel *shareModel = [PW_MoreModel MoreIconName:@"icon_more_share" title:LocalizedStr(@"text_shareApp") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        [PW_ShareAppTool showShareApp];
+    }];
+    [self.dataArr addObjectsFromArray:@[walletModel,networkModel,addressBookModel,instructionsModel,adviceModel,agreementModel,aboutModel,setupModel,shareModel]];
     [self.tableView reloadData];
 }
 - (void)openWebTitle:(NSString *)title urlStr:(NSString *)urlStr {
@@ -109,42 +88,48 @@
     [self.navigationController pushViewController:webVc animated:YES];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
+        make.top.offset(0);
         make.left.bottom.right.offset(0);
     }];
 }
 #pragma mark - delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataArr.count;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_MoreCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_MoreCell"];
-    cell.dataArr = self.dataArr[indexPath.section].dataArr;
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.dataArr[indexPath.section].dataArr.count*45;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PW_MoreModel *model = self.dataArr[indexPath.row];
+    if (model.actionBlock) {
+        model.actionBlock(model);
+    }
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {
     if(!_tableView) {
-        _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 45;
-        _tableView.sectionHeaderHeight = 5;
-        _tableView.sectionFooterHeight = 5;
+        _tableView.rowHeight = 70;
+        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 10, 0);
         [_tableView registerClass:[PW_MoreCell class] forCellReuseIdentifier:@"PW_MoreCell"];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
-- (NSMutableArray<PW_GroupMoreModel *> *)dataArr {
+- (NSMutableArray<PW_MoreModel *> *)dataArr {
     if (!_dataArr) {
         _dataArr = [NSMutableArray array];
     }

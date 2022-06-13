@@ -11,6 +11,7 @@
 @interface PW_WalletCell()
 
 @property (nonatomic, strong) UIView *bodyView;
+@property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *nameLb;
 @property (nonatomic, strong) UILabel *amountLb;
@@ -52,37 +53,41 @@
 
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
+    [self.bodyView addSubview:self.lineView];
     [self.bodyView addSubview:self.iconIv];
     [self.bodyView addSubview:self.nameLb];
     [self.bodyView addSubview:self.amountLb];
     [self.bodyView addSubview:self.priceLb];
     [self.bodyView addSubview:self.costLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-8);
+        make.top.bottom.offset(0);
+        make.left.offset(38);
+        make.right.offset(-38);
+    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.mas_offset(1);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(12);
-        make.width.height.offset(40);
+        make.centerY.offset(0);
+        make.left.offset(0);
+        make.width.height.offset(46);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(15);
-        make.top.offset(12);
+        make.left.equalTo(self.iconIv.mas_right).offset(18);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
     }];
     [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-16);
-        make.top.offset(9);
+        make.right.offset(0);
+        make.bottom.equalTo(self.nameLb);
     }];
     [self.priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(15);
-        make.bottom.offset(-10);
+        make.left.equalTo(self.iconIv.mas_right).offset(18);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(1);
     }];
     [self.costLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-16);
-        make.bottom.offset(-8);
+        make.right.offset(0);
+        make.top.equalTo(self.priceLb);
     }];
 }
 
@@ -100,11 +105,15 @@
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        _bodyView.layer.cornerRadius = 8;
     }
     return _bodyView;
+}
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor g_lineColor];
+    }
+    return _lineView;
 }
 - (UIImageView *)iconIv {
     if (!_iconIv) {

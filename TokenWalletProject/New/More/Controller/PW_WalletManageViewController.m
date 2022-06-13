@@ -70,7 +70,7 @@
 - (void)makeViews {
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.offset(0);
         make.bottom.offset(-SafeBottomInset);
     }];
@@ -116,6 +116,17 @@
         [[PW_WalletManager shared] deleteWallet:model];
         [self.dataList removeObject:model];
         [tableView reloadData];
+        if (self.dataList.count>0) {
+            if ([User_manager.currentUser.chooseWallet_address isEqualToString:model.address]) {
+                Wallet *wallet = self.dataList.firstObject;
+                [User_manager updateChooseWallet:wallet];
+            }
+        }else{
+            [User_manager logout];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [TheAppDelegate switchToCreateWalletVC];
+            });
+        }
     }
 }
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {

@@ -23,9 +23,11 @@
     [super viewDidLoad];
     
     self.tabBar.translucent = NO;
-    self.tabBar.backgroundColor = [UIColor g_bgColor];
+    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH, self.tabBar.frame.size.height) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor blackColor]] gradientType:PW_GradientLeftToRight];
+    UIColor *bgColor = [UIColor colorWithPatternImage:image];
+    self.tabBar.backgroundColor = bgColor;
     [self.tabBar setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, -3) radius:8];
-    self.tabBar.barTintColor = [UIColor g_bgColor];
+    self.tabBar.barTintColor = bgColor;
 //    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
 //    line.backgroundColor = [UIColor g_lineColor];
 //    [self.tabBar addSubview:line];
@@ -59,8 +61,8 @@
 - (UITabBarItem *)tabbarItemTitle:(NSString *)title imageNamed:(NSString *)imageNamed {
     UITabBarItem *item = [[UITabBarItem alloc] init];
     item.title = title;
-    [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10 weight:UIFontWeightMedium],NSForegroundColorAttributeName:[UIColor g_grayTextColor]} forState:UIControlStateNormal];
-    [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10 weight:UIFontWeightMedium],NSForegroundColorAttributeName:[UIColor g_primaryColor]} forState:UIControlStateSelected];
+    [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightMedium],NSForegroundColorAttributeName:[UIColor g_whiteTextColor]} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightMedium],NSForegroundColorAttributeName:[UIColor g_primaryColor]} forState:UIControlStateSelected];
     item.image = [[UIImage imageNamed:imageNamed] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",imageNamed]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return item;

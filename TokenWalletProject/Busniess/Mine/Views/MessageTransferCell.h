@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WalletRecord.h"
+#import "PW_TokenDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageTransferCell : UITableViewCell
 
-@property (nonatomic, strong) WalletRecord *model;
+@property (nonatomic, strong) PW_TokenDetailModel *model;
 
 @end
 

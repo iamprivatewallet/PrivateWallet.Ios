@@ -68,7 +68,7 @@
     [self.originPwdTf pw_setSecureTextEntry];
     [originView addSubview:self.originPwdTf];
     [originView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.offset(20);
         make.right.offset(-20);
         make.height.offset(84);

@@ -118,10 +118,10 @@
     scrollView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [scrollView setRadius:28 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {

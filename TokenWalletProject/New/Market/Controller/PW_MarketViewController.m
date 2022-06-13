@@ -7,20 +7,21 @@
 //
 
 #import "PW_MarketViewController.h"
-#import "PW_MarketMenuView.h"
 #import "PW_MarketHeaderView.h"
 #import "PW_MarketCell.h"
 #import <SocketRocket.h>
+#import "PW_MarketMenuModel.h"
 
 @interface PW_MarketViewController () <UITableViewDelegate,UITableViewDataSource,SRWebSocketDelegate>
 
-@property (nonatomic, strong) PW_MarketMenuView *menuView;
 @property (nonatomic, strong) PW_TableView *tableView;
 @property (nonatomic, strong) NSMutableArray<PW_MarketModel *> *dataArr;
 
 @property (nonatomic, strong) SRWebSocket *webSocket;
 
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, copy) NSArray<PW_MarketMenuModel *> *menuArr;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @end
 
@@ -29,6 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setNavNoLineTitle:LocalizedStr(@"text_markets")];
+    [self setupNavBgGreen];
     [self makeViews];
     [self buildData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redRoseGreenFellAction) name:kRedRoseGreenFellNotification object:nil];
@@ -53,32 +56,26 @@
 - (void)redRoseGreenFellAction {
     [self.tableView reloadData];
 }
+- (void)menuChangeAction {
+    [self refreshWithIndex:self.segmentedControl.selectedSegmentIndex];
+}
 - (void)buildData {
-    PW_MarketMenuModel *model1 = [PW_MarketMenuModel ModelTitle:LocalizedStr(@"text_selfSelection")];
-    PW_MarketMenuModel *model2 = [PW_MarketMenuModel ModelTitle:LocalizedStr(@"text_mainstreamCurrency")];
-    PW_MarketMenuModel *model3 = [PW_MarketMenuModel ModelTitle:@"DeFi"];
-    PW_MarketMenuModel *model4 = [PW_MarketMenuModel ModelTitle:@"NFT"];
-    self.menuView.dataArr = @[model1,model2,model3,model4];
-    __weak typeof(self) weakSelf = self;
-    self.menuView.clickBlock = ^(NSInteger idx, PW_MarketMenuModel * _Nonnull model) {
-        [weakSelf refreshWithIndex:idx];
-    };
     [self refreshWithIndex:1];
 }
 - (void)refreshWithIndex:(NSInteger)index {
-    if (self.selectedIndex==index||self.selectedIndex<0||self.selectedIndex>=self.menuView.dataArr.count) {
+    self.segmentedControl.selectedSegmentIndex = index;
+    NSInteger selectedIndex = index;
+    if (selectedIndex<0||selectedIndex>=self.menuArr.count) {
         return;
     }
-    self.selectedIndex = index;
-    for (NSInteger i=0;i<self.menuView.dataArr.count;i++) {
-        PW_MarketMenuModel *model = self.menuView.dataArr[i];
+    for (NSInteger i=0;i<self.menuArr.count;i++) {
+        PW_MarketMenuModel *model = self.menuArr[i];
         model.selected = i==index;
         if (model.selected) {
             [self.dataArr removeAllObjects];
             [self.dataArr addObjectsFromArray:model.dataArr];
         }
     }
-    self.menuView.dataArr = self.menuView.dataArr;
     [self refreshTableData];
 }
 - (void)refershDataWithDataArr:(NSArray<PW_MarketModel *> *)array {
@@ -86,7 +83,7 @@
     NSMutableArray *selectionArr = [NSMutableArray array];
     for (PW_MarketModel *model in array) {
         model.collection = [[PW_MarketManager shared] isExistWithSymbol:model.symbol]!=nil;
-        if (model.type>0&&model.type<self.menuView.dataArr.count) {
+        if (model.type>0&&model.type<self.menuArr.count) {
             NSArray *array = dataDict[@(model.type).stringValue];
             if (array&&array.count>0) {
                 NSMutableArray *tempArr = [NSMutableArray arrayWithArray:array];
@@ -104,20 +101,20 @@
     }
     dataDict[@"0"] = selectionArr;
     for (NSString *key in dataDict.allKeys) {
-        if (key.integerValue>=0&&key.integerValue<self.menuView.dataArr.count) {
-            self.menuView.dataArr[key.integerValue].dataArr = dataDict[key];
+        if (key.integerValue>=0&&key.integerValue<self.menuArr.count) {
+            self.menuArr[key.integerValue].dataArr = dataDict[key];
         }
     }
     [self refreshTableData];
 }
 - (void)refreshTableData {
     [self.dataArr removeAllObjects];
-    [self.dataArr addObjectsFromArray:self.menuView.dataArr[self.selectedIndex].dataArr];
+    [self.dataArr addObjectsFromArray:self.menuArr[self.segmentedControl.selectedSegmentIndex].dataArr];
     [self.tableView reloadData];
     self.noDataView.hidden = self.dataArr.count>0;
 }
 - (void)addRemoveSelectionWithModel:(PW_MarketModel *)model {
-    NSArray *array = self.menuView.dataArr.firstObject.dataArr;
+    NSArray *array = self.menuArr.firstObject.dataArr;
     NSMutableArray *selectionArr = [NSMutableArray arrayWithArray:array?array:@[]];
     if (model.collection) {
         [[PW_MarketManager shared] saveModel:model];
@@ -128,31 +125,25 @@
         [[PW_MarketManager shared] deleteModel:model];
         [selectionArr removeObject:model];
     }
-    self.menuView.dataArr.firstObject.dataArr = [selectionArr copy];
+    self.menuArr.firstObject.dataArr = [selectionArr copy];
     [self refreshTableData];
 }
 - (void)makeViews {
-    UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_market_topBg"]];
-    [self.view addSubview:bgIv];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.offset(0);
+    [self.view addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
     }];
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_quotation") fontSize:21 textColor:[UIColor g_boldTextColor]];
-    [self.view addSubview:titleLb];
-    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.top.offset(StatusHeight+10);
-    }];
-    self.menuView = [[PW_MarketMenuView alloc] init];
-    [self.view addSubview:self.menuView];
-    [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.offset(0);
-        make.top.offset(StatusHeight+50);
+    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [self.contentView addSubview:self.segmentedControl];
+    [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(35);
+        make.left.offset(36);
         make.height.offset(38);
     }];
-    [self.view addSubview:self.tableView];
+    [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.menuView.mas_bottom);
+        make.top.equalTo(self.segmentedControl.mas_bottom).offset(20);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -203,8 +194,8 @@
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_MarketHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_MarketHeaderView"];
         [_tableView registerClass:[PW_MarketCell class] forCellReuseIdentifier:@"PW_MarketCell"];
-        _tableView.rowHeight = 70;
-        _tableView.sectionHeaderHeight = 50;
+        _tableView.rowHeight = 75;
+        _tableView.sectionHeaderHeight = 30;
         _tableView.sectionFooterHeight = 5;
     }
     return _tableView;
@@ -222,6 +213,49 @@
         _webSocket.delegate = self;
     }
     return _webSocket;
+}
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = [UIColor g_bgColor];
+    }
+    return _contentView;
+}
+- (NSArray<PW_MarketMenuModel *> *)menuArr {
+    if (!_menuArr) {
+        PW_MarketMenuModel *model1 = [PW_MarketMenuModel ModelTitle:LocalizedStr(@"text_selfSelection")];
+        PW_MarketMenuModel *model2 = [PW_MarketMenuModel ModelTitle:LocalizedStr(@"text_mainstreamCurrency")];
+        PW_MarketMenuModel *model3 = [PW_MarketMenuModel ModelTitle:@"DeFi"];
+        PW_MarketMenuModel *model4 = [PW_MarketMenuModel ModelTitle:@"NFT"];
+        _menuArr = @[model1,model2,model3,model4];
+    }
+    return _menuArr;
+}
+- (UISegmentedControl *)segmentedControl {
+    if (!_segmentedControl) {
+        NSMutableArray *titles = [NSMutableArray array];
+        for (int i=0; i<self.menuArr.count; i++) {
+            [titles addObject:self.menuArr[i].title];
+        }
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
+        _segmentedControl.apportionsSegmentWidthsByContent = YES;
+        [_segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [_segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor g_hex:@"#7221F4"] size:CGSizeMake(1, 1)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+        UIImage *dividerImage = [UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)];
+        [_segmentedControl setDividerImage:dividerImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        _segmentedControl.tintColor = [UIColor g_hex:@"#7221F4"];
+        _segmentedControl.backgroundColor = [UIColor whiteColor];
+        [_segmentedControl setBorderColor:[UIColor g_hex:@"#7221F4"] width:1 radius:8];
+        if (@available(iOS 13.0, *)) {
+            _segmentedControl.selectedSegmentTintColor = [UIColor g_hex:@"#7221F4"];
+        } else {
+            // Fallback on earlier versions
+        }
+        [_segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_textColor]} forState:UIControlStateNormal];
+        [_segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_whiteTextColor]} forState:UIControlStateSelected];
+        [_segmentedControl addTarget:self action:@selector(menuChangeAction) forControlEvents:UIControlEventValueChanged];
+    }
+    return _segmentedControl;
 }
 
 @end

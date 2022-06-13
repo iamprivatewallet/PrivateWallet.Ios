@@ -32,7 +32,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    if (![User_manager.currentUser.user_name isNoEmpty]) {
+    NSArray *wallets = [[PW_WalletManager shared] getWallets];
+    User *user = User_manager.currentUser;
+    if (wallets==nil||wallets.count==0||![user.chooseWallet_address isNoEmpty]) {
         [self switchToCreateWalletVC];
     }else{
         self.rootController = [[PW_TabBarViewController alloc] init];

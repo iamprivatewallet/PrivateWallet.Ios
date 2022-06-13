@@ -65,51 +65,24 @@
     } errBlock:nil];
 }
 - (void)makeViews {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIImageView *topIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_about_app"]];
-    [self.view addSubview:topIv];
+    [contentView addSubview:topIv];
     [topIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(50);
         make.centerX.offset(0);
     }];
-    UILabel *nameLb = [PW_ViewTool labelBoldText:PW_APPName fontSize:16 textColor:[UIColor g_boldTextColor]];
-    [self.view addSubview:nameLb];
-    [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(topIv.mas_bottom).offset(22);
-        make.centerX.offset(0);
-    }];
-    UIView *updateView = [[UIView alloc] init];
-    [updateView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.view addSubview:updateView];
-    [updateView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nameLb.mas_bottom).offset(56);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(45);
-    }];
-    UIView *updateItemView = [self createRowIconName:@"icon_about_update" title:LocalizedStr(@"text_updateVersion")];
-    [updateItemView addTapTarget:self action:@selector(checkVersion)];
-    [updateView addSubview:updateItemView];
-    self.versionLb = [PW_ViewTool labelText:NSStringWithFormat(@"v%@(%@)",PW_APPVersion,PW_APPBuild) fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [updateItemView addSubview:self.versionLb];
-    self.versionTipView = [[UIView alloc] init];
-    self.versionTipView.backgroundColor = [UIColor g_primaryColor];
-    self.versionTipView.layer.cornerRadius = 2.5;
-    self.versionTipView.hidden = YES;
-    [updateItemView addSubview:self.versionTipView];
-    [updateItemView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
-    [self.versionLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-30);
-        make.centerY.offset(0);
-    }];
-    [self.versionTipView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-30);
-        make.width.height.offset(5);
-        make.centerY.offset(0);
-    }];
     __weak typeof(self) weakSelf = self;
-    NSArray *dataArr = @[[PW_MoreModel MoreIconName:@"icon_about_webSite" title:LocalizedStr(@"text_webSite") actionBlock:^(PW_MoreModel * _Nonnull model) {
+    NSArray *dataArr = @[[PW_MoreModel MoreIconName:@"icon_about_update" title:LocalizedStr(@"text_updateVersion") desc:NSStringWithFormat(@"v%@(%@)",PW_APPVersion,PW_APPBuild) actionBlock:^(PW_MoreModel * _Nonnull model) {
+        [weakSelf checkVersion];
+    }],[PW_MoreModel MoreIconName:@"icon_about_webSite" title:LocalizedStr(@"text_webSite") actionBlock:^(PW_MoreModel * _Nonnull model) {
         [weakSelf openWebTitle:model.title urlStr:WalletWebSiteUrl];
     }],[PW_MoreModel MoreIconName:@"icon_about_bbs" title:LocalizedStr(@"text_bbs") actionBlock:^(PW_MoreModel * _Nonnull model) {
         
@@ -119,17 +92,16 @@
         
     }]];
     UIView *otherView = [[UIView alloc] init];
-    [otherView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.view addSubview:otherView];
+    [contentView addSubview:otherView];
     [otherView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(updateView.mas_bottom).offset(16);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.equalTo(topIv.mas_bottom).offset(25);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     UIView *lastView = nil;
     for (NSInteger i=0; i<dataArr.count; i++) {
         PW_MoreModel *model = dataArr[i];
-        UIView *rowView = [self createRowIconName:model.iconName title:model.title];
+        UIView *rowView = [self createRowWithModel:model];
         [rowView addTapBlock:^(UIView * _Nonnull view) {
             if (model.actionBlock) {
                 model.actionBlock(model);
@@ -143,7 +115,7 @@
                 make.top.offset(10);
             }
             make.left.right.offset(0);
-            make.height.offset(45);
+            make.height.offset(70);
             if(i==dataArr.count-1){
                 make.bottom.offset(-10);
             }
@@ -151,26 +123,42 @@
         lastView = rowView;
     }
 }
-- (UIView *)createRowIconName:(NSString *)iconName title:(NSString *)title {
+- (UIView *)createRowWithModel:(PW_MoreModel *)model {
     UIView *rowView = [[UIView alloc] init];
-    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [rowView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:model.iconName]];
     [rowView addSubview:iconIv];
-    UILabel *titleLb = [PW_ViewTool labelMediumText:title fontSize:14 textColor:[UIColor g_textColor]];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:model.title fontSize:18 textColor:[UIColor g_textColor]];
     [rowView addSubview:titleLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [rowView addSubview:arrowIv];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
+        make.centerX.equalTo(rowView.mas_left).offset(30);
         make.centerY.offset(0);
     }];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.left.offset(66);
         make.centerY.offset(0);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-15);
         make.centerY.offset(0);
     }];
+    if ([model.desc isNoEmpty]) {
+        UILabel *descLb = [PW_ViewTool labelText:model.desc fontSize:14 textColor:[UIColor g_grayTextColor]];
+        descLb.text = model.desc;
+        [rowView addSubview:descLb];
+        [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(arrowIv.mas_left).offset(-22);
+            make.centerY.offset(0);
+        }];
+    }
     return rowView;
 }
 

@@ -10,8 +10,12 @@
 
 @interface PW_DappBanner2Cell ()
 
-@property (nonatomic, strong) UIImageView *icon1Iv;
-@property (nonatomic, strong) UIImageView *icon2Iv;
+@property (nonatomic, strong) UIView *leftView;
+@property (nonatomic, strong) UIView *rightView;
+@property (nonatomic, strong) UIImageView *leftIv;
+@property (nonatomic, strong) UILabel *leftTitleLb;
+@property (nonatomic, strong) UIImageView *rightIv;
+@property (nonatomic, strong) UILabel *rightTitleLb;
 
 @end
 
@@ -20,25 +24,18 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.icon1Iv = [[UIImageView alloc] init];
-        [self.icon1Iv setCornerRadius:8];
-        self.icon1Iv.contentMode = UIViewContentModeScaleAspectFill;
-        [self.icon1Iv addTapTarget:self action:@selector(btn1Action)];
-        [self.contentView addSubview:self.icon1Iv];
-        self.icon2Iv = [[UIImageView alloc] init];
-        [self.icon2Iv setCornerRadius:8];
-        self.icon2Iv.contentMode = UIViewContentModeScaleAspectFill;
-        [self.icon2Iv addTapTarget:self action:@selector(btn2Action)];
-        [self.contentView addSubview:self.icon2Iv];
-        [self.icon1Iv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(10);
-            make.left.offset(30);
-            make.bottom.offset(-10);
+        [self.contentView addSubview:self.leftView];
+        [self.contentView addSubview:self.rightView];
+        [self.leftView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.offset(36);
+            make.top.offset(26);
+            make.bottom.offset(0);
         }];
-        [self.icon2Iv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.width.bottom.equalTo(self.icon1Iv);
-            make.left.equalTo(self.icon1Iv.mas_right).offset(15);
-            make.right.offset(-30);
+        [self.rightView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leftView.mas_right).offset(16);
+            make.top.bottom.equalTo(self.leftView);
+            make.right.offset(-36);
+            make.width.equalTo(self.leftView);
         }];
     }
     return self;
@@ -46,10 +43,14 @@
 - (void)setDataArr:(NSArray<PW_BannerModel *> *)dataArr {
     _dataArr = dataArr;
     if (dataArr.count>0) {
-        [self.icon1Iv sd_setImageWithURL:[NSURL URLWithString:dataArr.firstObject.imgH5]];
+        PW_BannerModel *model = dataArr.firstObject;
+        [self.leftIv sd_setImageWithURL:[NSURL URLWithString:model.imgH5]];
+        self.leftTitleLb.text = model.title;
     }
     if (dataArr.count>1) {
-        [self.icon2Iv sd_setImageWithURL:[NSURL URLWithString:dataArr[1].imgH5]];
+        PW_BannerModel *model = dataArr[1];
+        [self.rightIv sd_setImageWithURL:[NSURL URLWithString:model.imgH5]];
+        self.rightTitleLb.text = model.title;
     }
 }
 - (void)btn1Action {
@@ -62,15 +63,73 @@
         self.clickBlock(self.dataArr[1]);
     }
 }
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (UIView *)leftView {
+    if (!_leftView) {
+        _leftView = [[UIView alloc] init];
+        [_leftView setCornerRadius:8];
+        [_leftView addSubview:self.leftIv];
+        [_leftView addSubview:self.leftTitleLb];
+        [self.leftTitleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.offset(0);
+            make.height.offset(28);
+        }];
+        [self.leftIv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.offset(0);
+            make.bottom.equalTo(self.leftTitleLb.mas_top).offset(0);
+        }];
+        [_leftView addTapTarget:self action:@selector(btn1Action)];
+    }
+    return _leftView;
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (UIImageView *)leftIv {
+    if (!_leftIv) {
+        _leftIv = [[UIImageView alloc] init];
+        _leftIv.contentMode = UIViewContentModeScaleAspectFill;
+        _leftIv.clipsToBounds = YES;
+    }
+    return _leftIv;
+}
+- (UILabel *)leftTitleLb {
+    if (!_leftTitleLb) {
+        _leftTitleLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_whiteTextColor]];
+        _leftTitleLb.textAlignment = NSTextAlignmentCenter;
+        _leftTitleLb.backgroundColor = [UIColor g_hex:@"#6200EE"];
+    }
+    return _leftTitleLb;
+}
+- (UIView *)rightView {
+    if (!_rightView) {
+        _rightView = [[UIView alloc] init];
+        [_rightView setCornerRadius:8];
+        [_rightView addSubview:self.rightIv];
+        [_rightView addSubview:self.rightTitleLb];
+        [self.rightTitleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.offset(0);
+            make.height.offset(28);
+        }];
+        [self.rightIv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.offset(0);
+            make.bottom.equalTo(self.rightTitleLb.mas_top).offset(0);
+        }];
+        [_rightView addTapTarget:self action:@selector(btn2Action)];
+    }
+    return _rightView;
+}
+- (UIImageView *)rightIv {
+    if (!_rightIv) {
+        _rightIv = [[UIImageView alloc] init];
+        _rightIv.contentMode = UIViewContentModeScaleAspectFill;
+        _rightIv.clipsToBounds = YES;
+    }
+    return _rightIv;
+}
+- (UILabel *)rightTitleLb {
+    if (!_rightTitleLb) {
+        _rightTitleLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_whiteTextColor]];
+        _rightTitleLb.textAlignment = NSTextAlignmentCenter;
+        _rightTitleLb.backgroundColor = [UIColor g_hex:@"#6200EE"];
+    }
+    return _rightTitleLb;
 }
 
 @end

@@ -65,6 +65,7 @@ static void * eventsBlockKey = &eventsBlockKey;
     maskLayer.frame = rect;
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
+    self.layer.masksToBounds = YES;
 }
 
 - (void)setBorderColor:(UIColor *)color width:(CGFloat)width radius:(CGFloat)radius {

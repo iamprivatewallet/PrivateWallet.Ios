@@ -26,31 +26,29 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    self.bodyView.backgroundColor = [[UIColor g_grayBgColor] colorWithAlphaComponent:0.5];
-    [self.bodyView setCornerRadius:8];
     [self.contentView addSubview:self.bodyView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
+        make.left.offset(36);
         make.top.offset(10);
-        make.right.offset(-20);
+        make.right.offset(-36);
         make.bottom.offset(-10);
     }];
-    UILabel *currencyLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"%@/%@",LocalizedStr(@"text_currency"),LocalizedStr(@"text_marketValue")) fontSize:13 textColor:[UIColor g_grayTextColor]];
+    UILabel *currencyLb = [PW_ViewTool labelText:PW_StrFormat(@"%@/%@",LocalizedStr(@"text_name"),LocalizedStr(@"text_marketValue")) fontSize:15 textColor:[UIColor g_textColor]];
     [self.bodyView addSubview:currencyLb];
-    UILabel *priceLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_price") fontSize:13 textColor:[UIColor g_grayTextColor]];
+    UILabel *priceLb = [PW_ViewTool labelText:LocalizedStr(@"text_price") fontSize:15 textColor:[UIColor g_textColor]];
     [self.bodyView addSubview:priceLb];
-    UILabel *fluctuationRangeLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_fluctuationRange") fontSize:13 textColor:[UIColor g_grayTextColor]];
+    UILabel *fluctuationRangeLb = [PW_ViewTool labelText:LocalizedStr(@"text_fluctuationRange") fontSize:15 textColor:[UIColor g_textColor]];
     [self.bodyView addSubview:fluctuationRangeLb];
     [currencyLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(35);
+        make.left.offset(0);
         make.centerY.offset(0);
     }];
     [priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-124);
+        make.right.offset(-110);
         make.centerY.offset(0);
     }];
     [fluctuationRangeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-30);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
 }

@@ -31,72 +31,84 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)makeViews {
-    UILabel *tipLb = [[UILabel alloc] init];
-    tipLb.font = [UIFont systemFontOfSize:15];
-    tipLb.text = LocalizedStr(@"text_importExistWallet");
-    tipLb.textColor = [UIColor g_whiteTextColor];
-    [self.view addSubview:tipLb];
-    [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(10);
-        make.left.offset(26);
+//    UILabel *tipLb = [[UILabel alloc] init];
+//    tipLb.font = [UIFont systemFontOfSize:15];
+//    tipLb.text = LocalizedStr(@"text_importExistWallet");
+//    tipLb.textColor = [UIColor g_whiteTextColor];
+//    [self.view addSubview:tipLb];
+//    [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.naviBar.mas_bottom).offset(10);
+//        make.left.offset(26);
+//    }];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
     }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_lock_big"]];
+    [contentView addSubview:iconIv];
     UIView *row1View = [self createRowIconName:@"icon_privateKey" title:LocalizedStr(@"text_privateKey") desc:LocalizedStr(@"text_privateKeyTip")];
     [row1View addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(privateKeyImport)]];
-    [self.view addSubview:row1View];
-    [row1View mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.equalTo(tipLb.mas_bottom).offset(20);
-        make.height.offset(62);
-    }];
+    [contentView addSubview:row1View];
     UIView *row2View = [self createRowIconName:@"icon_mnemonic" title:LocalizedStr(@"text_mnemonicWord") desc:LocalizedStr(@"text_mnemonicWordTip")];
     [row2View addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mnemonicImport)]];
-    [self.view addSubview:row2View];
+    [contentView addSubview:row2View];
+    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(26);
+        make.right.offset(-26);
+        make.bottom.equalTo(row1View.mas_top).offset(-20);
+    }];
+    [row1View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottom.equalTo(row2View.mas_top).offset(-18);
+        make.height.offset(65);
+    }];
     [row2View mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.equalTo(row1View.mas_bottom).offset(10);
-        make.height.offset(62);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(65);
+        make.bottomMargin.offset(-35);
     }];
 }
 - (UIView *)createRowIconName:(NSString *)iconName title:(NSString *)title desc:(NSString *)desc {
     UIView *bodyView = [[UIView alloc] init];
-    bodyView.backgroundColor = [UIColor g_bgColor];
-    bodyView.layer.cornerRadius = 8;
-    bodyView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    bodyView.layer.shadowOffset = CGSizeMake(0, 2);
-    bodyView.layer.shadowRadius = 8;
-    bodyView.layer.shadowOpacity = 1;
+    [bodyView setCornerRadius:8];
+    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-72, 65) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor blackColor]] gradientType:PW_GradientLeftToRight];
+    bodyView.backgroundColor = [UIColor colorWithPatternImage:image];
     UIImageView *iconIv = [[UIImageView alloc] init];
     iconIv.image = [UIImage imageNamed:iconName];
     [bodyView addSubview:iconIv];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
+        make.centerX.equalTo(bodyView.mas_left).offset(30);
         make.centerY.offset(0);
     }];
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = title;
-    titleLb.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
-    titleLb.textColor = [UIColor g_boldTextColor];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
+    titleLb.textColor = [UIColor g_whiteTextColor];
     [bodyView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bodyView.mas_centerY);
-        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.bottom.equalTo(bodyView.mas_centerY).offset(3);
+        make.left.offset(60);
     }];
     UILabel *descLb = [[UILabel alloc] init];
     descLb.text = desc;
-    descLb.font = [UIFont systemFontOfSize:12 weight:UIFontWeightSemibold];
+    descLb.font = [UIFont pw_regularFontOfSize:12];
     descLb.textColor = [UIColor g_grayTextColor];
     [bodyView addSubview:descLb];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleLb.mas_bottom);
-        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.left.equalTo(titleLb);
     }];
     UIImageView *arrowIv = [[UIImageView alloc] init];
     arrowIv.image = [UIImage imageNamed:@"icon_arrow"];
     [bodyView addSubview:arrowIv];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(-20);
         make.centerY.offset(0);
     }];
     return bodyView;

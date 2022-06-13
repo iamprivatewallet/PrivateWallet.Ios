@@ -19,9 +19,8 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     self.view.backgroundColor = [UIColor g_darkBgColor];
-    [self.view addSubview:self.bgIv];
     [self.bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.offset(0);
     }];
 }
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
@@ -29,6 +28,27 @@
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+- (void)setupFullBackground {
+    self.bgIv.image = [UIImage imageNamed:@"icon_bg"];
+    [self.bgIv mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
+}
+- (void)setupNavBgBlackBig {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_black_big"];
+}
+- (void)setupNavBgRed {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_red"];
+}
+- (void)setupNavBgGreen {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_green"];
+}
+- (void)setupNavBgPurple {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_purple"];
+}
+- (void)clearBackground {
+    [self.bgIv removeFromSuperview];
 }
 - (void)makeViews {
     
@@ -128,30 +148,36 @@
     _titleLable = [UILabel new];
     [self.naviBar addSubview:_titleLable];
     [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.naviBar.mas_bottom).offset(-(44-25)/2);
+        make.centerY.equalTo(self.naviBar.mas_bottom).offset(-22);
         make.centerX.equalTo(self.naviBar);
         make.height.mas_equalTo(25);
         make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.75);
     }];
-    [UITools setLableProperties:_titleLable withColor:[UIColor g_whiteTextColor] andFont:GCSFontSemibold(16)];
+    _titleLable.font = [UIFont pw_mediumFontOfSize:20];
+    [_titleLable setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
     _titleLable.text = title;
 //    }
     
     if (leftImage||[leftTitle isNoEmpty]) {
         _leftBtn = [UIButton new];
         [self.naviBar addSubview:_leftBtn];
-        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.naviBar).offset(CGFloatScale(10));
-            make.width.mas_equalTo(40);
-            make.height.mas_equalTo(44);
-            make.centerY.equalTo(_titleLable.mas_centerY);
-        }];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
-            [_leftBtn setTitleColor:[UIColor g_textColor] forState:UIControlStateNormal];
-            _leftBtn.titleLabel.font = GCSFontRegular(14);
+            [_leftBtn setTitleColor:[UIColor g_whiteTextColor] forState:UIControlStateNormal];
+            _leftBtn.titleLabel.font = [UIFont pw_mediumFontOfSize:20];
+            [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.offset(CGFloatScale(18));
+                make.height.mas_equalTo(44);
+                make.centerY.equalTo(_titleLable.mas_centerY);
+            }];
         }else{
             [_leftBtn setImage:ImageNamed(leftImage) forState:UIControlStateNormal];
+            [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.offset(CGFloatScale(10));
+                make.width.mas_equalTo(40);
+                make.height.mas_equalTo(44);
+                make.centerY.equalTo(_titleLable.mas_centerY);
+            }];
         }
         if (leftAction) {
             [_leftBtn addTarget:self action:leftAction forControlEvents:UIControlEventTouchUpInside];
@@ -159,24 +185,22 @@
     }
     if (rightImage||[rightTitle isNoEmpty]) {
         _rightBtn = [[UIButton alloc]initWithFrame:CGRectZero];
-        _rightBtn.titleLabel.font = GCSFontRegular(14);
+        _rightBtn.titleLabel.font = [UIFont pw_mediumFontOfSize:20];
         [_rightBtn setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_rightBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self.naviBar addSubview:_rightBtn];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.naviBar).offset(-CGFloatScale(20));
+            make.right.offset(-CGFloatScale(20));
             make.centerY.equalTo(self.titleLable.mas_centerY);
         }];
         if (rightImage) {
             [_rightBtn setImage:ImageNamed(rightImage) forState:UIControlStateNormal];
-            if (!SYSTEM_VERSION_LESS_THAN(@"11")) {
-                _rightBtn.contentHorizontalAlignment =UIControlContentHorizontalAlignmentRight;
-                [_rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0,0, -5 * SCREEN_WIDTH/375.0)];
-            }
+            _rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            [_rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,0,0,-5)];
         }
         if (rightTitle) {
             [_rightBtn setTitle:rightTitle forState:UIControlStateNormal];
-            [_rightBtn setTitleColor:[UIColor g_textColor] forState:UIControlStateNormal];
+            [_rightBtn setTitleColor:[UIColor g_whiteTextColor] forState:UIControlStateNormal];
         }
         if (rightAction) {
             [_rightBtn addTarget:self action:rightAction forControlEvents:(UIControlEventTouchUpInside)];
@@ -201,6 +225,10 @@
 - (UIImageView *)bgIv {
     if (!_bgIv) {
         _bgIv = [[UIImageView alloc] init];
+        _bgIv.image = [UIImage imageNamed:@"icon_nav_black"];
+        _bgIv.contentMode = UIViewContentModeScaleAspectFill;
+        _bgIv.clipsToBounds = YES;
+        [self.view insertSubview:_bgIv atIndex:0];
     }
     return _bgIv;
 }

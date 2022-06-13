@@ -58,6 +58,7 @@
         }
     }];
     [self setNavNoLineTitle:@"Scan"];
+    [self clearBackground];
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

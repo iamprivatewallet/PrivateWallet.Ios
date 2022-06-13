@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *marketValueLb;
 @property (nonatomic, strong) UILabel *priceLb;
 @property (nonatomic, strong) UILabel *fluctuationRangeLb;
+@property (nonatomic, strong) UIView *lineView;
 
 @end
 
@@ -41,7 +42,7 @@
     }
     self.priceLb.text = PW_StrFormat(@"$%@",[[model.last stringDownDecimal:2] currency]);
     self.fluctuationRangeLb.text = PW_StrFormat(@"%@%@%%",model.rose.floatValue>0?@"+":@"",[model.rose stringDownDecimal:2]);
-    self.priceLb.textColor = self.fluctuationRangeLb.backgroundColor = model.rose.floatValue>0?[UIColor g_roseColor]:[UIColor g_fallColor];
+    self.fluctuationRangeLb.backgroundColor = model.rose.floatValue>0?[UIColor g_roseColor]:[UIColor g_fallColor];
 }
 - (void)collectionAction {
     if (self.collectionBlock) {
@@ -55,42 +56,43 @@
     [self.bodyView addSubview:self.marketValueLb];
     [self.bodyView addSubview:self.priceLb];
     [self.bodyView addSubview:self.fluctuationRangeLb];
+    [self.bodyView addSubview:self.lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-8);
-        make.top.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.bottom.offset(0);
     }];
     [self.collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(10);
-        make.top.offset(15);
+        make.right.offset(0);
+        make.centerY.offset(0);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(35);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-2);
+        make.left.offset(0);
     }];
     [self.marketValueLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-10);
-        make.left.offset(35);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(2);
+        make.left.offset(0);
     }];
     [self.priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-124);
+        make.right.offset(-110);
         make.centerY.offset(0);
     }];
     [self.fluctuationRangeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
-        make.centerY.offset(-3);
-        make.width.offset(78);
-        make.height.offset(34);
+        make.right.equalTo(self.collectionBtn.mas_left).offset(-10);
+        make.centerY.offset(0);
+        make.width.offset(65);
+        make.height.offset(28);
+    }];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.offset(0);
+        make.height.offset(1);
     }];
 }
 #pragma mark - lazy
 - (UIView *)bodyView {
     if (!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        _bodyView.layer.cornerRadius = 8;
     }
     return _bodyView;
 }
@@ -105,31 +107,38 @@
 }
 - (UILabel *)nameLb {
     if (!_nameLb) {
-        _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
+        _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:20 textColor:[UIColor g_boldTextColor]];
     }
     return _nameLb;
 }
 - (UILabel *)marketValueLb {
     if (!_marketValueLb) {
-        _marketValueLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_grayTextColor]];
+        _marketValueLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_textColor]];
     }
     return _marketValueLb;
 }
 - (UILabel *)priceLb {
     if (!_priceLb) {
-        _priceLb = [PW_ViewTool labelMediumText:@"--" fontSize:17 textColor:[UIColor g_textColor]];
+        _priceLb = [PW_ViewTool labelText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
     }
     return _priceLb;
 }
 - (UILabel *)fluctuationRangeLb {
     if (!_fluctuationRangeLb) {
-        _fluctuationRangeLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_primaryTextColor]];
+        _fluctuationRangeLb = [PW_ViewTool labelMediumText:@"--" fontSize:15 textColor:[UIColor g_primaryTextColor]];
         _fluctuationRangeLb.textAlignment = NSTextAlignmentCenter;
         _fluctuationRangeLb.backgroundColor = [UIColor g_primaryColor];
-        [_fluctuationRangeLb setCornerRadius:6];
+        [_fluctuationRangeLb setCornerRadius:8];
         _fluctuationRangeLb.adjustsFontSizeToFitWidth = YES;
     }
     return _fluctuationRangeLb;
+}
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor g_lineColor];
+    }
+    return _lineView;
 }
 
 @end

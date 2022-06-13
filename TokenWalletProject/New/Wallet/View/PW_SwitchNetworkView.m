@@ -83,7 +83,7 @@
     self.backgroundColor = [UIColor g_maskColor];
     self.contentView = [[UIView alloc] init];
     self.contentView.backgroundColor = [UIColor g_bgColor];
-    [self.contentView setRadius:28 corners:(UIRectCornerTopLeft | UIRectCornerTopRight) size:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*0.8)];
+    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight) size:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*0.8)];
     [self addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.offset(0);

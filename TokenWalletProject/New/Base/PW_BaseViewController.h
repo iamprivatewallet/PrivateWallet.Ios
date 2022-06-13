@@ -30,6 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 
+- (void)setupFullBackground;
+- (void)setupNavBgBlackBig;
+- (void)setupNavBgRed;
+- (void)setupNavBgGreen;
+- (void)setupNavBgPurple;//紫色
+- (void)clearBackground;
 - (void)setNavNoLineTitle:(NSString *)title;
 - (void)setNavNoLineTitle:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction;
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;

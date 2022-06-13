@@ -11,17 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PW_GroupMoreModel : PW_BaseModel
-
-@property (nonatomic, copy) NSArray<PW_MoreModel *> *dataArr;
-
-@end
-
 @interface PW_MoreModel : PW_BaseModel
 
 + (instancetype)MoreIconName:(NSString *)iconName title:(NSString *)title actionBlock:(void(^)(PW_MoreModel *model))actionBlock;
++ (instancetype)MoreIconName:(NSString *)iconName title:(NSString *)title desc:(NSString *)desc actionBlock:(void(^)(PW_MoreModel *model))actionBlock;
 @property (nonatomic, copy) NSString *iconName;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *desc;
 @property (nonatomic, copy) void(^actionBlock)(PW_MoreModel *model);
 
 @end

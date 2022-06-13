@@ -28,10 +28,7 @@
     return self;
 }
 - (void)setDataArr:(NSArray<PW_DappModel *> *)dataArr {
-    if (dataArr==nil) {
-        return;
-    }
-    if (dataArr.count>5) {
+    if (dataArr&&dataArr.count>5) {
         NSMutableArray *array = [NSMutableArray array];
         [array addObjectsFromArray:[dataArr subarrayWithRange:NSMakeRange(0, 4)]];
         PW_DappModel *moreModel = [[PW_DappModel alloc] init];

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_MoreCell : PW_BaseTableCell
 
-@property (nonatomic, strong) NSArray<PW_MoreModel *> *dataArr;
+@property (nonatomic, strong) PW_MoreModel *model;
 
 @end
 

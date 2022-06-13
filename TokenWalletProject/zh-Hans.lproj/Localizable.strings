@@ -122,6 +122,7 @@ text_tradeDetail="交易详情";
 text_collectionSuccess="收款成功";
 text_pending="确认中";
 text_tradeFail="交易失败";
+text_tradeSuccess="交易成功";
 text_sendAddress="发送地址";
 text_receiveAddress="接收地址";
 text_minersFee="矿工费";
@@ -162,7 +163,7 @@ text_addressError="地址错误";
 text_transactionBroadcast="交易已广播";
 text_clearAllRecords="清空所有记录";
 
-text_quotation="行情";
+text_markets="行情";
 text_selfSelection="自选";
 text_mainstreamCurrency="主流币";
 text_marketValue="市值";

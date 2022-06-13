@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_bgColor;
 + (UIColor *)g_bgCardColor;
 + (UIColor *)g_darkBgColor;
++ (UIColor *)g_darkGradientStartColor;
 + (UIColor *)g_grayBgColor;
 + (UIColor *)g_primaryColor;
 + (UIColor *)g_primaryTextColor;

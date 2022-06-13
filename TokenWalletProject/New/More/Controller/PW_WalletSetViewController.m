@@ -68,7 +68,7 @@
 - (void)makeViews {
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(20);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.offset(0);
         make.bottom.offset(-SafeBottomInset);
     }];

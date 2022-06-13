@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupFullBackground];
     [self makeViews];
 }
 - (void)importAction {
@@ -31,14 +32,6 @@
     [self.navigationController pushViewController:createVc animated:YES];
 }
 - (void)makeViews {
-    UIImageView *bgIv = [[UIImageView alloc] init];
-    bgIv.image = [UIImage imageNamed:@"icon_bg"];
-    bgIv.contentMode = UIViewContentModeScaleAspectFill;
-    bgIv.clipsToBounds = YES;
-    [self.view addSubview:bgIv];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
     UIView *contentView = [[UIView alloc] init];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
