@@ -83,6 +83,9 @@
 + (UIColor *)g_darkGradientStartColor {
     return [self g_hex:@"#4D4D4D"];
 }
++ (UIColor *)g_darkGradientEndColor {
+    return [self blackColor];
+}
 + (UIColor *)g_grayBgColor {
     return [self g_hex:@"#F4F6F9"];
 }
@@ -125,6 +128,9 @@
 }
 + (UIColor *)g_borderDarkColor {
     return [self g_hex:@"#999999"];
+}
++ (UIColor *)g_borderGrayColor {
+    return [self g_hex:@"#E6E6E6"];
 }
 + (UIColor *)g_dottedColor {
     return COLORFORRGB(0xB0B8C4);

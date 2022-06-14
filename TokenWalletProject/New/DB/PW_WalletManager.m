@@ -89,7 +89,7 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 }
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"sortIndex":@(sortIndex)} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and walletType = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"sortIndex":@(sortIndex)} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
 }
 //删除钱包
 - (void)deleteWallet:(Wallet*)wallet{
@@ -112,11 +112,11 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 }
 - (BOOL)updateWalletName:(NSString *)name address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletName":name} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and walletType = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletName":name} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
 }
 - (BOOL)updateWalletPwd:(NSString *)pwd address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletPassword":pwd} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and walletType = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletPassword":pwd} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
 }
 //查询对应私钥的钱包
 - (NSArray*)selctWalletWithPrikey:(NSString*)pKey type:(NSString*)type{

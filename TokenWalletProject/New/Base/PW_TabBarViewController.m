@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     self.tabBar.translucent = NO;
-    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH, self.tabBar.frame.size.height) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor blackColor]] gradientType:PW_GradientLeftToRight];
+    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH, self.tabBar.frame.size.height) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor g_darkGradientEndColor]] gradientType:PW_GradientLeftToRight];
     UIColor *bgColor = [UIColor colorWithPatternImage:image];
     self.tabBar.backgroundColor = bgColor;
     [self.tabBar setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, -3) radius:8];

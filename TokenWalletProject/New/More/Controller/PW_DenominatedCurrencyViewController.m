@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_denominatedCurrency") rightTitle:LocalizedStr(@"text_finish") rightAction:@selector(finishAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_denominatedCurrency") rightTitle:LocalizedStr(@"text_save") rightAction:@selector(finishAction)];
     [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     self.oldType = [PW_DenominatedCurrencyTool getType];
     [self makeViews];
@@ -44,9 +44,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -81,9 +89,9 @@
 - (NSMutableArray<PW_DenominatedCurrencyModel *> *)dataArr {
     if (!_dataArr) {
         _dataArr = [NSMutableArray array];
-        PW_DenominatedCurrencyModel *rmbModel = [PW_DenominatedCurrencyModel DenominatedCurrencyIconStr:@"￥" title:NSStringWithFormat(@"%@（￥）",LocalizedStr(@"text_rmb")) type:PW_DenominatedCurrencyRMB];
+        PW_DenominatedCurrencyModel *rmbModel = [PW_DenominatedCurrencyModel DenominatedCurrencyIconStr:@"icon_cny" title:@"CNY" type:PW_DenominatedCurrencyRMB];
         rmbModel.selected = self.oldType==PW_DenominatedCurrencyRMB;
-        PW_DenominatedCurrencyModel *dollarModel = [PW_DenominatedCurrencyModel DenominatedCurrencyIconStr:@"$" title:NSStringWithFormat(@"%@（$）",LocalizedStr(@"text_dollar")) type:PW_DenominatedCurrencyDollar];
+        PW_DenominatedCurrencyModel *dollarModel = [PW_DenominatedCurrencyModel DenominatedCurrencyIconStr:@"icon_usd" title:@"USD" type:PW_DenominatedCurrencyDollar];
         dollarModel.selected = self.oldType==PW_DenominatedCurrencyDollar;
         [_dataArr addObjectsFromArray:@[rmbModel,dollarModel]];
     }

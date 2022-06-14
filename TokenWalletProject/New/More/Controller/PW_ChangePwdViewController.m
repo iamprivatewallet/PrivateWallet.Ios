@@ -57,20 +57,27 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIView *originView = [[UIView alloc] init];
-    originView.backgroundColor = [UIColor g_bgColor];
-    [originView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [originView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.view addSubview:originView];
-    UILabel *originTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_originPwd") fontSize:13 textColor:[UIColor g_boldTextColor]];
+    originView.backgroundColor = [UIColor g_bgCardColor];
+    [originView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
+    [contentView addSubview:originView];
+    UILabel *originTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_originPwd") fontSize:20 textColor:[UIColor g_boldTextColor]];
     [originView addSubview:originTipLb];
     self.originPwdTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputOrginPwd")];
     [self.originPwdTf pw_setSecureTextEntry];
     [originView addSubview:self.originPwdTf];
     [originView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.offset(28);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     [originTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,11 +91,10 @@
         make.bottom.offset(-10);
     }];
     UIView *setupView = [[UIView alloc] init];
-    setupView.backgroundColor = [UIColor g_bgColor];
-    [setupView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [setupView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.view addSubview:setupView];
-    UILabel *setupTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_setTradePwd") fontSize:13 textColor:[UIColor g_boldTextColor]];
+    setupView.backgroundColor = [UIColor g_bgCardColor];
+    [setupView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
+    [contentView addSubview:setupView];
+    UILabel *setupTipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_setTradePwd") fontSize:20 textColor:[UIColor g_boldTextColor]];
     [setupView addSubview:setupTipLb];
     self.pwdTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_setTradePwdTip")];
     [self.pwdTf pw_setSecureTextEntry];
@@ -101,9 +107,9 @@
     [setupView addSubview:self.againPwdTf];
     [setupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(originView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(160);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(140);
     }];
     [setupTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);
@@ -122,17 +128,17 @@
         make.height.offset(1);
     }];
     [self.againPwdTf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom).offset(15);
+        make.top.equalTo(lineView.mas_bottom).offset(5);
         make.left.offset(18);
         make.right.offset(-15);
         make.height.offset(40);
     }];
     self.sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
-    [self.view addSubview:self.sureBtn];
+    [contentView addSubview:self.sureBtn];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(setupView.mas_bottom).offset(40);
-        make.left.offset(25);
-        make.right.offset(-25);
+        make.bottomMargin.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(55);
     }];
 }

@@ -125,16 +125,9 @@
 }
 - (UIView *)createRowWithModel:(PW_MoreModel *)model {
     UIView *rowView = [[UIView alloc] init];
-    UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor g_lineColor];
-    [rowView addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.offset(0);
-        make.height.offset(1);
-    }];
     UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:model.iconName]];
     [rowView addSubview:iconIv];
-    UILabel *titleLb = [PW_ViewTool labelMediumText:model.title fontSize:18 textColor:[UIColor g_textColor]];
+    UILabel *titleLb = [PW_ViewTool labelText:model.title fontSize:18 textColor:[UIColor g_textColor]];
     [rowView addSubview:titleLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [rowView addSubview:arrowIv];
@@ -147,7 +140,7 @@
         make.centerY.offset(0);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
     if ([model.desc isNoEmpty]) {

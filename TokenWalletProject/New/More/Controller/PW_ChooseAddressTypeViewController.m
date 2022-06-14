@@ -26,15 +26,23 @@
     [self buildData];
 }
 - (void)buildData {
-    PW_ChooseAddressTypeModel *ethModel = [PW_ChooseAddressTypeModel IconName:@"icon_ETH" title:WalletTypeETH subTitle:@"Ethereum" chainId:kETHChainId selected:[self.selectedChainId isEqualToString:kETHChainId]];
-    PW_ChooseAddressTypeModel *cvnModel = [PW_ChooseAddressTypeModel IconName:@"icon_CVN" title:WalletTypeCVN subTitle:@"Cvn" chainId:kCVNChainId selected:[self.selectedChainId isEqualToString:kCVNChainId]];
+    PW_ChooseAddressTypeModel *ethModel = [PW_ChooseAddressTypeModel IconName:@"icon_type_ETH" title:WalletTypeETH subTitle:@"Ethereum" chainId:kETHChainId selected:[self.selectedChainId isEqualToString:kETHChainId]];
+    PW_ChooseAddressTypeModel *cvnModel = [PW_ChooseAddressTypeModel IconName:@"icon_type_CVN" title:WalletTypeCVN subTitle:@"Cvn" chainId:kCVNChainId selected:[self.selectedChainId isEqualToString:kCVNChainId]];
     [self.dataArr addObjectsFromArray:@[ethModel,cvnModel]];
     [self.tableView reloadData];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }

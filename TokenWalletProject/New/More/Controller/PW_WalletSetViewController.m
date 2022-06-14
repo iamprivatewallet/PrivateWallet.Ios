@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray<PW_WalletSetModel *> *dataList;
 @property (nonatomic, strong) PW_TableView *tableView;
+@property (nonatomic, strong) UIButton *deleteBtn;
 
 @end
 
@@ -28,6 +29,30 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_walletSet")];
     [self makeViews];
     [self buildData];
+}
+- (void)deleteAction {
+    if (self.model.isImport==NO&&![User_manager isBackup]) {
+        [PW_TipTool showDeleteWalletBackupMnemonicsSureBlock:^{
+            PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
+            vc.isFirst = NO;
+            vc.wordStr = User_manager.currentUser.user_mnemonic;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        return;
+    }
+    [[PW_WalletManager shared] deleteWallet:self.model];
+    NSArray *wallets = [[PW_WalletManager shared] getWallets];
+    if (wallets.count>0) {
+        if ([User_manager.currentUser.chooseWallet_address isEqualToString:self.model.address]) {
+            Wallet *wallet = wallets.firstObject;
+            [User_manager updateChooseWallet:wallet];
+        }
+    }else{
+        [User_manager logout];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [TheAppDelegate switchToCreateWalletVC];
+        });
+    }
 }
 - (void)buildData {
     __weak typeof(self) weakSelf = self;
@@ -66,11 +91,25 @@
     [self.tableView reloadData];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [contentView addSubview:self.deleteBtn];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.offset(0);
+        make.bottom.equalTo(self.deleteBtn.mas_top).offset(-10);
+    }];
+    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(56);
+        make.bottomMargin.offset(-30);
     }];
 }
 #pragma mark - delegate
@@ -94,10 +133,18 @@
         _tableView = [[PW_TableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 72;
+        _tableView.rowHeight = 84;
+        _tableView.contentInset = UIEdgeInsetsMake(28, 0, SafeBottomInset, 0);
         [_tableView registerClass:[PW_WalletSetCell class] forCellReuseIdentifier:@"PW_WalletSetCell"];
     }
     return _tableView;
+}
+- (UIButton *)deleteBtn {
+    if (!_deleteBtn) {
+        _deleteBtn = [PW_ViewTool buttonTitle:@"Delete Wallet" fontSize:18 titleColor:[UIColor g_grayTextColor] imageName:@"icon_delete_gray" target:self action:@selector(deleteAction)];
+        [_deleteBtn setBorderColor:[UIColor g_borderGrayColor] width:1 radius:8];
+    }
+    return _deleteBtn;
 }
 - (NSMutableArray<PW_WalletSetModel *> *)dataList {
     if(!_dataList) {

@@ -46,50 +46,59 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.bodyView.backgroundColor = [UIColor g_bgCardColor];
+    [self.bodyView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.bodyView];
-    self.nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_boldTextColor]];
+    self.nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
     [self.bodyView addSubview:self.nameLb];
     self.addressTypeLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.addressTypeLb setRequiredHorizontal];
     [self.bodyView addSubview:self.addressTypeLb];
-    self.addressLb = [PW_ViewTool labelMediumText:@"--" fontSize:13 textColor:[UIColor g_boldTextColor]];
+    self.addressLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.bodyView addSubview:self.addressLb];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_primaryColor];
+    [self.bodyView addSubview:lineView];
     UILabel *noteTipLb = [PW_ViewTool labelMediumText:PW_StrFormat(@"%@：",LocalizedStr(@"text_note")) fontSize:14 textColor:[UIColor g_grayTextColor]];
     [noteTipLb setRequiredHorizontal];
     [self.bodyView addSubview:noteTipLb];
-    self.noteLb = [PW_ViewTool labelMediumText:@"--" fontSize:13 textColor:[UIColor g_boldTextColor]];
-    self.noteLb.numberOfLines = 3;
+    self.noteLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_boldTextColor]];
+    self.noteLb.numberOfLines = 1;
     [self.bodyView addSubview:self.noteLb];
     self.deleteBtn = [PW_ViewTool buttonImageName:@"icon_delete" target:self action:@selector(deleteAction)];
     self.deleteBtn.hidden = YES;
     [self.bodyView addSubview:self.deleteBtn];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.top.offset(8);
         make.bottom.offset(-8);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
-        make.top.offset(10);
+        make.left.offset(20);
+        make.top.offset(12);
     }];
     [self.addressTypeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
-        make.top.equalTo(self.nameLb.mas_bottom).offset(20);
+        make.left.offset(20);
+        make.top.equalTo(self.nameLb.mas_bottom).offset(5);
     }];
     [self.addressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.addressTypeLb.mas_right).offset(8);
+        make.left.equalTo(self.addressTypeLb.mas_right).offset(2);
         make.top.equalTo(self.addressTypeLb);
         make.right.mas_lessThanOrEqualTo(-40);
     }];
-    [noteTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
-        make.top.equalTo(self.addressLb.mas_bottom).offset(18);
+        make.right.offset(-18);
+        make.height.offset(1);
+        make.top.equalTo(self.addressLb.mas_bottom).offset(8);
+    }];
+    [noteTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(20);
+        make.top.equalTo(self.addressLb.mas_bottom).offset(16);
     }];
     [self.noteLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(noteTipLb.mas_right).offset(8);
+        make.left.equalTo(noteTipLb.mas_right).offset(2);
         make.top.equalTo(noteTipLb);
         make.right.mas_lessThanOrEqualTo(-40);
     }];

@@ -22,7 +22,7 @@ static NSString * _Nonnull PW_DenominatedCurrencyTypeKey = @"DenominatedCurrency
 + (NSString *)typeStr {
     PW_DenominatedCurrencyType type =[PW_DenominatedCurrencyTool getType];
     if (type==PW_DenominatedCurrencyRMB) {
-        return @"RMB";
+        return @"CNY";
     }else if (type==PW_DenominatedCurrencyDollar) {
         return @"USD";
     }

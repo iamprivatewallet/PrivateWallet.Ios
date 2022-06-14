@@ -255,6 +255,7 @@
 		5C9457B4285729E500CC60B7 /* PW_DappChainBrowserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9457B3285729E500CC60B7 /* PW_DappChainBrowserModel.m */; };
 		5C9457B72857370600CC60B7 /* PW_MessageCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9457B62857370600CC60B7 /* PW_MessageCenterViewController.m */; };
 		5C9457BB28573CB900CC60B7 /* PW_MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9457B928573CB900CC60B7 /* PW_MessageDetailViewController.m */; };
+		5C9457BF2858472E00CC60B7 /* PW_WalletManageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9457BE2858472D00CC60B7 /* PW_WalletManageHeaderView.m */; };
 		5C9BAB5D27D9D8110029988A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB5F27D9D8110029988A /* Localizable.strings */; };
 		5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6827D9E29B0029988A /* LanguageTool.m */; };
 		5C9BAB6C27D9EACC0029988A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6E27D9EACC0029988A /* InfoPlist.strings */; };
@@ -1081,6 +1082,8 @@
 		5C9457B62857370600CC60B7 /* PW_MessageCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MessageCenterViewController.m; sourceTree = "<group>"; };
 		5C9457B828573CB900CC60B7 /* PW_MessageDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MessageDetailViewController.h; sourceTree = "<group>"; };
 		5C9457B928573CB900CC60B7 /* PW_MessageDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MessageDetailViewController.m; sourceTree = "<group>"; };
+		5C9457BD2858472D00CC60B7 /* PW_WalletManageHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletManageHeaderView.h; sourceTree = "<group>"; };
+		5C9457BE2858472D00CC60B7 /* PW_WalletManageHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletManageHeaderView.m; sourceTree = "<group>"; };
 		5C9BAB5E27D9D8110029988A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5C9BAB6027D9D8170029988A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5C9BAB6727D9E29B0029988A /* LanguageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanguageTool.h; sourceTree = "<group>"; };
@@ -3437,6 +3440,8 @@
 			children = (
 				5CB119E8280BC3EE0006BEFB /* PW_MoreCell.h */,
 				5CB119E9280BC3EE0006BEFB /* PW_MoreCell.m */,
+				5C9457BD2858472D00CC60B7 /* PW_WalletManageHeaderView.h */,
+				5C9457BE2858472D00CC60B7 /* PW_WalletManageHeaderView.m */,
 				5C37A8C9280EA96800AAA728 /* PW_WalletManageCell.h */,
 				5C37A8CA280EA96800AAA728 /* PW_WalletManageCell.m */,
 				5C37A8D2280EB52000AAA728 /* PW_WalletSetCell.h */,
@@ -4993,6 +4998,7 @@
 				992E0F5126D4E7D800E1C31B /* AssetBottomView.m in Sources */,
 				5C8AAADC280C125400E4ED53 /* PW_SetUpViewController.m in Sources */,
 				790521F521D0EC8700ABF6D5 /* WalletManager.m in Sources */,
+				5C9457BF2858472E00CC60B7 /* PW_WalletManageHeaderView.m in Sources */,
 				1FA8EF7121B824F900B4E28E /* UIView+TYAlertView.m in Sources */,
 				992E0F5A26D500F800E1C31B /* AssetTableCell.m in Sources */,
 				5AF5D19B1D2F7CBA004070D7 /* NSString+XML.m in Sources */,

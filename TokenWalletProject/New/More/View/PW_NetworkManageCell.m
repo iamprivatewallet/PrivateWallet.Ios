@@ -51,10 +51,10 @@
     self.arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.bodyView addSubview:self.arrowIv];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(10);
+        make.left.offset(36);
         make.top.offset(6);
         make.bottom.offset(-6);
-        make.right.offset(-10);
+        make.right.offset(-36);
     }];
     [self.iconLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);

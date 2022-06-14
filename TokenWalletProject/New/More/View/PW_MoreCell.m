@@ -34,7 +34,7 @@
 - (void)makeViews {
     self.iconIv = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconIv];
-    self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
+    self.titleLb = [PW_ViewTool labelText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.titleLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.contentView addSubview:arrowIv];

@@ -11,7 +11,7 @@
 @interface PW_DenominatedCurrencyCell ()
 
 @property (nonatomic, strong) UIView *bodyView;
-@property (nonatomic, strong) UILabel *iconLb;
+@property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *titleLb;
 @property (nonatomic, strong) UIButton *openBtn;
 
@@ -28,23 +28,15 @@
 }
 - (void)setModel:(PW_DenominatedCurrencyModel *)model {
     _model = model;
-    self.iconLb.text = model.iconStr;
+    self.iconIv.image = [UIImage imageNamed:model.iconStr];
     self.titleLb.text = model.title;
     self.openBtn.selected = model.selected;
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
     [self.contentView addSubview:self.bodyView];
-    self.iconLb = [[UILabel alloc] init];
-    self.iconLb.textColor = [UIColor g_hex:@"#11D1C7"];
-    self.iconLb.font = [UIFont pw_regularFontOfSize:22];
-    self.iconLb.textAlignment = NSTextAlignmentCenter;
-    self.iconLb.layer.cornerRadius = 20;
-    self.iconLb.layer.masksToBounds = YES;
-    self.iconLb.backgroundColor = [UIColor g_hex:@"#E5FAF9"];
-    [self.bodyView addSubview:self.iconLb];
+    self.iconIv = [[UIImageView alloc] init];
+    [self.bodyView addSubview:self.iconIv];
     self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
     [self.bodyView addSubview:self.titleLb];
     self.openBtn = [[UIButton alloc] init];
@@ -52,24 +44,29 @@
     [self.openBtn setImage:[UIImage imageNamed:@"icon_uncheck"] forState:UIControlStateNormal];
     [self.openBtn setImage:[UIImage imageNamed:@"icon_check"] forState:UIControlStateSelected];
     [self.bodyView addSubview:self.openBtn];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.offset(5);
-        make.bottom.offset(-5);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.bottom.offset(0);
     }];
-    [self.iconLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
-        make.width.height.offset(40);
+    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bodyView.mas_left).offset(30);
         make.centerY.offset(0);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconLb.mas_right).offset(15);
+        make.left.offset(66);
         make.centerY.offset(0);
     }];
     [self.openBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-16);
+        make.right.offset(0);
         make.centerY.offset(0);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
     }];
 }
 

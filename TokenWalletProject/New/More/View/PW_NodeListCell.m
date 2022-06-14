@@ -32,9 +32,6 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
-    self.bodyView.layer.cornerRadius = 8;
     [self.contentView addSubview:self.bodyView];
     self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
     [self.bodyView addSubview:self.titleLb];
@@ -42,21 +39,27 @@
     self.openBtn.userInteractionEnabled = NO;
     [self.openBtn setImage:[UIImage imageNamed:@"icon_uncheck"] forState:UIControlStateNormal];
     [self.openBtn setImage:[UIImage imageNamed:@"icon_check"] forState:UIControlStateSelected];
-    [self.contentView addSubview:self.openBtn];
+    [self.bodyView addSubview:self.openBtn];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(6);
-        make.bottom.offset(-6);
-        make.left.offset(20);
-        make.right.offset(-76);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
+        make.left.offset(0);
         make.right.mas_lessThanOrEqualTo(-18);
         make.centerY.offset(0);
     }];
     [self.openBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-30);
+        make.right.offset(0);
         make.centerY.offset(0);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
     }];
 }
 - (void)awakeFromNib {

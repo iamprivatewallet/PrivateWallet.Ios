@@ -39,29 +39,34 @@
     [self.bodyView addSubview:self.descLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.bodyView addSubview:arrowIv];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-12);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
+        make.centerX.equalTo(self.bodyView.mas_left).offset(30);
         make.centerY.offset(0);
-        make.width.height.offset(27);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(12);
-        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-2);
-        make.right.offset(-30);
+        make.left.offset(66);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
+        make.right.offset(-35);
     }];
     [self.descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(12);
-        make.top.equalTo(self.bodyView.mas_centerY).offset(2);
+        make.left.equalTo(self.titleLb);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(1);
         make.right.offset(-30);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
 }
@@ -69,9 +74,6 @@
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        _bodyView.layer.cornerRadius = 8;
     }
     return _bodyView;
 }

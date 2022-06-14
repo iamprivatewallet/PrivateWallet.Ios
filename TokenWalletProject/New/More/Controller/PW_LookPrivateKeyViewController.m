@@ -39,57 +39,60 @@
     [self.model.priKey pasteboardToast:YES];
 }
 - (void)makeViews {
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_privateKey") fontSize:15 textColor:[UIColor g_boldTextColor]];
-    [self.view addSubview:titleLb];
-    UILabel *descLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_privateKeyWalletTip") fontSize:12 textColor:[UIColor g_grayTextColor]];
-    [self.view addSubview:descLb];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_privateKey") fontSize:20 textColor:[UIColor g_textColor]];
+    [contentView addSubview:titleLb];
+    UILabel *descLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_privateKeyWalletTip") fontSize:15 textColor:[UIColor g_grayTextColor]];
+    [contentView addSubview:descLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(30);
-        make.left.offset(25);
+        make.top.offset(28);
+        make.left.offset(38);
     }];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(6);
-        make.left.offset(25);
-        make.right.offset(-25);
+        make.top.equalTo(titleLb.mas_bottom).offset(18);
+        make.left.offset(38);
+        make.right.offset(-38);
     }];
     UIView *privateKeyView = [[UIView alloc] init];
-    privateKeyView.backgroundColor = [UIColor g_bgColor];
-    [privateKeyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [privateKeyView setBorderColor:[UIColor g_borderColor] width:2 radius:8];
-    [self.view addSubview:privateKeyView];
-    self.privateKeyLb = [PW_ViewTool labelSemiboldText:self.model.priKey fontSize:12 textColor:[UIColor g_grayTextColor]];
+    privateKeyView.backgroundColor = [UIColor colorWithPatternImage:[UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-72, 110) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor g_darkGradientEndColor]] gradientType:PW_GradientLeftToRight cornerRadius:8]];
+    [contentView addSubview:privateKeyView];
+    self.privateKeyLb = [PW_ViewTool labelSemiboldText:self.model.priKey fontSize:13 textColor:[UIColor g_whiteTextColor]];
     [privateKeyView addSubview:self.privateKeyLb];
-    self.myCopyBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyAction)];
+    self.myCopyBtn = [PW_ViewTool buttonImageName:@"icon_copy_primary" target:self action:@selector(copyAction)];
     [privateKeyView addSubview:self.myCopyBtn];
-    self.lookBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_clickLookPrivateKey") fontSize:15 titleColor:[UIColor g_textColor] cornerRadius:17.5 backgroundColor:[UIColor g_bgColor] target:self action:@selector(lookAction)];
-    [self.lookBtn setBorderColor:[UIColor g_borderColor] width:1 radius:17.5];
+    self.lookBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_clickLookPrivateKey") fontSize:18 titleColor:[UIColor g_whiteTextColor] imageName:nil target:self action:@selector(lookAction)];
     [privateKeyView addSubview:self.lookBtn];
     [privateKeyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(descLb.mas_bottom).offset(20);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(144);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(110);
     }];
     [self.privateKeyLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(15);
-        make.left.offset(15);
-        make.right.offset(-15);
+        make.top.offset(28);
+        make.left.offset(20);
+        make.right.offset(-20);
     }];
     [self.lookBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.offset(180);
-        make.height.offset(35);
         make.center.offset(0);
     }];
     [self.myCopyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.offset(-10);
-        make.right.offset(-10);
+        make.right.offset(-15);
     }];
-    UILabel *tipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_privateKeyWalletDesc") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.view addSubview:tipLb];
+    UILabel *tipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_privateKeyWalletDesc") fontSize:13 textColor:[UIColor g_textColor]];
+    [contentView addSubview:tipLb];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(privateKeyView.mas_bottom).offset(20);
-        make.left.offset(25);
-        make.right.offset(-25);
+        make.top.equalTo(privateKeyView.mas_bottom).offset(25);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
 }
 

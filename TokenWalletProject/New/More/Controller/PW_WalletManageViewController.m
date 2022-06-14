@@ -12,6 +12,7 @@
 #import "PW_WalletManageCell.h"
 #import "PW_WalletSetViewController.h"
 #import "PW_BackupWalletViewController.h"
+#import "PW_WalletManageHeaderView.h"
 
 @interface PW_WalletManageViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -31,6 +32,7 @@
     [super viewDidLoad];
     
     [self setNavNoLineTitle:LocalizedStr(@"text_walletManage") rightTitle:LocalizedStr(@"text_edit") rightAction:@selector(editAction)];
+    [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kChainNodeUpdateNotification object:nil];
     [self makeViews];
     [self refreshData];
@@ -39,10 +41,8 @@
     [self.tableView setEditing:!self.tableView.editing animated:YES];
     if(self.tableView.editing){
         [self.rightBtn setTitle:LocalizedStr(@"text_finish") forState:UIControlStateNormal];
-        [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     }else{
         [self.rightBtn setTitle:LocalizedStr(@"text_edit") forState:UIControlStateNormal];
-        [self.rightBtn setTitleColor:[UIColor g_textColor] forState:UIControlStateNormal];
         [self sortUpdateDBAction];
     }
     [self.tableView reloadData];
@@ -68,10 +68,17 @@
     [self.tableView reloadData];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
-        make.left.right.offset(0);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.offset(0);
         make.bottom.offset(-SafeBottomInset);
     }];
 }
@@ -92,6 +99,14 @@
     };
     return cell;
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    PW_WalletManageHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_WalletManageHeaderView"];
+    __weak typeof(self) weakSelf = self;
+    view.addBlock = ^{
+        [weakSelf addWalletAction];
+    };
+    return view;
+}
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -105,7 +120,7 @@
     if (editingStyle==UITableViewCellEditingStyleDelete) {
         Wallet *model = self.dataList[indexPath.row];
         if (model.isImport==NO&&![User_manager isBackup]) {
-            [PW_AlertTool showAlertTitle:LocalizedStr(@"text_prompt") desc:LocalizedStr(@"text_noBackupTip") sureBlock:^{
+            [PW_TipTool showDeleteWalletBackupMnemonicsSureBlock:^{
                 PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
                 vc.isFirst = NO;
                 vc.wordStr = User_manager.currentUser.user_mnemonic;
@@ -148,11 +163,12 @@
         _tableView = [[PW_TableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 74;
+        _tableView.rowHeight = 72;
+        _tableView.sectionHeaderHeight = 50;
         [_tableView registerClass:[PW_WalletManageCell class] forCellReuseIdentifier:@"PW_WalletManageCell"];
+        [_tableView registerClass:[PW_WalletManageHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_WalletManageHeaderView"];
         _tableView.tableHeaderView = self.networkView;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
-        _tableView.tableFooterView = self.addWalletView;
+        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 20, 0);
     }
     return _tableView;
 }
@@ -165,8 +181,8 @@
         [contentView addTapTarget:self action:@selector(changeNetAction)];
         [_networkView addSubview:contentView];
         [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(20);
-            make.right.offset(-20);
+            make.left.offset(36);
+            make.right.offset(-36);
             make.top.offset(0);
             make.bottom.offset(-6);
         }];
@@ -204,23 +220,6 @@
         }];
     }
     return _networkView;
-}
-- (UIView *)addWalletView {
-    if (!_addWalletView) {
-        _addWalletView = [[UIView alloc] init];
-        _addWalletView.frame = CGRectMake(0, 0, 0, 54);
-        UIButton *addBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addWallet") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addWalletAction)];
-        addBtn.frame = CGRectMake(0, 5, SCREEN_WIDTH-40, 44);
-        [addBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
-        [_addWalletView addSubview:addBtn];
-        [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(5);
-            make.bottom.offset(-5);
-            make.left.offset(20);
-            make.right.offset(-20);
-        }];
-    }
-    return _addWalletView;
 }
 - (NSMutableArray<Wallet *> *)dataList {
     if(!_dataList) {

@@ -77,7 +77,7 @@
 - (UIView *)createRowIconName:(NSString *)iconName title:(NSString *)title desc:(NSString *)desc {
     UIView *bodyView = [[UIView alloc] init];
     [bodyView setCornerRadius:8];
-    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-72, 65) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor blackColor]] gradientType:PW_GradientLeftToRight];
+    UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-72, 65) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor g_darkGradientEndColor]] gradientType:PW_GradientLeftToRight];
     bodyView.backgroundColor = [UIColor colorWithPatternImage:image];
     UIImageView *iconIv = [[UIImageView alloc] init];
     iconIv.image = [UIImage imageNamed:iconName];

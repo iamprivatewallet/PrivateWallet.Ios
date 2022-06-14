@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     [self setNavNoLineTitle:LocalizedStr(@"text_addContact")];
-    self.typeModel = [PW_ChooseAddressTypeModel IconName:@"icon_ETH" title:@"ETH" subTitle:@"Ethereum" chainId:kETHChainId selected:YES];
+    self.typeModel = [PW_ChooseAddressTypeModel IconName:@"icon_type_CVN" title:@"ETH" subTitle:@"Ethereum" chainId:kETHChainId selected:YES];
     [self makeViews];
     [self refreshUI];
 }
@@ -87,72 +87,75 @@
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
     }];
     self.contentView = [[UIView alloc] init];
+    self.contentView.backgroundColor = [UIColor g_bgColor];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.bottom.offset(0);
+        make.height.greaterThanOrEqualTo(scrollView);
         make.width.equalTo(scrollView);
     }];
     self.tokenView = [[UIView alloc] init];
-    self.tokenView.backgroundColor = [UIColor g_bgColor];
-    [self.tokenView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    self.tokenView.layer.cornerRadius = 21;
+    self.tokenView.backgroundColor = [UIColor g_bgCardColor];
+    [self.tokenView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.tokenView addTapTarget:self action:@selector(changeTypeAction)];
     [self.contentView addSubview:self.tokenView];
     [self.tokenView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(20);
-        make.left.offset(20);
-        make.height.offset(42);
+        make.top.offset(36);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(65);
     }];
     self.nameView = [[UIView alloc] init];
-    [self.nameView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.nameView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.nameView.backgroundColor = [UIColor g_bgCardColor];
+    [self.nameView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.nameView];
     self.addressView = [[UIView alloc] init];
-    [self.addressView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.addressView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.addressView.backgroundColor = [UIColor g_bgCardColor];
+    [self.addressView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.addressView];
     self.noteView = [[UIView alloc] init];
-    [self.noteView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.noteView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.noteView.backgroundColor = [UIColor g_bgCardColor];
+    [self.noteView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.noteView];
-    UIButton *saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
+    UIButton *saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
     [self.contentView addSubview:saveBtn];
     [self.nameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tokenView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     [self.addressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     [self.noteView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.addressView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.noteView.mas_bottom).offset(25);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.greaterThanOrEqualTo(self.noteView.mas_bottom).offset(25);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(55);
-        make.bottom.mas_lessThanOrEqualTo(-20);
+        make.bottomMargin.offset(-20);
     }];
     [self createTokenItems];
     [self createNameItems];
     [self createAddressItems];
     [self createNoteItems];
+    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
 }
 - (void)createTokenItems {
     self.iconIv = [[UIImageView alloc] init];
@@ -161,29 +164,27 @@
     [self.tokenView addSubview:self.nameLb];
     self.subNameLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
     [self.tokenView addSubview:self.subNameLb];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_dark"]];
+    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.tokenView addSubview:arrowIv];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.offset(25);
-        make.left.offset(15);
+        make.centerX.equalTo(self.tokenView.mas_left).offset(35);
         make.centerY.offset(0);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
-        make.centerY.offset(0);
+        make.left.offset(70);
+        make.bottom.equalTo(self.tokenView.mas_centerY);
     }];
     [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLb.mas_right).offset(5);
-        make.bottom.equalTo(self.nameLb);
+        make.left.equalTo(self.nameLb);
+        make.top.equalTo(self.tokenView.mas_centerY);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.subNameLb.mas_right).offset(18);
         make.centerY.offset(0);
-        make.right.offset(-20);
+        make.right.offset(-18);
     }];
 }
 - (void)createNameItems {
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_name") fontSize:13 textColor:[UIColor g_textColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_name") fontSize:20 textColor:[UIColor g_textColor]];
     [self.nameView addSubview:tipLb];
     self.nameTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_setup")];
     [self.nameView addSubview:self.nameTf];
@@ -199,7 +200,7 @@
     }];
 }
 - (void)createAddressItems {
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_walletAddress") fontSize:13 textColor:[UIColor g_textColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_walletAddress") fontSize:20 textColor:[UIColor g_textColor]];
     [self.addressView addSubview:tipLb];
     self.addressTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputCopyAddress")];
     [self.addressView addSubview:self.addressTf];
@@ -212,28 +213,22 @@
     [self.addressTf mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(32);
         make.left.offset(18);
-        make.right.offset(-55);
+        make.right.offset(-18);
         make.bottom.offset(-10);
     }];
     [scanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-24);
-        make.bottom.offset(-22);
+        make.right.offset(-12);
+        make.top.offset(12);
     }];
 }
 - (void)createNoteItems {
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_note") fontSize:13 textColor:[UIColor g_textColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_note") fontSize:20 textColor:[UIColor g_textColor]];
     [self.noteView addSubview:tipLb];
-    UILabel *tipDescLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"（%@）",LocalizedStr(@"text_optional")) fontSize:12 textColor:[UIColor g_grayTextColor]];
-    [self.noteView addSubview:tipDescLb];
-    self.noteTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_note")];
+    self.noteTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_optional")];
     [self.noteView addSubview:self.noteTf];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.top.offset(10);
-    }];
-    [tipDescLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(tipLb.mas_right);
-        make.centerY.equalTo(tipLb);
     }];
     [self.noteTf mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(32);

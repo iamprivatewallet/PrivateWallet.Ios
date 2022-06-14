@@ -26,16 +26,15 @@
     [super viewDidLoad];
     
     [self setNavNoLineTitle:LocalizedStr(@"text_addressBook") rightTitle:LocalizedStr(@"text_edit") rightAction:@selector(editAction)];
+    [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     [self makeViews];
 }
 - (void)editAction {
     self.isEdit = !self.isEdit;
     if(self.isEdit){
         [self.rightBtn setTitle:LocalizedStr(@"text_finish") forState:UIControlStateNormal];
-        [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     }else{
         [self.rightBtn setTitle:LocalizedStr(@"text_edit") forState:UIControlStateNormal];
-        [self.rightBtn setTitleColor:[UIColor g_textColor] forState:UIControlStateNormal];
     }
     [self.tableView reloadData];
 }
@@ -48,9 +47,17 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -82,7 +89,7 @@
         _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 180;
+        _tableView.rowHeight = 140;
         [_tableView registerClass:[PW_AddressBookCell class] forCellReuseIdentifier:@"PW_AddressBookCell"];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableFooterView = self.addView;
@@ -94,13 +101,13 @@
         _addView = [[UIView alloc] init];
         _addView.frame = CGRectMake(0, 0, 0, 54);
         UIButton *addBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addContact") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addAction)];
-        addBtn.frame = CGRectMake(20, 10, SCREEN_WIDTH-40, 44);
+        addBtn.frame = CGRectMake(20, 10, SCREEN_WIDTH-72, 44);
         [addBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
         [_addView addSubview:addBtn];
         [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(10);
-            make.left.offset(20);
-            make.right.offset(-20);
+            make.left.offset(36);
+            make.right.offset(-36);
             make.height.offset(44);
         }];
     }

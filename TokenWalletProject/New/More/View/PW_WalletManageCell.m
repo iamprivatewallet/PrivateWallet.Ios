@@ -56,28 +56,28 @@
     [self.bodyView addSubview:self.arrowIv];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(6);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.bottom.offset(-6);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(20);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
+        make.left.offset(0);
     }];
     [self.addressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLb.mas_bottom).offset(4);
-        make.left.offset(20);
+        make.top.equalTo(self.nameLb.mas_bottom).offset(2);
+        make.left.offset(0);
     }];
     [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.addressLb.mas_right).offset(8);
         make.centerY.equalTo(self.addressLb);
     }];
     [self.arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
     [self.topBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-12);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
 }
@@ -85,27 +85,24 @@
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        _bodyView.layer.cornerRadius = 8;
     }
     return _bodyView;
 }
 - (UILabel *)nameLb {
     if (!_nameLb) {
-        _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
+        _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:20 textColor:[UIColor g_boldTextColor]];
     }
     return _nameLb;
 }
 - (UILabel *)addressLb {
     if (!_addressLb) {
-        _addressLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+        _addressLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_darkTextColor]];
     }
     return _addressLb;
 }
 - (UIButton *)copyBtn {
     if (!_copyBtn) {
-        _copyBtn = [PW_ViewTool buttonImageName:@"icon_copyAndBg" target:self action:@selector(copyAction)];
+        _copyBtn = [PW_ViewTool buttonImageName:@"icon_copy_gray" target:self action:@selector(copyAction)];
     }
     return _copyBtn;
 }

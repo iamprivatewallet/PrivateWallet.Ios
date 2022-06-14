@@ -50,6 +50,24 @@
     }
     return btn;
 }
++ (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(nullable UIColor *)backgroundColor target:(nullable id)target action:(nullable SEL)action {
+    return [self buttonTitle:title fontSize:fontSize weight:UIFontWeightRegular titleColor:titleColor cornerRadius:cornerRadius backgroundColor:backgroundColor target:target action:action];
+}
++ (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize titleColor:(UIColor *)titleColor imageName:(nullable NSString *)imageName target:(nullable id)target action:(nullable SEL)action {
+    PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:title forState:UIControlStateNormal];
+    if([imageName isNoEmpty]){
+        [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [btn layoutWithEdgeInsetStyle:PW_ButtonEdgeInsetStyleLeft spaceBetweenImageAndTitle:5];
+    }
+    btn.titleLabel.font = [UIFont systemFontOfSize:fontSize weight:UIFontWeightRegular];
+    [btn setTitleColor:titleColor forState:UIControlStateNormal];
+    [btn setTitleColor:[titleColor colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
+    if(target&&action){
+        [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
+    return btn;
+}
 + (UIButton *)buttonTitle:(NSString *)title fontSize:(CGFloat)fontSize weight:(UIFontWeight)weight titleColor:(UIColor *)titleColor cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action {
     PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];

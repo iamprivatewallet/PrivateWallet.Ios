@@ -49,34 +49,32 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
-    self.bodyView.layer.cornerRadius = 8;
     [self.contentView addSubview:self.bodyView];
     self.iconIv = [[UIImageView alloc] init];
     [self.bodyView addSubview:self.iconIv];
-    self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
+    self.titleLb = [PW_ViewTool labelText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
     [self.bodyView addSubview:self.titleLb];
-    self.descLb = [PW_ViewTool labelMediumText:@"" fontSize:13 textColor:[UIColor g_grayTextColor]];
+    self.descLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.bodyView addSubview:self.descLb];
     self.arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.bodyView addSubview:self.arrowIv];
     self.switchBtn = [[UISwitch alloc] init];
     [self.switchBtn addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     [self.bodyView addSubview:self.switchBtn];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(5);
-        make.bottom.offset(-5);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(15);
-        make.width.height.offset(36);
+        make.centerX.equalTo(self.bodyView.mas_left).offset(30);
         make.centerY.offset(0);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
+        make.left.offset(66);
         make.centerY.offset(0);
     }];
     [self.descLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,12 +82,16 @@
         make.centerY.offset(0);
     }];
     [self.arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
     [self.switchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
     }];
 }
 - (void)awakeFromNib {

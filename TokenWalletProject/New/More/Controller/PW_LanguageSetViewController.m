@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_multilingual") rightTitle:LocalizedStr(@"text_finish") rightAction:@selector(finishAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_multilingual") rightTitle:LocalizedStr(@"text_save") rightAction:@selector(finishAction)];
     [self.rightBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
     [self makeViews];
     self.oldLanguageModel = [LanguageTool currentLanguage];
@@ -50,9 +50,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -79,7 +87,7 @@
         _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 72;
+        _tableView.rowHeight = 75;
         [_tableView registerClass:[PW_LanguageCell class] forCellReuseIdentifier:@"PW_LanguageCell"];
     }
     return _tableView;

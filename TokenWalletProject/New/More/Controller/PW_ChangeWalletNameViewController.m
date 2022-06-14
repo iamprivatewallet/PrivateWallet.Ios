@@ -37,37 +37,45 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIView *nameView = [[UIView alloc] init];
     nameView.backgroundColor = [UIColor g_bgColor];
     [nameView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [nameView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.view addSubview:nameView];
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_walletName") fontSize:13 textColor:[UIColor g_boldTextColor]];
+    [nameView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
+    [contentView addSubview:nameView];
+    UILabel *tipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_walletName") fontSize:20 textColor:[UIColor g_boldTextColor]];
     [nameView addSubview:tipLb];
-    self.nameTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:17] color:[UIColor g_textColor] placeholder:self.model.walletName];
+    self.nameTf = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:15] color:[UIColor g_textColor] placeholder:self.model.walletName];
     [nameView addSubview:self.nameTf];
     [nameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(84);
+        make.top.offset(36);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(74);
     }];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
-        make.top.offset(10);
+        make.top.offset(15);
     }];
     [self.nameTf mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(30);
-        make.bottom.offset(-10);
+        make.top.offset(35);
+        make.bottom.offset(-5);
         make.left.offset(18);
         make.right.offset(-15);
     }];
-    self.sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
-    [self.view addSubview:self.sureBtn];
+    self.sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
+    [contentView addSubview:self.sureBtn];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nameView.mas_bottom).offset(45);
-        make.left.offset(25);
-        make.right.offset(-25);
+        make.bottomMargin.offset(-30);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(55);
     }];
 }

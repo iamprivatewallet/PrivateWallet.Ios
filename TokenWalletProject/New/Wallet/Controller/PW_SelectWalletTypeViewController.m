@@ -27,21 +27,21 @@
          @{
              @"title":WalletTypeETH,
              @"detailText":@"Ethereum",
-             @"icon":@"icon_ETH",
+             @"icon":@"icon_type_ETH",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
          @{
              @"title":WalletTypeCVN,
              @"detailText":@"cvn",
-             @"icon":@"icon_CVN",
+             @"icon":@"icon_type_CVN",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
 //         @{
 //             @"title":WalletTypeSolana,
 //             @"detailText":@"solana",
-//             @"icon":@"icon_ETH",
+//             @"icon":@"icon_type_SOLANA",
 //             @"isDefault":@"1",
 //             @"isChecked":@"1"
 //         }
@@ -53,9 +53,17 @@
     [self makeViews];
 }
 - (void)makeViews{
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(0);
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }

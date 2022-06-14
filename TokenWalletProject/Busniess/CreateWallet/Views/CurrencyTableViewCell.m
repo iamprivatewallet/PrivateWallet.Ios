@@ -32,9 +32,9 @@
         if (![mdl.isDefault boolValue]) {
             //不是默认币种，可以选择点击
             if (mdl.isChecked) {
-                [self.checkIconBtn setBackgroundImage:ImageNamed(@"checkedBlueGhost") forState:UIControlStateNormal];
+                [self.checkIconBtn setBackgroundImage:ImageNamed(@"icon_check") forState:UIControlStateNormal];
             }else{
-                [self.checkIconBtn setBackgroundImage:ImageNamed(@"uncheck") forState:UIControlStateNormal];
+                [self.checkIconBtn setBackgroundImage:ImageNamed(@"icon_uncheck") forState:UIControlStateNormal];
             }
         }
     }
@@ -44,37 +44,34 @@
 - (void)makeViews {
     self.iconImg = [ZZCustomView imageViewInitView:self.contentView imageName:@"walletEthNormal"];
     [self.iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentView).offset(15);
-        make.size.mas_equalTo(CGSizeMake(32, 32));
-        make.centerY.equalTo(self.contentView);
+        make.centerX.equalTo(self.contentView.mas_left).offset(66);
+        make.centerY.offset(0);
     }];
     
     self.titleLbl = [ZZCustomView labelInitWithView:self.contentView text:@"ETH" textColor:[UIColor im_textColor_three] font:GCSFontSemibold(15)];
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImg.mas_right).offset(15);
-        make.top.equalTo(self.iconImg).offset(-5);
+        make.left.offset(102);
+        make.bottom.equalTo(self.contentView.mas_centerY).offset(-2);
     }];
     
     self.detailLbl = [ZZCustomView labelInitWithView:self.contentView text:@"Ethereum" textColor:[UIColor im_textColor_six] font:GCSFontRegular(13)];
     [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLbl);
-        make.top.equalTo(self.titleLbl.mas_bottom);
+        make.top.equalTo(self.titleLbl.mas_bottom).offset(4);
     }];
     if (self.isCheck) {//选择对号
         self.checkIconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.checkIconBtn setBackgroundImage:ImageNamed(@"currency_check") forState:UIControlStateNormal];
+        [self.checkIconBtn setBackgroundImage:ImageNamed(@"icon_check") forState:UIControlStateNormal];
         [self.contentView addSubview:self.checkIconBtn];
         [self.checkIconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView).offset(-15);
+            make.right.offset(-36);
             make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(21, 21));
         }];
     }else{//箭头
-        UIImageView *arrow = [ZZCustomView imageViewInitView:self.contentView imageName:@"arrow"];
+        UIImageView *arrow = [ZZCustomView imageViewInitView:self.contentView imageName:@"icon_arrow"];
         [arrow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.contentView).offset(-15);
-            make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(18, 18));
+            make.right.offset(-36);
+            make.centerY.offset(0);
         }];
     }
     

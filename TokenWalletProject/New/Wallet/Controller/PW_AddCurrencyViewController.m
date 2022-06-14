@@ -31,7 +31,7 @@
          @{
              @"title":WalletTypeETH,
              @"desc":@"Ethereum",
-             @"icon":@"icon_ETH",
+             @"icon":@"icon_type_ETH",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
@@ -52,7 +52,7 @@
          @{
              @"title":WalletTypeCVN,
              @"desc":@"cvn",
-             @"icon":@"icon_CVN",
+             @"icon":@"icon_type_CVN",
              @"isDefault":@"0",
              @"isChecked":@"0"
          },

@@ -32,33 +32,38 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
     [self.contentView addSubview:self.bodyView];
     self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
     [self.bodyView addSubview:self.titleLb];
     self.descLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+    self.descLb.numberOfLines = 2;
     [self.bodyView addSubview:self.descLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.bodyView addSubview:arrowIv];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.offset(6);
-        make.bottom.offset(-6);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.bottom.offset(0);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.bodyView.mas_centerY);
-        make.left.offset(25);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
+        make.left.offset(0);
     }];
     [self.descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(25);
-        make.top.equalTo(self.bodyView.mas_centerY).offset(4);
-        make.right.mas_lessThanOrEqualTo(-20);
+        make.left.offset(0);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(1);
+        make.right.mas_lessThanOrEqualTo(0);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
     }];
 }
 

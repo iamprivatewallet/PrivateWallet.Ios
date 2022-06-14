@@ -50,10 +50,10 @@
         PW_NetworkManageViewController *vc = [[PW_NetworkManageViewController alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
-//    PW_MoreModel *lockModel = [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
-//        PW_AppLockViewController *vc = [[PW_AppLockViewController alloc] init];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-//    }];
+    PW_MoreModel *lockModel = [PW_MoreModel MoreIconName:@"icon_more_lock" title:LocalizedStr(@"text_appLock") actionBlock:^(PW_MoreModel * _Nonnull model) {
+        PW_AppLockViewController *vc = [[PW_AppLockViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
     PW_MoreModel *addressBookModel = [PW_MoreModel MoreIconName:@"icon_more_addressBook" title:LocalizedStr(@"text_addressBook") actionBlock:^(PW_MoreModel * _Nonnull model) {
         PW_AddressBookViewController *vc = [[PW_AddressBookViewController alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -78,7 +78,7 @@
     PW_MoreModel *shareModel = [PW_MoreModel MoreIconName:@"icon_more_share" title:LocalizedStr(@"text_shareApp") actionBlock:^(PW_MoreModel * _Nonnull model) {
         [PW_ShareAppTool showShareApp];
     }];
-    [self.dataArr addObjectsFromArray:@[walletModel,networkModel,addressBookModel,instructionsModel,adviceModel,agreementModel,aboutModel,setupModel,shareModel]];
+    [self.dataArr addObjectsFromArray:@[walletModel,networkModel,lockModel,addressBookModel,instructionsModel,adviceModel,agreementModel,aboutModel,setupModel,shareModel]];
     [self.tableView reloadData];
 }
 - (void)openWebTitle:(NSString *)title urlStr:(NSString *)urlStr {
@@ -98,7 +98,7 @@
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(28);
         make.left.bottom.right.offset(0);
     }];
 }
@@ -124,7 +124,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 70;
-        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 10, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
         [_tableView registerClass:[PW_MoreCell class] forCellReuseIdentifier:@"PW_MoreCell"];
     }
     return _tableView;

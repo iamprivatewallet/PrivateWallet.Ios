@@ -185,7 +185,7 @@
     }
     if (rightImage||[rightTitle isNoEmpty]) {
         _rightBtn = [[UIButton alloc]initWithFrame:CGRectZero];
-        _rightBtn.titleLabel.font = [UIFont pw_mediumFontOfSize:20];
+        _rightBtn.titleLabel.font = [UIFont pw_mediumFontOfSize:15];
         [_rightBtn setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_rightBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self.naviBar addSubview:_rightBtn];

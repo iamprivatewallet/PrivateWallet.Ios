@@ -15,6 +15,65 @@
 + (void)showBackupTipSureBlock:(void (^)(void))block {
     [self showBackupTipDesc:LocalizedStr(@"text_backupAlertDesc") sureBlock:block];
 }
++ (void)showDeleteWalletBackupMnemonicsSureBlock:(void (^)(void))block {
+    [[UIApplication sharedApplication].delegate.window endEditing:YES];
+    UIView *contentView = [[UIView alloc] init];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
+    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_prompt") fontSize:22 textColor:[UIColor g_boldTextColor]];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(38);
+        make.centerX.offset(0);
+        make.width.equalTo(contentView).multipliedBy(0.6);
+    }];
+    UIView *descBgView = [[UIView alloc] init];
+    descBgView.backgroundColor = [UIColor g_warnBgColor];
+    [descBgView setCornerRadius:8];
+    [contentView addSubview:descBgView];
+    [descBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLb.mas_bottom).offset(15);
+        make.left.offset(36);
+        make.right.offset(-36);
+    }];
+    UILabel *descLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupTip") fontSize:14 textColor:[UIColor g_darkTextColor]];
+    descLb.textAlignment = NSTextAlignmentCenter;
+    [descBgView addSubview:descLb];
+    [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(16);
+        make.left.offset(40);
+        make.right.offset(-40);
+        make.bottom.offset(-16);
+    }];
+    __weak typeof(view) weakView = view;
+    UIButton *cancelBtn = [PW_ViewTool buttonTitle:LocalizedStr(@"text_cancel") fontSize:18 titleColor:[UIColor g_whiteTextColor] cornerRadius:8 backgroundColor:[UIColor g_darkBgColor] target:nil action:nil];
+    [cancelBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+    }];
+    [contentView addSubview:cancelBtn];
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(descBgView.mas_bottom).offset(18);
+        make.left.offset(36);
+        make.height.offset(55);
+        make.bottomMargin.offset(-20);
+    }];
+    UIButton *sureBtn = [PW_ViewTool buttonTitle:LocalizedStr(@"text_backupMnemonics") fontSize:18 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
+    sureBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    sureBtn.titleLabel.numberOfLines = 2;
+    [sureBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+        [weakView removeFromSuperview];
+        if(block){
+            block();
+        }
+    }];
+    [contentView addSubview:sureBtn];
+    [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cancelBtn.mas_right).offset(25);
+        make.right.offset(-36);
+        make.top.width.height.bottom.equalTo(cancelBtn);
+    }];
+    [PW_AlertTool showAnimationSheetContentView:contentView];
+}
 + (void)showBackupTipPrivateKeySureBlock:(void (^)(void))block {
     [self showBackupTipDesc:LocalizedStr(@"text_backupAlertPrivateKeyDesc") sureBlock:block];
 }

@@ -104,125 +104,117 @@
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
     }];
     self.contentView = [[UIView alloc] init];
+    self.contentView.backgroundColor = [UIColor g_bgColor];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.bottom.offset(0);
+        make.height.greaterThanOrEqualTo(scrollView);
         make.width.equalTo(scrollView);
     }];
-    self.warnView = [[UIView alloc] init];
-    self.warnView.backgroundColor = [UIColor g_warnBgColor];
-    self.warnView.layer.cornerRadius = 12;
-    self.warnView.layer.masksToBounds = YES;
-    [self.contentView addSubview:self.warnView];
-    [self.warnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.top.offset(20);
-        make.right.offset(-20);
-    }];
     self.nameView = [[UIView alloc] init];
-    self.nameView.backgroundColor = [UIColor g_bgColor];
-    [self.nameView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.nameView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.nameView.backgroundColor = [UIColor g_bgCardColor];
+    [self.nameView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.nameView];
     [self.nameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.warnView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.offset(36);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     self.rpcUrlView = [[UIView alloc] init];
-    self.rpcUrlView.backgroundColor = [UIColor g_bgColor];
-    [self.rpcUrlView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.rpcUrlView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.rpcUrlView.backgroundColor = [UIColor g_bgCardColor];
+    [self.rpcUrlView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.rpcUrlView];
     [self.rpcUrlView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     self.chainIdView = [[UIView alloc] init];
-    self.chainIdView.backgroundColor = [UIColor g_bgColor];
-    [self.chainIdView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.chainIdView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.chainIdView.backgroundColor = [UIColor g_bgCardColor];
+    [self.chainIdView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.chainIdView];
     [self.chainIdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.rpcUrlView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     self.symbolView = [[UIView alloc] init];
-    self.symbolView.backgroundColor = [UIColor g_bgColor];
-    [self.symbolView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.symbolView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.symbolView.backgroundColor = [UIColor g_bgCardColor];
+    [self.symbolView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.symbolView];
     [self.symbolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.chainIdView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
     self.blockBrowserView = [[UIView alloc] init];
-    self.blockBrowserView.backgroundColor = [UIColor g_bgColor];
-    [self.blockBrowserView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [self.blockBrowserView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    self.blockBrowserView.backgroundColor = [UIColor g_bgCardColor];
+    [self.blockBrowserView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:self.blockBrowserView];
     [self.blockBrowserView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.symbolView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(84);
     }];
-    self.cancelBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_cancel") fontSize:16 titleColor:[UIColor g_boldTextColor] cornerRadius:16 backgroundColor:nil target:self action:@selector(cancelAction)];
-    [self.cancelBtn setBorderColor:[UIColor g_boldTextColor] width:1 radius:16];
+    self.warnView = [[UIView alloc] init];
+    self.warnView.backgroundColor = [UIColor g_warnBgColor];
+    self.warnView.layer.cornerRadius = 8;
+    self.warnView.layer.masksToBounds = YES;
+    [self.contentView addSubview:self.warnView];
+    [self.warnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_greaterThanOrEqualTo(self.blockBrowserView.mas_bottom).offset(30);
+        make.left.offset(36);
+        make.right.offset(-36);
+    }];
+    self.cancelBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_cancel") fontSize:18 titleColor:[UIColor g_whiteTextColor] cornerRadius:8 backgroundColor:[UIColor g_darkBgColor] target:self action:@selector(cancelAction)];
     [self.contentView addSubview:self.cancelBtn];
-    self.saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
+    self.saveBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_save") fontSize:18 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(saveAction)];
     [self.contentView addSubview:self.saveBtn];
     [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(25);
-        make.top.equalTo(self.blockBrowserView.mas_bottom).offset(30);
+        make.left.offset(36);
+        make.top.equalTo(self.warnView.mas_bottom).offset(18);
         make.height.offset(55);
-        make.bottom.offset(-20);
+        make.bottom.offset(-SafeBottomInset-20);
     }];
     [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.cancelBtn.mas_right).offset(15);
+        make.left.equalTo(self.cancelBtn.mas_right).offset(28);
         make.top.equalTo(self.cancelBtn);
-        make.right.offset(-25);
-        make.width.equalTo(self.cancelBtn);
-        make.height.offset(55);
+        make.right.offset(-36);
+        make.width.height.equalTo(self.cancelBtn);
     }];
-    [self createWarnItems];
     [self createNameItems];
     [self createRpcUrlItems];
     [self createChainIdItems];
     [self createSymbolItems];
     [self createBlockBrowserItems];
+    [self createWarnItems];
+    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
 }
 - (void)createWarnItems {
-    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_warning"]];
-    [self.warnView addSubview:iconIv];
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_addCustomNetworkTip") fontSize:12 textColor:[UIColor g_warnColor]];
+    UILabel *tipLb = [PW_ViewTool labelText:LocalizedStr(@"text_addCustomNetworkTip") fontSize:14 textColor:[UIColor g_textColor]];
+    tipLb.textAlignment = NSTextAlignmentCenter;
     [self.warnView addSubview:tipLb];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.offset(14);
-    }];
     [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(iconIv.mas_right).offset(12);
-        make.top.offset(12);
-        make.right.offset(-10);
-        make.bottom.offset(-12);
+        make.left.offset(30);
+        make.top.offset(18);
+        make.right.offset(-30);
+        make.bottom.offset(-18);
     }];
 }
 - (void)createNameItems {
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_networkName") fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_networkName") fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.nameView addSubview:tipLb];
     self.nameTf = [PW_ViewTool textFieldFont:[UIFont pw_mediumFontOfSize:16] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_networkName")];
     [self.nameView addSubview:self.nameTf];
@@ -238,7 +230,7 @@
     }];
 }
 - (void)createRpcUrlItems {
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"%@PRC URL",LocalizedStr(@"text_added")) fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"%@PRC URL",LocalizedStr(@"text_added")) fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.rpcUrlView addSubview:tipLb];
     self.rpcUrlTf = [PW_ViewTool textFieldFont:[UIFont pw_mediumFontOfSize:16] color:[UIColor g_textColor] placeholder:@"PRC URL"];
     self.rpcUrlTf.keyboardType = UIKeyboardTypeURL;
@@ -256,7 +248,7 @@
 }
 - (void)createChainIdItems {
     NSString *tipStr = PW_StrFormat(@"%@ID",LocalizedStr(@"text_chain"));
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.chainIdView addSubview:tipLb];
     self.chainIdTf = [PW_ViewTool textFieldFont:[UIFont pw_mediumFontOfSize:16] color:[UIColor g_textColor] placeholder:tipStr];
     self.chainIdTf.keyboardType = UIKeyboardTypeNumberPad;
@@ -274,7 +266,7 @@
 }
 - (void)createSymbolItems {
     NSString *tipStr = LocalizedStr(@"text_tokenSymbol");
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.symbolView addSubview:tipLb];
     UILabel *descLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"（%@）",LocalizedStr(@"text_optional")) fontSize:12 textColor:[UIColor g_grayTextColor]];
     [self.symbolView addSubview:descLb];
@@ -298,7 +290,7 @@
 }
 - (void)createBlockBrowserItems {
     NSString *tipStr = LocalizedStr(@"text_blockBrowser");
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UILabel *tipLb = [PW_ViewTool labelSemiboldText:tipStr fontSize:20 textColor:[UIColor g_boldTextColor]];
     [self.blockBrowserView addSubview:tipLb];
     UILabel *descLb = [PW_ViewTool labelSemiboldText:PW_StrFormat(@"（%@）",LocalizedStr(@"text_optional")) fontSize:12 textColor:[UIColor g_grayTextColor]];
     [self.blockBrowserView addSubview:descLb];

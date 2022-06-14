@@ -36,8 +36,6 @@
 }
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
-    [self.bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    self.bodyView.backgroundColor = [UIColor g_bgColor];
     [self.contentView addSubview:self.bodyView];
     self.iconIv = [[UIImageView alloc] init];
     [self.bodyView addSubview:self.iconIv];
@@ -50,19 +48,20 @@
     [self.stateBtn setImage:[UIImage imageNamed:@"icon_uncheck"] forState:UIControlStateNormal];
     [self.stateBtn setImage:[UIImage imageNamed:@"icon_check"] forState:UIControlStateSelected];
     [self.bodyView addSubview:self.stateBtn];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.top.offset(5);
-        make.bottom.offset(-5);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.bottom.offset(0);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
-        make.width.height.offset(40);
+        make.centerX.equalTo(self.bodyView.mas_left).offset(30);
         make.centerY.offset(0);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(15);
+        make.left.offset(66);
         make.centerY.offset(0);
     }];
     [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,8 +69,12 @@
         make.centerY.offset(0);
     }];
     [self.stateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-16);
+        make.right.offset(0);
         make.centerY.offset(0);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.offset(0);
+        make.height.offset(1);
     }];
 }
 
