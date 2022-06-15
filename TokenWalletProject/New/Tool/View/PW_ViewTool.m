@@ -115,6 +115,26 @@
     return tf;
 }
 
++ (UISegmentedControl *)segmentedControlWithTitles:(NSArray<NSString *> *)titles {
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
+    segmentedControl.apportionsSegmentWidthsByContent = YES;
+    [segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor g_hex:@"#7221F4"] size:CGSizeMake(1, 1)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    UIImage *dividerImage = [UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)];
+    [segmentedControl setDividerImage:dividerImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    segmentedControl.tintColor = [UIColor g_hex:@"#7221F4"];
+    segmentedControl.backgroundColor = [UIColor whiteColor];
+    [segmentedControl setBorderColor:[UIColor g_hex:@"#7221F4"] width:1 radius:8];
+    if (@available(iOS 13.0, *)) {
+        segmentedControl.selectedSegmentTintColor = [UIColor g_hex:@"#7221F4"];
+    } else {
+        // Fallback on earlier versions
+    }
+    [segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_textColor]} forState:UIControlStateNormal];
+    [segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_whiteTextColor]} forState:UIControlStateSelected];
+    return segmentedControl;
+}
+
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius {
     [self setupView:view cornerRadius:cornerRadius shadowColor:[UIColor g_shadowColor] shadowOffset:shadowOffset shadowRadius:shadowRadius];
 }

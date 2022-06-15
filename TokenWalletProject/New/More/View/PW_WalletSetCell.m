@@ -52,11 +52,11 @@
         make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.bodyView.mas_left).offset(30);
+        make.centerX.equalTo(self.bodyView.mas_left).offset(22);
         make.centerY.offset(0);
     }];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(66);
+        make.left.offset(56);
         make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
         make.right.offset(-35);
     }];

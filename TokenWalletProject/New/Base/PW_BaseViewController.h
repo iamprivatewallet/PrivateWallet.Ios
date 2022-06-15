@@ -31,19 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *rightBtn;
 
 - (void)setupFullBackground;
-- (void)setupNavBgBlackBig;
+- (void)setupNavBgBlack;
 - (void)setupNavBgRed;
 - (void)setupNavBgGreen;
 - (void)setupNavBgPurple;//紫色
 - (void)clearBackground;
 - (void)setNavNoLineTitle:(NSString *)title;
-- (void)setNavNoLineTitle:(NSString *)title rightTitle:(NSString *)rightTitle rightAction:(SEL)rightAction;
-- (void)setNavNoLineTitle:(NSString *)title rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;
-- (void)setNavNoLineTitle:(NSString *)title leftTitle:(NSString *)leftTitle rightImg:(NSString *)rightImg rightAction:(SEL)rightAction;
+- (void)setNavNoLineTitle:(NSString *)title rightTitle:(nullable NSString *)rightTitle rightAction:(nullable SEL)rightAction;
+- (void)setNavNoLineTitle:(NSString *)title rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction;
+- (void)setNavNoLineTitle:(NSString *)title leftTitle:(nullable NSString *)leftTitle rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction;
 //只显示标题
 - (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine;
 //自定义左右图片
-- (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine;
+- (void)setNavTitle:(NSString *)title leftImg:(nullable NSString *)leftImg leftAction:(nullable SEL)leftAction rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction isNoLine:(BOOL)isNoLine;
 
 @end
 

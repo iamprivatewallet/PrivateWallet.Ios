@@ -21,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_recentBrowse") rightTitle:LocalizedStr(@"text_cleanAll") rightAction:@selector(clearAllAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_browseHistory") rightTitle:LocalizedStr(@"text_cleanAll") rightAction:@selector(clearAllAction)];
+    [self setupNavBgPurple];
     [self makeViews];
     self.noDataView.hidden = self.dataArr.count>0;
 }
@@ -31,10 +32,24 @@
     self.noDataView.hidden = NO;
     [self.tableView reloadData];
 }
+- (void)deleteWithModel:(PW_DappModel *)model {
+    [[PW_DappFavoritesManager shared] deleteWithUrlStr:model.appUrl];
+    [self.dataArr removeObject:model];
+    self.noDataView.hidden = self.dataArr.count>0;
+    [self.tableView reloadData];
+}
 - (void)makeViews {
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -56,9 +71,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         PW_DappModel *model = self.dataArr[indexPath.row];
-        [[PW_DappManager shared] deleteWithUrlStr:model.appUrl];
-        [self.dataArr removeObject:model];
-        [tableView reloadData];
+        [self deleteWithModel:model];
     }
 }
 #pragma mark - lazy
@@ -69,8 +82,8 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_DappRecentBrowseCell class] forCellReuseIdentifier:@"PW_DappRecentBrowseCell"];
-        _tableView.rowHeight = 74;
-        _tableView.contentInset = UIEdgeInsetsMake(15, 0, 15, 0);
+        _tableView.rowHeight = 62;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     }
     return _tableView;
 }

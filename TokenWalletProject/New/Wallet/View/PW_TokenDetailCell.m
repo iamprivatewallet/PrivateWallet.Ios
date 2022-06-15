@@ -34,7 +34,7 @@
 - (void)setModel:(PW_TokenDetailModel *)model {
     _model = model;
     self.iconIv.image = [UIImage imageNamed:model.isOut?@"icon_roll_out":@"icon_roll_in"];
-    self.hashLb.text = [model.hashStr showShortAddress];
+    self.hashLb.text = [model.hashStr showShortAddressHead:9 tail:4];
     self.amountLb.text = NSStringWithFormat(@"%@%@",model.isOut?@"-":@"+",model.value);
     self.timeLb.text = [NSString timeStrTimeInterval:model.timeStamp];
     self.tokenNameLb.text = model.tokenName;
@@ -50,37 +50,42 @@
     [self.bodyView addSubview:self.amountLb];
     [self.bodyView addSubview:self.timeLb];
     [self.bodyView addSubview:self.tokenNameLb];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-8);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
-        make.left.offset(12);
-        make.width.height.offset(35);
+        make.centerX.equalTo(self.bodyView.mas_left).offset(22);
     }];
     [self.hashLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
-        make.top.equalTo(self.iconIv);
+        make.left.offset(60);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-2);
     }];
     [self.copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.hashLb.mas_right).offset(6);
         make.centerY.equalTo(self.hashLb);
         make.right.lessThanOrEqualTo(self.amountLb.mas_left).offset(-10);
     }];
-    [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
-        make.top.offset(12);
-    }];
     [self.timeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
-        make.bottom.equalTo(self.iconIv.mas_bottom).offset(-2);
+        make.left.equalTo(self.hashLb);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(2);
+    }];
+    [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(0);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-2);
     }];
     [self.tokenNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-18);
-        make.bottom.offset(-13);
+        make.right.offset(0);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(2);
+    }];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.offset(0);
+        make.height.offset(1);
     }];
 }
 
@@ -98,9 +103,6 @@
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        [_bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     }
     return _bodyView;
 }
@@ -112,7 +114,7 @@
 }
 - (UILabel *)hashLb {
     if (!_hashLb) {
-        _hashLb = [PW_ViewTool labelMediumText:@"" fontSize:12 textColor:[UIColor g_boldTextColor]];
+        _hashLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_textColor]];
         [_hashLb setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     }
     return _hashLb;
@@ -126,19 +128,19 @@
 }
 - (UILabel *)amountLb {
     if (!_amountLb) {
-        _amountLb = [PW_ViewTool labelMediumText:@"" fontSize:18 textColor:[UIColor g_boldTextColor]];
+        _amountLb = [PW_ViewTool labelMediumText:@"" fontSize:18 textColor:[UIColor g_textColor]];
     }
     return _amountLb;
 }
 - (UILabel *)timeLb {
     if (!_timeLb) {
-        _timeLb = [PW_ViewTool labelText:@"" fontSize:12 textColor:[UIColor g_grayTextColor]];
+        _timeLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_grayTextColor]];
     }
     return _timeLb;
 }
 - (UILabel *)tokenNameLb {
     if (!_tokenNameLb) {
-        _tokenNameLb = [PW_ViewTool labelMediumText:@"" fontSize:13 textColor:[UIColor g_grayTextColor]];
+        _tokenNameLb = [PW_ViewTool labelText:@"" fontSize:12 textColor:[UIColor g_textColor]];
     }
     return _tokenNameLb;
 }

@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UITextField *)textFieldFont:(UIFont *)font color:(UIColor *)color placeholder:(NSString *)placeholder;
 
++ (UISegmentedControl *)segmentedControlWithTitles:(NSArray<NSString *> *)titles;
+
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;
 + (void)setupView:(UIView *)view cornerRadius:(CGFloat)cornerRadius shadowColor:(UIColor *)shadowColor shadowOffset:(CGSize)shadowOffset shadowRadius:(CGFloat)shadowRadius;
 

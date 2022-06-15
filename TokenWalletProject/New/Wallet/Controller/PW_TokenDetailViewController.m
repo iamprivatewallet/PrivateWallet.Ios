@@ -15,22 +15,22 @@
 
 typedef enum : NSUInteger {
     kFilterTypeAll=0,
-    kFilterTypeIn,
-    kFilterTypeOut,
+    kFilterTypeIn=2,
+    kFilterTypeOut=1,
 } kFilterType;
 
 @interface PW_TokenDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) PW_TableView *tableView;
 @property (nonatomic, strong) UIView *topView;
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, weak) UIButton *selectedBtn;
 
 @property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *nameLb;
 @property (nonatomic, strong) UILabel *amountLb;
 @property (nonatomic, strong) UILabel *fullNameLb;
 @property (nonatomic, strong) UILabel *costLb;
+
+@property (nonatomic, strong) UISegmentedControl *menuControl;
 
 @property (nonatomic, strong) NSMutableArray<PW_TokenDetailModel *> *dataList;
 @property (nonatomic, strong) NSMutableArray<PW_TokenDetailModel *> *showList;
@@ -43,7 +43,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_question" rightAction:@selector(infoAction)];
+    [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_info_primary" rightAction:@selector(infoAction)];
     [self makeViews];
     self.noDataView.offsetY = 100;
     if(![User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
@@ -86,6 +86,10 @@ typedef enum : NSUInteger {
     vc.tokenId = self.model.tId;
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)menuChangeAction {
+    self.filterType = self.menuControl.selectedSegmentIndex;
+    [self refreshData];
+}
 - (void)transferAction {
     PW_TransferViewController *vc = [PW_TransferViewController new];
     vc.model = self.model;
@@ -97,11 +101,7 @@ typedef enum : NSUInteger {
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)headerBtnAction:(UIButton *)btn {
-    self.selectedBtn.selected = NO;
-    self.selectedBtn = btn;
-    self.selectedBtn.selected = YES;
-    self.filterType = btn.tag;
-    [self refreshData];
+    
 }
 - (void)requestData {
     NSString *contractAddress = self.model.tokenContract;
@@ -243,145 +243,76 @@ typedef enum : NSUInteger {
     self.nameLb.text = self.model.tokenName;
     self.amountLb.text = self.model.tokenAmount;
     self.fullNameLb.text = self.model.tokenName;
-    self.costLb.text = [self.model.tokenAmount isNoEmpty]?NSStringWithFormat(@"$%@",[self.model.tokenAmount stringDownMultiplyingBy:self.model.price decimal:8]):@"--";
+    self.costLb.text = [self.model.tokenAmount isNoEmpty]?NSStringWithFormat(@"≈ $%@",[self.model.tokenAmount stringDownMultiplyingBy:self.model.price decimal:8]):@"--";
 }
 - (void)makeViews {
     self.topView = [[UIView alloc] init];
     [self.view addSubview:self.topView];
-    [self.view addSubview:self.headerView];
-    [self.view addSubview:self.tableView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.height.offset(210);
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topView.mas_bottom).offset(5);
+        make.left.bottom.right.offset(0);
     }];
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_bottom);
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.menuControl];
+    [contentView addSubview:self.tableView];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(25);
         make.left.right.offset(0);
-        make.height.offset(40);
+        make.height.offset(90);
+    }];
+    [self.menuControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(36);
+        make.left.offset(36);
+        make.right.mas_lessThanOrEqualTo(-36);
+        make.height.offset(38);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom);
+        make.top.equalTo(self.menuControl.mas_bottom).offset(10);
         make.left.right.bottom.offset(0);
     }];
     [self createTopItems];
-    [self createHeaderItems];
 }
 - (void)createTopItems {
     self.iconIv = [[UIImageView alloc] init];
     [self.topView addSubview:self.iconIv];
-    self.nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
+    self.nameLb = [PW_ViewTool labelText:@"--" fontSize:14 textColor:[UIColor g_whiteTextColor]];
     [self.topView addSubview:self.nameLb];
-    self.amountLb = [PW_ViewTool labelMediumText:@"--" fontSize:24 textColor:[UIColor g_boldTextColor]];
+    self.amountLb = [PW_ViewTool labelMediumText:@"--" fontSize:23 textColor:[UIColor g_whiteTextColor]];
     [self.topView addSubview:self.amountLb];
-    self.fullNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
-    [self.topView addSubview:self.fullNameLb];
-    self.costLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_grayTextColor]];
+    self.costLb = [PW_ViewTool labelText:@"--" fontSize:14 textColor:[UIColor g_whiteTextColor]];
     [self.topView addSubview:self.costLb];
-    UIView *transferView = [[UIView alloc] init];
-    [transferView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [transferView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [transferView addTapTarget:self action:@selector(transferAction)];
-    [self.topView addSubview:transferView];
-    UIView *collectionView = [[UIView alloc] init];
-    [collectionView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [collectionView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [collectionView addTapTarget:self action:@selector(collectionAction)];
-    [self.topView addSubview:collectionView];
-    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(30);
-        make.left.offset(25);
-        make.width.height.offset(55);
-    }];
-    [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(14);
-        make.top.equalTo(self.iconIv).offset(8);
-    }];
-    [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.top.equalTo(self.iconIv).offset(3);
-    }];
-    [self.fullNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(14);
-        make.bottom.equalTo(self.iconIv.mas_bottom).offset(-8);
-    }];
-    [self.costLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.bottom.equalTo(self.iconIv.mas_bottom).offset(-3);
-    }];
-    [transferView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconIv.mas_bottom).offset(25);
-        make.left.offset(25);
-        make.height.offset(86);
-    }];
-    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconIv.mas_bottom).offset(25);
-        make.left.equalTo(transferView.mas_right).offset(15);
-        make.right.offset(-25);
-        make.height.offset(86);
-        make.width.equalTo(transferView);
-    }];
-    UIImageView *transferIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_transfer_big"]];
-    [transferView addSubview:transferIv];
-    UILabel *transferLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_transfer") fontSize:15 textColor:[UIColor g_boldTextColor]];
-    [transferView addSubview:transferLb];
-    UIImageView *collectionIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_collection_big"]];
-    [collectionView addSubview:collectionIv];
-    UILabel *collectionLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_collection") fontSize:15 textColor:[UIColor g_boldTextColor]];
-    [collectionView addSubview:collectionLb];
-    [transferIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(16);
-        make.centerX.offset(0);
-    }];
-    [transferLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-15);
-        make.centerX.offset(0);
-    }];
-    [collectionIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(16);
-        make.centerX.offset(0);
-    }];
-    [collectionLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-15);
-        make.centerX.offset(0);
-    }];
-}
-- (void)createHeaderItems {
-    UIButton *allBtn = [self createHeaderBtnTitle:LocalizedStr(@"text_all") action:@selector(headerBtnAction:)];
-    allBtn.tag = kFilterTypeAll;
-    allBtn.selected = YES;
-    [self.headerView addSubview:allBtn];
-    self.selectedBtn = allBtn;
-    UIButton *collectionBtn = [self createHeaderBtnTitle:LocalizedStr(@"text_collection") action:@selector(headerBtnAction:)];
-    collectionBtn.tag = kFilterTypeIn;
-    [self.headerView addSubview:collectionBtn];
-    UIButton *transferBtn = [self createHeaderBtnTitle:LocalizedStr(@"text_transfer") action:@selector(headerBtnAction:)];
-    transferBtn.tag = kFilterTypeOut;
-    [self.headerView addSubview:transferBtn];
-    [allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(30);
-        make.centerY.offset(0);
-        make.top.bottom.offset(0);
+    UIButton *transferBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_transfer") fontSize:14 titleColor:[UIColor g_whiteTextColor] imageName:@"icon_transfer" target:self action:@selector(transferAction)];
+    [self.topView addSubview:transferBtn];
+    UIButton *collectionBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_collection") fontSize:14 titleColor:[UIColor g_whiteTextColor] imageName:@"icon_collection" target:self action:@selector(collectionAction)];
+    [self.topView addSubview:collectionBtn];
+    [transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.topView.mas_centerY).offset(-6);
+        make.right.offset(-18);
     }];
     [collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(allBtn.mas_right).offset(20);
-        make.centerY.offset(0);
-        make.top.bottom.offset(0);
+        make.right.offset(-18);
+        make.top.equalTo(self.topView.mas_centerY).offset(6);
     }];
-    [transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(collectionBtn.mas_right).offset(20);
+    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
-        make.top.bottom.offset(0);
+        make.left.offset(10);
+        make.width.height.offset(80);
     }];
-}
-- (UIButton *)createHeaderBtnTitle:(NSString *)title action:(SEL)action {
-    PW_Button *btn = [PW_Button buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor g_grayTextColor] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor g_boldTextColor] forState:UIControlStateSelected];
-    [btn pw_setNormalFont:[UIFont pw_semiBoldFontOfSize:14] selectedFont:[UIFont pw_semiBoldFontOfSize:16]];
-    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    return btn;
+    [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.amountLb);
+        make.bottom.equalTo(self.amountLb.mas_top).offset(2);
+    }];
+    [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconIv.mas_right).offset(8);
+        make.centerY.offset(0);
+    }];
+    [self.costLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.amountLb);
+        make.top.equalTo(self.amountLb.mas_bottom).offset(2);
+    }];
 }
 #pragma make - Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -405,19 +336,13 @@ typedef enum : NSUInteger {
     }
     return _topView;
 }
-- (UIView *)headerView {
-    if (!_headerView) {
-        _headerView = [[UIView alloc] init];
-    }
-    return _headerView;
-}
 - (PW_TableView *)tableView {
     if(!_tableView) {
         _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_TokenDetailCell class] forCellReuseIdentifier:@"PW_TokenDetailCell"];
-        _tableView.rowHeight = 70;
+        _tableView.rowHeight = 76;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -433,6 +358,15 @@ typedef enum : NSUInteger {
         _showList = [NSMutableArray array];
     }
     return _showList;
+}
+- (UISegmentedControl *)menuControl {
+    if (!_menuControl) {
+        NSArray *titles = @[LocalizedStr(@"text_all"),LocalizedStr(@"text_transfer"),LocalizedStr(@"text_collection")];
+        _menuControl = [PW_ViewTool segmentedControlWithTitles:titles];
+        _menuControl.selectedSegmentIndex = 0;
+        [_menuControl addTarget:self action:@selector(menuChangeAction) forControlEvents:UIControlEventValueChanged];
+    }
+    return _menuControl;
 }
 
 @end

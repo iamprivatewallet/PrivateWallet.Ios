@@ -237,22 +237,7 @@
         for (int i=0; i<self.menuArr.count; i++) {
             [titles addObject:self.menuArr[i].title];
         }
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
-        _segmentedControl.apportionsSegmentWidthsByContent = YES;
-        [_segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        [_segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor g_hex:@"#7221F4"] size:CGSizeMake(1, 1)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-        UIImage *dividerImage = [UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)];
-        [_segmentedControl setDividerImage:dividerImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-        _segmentedControl.tintColor = [UIColor g_hex:@"#7221F4"];
-        _segmentedControl.backgroundColor = [UIColor whiteColor];
-        [_segmentedControl setBorderColor:[UIColor g_hex:@"#7221F4"] width:1 radius:8];
-        if (@available(iOS 13.0, *)) {
-            _segmentedControl.selectedSegmentTintColor = [UIColor g_hex:@"#7221F4"];
-        } else {
-            // Fallback on earlier versions
-        }
-        [_segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_textColor]} forState:UIControlStateNormal];
-        [_segmentedControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:18],NSForegroundColorAttributeName:[UIColor g_whiteTextColor]} forState:UIControlStateSelected];
+        _segmentedControl = [PW_ViewTool segmentedControlWithTitles:titles];
         [_segmentedControl addTarget:self action:@selector(menuChangeAction) forControlEvents:UIControlEventValueChanged];
     }
     return _segmentedControl;

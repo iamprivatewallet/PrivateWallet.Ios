@@ -42,103 +42,106 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)makeViews {
-    self.headerView = [[UIView alloc] init];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 82)];
-    [self.headerView setShadowColor:[UIColor g_hex:@"#00A4B8" alpha:0.45] offset:CGSizeMake(0, 5) radius:15 path:path];
-    [self.headerView addTapTarget:self action:@selector(createAction)];
-    [self.view addSubview:self.headerView];
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(22);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(82);
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.bottom.right.offset(0);
     }];
-    UILabel *titleLb = [PW_ViewTool labelText:LocalizedStr(@"text_importExistWallet") fontSize:15 textColor:[UIColor g_textColor]];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    self.headerView = [[UIView alloc] init];
+    [self.headerView addTapTarget:self action:@selector(createAction)];
+    [contentView addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(28);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(70);
+    }];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_importExistWallet") fontSize:15 textColor:[UIColor g_textColor]];
     [self.view addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom).offset(26);
-        make.left.offset(26);
+        make.top.equalTo(self.headerView.mas_bottom).offset(15);
+        make.left.offset(40);
     }];
-    UIView *privateKeyView = [self createRowViewImageName:@"icon_privateKey_gray" title:LocalizedStr(@"text_privateKey") desc:LocalizedStr(@"text_privateKeyTip")];
+    UIView *privateKeyView = [self createRowViewImageName:@"icon_wallet_privatekey" title:LocalizedStr(@"text_privateKey") desc:LocalizedStr(@"text_privateKeyTip")];
     [privateKeyView addTapTarget:self action:@selector(importPrivateKeyAction)];
     [self.view addSubview:privateKeyView];
-    UIView *mnemonicWordView = [self createRowViewImageName:@"icon_mnemonic_gray" title:LocalizedStr(@"text_mnemonicWord") desc:LocalizedStr(@"text_mnemonicWordTip")];
+    UIView *mnemonicWordView = [self createRowViewImageName:@"icon_wallet_mnemonic" title:LocalizedStr(@"text_mnemonicWord") desc:LocalizedStr(@"text_mnemonicWordTip")];
     [mnemonicWordView addTapTarget:self action:@selector(importMnemonicWordAction)];
     [self.view addSubview:mnemonicWordView];
     [privateKeyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(20);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(62);
+        make.top.equalTo(titleLb.mas_bottom).offset(5);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(70);
     }];
     [mnemonicWordView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(privateKeyView.mas_bottom).offset(10);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.offset(62);
+        make.top.equalTo(privateKeyView.mas_bottom).offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.offset(70);
     }];
     [self createHeaderItems];
 }
 - (void)createHeaderItems {
-    UIImage *bgImage = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH-40, 82) gradientColors:@[[UIColor g_hex:@"#00D5E9"],[UIColor g_hex:@"#00A4B9"]] gradientType:PW_GradientLeftToRight cornerRadius:8];
-    UIImageView *bgIv = [[UIImageView alloc] initWithImage:bgImage];
-    [self.headerView addSubview:bgIv];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
-    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_wallet_big"]];
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_more_wallet"]];
     [self.headerView addSubview:iconIv];
-    UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_createWallet") fontSize:18 textColor:[UIColor whiteColor]];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_createWallet") fontSize:18 textColor:[UIColor g_textColor]];
     [self.headerView addSubview:titleLb];
-    UILabel *descLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_addWalletTip") fontSize:13 textColor:[UIColor g_lightTextColor]];
+    UILabel *descLb = [PW_ViewTool labelText:LocalizedStr(@"text_addWalletTip") fontSize:13 textColor:[UIColor g_grayTextColor]];
     [self.headerView addSubview:descLb];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_light"]];
+    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [self.headerView addSubview:arrowIv];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(10);
+        make.centerX.equalTo(self.headerView.mas_left).offset(22);
         make.centerY.offset(0);
     }];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(iconIv.mas_right).offset(10);
-        make.bottom.equalTo(self.headerView.mas_centerY).offset(-2);
+        make.left.offset(56);
+        make.bottom.equalTo(self.headerView.mas_centerY).offset(-1);
     }];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(iconIv.mas_right).offset(10);
-        make.top.equalTo(self.headerView.mas_centerY).offset(2);
+        make.left.equalTo(titleLb);
+        make.top.equalTo(self.headerView.mas_centerY).offset(1);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
 }
 - (UIView *)createRowViewImageName:(NSString *)imageName title:(NSString *)title desc:(NSString *)desc {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor g_bgColor];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 62)];
-    view.layer.cornerRadius = 8;
-    [view setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8 path:path];
     UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     [view addSubview:iconIv];
-    UILabel *titleLb = [PW_ViewTool labelMediumText:title fontSize:16 textColor:[UIColor g_boldTextColor]];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:title fontSize:18 textColor:[UIColor g_boldTextColor]];
     [view addSubview:titleLb];
-    UILabel *descLb = [PW_ViewTool labelSemiboldText:desc fontSize:12 textColor:[UIColor g_grayTextColor]];
+    UILabel *descLb = [PW_ViewTool labelText:desc fontSize:13 textColor:[UIColor g_grayTextColor]];
     [view addSubview:descLb];
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [view addSubview:arrowIv];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [view addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(16);
+        make.centerX.equalTo(view.mas_left).offset(22);
         make.centerY.offset(0);
     }];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(view.mas_centerY).offset(-2);
-        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.bottom.equalTo(view.mas_centerY).offset(-1);
+        make.left.offset(56);
     }];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(view.mas_centerY).offset(2);
-        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.top.equalTo(view.mas_centerY).offset(1);
+        make.left.equalTo(titleLb);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
     return view;

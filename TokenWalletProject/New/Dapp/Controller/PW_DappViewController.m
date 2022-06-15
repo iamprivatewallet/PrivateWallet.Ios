@@ -17,6 +17,7 @@
 #import "PW_DappBanner2Cell.h"
 #import "PW_WebViewController.h"
 #import "PW_Web3ViewController.h"
+#import "PW_DappFavoritesViewController.h"
 #import "PW_DappRecentBrowseViewController.h"
 #import "PW_WalletListView.h"
 #import "PW_DappCell.h"
@@ -56,9 +57,6 @@
 - (void)searchAction {
     PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-- (void)menuChangeAction {
-    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -143,20 +141,25 @@
         if (indexPath.row==0) {
             PW_DappBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappBrowserCell"];
             if (self.section1Idx==0) {//hot
-                cell.dataArr = @[];
-            }else if (self.section1Idx==1) {
                 if (self.model.dappTop.count>5) {
                     cell.dataArr = [self.model.dappTop subarrayWithRange:NSMakeRange(0, 4)];
                 }else{
                     cell.dataArr = self.model.dappTop;
                 }
+            }else if (self.section1Idx==1) {//favorites
+                cell.dataArr = [[PW_DappFavoritesManager shared] getList];
             }else{
                 cell.dataArr = self.dappRecentBrowseArr;
             }
             cell.clickBlock = ^(PW_DappModel * _Nonnull model, NSArray<PW_DappModel *> * _Nonnull dataArr) {
                 if (model.isMore) {
-                    PW_DappRecentBrowseViewController *vc = [[PW_DappRecentBrowseViewController alloc] init];
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    if (self.section1Idx==1) {
+                        PW_DappFavoritesViewController *vc = [[PW_DappFavoritesViewController alloc] init];
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    }else if (self.section1Idx==2) {
+                        PW_DappRecentBrowseViewController *vc = [[PW_DappRecentBrowseViewController alloc] init];
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    }
                 }else{
                     [weakSelf openWeb3WithModel:model];
                 }
@@ -204,7 +207,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section==0) {
         PW_SegmentedHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_SegmentedHeaderView"];
-        [view configurationItems:@[@"Hot",@"Favorites",@"Browse"]];
+        [view configurationItems:@[@"Hot",LocalizedStr(@"text_favorites"),LocalizedStr(@"text_browse")]];
         view.selectedIndex = self.section1Idx;
         __weak typeof(self) weakSelf = self;
         view.clickBlock = ^(NSInteger idx) {

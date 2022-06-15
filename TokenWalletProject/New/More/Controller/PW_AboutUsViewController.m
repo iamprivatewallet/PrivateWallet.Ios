@@ -132,11 +132,11 @@
     UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow"]];
     [rowView addSubview:arrowIv];
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(rowView.mas_left).offset(30);
+        make.centerX.equalTo(rowView.mas_left).offset(22);
         make.centerY.offset(0);
     }];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(66);
+        make.left.offset(56);
         make.centerY.offset(0);
     }];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {

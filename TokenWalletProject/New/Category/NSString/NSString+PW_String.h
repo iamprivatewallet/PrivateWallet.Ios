@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pasteboardToast:(BOOL)toast;
 
 - (NSString *)showShortAddress;
-- (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail;
+- (NSString *)showShortAddressHead:(NSInteger)head tail:(NSInteger)tail;
 
 - (BOOL)isInt;
 - (BOOL)isFloat;

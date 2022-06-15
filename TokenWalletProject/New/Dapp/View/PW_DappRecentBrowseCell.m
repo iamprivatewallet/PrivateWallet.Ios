@@ -29,41 +29,39 @@
 - (void)setModel:(PW_DappModel *)model {
     _model = model;
     [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.iconUrl]];
-    self.titleLb.text = model.appName;
+//    self.titleLb.text = model.appName;
     self.descLb.text = model.appUrl;
 }
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];
-    [self.bodyView addSubview:self.titleLb];
+//    [self.bodyView addSubview:self.titleLb];
     [self.bodyView addSubview:self.descLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(6);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-6);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
+        make.left.offset(0);
         make.centerY.offset(0);
-        make.width.height.offset(40);
+        make.width.height.offset(46);
     }];
-    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(15);
-        make.top.equalTo(self.iconIv);
-        make.right.mas_lessThanOrEqualTo(-15);
-    }];
+//    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.iconIv.mas_right).offset(12);
+//        make.top.equalTo(self.iconIv);
+//        make.right.mas_lessThanOrEqualTo(0);
+//    }];
     [self.descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(15);
-        make.bottom.equalTo(self.iconIv);
-        make.right.mas_lessThanOrEqualTo(-15);
+        make.left.equalTo(self.iconIv.mas_right).offset(12);
+        make.centerY.offset(0);
+        make.right.mas_lessThanOrEqualTo(0);
     }];
 }
 #pragma mark - lazy
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        [_bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     }
     return _bodyView;
 }
@@ -81,7 +79,7 @@
 }
 - (UILabel *)descLb {
     if (!_descLb) {
-        _descLb = [PW_ViewTool labelBoldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+        _descLb = [PW_ViewTool labelText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
     }
     return _descLb;
 }

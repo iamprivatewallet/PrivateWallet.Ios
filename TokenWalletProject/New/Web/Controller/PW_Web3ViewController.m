@@ -52,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupNavBgPurple];
     [self makeViews];
     NSString *urlStr = self.model.appUrl;
     if (![urlStr isURL]) {
@@ -70,7 +71,6 @@
 }
 - (void)makeViews{
     UIView *navBarView = [[UIView alloc] init];
-    navBarView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:navBarView];
     [navBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
@@ -107,13 +107,13 @@
     [self.webView addObserver:self forKeyPath:@"canGoBack" options:NSKeyValueObservingOptionNew context:nil];
 }
 - (void)createNavItems {
-    UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close_dark" target:self action:@selector(closeAction)];
+    UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close_white" target:self action:@selector(closeAction)];
     [self.navContentView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(20);
         make.centerY.offset(0);
     }];
-    self.backBtn = [PW_ViewTool buttonImageName:@"icon_back" target:self action:@selector(backAction)];
+    self.backBtn = [PW_ViewTool buttonImageName:@"icon_back_white" target:self action:@selector(backAction)];
     self.backBtn.hidden = YES;
     [self.navContentView addSubview:self.backBtn];
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,25 +121,18 @@
         make.centerY.offset(0);
     }];
     UIView *btnsView = [[UIView alloc] init];
-    [btnsView setBorderColor:[UIColor g_borderColor] width:1 radius:17];
+    btnsView.backgroundColor = [UIColor g_darkBgColor];
+    [btnsView setCornerRadius:8];
     [self.navContentView addSubview:btnsView];
     [btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-22);
-        make.height.offset(34);
-        make.width.offset(88);
+        make.right.offset(-18);
+        make.height.offset(28);
+        make.width.offset(74);
         make.centerY.offset(0);
     }];
-    UIView *spaceLineView = [[UIView alloc] init];
-    spaceLineView.backgroundColor = [UIColor g_borderColor];
-    [btnsView addSubview:spaceLineView];
-    [spaceLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(18);
-        make.width.offset(0.5);
-        make.center.offset(0);
-    }];
-    UIButton *walletBtn = [PW_ViewTool buttonImageName:@"icon_wallet_dark" target:self action:@selector(walletAction)];
+    UIButton *walletBtn = [PW_ViewTool buttonImageName:@"icon_wallet" target:self action:@selector(walletAction)];
     [btnsView addSubview:walletBtn];
-    UIButton *moreBtn = [PW_ViewTool buttonImageName:@"icon_more_dark" target:self action:@selector(moreAction)];
+    UIButton *moreBtn = [PW_ViewTool buttonImageName:@"icon_more" target:self action:@selector(moreAction)];
     [btnsView addSubview:moreBtn];
     [walletBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.offset(0);
@@ -149,10 +142,10 @@
         make.top.right.bottom.offset(0);
         make.width.equalTo(walletBtn);
     }];
-    self.titleLb = [PW_ViewTool labelSemiboldText:@"" fontSize:15 textColor:[UIColor g_boldTextColor]];
+    self.titleLb = [PW_ViewTool labelMediumText:@"" fontSize:20 textColor:[UIColor g_whiteTextColor]];
     self.titleLb.numberOfLines = 1;
     [self.navContentView addSubview:self.titleLb];
-    self.descLb = [PW_ViewTool labelBoldText:@"" fontSize:13 textColor:[UIColor g_grayTextColor]];
+    self.descLb = [PW_ViewTool labelText:@"" fontSize:14 textColor:[UIColor g_whiteTextColor]];
     self.descLb.numberOfLines = 1;
     [self.navContentView addSubview:self.descLb];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -179,28 +172,36 @@
 }
 - (void)moreAction {
     __weak typeof(self) weakSelf = self;
-    PW_DappMoreModel *refreshModel = [PW_DappMoreModel ModelIconName:@"icon_refresh_dark" title:LocalizedStr(@"text_refresh") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+    PW_DappMoreModel *refreshModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_refresh" title:LocalizedStr(@"text_refresh") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         [weakSelf.webView reload];
     }];
-    PW_DappMoreModel *copyModel = [PW_DappMoreModel ModelIconName:@"icon_link_dark" title:LocalizedStr(@"text_copyURL") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+    PW_DappMoreModel *copyModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_copy" title:LocalizedStr(@"text_copyURL") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         [[weakSelf currentUrlAbsoluteStr] pasteboardToast:YES];
     }];
-    PW_DappMoreModel *shareModel = [PW_DappMoreModel ModelIconName:@"icon_share_dark" title:LocalizedStr(@"text_share") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+    PW_DappMoreModel *shareModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_share" title:LocalizedStr(@"text_share") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         NSURL *url = [NSURL URLWithString:[self.model.iconUrl isNoEmpty]?self.model.iconUrl:[self faviconURL]];
         [[SDWebImageManager sharedManager] loadImageWithURL:url options:SDWebImageHighPriority progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
             [PW_ShareTool shareIcon:image title:weakSelf.model.appName subTitle:[weakSelf currentURL] data:[NSURL URLWithString:[weakSelf currentURL]] completionBlock:nil];
         }];
     }];
-    PW_DappMoreModel *browserModel = [PW_DappMoreModel ModelIconName:@"icon_browser_dark" title:LocalizedStr(@"text_browserOpen") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+    PW_DappMoreModel *browserModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_browser" title:LocalizedStr(@"text_browserOpen") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self currentUrlAbsoluteStr]] options:@{} completionHandler:nil];
     }];
-    PW_DappMoreModel *reportModel = [PW_DappMoreModel ModelIconName:@"icon_report_dark" title:LocalizedStr(@"text_report") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+    BOOL isFavorite = [[PW_DappFavoritesManager shared] isExistWithUrlStr:self.model.appUrl]!=nil;
+    PW_DappMoreModel *favoriteModel = [PW_DappMoreModel ModelIconName:isFavorite?@"icon_sheet_favorite_full":@"icon_sheet_favorite" title:LocalizedStr(@"text_favorites") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
+        if ([[PW_DappFavoritesManager shared] isExistWithUrlStr:weakSelf.model.appUrl]) {
+            [[PW_DappFavoritesManager shared] deleteWithUrlStr:weakSelf.model.appUrl];
+        }else{
+            [[PW_DappFavoritesManager shared] saveModel:weakSelf.model];
+        }
+    }];
+    PW_DappMoreModel *reportModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_report" title:LocalizedStr(@"text_report") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         PW_WebViewController *vc = [[PW_WebViewController alloc] init];
         vc.titleStr = model.title;
         vc.urlStr = WalletReportUrl;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
-    [PW_TipTool showDappMoreTitle:PW_StrFormat(LocalizedStr(@"text_moreDappTip"),[self currentURL]) dataArr:@[refreshModel,copyModel,shareModel,browserModel,reportModel] sureBlock:^(PW_DappMoreModel * _Nonnull model) {
+    [PW_TipTool showDappMoreTitle:PW_StrFormat(LocalizedStr(@"text_moreDappTip"),[self currentURL]) dataArr:@[refreshModel,copyModel,shareModel,browserModel,favoriteModel,reportModel] sureBlock:^(PW_DappMoreModel * _Nonnull model) {
         if (model.actionBlock) {
             model.actionBlock(model);
         }

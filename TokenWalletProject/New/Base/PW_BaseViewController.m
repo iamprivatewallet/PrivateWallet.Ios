@@ -35,8 +35,8 @@
         make.edges.offset(0);
     }];
 }
-- (void)setupNavBgBlackBig {
-    self.bgIv.image = [UIImage imageNamed:@"icon_nav_black_big"];
+- (void)setupNavBgBlack {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_black"];
 }
 - (void)setupNavBgRed {
     self.bgIv.image = [UIImage imageNamed:@"icon_nav_red"];
@@ -225,7 +225,7 @@
 - (UIImageView *)bgIv {
     if (!_bgIv) {
         _bgIv = [[UIImageView alloc] init];
-        _bgIv.image = [UIImage imageNamed:@"icon_nav_black"];
+        _bgIv.image = [UIImage imageNamed:@"icon_nav_black_big"];
         _bgIv.contentMode = UIViewContentModeScaleAspectFill;
         _bgIv.clipsToBounds = YES;
         [self.view insertSubview:_bgIv atIndex:0];

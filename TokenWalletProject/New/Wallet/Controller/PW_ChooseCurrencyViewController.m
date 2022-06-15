@@ -65,7 +65,7 @@
         make.height.offset(35);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeBtn setImage:[UIImage imageNamed:@"icon_close_dark"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"icon_close_white"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {

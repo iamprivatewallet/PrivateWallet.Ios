@@ -383,7 +383,7 @@
     titleLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(20);
+        make.top.offset(30);
         make.centerX.offset(0);
         make.right.mas_lessThanOrEqualTo(-10);
     }];
@@ -397,16 +397,18 @@
         }
     };
     [contentView addSubview:moreView];
+    NSInteger column = 5;
+    NSInteger row = dataArr.count/5+((dataArr.count%column)>0?1:0);
     [moreView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(35);
+        make.top.equalTo(titleLb.mas_bottom).offset(25);
         make.left.right.offset(0);
-        make.height.offset(90);
+        make.height.offset(row*90);
     }];
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor g_lineColor];
     [contentView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moreView.mas_bottom).offset(30);
+        make.top.equalTo(moreView.mas_bottom).offset(10);
         make.left.offset(25);
         make.right.offset(-25);
         make.height.offset(1);
@@ -417,7 +419,7 @@
     }];
     [contentView addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom).offset(20);
+        make.top.equalTo(lineView.mas_bottom).offset(10);
         make.left.right.offset(0);
         make.height.offset(44);
         make.bottom.offset(-SafeBottomInset);

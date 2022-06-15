@@ -83,10 +83,6 @@
         [self showError:LocalizedStr(@"text_pwdFormatError")];
         return;
     }
-    if (pwdStr.length<8) {
-        [self showError:LocalizedStr(@"text_pwdFormatError")];
-        return;
-    }
     if (![pwdStr isEqualToString:self.againPwdTF.text]) {
         [self showError:LocalizedStr(@"text_pwdDisagreeError")];
         return;
@@ -175,88 +171,62 @@
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
     }];
+    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.left.top.right.bottom.offset(0);
+        make.height.greaterThanOrEqualTo(scrollView);
         make.width.equalTo(scrollView);
     }];
-    UIImageView *iconIv = [[UIImageView alloc] init];
-    iconIv.image = [UIImage imageNamed:@"icon_privateKey_big"];
-    [self.contentView addSubview:iconIv];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.offset(0);
-        make.top.offset(30);
-    }];
     UIView *privateKeyView = [[UIView alloc] init];
-    privateKeyView.backgroundColor = [UIColor g_bgColor];
-    privateKeyView.layer.cornerRadius = 8;
-    privateKeyView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    privateKeyView.layer.shadowOffset = CGSizeMake(0, 2);
-    privateKeyView.layer.shadowRadius = 8;
-    privateKeyView.layer.shadowOpacity = 1;
-    privateKeyView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
+    privateKeyView.backgroundColor = [UIColor g_bgCardColor];
+    [privateKeyView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:privateKeyView];
     self.privateKeyView = privateKeyView;
     [privateKeyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(iconIv.mas_bottom).offset(35);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.offset(36);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.mas_equalTo(84);
     }];
     UIView *walletNameView = [[UIView alloc] init];
-    walletNameView.backgroundColor = [UIColor g_bgColor];
-    walletNameView.layer.cornerRadius = 8;
-    walletNameView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    walletNameView.layer.shadowOffset = CGSizeMake(0, 2);
-    walletNameView.layer.shadowRadius = 8;
-    walletNameView.layer.shadowOpacity = 1;
-    walletNameView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 84)].CGPath;
+    walletNameView.backgroundColor = [UIColor g_bgCardColor];
+    [walletNameView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:walletNameView];
     self.walletNameView = walletNameView;
     [walletNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(privateKeyView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.mas_equalTo(84);
     }];
     UIView *pwdView = [[UIView alloc] init];
-    pwdView.backgroundColor = [UIColor g_bgColor];
-    pwdView.layer.cornerRadius = 8;
-    pwdView.layer.shadowColor = [UIColor g_shadowColor].CGColor;
-    pwdView.layer.shadowOffset = CGSizeMake(0, 2);
-    pwdView.layer.shadowRadius = 8;
-    pwdView.layer.shadowOpacity = 1;
-    pwdView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH-40, 160)].CGPath;
+    pwdView.backgroundColor = [UIColor g_bgCardColor];
+    [pwdView setBorderColor:[UIColor g_borderDarkColor] width:1 radius:8];
     [self.contentView addSubview:pwdView];
     self.pwdView = pwdView;
     [pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(walletNameView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.height.mas_equalTo(160);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.mas_equalTo(140);
     }];
-    UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [sureBtn setTitle:LocalizedStr(@"text_confirm") forState:UIControlStateNormal];
-    sureBtn.titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    [sureBtn setTitleColor:[UIColor g_primaryTextColor] forState:UIControlStateNormal];
-    sureBtn.layer.cornerRadius = 16;
-    sureBtn.backgroundColor = [UIColor g_primaryColor];
-    [sureBtn addTarget:self action:@selector(sureAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
     [self.contentView addSubview:sureBtn];
     self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(pwdView.mas_bottom).offset(40);
+        make.top.greaterThanOrEqualTo(pwdView.mas_bottom).offset(40);
         make.height.offset(55);
-        make.left.offset(25);
-        make.right.offset(-25);
-        make.bottom.offset(-40);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottomMargin.offset(-20);
     }];
     [self createPrivateKeyItems];
     [self createWalletNameItems];
@@ -269,8 +239,8 @@
     }else if(self.importType==PW_ImportWalletTypeMnemonic){
         titleLb.text = LocalizedStr(@"text_mnemonicWord");
     }
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-    titleLb.textColor = [UIColor g_boldTextColor];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
+    titleLb.textColor = [UIColor g_textColor];
     titleLb.layer.opacity = 0.7;
     [self.privateKeyView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -306,8 +276,8 @@
 - (void)createWalletNameItems {
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = NSStringWithFormat(@"%@ - %@",LocalizedStr(@"text_walletName"),self.walletType);
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-    titleLb.textColor = [UIColor g_boldTextColor];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
+    titleLb.textColor = [UIColor g_textColor];
     titleLb.layer.opacity = 0.7;
     [self.walletNameView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -330,8 +300,8 @@
 - (void)createPwdItems {
     UILabel *titleLb = [[UILabel alloc] init];
     titleLb.text = LocalizedStr(@"text_setTradePwd");
-    titleLb.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
-    titleLb.textColor = [UIColor g_boldTextColor];
+    titleLb.font = [UIFont pw_mediumFontOfSize:20];
+    titleLb.textColor = [UIColor g_textColor];
     titleLb.layer.opacity = 0.7;
     [self.pwdView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -349,11 +319,11 @@
     [self.pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.right.offset(-15);
-        make.top.equalTo(titleLb.mas_bottom).offset(0);
-        make.height.offset(50);
+        make.top.equalTo(titleLb.mas_bottom).offset(5);
+        make.height.offset(45);
     }];
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor g_lineColor];
+    lineView.backgroundColor = [UIColor g_primaryColor];
     [self.pwdView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.pwdTF.mas_bottom).offset(5);
@@ -372,8 +342,8 @@
     [self.againPwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.right.offset(-15);
-        make.top.equalTo(lineView.mas_bottom).offset(10);
-        make.height.offset(50);
+        make.top.equalTo(lineView.mas_bottom).offset(5);
+        make.height.offset(45);
     }];
 }
 

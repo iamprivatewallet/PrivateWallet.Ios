@@ -49,12 +49,12 @@
 }
 
 - (NSString *)showShortAddress {
-    return [self showAddressHead:14 tail:4];
+    return [self showShortAddressHead:14 tail:4];
 }
-- (NSString *)showAddressHead:(NSInteger)head tail:(NSInteger)tail {
-    if([self isNoEmpty]&&self.length>=18){
-        NSString *headStr = [self substringToIndex:14];
-        NSString *tailStr = [self substringFromIndex:self.length-4];
+- (NSString *)showShortAddressHead:(NSInteger)head tail:(NSInteger)tail {
+    if([self isNoEmpty]&&self.length>=(head+tail)){
+        NSString *headStr = [self substringToIndex:head];
+        NSString *tailStr = [self substringFromIndex:self.length-tail];
         return [NSString stringWithFormat:@"%@...%@",headStr,tailStr];
     }
     return self;

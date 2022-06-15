@@ -44,13 +44,13 @@
 - (void)makeViews {
     self.iconImg = [ZZCustomView imageViewInitView:self.contentView imageName:@"walletEthNormal"];
     [self.iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_left).offset(66);
+        make.centerX.equalTo(self.contentView.mas_left).offset(58);
         make.centerY.offset(0);
     }];
     
     self.titleLbl = [ZZCustomView labelInitWithView:self.contentView text:@"ETH" textColor:[UIColor im_textColor_three] font:GCSFontSemibold(15)];
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(102);
+        make.left.offset(94);
         make.bottom.equalTo(self.contentView.mas_centerY).offset(-2);
     }];
     
@@ -58,6 +58,15 @@
     [self.detailLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLbl);
         make.top.equalTo(self.titleLbl.mas_bottom).offset(4);
+    }];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.contentView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.bottom.offset(0);
+        make.height.offset(1);
     }];
     if (self.isCheck) {//选择对号
         self.checkIconBtn = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -48,7 +48,6 @@
     [super viewDidLoad];
     
     [self setNavTitle:@"" leftImg:nil leftAction:nil rightImg:@"icon_scan" rightAction:@selector(scanAction) isNoLine:YES];
-    [self setupNavBgBlackBig];
     [self makeViews];
     [self getWallets];
     self.hiddenSmallBtn.selected = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];

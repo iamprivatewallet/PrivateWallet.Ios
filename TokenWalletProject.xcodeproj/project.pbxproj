@@ -197,6 +197,9 @@
 		5C37A8E0280ECF0F00AAA728 /* PW_ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8DF280ECF0F00AAA728 /* PW_ChangePwdViewController.m */; };
 		5C37A8E6280FB92100AAA728 /* PW_DappBrowserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8E5280FB92100AAA728 /* PW_DappBrowserModel.m */; };
 		5C37A8EA280FB9F100AAA728 /* UIButton+PW_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8E9280FB9F100AAA728 /* UIButton+PW_Button.m */; };
+		5C38FBCE2859BCA000D6017F /* PW_DappFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */; };
+		5C38FBD12859C20100D6017F /* PW_DappFavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */; };
+		5C38FBD42859C81900D6017F /* PW_DappFavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */; };
 		5C581002282CB6A000CFB197 /* Solana in Frameworks */ = {isa = PBXBuildFile; productRef = 5C581001282CB69C00CFB197 /* Solana */; };
 		5C62CF9627FB0AAC00C1C5DC /* Web3WebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */; };
 		5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */; };
@@ -970,6 +973,12 @@
 		5C37A8E5280FB92100AAA728 /* PW_DappBrowserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserModel.m; sourceTree = "<group>"; };
 		5C37A8E8280FB9F100AAA728 /* UIButton+PW_Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+PW_Button.h"; sourceTree = "<group>"; };
 		5C37A8E9280FB9F100AAA728 /* UIButton+PW_Button.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PW_Button.m"; sourceTree = "<group>"; };
+		5C38FBCC2859BCA000D6017F /* PW_DappFavoritesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappFavoritesViewController.h; sourceTree = "<group>"; };
+		5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappFavoritesViewController.m; sourceTree = "<group>"; };
+		5C38FBCF2859C20100D6017F /* PW_DappFavoritesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappFavoritesCell.h; sourceTree = "<group>"; };
+		5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappFavoritesCell.m; sourceTree = "<group>"; };
+		5C38FBD22859C81900D6017F /* PW_DappFavoritesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappFavoritesManager.h; sourceTree = "<group>"; };
+		5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappFavoritesManager.m; sourceTree = "<group>"; };
 		5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Web3WebView.framework; sourceTree = "<group>"; };
 		5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenDetailViewController.h; sourceTree = "<group>"; };
 		5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenDetailViewController.m; sourceTree = "<group>"; };
@@ -2817,6 +2826,8 @@
 				5C8AAB19280D689000E4ED53 /* PW_AddressBookManager.m */,
 				5CCE70CA28100CF300860841 /* PW_DappManager.h */,
 				5CCE70CB28100CF300860841 /* PW_DappManager.m */,
+				5C38FBD22859C81900D6017F /* PW_DappFavoritesManager.h */,
+				5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */,
 				5C671307281166990088A1A5 /* PW_MarketManager.h */,
 				5C671308281166990088A1A5 /* PW_MarketManager.m */,
 			);
@@ -3471,6 +3482,8 @@
 			children = (
 				5CE7ACE527F6EE1F00E2188D /* PW_DappViewController.h */,
 				5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */,
+				5C38FBCC2859BCA000D6017F /* PW_DappFavoritesViewController.h */,
+				5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */,
 				5CCE70CD28100ECF00860841 /* PW_DappRecentBrowseViewController.h */,
 				5CCE70CE28100ECF00860841 /* PW_DappRecentBrowseViewController.m */,
 			);
@@ -3511,6 +3524,8 @@
 				5CCE70C8281006C900860841 /* PW_DappChainItemCell.m */,
 				5CCE70D028100F9300860841 /* PW_DappRecentBrowseCell.h */,
 				5CCE70D128100F9300860841 /* PW_DappRecentBrowseCell.m */,
+				5C38FBCF2859C20100D6017F /* PW_DappFavoritesCell.h */,
+				5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */,
 				5C9457A628571B4000CC60B7 /* PW_SegmentedHeaderView.h */,
 				5C9457A728571B4000CC60B7 /* PW_SegmentedHeaderView.m */,
 				5C9457A3285719CB00CC60B7 /* PW_TitleHeaderView.h */,
@@ -4961,6 +4976,7 @@
 				5C8AAAF8280D369F00E4ED53 /* PW_DenominatedCurrencyTool.m in Sources */,
 				5AF5D18C1D2F7CBA004070D7 /* NSString+DictionaryValue.m in Sources */,
 				5CEF34A827FE97CD0052BA15 /* UIFont+PW_Font.m in Sources */,
+				5C38FBD12859C20100D6017F /* PW_DappFavoritesCell.m in Sources */,
 				5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */,
 				5CE7ACCB27F6EC2200E2188D /* PW_TabBarViewController.m in Sources */,
 				5C37A8DD280EC75900AAA728 /* PW_LookPrivateKeyViewController.m in Sources */,
@@ -5030,6 +5046,7 @@
 				5C37A8E6280FB92100AAA728 /* PW_DappBrowserModel.m in Sources */,
 				5AF5D16E1D2F7CBA004070D7 /* NSDictionary+XML.m in Sources */,
 				5C8AAAE8280C1FE900E4ED53 /* PW_LanguageCell.m in Sources */,
+				5C38FBCE2859BCA000D6017F /* PW_DappFavoritesViewController.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
 				5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */,
 				994AA0EC26C511DD0062F9AF /* CollectionShareView.m in Sources */,
@@ -5101,6 +5118,7 @@
 				99D2C9EF2537F66000C1C196 /* BaseNavinationViewController.m in Sources */,
 				5AF5D1911D2F7CBA004070D7 /* NSString+MIME.m in Sources */,
 				5AF5D18F1D2F7CBA004070D7 /* NSString+Hash.m in Sources */,
+				5C38FBD42859C81900D6017F /* PW_DappFavoritesManager.m in Sources */,
 				5AF5D17D1D2F7CBA004070D7 /* NSObject+AppInfo.m in Sources */,
 				992E0F3F26CCDBC500E1C31B /* SettingManager.m in Sources */,
 				9937C8B3271434D90064BBC3 /* RecordModel.m in Sources */,

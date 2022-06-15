@@ -61,8 +61,8 @@
     [self.bodyView addSubview:self.costLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
-        make.left.offset(38);
-        make.right.offset(-38);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.offset(0);

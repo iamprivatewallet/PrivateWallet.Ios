@@ -136,7 +136,7 @@
     return COLORFORRGB(0xB0B8C4);
 }
 + (UIColor *)g_maskColor {
-    return [self g_hex:@"#000000" alpha:0.6];
+    return [self g_hex:@"#000000" alpha:0.7];
 }
 
 @end
