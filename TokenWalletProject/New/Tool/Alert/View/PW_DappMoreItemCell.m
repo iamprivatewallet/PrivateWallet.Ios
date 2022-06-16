@@ -35,7 +35,7 @@
         [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.offset(0);
         }];
-        self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_darkTextColor]];
+        self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
         self.titleLb.numberOfLines = 2;
         self.titleLb.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLb];

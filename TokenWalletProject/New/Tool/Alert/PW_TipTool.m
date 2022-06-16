@@ -36,7 +36,7 @@
         make.left.offset(36);
         make.right.offset(-36);
     }];
-    UILabel *descLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupTip") fontSize:14 textColor:[UIColor g_darkTextColor]];
+    UILabel *descLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_backupTip") fontSize:14 textColor:[UIColor g_grayTextColor]];
     descLb.textAlignment = NSTextAlignmentCenter;
     [descBgView addSubview:descLb];
     [descLb mas_makeConstraints:^(MASConstraintMaker *make) {

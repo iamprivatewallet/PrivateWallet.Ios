@@ -20,12 +20,13 @@
         make.edges.offset(0);
     }];
     UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_darkBgColor];
     contentView.clipsToBounds = YES;
     [maskView addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.right.offset(-18);
-        make.centerY.offset(10);
+        make.centerY.offset(-10);
         make.height.mas_greaterThanOrEqualTo(300);
         make.height.mas_lessThanOrEqualTo(SCREEN_HEIGHT*0.8);
     }];
@@ -33,7 +34,8 @@
     bgIv.contentMode = UIViewContentModeScaleAspectFill;
     [contentView addSubview:bgIv];
     [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
+        make.top.left.right.offset(0);
+        make.bottom.offset(0).priorityLow();
     }];
     contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
     contentView.alpha = 0;

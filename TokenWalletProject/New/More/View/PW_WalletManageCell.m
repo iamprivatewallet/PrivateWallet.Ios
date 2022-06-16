@@ -96,7 +96,7 @@
 }
 - (UILabel *)addressLb {
     if (!_addressLb) {
-        _addressLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_darkTextColor]];
+        _addressLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_grayTextColor]];
     }
     return _addressLb;
 }

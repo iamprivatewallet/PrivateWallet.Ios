@@ -13,8 +13,7 @@
 
 @interface PW_CollectionViewController ()
 
-@property (nonatomic, strong) UIImageView *topBgIv;
-
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UILabel *tipLb;
 
 @property (nonatomic, strong) UIView *tokenView;
@@ -32,7 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_collection")];
+    [self setNavNoLineTitle:@""];
+    [self setupFullBackground];
     [self makeViews];
     [self refreshUI];
 }
@@ -68,130 +68,154 @@
 //    }else{
 //        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
 //    }
-    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:walletAddress] size:170];
+    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:walletAddress] size:190];
 }
 - (void)makeViews {
-    self.topBgIv = [[UIImageView alloc] init];
-    self.topBgIv.image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH, 248) gradientColors:@[[UIColor g_hex:@"#2A8094"],[UIColor g_hex:@"#195179"]] gradientType:PW_GradientLeftToRight];
-    [self.view insertSubview:self.topBgIv atIndex:0];
-    self.tokenView = [[UIView alloc] init];
-    self.tokenView.backgroundColor = [UIColor g_bgColor];
-    [self.tokenView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    self.tokenView.layer.cornerRadius = 21;
-    [self.tokenView addTapTarget:self action:@selector(changeTokenAction)];
-    [self.view addSubview:self.tokenView];
-    [self.topBgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
-        make.height.offset(248);
-    }];
-    [self.tokenView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.height.offset(42);
-    }];
-    [self createTokenItems];
-    [self createWarnView];
-    [self createQrCodeView];
-}
-- (void)createTokenItems {
-    self.iconIv = [[UIImageView alloc] init];
-    [self.tokenView addSubview:self.iconIv];
-    self.nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
-    [self.tokenView addSubview:self.nameLb];
-    self.subNameLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
-    [self.tokenView addSubview:self.subNameLb];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_dark"]];
-    [self.tokenView addSubview:arrowIv];
-    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.offset(25);
-        make.left.offset(15);
-        make.centerY.offset(0);
-    }];
-    [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
-        make.centerY.offset(0);
-    }];
-    [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLb.mas_right).offset(5);
-        make.bottom.equalTo(self.nameLb);
-    }];
-    [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.subNameLb.mas_right).offset(18);
-        make.centerY.offset(0);
-        make.right.offset(-20);
-    }];
-}
-- (void)createWarnView {
-    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_warning_light"]];
-    [self.view addSubview:iconIv];
-    self.tipLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor whiteColor]];
-    [self.view addSubview:self.tipLb];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(30);
-        make.top.equalTo(self.tokenView.mas_bottom).offset(16);
-    }];
-    [self.tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(iconIv);
-        make.left.equalTo(iconIv.mas_right).offset(6);
-    }];
-}
-- (void)createQrCodeView {
-    UIView *qrView = [[UIView alloc] init];
-    qrView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:qrView];
-    [qrView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topBgIv.mas_bottom).offset(-32);
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [self.view addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(0);
         make.left.right.bottom.offset(0);
     }];
-    [qrView setRadius:32 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
-    UIView *qrBodyView = [[UIView alloc] init];
-    [qrBodyView setBorderColor:[UIColor g_borderColor] width:1 radius:15];
-    [qrView addSubview:qrBodyView];
-    [qrBodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.offset(200);
-        make.top.offset(60);
+    self.contentView = [[UIView alloc] init];
+    [scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+        make.width.equalTo(scrollView);
+        make.height.mas_greaterThanOrEqualTo(scrollView);
+    }];
+//    self.tokenView = [[UIView alloc] init];
+//    self.tokenView.backgroundColor = [UIColor g_bgColor];
+//    [self.tokenView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
+//    self.tokenView.layer.cornerRadius = 21;
+//    [self.tokenView addTapTarget:self action:@selector(changeTokenAction)];
+//    [self.view addSubview:self.tokenView];
+//    [self.tokenView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+//        make.left.offset(20);
+//        make.height.offset(42);
+//    }];
+    UILabel *titleLb = [PW_ViewTool labelMediumText:NSStringWithFormat(@"%@ %@",self.model.tokenName,LocalizedStr(@"text_collection")) fontSize:25 textColor:[UIColor g_whiteTextColor]];
+    [self.contentView addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(35);
         make.centerX.offset(0);
+    }];
+    UIView *qrView = [[UIView alloc] init];
+    [self.contentView addSubview:qrView];
+    [qrView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLb.mas_bottom).offset(25);
+        make.centerX.offset(0);
+        make.size.mas_equalTo(290);
+    }];
+    UIImageView *scanIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_scan_big"]];
+    [qrView addSubview:scanIv];
+    [scanIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
     }];
     self.qrIv = [[UIImageView alloc] init];
-    [qrBodyView addSubview:self.qrIv];
+    [qrView addSubview:self.qrIv];
     [self.qrIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
-        make.size.mas_equalTo(170);
+        make.size.mas_equalTo(190);
     }];
-    UILabel *tipLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_walletAddress") fontSize:14 textColor:[UIColor g_grayTextColor]];
-    [qrBodyView addSubview:tipLb];
-    [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(qrBodyView.mas_bottom).offset(15);
+    UIView *addressView = [[UIView alloc] init];
+    [addressView setBorderColor:[UIColor g_hex:@"#FBAE17"] width:1 radius:8];
+    [self.contentView addSubview:addressView];
+    [addressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(qrView.mas_bottom).offset(25);
+        make.width.offset(266);
         make.centerX.offset(0);
     }];
-    self.addressLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
+    UILabel *addressTipLb = [PW_ViewTool labelBoldText:LocalizedStr(@"text_walletAddress") fontSize:20 textColor:[UIColor g_whiteTextColor]];
+    [addressView addSubview:addressTipLb];
+    [addressTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(18);
+        make.centerX.offset(0);
+    }];
+    self.addressLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor g_whiteTextColor]];
+    self.addressLb.numberOfLines = 1;
     self.addressLb.textAlignment = NSTextAlignmentCenter;
-    [qrView addSubview:self.addressLb];
+    self.addressLb.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    [addressView addSubview:self.addressLb];
     [self.addressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tipLb.mas_bottom).offset(20);
-        make.left.offset(CGFloatScale(65));
-        make.right.offset(CGFloatScale(-65));
+        make.top.equalTo(addressTipLb.mas_bottom).offset(2);
+        make.left.offset(45);
+        make.right.offset(-45);
+        make.bottom.offset(-20);
     }];
-    UIButton *shareBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_share") fontSize:17 titleColor:[UIColor g_boldTextColor] imageName:@"icon_share_primary" target:self action:@selector(shareAction)];
-    [shareBtn setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [shareBtn setBorderColor:[UIColor g_borderColor] width:1 radius:27.5];
-    [qrView addSubview:shareBtn];
-    UIButton *copyBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_copy") fontSize:17 titleColor:[UIColor g_boldTextColor] imageName:@"icon_copy_primary" target:self action:@selector(copyAction)];
-    [copyBtn setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-    [copyBtn setBorderColor:[UIColor g_borderColor] width:1 radius:27.5];
-    [qrView addSubview:copyBtn];
-    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.addressLb.mas_bottom).offset(22);
-        make.height.offset(55);
-        make.width.offset(140);
-        make.right.equalTo(qrView.mas_centerX).offset(-10);
+    self.tipLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor g_whiteTextColor]];
+    self.tipLb.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:self.tipLb];
+    [self.tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.equalTo(addressView.mas_bottom).offset(44);
     }];
-    [copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(shareBtn);
-        make.left.equalTo(shareBtn.mas_right).offset(20);
-        make.height.offset(55);
-        make.width.offset(140);
+    UIView *shareView = [self createBtnViewTitle:LocalizedStr(@"text_share") imageName:@"icon_share_logo" action:@selector(shareAction)];
+    [self.contentView addSubview:shareView];
+    UIView *copyView = [self createBtnViewTitle:LocalizedStr(@"text_copy") imageName:@"icon_copy_logo" action:@selector(copyAction)];
+    [self.contentView addSubview:copyView];
+    [shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.tipLb.mas_bottom).offset(20);
+        make.left.offset(36);
+        make.height.mas_equalTo(55);
+        make.bottom.mas_lessThanOrEqualTo(-SafeBottomInset-20);
+    }];
+    [copyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(shareView.mas_right).offset(25);
+        make.top.bottom.width.height.equalTo(shareView);
+        make.right.offset(-36);
     }];
 }
+- (UIView *)createBtnViewTitle:(NSString *)title imageName:(NSString *)imageName action:(SEL)action {
+    UIView *contentView = [[UIView alloc] init];
+    [contentView setBorderColor:[UIColor g_primaryColor] width:1 radius:8];
+    UIImageView *iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    [iconIv setRequiredHorizontal];
+    [contentView addSubview:iconIv];
+    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.centerY.offset(0);
+    }];
+    UILabel *titleLb = [PW_ViewTool labelText:title fontSize:18 textColor:[UIColor g_whiteTextColor]];
+    [contentView addSubview:titleLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(iconIv.mas_right).offset(12);
+        make.centerY.offset(0);
+        make.right.mas_lessThanOrEqualTo(0);
+    }];
+    [contentView addTapTarget:self action:action];
+    return contentView;
+}
+//- (void)createTokenItems {
+//    self.iconIv = [[UIImageView alloc] init];
+//    [self.tokenView addSubview:self.iconIv];
+//    self.nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
+//    [self.tokenView addSubview:self.nameLb];
+//    self.subNameLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+//    [self.tokenView addSubview:self.subNameLb];
+//    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_dark"]];
+//    [self.tokenView addSubview:arrowIv];
+//    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.height.offset(25);
+//        make.left.offset(15);
+//        make.centerY.offset(0);
+//    }];
+//    [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.iconIv.mas_right).offset(10);
+//        make.centerY.offset(0);
+//    }];
+//    [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.nameLb.mas_right).offset(5);
+//        make.bottom.equalTo(self.nameLb);
+//    }];
+//    [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.subNameLb.mas_right).offset(18);
+//        make.centerY.offset(0);
+//        make.right.offset(-20);
+//    }];
+//}
 
 @end

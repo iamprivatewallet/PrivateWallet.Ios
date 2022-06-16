@@ -25,15 +25,6 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_tradeDetail")];
     [self makeViews];
 }
-- (void)copySendAction {
-    [self.model.fromAddress pasteboardToast:YES];
-}
-- (void)copyReceiveAction {
-    [self.model.toAddress pasteboardToast:YES];
-}
-- (void)copyHashAction {
-    [self.model.hashStr pasteboardToast:YES];
-}
 - (void)blockchainDetailAction {
     if([self.model.detaInfoUrl isNoEmpty]){
         BrowseWebViewController *webVc = [[BrowseWebViewController alloc] init];
@@ -42,8 +33,19 @@
     }
 }
 - (void)makeViews {
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bgView];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
+    }];
+    [bgView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIScrollView *scrollView = [[UIScrollView alloc] init];
-    [self.view addSubview:scrollView];
+    [bgView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,179 +53,145 @@
         make.width.equalTo(scrollView);
     }];
     UIImageView *stateIv = [[UIImageView alloc] init];
-    NSString *imageName = @"icon_trade_pending_big";
+    [self.contentView addSubview:stateIv];
+    NSString *amountStr = NSStringWithFormat(@"%@%@ %@",self.model.isOut?@"-":@"+",self.model.value,self.model.tokenName);
+    UILabel *amountLb = [PW_ViewTool labelBoldText:amountStr fontSize:23 textColor:[UIColor g_grayTextColor]];
+    [self.contentView addSubview:amountLb];
+    UILabel *stateLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_textColor]];
+    [self.contentView addSubview:stateLb];
+    NSString *imageName = @"icon_trade_pending";
+    stateLb.text = LocalizedStr(@"text_pending");
     if(self.model.transactionStatus<0){
-        imageName = @"icon_trade_fail_big";
+        imageName = @"icon_trade_fail";
+        stateLb.text = LocalizedStr(@"text_tradeFail");
+        stateLb.textColor = [UIColor g_errorColor];
     }else if(self.model.transactionStatus>0){
-        imageName = @"icon_trade_success_big";
+        if (self.model.isOut) {
+            imageName = @"icon_trade_out";
+        }else{
+            imageName = @"icon_trade_in";
+        }
+        stateLb.text = LocalizedStr(@"text_collectionSuccess");
+        stateLb.textColor = [UIColor g_successColor];
     }
     stateIv.image = [UIImage imageNamed:imageName];
-    [self.contentView addSubview:stateIv];
-    NSString *amountStr = NSStringWithFormat(@"%@%@",self.model.isOut?@"-":@"+",self.model.value);
-    UILabel *amountLb = [PW_ViewTool labelSemiboldText:amountStr fontSize:32 textColor:[UIColor g_boldTextColor]];
-    [self.contentView addSubview:amountLb];
-    UILabel *unitLb = [PW_ViewTool labelSemiboldText:self.model.tokenName fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.contentView addSubview:unitLb];
-    NSString *stateStr = self.model.transactionStatus==0?LocalizedStr(@"text_pending"):(self.model.transactionStatus==1?LocalizedStr(@"text_collectionSuccess"):LocalizedStr(@"text_tradeFail"));
-    UILabel *stateLb = [PW_ViewTool labelMediumText:stateStr fontSize:16 textColor:[UIColor g_boldTextColor]];
-    [self.contentView addSubview:stateLb];
     [stateIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(45);
+        make.top.offset(20);
+        make.centerX.offset(0);
+    }];
+    [stateLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(stateIv.mas_bottom).offset(2);
         make.centerX.offset(0);
     }];
     [amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(stateIv.mas_bottom).offset(22);
+        make.top.equalTo(stateLb.mas_bottom).offset(8);
         make.centerX.offset(-5);
     }];
-    [unitLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(amountLb);
-        make.left.equalTo(amountLb.mas_right).offset(1);
-    }];
-    [stateLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(amountLb.mas_bottom).offset(5);
-        make.centerX.offset(0);
-    }];
     self.baseView = [[UIView alloc] init];
-    [self.baseView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:self.baseView];
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(stateLb.mas_bottom).offset(38);
-        make.left.offset(20);
-        make.right.offset(-20);
-    }];
-    self.blockView = [[UIView alloc] init];
-    [self.blockView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    [self.contentView addSubview:self.blockView];
-    [self.blockView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.top.equalTo(amountLb.mas_bottom).offset(20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.bottom.offset(-20);
     }];
-    UIButton *detailBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [detailBtn setTitle:LocalizedStr(@"text_blockchainViewDetail") forState:UIControlStateNormal];
-    [detailBtn addTarget:self action:@selector(blockchainDetailAction) forControlEvents:UIControlEventTouchUpInside];
-    [detailBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateNormal];
-    detailBtn.titleLabel.font = [UIFont pw_semiBoldFontOfSize:14];
+    UIButton *detailBtn = [PW_ViewTool buttonTitle:LocalizedStr(@"text_blockchainViewDetail") fontSize:14 titleColor:[UIColor g_linkColor] imageName:nil target:self action:@selector(blockchainDetailAction)];
     [self.view addSubview:detailBtn];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-    }];
     [detailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(scrollView.mas_bottom).offset(20);
         make.centerX.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.bottomMargin.offset(-20);
     }];
     [self createBaseItems];
-    [self createBlockItems];
 }
 - (void)createBaseItems {
-    UILabel *sendTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_sendAddress") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:sendTipLb];
-    UILabel *sendAddressLb = [PW_ViewTool labelSemiboldText:self.model.fromAddress fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:sendAddressLb];
-    UIButton *copySendBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copySendAction)];
-    [copySendBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.baseView addSubview:copySendBtn];
-    UILabel *receiveTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_receiveAddress") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:receiveTipLb];
-    UILabel *receiveAddressLb = [PW_ViewTool labelSemiboldText:self.model.toAddress fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:receiveAddressLb];
-    UIButton *copyReceiveBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyReceiveAction)];
-    [copyReceiveBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.baseView addSubview:copyReceiveBtn];
-    UILabel *minersFeeTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_minersFee") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:minersFeeTipLb];
+    UIView *sendView = [self createRowViewTitle:LocalizedStr(@"text_sendAddress") desc:self.model.fromAddress showCopy:YES];
+    [self.baseView addSubview:sendView];
+    [sendView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
+    }];
+    UIView *receiveView = [self createRowViewTitle:LocalizedStr(@"text_receiveAddress") desc:self.model.toAddress showCopy:YES];
+    [self.baseView addSubview:receiveView];
+    [receiveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sendView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
+    }];
     NSString *useGasToken = @"0";
     if([self.model.gasPrice isNoEmpty]){
         NSString *gwei = [self.model.gasPrice stringDownDividingBy10Power:self.model.tokenDecimals scale:9];
         useGasToken = [gwei stringDownMultiplyingBy:self.model.gasUsed decimal:8];
     }
-    UILabel *minersFeeLb = [PW_ViewTool labelSemiboldText:NSStringWithFormat(@"%@ %@",useGasToken,self.model.tokenName) fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:minersFeeLb];
-    [sendTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(18);
-        make.left.offset(18);
+    UIView *gasFeeView = [self createRowViewTitle:LocalizedStr(@"text_minersFee") desc:NSStringWithFormat(@"%@ %@",useGasToken,self.model.tokenName) showCopy:NO];
+    [self.baseView addSubview:gasFeeView];
+    [gasFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(receiveView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
     }];
-    [sendAddressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sendTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+    UIView *hashView = [self createRowViewTitle:LocalizedStr(@"text_tradeHash") desc:self.model.hashStr showCopy:YES];
+    [self.baseView addSubview:hashView];
+    [hashView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(gasFeeView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
     }];
-    [copySendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(sendAddressLb.mas_right).offset(8);
-        make.centerY.equalTo(sendAddressLb);
-        make.right.mas_lessThanOrEqualTo(-18);
+    UIView *blockView = [self createRowViewTitle:LocalizedStr(@"text_blockHeight") desc:@"--" showCopy:YES];
+    [self.baseView addSubview:blockView];
+    [blockView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(hashView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
     }];
-    [receiveTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sendAddressLb.mas_bottom).offset(18);
-        make.left.offset(18);
-    }];
-    [receiveAddressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(receiveTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
-    }];
-    [copyReceiveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(receiveAddressLb.mas_right).offset(8);
-        make.centerY.equalTo(receiveAddressLb);
-        make.right.mas_lessThanOrEqualTo(-18);
-    }];
-    [minersFeeTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(receiveAddressLb.mas_bottom).offset(18);
-        make.left.offset(18);
-    }];
-    [minersFeeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(minersFeeTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
-        make.bottom.offset(-24);
+    UIView *timeView = [self createRowViewTitle:LocalizedStr(@"text_time") desc:[NSString timeStrTimeInterval:self.model.timeStamp] showCopy:NO showLine:NO];
+    [self.baseView addSubview:timeView];
+    [timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(blockView.mas_bottom);
+        make.left.right.bottom.offset(0);
+        make.height.mas_greaterThanOrEqualTo(64);
     }];
 }
-- (void)createBlockItems {
-    UILabel *hashTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_tradeHash") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.blockView addSubview:hashTipLb];
-    UILabel *hashLb = [PW_ViewTool labelSemiboldText:self.model.hashStr fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.blockView addSubview:hashLb];
-    UIButton *copyHashBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyHashAction)];
-    [copyHashBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.blockView addSubview:copyHashBtn];
-    UILabel *blockHeightTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_blockHeight") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.blockView addSubview:blockHeightTipLb];
-    UILabel *blockHeightLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.blockView addSubview:blockHeightLb];
-    UILabel *timeTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_time") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.blockView addSubview:timeTipLb];
-    UILabel *timeLb = [PW_ViewTool labelSemiboldText:[NSString timeStrTimeInterval:self.model.timeStamp] fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.blockView addSubview:timeLb];
-    [hashTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(18);
-        make.left.offset(18);
+- (UIView *)createRowViewTitle:(NSString *)title desc:(NSString *)desc showCopy:(BOOL)showCopy {
+    return [self createRowViewTitle:title desc:desc showCopy:showCopy showLine:YES];
+}
+- (UIView *)createRowViewTitle:(NSString *)title desc:(NSString *)desc showCopy:(BOOL)showCopy showLine:(BOOL)showLine {
+    UIView *contentView = [[UIView alloc] init];
+    UILabel *titleLb = [PW_ViewTool labelText:title fontSize:14 textColor:[UIColor g_grayTextColor]];
+    [contentView addSubview:titleLb];
+    UILabel *descLb = [PW_ViewTool labelBoldText:desc fontSize:14 textColor:[UIColor g_textColor]];
+    [contentView addSubview:descLb];
+    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.top.offset(15);
     }];
-    [hashLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(hashTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+    [descLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.top.equalTo(titleLb.mas_bottom).offset(2);
+        make.right.mas_lessThanOrEqualTo(-20);
+        make.bottom.mas_lessThanOrEqualTo(-15);
     }];
-    [copyHashBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(hashLb.mas_right).offset(8);
-        make.centerY.equalTo(hashLb);
-        make.right.mas_lessThanOrEqualTo(-18);
-    }];
-    [blockHeightTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(hashLb.mas_bottom).offset(18);
-        make.left.offset(18);
-    }];
-    [blockHeightLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(blockHeightTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
-    }];
-    [timeTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(blockHeightLb.mas_bottom).offset(18);
-        make.left.offset(18);
-    }];
-    [timeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(timeTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
-        make.bottom.offset(-24);
-    }];
+    if (showLine) {
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor g_lineColor];
+        [contentView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.offset(0);
+            make.height.offset(1);
+        }];
+    }
+    if (showCopy) {
+        UIButton *copyBtn = [PW_ViewTool buttonImageName:@"icon_copy_gray" target:nil action:nil];
+        [copyBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
+            [desc pasteboardToast:YES];
+        }];
+        [contentView addSubview:copyBtn];
+        [copyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.offset(0);
+            make.centerY.offset(0);
+        }];
+    }
+    return contentView;
 }
 
 @end

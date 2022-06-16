@@ -21,7 +21,7 @@
     if (self) {
         self.titleBtn = [PW_Button buttonWithType:UIButtonTypeCustom];
         self.titleBtn.userInteractionEnabled = NO;
-        [self.titleBtn setTitleColor:[UIColor g_darkTextColor] forState:UIControlStateNormal];
+        [self.titleBtn setTitleColor:[UIColor g_grayTextColor] forState:UIControlStateNormal];
         [self.titleBtn setTitleColor:[UIColor g_primaryColor] forState:UIControlStateSelected];
         [self.titleBtn pw_setNormalFont:[UIFont pw_semiBoldFontOfSize:15] selectedFont:[UIFont pw_semiBoldFontOfSize:17]];
         [self.contentView addSubview:self.titleBtn];

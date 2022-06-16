@@ -46,7 +46,7 @@
 - (void)refreshUI {
     [self.iconIv sd_setImageWithURL:[NSURL URLWithString:self.model.tokenLogo] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
     self.titleLb.text = self.model.tokenName;
-    self.descLb.text = self.model.tokenName;
+    self.descLb.text = NSStringWithFormat(@"(%@)",self.model.tokenName);
     self.tokenFullNameLb.text = self.model.tokenTitle;
     self.websiteLb.text = self.model.webUrl;
     self.contractAddressLb.text = self.model.tokenContract;
@@ -65,12 +65,18 @@
     }];
 }
 - (void)makeViews {
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bgView];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.bottom.offset(0);
+    }];
+    [bgView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIScrollView *scrollView = [[UIScrollView alloc] init];
-    [self.view addSubview:scrollView];
+    [bgView addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom);
-        make.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.edges.offset(0);
     }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
@@ -81,37 +87,35 @@
     self.iconIv = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconIv];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(50);
+        make.top.offset(25);
         make.centerX.offset(0);
-        make.size.mas_equalTo(65);
+        make.size.mas_equalTo(85);
     }];
-    self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:32 textColor:[UIColor g_boldTextColor]];
+    self.titleLb = [PW_ViewTool labelBoldText:@"--" fontSize:22 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.titleLb];
-    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconIv.mas_bottom).offset(22);
-        make.centerX.offset(0);
-    }];
-    self.descLb = [PW_ViewTool labelMediumText:@"--" fontSize:16 textColor:[UIColor g_grayTextColor]];
+    self.descLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.descLb];
+    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.iconIv.mas_bottom).offset(2);
+        make.right.equalTo(self.descLb.mas_left).offset(-8);
+    }];
     [self.descLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLb.mas_bottom).offset(6);
-        make.centerX.offset(0);
+        make.baseline.equalTo(self.titleLb);
+        make.left.equalTo(self.contentView.mas_centerX).offset(0);
     }];
     self.baseView = [[UIView alloc] init];
-    [self.baseView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:self.baseView];
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.descLb.mas_bottom).offset(30);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     self.releaseView = [[UIView alloc] init];
-    [self.releaseView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:self.releaseView];
     [self.releaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseView.mas_bottom).offset(15);
-        make.left.offset(20);
-        make.right.offset(-20);
+        make.left.offset(36);
+        make.right.offset(-36);
         make.height.offset(160);
         make.bottom.offset(-40);
     }];
@@ -119,97 +123,158 @@
     [self createReleaseItems];
 }
 - (void)createBaseItems {
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_baseInfo") fontSize:13 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:titleLb];
-    UILabel *fullNameTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_tokenFullName") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:fullNameTipLb];
-    self.tokenFullNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:self.tokenFullNameLb];
-    UILabel *websiteTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_website") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:websiteTipLb];
-    self.websiteLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_primaryColor]];
-    [self.baseView addSubview:self.websiteLb];
-    UIButton *copyWebsiteBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyWebsiteAction)];
-    [copyWebsiteBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.baseView addSubview:copyWebsiteBtn];
-    UILabel *contractAddressTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_contractAddress") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.baseView addSubview:contractAddressTipLb];
-    self.contractAddressLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_boldTextColor]];
-    [self.baseView addSubview:self.contractAddressLb];
-    UIButton *copyContractAddressBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyContractAddressAction)];
-    [copyContractAddressBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.baseView addSubview:copyContractAddressBtn];
+    UIView *basicInfoView = [[UIView alloc] init];
+    [self.baseView addSubview:basicInfoView];
+    [basicInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.offset(0);
+        make.height.offset(82);
+    }];
+    UILabel *titleLb = [PW_ViewTool labelText:LocalizedStr(@"text_baseInfo") fontSize:14 textColor:[UIColor g_textColor]];
+    [basicInfoView addSubview:titleLb];
+    UILabel *fullNameTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_tokenName") fontSize:14 textColor:[UIColor g_grayTextColor]];
+    [basicInfoView addSubview:fullNameTipLb];
+    self.tokenFullNameLb = [PW_ViewTool labelText:@"--" fontSize:14 textColor:[UIColor g_boldTextColor]];
+    [basicInfoView addSubview:self.tokenFullNameLb];
+    UIView *line1View = [[UIView alloc] init];
+    line1View.backgroundColor = [UIColor g_lineColor];
+    [basicInfoView addSubview:line1View];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(18);
+        make.bottom.equalTo(fullNameTipLb.mas_top).offset(-8);
+        make.left.offset(0);
     }];
     [fullNameTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(12);
-        make.left.offset(18);
+        make.centerY.equalTo(basicInfoView.mas_centerY).offset(2);
+        make.left.offset(0);
     }];
     [self.tokenFullNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(fullNameTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
-        make.right.mas_lessThanOrEqualTo(-18);
+        make.top.equalTo(fullNameTipLb.mas_bottom).offset(2);
+        make.left.offset(0);
+        make.right.mas_lessThanOrEqualTo(0);
     }];
+    [line1View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
+    UIView *websiteView = [[UIView alloc] init];
+    [self.baseView addSubview:websiteView];
+    [websiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(basicInfoView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.offset(66);
+    }];
+    UILabel *websiteTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_webSite") fontSize:14 textColor:[UIColor g_grayTextColor]];
+    [websiteView addSubview:websiteTipLb];
+    self.websiteLb = [PW_ViewTool labelText:@"--" fontSize:14 textColor:[UIColor g_linkColor]];
+    [websiteView addSubview:self.websiteLb];
+    UIButton *copyWebsiteBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyWebsiteAction)];
+    [copyWebsiteBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [websiteView addSubview:copyWebsiteBtn];
+    UIView *line2View = [[UIView alloc] init];
+    line2View.backgroundColor = [UIColor g_lineColor];
+    [websiteView addSubview:line2View];
     [websiteTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tokenFullNameLb.mas_bottom).offset(18);
-        make.left.offset(18);
+        make.bottom.equalTo(websiteView.mas_centerY).offset(-2);
+        make.left.offset(0);
     }];
     [self.websiteLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(websiteTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+        make.top.equalTo(websiteView.mas_centerY).offset(2);
+        make.left.offset(0);
+        make.right.mas_lessThanOrEqualTo(-25);
     }];
     [copyWebsiteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.websiteLb.mas_right).offset(4);
-        make.right.mas_lessThanOrEqualTo(-18);
-        make.centerY.equalTo(self.websiteLb);
+        make.right.offset(0);
+        make.centerY.offset(0);
     }];
+    [line2View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
+    UIView *addressView = [[UIView alloc] init];
+    [self.baseView addSubview:addressView];
+    [addressView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(websiteView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.offset(66);
+        make.bottom.offset(0);
+    }];
+    UILabel *contractAddressTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_contractAddress") fontSize:13 textColor:[UIColor g_grayTextColor]];
+    [addressView addSubview:contractAddressTipLb];
+    self.contractAddressLb = [PW_ViewTool labelBoldText:@"--" fontSize:12 textColor:[UIColor g_boldTextColor]];
+    [addressView addSubview:self.contractAddressLb];
+    UIButton *copyContractAddressBtn = [PW_ViewTool buttonImageName:@"icon_copy" target:self action:@selector(copyContractAddressAction)];
+    [copyContractAddressBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    [addressView addSubview:copyContractAddressBtn];
+    UIView *line3View = [[UIView alloc] init];
+    line3View.backgroundColor = [UIColor g_lineColor];
+    [addressView addSubview:line3View];
     [contractAddressTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.websiteLb.mas_bottom).offset(18);
-        make.left.offset(18);
+        make.bottom.equalTo(addressView.mas_centerY).offset(-2);
+        make.left.offset(0);
     }];
     [self.contractAddressLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contractAddressTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+        make.top.equalTo(addressView.mas_centerY).offset(2);
+        make.left.offset(0);
+        make.right.mas_lessThanOrEqualTo(-25);
     }];
     [copyContractAddressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contractAddressLb.mas_right).offset(4);
-        make.right.mas_lessThanOrEqualTo(-18);
-        make.bottom.offset(-24);
-        make.centerY.equalTo(self.contractAddressLb);
+        make.right.offset(0);
+        make.centerY.offset(0);
+    }];
+    [line3View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
     }];
 }
 - (void)createReleaseItems {
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_releaseInfo") fontSize:13 textColor:[UIColor g_boldTextColor]];
+    UIView *releaseInfoView = [[UIView alloc] init];
+    [self.releaseView addSubview:releaseInfoView];
+    [releaseInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.offset(0);
+        make.height.offset(82);
+    }];
+    UILabel *titleLb = [PW_ViewTool labelText:LocalizedStr(@"text_releaseInfo") fontSize:14 textColor:[UIColor g_textColor]];
     [self.releaseView addSubview:titleLb];
-    UILabel *tokenTotalTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_tokenTotal") fontSize:13 textColor:[UIColor g_grayTextColor]];
+    UILabel *tokenTotalTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_tokenTotal") fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.releaseView addSubview:tokenTotalTipLb];
-    self.tokenTotalLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_boldTextColor]];
+    self.tokenTotalLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor g_textColor]];
     [self.baseView addSubview:self.tokenTotalLb];
-    UILabel *releaseTimeTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_releaseTime") fontSize:13 textColor:[UIColor g_grayTextColor]];
-    [self.releaseView addSubview:releaseTimeTipLb];
-    self.releaseTimeLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_primaryColor]];
-    [self.releaseView addSubview:self.releaseTimeLb];
+    UIView *line1View = [[UIView alloc] init];
+    line1View.backgroundColor = [UIColor g_lineColor];
+    [releaseInfoView addSubview:line1View];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(18);
+        make.bottom.equalTo(tokenTotalTipLb.mas_top).offset(-8);
+        make.left.offset(0);
     }];
     [tokenTotalTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(12);
-        make.left.offset(18);
+        make.centerY.equalTo(releaseInfoView.mas_centerY).offset(2);
+        make.left.offset(0);
     }];
     [self.tokenTotalLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(tokenTotalTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+        make.top.equalTo(tokenTotalTipLb.mas_bottom).offset(2);
+        make.left.offset(0);
     }];
+    [line1View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.offset(1);
+    }];
+    UIView *releaseTimeView = [[UIView alloc] init];
+    [self.releaseView addSubview:releaseTimeView];
+    [releaseTimeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(releaseInfoView.mas_bottom);
+        make.left.right.offset(0);
+        make.height.offset(66);
+    }];
+    UILabel *releaseTimeTipLb = [PW_ViewTool labelText:LocalizedStr(@"text_releaseTime") fontSize:14 textColor:[UIColor g_grayTextColor]];
+    [releaseTimeView addSubview:releaseTimeTipLb];
+    self.releaseTimeLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor g_textColor]];
+    [releaseTimeView addSubview:self.releaseTimeLb];
     [releaseTimeTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tokenTotalLb.mas_bottom).offset(18);
-        make.left.offset(18);
+        make.bottom.equalTo(releaseTimeView.mas_centerY).offset(-2);
+        make.left.offset(0);
     }];
     [self.releaseTimeLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(releaseTimeTipLb.mas_bottom).offset(5);
-        make.left.offset(18);
+        make.top.equalTo(releaseTimeView.mas_centerY).offset(2);
+        make.left.offset(0);
     }];
 }
 

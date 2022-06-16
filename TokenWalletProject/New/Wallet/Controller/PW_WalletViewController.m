@@ -475,7 +475,7 @@
         make.left.equalTo(assetsLb.mas_right).offset(10);
         make.centerY.equalTo(assetsLb);
     }];
-    UILabel *totalAssetsLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:22 textColor:[UIColor g_darkTextColor]];
+    UILabel *totalAssetsLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:22 textColor:[UIColor g_grayTextColor]];
     [headerView addSubview:totalAssetsLb];
     self.totalAssetsLb = totalAssetsLb;
     [totalAssetsLb mas_makeConstraints:^(MASConstraintMaker *make) {

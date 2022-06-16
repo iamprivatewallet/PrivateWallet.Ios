@@ -30,7 +30,7 @@
             make.centerY.offset(0);
             make.width.height.offset(45);
         }];
-        self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor g_darkTextColor]];
+        self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor g_grayTextColor]];
         self.titleLb.numberOfLines = 2;
         [self.contentView addSubview:self.titleLb];
         [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {

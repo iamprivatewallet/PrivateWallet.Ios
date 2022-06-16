@@ -27,7 +27,7 @@
             make.centerX.offset(0);
             make.height.equalTo(self.iconIv.mas_width);
         }];
-        self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_darkTextColor]];
+        self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_grayTextColor]];
         self.titleLb.numberOfLines = 1;
         self.titleLb.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLb];

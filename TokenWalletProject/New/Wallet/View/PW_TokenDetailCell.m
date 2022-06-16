@@ -33,7 +33,7 @@
 }
 - (void)setModel:(PW_TokenDetailModel *)model {
     _model = model;
-    self.iconIv.image = [UIImage imageNamed:model.isOut?@"icon_roll_out":@"icon_roll_in"];
+    self.iconIv.image = [UIImage imageNamed:model.isOut?@"icon_trade_out":@"icon_trade_in"];
     self.hashLb.text = [model.hashStr showShortAddressHead:9 tail:4];
     self.amountLb.text = NSStringWithFormat(@"%@%@",model.isOut?@"-":@"+",model.value);
     self.timeLb.text = [NSString timeStrTimeInterval:model.timeStamp];

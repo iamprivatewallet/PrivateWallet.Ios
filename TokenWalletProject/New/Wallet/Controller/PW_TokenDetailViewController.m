@@ -248,6 +248,11 @@ typedef enum : NSUInteger {
 - (void)makeViews {
     self.topView = [[UIView alloc] init];
     [self.view addSubview:self.topView];
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.left.right.offset(0);
+        make.height.offset(90);
+    }];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
@@ -258,11 +263,6 @@ typedef enum : NSUInteger {
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.menuControl];
     [contentView addSubview:self.tableView];
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(25);
-        make.left.right.offset(0);
-        make.height.offset(90);
-    }];
     [self.menuControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(36);
         make.left.offset(36);

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     [self setNeedsStatusBarAppearanceUpdate];
-    self.view.backgroundColor = [UIColor g_darkBgColor];
+    self.view.backgroundColor = [UIColor g_bgColor];
     [self.bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
     }];
