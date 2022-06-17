@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface PW_GasModel : PW_BaseModel
+@interface PW_GasModel : PW_BaseModel <NSCopying, NSMutableCopying>
 
 @property (nonatomic, copy) NSString *gas_price;
 @property (nonatomic, readonly, copy) NSString *gas_gwei;

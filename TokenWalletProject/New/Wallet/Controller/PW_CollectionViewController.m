@@ -49,7 +49,8 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)shareAction {
-    [PW_SharePayTool showPayMeViewWithAddress:self.model.tokenContract name:self.model.tokenName];
+    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    [PW_SharePayTool showPayMeViewWithAddress:walletAddress name:self.model.tokenName];
 }
 - (void)copyAction {
     [self.model.tokenContract pasteboardToast:YES];

@@ -72,4 +72,19 @@
     return [self.gas_amount stringDownMultiplyingBy:self.price decimal:9];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    PW_GasModel *model = [PW_GasModel allocWithZone:zone];
+    model.gas_price = self.gas_price;
+    model.gas = self.gas;
+    model.price = self.price;
+    return model;
+}
+- (id)mutableCopyWithZone:(NSZone *)zone {
+    PW_GasModel *model = [PW_GasModel allocWithZone:zone];
+    model.gas_price = self.gas_price;
+    model.gas = self.gas;
+    model.price = self.price;
+    return model;
+}
+
 @end

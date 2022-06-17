@@ -48,7 +48,7 @@ FeeCustomCellDelegate
     }
 }
 - (void)requestEstimateGas {
-    [MOSWalletContractTool estimateGasToAddress:nil value:nil completionBlock:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+    [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
         if(gas){
             NSString *gas_gwei = [gasPrice stringDownDividingBy10Power:9];
             self.gasGwei = gas_gwei;

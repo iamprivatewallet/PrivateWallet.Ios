@@ -363,12 +363,12 @@ BackupAlertMainViewDelegate
 //                completion(amount);
 //            }
 //        }];
-        [MOSWalletContractTool getBalanceERC20WithContractAddress:coin.tokenAddress completionBlock:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+        [[PWWalletContractTool shared] balanceERC20WithAddress:self.ethWallet.address contractAddress:coin.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
             if(coin.decimals>0){
                 NSString *newAmount = [amount stringDownDividingBy10Power:coin.decimals];
                 completion(newAmount);
             }else{
-                [MOSWalletContractTool getDecimalsERC20WithContractAddress:coin.tokenAddress completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+                [[PWWalletContractTool shared] decimalsERC20WithContractAddress:coin.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                     if(errMsg==nil){
                         coin.decimals = decimals;
                         NSString *newAmount = [amount stringDownDividingBy10Power:decimals];

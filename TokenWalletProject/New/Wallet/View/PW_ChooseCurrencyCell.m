@@ -47,16 +47,22 @@
     [self.bodyView addSubview:self.addressLb];
     [self.bodyView addSubview:self.copyBtn];
     [self.bodyView addSubview:self.chooseBtn];
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_lineColor];
+    [self.bodyView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.mas_equalTo(1);
+    }];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(5);
-        make.left.offset(20);
-        make.right.offset(-20);
-        make.bottom.offset(-5);
+        make.top.bottom.offset(0);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
-        make.left.offset(12);
-        make.width.height.offset(40);
+        make.left.offset(0);
+        make.width.height.offset(45);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconIv.mas_right).offset(15);
@@ -72,7 +78,7 @@
         make.right.lessThanOrEqualTo(self.chooseBtn.mas_left).offset(-10);
     }];
     [self.chooseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
+        make.right.offset(0);
         make.centerY.offset(0);
     }];
 }
@@ -80,8 +86,6 @@
 - (UIView *)bodyView {
     if(!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        _bodyView.backgroundColor = [UIColor g_bgColor];
-        [_bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     }
     return _bodyView;
 }

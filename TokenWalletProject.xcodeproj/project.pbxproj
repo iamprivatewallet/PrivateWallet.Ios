@@ -181,7 +181,7 @@
 		5B08D8C721F82406002CC9A8 /* cwv.js in Resources */ = {isa = PBXBuildFile; fileRef = 5B08D8C621F82406002CC9A8 /* cwv.js */; };
 		5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */; };
 		5C2B3E322808297800CC16CE /* PW_SearchCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */; };
-		5C34201827D7421900A2630B /* brewchain.js in Resources */ = {isa = PBXBuildFile; fileRef = 5C34201727D7421900A2630B /* brewchain.js */; };
+		5C3190EE285CAAF60053F572 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3190ED285CAAF60053F572 /* web3.swift */; };
 		5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */; };
 		5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17F28094AAC0000FEE0 /* PW_CurrencyManageCell.m */; };
 		5C36E18528094BD20000FEE0 /* PW_GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E18428094BD20000FEE0 /* PW_GlobalData.m */; };
@@ -200,7 +200,6 @@
 		5C38FBCE2859BCA000D6017F /* PW_DappFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */; };
 		5C38FBD12859C20100D6017F /* PW_DappFavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */; };
 		5C38FBD42859C81900D6017F /* PW_DappFavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */; };
-		5C581002282CB6A000CFB197 /* Solana in Frameworks */ = {isa = PBXBuildFile; productRef = 5C581001282CB69C00CFB197 /* Solana */; };
 		5C62CF9627FB0AAC00C1C5DC /* Web3WebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */; };
 		5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */; };
 		5C62CF9C27FD223100C1C5DC /* PW_TokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */; };
@@ -218,7 +217,6 @@
 		5C71193327BB7ABD00FE9B51 /* MetaMaskCallApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */; };
 		5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193A27BB860500FE9B51 /* WQJLog.swift */; };
 		5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */; };
-		5C71194027BCBF3D00FE9B51 /* MOSWalletTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193F27BCBF3C00FE9B51 /* MOSWalletTool.swift */; };
 		5C7ED85D2807EF6D00873A53 /* PW_AddCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED85C2807EF6D00873A53 /* PW_AddCurrencyViewController.m */; };
 		5C7ED8602807F83800873A53 /* PW_AddCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED85F2807F83800873A53 /* PW_AddCurrencyCell.m */; };
 		5C7ED8632807F9FB00873A53 /* PW_AddCurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED8622807F9FB00873A53 /* PW_AddCurrencyModel.m */; };
@@ -267,7 +265,7 @@
 		5CA0F146280E56DC00DE8DDB /* PW_NetworkManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F145280E56DC00DE8DDB /* PW_NetworkManageCell.m */; };
 		5CA0F149280E5A9800DE8DDB /* PW_NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F148280E5A9800DE8DDB /* PW_NetworkManager.m */; };
 		5CA0F14C280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F14B280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m */; };
-		5CA2E2C427BE4FF7002E2930 /* MOSWalletContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */; };
+		5CA2E2C427BE4FF7002E2930 /* PWWalletContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */; };
 		5CA3463E280BF60F00E18D92 /* PW_ShareAppTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */; };
 		5CA34641280C028100E18D92 /* PW_AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA34640280C028100E18D92 /* PW_AboutUsViewController.m */; };
 		5CA451D728168872006FFA3B /* brewchain.js in Resources */ = {isa = PBXBuildFile; fileRef = 5CA451D628168872006FFA3B /* brewchain.js */; };
@@ -1012,7 +1010,6 @@
 		5C71193A27BB860500FE9B51 /* WQJLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WQJLog.swift; sourceTree = "<group>"; };
 		5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Caculate.m"; sourceTree = "<group>"; };
 		5C71193D27BB8E0700FE9B51 /* NSString+Caculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Caculate.h"; sourceTree = "<group>"; };
-		5C71193F27BCBF3C00FE9B51 /* MOSWalletTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MOSWalletTool.swift; sourceTree = "<group>"; };
 		5C7ED85B2807EF6D00873A53 /* PW_AddCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCurrencyViewController.h; sourceTree = "<group>"; };
 		5C7ED85C2807EF6D00873A53 /* PW_AddCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddCurrencyViewController.m; sourceTree = "<group>"; };
 		5C7ED85E2807F83800873A53 /* PW_AddCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCurrencyCell.h; sourceTree = "<group>"; };
@@ -1108,7 +1105,7 @@
 		5CA0F148280E5A9800DE8DDB /* PW_NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NetworkManager.m; sourceTree = "<group>"; };
 		5CA0F14A280E64D500DE8DDB /* PW_AddCustomNetworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCustomNetworkViewController.h; sourceTree = "<group>"; };
 		5CA0F14B280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddCustomNetworkViewController.m; sourceTree = "<group>"; };
-		5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MOSWalletContractTool.swift; sourceTree = "<group>"; };
+		5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PWWalletContractTool.swift; sourceTree = "<group>"; };
 		5CA3463C280BF60F00E18D92 /* PW_ShareAppTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ShareAppTool.h; sourceTree = "<group>"; };
 		5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareAppTool.m; sourceTree = "<group>"; };
 		5CA3463F280C028000E18D92 /* PW_AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AboutUsViewController.h; sourceTree = "<group>"; };
@@ -1798,6 +1795,7 @@
 				5A97223A1D4B4A1B00A77FB7 /* libz.tbd in Frameworks */,
 				5A328F351D4863BA00FDD616 /* CoreTelephony.framework in Frameworks */,
 				5A328F331D48620900FDD616 /* ImageIO.framework in Frameworks */,
+				5C3190EE285CAAF60053F572 /* web3.swift in Frameworks */,
 				5AF5D3031D2FA12C004070D7 /* AdSupport.framework in Frameworks */,
 				5AF5D2FF1D2FA113004070D7 /* Security.framework in Frameworks */,
 				5AF5D2FD1D2FA105004070D7 /* QuartzCore.framework in Frameworks */,
@@ -1805,7 +1803,6 @@
 				5AF5D2F91D2FA0E3004070D7 /* CoreData.framework in Frameworks */,
 				5AF5D2F71D2FA0D0004070D7 /* AssetsLibrary.framework in Frameworks */,
 				5AF5D2F51D2FA0C7004070D7 /* CFNetwork.framework in Frameworks */,
-				5C581002282CB6A000CFB197 /* Solana in Frameworks */,
 				5AF5D2F31D2FA0B9004070D7 /* Foundation.framework in Frameworks */,
 				5AF5D2F11D2FA0B0004070D7 /* CoreGraphics.framework in Frameworks */,
 				5AF5D2EF1D2FA0A5004070D7 /* SystemConfiguration.framework in Frameworks */,
@@ -2877,8 +2874,7 @@
 			isa = PBXGroup;
 			children = (
 				5C71193A27BB860500FE9B51 /* WQJLog.swift */,
-				5CA2E2C327BE4FF7002E2930 /* MOSWalletContractTool.swift */,
-				5C71193F27BCBF3C00FE9B51 /* MOSWalletTool.swift */,
+				5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */,
 				5C71192C27BB7ABC00FE9B51 /* MetaMaskCallApi.h */,
 				5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */,
 				5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */,
@@ -4498,7 +4494,7 @@
 			);
 			name = TokenWalletProject;
 			packageProductDependencies = (
-				5C581001282CB69C00CFB197 /* Solana */,
+				5C3190ED285CAAF60053F572 /* web3.swift */,
 			);
 			productName = TokenWalletProject;
 			productReference = 5A8FD94C1D2DFC270015D6C0 /* TokenWalletProject.app */;
@@ -4548,7 +4544,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PW_;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					5A8FD94B1D2DFC270015D6C0 = {
@@ -4589,7 +4585,7 @@
 			);
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
 			packageReferences = (
-				5C581000282CB69C00CFB197 /* XCRemoteSwiftPackageReference "Solana" */,
+				5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */,
 			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
@@ -4631,7 +4627,6 @@
 				5AF5D22B1D2F7CBA004070D7 /* nav_button_back_n@2x.png in Resources */,
 				5C9BAB5D27D9D8110029988A /* Localizable.strings in Resources */,
 				5A7A80CC1D376ECD0019B4D2 /* user_icon_default@2x.png in Resources */,
-				5C34201827D7421900A2630B /* brewchain.js in Resources */,
 				5C71193227BB7ABD00FE9B51 /* js.bundle in Resources */,
 				1FCE189821AAFA5600328D78 /* ZYBannerView.bundle in Resources */,
 				79A6D3CB21E0EC2700C6D173 /* bip44.js in Resources */,
@@ -4672,9 +4667,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TokenWalletProject/Pods-TokenWalletProject-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
@@ -4688,25 +4681,23 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
+				"${BUILT_PRODUCTS_DIR}/Solana.Swift/Solana_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
-				"${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework",
-				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
@@ -4720,18 +4711,18 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solana_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4915,7 +4906,7 @@
 				5AF5D1951D2F7CBA004070D7 /* NSString+Ruby.m in Sources */,
 				5C9457AB285727BF00CC60B7 /* PW_DappCell.m in Sources */,
 				5E0799FA21D28A3A00924407 /* Struct.pbobjc.m in Sources */,
-				5CA2E2C427BE4FF7002E2930 /* MOSWalletContractTool.swift in Sources */,
+				5CA2E2C427BE4FF7002E2930 /* PWWalletContractTool.swift in Sources */,
 				5CA34641280C028100E18D92 /* PW_AboutUsViewController.m in Sources */,
 				5AF5D1501D2F7CBA004070D7 /* NSManagedObjectContext+Fetching.m in Sources */,
 				5E0799F421D28A3A00924407 /* SourceContext.pbobjc.m in Sources */,
@@ -5199,7 +5190,6 @@
 				5AF5D1A91D2F7CBA004070D7 /* CAAnimation+EasingEquations.m in Sources */,
 				5E079A3C21D3C90A00924407 /* JKBigInteger.m in Sources */,
 				994AA0FB26CA40C50062F9AF /* GasPriceTableViewCell.m in Sources */,
-				5C71194027BCBF3D00FE9B51 /* MOSWalletTool.swift in Sources */,
 				9937C8BE2719235A0064BBC3 /* VisitDAppsRecordManager.m in Sources */,
 				992E0FC426DCDA1800E1C31B /* TransferDetailInfoCell.m in Sources */,
 				5E079A2621D3C5F200924407 /* sha3.cpp in Sources */,
@@ -5409,7 +5399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -5459,7 +5449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -5519,7 +5509,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5543,8 +5533,6 @@
 					"-framework",
 					"\"AVFoundation\"",
 					"-framework",
-					"\"BigInt\"",
-					"-framework",
 					"\"CocoaSecurity\"",
 					"-framework",
 					"\"CoreGraphics\"",
@@ -5554,8 +5542,6 @@
 					"\"CoreMedia\"",
 					"-framework",
 					"\"CoreVideo\"",
-					"-framework",
-					"\"CryptoSwift\"",
 					"-framework",
 					"\"DZNEmptyDataSet\"",
 					"-framework",
@@ -5587,8 +5573,6 @@
 					"-framework",
 					"\"PNChart\"",
 					"-framework",
-					"\"PromiseKit\"",
-					"-framework",
 					"\"QuartzCore\"",
 					"-framework",
 					"\"RDVTabBarController\"",
@@ -5608,8 +5592,6 @@
 					"\"UITableView_FDTemplateLayoutCell\"",
 					"-framework",
 					"\"secp256k1\"",
-					"-framework",
-					"\"web3swift\"",
 					"-force_load",
 					"\"$(SRCROOT)/TokenWalletProject/Libs/Web3/Web3WebView/Web3WebView.framework/Web3WebView\"",
 				);
@@ -5675,7 +5657,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5699,8 +5681,6 @@
 					"-framework",
 					"\"AVFoundation\"",
 					"-framework",
-					"\"BigInt\"",
-					"-framework",
 					"\"CocoaSecurity\"",
 					"-framework",
 					"\"CoreGraphics\"",
@@ -5710,8 +5690,6 @@
 					"\"CoreMedia\"",
 					"-framework",
 					"\"CoreVideo\"",
-					"-framework",
-					"\"CryptoSwift\"",
 					"-framework",
 					"\"DZNEmptyDataSet\"",
 					"-framework",
@@ -5743,8 +5721,6 @@
 					"-framework",
 					"\"PNChart\"",
 					"-framework",
-					"\"PromiseKit\"",
-					"-framework",
 					"\"QuartzCore\"",
 					"-framework",
 					"\"RDVTabBarController\"",
@@ -5764,8 +5740,6 @@
 					"\"UITableView_FDTemplateLayoutCell\"",
 					"-framework",
 					"\"secp256k1\"",
-					"-framework",
-					"\"web3swift\"",
 					"-force_load",
 					"\"$(SRCROOT)/TokenWalletProject/Libs/Web3/Web3WebView/Web3WebView.framework/Web3WebView\"",
 				);
@@ -5893,9 +5867,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5C581000282CB69C00CFB197 /* XCRemoteSwiftPackageReference "Solana" */ = {
+		5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ajamaica/Solana.Swift";
+			repositoryURL = "https://github.com/argentlabs/web3.swift";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -5904,10 +5878,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5C581001282CB69C00CFB197 /* Solana */ = {
+		5C3190ED285CAAF60053F572 /* web3.swift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5C581000282CB69C00CFB197 /* XCRemoteSwiftPackageReference "Solana" */;
-			productName = Solana;
+			package = 5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */;
+			productName = web3.swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -46,13 +46,14 @@ typedef enum : NSUInteger {
     [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_info_primary" rightAction:@selector(infoAction)];
     [self makeViews];
     self.noDataView.offsetY = 100;
-    if(![User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
+    User *user = User_manager.currentUser;
+    if(![user.chooseWallet_type isEqualToString:WalletTypeCVN]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
         if(self.model.tokenDecimals==0&&(![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
-            [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.model.tokenContract completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.model.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.model.tokenDecimals = decimals;
                     [self requestData];
-                    [MOSWalletContractTool getBalanceERC20WithContractAddress:self.model.tokenContract completionBlock:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+                    [[PWWalletContractTool shared] balanceERC20WithAddress:user.chooseWallet_address contractAddress:self.model.tokenContract completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
                         if(errMsg==nil){
                             self.model.tokenAmount = [amount stringDownDividingBy10Power:decimals];
                             [self refreshTopData];
@@ -61,7 +62,7 @@ typedef enum : NSUInteger {
                 }
             }];
         }else if(self.model.tokenDecimals==0){
-            [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.model.tokenContract completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.model.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.model.tokenDecimals = decimals;
                     [self requestData];
@@ -69,7 +70,7 @@ typedef enum : NSUInteger {
             }];
         }else{
             [self requestData];
-            [MOSWalletContractTool getBalanceERC20WithContractAddress:self.model.tokenContract completionBlock:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+            [[PWWalletContractTool shared] balanceERC20WithAddress:user.chooseWallet_address contractAddress:self.model.tokenContract completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.model.tokenAmount = [amount stringDownDividingBy10Power:self.model.tokenDecimals];
                     [self refreshTopData];

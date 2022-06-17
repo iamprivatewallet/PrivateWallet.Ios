@@ -311,12 +311,12 @@
             }
         }];
     }else{
-        [MOSWalletContractTool getBalanceERC20WithContractAddress:coin.tokenContract completionBlock:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+        [[PWWalletContractTool shared] balanceERC20WithAddress:self.currentWallet.address contractAddress:coin.tokenContract completionHandler:^(NSString * _Nonnull amount, NSString * _Nullable errMsg) {
             if(coin.tokenDecimals>0){
                 NSString *newAmount = [amount stringDownDividingBy10Power:coin.tokenDecimals];
                 completion(newAmount);
             }else{
-                [MOSWalletContractTool getDecimalsERC20WithContractAddress:coin.tokenContract completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+                [[PWWalletContractTool shared] decimalsERC20WithContractAddress:coin.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                     if(errMsg==nil){
                         coin.tokenDecimals = decimals;
                         NSString *newAmount = [amount stringDownDividingBy10Power:decimals];

@@ -14,9 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - BigInt (5.2.0)
   - CocoaSecurity (1.2.4)
-  - CryptoSwift (1.4.3)
   - DZNEmptyDataSet (1.8.1)
   - FDFullscreenPopGesture (1.1)
   - FMDB (2.7.5):
@@ -54,15 +52,6 @@ PODS:
   - MJRefresh (3.4.3)
   - PNChart (0.8.9):
     - UICountingLabel (~> 1.2.0)
-  - PromiseKit (6.15.3):
-    - PromiseKit/CorePromise (= 6.15.3)
-    - PromiseKit/Foundation (= 6.15.3)
-    - PromiseKit/UIKit (= 6.15.3)
-  - PromiseKit/CorePromise (6.15.3)
-  - PromiseKit/Foundation (6.15.3):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.15.3):
-    - PromiseKit/CorePromise
   - RDVTabBarController (1.3.0)
   - ReactiveObjC (3.1.1)
   - SDCycleScrollView (1.82):
@@ -70,18 +59,17 @@ PODS:
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
-  - secp256k1.c (0.1.2)
+  - secp256k1.swift (0.1.4)
   - SocketRocket (0.6.0)
+  - Solana.Swift (1.1):
+    - secp256k1.swift
+    - Starscream (~> 4.0.0)
+    - TweetNacl (~> 1.0.2)
   - Starscream (4.0.4)
   - SVProgressHUD (2.2.5)
+  - TweetNacl (1.0.2)
   - UICountingLabel (1.2.0)
   - "UITableView+FDTemplateLayoutCell (1.6)"
-  - web3swift (2.6.5):
-    - BigInt (= 5.2.0)
-    - CryptoSwift (= 1.4.3)
-    - PromiseKit (= 6.15.3)
-    - secp256k1.c (~> 0.1)
-    - Starscream (= 4.0.4)
 
 DEPENDENCIES:
   - AFNetworking (= 4.0.1)
@@ -104,28 +92,25 @@ DEPENDENCIES:
   - SDCycleScrollView (= 1.82)
   - SDWebImage (= 5.11.1)
   - SocketRocket (= 0.6.0)
+  - Solana.Swift (from `https://github.com/ajamaica/Solana.Swift.git`, branch `master`)
   - SVProgressHUD
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
-  - web3swift (= 2.6.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
-    - BigInt
     - CocoaSecurity
-    - CryptoSwift
     - JJException
     - LBXScan
     - MJExtension
-    - PromiseKit
     - ReactiveObjC
     - SDCycleScrollView
     - SDWebImage
-    - secp256k1.c
+    - secp256k1.swift
     - SocketRocket
     - Starscream
+    - TweetNacl
     - "UITableView+FDTemplateLayoutCell"
-    - web3swift
   trunk:
     - DZNEmptyDataSet
     - FDFullscreenPopGesture
@@ -141,11 +126,19 @@ SPEC REPOS:
     - SVProgressHUD
     - UICountingLabel
 
+EXTERNAL SOURCES:
+  Solana.Swift:
+    :branch: master
+    :git: https://github.com/ajamaica/Solana.Swift.git
+
+CHECKOUT OPTIONS:
+  Solana.Swift:
+    :commit: 7dd94bd16e57246673fc6e5ae6751916fa736c90
+    :git: https://github.com/ajamaica/Solana.Swift.git
+
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  BigInt: f668a80089607f521586bbe29513d708491ef2f7
   CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
-  CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -159,19 +152,19 @@ SPEC CHECKSUMS:
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
-  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
   RDVTabBarController: 28a5c6546b9991cf2712d59947324c6b06603e14
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
-  secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  Solana.Swift: f72466e11f836aa8ccb840d780f39c69a9289c97
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
-  web3swift: f712c5eef8801fb2dca4e4fdafc0af4471195f03
 
-PODFILE CHECKSUM: 6944430105d67fa29747484b090ade417e3dc1f4
+PODFILE CHECKSUM: cd9f07632cb1b6310483540f9386eb73f9a51c44
 
 COCOAPODS: 1.11.2

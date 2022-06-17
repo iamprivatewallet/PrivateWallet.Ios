@@ -32,49 +32,57 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
-    UIImageView *bgIv = [[UIImageView alloc] init];
-    bgIv.image = [UIImage imageNamed:@"first_bg"];
-    [self.view addSubview:bgIv];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+    UIView *searchView = [[UIView alloc] init];
+    [self.view addSubview:searchView];
+    [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(StatusHeight+5);
+        make.left.offset(18);
+        make.right.offset(-55);
+        make.height.offset(46);
     }];
-    UITextField *searchTF = [[UITextField alloc] init];
-    UIImageView *searchIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search"]];
-    CGSize size = searchIv.bounds.size;
-    searchIv.frame = CGRectMake(16, (35-size.height)*0.5, size.width, size.height);
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [leftView addSubview:searchIv];
-    searchTF.leftView = leftView;
+    UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg_primary"]];
+    [searchView addSubview:bgIv];
+    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
+    UIImageView *searchIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_primary"]];
+    [searchView addSubview:searchIv];
+    [searchIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
+        make.centerY.offset(0);
+    }];
+    UITextField *searchTF = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:14] color:[UIColor g_whiteTextColor] placeholder:LocalizedStr(@"text_searchCurrencyContract")];
     searchTF.delegate = self;
-    searchTF.leftViewMode = UITextFieldViewModeAlways;
-    searchTF.textColor = [UIColor g_textColor];
-    searchTF.font = [UIFont systemFontOfSize:12];
-    searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     searchTF.borderStyle = UITextBorderStyleNone;
     searchTF.returnKeyType = UIReturnKeySearch;
     searchTF.enablesReturnKeyAutomatically = YES;
-    searchTF.layer.cornerRadius = 17.5;
-    searchTF.backgroundColor = [UIColor g_bgColor];
-    [searchTF pw_setPlaceholder:LocalizedStr(@"text_searchCurrencyContract")];
-    [self.view addSubview:searchTF];
+    [searchView addSubview:searchTF];
     self.searchTF = searchTF;
     [searchTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(StatusHeight+5);
-        make.left.offset(25);
-        make.right.offset(-65);
-        make.height.offset(35);
+        make.top.bottom.offset(0);
+        make.left.offset(45);
+        make.right.offset(-5);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeBtn setImage:[UIImage imageNamed:@"icon_close_white"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"icon_close_primary"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.centerY.equalTo(searchTF);
+        make.right.offset(-20);
+        make.centerY.equalTo(searchView).offset(0);
+        make.width.height.mas_equalTo(25);
     }];
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchTF.mas_bottom).offset(20);
+        make.left.right.bottom.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(searchTF.mas_bottom).offset(10);
+        make.top.offset(15);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -117,7 +125,7 @@
     return headerView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 45;
+    return 50;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return nil;
@@ -151,7 +159,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 72;
+        _tableView.rowHeight = 74;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[PW_ChooseCurrencyCell class] forCellReuseIdentifier:@"PW_ChooseCurrencyCell"];
         [_tableView registerClass:[PW_SearchHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_SearchHeaderView"];

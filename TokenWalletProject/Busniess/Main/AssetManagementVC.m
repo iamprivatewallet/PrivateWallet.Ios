@@ -54,12 +54,12 @@ AssetSortViewDelegate
     
     if(![self.coinModel.currentWallet.type isEqualToString:@"CVN"]&&(self.coinModel.decimals==0||![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0)){
         if(![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0){
-            [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.coinModel.tokenAddress completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.coinModel.decimals = decimals;
                     [self loadRecordListIsMore:NO sort:0];
                 }
-                [MOSWalletContractTool getBalanceERC20WithContractAddress:self.coinModel.tokenAddress completionBlock:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+                [[PWWalletContractTool shared] balanceERC20WithAddress:User_manager.currentUser.chooseWallet_address contractAddress:self.coinModel.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
                     if(errMsg==nil){
                         self.coinModel.usableAmount = [amount stringDownDividingBy10Power:decimals];
                         [self.topView setViewWithModel:self.coinModel];
@@ -67,7 +67,7 @@ AssetSortViewDelegate
                 }];
             }];
         }else{
-            [MOSWalletContractTool getDecimalsERC20WithContractAddress:self.coinModel.tokenAddress completionBlock:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.coinModel.decimals = decimals;
                     [self loadRecordListIsMore:NO sort:0];

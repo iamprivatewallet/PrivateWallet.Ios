@@ -51,7 +51,7 @@ WKNavigationDelegate
     if (self.codeInfoModel) {
         [self.transferView setCodeInfoWithModel:self.codeInfoModel];
     }
-    [MOSWalletContractTool estimateGasToAddress:nil value:nil completionBlock:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+    [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
         if(gas){
             GasPriceModel *mdl = [[GasPriceModel alloc] init];
             NSString *gas_gwei = [gasPrice stringDownDividingBy10Power:9];

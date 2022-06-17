@@ -112,7 +112,7 @@
             }
             payModel.value = authCount;
             [SVProgressHUD showWithStatus:nil];
-            [MOSWalletContractTool getSymbolERC20WithContractAddress:to completionBlock:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
+            [[PWWalletContractTool shared] symbolERC20WithContractAddress:to completionHandler:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
                 [SVProgressHUD dismiss];
                 payModel.symbol = symbol;
                 [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {

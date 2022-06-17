@@ -72,6 +72,7 @@ static void * eventsBlockKey = &eventsBlockKey;
     self.layer.borderColor = color.CGColor;
     self.layer.borderWidth = width;
     self.layer.cornerRadius = radius;
+    self.layer.masksToBounds = YES;
 }
 
 - (void)setShadowColor:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius {

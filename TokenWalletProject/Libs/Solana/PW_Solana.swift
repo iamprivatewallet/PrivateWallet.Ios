@@ -6,7 +6,7 @@
 //  Copyright © 2022 . All rights reserved.
 //
 
-import Solana
+import Solana_Swift
 
 class PW_Solana: NSObject {
     static let network: Network = .mainnetBeta
