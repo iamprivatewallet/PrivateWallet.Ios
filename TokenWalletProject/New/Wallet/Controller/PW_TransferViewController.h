@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_TransferViewController : PW_BaseViewController
 
 @property (nonatomic, strong) PW_TokenModel *model;
+@property (nonatomic, copy) NSString *toAddress;
 @property (nonatomic, copy) void(^transferSuccessBlock)(void);
 
 @end

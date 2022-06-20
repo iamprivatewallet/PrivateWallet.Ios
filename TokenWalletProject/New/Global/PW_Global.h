@@ -10,6 +10,7 @@
 #define PW_Global_h
 
 #import "PW_GlobalData.h"
+#import "PW_LockTool.h"
 #import "PW_DenominatedCurrencyTool.h"
 #import "PW_RedRoseGreenFellTool.h"
 

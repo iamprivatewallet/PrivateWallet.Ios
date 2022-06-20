@@ -76,7 +76,7 @@
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(searchTF.mas_bottom).offset(20);
+        make.top.equalTo(searchView.mas_bottom).offset(20);
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];

@@ -88,15 +88,15 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.estimatedItemSize = CGSizeMake(80, 35);
-        layout.minimumInteritemSpacing = 8;
+        layout.estimatedItemSize = CGSizeMake(80, 38);
+        layout.minimumInteritemSpacing = 10;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[PW_SearchRecommendItemCell class] forCellWithReuseIdentifier:@"PW_SearchRecommendItemCell"];
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 26, 0, 26);
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 36, 0, 36);
     }
     return _collectionView;
 }
@@ -114,24 +114,25 @@
 }
 - (void)makeViews {
     self.contentView.backgroundColor = [UIColor g_bgColor];
-    self.contentView.layer.cornerRadius = 17.5;
+    self.contentView.layer.cornerRadius = 8;
+    [self.contentView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
     self.iconIv = [[UIImageView alloc] init];
     [self.contentView addSubview:self.iconIv];
-    self.nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
+    self.nameLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.nameLb];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(10);
+        make.left.offset(15);
         make.centerY.offset(0);
         make.width.height.offset(20);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(8);
+        make.left.equalTo(self.iconIv.mas_right).offset(10);
         make.centerY.offset(0);
     }];
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
     CGSize size = layoutAttributes.size;
-    size.width = [self.nameLb.text boundingRectWithSize:CGSizeMake(MAXFLOAT, size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont pw_semiBoldFontOfSize:16]} context:nil].size.width+10+20+8+10+10;
+    size.width = [self.nameLb.text boundingRectWithSize:CGSizeMake(MAXFLOAT, size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont pw_semiBoldFontOfSize:16]} context:nil].size.width+10+20+10+10+10;
     layoutAttributes.size = size;
     return layoutAttributes;
 }

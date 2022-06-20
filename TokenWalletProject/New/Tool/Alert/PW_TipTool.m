@@ -188,21 +188,6 @@
             contentView.transform = CGAffineTransformIdentity;
         }];
     }];
-//    NSNotification *showNoti = [NSNotification notificationWithName:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addNotification:showNoti block:^(NSNotification * _Nonnull notification) {
-//        CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-//        CGRect frame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-//        [UIView animateWithDuration:duration animations:^{
-//            contentView.transform = CGAffineTransformMakeTranslation(0, -frame.size.height);
-//        }];
-//    }];
-//    NSNotification *hideNoti = [NSNotification notificationWithName:UIKeyboardWillHideNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addNotification:hideNoti block:^(NSNotification *notification) {
-//        CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-//        [UIView animateWithDuration:duration animations:^{
-//            contentView.transform = CGAffineTransformIdentity;
-//        }];
-//    }];
     [pwdView addSubview:pwdTF];
     [pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);

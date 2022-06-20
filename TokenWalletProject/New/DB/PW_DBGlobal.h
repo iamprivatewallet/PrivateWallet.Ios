@@ -16,6 +16,7 @@
 #import "PW_AddressBookManager.h"
 #import "PW_NetworkManager.h"
 #import "PW_DappManager.h"
+#import "PW_DappSearchManager.h"
 #import "PW_DappFavoritesManager.h"
 #import "PW_MarketManager.h"
 

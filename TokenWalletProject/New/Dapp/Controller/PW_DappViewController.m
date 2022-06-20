@@ -8,7 +8,7 @@
 
 #import "PW_DappViewController.h"
 #import "PW_ScanTool.h"
-#import "PW_SearchDappCurrencyViewController.h"
+#import "PW_SearchDappViewController.h"
 #import <SDCycleScrollView.h>
 #import "PW_DappBrowserCell.h"
 #import "PW_DappBrowserModel.h"
@@ -49,13 +49,13 @@
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
-        PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+        PW_SearchDappViewController *vc = [[PW_SearchDappViewController alloc] init];
         vc.searchStr = result;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 - (void)searchAction {
-    PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+    PW_SearchDappViewController *vc = [[PW_SearchDappViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +64,7 @@
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 - (void)makeViews {
-    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchDappCurrency") fontSize:12 titleColor:[UIColor g_grayTextColor] imageName:@"icon_search_white" target:self action:@selector(searchAction)];
+    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchDappCurrency") fontSize:12 titleColor:[UIColor g_whiteTextColor] imageName:@"icon_search_white" target:self action:@selector(searchAction)];
     [searchBtn setBackgroundImage:[UIImage imageNamed:@"icon_search_bg"] forState:UIControlStateNormal];
     searchBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

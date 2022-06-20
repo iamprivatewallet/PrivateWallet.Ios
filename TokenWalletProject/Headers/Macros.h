@@ -13,12 +13,6 @@
 #define APP_VERSION  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 //#define IOS_VERSION [NSString stringWithFormat:@"iOS %.2f",[[[UIDevice currentDevice] systemVersion] floatValue]]
 
-//导航栏高度
-#define NavigationHeight 44
-//状态栏高度
-#define StatusHeight [UIApplication sharedApplication].statusBarFrame.size.height
-
-#define NavigationAndStatusHeight (NavigationHeight+StatusHeight)
 //tabbar高度
 #define TabBarHeight ((StatusHeight>20)?83:49)
 

@@ -11,12 +11,15 @@
 @implementation UITextField (PW_Global)
 
 - (void)pw_setPlaceholder:(NSString *)placeholder {
-    [self pw_setPlaceholder:placeholder leftImage:nil];
+    [self pw_setPlaceholder:placeholder color:[UIColor g_placeholderColor] leftImage:nil];
 }
-- (void)pw_setPlaceholder:(NSString *)placeholder leftImage:(nullable NSString *)leftImage {
+- (void)pw_setPlaceholder:(NSString *)placeholder color:(UIColor *)color {
+    [self pw_setPlaceholder:placeholder color:color leftImage:nil];
+}
+- (void)pw_setPlaceholder:(NSString *)placeholder color:(UIColor *)color leftImage:(nullable NSString *)leftImage {
     if([placeholder isNoEmpty]){
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:placeholder];
-        [attrStr addAttributes:@{NSForegroundColorAttributeName:[UIColor g_placeholderColor]} range:NSMakeRange(0, attrStr.length)];
+        [attrStr addAttributes:@{NSForegroundColorAttributeName:color} range:NSMakeRange(0, attrStr.length)];
         if(self.font){
             [attrStr addAttributes:@{NSFontAttributeName:self.font} range:NSMakeRange(0, attrStr.length)];
         }

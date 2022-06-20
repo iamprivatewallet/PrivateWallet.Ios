@@ -15,7 +15,7 @@
 #import "PW_TransferViewController.h"
 #import "PW_WalletView.h"
 #import "PW_SelectWalletTypeViewController.h"
-#import "PW_SearchDappCurrencyViewController.h"
+#import "PW_SearchDappViewController.h"
 #import "PW_SearchCurrencyViewController.h"
 #import "PW_CurrencyManageViewController.h"
 #import "PW_SolanaTest.h"
@@ -81,12 +81,18 @@
     }
 }
 - (void)searchAction {
-    PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+    PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
-        PW_SearchDappCurrencyViewController *vc = [[PW_SearchDappCurrencyViewController alloc] init];
+        if ([result isContract]) {
+            PW_TransferViewController *vc = [[PW_TransferViewController alloc] init];
+            vc.toAddress = result;
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+        PW_SearchDappViewController *vc = [[PW_SearchDappViewController alloc] init];
         vc.searchStr = result;
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -127,10 +133,6 @@
 }
 - (void)editAction {
     PW_CurrencyManageViewController *vc = [[PW_CurrencyManageViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-- (void)addAction {
-    PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)addCurrencyAction {

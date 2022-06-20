@@ -15,6 +15,8 @@
 #import "VersionTool.h"
 #import "PW_FirstChooseViewController.h"
 #import "PW_SetUpViewController.h"
+#import "PW_AuthenticationTool.h"
+#import <SDWebImage/SDImageCacheConfig.h>
 
 @interface AppDelegate () <UIGestureRecognizerDelegate>
 
@@ -44,6 +46,7 @@
     }
     [self setConfig];
     [self beginNetwork];
+    [self setupLockApp];
     
     return YES;
 }
@@ -139,18 +142,36 @@
         [self resetCreateWalletVc];
     }
 }
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    
+- (void)setupLockApp {
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    effectView.hidden = YES;
+    [self.window addSubview:effectView];
+    [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
+    [RACObserve(self, appIsBackground) subscribeNext:^(NSNumber * _Nullable x) {
+        if ([PW_LockTool getUnlockAppTransaction]) {
+            effectView.hidden = NO;
+            if (!x.boolValue) {
+                LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
+                if (context) {
+                    [PW_AuthenticationTool showWithDesc:@"Unlock App" reply:^(BOOL success, NSError * _Nonnull error) {
+                        if (success) {
+                            effectView.hidden = YES;
+                        }
+                    }];
+                }
+            }
+        }
+    }];
 }
-
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    self.appIsBackground = YES;
+}
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [VersionTool requestAppVersion];
-    //touch id
-//    if ([SettingManager sharedInstance].isUseTouchID) {
-//        TouchIDController *con = [[TouchIDController alloc] init];
-//        [self.rootNavigationController pushViewController:con animated:NO];
-//    }
+    self.appIsBackground = NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

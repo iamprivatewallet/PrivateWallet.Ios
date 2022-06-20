@@ -47,26 +47,25 @@
     [self.bodyView addSubview:self.subNameLb];
     [self.bodyView addSubview:self.topBtn];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(10);
-        make.top.offset(6);
-        make.bottom.offset(-6);
-        make.right.offset(-10);
+        make.left.offset(20);
+        make.top.bottom.offset(0);
+        make.right.offset(-20);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
+        make.left.offset(10);
         make.centerY.offset(0);
-        make.width.height.offset(25);
+        make.width.height.offset(46);
     }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
+        make.left.equalTo(self.iconIv.mas_right).offset(8);
         make.centerY.offset(0);
     }];
     [self.subNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLb.mas_right).offset(8);
-        make.centerY.offset(0);
+        make.baseline.equalTo(self.nameLb);
     }];
     [self.topBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-12);
+        make.right.offset(-8);
         make.centerY.offset(0);
     }];
 }
@@ -74,9 +73,6 @@
 - (UIView *)bodyView {
     if (!_bodyView) {
         _bodyView = [[UIView alloc] init];
-        [_bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 2) radius:8];
-        _bodyView.layer.cornerRadius = 8;
-        _bodyView.backgroundColor = [UIColor g_bgColor];
     }
     return _bodyView;
 }
@@ -88,13 +84,13 @@
 }
 - (UILabel *)nameLb {
     if (!_nameLb) {
-        _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:18 textColor:[UIColor g_boldTextColor]];
+        _nameLb = [PW_ViewTool labelBoldText:@"--" fontSize:20 textColor:[UIColor g_textColor]];
     }
     return _nameLb;
 }
 - (UILabel *)subNameLb {
     if (!_subNameLb) {
-        _subNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+        _subNameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:14 textColor:[UIColor g_grayTextColor]];
     }
     return _subNameLb;
 }

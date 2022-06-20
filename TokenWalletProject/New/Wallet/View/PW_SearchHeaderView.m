@@ -11,6 +11,7 @@
 @interface PW_SearchHeaderView ()
 
 @property (nonatomic, strong) UILabel *titleLb;
+@property (nonatomic, strong) UIImageView *iconIv;
 
 @end
 
@@ -27,11 +28,22 @@
     _title = title;
     self.titleLb.text = title;
 }
+- (void)setShowHot:(BOOL)showHot {
+    _showHot = showHot;
+    self.iconIv.hidden = !showHot;
+}
 - (void)makeViews {
-    self.titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:15 textColor:[UIColor g_boldTextColor]];
+    self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:20 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.titleLb];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(26);
+        make.left.offset(36);
+        make.centerY.offset(0);
+    }];
+    self.iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_hot"]];
+    self.iconIv.hidden = YES;
+    [self.contentView addSubview:self.iconIv];
+    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLb.mas_right).offset(15);
         make.centerY.offset(0);
     }];
 }

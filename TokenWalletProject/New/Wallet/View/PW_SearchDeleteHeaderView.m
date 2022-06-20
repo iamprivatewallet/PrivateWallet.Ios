@@ -38,16 +38,16 @@
     }
 }
 - (void)makeViews {
-    self.titleLb = [PW_ViewTool labelText:@"--" fontSize:15 textColor:[UIColor g_boldTextColor]];
+    self.titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:20 textColor:[UIColor g_textColor]];
     [self.contentView addSubview:self.titleLb];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(26);
+        make.left.offset(36);
         make.centerY.offset(0);
     }];
-    self.deleteBtn = [PW_ViewTool buttonImageName:@"icon_delete" target:self action:@selector(deleteAction)];
+    self.deleteBtn = [PW_ViewTool buttonImageName:@"icon_delete_gray" target:self action:@selector(deleteAction)];
     [self.contentView addSubview:self.deleteBtn];
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-26);
+        make.right.offset(-36);
         make.centerY.offset(0);
     }];
 }

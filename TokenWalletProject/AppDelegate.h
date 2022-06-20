@@ -13,9 +13,10 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) UINavigationController *rootNavigationController;
+@property (nonatomic, assign) BOOL appIsBackground;//是否在后台
 
--(void)switchToTabBarController;
--(void)switchToCreateWalletVC;
+- (void)switchToTabBarController;
+- (void)switchToCreateWalletVC;
 - (void)resetApp;
 
 @end

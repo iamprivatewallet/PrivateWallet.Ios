@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupNavBgPurple];
     [self makeViews];
     [self requestDappData];
     self.searchTF.text = self.searchStr;
@@ -39,49 +40,58 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
-    UIImageView *bgIv = [[UIImageView alloc] init];
-    bgIv.image = [UIImage imageNamed:@"first_bg"];
-    [self.view addSubview:bgIv];
-    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+    UIView *searchView = [[UIView alloc] init];
+    [self.view addSubview:searchView];
+    [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(StatusHeight+5);
+        make.left.offset(18);
+        make.right.offset(-55);
+        make.height.offset(46);
     }];
-    UITextField *searchTF = [[UITextField alloc] init];
-    UIImageView *searchIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search"]];
-    CGSize size = searchIv.bounds.size;
-    searchIv.frame = CGRectMake(16, (35-size.height)*0.5, size.width, size.height);
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [leftView addSubview:searchIv];
-    searchTF.leftView = leftView;
+    UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
+    [searchView addSubview:bgIv];
+    [bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
+    UIImageView *searchIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_white"]];
+    [searchView addSubview:searchIv];
+    [searchIv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
+        make.centerY.offset(0);
+    }];
+    UITextField *searchTF = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:16] color:[UIColor g_whiteTextColor] placeholder:LocalizedStr(@"text_searchDappCurrency")];
+    [searchTF pw_setPlaceholder:LocalizedStr(@"text_searchDappCurrency") color:[UIColor g_placeholderWhiteColor]];
     searchTF.delegate = self;
-    searchTF.leftViewMode = UITextFieldViewModeAlways;
-    searchTF.textColor = [UIColor g_textColor];
-    searchTF.font = [UIFont systemFontOfSize:12];
-    searchTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     searchTF.borderStyle = UITextBorderStyleNone;
     searchTF.returnKeyType = UIReturnKeySearch;
     searchTF.enablesReturnKeyAutomatically = YES;
-    searchTF.layer.cornerRadius = 17.5;
-    searchTF.backgroundColor = [UIColor g_bgColor];
-    [searchTF pw_setPlaceholder:LocalizedStr(@"text_searchDappCurrency")];
-    [self.view addSubview:searchTF];
+    [searchView addSubview:searchTF];
     self.searchTF = searchTF;
     [searchTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(StatusHeight+5);
-        make.left.offset(25);
-        make.right.offset(-65);
-        make.height.offset(35);
+        make.top.bottom.offset(0);
+        make.left.offset(45);
+        make.right.offset(-5);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn setImage:[UIImage imageNamed:@"icon_close_white"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.centerY.equalTo(searchTF);
+        make.right.offset(-20);
+        make.centerY.equalTo(searchView).offset(0);
+        make.width.height.mas_equalTo(25);
     }];
-    [self.view addSubview:self.tableView];
+    UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(searchView.mas_bottom).offset(20);
+        make.left.right.bottom.offset(0);
+    }];
+    [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(searchTF.mas_bottom).offset(10);
+        make.top.offset(15);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -168,7 +178,10 @@
         }
         return 1;
     }
-    return self.currencyList.count;
+    if (self.isSearch){
+        return self.currencyList.count;
+    }
+    return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0){
@@ -191,7 +204,11 @@
         return cell;
     }
     PW_SearchCurrencyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_SearchCurrencyCell"];
-    cell.model = self.currencyList[indexPath.row];
+    if (self.isSearch) {
+        cell.model = self.currencyList[indexPath.row];
+    }else{
+        
+    }
     __weak typeof(self) weakSelf = self;
     cell.addBlock = ^(PW_TokenModel * _Nonnull model) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -220,7 +237,7 @@
         if (self.isSearch){
             return 40;
         }
-        return 35;
+        return 44;
     }
     return 70;
 }
@@ -233,12 +250,14 @@
                 return nil;
             }
         }else{
-            headerView.title = LocalizedStr(@"text_recommendDapp");
+            headerView.title = LocalizedStr(@"text_hot");
+            headerView.showHot = YES;
         }
         return headerView;
     }
     PW_SearchDeleteHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"PW_SearchDeleteHeaderView"];
     headerView.title = self.isSearch?LocalizedStr(@"text_currency"):LocalizedStr(@"text_searchRecord");
+    headerView.hideDelete = self.isSearch;
     headerView.deleteBlock = ^{
         [PW_AlertTool showSystemAlertTitle:LocalizedStr(@"text_prompt") desc:LocalizedStr(@"text_clearAllRecords") actionTitle:LocalizedStr(@"text_confirm") actionStyle:UIAlertActionStyleDestructive handler:^{
             

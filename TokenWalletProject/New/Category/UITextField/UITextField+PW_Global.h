@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UITextField (PW_Global)
 
 - (void)pw_setPlaceholder:(NSString *)placeholder;
-- (void)pw_setPlaceholder:(NSString *)placeholder leftImage:(nullable NSString *)leftImage;
+- (void)pw_setPlaceholder:(NSString *)placeholder color:(UIColor *)color;
+- (void)pw_setPlaceholder:(NSString *)placeholder color:(UIColor *)color leftImage:(nullable NSString *)leftImage;
 
 - (void)pw_setSecureTextEntry;
 

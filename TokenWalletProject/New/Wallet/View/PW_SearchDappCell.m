@@ -35,11 +35,11 @@
 - (void)makeViews {
     self.bodyView = [[UIView alloc] init];
     self.bodyView.backgroundColor = [UIColor g_bgColor];
-    self.bodyView.layer.cornerRadius = 20;
+    [self.bodyView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
     [self.contentView addSubview:self.bodyView];
     self.iconIv = [[UIImageView alloc] init];
     [self.bodyView addSubview:self.iconIv];
-    self.nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:16 textColor:[UIColor g_boldTextColor]];
+    self.nameLb = [PW_ViewTool labelText:@"--" fontSize:16 textColor:[UIColor g_textColor]];
     self.nameLb.numberOfLines = 2;
     [self.bodyView addSubview:self.nameLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {

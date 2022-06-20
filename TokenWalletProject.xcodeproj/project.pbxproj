@@ -327,6 +327,9 @@
 		5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */; };
 		5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */; };
 		5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70F12811087800860841 /* PW_MarketMenuModel.m */; };
+		5CE0552228605DB500B68A6B /* PW_SearchDappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */; };
+		5CE0552528605E5B00B68A6B /* PW_DappSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0552428605E5B00B68A6B /* PW_DappSearchManager.m */; };
+		5CE0552C28606C9600B68A6B /* PW_LockTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0552B28606C9600B68A6B /* PW_LockTool.m */; };
 		5CE19F9D28192FA8008C37A3 /* PW_DappAlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */; };
 		5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */; };
 		5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA228193390008C37A3 /* PW_DappPayModel.m */; };
@@ -1224,6 +1227,12 @@
 		5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuItemCell.m; sourceTree = "<group>"; };
 		5CCE70F02811087800860841 /* PW_MarketMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuModel.h; sourceTree = "<group>"; };
 		5CCE70F12811087800860841 /* PW_MarketMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuModel.m; sourceTree = "<group>"; };
+		5CE0552028605DB500B68A6B /* PW_SearchDappViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchDappViewController.h; sourceTree = "<group>"; };
+		5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SearchDappViewController.m; sourceTree = "<group>"; };
+		5CE0552328605E5B00B68A6B /* PW_DappSearchManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappSearchManager.h; sourceTree = "<group>"; };
+		5CE0552428605E5B00B68A6B /* PW_DappSearchManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappSearchManager.m; sourceTree = "<group>"; };
+		5CE0552A28606C9600B68A6B /* PW_LockTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_LockTool.h; sourceTree = "<group>"; };
+		5CE0552B28606C9600B68A6B /* PW_LockTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_LockTool.m; sourceTree = "<group>"; };
 		5CE19F9B28192FA8008C37A3 /* PW_DappAlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappAlertTool.h; sourceTree = "<group>"; };
 		5CE19F9C28192FA8008C37A3 /* PW_DappAlertTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappAlertTool.m; sourceTree = "<group>"; };
 		5CE19F9E28192FDE008C37A3 /* PW_AlertTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AlertTool.h; sourceTree = "<group>"; };
@@ -2780,6 +2789,7 @@
 			isa = PBXGroup;
 			children = (
 				5C36E18628094BE80000FEE0 /* PW_Global.h */,
+				5CE0552628606C3300B68A6B /* Lock */,
 				5C36E18228094BC00000FEE0 /* Data */,
 				5C8AAAF5280D368600E4ED53 /* DenominatedCurrency */,
 				5C8AAAF9280D3EBB00E4ED53 /* RedRoseGreenFell */,
@@ -2823,6 +2833,8 @@
 				5C8AAB19280D689000E4ED53 /* PW_AddressBookManager.m */,
 				5CCE70CA28100CF300860841 /* PW_DappManager.h */,
 				5CCE70CB28100CF300860841 /* PW_DappManager.m */,
+				5CE0552328605E5B00B68A6B /* PW_DappSearchManager.h */,
+				5CE0552428605E5B00B68A6B /* PW_DappSearchManager.m */,
 				5C38FBD22859C81900D6017F /* PW_DappFavoritesManager.h */,
 				5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */,
 				5C671307281166990088A1A5 /* PW_MarketManager.h */,
@@ -3179,6 +3191,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5CE0552628606C3300B68A6B /* Lock */ = {
+			isa = PBXGroup;
+			children = (
+				5CE0552A28606C9600B68A6B /* PW_LockTool.h */,
+				5CE0552B28606C9600B68A6B /* PW_LockTool.m */,
+			);
+			path = Lock;
+			sourceTree = "<group>";
+		};
 		5CE7ACBA27F5CE4900E2188D /* Scan */ = {
 			isa = PBXGroup;
 			children = (
@@ -3277,6 +3298,8 @@
 				5CEF34CF280589410052BA15 /* PW_AddImportWalletViewController.m */,
 				5CEF34D12806BE460052BA15 /* PW_SearchDappCurrencyViewController.h */,
 				5CEF34D22806BE460052BA15 /* PW_SearchDappCurrencyViewController.m */,
+				5CE0552028605DB500B68A6B /* PW_SearchDappViewController.h */,
+				5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */,
 				5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */,
 				5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */,
 				5C36E17B28093F910000FEE0 /* PW_CurrencyManageViewController.h */,
@@ -5089,6 +5112,7 @@
 				79C9B35921ABEE2E007BA751 /* SKTagView.m in Sources */,
 				5C9457A5285719CB00CC60B7 /* PW_TitleHeaderView.m in Sources */,
 				5AF5D3411D335C9A004070D7 /* DTTimePeriod.m in Sources */,
+				5CE0552C28606C9600B68A6B /* PW_LockTool.m in Sources */,
 				5E0799FB21D28A3A00924407 /* GPBCodedInputStream.m in Sources */,
 				992E0F0A26CCAC4800E1C31B /* FchainTool.m in Sources */,
 				5C71193127BB7ABC00FE9B51 /* MOSETHGasModel.m in Sources */,
@@ -5189,6 +5213,7 @@
 				5AF5D14C1D2F7CBA004070D7 /* NSFetchRequest+Extensions.m in Sources */,
 				5AF5D1A91D2F7CBA004070D7 /* CAAnimation+EasingEquations.m in Sources */,
 				5E079A3C21D3C90A00924407 /* JKBigInteger.m in Sources */,
+				5CE0552528605E5B00B68A6B /* PW_DappSearchManager.m in Sources */,
 				994AA0FB26CA40C50062F9AF /* GasPriceTableViewCell.m in Sources */,
 				9937C8BE2719235A0064BBC3 /* VisitDAppsRecordManager.m in Sources */,
 				992E0FC426DCDA1800E1C31B /* TransferDetailInfoCell.m in Sources */,
@@ -5240,6 +5265,7 @@
 				5CB76B3127F458C40068E967 /* PW_BackupWalletViewController.m in Sources */,
 				5C9457A828571B4000CC60B7 /* PW_SegmentedHeaderView.m in Sources */,
 				5C62CF9C27FD223100C1C5DC /* PW_TokenDetailCell.m in Sources */,
+				5CE0552228605DB500B68A6B /* PW_SearchDappViewController.m in Sources */,
 				1FCE189721AAFA5600328D78 /* ZYBannerFooter.m in Sources */,
 				992E0F2F26CCD9CC00E1C31B /* ETHTokenCoin.m in Sources */,
 				5CE7AD0327F8624700E2188D /* PW_BaseTableCell.m in Sources */,

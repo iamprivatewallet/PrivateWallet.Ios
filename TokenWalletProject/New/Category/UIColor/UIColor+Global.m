@@ -99,7 +99,10 @@
     return [UIColor whiteColor];
 }
 + (UIColor *)g_placeholderColor {
-    return COLORFORRGB(0x919CAA);
+    return [UIColor g_hex:@"#919CAA"];
+}
++ (UIColor *)g_placeholderWhiteColor {
+    return [UIColor colorWithWhite:1 alpha:0.8];
 }
 + (UIColor *)g_lineColor {
     return [UIColor g_hex:@"#F5F5F5"];

@@ -50,7 +50,7 @@
 #define NavAndStatusHeight  (44+[[UIApplication sharedApplication] statusBarFrame].size.height)
 
 #define StatusHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
-#define SafeBottomInset [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom
+#define SafeBottomInset [UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom
 #define NavHeight  44
 
 #define TAB_HEIGHT (isIPhoneX ? 70 : 50)

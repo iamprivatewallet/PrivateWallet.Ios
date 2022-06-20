@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_SearchHeaderView : UITableViewHeaderFooterView
 
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) BOOL showHot;
 
 @end
 

@@ -68,6 +68,9 @@ static NSInteger SpeedFeeBtnTag = 100;
     
     [self setNavNoLineTitle:LocalizedStr(@"text_transfer")];
     self.speedFeeIdx = 1;
+    if (self.model==nil) {
+        self.model = [PW_GlobalData shared].mainTokenModel;
+    }
     [self makeViews];
     [self refreshUI];
     [self requestGasData];
@@ -230,6 +233,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.nameLb.text = self.model.tokenName;
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     self.sendAddressLb.text = [walletAddress showShortAddress];
+    self.addressTF.text = self.toAddress;
 }
 - (void)refreshGasUI {
     PW_GasModel *gasModel = [self getCurrentGasModel];
