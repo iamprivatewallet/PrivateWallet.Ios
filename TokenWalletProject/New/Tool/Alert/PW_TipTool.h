@@ -17,8 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showDeleteWalletBackupMnemonicsSureBlock:(void (^)(void))block;
 + (void)showBackupTipPrivateKeySureBlock:(void (^)(void))block;
 + (void)showBackupTipDesc:(NSString *)desc sureBlock:(void (^)(void))block;
+/// 判断是否开启生物验证、否则用密码验证
++ (void)showPayCheckBlock:(void (^)(NSString *pwd))block;
++ (void)showPayCheckBlock:(void (^)(NSString *pwd))block closeBlock:(nullable void(^)(void))closeBlock;
+/// 密码验证
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block;
 + (void)showPayPwdSureBlock:(void (^)(NSString *pwd))block closeBlock:(nullable void(^)(void))closeBlock;
+/// 生物验证
++ (void)showPayBiologicalSureBlock:(void (^)(NSString *pwd))block;
++ (void)showPayBiologicalSureBlock:(void (^)(NSString *pwd))block closeBlock:(nullable void(^)(void))closeBlock;
 /// dapp钱包不支持
 + (void)showDappWalletNotSupportedWithModel:(PW_DappModel *)model sureBlock:(void(^)(void))block;
 /// dapp免责声明

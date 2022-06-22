@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (LAContext *)showWithDesc:(NSString *)desc reply:(void(^)(BOOL success,NSError *error))block;
 + (LAContext *)isSupportBiometrics;
 + (NSError *)supportBiometricsError;
++ (NSString *)biometryTypeStr;
 
 @end
 

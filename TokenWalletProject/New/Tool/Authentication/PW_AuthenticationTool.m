@@ -45,5 +45,19 @@
     }
     return error;
 }
++ (NSString *)biometryTypeStr {
+    LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
+    NSString *biometryTypeStr = @"TouchID";
+    if (context) {
+        switch (context.biometryType) {
+            case LABiometryTypeFaceID:
+                biometryTypeStr = @"FaceID";
+                break;
+            default:
+                break;
+        }
+    }
+    return biometryTypeStr;
+}
 
 @end

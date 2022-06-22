@@ -573,7 +573,7 @@
         [_tableView registerClass:[PW_WalletCell class] forCellReuseIdentifier:@"PW_WalletCell"];
         _tableView.rowHeight = 75;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.contentInset = UIEdgeInsetsMake(10, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(10, 0, SafeBottomInset, 0);
         _tableView.tableFooterView = self.addCurrencyView;
     }
     return _tableView;

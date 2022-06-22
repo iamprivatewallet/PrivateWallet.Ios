@@ -23,6 +23,9 @@
 @property (strong, nonatomic) UIViewController *rootController;
 @property (nonatomic, strong) AFNetworkReachabilityManager *manager;
 
+@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) PW_AppPwdLockView *appPwdLockView;
+
 @end
 
 @implementation AppDelegate
@@ -143,26 +146,31 @@
     }
 }
 - (void)setupLockApp {
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    effectView.hidden = YES;
-    [self.window addSubview:effectView];
-    [effectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
     [RACObserve(self, appIsBackground) subscribeNext:^(NSNumber * _Nullable x) {
         if ([PW_LockTool getUnlockAppTransaction]) {
-            effectView.hidden = NO;
+            [self.window addSubview:self.effectView];
+            [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.offset(0);
+            }];
             if (!x.boolValue) {
                 LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
                 if (context) {
-                    [PW_AuthenticationTool showWithDesc:@"Unlock App" reply:^(BOOL success, NSError * _Nonnull error) {
+                    [PW_AuthenticationTool showWithDesc:LocalizedStr(@"text_unlockApp") reply:^(BOOL success, NSError * _Nonnull error) {
                         if (success) {
-                            effectView.hidden = YES;
+                            [self.effectView removeFromSuperview];
                         }
                     }];
+                }else{
+                    NSString *str = [PW_AuthenticationTool biometryTypeStr];
+                    [PW_ToastTool showError:NSStringWithFormat(@"%@ %@",str,LocalizedStr(@"text_permissionsNotEnabled"))];
                 }
             }
+        }else if([PW_LockTool getOpenUnlockPwd]) {//密码解锁
+            [self.appPwdLockView reset];
+            [self.window addSubview:self.appPwdLockView];
+            [self.appPwdLockView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.offset(0);
+            }];
         }
     }];
 }
@@ -189,6 +197,26 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+#pragma mark - lazy
+- (UIVisualEffectView *)effectView {
+    if (!_effectView) {
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+        _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    }
+    return _effectView;
+}
+- (PW_AppPwdLockView *)appPwdLockView {
+    if (!_appPwdLockView) {
+        _appPwdLockView = [[PW_AppPwdLockView alloc] init];
+        _appPwdLockView.completeBlock = ^(PW_AppPwdLockView * _Nonnull view, BOOL success) {
+            if (success) {
+                [view removeFromSuperview];
+            }
+        };
+    }
+    return _appPwdLockView;
 }
 
 @end

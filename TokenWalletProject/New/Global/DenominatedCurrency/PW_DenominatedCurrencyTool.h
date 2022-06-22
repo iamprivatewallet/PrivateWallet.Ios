@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, PW_DenominatedCurrencyType) {
-    PW_DenominatedCurrencyRMB,
+    PW_DenominatedCurrencyRMB=0,
     PW_DenominatedCurrencyDollar,
 };
 
@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setType:(PW_DenominatedCurrencyType)type;
 + (PW_DenominatedCurrencyType)getType;
 + (NSString *)typeStr;
+
++ (void)clear;
 
 @end
 

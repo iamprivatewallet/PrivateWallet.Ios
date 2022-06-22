@@ -114,7 +114,7 @@
 - (void)setNavNoLineTitle:(NSString *)title leftTitle:(NSString *)leftTitle rightImg:(NSString *)rightImg rightAction:(SEL)rightAction {
     [self initBarWithTitle:title leftImg:nil leftTitle:leftTitle leftAction:nil rightTitle:nil rightImage:rightImg rightAction:rightAction isNoLine:YES];
 }
-- (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine{
+- (void)setNavTitleNoLeft:(NSString *)title isNoLine:(BOOL)isNoLine{
     [self initBarWithTitle:title leftBtnImg:nil leftTitle:nil leftAction:nil isNoLine:isNoLine];
 }
 - (void)setNavTitle:(NSString *)title leftImg:(NSString *)leftImg leftAction:(SEL)leftAction rightImg:(NSString *)rightImg rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine{

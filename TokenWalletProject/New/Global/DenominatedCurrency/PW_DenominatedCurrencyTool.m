@@ -29,4 +29,8 @@ static NSString * _Nonnull PW_DenominatedCurrencyTypeKey = @"DenominatedCurrency
     return @"";
 }
 
++ (void)clear {
+    [self setType:0];
+}
+
 @end

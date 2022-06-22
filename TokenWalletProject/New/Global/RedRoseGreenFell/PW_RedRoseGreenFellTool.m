@@ -24,4 +24,8 @@ static NSString * _Nonnull PW_RedRoseGreenFellKey = @"RedRoseGreenFellKey";
     return [[NSUserDefaults standardUserDefaults] boolForKey:PW_RedRoseGreenFellKey];
 }
 
++ (void)clear {
+    [self setOpen:NO];
+}
+
 @end

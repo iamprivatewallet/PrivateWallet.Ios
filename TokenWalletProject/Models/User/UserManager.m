@@ -89,8 +89,7 @@
 }
 
 // 用户登出
-- (void)logout
-{
+- (void)logout {
     self.currentUser.user_is_login = NO;
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:User_Info_Key];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -99,7 +98,11 @@
         Wallet *wallet = walletArray[i];
         [[PW_WalletManager shared] deleteWallet:wallet];
     }
-  
+    [PW_GlobalTool clear];
+    //删除数据库
+    NSString *dbName = @"JQFMDB.sqlite";
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }
 -(void)saveCurrentUser:(User *)currentUser
 {

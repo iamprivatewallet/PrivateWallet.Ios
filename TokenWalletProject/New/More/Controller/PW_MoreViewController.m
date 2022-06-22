@@ -11,7 +11,7 @@
 #import "PW_MoreCell.h"
 #import "PW_MessageCenterViewController.h"
 #import "PW_ShareAppTool.h"
-#import "BrowseWebViewController.h"
+#import "PW_WebViewController.h"
 #import "PW_AboutUsViewController.h"
 #import "PW_SetUpViewController.h"
 #import "PW_AddressBookViewController.h"
@@ -82,8 +82,8 @@
     [self.tableView reloadData];
 }
 - (void)openWebTitle:(NSString *)title urlStr:(NSString *)urlStr {
-    BrowseWebViewController *webVc = [[BrowseWebViewController alloc] init];
-    webVc.title = title;
+    PW_WebViewController *webVc = [[PW_WebViewController alloc] init];
+    webVc.titleStr = title;
     webVc.urlStr = urlStr;
     [self.navigationController pushViewController:webVc animated:YES];
 }
@@ -124,7 +124,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 70;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, SafeBottomInset, 0);
         [_tableView registerClass:[PW_MoreCell class] forCellReuseIdentifier:@"PW_MoreCell"];
     }
     return _tableView;

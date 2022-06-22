@@ -57,7 +57,7 @@
 - (void)buildData {
     __weak typeof(self) weakSelf = self;
     PW_WalletSetModel *model1 = [PW_WalletSetModel ModelIconName:@"icon_wallet_name" title:LocalizedStr(@"text_changeWalletName") desc:LocalizedStr(@"text_changeWalletNameWalletDesc") actionBlock:^(PW_WalletSetModel * _Nonnull model) {
-        [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+        [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
             if (![pwd isEqualToString:weakSelf.model.walletPassword]) {
                 return [weakSelf showError:LocalizedStr(@"text_pwdError")];
             }
@@ -102,7 +102,8 @@
     [contentView addSubview:self.tableView];
     [contentView addSubview:self.deleteBtn];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.offset(0);
+        make.top.offset(28);
+        make.left.right.offset(0);
         make.bottom.equalTo(self.deleteBtn.mas_top).offset(-10);
     }];
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +135,6 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 84;
-        _tableView.contentInset = UIEdgeInsetsMake(28, 0, SafeBottomInset, 0);
         [_tableView registerClass:[PW_WalletSetCell class] forCellReuseIdentifier:@"PW_WalletSetCell"];
     }
     return _tableView;

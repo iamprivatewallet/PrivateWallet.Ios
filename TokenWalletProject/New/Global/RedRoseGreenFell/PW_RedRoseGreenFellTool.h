@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setOpen:(BOOL)isOpen;
 + (BOOL)isOpen;
 
++ (void)clear;;
+
 @end
 
 NS_ASSUME_NONNULL_END

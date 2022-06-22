@@ -12,6 +12,7 @@
 #import "PW_SearchCurrencyCell.h"
 #import "PW_SearchHeaderView.h"
 #import "PW_SearchDeleteHeaderView.h"
+#import "PW_SearchHistoryDappCell.h"
 #import "PW_Web3ViewController.h"
 
 @interface PW_SearchDappViewController () <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -180,7 +181,7 @@
         };
         return cell;
     }
-    PW_SearchDappCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_SearchDappCell"];
+    PW_SearchHistoryDappCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_SearchHistoryDappCell"];
     cell.model = self.historyList[indexPath.row];
     return cell;
 }
@@ -263,6 +264,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[PW_SearchRecommendCell class] forCellReuseIdentifier:@"PW_SearchRecommendCell"];
         [_tableView registerClass:[PW_SearchDappCell class] forCellReuseIdentifier:@"PW_SearchDappCell"];
+        [_tableView registerClass:[PW_SearchHistoryDappCell class] forCellReuseIdentifier:@"PW_SearchHistoryDappCell"];
         [_tableView registerClass:[PW_SearchCurrencyCell class] forCellReuseIdentifier:@"PW_SearchCurrencyCell"];
         [_tableView registerClass:[PW_SearchHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_SearchHeaderView"];
         [_tableView registerClass:[PW_SearchDeleteHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_SearchDeleteHeaderView"];

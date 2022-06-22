@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIButton *)buttonImageName:(NSString *)imageName target:(nullable id)target action:(nullable SEL)action;
 + (UIButton *)buttonImageName:(NSString *)imageName selectedImage:(nullable NSString *)selectedImage target:(nullable id)target action:(nullable SEL)action;
 
-+ (UITextField *)textFieldFont:(UIFont *)font color:(UIColor *)color placeholder:(NSString *)placeholder;
++ (UITextField *)textFieldFont:(UIFont *)font color:(UIColor *)color placeholder:(nullable NSString *)placeholder;
 
 + (UISegmentedControl *)segmentedControlWithTitles:(NSArray<NSString *> *)titles;
 

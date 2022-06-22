@@ -8,6 +8,7 @@
 
 #import "PW_AppLockViewController.h"
 #import "PW_AuthenticationTool.h"
+#import "PW_UnlockPasswordViewController.h"
 
 @interface PW_AppLockViewController ()
 
@@ -23,24 +24,25 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_appLock")];
     [self makeViews];
-//    self.pwdBtn.selected = [PW_LockTool getUnlockPwd];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.pwdBtn.selected = [PW_LockTool getOpenUnlockPwd];
     self.biologicalBtn.selected = [PW_LockTool getUnlockAppTransaction];
 }
-//- (void)pwdAction:(UIButton *)btn {
-//    btn.selected = !btn.selected;
-//    [PW_LockTool setUnlockPwd:btn.selected];
-//}
+- (void)pwdAction:(UIButton *)btn {
+    if (btn.selected==NO) {
+        PW_UnlockPasswordViewController *vc = [[PW_UnlockPasswordViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        btn.selected = NO;
+        [PW_LockTool setOpenUnlockPwd:NO];
+    }
+}
 - (void)biologicalAction:(UIButton *)btn {
     LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
-    NSString *biometryTypeStr = @"TouchID";
+    NSString *biometryTypeStr = [PW_AuthenticationTool biometryTypeStr];
     if (context) {
-        switch (context.biometryType) {
-            case LABiometryTypeFaceID:
-                biometryTypeStr = @"FaceID";
-                break;
-            default:
-                break;
-        }
         NSString *desc = NSStringWithFormat(LocalizedStr(@"text_biologicalTitle"),biometryTypeStr);
         [PW_AuthenticationTool showWithDesc:desc reply:^(BOOL success, NSError * _Nonnull error) {
             if (success) {
@@ -49,7 +51,7 @@
             }
         }];
     }else{
-        [self showError:@"No support"];
+        [self showError:NSStringWithFormat(@"%@ %@",biometryTypeStr,LocalizedStr(@"text_permissionsNotEnabled"))];
     }
 }
 - (void)makeViews {
@@ -61,20 +63,20 @@
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
-//    UIView *pwdView = [self createRowIconName:@"icon_lock_pwd" title:LocalizedStr(@"text_unlockPassword") desc:nil];
-//    [contentView addSubview:pwdView];
-//    [pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.offset(36);
-//        make.right.offset(-36);
-//        make.top.offset(28);
-//        make.height.mas_greaterThanOrEqualTo(70);
-//    }];
-//    self.pwdBtn = [PW_ViewTool buttonImageName:@"icon_switch_off" selectedImage:@"icon_switch_on" target:self action:@selector(pwdAction:)];
-//    [pwdView addSubview:self.pwdBtn];
-//    [self.pwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.offset(-10);
-//        make.centerY.offset(0);
-//    }];
+    UIView *pwdView = [self createRowIconName:@"icon_lock_pwd" title:LocalizedStr(@"text_unlockPassword") desc:nil];
+    [contentView addSubview:pwdView];
+    [pwdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.top.offset(28);
+        make.height.mas_greaterThanOrEqualTo(70);
+    }];
+    self.pwdBtn = [PW_ViewTool buttonImageName:@"icon_switch_off" selectedImage:@"icon_switch_on" target:self action:@selector(pwdAction:)];
+    [pwdView addSubview:self.pwdBtn];
+    [self.pwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-10);
+        make.centerY.offset(0);
+    }];
     LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
     NSString *biometryTypeStr = @"TouchID";
     if (context) {
@@ -91,8 +93,7 @@
     [biologicalView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(36);
         make.right.offset(-36);
-//        make.top.equalTo(pwdView.mas_bottom).offset(0);
-        make.top.offset(28);
+        make.top.equalTo(pwdView.mas_bottom).offset(0);
         make.height.mas_greaterThanOrEqualTo(70);
     }];
     self.biologicalBtn = [PW_ViewTool buttonImageName:@"icon_switch_off" selectedImage:@"icon_switch_on" target:self action:@selector(biologicalAction:)];

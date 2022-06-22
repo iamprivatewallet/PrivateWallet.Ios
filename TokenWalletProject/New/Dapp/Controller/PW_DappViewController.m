@@ -85,7 +85,7 @@
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(28);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -247,7 +247,7 @@
         _tableView.rowHeight = 70;
         _tableView.sectionHeaderHeight = 55;
         _tableView.sectionFooterHeight = 10;
-        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         _tableView.tableHeaderView = self.headerView;
     }
     return _tableView;

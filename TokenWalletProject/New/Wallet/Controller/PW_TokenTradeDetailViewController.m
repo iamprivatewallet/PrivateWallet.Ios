@@ -7,7 +7,7 @@
 //
 
 #import "PW_TokenTradeDetailViewController.h"
-#import "BrowseWebViewController.h"
+#import "PW_WebViewController.h"
 
 @interface PW_TokenTradeDetailViewController ()
 
@@ -27,7 +27,7 @@
 }
 - (void)blockchainDetailAction {
     if([self.model.detaInfoUrl isNoEmpty]){
-        BrowseWebViewController *webVc = [[BrowseWebViewController alloc] init];
+        PW_WebViewController *webVc = [[PW_WebViewController alloc] init];
         webVc.urlStr = self.model.detaInfoUrl;
         [self.navigationController pushViewController:webVc animated:YES];
     }

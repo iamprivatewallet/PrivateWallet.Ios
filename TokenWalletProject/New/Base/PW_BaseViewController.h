@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setNavNoLineTitle:(NSString *)title rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction;
 - (void)setNavNoLineTitle:(NSString *)title leftTitle:(nullable NSString *)leftTitle rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction;
 //只显示标题
-- (void)setNavTitle:(NSString *)title isNoLine:(BOOL)isNoLine;
+- (void)setNavTitleNoLeft:(NSString *)title isNoLine:(BOOL)isNoLine;
 //自定义左右图片
 - (void)setNavTitle:(NSString *)title leftImg:(nullable NSString *)leftImg leftAction:(nullable SEL)leftAction rightImg:(nullable NSString *)rightImg rightAction:(nullable SEL)rightAction isNoLine:(BOOL)isNoLine;
 

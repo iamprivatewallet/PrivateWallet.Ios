@@ -150,7 +150,7 @@
         }
     }];
     if (self.currencyList.count>0) {
-        [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+        [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
             if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
                 return [self showError:LocalizedStr(@"text_pwdError")];
             }

@@ -83,7 +83,7 @@
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_DappRecentBrowseCell class] forCellReuseIdentifier:@"PW_DappRecentBrowseCell"];
         _tableView.rowHeight = 62;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, SafeBottomInset, 0);
     }
     return _tableView;
 }

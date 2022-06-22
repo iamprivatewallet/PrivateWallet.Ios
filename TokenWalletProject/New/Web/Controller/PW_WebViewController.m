@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavTitle:self.titleStr isNoLine:NO];
+    [self setNavNoLineTitle:self.titleStr];
     [self makeViews];
 }
 - (void)makeViews {

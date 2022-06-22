@@ -14,9 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_DappMinersFeeView : UIView
 
 @property (nonatomic, strong) PW_GasToolModel *toolModel;
-@property (nonatomic, strong, readonly) PW_GasModel *gasModel;
 @property (nonatomic, copy, readonly) NSString *title;
-@property (nonatomic, copy) void(^changeBlock)(PW_GasModel *model, NSString *title);
+- (PW_GasModel *)getCurrentGasModel;
 
 @end
 

@@ -197,7 +197,7 @@
 //    [self.tokenView addSubview:self.nameLb];
 //    self.subNameLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
 //    [self.tokenView addSubview:self.subNameLb];
-//    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_dark"]];
+//    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_arrow_black"]];
 //    [self.tokenView addSubview:arrowIv];
 //    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.width.height.offset(25);

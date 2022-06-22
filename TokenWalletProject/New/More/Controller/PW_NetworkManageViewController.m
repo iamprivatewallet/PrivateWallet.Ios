@@ -87,7 +87,7 @@
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(28);
         make.left.bottom.right.offset(0);
     }];
 }
@@ -160,7 +160,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 72;
         [_tableView registerClass:[PW_NetworkManageCell class] forCellReuseIdentifier:@"PW_NetworkManageCell"];
-        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, SafeBottomInset, 0);
         _tableView.tableFooterView = self.addView;
     }
     return _tableView;

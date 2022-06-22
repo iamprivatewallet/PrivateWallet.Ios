@@ -182,6 +182,7 @@
 		5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */; };
 		5C2B3E322808297800CC16CE /* PW_SearchCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */; };
 		5C3190EE285CAAF60053F572 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3190ED285CAAF60053F572 /* web3.swift */; };
+		5C32AB4C28631259002C7970 /* PW_GlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32AB4B28631259002C7970 /* PW_GlobalTool.m */; };
 		5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */; };
 		5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17F28094AAC0000FEE0 /* PW_CurrencyManageCell.m */; };
 		5C36E18528094BD20000FEE0 /* PW_GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E18428094BD20000FEE0 /* PW_GlobalData.m */; };
@@ -261,10 +262,14 @@
 		5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6827D9E29B0029988A /* LanguageTool.m */; };
 		5C9BAB6C27D9EACC0029988A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6E27D9EACC0029988A /* InfoPlist.strings */; };
 		5C9BAB7127DA04D70029988A /* Language.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7027DA04D70029988A /* Language.plist */; };
+		5C9C1D962862B74800F28632 /* PW_UnlockPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */; };
+		5C9C1D9A2862C3CC00F28632 /* PW_PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */; };
+		5C9C1D9E2862F4BB00F28632 /* PW_AppPwdLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */; };
 		5CA0F143280E551500DE8DDB /* PW_NetworkManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F142280E551500DE8DDB /* PW_NetworkManageViewController.m */; };
 		5CA0F146280E56DC00DE8DDB /* PW_NetworkManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F145280E56DC00DE8DDB /* PW_NetworkManageCell.m */; };
 		5CA0F149280E5A9800DE8DDB /* PW_NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F148280E5A9800DE8DDB /* PW_NetworkManager.m */; };
 		5CA0F14C280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F14B280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m */; };
+		5CA2C8512861A02C00EA46F5 /* PW_SearchHistoryDappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2C8502861A02C00EA46F5 /* PW_SearchHistoryDappCell.m */; };
 		5CA2E2C427BE4FF7002E2930 /* PWWalletContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */; };
 		5CA3463E280BF60F00E18D92 /* PW_ShareAppTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */; };
 		5CA34641280C028100E18D92 /* PW_AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA34640280C028100E18D92 /* PW_AboutUsViewController.m */; };
@@ -942,6 +947,8 @@
 		5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Web3ViewController.m; sourceTree = "<group>"; };
 		5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchCurrencyViewController.h; sourceTree = "<group>"; };
 		5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SearchCurrencyViewController.m; sourceTree = "<group>"; };
+		5C32AB4A28631259002C7970 /* PW_GlobalTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_GlobalTool.h; sourceTree = "<group>"; };
+		5C32AB4B28631259002C7970 /* PW_GlobalTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_GlobalTool.m; sourceTree = "<group>"; };
 		5C34201727D7421900A2630B /* brewchain.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = brewchain.js; sourceTree = "<group>"; };
 		5C36E17B28093F910000FEE0 /* PW_CurrencyManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_CurrencyManageViewController.h; sourceTree = "<group>"; };
 		5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_CurrencyManageViewController.m; sourceTree = "<group>"; };
@@ -1100,6 +1107,12 @@
 		5C9BAB6D27D9EACC0029988A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C9BAB6F27D9EACF0029988A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5C9BAB7027DA04D70029988A /* Language.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Language.plist; sourceTree = "<group>"; };
+		5C9C1D942862B74800F28632 /* PW_UnlockPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_UnlockPasswordViewController.h; sourceTree = "<group>"; };
+		5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_UnlockPasswordViewController.m; sourceTree = "<group>"; };
+		5C9C1D982862C3CC00F28632 /* PW_PasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_PasswordView.h; sourceTree = "<group>"; };
+		5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_PasswordView.m; sourceTree = "<group>"; };
+		5C9C1D9C2862F4BB00F28632 /* PW_AppPwdLockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AppPwdLockView.h; sourceTree = "<group>"; };
+		5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AppPwdLockView.m; sourceTree = "<group>"; };
 		5CA0F141280E551500DE8DDB /* PW_NetworkManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NetworkManageViewController.h; sourceTree = "<group>"; };
 		5CA0F142280E551500DE8DDB /* PW_NetworkManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NetworkManageViewController.m; sourceTree = "<group>"; };
 		5CA0F144280E56DC00DE8DDB /* PW_NetworkManageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NetworkManageCell.h; sourceTree = "<group>"; };
@@ -1108,6 +1121,8 @@
 		5CA0F148280E5A9800DE8DDB /* PW_NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NetworkManager.m; sourceTree = "<group>"; };
 		5CA0F14A280E64D500DE8DDB /* PW_AddCustomNetworkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCustomNetworkViewController.h; sourceTree = "<group>"; };
 		5CA0F14B280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddCustomNetworkViewController.m; sourceTree = "<group>"; };
+		5CA2C84F2861A02C00EA46F5 /* PW_SearchHistoryDappCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchHistoryDappCell.h; sourceTree = "<group>"; };
+		5CA2C8502861A02C00EA46F5 /* PW_SearchHistoryDappCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SearchHistoryDappCell.m; sourceTree = "<group>"; };
 		5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PWWalletContractTool.swift; sourceTree = "<group>"; };
 		5CA3463C280BF60F00E18D92 /* PW_ShareAppTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ShareAppTool.h; sourceTree = "<group>"; };
 		5CA3463D280BF60F00E18D92 /* PW_ShareAppTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ShareAppTool.m; sourceTree = "<group>"; };
@@ -2789,6 +2804,8 @@
 			isa = PBXGroup;
 			children = (
 				5C36E18628094BE80000FEE0 /* PW_Global.h */,
+				5C32AB4A28631259002C7970 /* PW_GlobalTool.h */,
+				5C32AB4B28631259002C7970 /* PW_GlobalTool.m */,
 				5CE0552628606C3300B68A6B /* Lock */,
 				5C36E18228094BC00000FEE0 /* Data */,
 				5C8AAAF5280D368600E4ED53 /* DenominatedCurrency */,
@@ -2922,6 +2939,24 @@
 				5C8AAAFB280D3EFD00E4ED53 /* PW_RedRoseGreenFellTool.m */,
 			);
 			path = RedRoseGreenFell;
+			sourceTree = "<group>";
+		};
+		5C9C1D972862C3B300F28632 /* PasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				5C9C1D982862C3CC00F28632 /* PW_PasswordView.h */,
+				5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */,
+			);
+			path = PasswordView;
+			sourceTree = "<group>";
+		};
+		5C9C1D9B2862F42D00F28632 /* AppPwdLockView */ = {
+			isa = PBXGroup;
+			children = (
+				5C9C1D9C2862F4BB00F28632 /* PW_AppPwdLockView.h */,
+				5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */,
+			);
+			path = AppPwdLockView;
 			sourceTree = "<group>";
 		};
 		5CA451DF2817CF03006FFA3B /* Solana */ = {
@@ -3327,6 +3362,8 @@
 				5CEF34D82806CA510052BA15 /* PW_SearchRecommendCell.m */,
 				5CEF34DD2806DFE40052BA15 /* PW_SearchDappCell.h */,
 				5CEF34DE2806DFE40052BA15 /* PW_SearchDappCell.m */,
+				5CA2C84F2861A02C00EA46F5 /* PW_SearchHistoryDappCell.h */,
+				5CA2C8502861A02C00EA46F5 /* PW_SearchHistoryDappCell.m */,
 				5CEF34DA2806D7240052BA15 /* PW_SearchCurrencyCell.h */,
 				5CEF34DB2806D7240052BA15 /* PW_SearchCurrencyCell.m */,
 				5C36E17E28094AAC0000FEE0 /* PW_CurrencyManageCell.h */,
@@ -3412,6 +3449,8 @@
 				5C37A8CD280EAE9000AAA728 /* PW_WalletSetViewController.m */,
 				5CC641F3282506C6002E1C46 /* PW_AppLockViewController.h */,
 				5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */,
+				5C9C1D942862B74800F28632 /* PW_UnlockPasswordViewController.h */,
+				5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */,
 				5C37A8D8280EC29F00AAA728 /* PW_ChangeWalletNameViewController.h */,
 				5C37A8D9280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m */,
 				5C37A8DE280ECF0F00AAA728 /* PW_ChangePwdViewController.h */,
@@ -3570,6 +3609,8 @@
 			isa = PBXGroup;
 			children = (
 				5CE7AD0027F85B7F00E2188D /* PW_ViewGlobal.h */,
+				5C9C1D9B2862F42D00F28632 /* AppPwdLockView */,
+				5C9C1D972862C3B300F28632 /* PasswordView */,
 				5CB119DE280ABEA40006BEFB /* Slider */,
 				5CE7ACFC27F85B2800E2188D /* UITableView */,
 				5CE7ACF327F8419C00E2188D /* UIButton */,
@@ -4803,6 +4844,7 @@
 				5CE7ACE727F6EE1F00E2188D /* PW_DappViewController.m in Sources */,
 				992EF1A026B92C1D00F70A94 /* CreateWalletView.m in Sources */,
 				5C8AAB14280D627600E4ED53 /* PW_AddressBookCell.m in Sources */,
+				5C9C1D9E2862F4BB00F28632 /* PW_AppPwdLockView.m in Sources */,
 				5AF5D16F1D2F7CBA004070D7 /* NSException+Trace.m in Sources */,
 				5AF5D22C1D2F7CBA004070D7 /* UINavigationController+ZHCustomNav.m in Sources */,
 				5E0799FE21D28A3A00924407 /* GPBArray.m in Sources */,
@@ -4915,6 +4957,7 @@
 				1FA8EF7821B824F900B4E28E /* TYBaseAnimation.m in Sources */,
 				5AF5D1741D2F7CBA004070D7 /* NSInvocation+Bb.m in Sources */,
 				5AF5D15D1D2F7CBA004070D7 /* NSData+Hash.m in Sources */,
+				5CA2C8512861A02C00EA46F5 /* PW_SearchHistoryDappCell.m in Sources */,
 				99D2CA2C2537F7EC00C1C196 /* UITools.m in Sources */,
 				5CB76B1827F2ECC20068E967 /* PW_BaseViewController.m in Sources */,
 				5E0799F721D28A3A00924407 /* Wrappers.pbobjc.m in Sources */,
@@ -4976,6 +5019,7 @@
 				5AF5D1621D2F7CBA004070D7 /* NSDate+Formatter.m in Sources */,
 				992E0F5426D4E7F700E1C31B /* AssetTopView.m in Sources */,
 				5C671306281164BC0088A1A5 /* NSNumber+PW_Number.m in Sources */,
+				5C32AB4C28631259002C7970 /* PW_GlobalTool.m in Sources */,
 				5CEF34CA2805264C0052BA15 /* PW_SelectWalletTypeViewController.m in Sources */,
 				5AF5D1591D2F7CBA004070D7 /* NSData+APNSToken.m in Sources */,
 				5CE7ACF627F841B100E2188D /* PW_Button.m in Sources */,
@@ -5188,6 +5232,7 @@
 				5AF5D1571D2F7CBA004070D7 /* NSArray+SafeAccess.m in Sources */,
 				992EF16026AFF59F00F70A94 /* MangeWalletsVC.m in Sources */,
 				5AF5D1841D2F7CBA004070D7 /* NSObject+MKBlockTimer.m in Sources */,
+				5C9C1D9A2862C3CC00F28632 /* PW_PasswordView.m in Sources */,
 				5E0799E921D28A3A00924407 /* GPBExtensionRegistry.m in Sources */,
 				5AF5D1A21D2F7CBA004070D7 /* NSURLRequest+ParamsFromDictionary.m in Sources */,
 				99D2CA442537F81C00C1C196 /* NSDate+Helper.m in Sources */,
@@ -5293,6 +5338,7 @@
 				5E079A0821D3C08700924407 /* ethereum.mm in Sources */,
 				992EF18426B2B2A300F70A94 /* ManageWalletCell.m in Sources */,
 				9926E15926FB1A2200FDF442 /* CVNServerMananger.m in Sources */,
+				5C9C1D962862B74800F28632 /* PW_UnlockPasswordViewController.m in Sources */,
 				992E0F7426D8D95D00E1C31B /* MyAllAssetsVC.m in Sources */,
 				992E0F7126D8D94700E1C31B /* MainAssetManageVC.m in Sources */,
 				9937C8A62702BA340064BBC3 /* DAppsCollectionViewCell.m in Sources */,

@@ -9,7 +9,7 @@
 #import "PW_AboutUsViewController.h"
 #import "VersionTool.h"
 #import "PW_MoreModel.h"
-#import "BrowseWebViewController.h"
+#import "PW_WebViewController.h"
 #import "VersionModel.h"
 
 @interface PW_AboutUsViewController ()
@@ -53,8 +53,8 @@
     }];
 }
 - (void)openWebTitle:(NSString *)title urlStr:(NSString *)urlStr {
-    BrowseWebViewController *webVc = [[BrowseWebViewController alloc] init];
-    webVc.title = title;
+    PW_WebViewController *webVc = [[PW_WebViewController alloc] init];
+    webVc.titleStr = title;
     webVc.urlStr = urlStr;
     [self.navigationController pushViewController:webVc animated:YES];
 }

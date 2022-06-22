@@ -78,8 +78,8 @@
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
-        make.bottom.offset(-SafeBottomInset);
+        make.top.offset(28);
+        make.left.right.bottom.offset(0);
     }];
 }
 #pragma mark - delegate
@@ -168,7 +168,7 @@
         [_tableView registerClass:[PW_WalletManageCell class] forCellReuseIdentifier:@"PW_WalletManageCell"];
         [_tableView registerClass:[PW_WalletManageHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_WalletManageHeaderView"];
         _tableView.tableHeaderView = self.networkView;
-        _tableView.contentInset = UIEdgeInsetsMake(28, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, SafeBottomInset, 0);
     }
     return _tableView;
 }

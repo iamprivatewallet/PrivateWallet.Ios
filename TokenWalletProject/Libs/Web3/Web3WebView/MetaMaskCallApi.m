@@ -128,7 +128,7 @@
 //                    }
                     dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16] addOxPrefix];
                     dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16] addOxPrefix];
-                    [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+                    [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
                         if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
                             if (errorBlock) {
                                 errorBlock(LocalizedStr(@"text_pwdError"));
@@ -151,7 +151,7 @@
             [PW_DappAlertTool showDappConfirmPayInfo:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
                 dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16]addOxPrefix];
                 dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16]addOxPrefix];
-                [PW_TipTool showPayPwdSureBlock:^(NSString * _Nonnull pwd) {
+                [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
                     if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
                         if (errorBlock) {
                             errorBlock(LocalizedStr(@"text_pwdError"));
