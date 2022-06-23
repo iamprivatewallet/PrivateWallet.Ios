@@ -46,6 +46,8 @@
     [self setupNavBgPurple];
     [self makeViews];
     [self requestData];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    [self.tableView.mj_header beginRefreshing];
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
@@ -90,20 +92,19 @@
     }];
 }
 - (void)requestData {
-    [self.view showLoadingIndicator];
     [self pw_requestApi:WalletHomeMain params:nil completeBlock:^(id  _Nonnull data) {
-        [self.view hideLoadingIndicator];
+        [self.tableView.mj_header endRefreshing];
         self.model = [PW_DappBrowserModel mj_objectWithKeyValues:data];
         self.sdScrollView.imageURLStringsGroup = [self.model.banner_1_1 valueForKeyPath:@"imgH5"];
         [self.tableView reloadData];
     } errBlock:^(NSString * _Nonnull msg) {
         [self showError:msg];
-        [self.view hideLoadingIndicator];
+        [self.tableView.mj_header endRefreshing];
     }];
 }
 - (void)openWebWithTitle:(NSString *)title urlStr:(NSString *)urlStr {
     PW_WebViewController *webVc = [[PW_WebViewController alloc] init];
-    webVc.title = title;
+    webVc.titleStr = title;
     webVc.urlStr = urlStr;
     [self.navigationController pushViewController:webVc animated:YES];
 }
@@ -141,8 +142,8 @@
         if (indexPath.row==0) {
             PW_DappBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappBrowserCell"];
             if (self.section1Idx==0) {//hot
-                if (self.model.dappTop.count>5) {
-                    cell.dataArr = [self.model.dappTop subarrayWithRange:NSMakeRange(0, 4)];
+                if (self.model.dappTop.count>4) {
+                    cell.dataArr = [self.model.dappTop subarrayWithRange:NSMakeRange(0, 3)];
                 }else{
                     cell.dataArr = self.model.dappTop;
                 }
@@ -183,9 +184,9 @@
         return cell;
     }
     PW_DappChainBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappChainBrowserCell"];
-//    cell.dataArr = nil;
+    cell.dataArr = self.model.browser;
     cell.clickBlock = ^(PW_DappChainBrowserModel * _Nonnull model) {
-        
+        [weakSelf openWebWithTitle:model.appName urlStr:model.appUrl];
     };
     return cell;
 }
@@ -194,15 +195,23 @@
         if (indexPath.row==1) {
             return 136;
         }
-        return 80;
+        return 85;
     }
-    NSArray *dataArr = self.model.dapp;
+    if (indexPath.section==1) {
+        NSArray *dataArr = self.model.dapp;
+        if (dataArr&&dataArr.count>0) {
+            NSInteger column = 4;
+            NSInteger row = ((NSInteger)dataArr.count/column)+(dataArr.count%column>0?1:0);
+            return row*85+(row-1)*15;
+        }
+    }
+    NSArray *dataArr = self.model.browser;
     if (dataArr&&dataArr.count>0) {
         NSInteger column = 2;
         NSInteger row = ((NSInteger)dataArr.count/column)+(dataArr.count%column>0?1:0);
-        return row*56+(row-1)*12;
+        return row*46+(row-1)*15+10;
     }
-    return 10;
+    return 1;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section==0) {
@@ -247,7 +256,7 @@
         _tableView.rowHeight = 70;
         _tableView.sectionHeaderHeight = 55;
         _tableView.sectionFooterHeight = 10;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
         _tableView.tableHeaderView = self.headerView;
     }
     return _tableView;

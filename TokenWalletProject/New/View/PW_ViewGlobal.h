@@ -14,5 +14,6 @@
 #import "PW_SliderView.h"
 #import "PW_PasswordView.h"
 #import "PW_AppPwdLockView.h"
+#import "PW_AppAuthLockView.h"
 
 #endif /* PW_ViewGlobal_h */

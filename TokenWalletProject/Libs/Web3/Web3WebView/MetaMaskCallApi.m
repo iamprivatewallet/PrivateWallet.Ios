@@ -90,32 +90,61 @@
             }
             return;
         }
-        NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
-        NSString *data = dataDict[@"data"];
-        NSString *to = dataDict[@"to"];
         NSString *gasPrice = dataDict[@"gasPrice"];
         NSString *gas = dataDict[@"gas"];
-        NSString *from = dataDict[@"from"];
-        PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
-        payModel.value = @"0";
-        payModel.symbol = [PW_GlobalData shared].mainTokenModel.tokenSymbol;
-        payModel.paymentAddress = from;
-        payModel.acceptAddress = to;
-        payModel.gasToolModel.gas_price = [gasPrice strTo10];
-        payModel.gasToolModel.gas = [gas strTo10];
-        payModel.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-        if([data.lowercaseString hasPrefix:AuthorizationPrefix]){
-            NSString *authCount = @"0";
-            NSInteger authCountLength = 64;
-            if (data.length>authCountLength) {
-                authCount = [data substringFromIndex:data.length-authCountLength];
-            }
-            payModel.value = authCount;
-            [SVProgressHUD showWithStatus:nil];
-            [[PWWalletContractTool shared] symbolERC20WithContractAddress:to completionHandler:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
-                [SVProgressHUD dismiss];
-                payModel.symbol = symbol;
-                [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
+        if (![gasPrice isNoEmpty]||![gas isNoEmpty]) {
+            [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+                if (![gasPrice isNoEmpty]) {
+                    if (errorBlock) {
+                        errorBlock(errorDesc);
+                    }
+                    return;
+                }
+                NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
+                if (![gasPrice isNoEmpty]) {
+                    dataDictNew[@"gasPrice"] = [gasPrice strTo16];
+                }
+                if (![gas isNoEmpty]) {
+                    dataDictNew[@"gas"] = [gas strTo16];
+                }
+                [self sendTransaction:model dict:dataDictNew completionHandler:completionHandler errorBlock:errorBlock];
+            }];
+        }else{
+            [self sendTransaction:model dict:dataDict completionHandler:completionHandler errorBlock:errorBlock];
+        }
+    }else{
+        //TODO 其他更多Method 统一直接使用web3的rpc协议进行请求，参数都无需做修改
+        NSLog(@"method:%@ 暂不支持",model.method);
+        [self requestWithModel:model completionHandler:completionHandler];
+    }
+}
+- (void)sendTransaction:(MetaMaskRepModel *)model dict:(NSDictionary *)dataDict completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {
+    NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
+    NSString *data = dataDictNew[@"data"];
+    NSString *to = dataDictNew[@"to"];
+    NSString *gasPrice = dataDictNew[@"gasPrice"];
+    NSString *gas = dataDictNew[@"gas"];
+    NSString *from = dataDictNew[@"from"];
+    PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
+    payModel.value = @"0";
+    payModel.symbol = [PW_GlobalData shared].mainTokenModel.tokenSymbol;
+    payModel.paymentAddress = from;
+    payModel.acceptAddress = to;
+    payModel.gasToolModel.gas_price = [gasPrice strTo10];
+    payModel.gasToolModel.gas = [gas strTo10];
+    payModel.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+    if([data.lowercaseString hasPrefix:AuthorizationPrefix]){
+        NSString *authCount = @"0";
+        NSInteger authCountLength = 64;
+        if (data.length>authCountLength) {
+            authCount = [data substringFromIndex:data.length-authCountLength];
+        }
+        payModel.value = authCount;
+        [SVProgressHUD showWithStatus:nil];
+        [[PWWalletContractTool shared] symbolERC20WithContractAddress:to completionHandler:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
+            [SVProgressHUD dismiss];
+            payModel.symbol = symbol;
+            [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
 //                    if (![payModel.value isEqualToString:authCount]) {
 //                        NSMutableString *value = [NSMutableString stringWithString:[payModel.value strTo16]];
 //                        if (value.length<authCountLength) {
@@ -126,31 +155,8 @@
 //                        }
 //                        dataDictNew[@"data"] = PW_StrFormat(@"%@%@",[data substringToIndex:data.length-authCountLength],value);
 //                    }
-                    dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16] addOxPrefix];
-                    dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16] addOxPrefix];
-                    [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
-                        if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
-                            if (errorBlock) {
-                                errorBlock(LocalizedStr(@"text_pwdError"));
-                            }
-                            return;
-                        }
-                        [self callTransaction:model dataDictNew:dataDictNew completionHandler:completionHandler errorBlock:errorBlock];
-                    } closeBlock:^{
-                        if (errorBlock) {
-                            errorBlock(@"cancel");
-                        }
-                    }];
-                } closeBlock:^{
-                    if (errorBlock) {
-                        errorBlock(@"cancel");
-                    }
-                }];
-            }];
-        }else{
-            [PW_DappAlertTool showDappConfirmPayInfo:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
-                dataDictNew[@"gasPrice"] = [[payModel.gasModel.gas_price strTo16]addOxPrefix];
-                dataDictNew[@"gas"] = [[payModel.gasModel.gas strTo16]addOxPrefix];
+                dataDictNew[@"gasPrice"] = [payModel.gasModel.gas_price strTo16];
+                dataDictNew[@"gas"] = [payModel.gasModel.gas strTo16];
                 [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
                     if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
                         if (errorBlock) {
@@ -169,11 +175,29 @@
                     errorBlock(@"cancel");
                 }
             }];
-        }
+        }];
     }else{
-        //TODO 其他更多Method 统一直接使用web3的rpc协议进行请求，参数都无需做修改
-        NSLog(@"method:%@ 暂不支持",model.method);
-        [self requestWithModel:model completionHandler:completionHandler];
+        [PW_DappAlertTool showDappConfirmPayInfo:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {
+            dataDictNew[@"gasPrice"] = [payModel.gasModel.gas_price strTo16];
+            dataDictNew[@"gas"] = [payModel.gasModel.gas strTo16];
+            [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+                if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
+                    if (errorBlock) {
+                        errorBlock(LocalizedStr(@"text_pwdError"));
+                    }
+                    return;
+                }
+                [self callTransaction:model dataDictNew:dataDictNew completionHandler:completionHandler errorBlock:errorBlock];
+            } closeBlock:^{
+                if (errorBlock) {
+                    errorBlock(@"cancel");
+                }
+            }];
+        } closeBlock:^{
+            if (errorBlock) {
+                errorBlock(@"cancel");
+            }
+        }];
     }
 }
 - (void)callTransaction:(MetaMaskRepModel *)model dataDictNew:(NSMutableDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {

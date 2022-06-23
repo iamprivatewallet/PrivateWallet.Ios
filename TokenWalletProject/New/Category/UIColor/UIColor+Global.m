@@ -60,6 +60,9 @@
 + (UIColor *)g_linkColor {
     return [UIColor g_hex:@"#1C6DF7"];
 }
++ (UIColor *)g_wrongColor {
+    return [UIColor g_hex:@"#EA3442"];
+}
 
 + (UIColor *)g_roseColor {
     if ([PW_RedRoseGreenFellTool isOpen]) {

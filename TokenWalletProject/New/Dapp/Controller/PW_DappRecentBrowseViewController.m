@@ -33,7 +33,7 @@
     [self.tableView reloadData];
 }
 - (void)deleteWithModel:(PW_DappModel *)model {
-    [[PW_DappFavoritesManager shared] deleteWithUrlStr:model.appUrl];
+    [[PW_DappManager shared] deleteWithUrlStr:model.appUrl];
     [self.dataArr removeObject:model];
     self.noDataView.hidden = self.dataArr.count>0;
     [self.tableView reloadData];

@@ -187,12 +187,15 @@
     PW_DappMoreModel *browserModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_browser" title:LocalizedStr(@"text_browserOpen") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self currentUrlAbsoluteStr]] options:@{} completionHandler:nil];
     }];
-    BOOL isFavorite = [[PW_DappFavoritesManager shared] isExistWithUrlStr:self.model.appUrl]!=nil;
+    BOOL isFavorite = [[PW_DappFavoritesManager shared] isExistWithUrlStr:[self currentURL]]!=nil;
     PW_DappMoreModel *favoriteModel = [PW_DappMoreModel ModelIconName:isFavorite?@"icon_sheet_favorite_full":@"icon_sheet_favorite" title:LocalizedStr(@"text_favorites") actionBlock:^(PW_DappMoreModel * _Nonnull model) {
-        if ([[PW_DappFavoritesManager shared] isExistWithUrlStr:weakSelf.model.appUrl]) {
-            [[PW_DappFavoritesManager shared] deleteWithUrlStr:weakSelf.model.appUrl];
+        if ([[PW_DappFavoritesManager shared] isExistWithUrlStr:[weakSelf currentURL]]) {
+            [[PW_DappFavoritesManager shared] deleteWithUrlStr:[weakSelf currentURL]];
         }else{
-            [[PW_DappFavoritesManager shared] saveModel:weakSelf.model];
+            PW_DappModel *model = [[PW_DappModel alloc] init];
+            model.appName = self.webView.title;
+            model.appUrl = [weakSelf currentURL];
+            [[PW_DappFavoritesManager shared] saveModel:model];
         }
     }];
     PW_DappMoreModel *reportModel = [PW_DappMoreModel ModelIconName:@"icon_sheet_report" title:LocalizedStr(@"text_report") actionBlock:^(PW_DappMoreModel * _Nonnull model) {

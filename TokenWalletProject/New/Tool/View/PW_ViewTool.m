@@ -112,6 +112,7 @@
     tf.textColor = color;
     [tf pw_setPlaceholder:placeholder];
     tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+    tf.autocorrectionType = UITextAutocorrectionTypeNo;
     return tf;
 }
 

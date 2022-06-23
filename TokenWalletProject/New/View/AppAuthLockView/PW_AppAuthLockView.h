@@ -1,8 +1,8 @@
 //
-//  PW_AppPwdLockView.h
+//  PW_AppAuthLockView.h
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/6/22.
+//  Created by mnz on 2022/6/23.
 //  Copyright © 2022 . All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PW_AppPwdLockView : UIView
+@interface PW_AppAuthLockView : UIView
 
-@property (nonatomic, copy) void(^completeBlock)(PW_AppPwdLockView *view, BOOL success);
+@property (nonatomic, copy) void(^completeBlock)(PW_AppAuthLockView *view, BOOL success);
 - (void)start;//begin auth
 - (void)reset;
 

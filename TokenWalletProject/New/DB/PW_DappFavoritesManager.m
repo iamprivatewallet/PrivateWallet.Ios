@@ -51,8 +51,8 @@ static NSString * _Nonnull PW_TableName = @"wallet_dappFavorites";
 }
 - (NSArray<PW_DappModel *> *)getList {
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * records = [db jq_lookupTable:PW_TableName dicOrModel:[PW_DappModel class] whereFormat:nil];
-    return records;
+    NSArray *records = [db jq_lookupTable:PW_TableName dicOrModel:[PW_DappModel class] whereFormat:nil];
+    return [[records reverseObjectEnumerator] allObjects];
 }
 - (BOOL)deleteAll {
     JQFMDB * db = [JQFMDB shareDatabase];

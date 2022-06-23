@@ -13,7 +13,7 @@
 #import "PW_MoreViewController.h"
 #import "PW_NavigationController.h"
 
-@interface PW_TabBarViewController ()
+@interface PW_TabBarViewController () <UITabBarControllerDelegate>
 
 @end
 
@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.delegate = self;
     self.tabBar.translucent = NO;
     UIImage *image = [UIImage pw_imageGradientSize:CGSizeMake(SCREEN_WIDTH, self.tabBar.frame.size.height) gradientColors:@[[UIColor g_darkGradientStartColor],[UIColor g_darkGradientEndColor]] gradientType:PW_GradientLeftToRight];
     UIColor *bgColor = [UIColor colorWithPatternImage:image];
@@ -66,6 +67,10 @@
     item.image = [[UIImage imageNamed:imageNamed] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     item.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",imageNamed]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return item;
+}
+#pragma mark - UITabBarControllerDelegate
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [PW_VibrateTool peekVibrate];
 }
 
 @end

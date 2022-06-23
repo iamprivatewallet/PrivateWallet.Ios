@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_warnColor;
 + (UIColor *)g_warnBgColor;
 + (UIColor *)g_linkColor;
++ (UIColor *)g_wrongColor;
 
 + (UIColor *)g_roseColor;
 + (UIColor *)g_fallColor;

@@ -19,6 +19,7 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     self.view.backgroundColor = [UIColor g_bgColor];
+    [self.view insertSubview:self.bgIv atIndex:0];
     [self.bgIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
     }];
@@ -228,7 +229,6 @@
         _bgIv.image = [UIImage imageNamed:@"icon_nav_black_big"];
         _bgIv.contentMode = UIViewContentModeScaleAspectFill;
         _bgIv.clipsToBounds = YES;
-        [self.view insertSubview:_bgIv atIndex:0];
     }
     return _bgIv;
 }

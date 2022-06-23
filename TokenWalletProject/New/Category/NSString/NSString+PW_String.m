@@ -159,12 +159,18 @@
     return NO;
 }
 - (NSString *)strTo10{
+    if(![self hasPrefixOx]){
+        return self;
+    }
     const char *hexChar = [self cStringUsingEncoding:NSUTF8StringEncoding];
     long long hexNumber;
     sscanf(hexChar, "%llx", &hexNumber);
     return [NSString stringWithFormat:@"%lld",hexNumber];
 }
 - (NSString *)strTo16{
+    if([self hasPrefixOx]){
+        return self;
+    }
     //10进制转换16进制（支持无穷大数）
     NSString *hex = @"";
     NSString *letter;
@@ -230,10 +236,13 @@
         hex = [letter stringByAppendingString:hex];
     }
     //    return hex;
-    return hex.length > 0 ? hex.lowercaseString : @"0";
-//    return hex.length > 0 ? [NSString stringWithFormat:@"0x%@",hex] : @"0x0";
+//    return hex.length > 0 ? hex.lowercaseString : @"0";
+    return hex.length > 0 ? [NSString stringWithFormat:@"0x%@",hex.lowercaseString] : @"0x0";
 }
 - (NSString *)addOxPrefix {
+    if([self hasPrefixOx]){
+        return self;
+    }
     return [self isNoEmpty] ? [NSString stringWithFormat:@"0x%@",self] : @"0x0";
 }
 - (NSString *)getStrTo16 {

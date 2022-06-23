@@ -15,7 +15,6 @@
 #import "VersionTool.h"
 #import "PW_FirstChooseViewController.h"
 #import "PW_SetUpViewController.h"
-#import "PW_AuthenticationTool.h"
 #import <SDWebImage/SDImageCacheConfig.h>
 
 @interface AppDelegate () <UIGestureRecognizerDelegate>
@@ -23,7 +22,7 @@
 @property (strong, nonatomic) UIViewController *rootController;
 @property (nonatomic, strong) AFNetworkReachabilityManager *manager;
 
-@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) PW_AppAuthLockView *appAuthLockView;
 @property (nonatomic, strong) PW_AppPwdLockView *appPwdLockView;
 
 @end
@@ -148,29 +147,25 @@
 - (void)setupLockApp {
     [RACObserve(self, appIsBackground) subscribeNext:^(NSNumber * _Nullable x) {
         if ([PW_LockTool getUnlockAppTransaction]) {
-            [self.window addSubview:self.effectView];
-            [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self.window addSubview:self.appAuthLockView];
+            [self.appAuthLockView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.offset(0);
             }];
-            if (!x.boolValue) {
-                LAContext *context = [PW_AuthenticationTool isSupportBiometrics];
-                if (context) {
-                    [PW_AuthenticationTool showWithDesc:LocalizedStr(@"text_unlockApp") reply:^(BOOL success, NSError * _Nonnull error) {
-                        if (success) {
-                            [self.effectView removeFromSuperview];
-                        }
-                    }];
-                }else{
-                    NSString *str = [PW_AuthenticationTool biometryTypeStr];
-                    [PW_ToastTool showError:NSStringWithFormat(@"%@ %@",str,LocalizedStr(@"text_permissionsNotEnabled"))];
-                }
+            if (x.boolValue) {
+                [self.appAuthLockView reset];
+            }else{
+                [self.appAuthLockView start];
             }
         }else if([PW_LockTool getOpenUnlockPwd]) {//密码解锁
-            [self.appPwdLockView reset];
             [self.window addSubview:self.appPwdLockView];
             [self.appPwdLockView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.offset(0);
             }];
+            if (x.boolValue) {
+                [self.appPwdLockView reset];
+            }else{
+                [self.appPwdLockView start];
+            }
         }
     }];
 }
@@ -200,12 +195,16 @@
 }
 
 #pragma mark - lazy
-- (UIVisualEffectView *)effectView {
-    if (!_effectView) {
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-        _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+- (PW_AppAuthLockView *)appAuthLockView {
+    if (!_appAuthLockView) {
+        _appAuthLockView = [[PW_AppAuthLockView alloc] init];
+        _appAuthLockView.completeBlock = ^(PW_AppAuthLockView * _Nonnull view, BOOL success) {
+            if (success) {
+                [view removeFromSuperview];
+            }
+        };
     }
-    return _effectView;
+    return _appAuthLockView;
 }
 - (PW_AppPwdLockView *)appPwdLockView {
     if (!_appPwdLockView) {

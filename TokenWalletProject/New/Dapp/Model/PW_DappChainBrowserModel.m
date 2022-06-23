@@ -10,4 +10,8 @@
 
 @implementation PW_DappChainBrowserModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"bId":@"id",@"desc":@"description"};
+}
+
 @end

@@ -33,20 +33,15 @@
     [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
-    self.wrongView = [[UIView alloc] init];
-    self.wrongView.backgroundColor = [UIColor g_hex:@"#EA3442"];
-    self.wrongView.hidden = YES;
     [self.effectView.contentView addSubview:self.wrongView];
     [self.wrongView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(NavAndStatusHeight);
         make.left.right.offset(0);
         make.height.mas_equalTo(55);
     }];
-    self.wrongLb = [PW_ViewTool labelText:[PW_LockTool getUnlockPwdErrorStr] fontSize:14 textColor:[UIColor whiteColor]];
-    self.wrongLb.textAlignment = NSTextAlignmentCenter;
     [self.wrongView addSubview:self.wrongLb];
     [self.wrongLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_greaterThanOrEqualTo(36);
+        make.left.mas_greaterThanOrEqualTo(30);
         make.center.offset(0);
     }];
     [self.effectView.contentView addSubview:self.bodyView];
@@ -75,8 +70,12 @@
         make.height.mas_equalTo(36);
     }];
 }
-- (void)reset {
+- (void)start {
     [self refreshUI];
+}
+- (void)reset {
+    self.wrongView.hidden = YES;
+    self.bodyView.hidden = YES;
 }
 - (void)completeWithText:(NSString *)text {
     BOOL isSuccess = [text isEqualToString:[PW_LockTool getUnlockPwd]];
@@ -129,6 +128,21 @@
         [_bodyView setCornerRadius:8];
     }
     return _bodyView;
+}
+- (UIView *)wrongView {
+    if (!_wrongView) {
+        _wrongView = [[UIView alloc] init];
+        _wrongView.backgroundColor = [UIColor g_wrongColor];
+        _wrongView.hidden = YES;
+    }
+    return _wrongView;
+}
+- (UILabel *)wrongLb {
+    if (!_wrongLb) {
+        _wrongLb = [PW_ViewTool labelText:[PW_LockTool getUnlockPwdErrorStr] fontSize:14 textColor:[UIColor whiteColor]];
+        _wrongLb.textAlignment = NSTextAlignmentCenter;
+    }
+    return _wrongLb;
 }
 
 @end

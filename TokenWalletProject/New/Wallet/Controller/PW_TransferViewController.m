@@ -570,7 +570,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self createMinersFeeItems];
 }
 - (void)createSendingAddressItems {
-    UILabel *tipLb = [PW_ViewTool labelText:LocalizedStr(@"text_sendAddress") fontSize:20 textColor:[UIColor g_textColor]];
+    UILabel *tipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_sendAddress") fontSize:20 textColor:[UIColor g_textColor]];
     [self.sendingView addSubview:tipLb];
     self.sendAddressLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_grayTextColor]];
     [self.sendingView addSubview:self.sendAddressLb];

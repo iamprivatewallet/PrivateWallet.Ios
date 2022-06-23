@@ -1,21 +1,21 @@
 //
-//  PW_DappBrowserItemCell.m
+//  PW_DappItemCell.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/4/20.
+//  Created by mnz on 2022/6/23.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_DappBrowserItemCell.h"
+#import "PW_DappItemCell.h"
 
-@interface PW_DappBrowserItemCell ()
+@interface PW_DappItemCell ()
 
 @property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *titleLb;
 
 @end
 
-@implementation PW_DappBrowserItemCell
+@implementation PW_DappItemCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -41,11 +41,7 @@
 }
 - (void)setModel:(PW_DappModel *)model {
     _model = model;
-    if ([model.iconUrl isURL]) {
-        [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.iconUrl]];
-    }else{
-        self.iconIv.image = [UIImage imageNamed:model.iconUrl];
-    }
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.iconUrl]];
     self.titleLb.text = model.appName;
 }
 

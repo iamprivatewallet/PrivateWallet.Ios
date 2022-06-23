@@ -28,9 +28,9 @@
     return self;
 }
 - (void)setDataArr:(NSArray<PW_DappModel *> *)dataArr {
-    if (dataArr&&dataArr.count>5) {
+    if (dataArr&&dataArr.count>4) {
         NSMutableArray *array = [NSMutableArray array];
-        [array addObjectsFromArray:[dataArr subarrayWithRange:NSMakeRange(0, 4)]];
+        [array addObjectsFromArray:[dataArr subarrayWithRange:NSMakeRange(0, 3)]];
         PW_DappModel *moreModel = [[PW_DappModel alloc] init];
         moreModel.appName = LocalizedStr(@"text_more");
         moreModel.iconUrl = @"icon_dapp_more";
@@ -61,11 +61,12 @@
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.sectionInset = UIEdgeInsetsMake(0, 30, 0, 30);
-        layout.minimumInteritemSpacing = 10;
-        NSInteger column = 5;
-        CGFloat itemW = (SCREEN_WIDTH-60-(column-1)*layout.minimumInteritemSpacing)/column;
-        layout.itemSize = CGSizeMake(itemW, itemW+30);
+        layout.sectionInset = UIEdgeInsetsMake(0, 26, 0, 26);
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
+        NSInteger column = 4;
+        CGFloat itemW = (SCREEN_WIDTH-55-(column-1)*layout.minimumLineSpacing)/column;
+        layout.itemSize = CGSizeMake(itemW, 85);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
         _collectionView.delegate = self;

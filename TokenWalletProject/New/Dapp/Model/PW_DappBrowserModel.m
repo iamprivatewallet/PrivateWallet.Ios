@@ -12,13 +12,12 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-        @"dapp_1":[PW_DappModel class],
-        @"dapp_56":[PW_DappModel class],
-        @"dapp_128":[PW_DappModel class],
+        @"dapp":[PW_DappModel class],
         @"dappTop":[PW_DappModel class],
         @"banner_1_1":[PW_BannerModel class],
         @"banner_2_2":[PW_BannerModel class],
         @"banner_2_3":[PW_BannerModel class],
+        @"browser":[PW_DappChainBrowserModel class],
     };
 }
 
