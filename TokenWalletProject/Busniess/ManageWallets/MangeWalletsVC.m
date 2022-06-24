@@ -34,7 +34,7 @@
     [self setNavTitleWithLeftItem:@"管理钱包"];
     [self makeViews];
     
-    self.walletType = kWalletTypeAll;
+    self.walletType = kManageWalletTypeAll;
     [self changeorignList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataList) name:@"ReloadWalletNotification" object:nil];
@@ -53,7 +53,7 @@
     if (self.importList.count > 0) {
         [self.importList removeAllObjects];
     }
-    if (self.walletType == kWalletTypeAll) {
+    if (self.walletType == kManageWalletTypeAll) {
         
         NSArray *orignList = [[WalletManager shareWalletManager] getOrignWallets];
         [self.orignList addObjectsFromArray:orignList];
@@ -74,20 +74,20 @@
     NSString *type;
     switch (self.walletType) {
         
-        case kWalletTypeETH:{
+        case kManageWalletTypeETH:{
             return @"ETH";
         }
             break;
-//        case kWalletTypeHECO:{
+//        case kManageWalletTypeHECO:{
 //            return @"HECO";
 //        }
 //            break;
-//        case kWalletTypeBSC:{
+//        case kManageWalletTypeBSC:{
 //            return @"BSC";
 //
 //        }
             break;
-        case kWalletTypeCVN:{
+        case kManageWalletTypeCVN:{
             return @"CVN";
 
         }
@@ -133,7 +133,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (self.walletType == kWalletTypeAll) {
+    if (self.walletType == kManageWalletTypeAll) {
         if (section == 1) {
             return self.importList.count;
         }
@@ -144,7 +144,7 @@
     
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.walletType == kWalletTypeAll && self.importList.count>0) {
+    if (self.walletType == kManageWalletTypeAll && self.importList.count>0) {
         return 2;
     }
     return 1;
@@ -163,7 +163,7 @@
        
     }else{
         //默认的身份钱包
-        if (indexPath.row == self.orignList.count && self.walletType == kWalletTypeAll) {
+        if (indexPath.row == self.orignList.count && self.walletType == kManageWalletTypeAll) {
             AddCurrencyCell *cell = [[AddCurrencyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"add"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -183,7 +183,7 @@
     
     UIView *bgView = [[UIView alloc]init];
     NSString *title = nil;
-    if (self.walletType == kWalletTypeAll) {
+    if (self.walletType == kManageWalletTypeAll) {
         if (section == 1) {
             title = @"创建/导入";
         }else{
@@ -204,14 +204,14 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 1 && self.walletType == kWalletTypeAll) {
+    if (indexPath.section == 1 && self.walletType == kManageWalletTypeAll) {
         
         ImportManageVC *vc = [[ImportManageVC alloc] init];
         vc.wallet = self.importList[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-        if (indexPath.row == self.orignList.count && self.walletType == kWalletTypeAll) {
+        if (indexPath.row == self.orignList.count && self.walletType == kManageWalletTypeAll) {
             //添加币种页
             AddCurrencyViewController *vc = [[AddCurrencyViewController alloc] init];
             vc.isAddCurrency = YES;

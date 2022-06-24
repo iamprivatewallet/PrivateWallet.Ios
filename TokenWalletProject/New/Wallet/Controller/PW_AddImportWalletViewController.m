@@ -101,7 +101,7 @@
     }
 }
 - (void)importPriKeyWithWallet:(Wallet *)wallet{
-    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
         NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
         NSString *publicKey = account[@"publicKey"];
         NSString *secretKey = account[@"secretKey"];
@@ -135,7 +135,7 @@
     }
 }
 - (void)importMnemonicWithWallet:(Wallet *)wallet{
-    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
         NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
         NSString *phrase = account[@"phrase"];
         NSString *publicKey = account[@"publicKey"];

@@ -47,7 +47,7 @@ typedef enum : NSUInteger {
     [self makeViews];
     self.noDataView.offsetY = 100;
     User *user = User_manager.currentUser;
-    if(![user.chooseWallet_type isEqualToString:WalletTypeCVN]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
+    if(![user.chooseWallet_type isEqualToString:kWalletTypeCVN]&&(self.model.tokenDecimals==0||![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
         if(self.model.tokenDecimals==0&&(![self.model.tokenAmount isNoEmpty]||self.model.tokenAmount.doubleValue==0)){
             [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.model.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
@@ -110,7 +110,7 @@ typedef enum : NSUInteger {
     if ([self.model.tokenContract isEqualToString:currentAddr]) {
         contractAddress = @"";
     }
-    if ([User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]) {
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
         if(![currentAddr.lowercaseString hasPrefix:@"cvn"]){
             currentAddr = NSStringWithFormat(@"CVN%@",currentAddr);
         }
@@ -170,7 +170,7 @@ typedef enum : NSUInteger {
 }
 - (void)loadHashInfoWith:(PW_TokenDetailModel *)model {
     NSString *hashStr = model.hashStr;
-    if([User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]){
+    if([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeCVN]){
         NSDictionary *parmDic = @{@"hash":hashStr};
         [AFNetworkClient requestPostWithUrl:NSStringWithFormat(@"%@/fbs/%@",kCVNRPCUrl,TCT_PBGTH_DO) withParameter:parmDic withBlock:^(id data, NSError *error) {
             if (!error) {

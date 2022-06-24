@@ -10,6 +10,32 @@
 
 @implementation PW_ContractTool
 
++ (void)loadETHBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion {
+    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    if ([[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {//主币
+        [PW_ContractTool loadETHMainBalanceDecimals:model.tokenDecimals completion:^(NSString * _Nonnull amount) {
+            if(amount!=nil) {
+                completion(amount);
+            }
+        }];
+    }else{
+        [[PWWalletContractTool shared] balanceERC20WithAddress:walletAddress contractAddress:model.tokenContract completionHandler:^(NSString * _Nonnull amount, NSString * _Nullable errMsg) {
+            if(model.tokenDecimals>0){
+                NSString *newAmount = [amount stringDownDividingBy10Power:model.tokenDecimals];
+                completion(newAmount);
+            }else{
+                [[PWWalletContractTool shared] decimalsERC20WithContractAddress:model.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
+                    if(errMsg==nil){
+                        model.tokenDecimals = decimals;
+                        NSString *newAmount = [amount stringDownDividingBy10Power:decimals];
+                        completion(newAmount);
+                    }
+                }];
+            }
+        }];
+    }
+}
+
 + (void)loadETHMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion {
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     NSDictionary *parmDic = @{
@@ -23,7 +49,7 @@
     [AFNetworkClient requestPostWithUrl:urlStr withParameter:parmDic withBlock:^(id data, NSError *error) {
         if(error==nil){
             NSString *amount = [UITools bigStringWith16String:data[@"result"]];
-            amount = [amount stringDownDividingBy10Power:18];
+            amount = [amount stringDownDividingBy10Power:decimals>0?decimals:18];
             completion(amount);
         }else{
             completion(nil);
@@ -54,6 +80,22 @@
     }];
 }
 
++ (void)loadCVNBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion {
+    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    if ([[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {//主币
+        [PW_ContractTool loadCVNMainBalanceDecimals:model.tokenDecimals completion:^(NSString * _Nonnull amount) {
+            if(completion&&amount!=nil) {
+                completion(amount);
+            }
+        }];
+    }else{
+        [PW_ContractTool loadCVNTokenBalance:model.tokenContract decimals:model.tokenDecimals completion:^(NSString * _Nonnull amount) {
+            if(completion&&amount!=nil) {
+                completion(amount);
+            }
+        }];
+    }
+}
 + (void)loadCVNMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion {
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     NSDictionary *param = @{

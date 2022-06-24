@@ -12,9 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_ContractTool : NSObject
 
++ (void)loadETHBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion;
 + (void)loadETHMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 + (void)loadETHTokenBalance:(NSString *)tokenAddress decimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 
++ (void)loadCVNBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion;
 + (void)loadCVNMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 + (void)loadCVNTokenBalance:(NSString *)tokenAddress decimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 

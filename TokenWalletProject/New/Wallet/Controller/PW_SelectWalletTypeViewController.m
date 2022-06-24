@@ -25,21 +25,21 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_addWallet")];
     NSArray *list = @[
          @{
-             @"title":WalletTypeETH,
+             @"title":kWalletTypeETH,
              @"detailText":@"Ethereum",
              @"icon":@"icon_type_ETH",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
          @{
-             @"title":WalletTypeCVN,
+             @"title":kWalletTypeCVN,
              @"detailText":@"cvn",
              @"icon":@"icon_type_CVN",
              @"isDefault":@"1",
              @"isChecked":@"1"
          },
 //         @{
-//             @"title":WalletTypeSolana,
+//             @"title":kWalletTypeSolana,
 //             @"detailText":@"solana",
 //             @"icon":@"icon_type_SOLANA",
 //             @"isDefault":@"1",

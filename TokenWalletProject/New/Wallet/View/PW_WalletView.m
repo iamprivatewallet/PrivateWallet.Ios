@@ -117,7 +117,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Wallet *wallet = self.dataList[indexPath.row];
     [User_manager updateChooseWallet:wallet];
-    if([wallet.type isEqualToString:WalletTypeETH]){
+    if([wallet.type isEqualToString:kWalletTypeETH]){
         NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kETHChainId];
         PW_NetworkModel *netModel = [[PW_NodeManager shared] getSelectedNodeWithChainId:kETHChainId];
         NSString *rpcUrl = @"";
@@ -128,7 +128,7 @@
             rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:kETHChainId];
         }
         [User_manager updateCurrentNode:rpcUrl chainId:kETHChainId name:name];
-    }else if([wallet.type isEqualToString:WalletTypeCVN]){
+    }else if([wallet.type isEqualToString:kWalletTypeCVN]){
         NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kCVNChainId];
         NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kCVNChainId];
         [User_manager updateCurrentNode:node chainId:kCVNChainId name:name];

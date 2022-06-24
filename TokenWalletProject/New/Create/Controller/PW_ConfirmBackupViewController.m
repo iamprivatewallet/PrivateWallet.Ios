@@ -46,7 +46,7 @@
         if (self.isFirst) {
             if (self.wallet) {//创建单个钱包
                 self.wallet.isImport = @"1";
-                if ([self.wallet.type isEqualToString:WalletTypeSolana]) {
+                if ([self.wallet.type isEqualToString:kWalletTypeSolana]) {
                     [[PW_WalletManager shared] saveWallet:self.wallet];
                     [self showSuccess:LocalizedStr(@"text_finishedWalletCreate")];
                     [self.navigationController popToRootViewControllerAnimated:YES];

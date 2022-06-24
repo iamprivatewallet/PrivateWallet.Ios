@@ -49,7 +49,7 @@
         [self showError:LocalizedStr(@"text_pwdDisagreeError")];
         return;
     }
-    if ([self.walletType isEqualToString:WalletTypeSolana]) {
+    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
         NSDictionary *account = [PW_Solana createAccount];
         NSString *phrase = account[@"phrase"];
         NSString *publicKey = account[@"publicKey"];

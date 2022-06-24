@@ -29,7 +29,7 @@
     [self makeViews];
     NSArray *list = @[
          @{
-             @"title":WalletTypeETH,
+             @"title":kWalletTypeETH,
              @"desc":@"Ethereum",
              @"icon":@"icon_type_ETH",
              @"isDefault":@"1",
@@ -50,7 +50,7 @@
  //            @"isChecked":@"1"
  //        },
          @{
-             @"title":WalletTypeCVN,
+             @"title":kWalletTypeCVN,
              @"desc":@"cvn",
              @"icon":@"icon_type_CVN",
              @"isDefault":@"0",

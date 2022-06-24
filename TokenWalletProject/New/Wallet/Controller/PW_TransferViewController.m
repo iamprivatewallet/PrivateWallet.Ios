@@ -14,6 +14,7 @@
 #import "CVNServerMananger.h"
 #import "brewchain.h"
 #import "PW_AddressBookViewController.h"
+#import "PW_ContractTool.h"
 
 static NSInteger SpeedFeeBtnTag = 100;
 
@@ -74,7 +75,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self makeViews];
     [self refreshUI];
     [self requestGasData];
-    if ([User_manager.currentUser.chooseWallet_type isEqualToString:WalletTypeCVN]) {
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
         [self loadDataForGetCVNNonce];
     }else{
         [self loadDataForNonce];
@@ -209,7 +210,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 - (void)transferAction {
     User *user = User_manager.currentUser;
-    if ([user.chooseWallet_type isEqualToString:WalletTypeCVN]) {
+    if ([user.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
         if ([self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
             [self loadTransferCVNMain];
         }else{
@@ -231,9 +232,27 @@ static NSInteger SpeedFeeBtnTag = 100;
 - (void)refreshUI {
     [self.iconIv sd_setImageWithURL:[NSURL URLWithString:self.model.tokenLogo] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
     self.nameLb.text = self.model.tokenName;
-    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    User *user = User_manager.currentUser;
+    NSString *walletAddress = user.chooseWallet_address;
     self.sendAddressLb.text = [walletAddress showShortAddress];
     self.addressTF.text = self.toAddress;
+    PW_TokenModel *model = self.model;
+    if ([self.model.tokenAmount isNoEmpty]) {
+        self.balanceLb.text = NSStringWithFormat(@"%@:%@",LocalizedStr(@"text_balance"),model.tokenAmount);
+    }else{
+        self.balanceLb.text = NSStringWithFormat(@"%@:--",LocalizedStr(@"text_balance"));
+    }
+    if ([user.chooseWallet_type isEqualToString:kWalletTypeETH]) {
+        [PW_ContractTool loadETHBalance:model completion:^(NSString * _Nonnull amount) {
+            model.tokenAmount = amount;
+            self.balanceLb.text = NSStringWithFormat(@"%@:%@",LocalizedStr(@"text_balance"),model.tokenAmount);
+        }];
+    }else if([user.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
+        [PW_ContractTool loadCVNBalance:model completion:^(NSString * _Nonnull amount) {
+            model.tokenAmount = amount;
+            self.balanceLb.text = NSStringWithFormat(@"%@:%@",LocalizedStr(@"text_balance"),model.tokenAmount);
+        }];
+    }
 }
 - (void)refreshGasUI {
     PW_GasModel *gasModel = [self getCurrentGasModel];
@@ -324,7 +343,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     User *user = User_manager.currentUser;
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-    if ([user.chooseWallet_type isEqualToString:WalletTypeCVN]) {
+    if ([user.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
         if (![self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
             JKBigDecimal *big = [[JKBigDecimal alloc]initWithString:@"1000000000000000000"];
             JKBigDecimal *result =  [big multiply:[[JKBigDecimal alloc]initWithString:self.amount]];
@@ -601,7 +620,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     }];
     [self.balanceLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-18);
-        make.top.offset(14);
+        make.centerY.equalTo(tipLb);
     }];
     [self.countTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);

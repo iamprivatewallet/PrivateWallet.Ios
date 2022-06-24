@@ -229,7 +229,7 @@
     return isExit;
 }
 - (void)refreshBalance {
-    if ([self.currentWallet.type isEqualToString:WalletTypeCVN]) {
+    if ([self.currentWallet.type isEqualToString:kWalletTypeCVN]) {
         [self loadCVNAllCoin];
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {

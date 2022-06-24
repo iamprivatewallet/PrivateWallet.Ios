@@ -370,7 +370,7 @@
 }
 
 //生成签名
-+ (NSString*)genSign:(NSString*)privateKey content:(NSString*)content type:(WalletType)type{
++ (NSString*)genSign:(NSString*)privateKey content:(NSString*)content type:(kFChainWalletType)type{
     KeyPair kp = {};
     NSString * signStr = @"";
     if (type == CWVCoin) {
@@ -624,7 +624,7 @@
 }
 
 //生成签名
-+ (void)genSign:(NSString*)privateKey content:(NSString*)content type:(WalletType)type block:(void(^)(NSString *result))block
++ (void)genSign:(NSString*)privateKey content:(NSString*)content type:(kFChainWalletType)type block:(void(^)(NSString *result))block
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *signStr = [self genSign:privateKey content:content type:type];

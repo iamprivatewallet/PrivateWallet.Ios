@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum WalletType {
+typedef NS_ENUM(NSInteger, kFChainWalletType) {
     Ethereum,
     Bitcoin,
     CWVCoin
-}WalletType;
+};
 
 @interface FchainTool : NSObject
 
@@ -42,10 +42,10 @@ typedef enum WalletType {
 + (void)importMnemonicFromModel:(Wallet *)model errorType:(void(^)(NSString *errorType, BOOL sucess))block;
 
 //生成签名
-+ (void)genSign:(NSString*)privateKey content:(NSString*)content type:(WalletType)type block:(void(^)(NSString *result))block;
++ (void)genSign:(NSString*)privateKey content:(NSString*)content type:(kFChainWalletType)type block:(void(^)(NSString *result))block;
 
 //数据签名
-+ (void)ecSignAddress:(NSString*)address content:(NSString*)msg type:(WalletType)type block:(void(^)(NSString *result))block;
++ (void)ecSignAddress:(NSString*)address content:(NSString*)msg type:(kFChainWalletType)type block:(void(^)(NSString *result))block;
 
 
 

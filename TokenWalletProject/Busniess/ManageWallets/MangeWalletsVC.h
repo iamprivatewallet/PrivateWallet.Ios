@@ -9,16 +9,16 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSInteger, kWalletType) {
-    kWalletTypeAll,
-    kWalletTypeETH,
-//    kWalletTypeBSC,
-//    kWalletTypeHECO,
-    kWalletTypeCVN
+typedef NS_ENUM(NSInteger, kManageWalletType) {
+    kManageWalletTypeAll,
+    kManageWalletTypeETH,
+//    kManageWalletTypeBSC,
+//    kManageWalletTypeHECO,
+    kManageWalletTypeCVN
 };
 
 @interface MangeWalletsVC : BaseViewController
-@property(nonatomic, assign) kWalletType walletType;
+@property(nonatomic, assign) kManageWalletType walletType;
 
 @end
 
