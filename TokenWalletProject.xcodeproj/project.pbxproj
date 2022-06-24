@@ -186,6 +186,7 @@
 		5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */; };
 		5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17F28094AAC0000FEE0 /* PW_CurrencyManageCell.m */; };
 		5C36E18528094BD20000FEE0 /* PW_GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E18428094BD20000FEE0 /* PW_GlobalData.m */; };
+		5C376DF2286582ED00435DEB /* PW_SDImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C376DF1286582ED00435DEB /* PW_SDImageTool.m */; };
 		5C37A8C5280E9ED400AAA728 /* PW_WalletManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8C4280E9ED400AAA728 /* PW_WalletManageViewController.m */; };
 		5C37A8C8280EA88600AAA728 /* PW_WalletViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8C7280EA88600AAA728 /* PW_WalletViewCell.m */; };
 		5C37A8CB280EA96800AAA728 /* PW_WalletManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37A8CA280EA96800AAA728 /* PW_WalletManageCell.m */; };
@@ -960,6 +961,8 @@
 		5C36E18328094BD20000FEE0 /* PW_GlobalData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_GlobalData.h; sourceTree = "<group>"; };
 		5C36E18428094BD20000FEE0 /* PW_GlobalData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_GlobalData.m; sourceTree = "<group>"; };
 		5C36E18628094BE80000FEE0 /* PW_Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Global.h; sourceTree = "<group>"; };
+		5C376DF0286582ED00435DEB /* PW_SDImageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SDImageTool.h; sourceTree = "<group>"; };
+		5C376DF1286582ED00435DEB /* PW_SDImageTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SDImageTool.m; sourceTree = "<group>"; };
 		5C37A8C3280E9ED400AAA728 /* PW_WalletManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletManageViewController.h; sourceTree = "<group>"; };
 		5C37A8C4280E9ED400AAA728 /* PW_WalletManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletManageViewController.m; sourceTree = "<group>"; };
 		5C37A8C6280EA88500AAA728 /* PW_WalletViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletViewCell.h; sourceTree = "<group>"; };
@@ -2832,6 +2835,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		5C376DEF286582D200435DEB /* SDImage */ = {
+			isa = PBXGroup;
+			children = (
+				5C376DF0286582ED00435DEB /* PW_SDImageTool.h */,
+				5C376DF1286582ED00435DEB /* PW_SDImageTool.m */,
+			);
+			path = SDImage;
+			sourceTree = "<group>";
+		};
 		5C37A8E7280FB9D700AAA728 /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -3083,6 +3095,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5C376DEF286582D200435DEB /* SDImage */,
 				5CD7B040286448CB00148BD5 /* Vibrate */,
 				5CC641F728250B22002E1C46 /* Authentication */,
 				5CEF34AE27FEC7580052BA15 /* Share */,
@@ -5380,6 +5393,7 @@
 				5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */,
 				5C37A8C8280EA88600AAA728 /* PW_WalletViewCell.m in Sources */,
 				79AA81E621CFBCAB00C7D510 /* brewchain.mm in Sources */,
+				5C376DF2286582ED00435DEB /* PW_SDImageTool.m in Sources */,
 				99D2CA452537F81C00C1C196 /* UIColor+Y_StockChart.m in Sources */,
 				1FCE189A21AAFA5600328D78 /* ZYBannerCell.m in Sources */,
 				992E0F3026CCD9CC00E1C31B /* ETHBalanceInfo.m in Sources */,
@@ -5577,7 +5591,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5725,7 +5739,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

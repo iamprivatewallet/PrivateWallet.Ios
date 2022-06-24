@@ -33,7 +33,7 @@
         self.titleLb.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLb];
         [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.offset(0);
+            make.bottom.offset(-5);
             make.left.right.offset(0);
         }];
     }

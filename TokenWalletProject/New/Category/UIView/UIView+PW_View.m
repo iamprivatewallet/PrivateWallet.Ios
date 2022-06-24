@@ -8,11 +8,13 @@
 
 #import "UIView+PW_View.h"
 
-static void * eventsBlockKey = &eventsBlockKey;
+static void *eventsTapBlockKey = &eventsTapBlockKey;
+static void *eventsSwipeBlockKey = &eventsSwipeBlockKey;
 
 @interface UIView ()
 
-@property (nonatomic, copy) PW_ViewBlock viewBlock;
+@property (nonatomic, copy) PW_ViewBlock tapBlock;
+@property (nonatomic, copy) PW_ViewBlock swipeBlock;
 
 @end
 
@@ -25,20 +27,44 @@ static void * eventsBlockKey = &eventsBlockKey;
 }
 - (void)addTapBlock:(PW_ViewBlock)block {
     self.userInteractionEnabled = YES;
-    self.viewBlock = block;
+    self.tapBlock = block;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(__tapAction:)];
     [self addGestureRecognizer:tap];
 }
 - (void)__tapAction:(UIGestureRecognizer *)gesture {
-    if (self.viewBlock) {
-        self.viewBlock(self);
+    if (self.tapBlock) {
+        self.tapBlock(self);
     }
 }
-- (void)setViewBlock:(PW_ViewBlock)viewBlock {
-    objc_setAssociatedObject(self, &eventsBlockKey, viewBlock, OBJC_ASSOCIATION_COPY);
+- (void)setTapBlock:(PW_ViewBlock)tapBlock {
+    objc_setAssociatedObject(self, &eventsTapBlockKey, tapBlock, OBJC_ASSOCIATION_COPY);
 }
-- (PW_ViewBlock)viewBlock {
-    return objc_getAssociatedObject(self, &eventsBlockKey);
+- (PW_ViewBlock)tapBlock {
+    return objc_getAssociatedObject(self, &eventsTapBlockKey);
+}
+- (void)addSwipeDirection:(UISwipeGestureRecognizerDirection)direction target:(nullable id)target action:(SEL)action {
+    self.userInteractionEnabled = YES;
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:target action:action];
+    swipeGesture.direction = direction;
+    [self addGestureRecognizer:swipeGesture];
+}
+- (void)addSwipeDirection:(UISwipeGestureRecognizerDirection)direction block:(PW_ViewBlock)block {
+    self.userInteractionEnabled = YES;
+    self.swipeBlock = block;
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(__swipeAction:)];
+    swipeGesture.direction = direction;
+    [self addGestureRecognizer:swipeGesture];
+}
+- (void)__swipeAction:(UISwipeGestureRecognizer *)gesture {
+    if (self.swipeBlock) {
+        self.swipeBlock(self);
+    }
+}
+- (void)setSwipeBlock:(PW_ViewBlock)swipeBlock {
+    objc_setAssociatedObject(self, &eventsSwipeBlockKey, swipeBlock, OBJC_ASSOCIATION_COPY);
+}
+- (PW_ViewBlock)swipeBlock {
+    return objc_getAssociatedObject(self, &eventsSwipeBlockKey);
 }
 
 - (void)setCornerRadius:(CGFloat)radius {
@@ -80,18 +106,24 @@ static void * eventsBlockKey = &eventsBlockKey;
 }
 - (void)setShadowColor:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius path:(nullable UIBezierPath *)path {
     CGSize size = self.bounds.size;
-    if(size.width==0&&size.height==0){
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
-        size = self.bounds.size;
-        if(size.width!=0&&size.height!=0){
+    if (path==nil&&self.superview!=nil) {
+        if(size.width==0&&size.height==0){
+            [self setNeedsLayout];
+            [self layoutIfNeeded];
+            size = self.bounds.size;
+            if(size.width!=0&&size.height!=0){
+                path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, size.width, size.height)];
+            }
+        }else{
             path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, size.width, size.height)];
         }
     }
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowOffset = offset;
     self.layer.shadowRadius = radius;
-    self.layer.shadowPath = path.CGPath;
+    if (path) {
+        self.layer.shadowPath = path.CGPath;
+    }
     self.layer.shadowOpacity = 1;
 }
 

@@ -9,6 +9,7 @@
 #ifndef PW_Tool_h
 #define PW_Tool_h
 
+#import "PW_SDImageTool.h"
 #import "PW_VibrateTool.h"
 #import "PW_ToastTool.h"
 #import "PW_ViewTool.h"

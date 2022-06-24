@@ -111,7 +111,10 @@
     return [UIColor g_hex:@"#F5F5F5"];
 }
 + (UIColor *)g_shadowColor {
-    return COLORFORRGBA(0xCCD0D6, 0.3);
+    return [[UIColor g_hex:@"#CCD0D6"] alpha:0.3];
+}
++ (UIColor *)g_shadowGrayColor {
+    return [[UIColor grayColor] alpha:0.8];
 }
 + (UIColor *)g_textColor {
     return [UIColor g_hex:@"#333333"];
@@ -127,6 +130,10 @@
 }
 + (UIColor *)g_lightTextColor {
     return [UIColor colorWithWhite:1.0 alpha:0.7];
+}
+
++ (UIColor *)g_segmentedColor {
+    return [UIColor g_hex:@"#7221F4"];
 }
 
 + (UIColor *)g_borderColor {

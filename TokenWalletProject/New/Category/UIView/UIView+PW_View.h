@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addTapTarget:(nullable id)target action:(SEL)action;
 - (void)addTapBlock:(PW_ViewBlock)block;
+- (void)addSwipeDirection:(UISwipeGestureRecognizerDirection)direction target:(nullable id)target action:(SEL)action;
+- (void)addSwipeDirection:(UISwipeGestureRecognizerDirection)direction block:(PW_ViewBlock)block;
 
 - (void)setCornerRadius:(CGFloat)radius;
 

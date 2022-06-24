@@ -31,6 +31,14 @@
     _dataArr = dataArr;
     [self.collectionView reloadData];
 }
++ (CGFloat)getHeightWithItemCount:(NSInteger)count {
+    if (count>0) {
+        NSInteger column = 4;
+        NSInteger row = ((NSInteger)count/column)+(count%column>0?1:0);
+        return row*85+(row-1)*10;
+    }
+    return 1;
+}
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArr.count;
@@ -50,11 +58,11 @@
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.sectionInset = UIEdgeInsetsMake(0, 26, 0, 26);
+        layout.sectionInset = UIEdgeInsetsMake(0, 16, 0, 16);
         layout.minimumInteritemSpacing = 0;
-        layout.minimumLineSpacing = 15;
+        layout.minimumLineSpacing = 10;
         NSInteger column = 4;
-        CGFloat itemW = (SCREEN_WIDTH-55-(column-1)*layout.minimumInteritemSpacing)/column;
+        CGFloat itemW = (SCREEN_WIDTH-32-(column-1)*layout.minimumInteritemSpacing)/column;
         layout.itemSize = CGSizeMake(itemW, 85);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];

@@ -15,7 +15,6 @@
 #import "VersionTool.h"
 #import "PW_FirstChooseViewController.h"
 #import "PW_SetUpViewController.h"
-#import <SDWebImage/SDImageCacheConfig.h>
 
 @interface AppDelegate () <UIGestureRecognizerDelegate>
 
@@ -78,6 +77,7 @@
     } else {
         // Fallback on earlier versions
     }
+    [PW_SDImageTool setup];
     [JJException configExceptionCategory:JJExceptionGuardAllExceptZombie];
     [JJException startGuardException];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;

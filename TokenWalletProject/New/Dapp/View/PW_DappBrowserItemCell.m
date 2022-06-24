@@ -21,10 +21,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.iconIv = [[UIImageView alloc] init];
+        self.iconIv.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.iconIv];
         [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(0);
-            make.left.offset(10);
+            make.left.offset(20);
             make.centerX.offset(0);
             make.height.equalTo(self.iconIv.mas_width);
         }];
@@ -33,7 +34,7 @@
         self.titleLb.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLb];
         [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.offset(0);
+            make.bottom.offset(-5);
             make.left.right.offset(0);
         }];
     }

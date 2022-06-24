@@ -21,7 +21,11 @@
         if(completeBlock){
             completeBlock(view!=nil);
         }
-    } errBlock:nil];
+    } errBlock:^(NSString * _Nonnull msg) {
+        if (userTake) {
+            [[ToastHelper sharedToastHelper] toast:msg];
+        }
+    }];
 }
 
 @end

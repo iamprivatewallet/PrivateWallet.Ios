@@ -31,6 +31,19 @@
     _dataArr = dataArr;
     [self.collectionView reloadData];
 }
++ (CGSize)getItemSize {
+    NSInteger column = 2;
+    CGFloat width = (SCREEN_WIDTH-72-(column-1)*26)/column;
+    return CGSizeMake(width, width*173.0/473.0);
+}
++ (CGFloat)getHeightWithItemCount:(NSInteger)count {
+    if (count>0) {
+        NSInteger column = 2;
+        NSInteger row = ((NSInteger)count/column)+(count%column>0?1:0);
+        return row*[PW_DappChainBrowserCell getItemSize].height+(row-1)*5;
+    }
+    return 1;
+}
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArr.count;
@@ -50,12 +63,10 @@
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.sectionInset = UIEdgeInsetsMake(5, 36, 5, 36);
+        layout.sectionInset = UIEdgeInsetsMake(0, 36, 0, 36);
         layout.minimumInteritemSpacing = 26;
-        layout.minimumLineSpacing = 15;
-        NSInteger column = 2;
-        CGFloat itemW = (SCREEN_WIDTH-72-(column-1)*layout.minimumInteritemSpacing)/column;
-        layout.itemSize = CGSizeMake(itemW, 46);
+        layout.minimumLineSpacing = 5;
+        layout.itemSize = [PW_DappChainBrowserCell getItemSize];
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
         _collectionView.delegate = self;

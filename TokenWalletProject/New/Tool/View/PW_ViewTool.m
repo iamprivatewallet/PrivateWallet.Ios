@@ -120,14 +120,14 @@
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
     segmentedControl.apportionsSegmentWidthsByContent = YES;
     [segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor g_hex:@"#7221F4"] size:CGSizeMake(1, 1)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[UIImage imageWithColor:[UIColor g_segmentedColor] size:CGSizeMake(1, 1)] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     UIImage *dividerImage = [UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(1, 1)];
     [segmentedControl setDividerImage:dividerImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    segmentedControl.tintColor = [UIColor g_hex:@"#7221F4"];
+    segmentedControl.tintColor = [UIColor g_segmentedColor];
     segmentedControl.backgroundColor = [UIColor whiteColor];
-    [segmentedControl setBorderColor:[UIColor g_hex:@"#7221F4"] width:1 radius:8];
+    [segmentedControl setBorderColor:[UIColor g_segmentedColor] width:1 radius:8];
     if (@available(iOS 13.0, *)) {
-        segmentedControl.selectedSegmentTintColor = [UIColor g_hex:@"#7221F4"];
+        segmentedControl.selectedSegmentTintColor = [UIColor g_segmentedColor];
     } else {
         // Fallback on earlier versions
     }

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<PW_DappModel *> *dataArr;
 @property (nonatomic, copy) void(^clickBlock)(PW_DappModel *model);
++ (CGFloat)getHeightWithItemCount:(NSInteger)count;
 
 @end
 

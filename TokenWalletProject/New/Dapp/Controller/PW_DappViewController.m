@@ -19,7 +19,7 @@
 #import "PW_Web3ViewController.h"
 #import "PW_DappFavoritesViewController.h"
 #import "PW_DappRecentBrowseViewController.h"
-#import "PW_WalletListView.h"
+#import "PW_SwitchNetworkView.h"
 #import "PW_DappCell.h"
 #import "PW_DappChainBrowserCell.h"
 
@@ -111,7 +111,7 @@
 - (void)openWeb3WithModel:(PW_DappModel *)model {
     if ([model.chainId isNoEmpty]&&![model.chainId isEqualToString:User_manager.currentUser.current_chainId]) {
         [PW_TipTool showDappWalletNotSupportedWithModel:model sureBlock:^{
-            [PW_WalletListView show];
+            [PW_SwitchNetworkView show];
         }];
     }else{
         [PW_TipTool showDappDisclaimerUrlStr:model.appUrl sureBlock:^{
@@ -140,14 +140,20 @@
     __weak typeof(self) weakSelf = self;
     if (indexPath.section==0) {
         if (indexPath.row==0) {
-            PW_DappBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappBrowserCell"];
             if (self.section1Idx==0) {//hot
+                PW_DappCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappCell"];
                 if (self.model.dappTop.count>4) {
                     cell.dataArr = [self.model.dappTop subarrayWithRange:NSMakeRange(0, 3)];
                 }else{
                     cell.dataArr = self.model.dappTop;
                 }
-            }else if (self.section1Idx==1) {//favorites
+                cell.clickBlock = ^(PW_DappModel * _Nonnull model) {
+                    [weakSelf openWeb3WithModel:model];
+                };
+                return cell;
+            }
+            PW_DappBrowserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_DappBrowserCell"];
+            if (self.section1Idx==1) {//favorites
                 cell.dataArr = [[PW_DappFavoritesManager shared] getList];
             }else{
                 cell.dataArr = self.dappRecentBrowseArr;
@@ -192,24 +198,22 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        if (indexPath.row==1) {
-            return 136;
+        if (indexPath.row==0) {
+            return 100;
         }
-        return 85;
+        return [PW_DappBanner2Cell getItemSize].height;
     }
     if (indexPath.section==1) {
         NSArray *dataArr = self.model.dapp;
-        if (dataArr&&dataArr.count>0) {
-            NSInteger column = 4;
-            NSInteger row = ((NSInteger)dataArr.count/column)+(dataArr.count%column>0?1:0);
-            return row*85+(row-1)*15;
+        if (dataArr) {
+            return [PW_DappCell getHeightWithItemCount:dataArr.count];
         }
     }
-    NSArray *dataArr = self.model.browser;
-    if (dataArr&&dataArr.count>0) {
-        NSInteger column = 2;
-        NSInteger row = ((NSInteger)dataArr.count/column)+(dataArr.count%column>0?1:0);
-        return row*46+(row-1)*15+10;
+    if (indexPath.section==2) {
+        NSArray *dataArr = self.model.browser;
+        if (dataArr) {
+            return [PW_DappChainBrowserCell getHeightWithItemCount:dataArr.count];
+        }
     }
     return 1;
 }
@@ -236,9 +240,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section==0) {
-        return 90;
+        return 75;
     }
-    return 55;
+    return 50;
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {
@@ -255,7 +259,7 @@
         [_tableView registerClass:[PW_TitleHeaderView class] forHeaderFooterViewReuseIdentifier:@"PW_TitleHeaderView"];
         _tableView.rowHeight = 70;
         _tableView.sectionHeaderHeight = 55;
-        _tableView.sectionFooterHeight = 10;
+        _tableView.sectionFooterHeight = 1;
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
         _tableView.tableHeaderView = self.headerView;
     }
@@ -263,12 +267,22 @@
 }
 - (UIView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 140)];
-        [_headerView addSubview:self.sdScrollView];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
+        UIView *bodyView = [[UIView alloc] init];
+        bodyView.layer.cornerRadius = 8;
+        bodyView.backgroundColor = [UIColor g_bgColor];
+        [bodyView setShadowColor:[UIColor g_shadowGrayColor] offset:CGSizeMake(0, 3) radius:8];
+        [_headerView addSubview:bodyView];
+        [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(10);
+            make.bottom.offset(-10);
+            make.left.offset(36);
+            make.right.offset(-36);
+        }];
+        [bodyView addSubview:self.sdScrollView];
         [self.sdScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.offset(0);
-            make.left.offset(25);
-            make.right.offset(-25);
+            make.left.top.offset(2);
+            make.right.bottom.offset(-2);
         }];
     }
     return _headerView;

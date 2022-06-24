@@ -344,8 +344,8 @@
         make.width.height.offset(40);
         make.bottom.mas_lessThanOrEqualTo(0);
     }];
-    NSString *str = PW_StrFormat(@"%@ %@ %@ %@",model.appName,LocalizedStr(@"text_support"),model.firType,LocalizedStr(@"text_chain"));
-    UILabel *nameLb = [PW_ViewTool labelSemiboldText:str fontSize:16 textColor:[UIColor g_textColor]];
+    NSString *str = PW_StrFormat(@"%@ %@ %@ %@",model.appName,LocalizedStr(@"text_support"),model.chainId,LocalizedStr(@"text_chain"));
+    UILabel *nameLb = [PW_ViewTool labelSemiboldText:str fontSize:14 textColor:[UIColor g_textColor]];
     [rowView addSubview:nameLb];
     [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(10);

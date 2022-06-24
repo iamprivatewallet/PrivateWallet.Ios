@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<PW_DappChainBrowserModel *> *dataArr;
 @property (nonatomic, copy) void(^clickBlock)(PW_DappChainBrowserModel *model);
++ (CGSize)getItemSize;
++ (CGFloat)getHeightWithItemCount:(NSInteger)count;
 
 @end
 

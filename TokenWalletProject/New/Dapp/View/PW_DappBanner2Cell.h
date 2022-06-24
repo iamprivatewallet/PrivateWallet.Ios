@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<PW_BannerModel *> *dataArr;
 @property (nonatomic, copy) void(^clickBlock)(PW_BannerModel *model);
++ (CGSize)getItemSize;
 
 @end
 

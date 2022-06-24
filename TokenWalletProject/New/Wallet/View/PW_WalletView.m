@@ -119,8 +119,15 @@
     [User_manager updateChooseWallet:wallet];
     if([wallet.type isEqualToString:WalletTypeETH]){
         NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kETHChainId];
-        NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kETHChainId];
-        [User_manager updateCurrentNode:node chainId:kETHChainId name:name];
+        PW_NetworkModel *netModel = [[PW_NodeManager shared] getSelectedNodeWithChainId:kETHChainId];
+        NSString *rpcUrl = @"";
+        if(netModel){
+            rpcUrl = netModel.rpcUrl;
+        }
+        if(![rpcUrl isNoEmpty]){
+            rpcUrl = [[SettingManager sharedInstance] getNodeWithChainId:kETHChainId];
+        }
+        [User_manager updateCurrentNode:rpcUrl chainId:kETHChainId name:name];
     }else if([wallet.type isEqualToString:WalletTypeCVN]){
         NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kCVNChainId];
         NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kCVNChainId];
