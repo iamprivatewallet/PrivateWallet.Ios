@@ -42,8 +42,15 @@
 }
 
 - (void)pw_setSecureTextEntry {
-    self.textContentType = UITextContentTypeNewPassword;
     self.secureTextEntry = YES;
+    if (@available(iOS 11.0, *)) {
+        self.textContentType = UITextContentTypePassword;
+    }
+    if (@available(iOS 12.0, *)) {
+        self.textContentType = UITextContentTypeNewPassword;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 @end

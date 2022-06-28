@@ -10,10 +10,15 @@ import UIKit
 import web3
 
 class PWWalletContractTool: NSObject {
-    static let sharedObj = PWWalletContractTool()
+    static var sharedObj = PWWalletContractTool()
     private var client: EthereumClient?
     private var erc20: ERC20?
     @objc public class func shared() -> PWWalletContractTool {
+        let defaultUrlStr = kETHRPCUrl;
+        let urlStr = SettingManager.sharedInstance().getCurrentNode().first as? String ?? defaultUrlStr
+        if(sharedObj.client?.url.absoluteString != urlStr){
+            sharedObj = PWWalletContractTool()
+        }
         return sharedObj
     }
     override init() {
@@ -42,7 +47,43 @@ class PWWalletContractTool: NSObject {
                         completionHandler?("\(gasPrice)","\(gas)",nil)
                     }
                 } catch let error {
-                    WQJLog("balance"+error.localizedDescription)
+                    WQJLog("estimateGas"+error.localizedDescription)
+                    DispatchQueue.main.async {
+                        completionHandler?(nil,nil,error.localizedDescription)
+                    }
+                }
+            })
+        })
+    }
+    @objc
+    public func estimateGasToken(toAddress: String?, token: String?, completionHandler: @escaping ((_ gasPrice: String?, _ gas: String?, _ errorDesc: String?)->())) {
+        estimateGasToken(toAddress: toAddress, token: token, extraData: nil, completionHandler: completionHandler)
+    }
+    @objc
+    public func estimateGasToken(toAddress: String?, token: String?, extraData: Data?, completionHandler: ((_ gasPrice: String?, _ gas: String?, _ errorDesc: String?)->())?) {
+        var to = EthereumAddress(EthereumAddress.zero.toChecksumAddress())
+        if (toAddress ?? "").count != 0 {
+            to = EthereumAddress(toAddress ?? "")
+        }
+        let walletAddress = SettingManager.sharedInstance().getCurrentAddress()
+        client?.eth_gasPrice(completionHandler: { [weak self] gasPrice in
+            let function = TransferToken(wallet: EthereumAddress(walletAddress ?? ""),
+                                         token: EthereumAddress(token ?? ""),
+                                         to: to,
+                                         amount: 1,
+                                         data: extraData ?? Data(),
+                                         gasPrice: nil,
+                                         gasLimit: nil)
+            let transaction = (try? function.transaction()) ?? EthereumTransaction(to: to, data: extraData ?? Data())
+            self?.client?.eth_estimateGas(transaction, completionHandler: { gas in
+                do {
+                    let gasPrice = try gasPrice.get()
+                    let gas = try gas.get()
+                    DispatchQueue.main.async {
+                        completionHandler?("\(gasPrice)","\(gas*2.5)",nil)
+                    }
+                } catch let error {
+                    WQJLog("estimateGasToken"+error.localizedDescription)
                     DispatchQueue.main.async {
                         completionHandler?(nil,nil,error.localizedDescription)
                     }

@@ -119,11 +119,12 @@
         make.height.mas_greaterThanOrEqualTo(64);
     }];
     NSString *useGasToken = @"0";
-    if([self.model.gasPrice isNoEmpty]){
-        NSString *gwei = [self.model.gasPrice stringDownDividingBy10Power:self.model.tokenDecimals scale:9];
-        useGasToken = [gwei stringDownMultiplyingBy:self.model.gasUsed decimal:8];
+    if([self.model.gasPrice isNoEmpty]&&[self.model.gasUsed isNoEmpty]){
+        NSString *gwei = [self.model.gasPrice stringDownDividingBy10Power:9 scale:9];
+        useGasToken = [[gwei stringDownMultiplyingBy:self.model.gasUsed decimal:9] stringDownDividingBy10Power:9 scale:9];
     }
-    UIView *gasFeeView = [self createRowViewTitle:LocalizedStr(@"text_minersFee") desc:NSStringWithFormat(@"%@ %@",useGasToken,self.model.tokenName) showCopy:NO];
+    PW_TokenModel *mainTokenModel = [PW_GlobalData shared].mainTokenModel;
+    UIView *gasFeeView = [self createRowViewTitle:LocalizedStr(@"text_minersFee") desc:NSStringWithFormat(@"%@ %@",useGasToken,mainTokenModel.tokenName) showCopy:NO];
     [self.baseView addSubview:gasFeeView];
     [gasFeeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(receiveView.mas_bottom);

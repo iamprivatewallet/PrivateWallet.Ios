@@ -311,6 +311,7 @@
 		5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB427E212A700C73976 /* BrowseWebViewController.m */; };
 		5CB8BBB827E3084E00C73976 /* TokenChainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBB727E3084E00C73976 /* TokenChainModel.m */; };
 		5CB8BBBB27E30DBD00C73976 /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */; };
+		5CB9CDA828698DE000EED1BE /* PWWalletABIFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB9CDA728698DE000EED1BE /* PWWalletABIFunction.swift */; };
 		5CC641F5282506C6002E1C46 /* PW_AppLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */; };
 		5CC641FA28250B32002E1C46 /* PW_AuthenticationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */; };
 		5CCE70B4280FDB3C00860841 /* PW_DappBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */; };
@@ -1204,6 +1205,7 @@
 		5CB8BBB927E30DBD00C73976 /* NetworkTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkTool.h; sourceTree = "<group>"; };
 		5CB8BBBA27E30DBD00C73976 /* NetworkTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkTool.m; sourceTree = "<group>"; };
 		5CB8BBBC27E311FC00C73976 /* NoticeConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeConst.h; sourceTree = "<group>"; };
+		5CB9CDA728698DE000EED1BE /* PWWalletABIFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWWalletABIFunction.swift; sourceTree = "<group>"; };
 		5CC641F3282506C6002E1C46 /* PW_AppLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AppLockViewController.h; sourceTree = "<group>"; };
 		5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AppLockViewController.m; sourceTree = "<group>"; };
 		5CC641F828250B31002E1C46 /* PW_AuthenticationTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AuthenticationTool.h; sourceTree = "<group>"; };
@@ -2924,6 +2926,7 @@
 			isa = PBXGroup;
 			children = (
 				5C71193A27BB860500FE9B51 /* WQJLog.swift */,
+				5CB9CDA728698DE000EED1BE /* PWWalletABIFunction.swift */,
 				5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */,
 				5C71192C27BB7ABC00FE9B51 /* MetaMaskCallApi.h */,
 				5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */,
@@ -5169,6 +5172,7 @@
 				992EF1A626B944A100F70A94 /* CreateWalletVC.m in Sources */,
 				5CEF34E22806E56C0052BA15 /* PW_TokenManager.m in Sources */,
 				5CE7AD0C27F98F0A00E2188D /* PW_TokenModel.m in Sources */,
+				5CB9CDA828698DE000EED1BE /* PWWalletABIFunction.swift in Sources */,
 				994AA0EF26C662860062F9AF /* TransferView.m in Sources */,
 				5AD11EDB1D3F4CAA007A0976 /* ToastHelper.m in Sources */,
 				99D2C9F02537F66000C1C196 /* BaseViewController.m in Sources */,
@@ -5991,8 +5995,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/argentlabs/web3.swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -23,6 +23,6 @@ static NSString * _Nonnull const kHECOChainId = @"128";
 static NSString * _Nonnull const kCVNChainId = @"168";
 
 static NSString * _Nonnull const kETHRPCUrl = @"https://mainnet.infura.io/v3/02979c20665f4db5a07f7f0e4fc14fb7";
-static NSString * _Nonnull const kBSCRPCUrl = @"https://bscrpc.com";
+static NSString * _Nonnull const kBSCRPCUrl = @"https://bsc-dataseed2.ninicoin.io";
 static NSString * _Nonnull const kHECORPCUrl = @"https://http-mainnet.hecochain.com";
 static NSString * _Nonnull const kCVNRPCUrl = @"http://52.220.97.222:1235";

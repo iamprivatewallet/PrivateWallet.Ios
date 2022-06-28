@@ -114,11 +114,11 @@ static NSInteger SpeedFeeBtnTag = 100;
     }];
     [self.gasPriceTF.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (![x isInt]) {
+        if (![x isFloat]) {
             if (x.length==0) {
                 return;
             }
-            strongSelf.gasPriceTF.text = strongSelf.customGasModel.gas_price;
+            strongSelf.gasPriceTF.text = strongSelf.customGasModel.gas_gwei;
             return;
         }
         strongSelf.customGasModel.gas_price = [x stringDownMultiplyingBy10Power:9 scale:0];

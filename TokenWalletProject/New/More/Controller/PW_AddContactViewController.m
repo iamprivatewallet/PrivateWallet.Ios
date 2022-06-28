@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     [self setNavNoLineTitle:LocalizedStr(@"text_addContact")];
-    self.typeModel = [PW_ChooseAddressTypeModel IconName:@"icon_type_CVN" title:@"ETH" subTitle:@"Ethereum" chainId:kETHChainId selected:YES];
+    self.typeModel = [PW_ChooseAddressTypeModel IconName:@"icon_type_ETH" title:kWalletTypeETH subTitle:@"Ethereum" chainId:kETHChainId selected:YES];
     [self makeViews];
     [self refreshUI];
 }

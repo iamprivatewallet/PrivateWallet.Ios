@@ -49,7 +49,7 @@
 //查询token_address 下的所有记录
 - (NSArray*)getWalletsWithAddress:(NSString *)address tokenAddr:(NSString *)tokenAddr {
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * records = [db jq_lookupTable:table_name dicOrModel:[WalletRecord class] whereFormat:[NSString stringWithFormat:@"where fromAddress = '%@' and contractAddress = '%@'",address,tokenAddr]];
+    NSArray * records = [db jq_lookupTable:table_name dicOrModel:[PW_TokenDetailModel class] whereFormat:[NSString stringWithFormat:@"where fromAddress = '%@' and contractAddress = '%@'",address,tokenAddr]];
     return records;
 }
 

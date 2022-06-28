@@ -77,11 +77,11 @@
     }];
     [self.amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(0);
-        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-2);
+        make.bottom.equalTo(self.bodyView.mas_centerY).offset(-1);
     }];
     [self.tokenNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(0);
-        make.top.equalTo(self.bodyView.mas_centerY).offset(2);
+        make.top.equalTo(self.bodyView.mas_centerY).offset(1);
     }];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.offset(0);
@@ -129,6 +129,7 @@
 - (UILabel *)amountLb {
     if (!_amountLb) {
         _amountLb = [PW_ViewTool labelMediumText:@"" fontSize:18 textColor:[UIColor g_textColor]];
+        _amountLb.adjustsFontSizeToFitWidth = YES;
     }
     return _amountLb;
 }

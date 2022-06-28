@@ -173,11 +173,7 @@
         make.right.offset(-36);
         make.height.offset(55);
     }];
-    UITextField *pwdTF = [[UITextField alloc] init];
-    pwdTF.font = [UIFont pw_semiBoldFontOfSize:14];
-    [pwdTF pw_setPlaceholder:LocalizedStr(@"text_inputTradePwd")];
-    pwdTF.textColor = [UIColor g_textColor];
-    pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    UITextField *pwdTF = [PW_ViewTool textFieldFont:[UIFont pw_semiBoldFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputTradePwd")];
     [pwdTF pw_setSecureTextEntry];
     [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:nil] subscribeNext:^(NSNotification * _Nullable x) {
         CGFloat duration = [x.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];

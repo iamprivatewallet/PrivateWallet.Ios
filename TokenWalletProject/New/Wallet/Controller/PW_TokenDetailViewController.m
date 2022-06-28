@@ -128,7 +128,9 @@ typedef enum : NSUInteger {
         [self.view hideLoadingIndicator];
         [self.dataList removeAllObjects];
         [self.showList removeAllObjects];
-        self.dataList = [PW_TokenDetailModel mj_objectArrayWithKeyValuesArray:data];
+        NSArray *dataArray = [PW_TokenDetailModel mj_objectArrayWithKeyValuesArray:data];
+        [self.dataList removeAllObjects];
+        [self.dataList addObjectsFromArray:[dataArray.reverseObjectEnumerator allObjects]];
         NSMutableArray *timeList = [NSMutableArray array];
         NSMutableArray *hashList = [NSMutableArray array];
         [self.dataList enumerateObjectsUsingBlock:^(PW_TokenDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

@@ -445,7 +445,7 @@
         NSString * str = [NSString stringWithFormat:@"%@%@%@",methodName,toAddr,amount];
         return str;
     }
-    return @"0x0";
+    return @"0x";
 }
 
 

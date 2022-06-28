@@ -42,6 +42,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 @property (nonatomic, strong) UIView *customFeeView;
 @property (nonatomic, strong) UITextField *gasPriceTF;
 @property (nonatomic, strong) UITextField *gasTF;
+@property (nonatomic, strong) UIButton *nextBtn;
 
 @property (nonatomic, weak) UIButton *selectedSpeedFeeBtn;
 @property (nonatomic, assign) NSInteger speedFeeIdx;
@@ -122,11 +123,11 @@ static NSInteger SpeedFeeBtnTag = 100;
     }];
     [self.gasPriceTF.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (![x isInt]) {
+        if (![x isFloat]) {
             if (x.length==0) {
                 return;
             }
-            strongSelf.gasPriceTF.text = strongSelf.customGasModel.gas_price;
+            strongSelf.gasPriceTF.text = strongSelf.customGasModel.gas_gwei;
             return;
         }
         strongSelf.customGasModel.gas_price = [x stringDownMultiplyingBy10Power:9 scale:0];
@@ -216,7 +217,7 @@ static NSInteger SpeedFeeBtnTag = 100;
         }else{
             [self loadTransferDai];
         }
-    }else{
+    }else if ([user.chooseWallet_type isEqualToString:kWalletTypeETH]) {
         [self loadColdWalletTransferETH];
     }
 }
@@ -226,6 +227,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     vc.chooseBlock = ^(PW_TokenModel * _Nonnull model) {
         self.model = model;
         [self refreshUI];
+        [self requestGasData];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -265,18 +267,34 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.gweiLb.text = NSStringWithFormat(@"%@ GWEI",gasModel.gas_gwei);
 }
 - (void)requestGasData {
-    [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
-        if(gas){
-            self.gasToolModel.gas_price = gasPrice;
-            self.gasToolModel.gas = gas;
-            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-            self.gasModel = self.gasToolModel.recommendModel;;
-            self.customGasModel = [self.gasModel mutableCopy];
-            self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
-            self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
-            [self refreshGasUI];
-        }
-    }];
+    NSString *tokenAddress = self.model.tokenContract;
+    if (![tokenAddress isNoEmpty]||[tokenAddress.lowercaseString isEqualToString:User_manager.currentUser.chooseWallet_address.lowercaseString]) {
+        [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+            if(gas){
+                self.gasToolModel.gas_price = gasPrice;
+                self.gasToolModel.gas = gas;
+                self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+                self.gasModel = self.gasToolModel.recommendModel;;
+                self.customGasModel = [self.gasModel mutableCopy];
+                self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
+                self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
+                [self refreshGasUI];
+            }
+        }];
+    }else{
+        [[PWWalletContractTool shared] estimateGasTokenToAddress:nil token:tokenAddress completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+            if(gas){
+                self.gasToolModel.gas_price = gasPrice;
+                self.gasToolModel.gas = gas;
+                self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+                self.gasModel = self.gasToolModel.recommendModel;;
+                self.customGasModel = [self.gasModel mutableCopy];
+                self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
+                self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
+                [self refreshGasUI];
+            }
+        }];
+    }
 }
 - (void)loadDataForGetCVNNonce {//CVN nonce
     [[CVNServerMananger sharedInstance] fetchBalance:User_manager.currentUser.chooseWallet_address contractAddr:@"" resultBlock:^(ETHBalance * _Nullable data, NSError * _Nullable error) {
@@ -297,7 +315,9 @@ static NSInteger SpeedFeeBtnTag = 100;
     NSData *tipData = [@"" dataUsingEncoding:NSUTF8StringEncoding];
     NSString *results = [CWVChainUtils signTransferAddress:[User_manager.currentUser.chooseWallet_address formatDelCVN] prikey:wallet.priKey nonce:self.model.nonce exdata:[tipData toHexStr] args:args];
     [self.view showLoadingIndicator];
+    self.nextBtn.enabled = NO;
     [[CVNServerMananger sharedInstance] transfer:results resultBlock:^(id  _Nullable data, NSError * _Nullable error) {
+        self.nextBtn.enabled = YES;
         [self.view hideLoadingIndicator];
         if (data) {
             if ([data[@"retCode"]intValue] == 1) {
@@ -330,6 +350,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     PW_TokenDetailModel *model = [[PW_TokenDetailModel alloc] init];
     model.value = self.amount;
     model.fromAddress = User_manager.currentUser.chooseWallet_address;
+    model.contractAddress = self.model.tokenContract;
     model.toAddress = self.address;
     model.tokenName = self.model.tokenName;
     model.timeStamp = [[NSDate new] timeIntervalSince1970]*1000;
@@ -362,7 +383,9 @@ static NSInteger SpeedFeeBtnTag = 100;
 //CVN代币 转账
 - (void)transferDaiWithTx:(NSString *)txStr{
     [self.view showLoadingIndicator];
+    self.nextBtn.enabled = NO;
     [[CVNServerMananger sharedInstance]transfer:txStr resultBlock:^(id  _Nullable data, NSError * _Nullable error) {
+        self.nextBtn.enabled = YES;
         [self.view hideLoadingIndicator];
         if (data) {
             if ([data[@"retCode"]intValue] == 1) {
@@ -407,6 +430,7 @@ static NSInteger SpeedFeeBtnTag = 100;
             @"to_addr":self.address,
             @"value":[self.amount stringRaisingToPower18],
             @"gas_price":gasModel.gas_price,
+            @"gas":gasModel.gas,
             @"prikey":wallet.priKey
         };
         @weakify(self);
@@ -415,13 +439,13 @@ static NSInteger SpeedFeeBtnTag = 100;
             NSString *sign = NSStringWithFormat(@"0x%@",result);
             [self ETHTransferWithSign:sign];
         }];
-    }else{
-        //ETH代币
+    }else{//ETH代币
         NSDictionary *dic = @{
             @"nonce":self.model.nonce,
             @"to_addr":self.address,
-            @"value":[self.amount stringRaisingToPower18],
+            @"value":[self.amount stringDownMultiplyingBy10Power:self.model.tokenDecimals],
             @"gas_price":gasModel.gas_price,
+            @"gas":gasModel.gas,
             @"contract_addr":self.model.tokenContract,
             @"prikey":wallet.priKey
         };
@@ -441,13 +465,18 @@ static NSInteger SpeedFeeBtnTag = 100;
                 @"method":@"eth_sendRawTransaction",
                 @"params":@[sign]
                 };
+    [self.view showLoadingIndicator];
+    self.nextBtn.enabled = NO;
     [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+        self.nextBtn.enabled = YES;
+        [self.view hideLoadingIndicator];
         if (data) {
             if (data[@"error"]) {
-                if ([data[@"error"][@"code"] isEqualToString:@"-32000"]) {
+                NSNumber *code = data[@"error"][@"code"];
+                if ([code.stringValue isEqualToString:@"-32000"]) {
                     [self loadDataForNonce];
                 }
-                [self showToast:data[@"error"][@"message"]];
+                [self showError:data[@"error"][@"message"]];
             }else{
                 SetUserDefaultsForKey(@"0", @"isFirstTransfer");
                 [UserDefaults synchronize];
@@ -465,6 +494,7 @@ static NSInteger SpeedFeeBtnTag = 100;
                 });
             }
         }else{
+            [self loadDataForNonce];
             [self showError:error.localizedDescription];
         }
     }];
@@ -489,9 +519,9 @@ static NSInteger SpeedFeeBtnTag = 100;
         make.left.right.bottom.offset(0);
     }];
     [bodyView setRadius:28 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
-    UIButton *nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
-    [bodyView addSubview:nextBtn];
-    [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
+    [bodyView addSubview:self.nextBtn];
+    [self.nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(25);
         make.right.offset(-25);
         make.height.offset(55);
@@ -501,7 +531,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [bodyView addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
-        make.bottom.equalTo(nextBtn.mas_top).offset(-10);
+        make.bottom.equalTo(self.nextBtn.mas_top).offset(-10);
     }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
