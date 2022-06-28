@@ -80,7 +80,7 @@ class PWWalletContractTool: NSObject {
                     let gasPrice = try gasPrice.get()
                     let gas = try gas.get()
                     DispatchQueue.main.async {
-                        completionHandler?("\(gasPrice)","\(gas*2.5)",nil)
+                        completionHandler?("\(gasPrice)","\(gas * 3)",nil)
                     }
                 } catch let error {
                     WQJLog("estimateGasToken"+error.localizedDescription)

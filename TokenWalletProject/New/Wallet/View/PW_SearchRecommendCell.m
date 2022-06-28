@@ -113,13 +113,18 @@
     return self;
 }
 - (void)makeViews {
-    self.contentView.backgroundColor = [UIColor g_bgColor];
-    self.contentView.layer.cornerRadius = 8;
-    [self.contentView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    bodyView.layer.cornerRadius = 8;
+    [bodyView setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
+    [self.contentView addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.iconIv = [[UIImageView alloc] init];
-    [self.contentView addSubview:self.iconIv];
+    [bodyView addSubview:self.iconIv];
     self.nameLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor g_textColor]];
-    [self.contentView addSubview:self.nameLb];
+    [bodyView addSubview:self.nameLb];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);
         make.centerY.offset(0);

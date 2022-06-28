@@ -19,7 +19,7 @@
 #import "PW_Web3ViewController.h"
 #import "PW_DappFavoritesViewController.h"
 #import "PW_DappRecentBrowseViewController.h"
-#import "PW_SwitchNetworkView.h"
+#import "PW_WalletView.h"
 #import "PW_DappCell.h"
 #import "PW_DappChainBrowserCell.h"
 
@@ -111,7 +111,7 @@
 - (void)openWeb3WithModel:(PW_DappModel *)model {
     if ([model.chainId isNoEmpty]&&![model.chainId isEqualToString:User_manager.currentUser.current_chainId]) {
         [PW_TipTool showDappWalletNotSupportedWithModel:model sureBlock:^{
-            [PW_SwitchNetworkView show];
+            [PW_WalletView show];
         }];
     }else{
         [PW_TipTool showDappDisclaimerUrlStr:model.appUrl sureBlock:^{
