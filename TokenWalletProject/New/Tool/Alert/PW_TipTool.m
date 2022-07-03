@@ -301,66 +301,58 @@
 + (void)showDappWalletNotSupportedWithModel:(PW_DappModel *)model sureBlock:(void(^)(void))block {
     [[UIApplication sharedApplication].delegate.window endEditing:YES];
     UIView *contentView = [[UIView alloc] init];
-    UIView *view = [PW_AlertTool showAlertView:contentView];
+    UIView *view = [PW_AlertTool showSheetView:contentView];
     UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_prompt") fontSize:21 textColor:[UIColor g_boldTextColor]];
     [contentView addSubview:titleLb];
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.offset(0);
         make.top.offset(25);
     }];
-    UIView *bodyView = [[UIView alloc] init];
-    bodyView.backgroundColor = [UIColor g_grayBgColor];
-    bodyView.layer.cornerRadius = 12;
-    [contentView addSubview:bodyView];
-    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLb.mas_bottom).offset(15);
-        make.left.offset(22);
-        make.right.offset(-22);
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = [UIColor g_primaryColor];
+    [contentView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(65);
+        make.left.offset(36);
+        make.right.offset(-36);
+        make.height.mas_equalTo(1);
     }];
-    UILabel *contentLb = [PW_ViewTool labelText:LocalizedStr(@"text_currentWalletNotSupportedTip") fontSize:15 textColor:[UIColor g_textColor]];
-    [bodyView addSubview:contentLb];
+    UILabel *contentLb = [PW_ViewTool labelText:LocalizedStr(@"text_currentWalletNotSupportedTip") fontSize:14 textColor:[UIColor g_textColor]];
+    contentLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:contentLb];
     [contentLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.offset(24);
-        make.right.offset(-24);
+        make.top.equalTo(lineView.mas_bottom).offset(16);
+        make.left.offset(38);
+        make.right.offset(-38);
     }];
-    UIView *rowView = [[UIView alloc] init];
-    [bodyView addSubview:rowView];
-    [rowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contentLb.mas_bottom).offset(10);
-        make.left.offset(24);
-        make.right.offset(-24);
-        make.bottom.offset(-10);
-    }];
-    UIImageView *iconIv = [[UIImageView alloc] init];
-    [iconIv sd_setImageWithURL:[NSURL URLWithString:model.iconUrl]];
-    [rowView addSubview:iconIv];
-    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.offset(0);
-        make.width.height.offset(40);
-        make.bottom.mas_lessThanOrEqualTo(0);
-    }];
+//    UIImageView *iconIv = [[UIImageView alloc] init];
+//    [iconIv sd_setImageWithURL:[NSURL URLWithString:model.iconUrl]];
+//    [rowView addSubview:iconIv];
+//    [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.offset(0);
+//        make.width.height.offset(40);
+//        make.bottom.mas_lessThanOrEqualTo(0);
+//    }];
     NSString *str = PW_StrFormat(@"%@ %@ %@ %@",model.appName,LocalizedStr(@"text_support"),model.chainId,LocalizedStr(@"text_chain"));
-    UILabel *nameLb = [PW_ViewTool labelSemiboldText:str fontSize:14 textColor:[UIColor g_textColor]];
-    [rowView addSubview:nameLb];
+    UILabel *nameLb = [PW_ViewTool labelMediumText:str fontSize:18 textColor:[UIColor g_textColor]];
+    nameLb.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:nameLb];
     [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(10);
-        make.left.equalTo(iconIv.mas_right).offset(10);
-        make.right.offset(0);
-        make.bottom.mas_lessThanOrEqualTo(0);
+        make.top.equalTo(contentLb.mas_bottom).offset(15);
+        make.left.offset(36);
+        make.right.offset(-36);
     }];
     __weak typeof(view) weakView = view;
-    UIButton *cancelBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_cancel") fontSize:16 titleColor:[UIColor g_grayTextColor] imageName:nil target:nil action:nil];
-    [cancelBtn setBorderColor:[UIColor g_borderColor] width:1 radius:8];
+    UIButton *cancelBtn = [PW_ViewTool buttonTitle:LocalizedStr(@"text_cancel") fontSize:18 titleColor:[UIColor g_whiteTextColor] cornerRadius:8 backgroundColor:[UIColor g_darkBgColor] target:nil action:nil];
     [cancelBtn addEvent:UIControlEventTouchUpInside block:^(UIControl * _Nonnull sender) {
         [weakView removeFromSuperview];
     }];
     [contentView addSubview:cancelBtn];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bodyView.mas_bottom).offset(30);
-        make.left.offset(22);
+        make.top.equalTo(nameLb.mas_bottom).offset(28);
+        make.left.offset(36);
         make.height.offset(55);
-        make.bottom.offset(-30);
+        make.bottom.offset(-20-SafeBottomInset);
     }];
     UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_switchWallet") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:nil action:nil];
     [contentView addSubview:sureBtn];
@@ -372,10 +364,10 @@
     }];
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.width.height.equalTo(cancelBtn);
-        make.left.equalTo(cancelBtn.mas_right).offset(15);
-        make.right.offset(-22);
+        make.left.equalTo(cancelBtn.mas_right).offset(26);
+        make.right.offset(-36);
     }];
-    [PW_AlertTool showAnimationAlertContentView:contentView];
+    [PW_AlertTool showAnimationSheetContentView:contentView];
 }
 + (void)showDappDisclaimerUrlStr:(NSString *)urlStr sureBlock:(void(^)(void))block{
     [[UIApplication sharedApplication].delegate.window endEditing:YES];

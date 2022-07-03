@@ -69,7 +69,7 @@
 //    }else{
 //        str = NSStringWithFormat(@"ethereum:%@",walletAddress);
 //    }
-    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:walletAddress] size:190];
+    self.qrIv.image = [SGQRCodeObtain generateQRCodeWithData:walletAddress size:190];
 }
 - (void)makeViews {
     UIScrollView *scrollView = [[UIScrollView alloc] init];

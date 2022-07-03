@@ -24,8 +24,8 @@
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);
         make.right.offset(-18);
-        make.centerY.offset(0);
-        make.height.mas_equalTo(SCREEN_HEIGHT*0.9);
+        make.centerY.offset(-10);
+        make.height.mas_equalTo(SCREEN_HEIGHT*0.8);
     }];
     UIView *bodyView = [[UIView alloc] init];
     [scrollView addSubview:bodyView];
@@ -38,7 +38,7 @@
     contentView.clipsToBounds = YES;
     [bodyView addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(bodyView);
+        make.edges.offset(0);
     }];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn setImage:[UIImage imageNamed:@"icon_close_big"] forState:UIControlStateNormal];
@@ -50,11 +50,10 @@
             [weakSelf removeFromSuperview];
         }];
     }];
-    [bodyView addSubview:closeBtn];
+    [maskView addSubview:closeBtn];
     [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contentView.mas_bottom).offset(20);
+        make.top.equalTo(scrollView.mas_bottom).offset(10);
         make.centerX.offset(0);
-        make.bottom.offset(0);
     }];
     contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
     contentView.alpha = 0;
@@ -96,7 +95,7 @@
         make.edges.offset(0);
     }];
     UIImageView *qrIv = [[UIImageView alloc] init];
-    qrIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:address] size:180];
+    qrIv.image = [SGQRCodeObtain generateQRCodeWithData:address size:180];
     [qrView addSubview:qrIv];
     [qrIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
@@ -135,7 +134,7 @@
         make.width.height.mas_equalTo(89);
     }];
     UIImageView *downLoadIv = [[UIImageView alloc] init];
-    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:AppDownloadUrl] size:89];
+    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:AppDownloadUrl size:89];
     [contentView addSubview:downLoadIv];
     [downLoadIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(logoIv);

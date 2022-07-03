@@ -64,10 +64,21 @@
     UILabel *textLb = [PW_ViewTool labelText:LocalizedStr(@"text_appDesc") fontSize:14 textColor:[UIColor g_whiteTextColor]];
     textLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:textLb];
+    CGFloat downloadWH = 260;
+    CGFloat downloadOffsetY = -30;
+    CGFloat logoWH = 120;
+    CGFloat logoOffsetY = 50;
+    CGFloat padding = 40;
+    if (!PW_IPhoneX) {
+        downloadWH = 200;
+        logoWH = 100;
+        logoOffsetY = 30;
+        padding = 30;
+    }
     [logoIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(50);
+        make.top.offset(logoOffsetY);
         make.centerX.offset(0);
-        make.width.height.offset(120);
+        make.width.height.mas_equalTo(logoWH);
     }];
     [textIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.offset(0);
@@ -81,27 +92,28 @@
     UIView *downLoadView = [[UIView alloc] init];
     [contentView addSubview:downLoadView];
     [downLoadView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contentView.mas_centerY).offset(-20);
+        make.top.equalTo(contentView.mas_centerY).offset(downloadOffsetY);
         make.centerX.offset(0);
-        make.size.mas_equalTo(260);
+        make.size.mas_equalTo(downloadWH);
     }];
     UIImageView *scanIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_scan_big"]];
     [downLoadView addSubview:scanIv];
     [scanIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
+    CGFloat downloadIvWH = downloadWH-2*padding;
     UIImageView *downLoadIv = [[UIImageView alloc] init];
-    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:[CATCommon JSONString:AppDownloadUrl] size:180];
+    downLoadIv.image = [SGQRCodeObtain generateQRCodeWithData:AppDownloadUrl size:downloadIvWH];
     [downLoadView addSubview:downLoadIv];
     [downLoadIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.offset(0);
-        make.size.mas_equalTo(180);
+        make.size.mas_equalTo(downloadIvWH);
     }];
     UILabel *downloadTipLb = [PW_ViewTool labelBoldText:LocalizedStr(@"text_scanDownloadApp") fontSize:25 textColor:[UIColor g_whiteTextColor]];
     downloadTipLb.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:downloadTipLb];
     [downloadTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(downLoadView.mas_bottom).offset(22);
+        make.top.equalTo(downLoadView.mas_bottom).offset(20);
         make.left.mas_greaterThanOrEqualTo(60);
         make.centerX.offset(0);
     }];

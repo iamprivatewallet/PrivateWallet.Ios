@@ -124,7 +124,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 70;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, SafeBottomInset, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
         [_tableView registerClass:[PW_MoreCell class] forCellReuseIdentifier:@"PW_MoreCell"];
     }
     return _tableView;
