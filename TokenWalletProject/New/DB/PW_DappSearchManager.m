@@ -48,14 +48,14 @@ static NSString * _Nonnull PW_TableName = @"wallet_dappSearch";
     JQFMDB * db = [JQFMDB shareDatabase];
     return [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where appUrl = '%@'",urlStr]];
 }
+- (BOOL)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    return [db jq_deleteAllDataFromTable:PW_TableName];
+}
 - (NSArray<PW_DappModel *> *)getList {
     JQFMDB * db = [JQFMDB shareDatabase];
     NSArray *records = [db jq_lookupTable:PW_TableName dicOrModel:[PW_DappModel class] whereFormat:nil];
     return [[records reverseObjectEnumerator] allObjects];
-}
-- (BOOL)deleteAll {
-    JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_deleteAllDataFromTable:PW_TableName];
 }
 - (nullable PW_DappModel *)isExistWithUrlStr:(NSString *)urlStr {
     JQFMDB * db = [JQFMDB shareDatabase];

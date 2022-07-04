@@ -114,14 +114,19 @@
     }];
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -191,7 +196,7 @@
         make.right.offset(-36);
         make.height.mas_equalTo(130);
     }];
-    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_confirm") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(sureAction)];
     [self.contentView addSubview:sureBtn];
     self.sureBtn = sureBtn;
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -298,12 +303,7 @@
         make.top.offset(10);
         make.left.offset(15);
     }];
-    self.pwdTF = [[UITextField alloc] init];
-    [self.pwdTF pw_setPlaceholder:LocalizedStr(@"text_setTradePwdTip")];
-    self.pwdTF.font = [UIFont systemFontOfSize:14];
-    self.pwdTF.textColor = [UIColor g_textColor];
-    self.pwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.pwdTF.keyboardType = UIKeyboardTypeAlphabet;
+    self.pwdTF = [PW_ViewTool textFieldFont:[UIFont systemFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_setTradePwdTip")];
     [self.pwdTF pw_setSecureTextEntry];
     [self.pwdView addSubview:self.pwdTF];
     [self.pwdTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -321,12 +321,7 @@
         make.right.offset(-15);
         make.height.offset(1);
     }];
-    self.againPwdTF = [[UITextField alloc] init];
-    [self.againPwdTF pw_setPlaceholder:LocalizedStr(@"text_inputAgain")];
-    self.againPwdTF.font = [UIFont systemFontOfSize:14];
-    self.againPwdTF.textColor = [UIColor g_textColor];
-    self.againPwdTF.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.againPwdTF.keyboardType = UIKeyboardTypeAlphabet;
+    self.againPwdTF = [PW_ViewTool textFieldFont:[UIFont systemFontOfSize:14] color:[UIColor g_textColor] placeholder:LocalizedStr(@"text_inputAgain")];
     [self.againPwdTF pw_setSecureTextEntry];
     [self.pwdView addSubview:self.againPwdTF];
     [self.againPwdTF mas_makeConstraints:^(MASConstraintMaker *make) {

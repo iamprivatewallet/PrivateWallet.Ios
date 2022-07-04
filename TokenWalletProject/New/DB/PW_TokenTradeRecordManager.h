@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveRecord:(PW_TokenDetailModel *)record;
 - (void)updateRecord:(PW_TokenDetailModel *)record;
 - (void)deleteRecord:(PW_TokenDetailModel*)record;
+- (void)deleteAll;
 - (NSArray*)getWalletsWithAddress:(NSString *)address tokenAddr:(NSString *)tokenAddr;
 
 @end

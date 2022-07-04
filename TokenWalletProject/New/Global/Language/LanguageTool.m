@@ -19,6 +19,7 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
 @end
 
 @implementation LanguageTool
+@synthesize languageDefault = _languageDefault;
 
 + (instancetype)shared {
     static LanguageTool *_sharedSingleton = nil;
@@ -96,6 +97,11 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
     }
     return _bundle;
 }
++ (void)clear {
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:LanguageTypeKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [LanguageTool shared].bundle = nil;
+}
 + (void)setLanguageType:(NSString *)type {
     [[NSUserDefaults standardUserDefaults] setObject:type forKey:LanguageTypeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -103,13 +109,15 @@ static NSString * _Nonnull LanguageTypeKey = @"appLanguage";
 }
 + (nullable LanguageModel *)currentLanguage {
     NSString *lan = [[NSUserDefaults standardUserDefaults] stringForKey:LanguageTypeKey];
-    __block LanguageModel *model = nil;
-    [[LanguageTool shared].languages enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if([lan hasPrefix:obj.type]) {
-            model = obj;
-            *stop = YES;
-        }
-    }];
+    __block LanguageModel *model = [LanguageTool shared].languageDefault;
+    if (lan) {
+        [[LanguageTool shared].languages enumerateObjectsUsingBlock:^(LanguageModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if([obj.type containsString:lan]) {
+                model = obj;
+                *stop = YES;
+            }
+        }];
+    }
     return model;
 }
 + (NSString *)localizedString:(NSString *)key {

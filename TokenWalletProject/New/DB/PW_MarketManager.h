@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveModel:(PW_MarketModel *)model;
 - (BOOL)updateModel:(PW_MarketModel *)model;
 - (void)deleteModel:(PW_MarketModel *)model;
+- (BOOL)deleteAll;
 - (NSArray<PW_MarketModel *> *)getList;
 - (nullable PW_MarketModel *)isExistWithSymbol:(NSString *)symbol;
 

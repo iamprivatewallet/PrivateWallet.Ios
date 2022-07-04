@@ -43,6 +43,10 @@ static NSString * _Nonnull PW_TableName = @"wallet_addressBook";
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where time = %lf",model.time]];
 }
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:PW_TableName];
+}
 - (NSArray<PW_AddressBookModel *> *)getList {
     JQFMDB * db = [JQFMDB shareDatabase];
     NSArray * records = [db jq_lookupTable:PW_TableName dicOrModel:[PW_AddressBookModel class] whereFormat:@"ORDER BY time DESC"];

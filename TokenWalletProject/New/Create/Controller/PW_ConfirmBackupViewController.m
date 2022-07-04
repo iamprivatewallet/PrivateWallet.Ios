@@ -106,14 +106,19 @@
     }
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,7 +157,7 @@
         make.right.offset(-36);
         make.top.equalTo(showMnemonicsView.mas_bottom);
     }];
-    UIButton *nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor whiteColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
+    UIButton *nextBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_nextStep") fontSize:16 titleColor:[UIColor whiteColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(nextAction)];
     [self.contentView addSubview:nextBtn];
     self.nextBtn = nextBtn;
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {

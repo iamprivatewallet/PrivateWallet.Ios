@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_WalletSetViewController : PW_BaseViewController
 
 @property (nonatomic, strong) Wallet *model;
+@property (nonatomic, copy) void(^refreshBlock)(Wallet *model);
 
 @end
 

@@ -154,6 +154,9 @@
         Wallet *model = self.dataList[indexPath.row];
         PW_WalletSetViewController *vc = [[PW_WalletSetViewController alloc] init];
         vc.model = model;
+        vc.refreshBlock = ^(Wallet * _Nonnull model) {
+            [self refreshData];
+        };
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

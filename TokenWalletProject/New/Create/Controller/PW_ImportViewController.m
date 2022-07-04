@@ -59,7 +59,7 @@
     [iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(26);
         make.right.offset(-26);
-        make.bottom.equalTo(row1View.mas_top).offset(-20);
+        make.bottom.equalTo(row1View.mas_top).offset(0);
     }];
     [row1View mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(36);

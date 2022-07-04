@@ -12,7 +12,7 @@
 @implementation PW_SDImageTool
 
 + (void)setup {
-    [SDImageCache sharedImageCache].config.maxDiskAge = 3*24*3600;//3 day
+    [SDImageCache sharedImageCache].config.maxDiskAge = 7*24*3600;//3 day
 }
 + (void)clear {
 //    float tmpSize = [[SDImageCache sharedImageCache] totalDiskSize];

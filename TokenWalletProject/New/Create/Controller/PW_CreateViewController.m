@@ -60,7 +60,7 @@
     NSString *pwdStr = self.pwdTF.text;
     self.sureBtn.userInteractionEnabled = NO;
     [self.view showLoadingIndicator];
-    if ([User_manager loginWithUserName:@"" withPassword:pwdStr withPwTip:@"" withMnemonic:wordStr isBackup:NO]){
+    if ([User_manager loginWithUserName:kDefaultUserName withPassword:pwdStr withPwTip:@"" withMnemonic:wordStr isBackup:NO]){
         [FchainTool genWalletsWithMnemonic:wordStr createList:@[@"ETH"] block:^(BOOL sucess) {
             [self.view hideLoadingIndicator];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -97,14 +97,19 @@
     }
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,7 +144,7 @@
     warnView.layer.cornerRadius = 12;
     [self.contentView addSubview:warnView];
     self.warnView = warnView;
-    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_create") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:16 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(createAction)];
+    UIButton *sureBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_create") fontSize:16 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(createAction)];
     [self.contentView addSubview:sureBtn];
     self.sureBtn = sureBtn;
     [warnView mas_makeConstraints:^(MASConstraintMaker *make) {

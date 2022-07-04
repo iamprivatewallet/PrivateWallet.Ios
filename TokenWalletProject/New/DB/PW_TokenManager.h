@@ -13,13 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_TokenManager : NSObject
 
-+ (instancetype)shareManager;
++ (instancetype)shared;
 - (NSInteger)getMaxIndex;
 - (void)saveCoin:(PW_TokenModel *)coin;
 - (BOOL)updateCoin:(PW_TokenModel*)record;
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (PW_TokenModel *)isExist:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
 - (void)deleteCoinWalletAddress:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId;
+- (void)deleteAll;
 - (NSArray*)getListWithWalletAddress:(NSString *)walletAddress type:(NSString *)type chainId:(NSInteger)chainId;
 
 @end

@@ -46,6 +46,10 @@
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:table_name whereFormat:[NSString stringWithFormat:@"where fromAddress = '%@' and contractAddress = '%@' and hashStr = '%@'",record.fromAddress,record.contractAddress,record.hashStr]];
 }
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:table_name];
+}
 //查询token_address 下的所有记录
 - (NSArray*)getWalletsWithAddress:(NSString *)address tokenAddr:(NSString *)tokenAddr {
     JQFMDB * db = [JQFMDB shareDatabase];

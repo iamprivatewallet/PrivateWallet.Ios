@@ -12,7 +12,7 @@
 
 @implementation PW_TokenManager
 
-+ (instancetype)shareManager{
++ (instancetype)shared{
     static PW_TokenManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -62,6 +62,10 @@
 - (void)deleteCoinWalletAddress:(NSString *)walletAddress type:(NSString *)type tokenAddress:(NSString *)tokenAddress chainId:(NSInteger)chainId{
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:table_name whereFormat:[NSString stringWithFormat:@"where walletAddress = '%@' and walletType = '%@' and tokenContract = '%@' and tokenChain = %ld",walletAddress,type,tokenAddress,chainId]];
+}
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:table_name];
 }
 //查询token_address 下的所有记录
 - (NSArray*)getListWithWalletAddress:(NSString *)walletAddress type:(NSString *)type chainId:(NSInteger)chainId{

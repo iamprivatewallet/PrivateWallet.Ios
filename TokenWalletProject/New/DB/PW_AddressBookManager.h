@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveModel:(PW_AddressBookModel *)model;
 - (BOOL)updateModel:(PW_AddressBookModel *)model;
 - (void)deleteModel:(PW_AddressBookModel *)model;
+- (void)deleteAll;
 - (NSArray<PW_AddressBookModel *> *)getList;
 - (NSArray<PW_AddressBookModel *> *)getListWithChainId:(NSString *)chainId;
 

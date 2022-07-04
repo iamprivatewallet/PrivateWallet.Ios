@@ -11,6 +11,7 @@
 @implementation PW_GlobalTool
 
 + (void)clear {
+    [LanguageTool clear];
     [PW_LockTool clear];
     [PW_DenominatedCurrencyTool clear];
     [PW_RedRoseGreenFellTool clear];

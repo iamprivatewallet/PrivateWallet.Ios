@@ -51,13 +51,13 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 //查询名下所有钱包
 - (NSArray*)getWallets {
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' ORDER BY sortIndex ASC",User_manager.currentUser.user_name]];
+    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:@"ORDER BY sortIndex ASC"];
     return wallets;
 }
 //查询对应类型的钱包
 - (NSArray*)selectWalletWithType:(NSString*)type{
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and type = '%@' ORDER BY sortIndex ASC",User_manager.currentUser.user_name,type]];
+    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where type = '%@' ORDER BY sortIndex ASC",type]];
     
     return wallets;
 }
@@ -69,18 +69,18 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 //查询初始钱包
 - (NSArray*)getOrignWallets{
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and isImport = '0' ORDER BY sortIndex ASC",User_manager.currentUser.user_name]];
+    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:@"where isImport = '0' ORDER BY sortIndex ASC"];
     return wallets;
 }
 //查询后导入钱包
 - (NSArray*)getImportWallets{
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and isImport = '1' ORDER BY sortIndex ASC",User_manager.currentUser.user_name]];
+    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:@"where isImport = '1' ORDER BY sortIndex ASC"];
     return wallets;
 }
 - (Wallet *)getOriginWalletWithType:(NSString*)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where owner = '%@' and type = '%@' and isImport = '0'",User_manager.currentUser.user_name,type]];
+    NSArray * wallets = [db jq_lookupTable:PW_TableName dicOrModel:[Wallet class] whereFormat:[NSString stringWithFormat:@"where type = '%@' and isImport = '0'",type]];
     if (wallets && wallets.count>0) {
         Wallet * wallet = wallets[0];
         return wallet;
@@ -89,12 +89,16 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 }
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"sortIndex":@(sortIndex)} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"sortIndex":@(sortIndex)} whereFormat:[NSString stringWithFormat:@"where address = '%@' and type = '%@'",address,type]];
 }
 //删除钱包
 - (void)deleteWallet:(Wallet*)wallet{
     JQFMDB * db = [JQFMDB shareDatabase];
-    [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,wallet.address,wallet.type]];
+    [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where address = '%@' and type = '%@'",wallet.address,wallet.type]];
+}
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:PW_TableName];
 }
 //修改钱包信息
 - (void)updateWallet:(Wallet*)wallet{
@@ -112,11 +116,11 @@ static NSString * _Nonnull PW_TableName = @"wallet_walletList";
 }
 - (BOOL)updateWalletName:(NSString *)name address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletName":name} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletName":name} whereFormat:[NSString stringWithFormat:@"where address = '%@' and type = '%@'",address,type]];
 }
 - (BOOL)updateWalletPwd:(NSString *)pwd address:(NSString *)address type:(NSString *)type {
     JQFMDB * db = [JQFMDB shareDatabase];
-    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletPassword":pwd} whereFormat:[NSString stringWithFormat:@"where owner = '%@' and address = '%@' and type = '%@'",User_manager.currentUser.user_name,address,type]];
+    return [db jq_updateTable:PW_TableName dicOrModel:@{@"walletPassword":pwd} whereFormat:[NSString stringWithFormat:@"where address = '%@' and type = '%@'",address,type]];
 }
 //查询对应私钥的钱包
 - (NSArray*)selctWalletWithPrikey:(NSString*)pKey type:(NSString*)type{

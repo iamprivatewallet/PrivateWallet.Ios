@@ -36,22 +36,20 @@
         BOOL login = [[userInfo objectForKey:@"user_login"] boolValue];
         BOOL backup = [[userInfo objectForKey:@"user_backup"] boolValue];
 
-        if (user_name.length > 0 && user_pass.length > 0) {
-            User *user= [[User alloc] init];
-            user.user_name = user_name;
-            user.user_pass = user_pass;
-            user.user_is_login = login;
-            user.user_is_backup = backup;
-            user.user_mnemonic = user_mnemonic;
-            user.user_pass_tip = user_pass_tip;
-            user.user_image = [self fetchUserImage];
-            user.current_Node = currentNode;
-            user.current_chainId = currentNodeChainId;
-            user.current_name = currentNodeName;
-            user.chooseWallet_address = chooseWallet_address;
-            user.chooseWallet_type = chooseWallet_type;
-            _currentUser = user;
-        }
+        User *user= [[User alloc] init];
+        user.user_name = [user_name isNoEmpty] ? user_name : kDefaultUserName;
+        user.user_pass = [user_pass isNoEmpty] ? user_pass : @"";
+        user.user_is_login = login;
+        user.user_is_backup = backup;
+        user.user_mnemonic = user_mnemonic;
+        user.user_pass_tip = user_pass_tip;
+        user.user_image = [self fetchUserImage];
+        user.current_Node = currentNode;
+        user.current_chainId = currentNodeChainId;
+        user.current_name = currentNodeName;
+        user.chooseWallet_address = chooseWallet_address;
+        user.chooseWallet_type = chooseWallet_type;
+        _currentUser = user;
     }
     return self;
 }
@@ -93,16 +91,12 @@
     self.currentUser.user_is_login = NO;
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:User_Info_Key];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSArray *walletArray = [[PW_WalletManager shared] getWallets];
-    for (int i = 0; i < walletArray.count; ++i) {
-        Wallet *wallet = walletArray[i];
-        [[PW_WalletManager shared] deleteWallet:wallet];
-    }
     [PW_GlobalTool clear];
-    //删除数据库
-    NSString *dbName = @"JQFMDB.sqlite";
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [PW_DBGlobalTool clear];
+//    //删除数据库
+//    NSString *dbName = @"JQFMDB.sqlite";
+//    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+//    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }
 -(void)saveCurrentUser:(User *)currentUser
 {

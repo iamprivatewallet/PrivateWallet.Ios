@@ -156,13 +156,13 @@
     model.price = @"0";
     model.tokenDecimals = 18;
     model.isDefault = YES;
-    PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+    PW_TokenModel *exitModel = [[PW_TokenManager shared] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
     if (exitModel==nil) {
-        model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
+        model.sortIndex = [[PW_TokenManager shared] getMaxIndex]+1;
         model.walletType = user.chooseWallet_type;
         model.walletAddress = user.chooseWallet_address;
         model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;
-        [[PW_TokenManager shareManager] saveCoin:model];
+        [[PW_TokenManager shared] saveCoin:model];
     }
     [self forceRefreshCacheCoinList];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
@@ -173,13 +173,13 @@
         [self.view hideLoadingIndicator];
         NSArray *array = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         for (PW_TokenModel *model in array) {
-            PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+            PW_TokenModel *exitModel = [[PW_TokenManager shared] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
             if (exitModel==nil) {
-                model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
+                model.sortIndex = [[PW_TokenManager shared] getMaxIndex]+1;
                 model.walletType = user.chooseWallet_type;
                 model.walletAddress = user.chooseWallet_address;
                 model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;
-                [[PW_TokenManager shareManager] saveCoin:model];
+                [[PW_TokenManager shared] saveCoin:model];
             }
         }
         [self forceRefreshCacheCoinList];
@@ -202,7 +202,7 @@
 }
 - (void)loadCacheCoinList {
     //获取缓存里 是否有代币列表
-    NSArray *coinList = [[PW_TokenManager shareManager] getListWithWalletAddress:self.currentWallet.address type:self.currentWallet.type chainId:User_manager.currentUser.current_chainId.integerValue];
+    NSArray *coinList = [[PW_TokenManager shared] getListWithWalletAddress:self.currentWallet.address type:self.currentWallet.type chainId:User_manager.currentUser.current_chainId.integerValue];
     BOOL isHiddenSmall = [GetUserDefaultsForKey(kHiddenWalletSmallAmount) boolValue];
     [coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
         if(![self isExitsCoinWithAddress:model.tokenContract]){
@@ -234,7 +234,7 @@
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
-                [[PW_TokenManager shareManager] updateCoin:obj];
+                [[PW_TokenManager shared] updateCoin:obj];
                 [self.tableView reloadData];
                 [self refreshCVNTotal];
             } errBlock:nil];
@@ -244,7 +244,7 @@
         [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
                 obj.price = NSStringWithFormat(@"%@",data);
-                [[PW_TokenManager shareManager] updateCoin:obj];
+                [[PW_TokenManager shared] updateCoin:obj];
                 [self.tableView reloadData];
                 [self refreshTotal];
             } errBlock:nil];
@@ -285,7 +285,7 @@
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
         [self loadETHBalanceWithCoin:coin completion:^(NSString *amount) {
             coin.tokenAmount = amount;
-            [[PW_TokenManager shareManager] updateCoin:coin];
+            [[PW_TokenManager shared] updateCoin:coin];
             [self refreshTotal];
         }];
     }];
@@ -335,7 +335,7 @@
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
         [self loadCVNBalanceWithCoin:coin completion:^(NSString *amount) {
             coin.tokenAmount = [amount stringDownDecimal:6];
-            [[PW_TokenManager shareManager] updateCoin:coin];
+            [[PW_TokenManager shared] updateCoin:coin];
             [self refreshCVNTotal];
         }];
     }];

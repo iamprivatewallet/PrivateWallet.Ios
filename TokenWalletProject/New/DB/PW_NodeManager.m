@@ -44,6 +44,10 @@ static NSString * _Nonnull PW_NodeTableName = @"wallet_nodeList";
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:PW_NodeTableName whereFormat:[NSString stringWithFormat:@"where chainId = '%@' and symbol = '%@' and rpcUrl = '%@'",model.chainId,model.symbol,model.rpcUrl]];
 }
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:PW_NodeTableName];
+}
 - (NSArray<PW_NetworkModel *> *)getNodeListWithChainId:(NSString *)chainId {
     JQFMDB * db = [JQFMDB shareDatabase];
     NSArray * records = [db jq_lookupTable:PW_NodeTableName dicOrModel:[PW_NetworkModel class] whereFormat:[NSString stringWithFormat:@"where chainId = '%@'",chainId]];

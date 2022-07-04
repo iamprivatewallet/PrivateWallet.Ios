@@ -9,6 +9,7 @@
 #ifndef PW_DBGlobal_h
 #define PW_DBGlobal_h
 
+#import "PW_DBGlobalTool.h"
 #import "PW_WalletManager.h"
 #import "PW_TokenTradeRecordManager.h"
 #import "PW_TokenManager.h"

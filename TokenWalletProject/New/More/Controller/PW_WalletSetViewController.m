@@ -41,12 +41,16 @@
         return;
     }
     [[PW_WalletManager shared] deleteWallet:self.model];
+    if (self.refreshBlock) {
+        self.refreshBlock(self.model);
+    }
     NSArray *wallets = [[PW_WalletManager shared] getWallets];
     if (wallets.count>0) {
         if ([User_manager.currentUser.chooseWallet_address isEqualToString:self.model.address]) {
             Wallet *wallet = wallets.firstObject;
             [User_manager updateChooseWallet:wallet];
         }
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         [User_manager logout];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

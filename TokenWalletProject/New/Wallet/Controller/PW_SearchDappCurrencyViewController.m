@@ -127,7 +127,7 @@
         self.currencyList = [PW_TokenModel mj_objectArrayWithKeyValuesArray:data];
         User *user = User_manager.currentUser;
         for (PW_TokenModel *model in self.currencyList) {
-            PW_TokenModel *exitModel = [[PW_TokenManager shareManager] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+            PW_TokenModel *exitModel = [[PW_TokenManager shared] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
             model.isExist = exitModel!=nil;
         }
         [self reloadTableSection:1];
@@ -215,17 +215,17 @@
         User *user = User_manager.currentUser;
         if(model.isExist){
             model.isExist = NO;
-            [[PW_TokenManager shareManager] deleteCoinWalletAddress:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
+            [[PW_TokenManager shared] deleteCoinWalletAddress:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
             [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshCoinListNotification object:nil];
             [strongSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
             return;
         }
-        model.sortIndex = [[PW_TokenManager shareManager] getMaxIndex]+1;
+        model.sortIndex = [[PW_TokenManager shared] getMaxIndex]+1;
         model.walletType = user.chooseWallet_type;
         model.walletAddress = user.chooseWallet_address;
         model.createTime = @([NSDate new].timeIntervalSince1970).stringValue;
         model.isExist = YES;
-        [[PW_TokenManager shareManager] saveCoin:model];
+        [[PW_TokenManager shared] saveCoin:model];
         [strongSelf showSuccess:LocalizedStr(@"text_addSuccess")];
         [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshCoinListNotification object:nil];
         [strongSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];

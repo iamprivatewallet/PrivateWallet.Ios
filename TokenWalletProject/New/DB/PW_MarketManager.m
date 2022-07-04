@@ -43,6 +43,10 @@ static NSString * _Nonnull PW_TableName = @"wallet_market";
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where symbol = '%@'",model.symbol]];
 }
+- (BOOL)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    return [db jq_deleteAllDataFromTable:PW_TableName];
+}
 - (NSArray<PW_MarketModel *> *)getList {
     JQFMDB * db = [JQFMDB shareDatabase];
     NSArray * records = [db jq_lookupTable:PW_TableName dicOrModel:[PW_AddressBookModel class] whereFormat:nil];

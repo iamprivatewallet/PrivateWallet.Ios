@@ -52,6 +52,10 @@ static NSString * _Nonnull PW_TableName = @"wallet_networkList";
     JQFMDB * db = [JQFMDB shareDatabase];
     [db jq_deleteTable:PW_TableName whereFormat:[NSString stringWithFormat:@"where chainId = '%@' and symbol = '%@' and rpcUrl = '%@'",model.chainId,model.symbol,model.rpcUrl]];
 }
+- (void)deleteAll {
+    JQFMDB * db = [JQFMDB shareDatabase];
+    [db jq_deleteAllDataFromTable:PW_TableName];
+}
 - (nullable PW_NetworkModel *)isExistWithChainId:(NSString *)chainId {
     NSArray *array = [self getListWithChainId:chainId];
     if(array&&array.count>0){

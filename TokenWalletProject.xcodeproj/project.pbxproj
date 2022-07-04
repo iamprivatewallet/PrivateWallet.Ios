@@ -219,6 +219,7 @@
 		5C71193327BB7ABD00FE9B51 /* MetaMaskCallApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */; };
 		5C71193B27BB860500FE9B51 /* WQJLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193A27BB860500FE9B51 /* WQJLog.swift */; };
 		5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */; };
+		5C7DE0E42872C1A300769CB3 /* PW_DBGlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7DE0E32872C1A300769CB3 /* PW_DBGlobalTool.m */; };
 		5C7ED85D2807EF6D00873A53 /* PW_AddCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED85C2807EF6D00873A53 /* PW_AddCurrencyViewController.m */; };
 		5C7ED8602807F83800873A53 /* PW_AddCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED85F2807F83800873A53 /* PW_AddCurrencyCell.m */; };
 		5C7ED8632807F9FB00873A53 /* PW_AddCurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7ED8622807F9FB00873A53 /* PW_AddCurrencyModel.m */; };
@@ -1027,6 +1028,8 @@
 		5C71193A27BB860500FE9B51 /* WQJLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WQJLog.swift; sourceTree = "<group>"; };
 		5C71193C27BB8E0700FE9B51 /* NSString+Caculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Caculate.m"; sourceTree = "<group>"; };
 		5C71193D27BB8E0700FE9B51 /* NSString+Caculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Caculate.h"; sourceTree = "<group>"; };
+		5C7DE0E22872C1A300769CB3 /* PW_DBGlobalTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DBGlobalTool.h; sourceTree = "<group>"; };
+		5C7DE0E32872C1A300769CB3 /* PW_DBGlobalTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DBGlobalTool.m; sourceTree = "<group>"; };
 		5C7ED85B2807EF6D00873A53 /* PW_AddCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCurrencyViewController.h; sourceTree = "<group>"; };
 		5C7ED85C2807EF6D00873A53 /* PW_AddCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AddCurrencyViewController.m; sourceTree = "<group>"; };
 		5C7ED85E2807F83800873A53 /* PW_AddCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AddCurrencyCell.h; sourceTree = "<group>"; };
@@ -2065,9 +2068,6 @@
 				992EF19426B7CE8900F70A94 /* CustomView.h */,
 				5AF5D2A61D2F8EE2004070D7 /* Macro.h */,
 				5CB8BBBC27E311FC00C73976 /* NoticeConst.h */,
-				5C9BAB7027DA04D70029988A /* Language.plist */,
-				5C9BAB6727D9E29B0029988A /* LanguageTool.h */,
-				5C9BAB6827D9E29B0029988A /* LanguageTool.m */,
 				5C9BAB6E27D9EACC0029988A /* InfoPlist.strings */,
 				5C9BAB5F27D9D8110029988A /* Localizable.strings */,
 			);
@@ -2820,6 +2820,7 @@
 				5C36E18628094BE80000FEE0 /* PW_Global.h */,
 				5C32AB4A28631259002C7970 /* PW_GlobalTool.h */,
 				5C32AB4B28631259002C7970 /* PW_GlobalTool.m */,
+				5C7DE0E52872CAF500769CB3 /* Language */,
 				5CE0552628606C3300B68A6B /* Lock */,
 				5C36E18228094BC00000FEE0 /* Data */,
 				5C8AAAF5280D368600E4ED53 /* DenominatedCurrency */,
@@ -2859,6 +2860,8 @@
 			isa = PBXGroup;
 			children = (
 				5C62CFA427FD336900C1C5DC /* PW_DBGlobal.h */,
+				5C7DE0E22872C1A300769CB3 /* PW_DBGlobalTool.h */,
+				5C7DE0E32872C1A300769CB3 /* PW_DBGlobalTool.m */,
 				5C37A8CF280EB14400AAA728 /* PW_WalletManager.h */,
 				5C37A8D0280EB14400AAA728 /* PW_WalletManager.m */,
 				5C62CFA127FD333D00C1C5DC /* PW_TokenTradeRecordManager.h */,
@@ -2934,6 +2937,16 @@
 				5C71192D27BB7ABC00FE9B51 /* js.bundle */,
 			);
 			path = Web3WebView;
+			sourceTree = "<group>";
+		};
+		5C7DE0E52872CAF500769CB3 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				5C9BAB7027DA04D70029988A /* Language.plist */,
+				5C9BAB6727D9E29B0029988A /* LanguageTool.h */,
+				5C9BAB6827D9E29B0029988A /* LanguageTool.m */,
+			);
+			path = Language;
 			sourceTree = "<group>";
 		};
 		5C7ED868280806C100873A53 /* Notification */ = {
@@ -5286,6 +5299,7 @@
 				5C9C1D9A2862C3CC00F28632 /* PW_PasswordView.m in Sources */,
 				5E0799E921D28A3A00924407 /* GPBExtensionRegistry.m in Sources */,
 				5AF5D1A21D2F7CBA004070D7 /* NSURLRequest+ParamsFromDictionary.m in Sources */,
+				5C7DE0E42872C1A300769CB3 /* PW_DBGlobalTool.m in Sources */,
 				99D2CA442537F81C00C1C196 /* NSDate+Helper.m in Sources */,
 				5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */,
 				992EF16F26B1506200F70A94 /* AboutUsViewController.m in Sources */,
@@ -5595,7 +5609,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5743,7 +5757,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 23RRG34V9B;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

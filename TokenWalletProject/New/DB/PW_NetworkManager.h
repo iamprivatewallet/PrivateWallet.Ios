@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)updateModel:(PW_NetworkModel *)model;
 - (BOOL)updateSortIndex:(NSInteger)sortIndex chainId:(NSString *)chainId;
 - (void)deleteModel:(PW_NetworkModel *)model;
+- (void)deleteAll;
 - (nullable PW_NetworkModel *)isExistWithChainId:(NSString *)chainId;
 - (NSArray<PW_NetworkModel *> *)getList;
 - (NSArray<PW_NetworkModel *> *)getListWithChainId:(NSString *)chainId;

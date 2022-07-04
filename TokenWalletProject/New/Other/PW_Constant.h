@@ -13,6 +13,8 @@ static float const g_smallAmount = 0.01;
 static NSString * _Nonnull const AuthorizationPrefix = @"0x095ea7b3";
 static NSString * _Nonnull const MaxAuthorizationCount = @"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
 
+static NSString * _Nonnull const kDefaultUserName = @"identity_name";
+
 static NSString * _Nonnull const kWalletTypeETH = @"ETH";
 static NSString * _Nonnull const kWalletTypeCVN = @"CVN";
 static NSString * _Nonnull const kWalletTypeSolana = @"Solana";

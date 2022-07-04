@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveModel:(PW_DappModel *)model;
 - (BOOL)updateModel:(PW_DappModel *)model;
 - (BOOL)deleteWithUrlStr:(NSString *)urlStr;
-- (NSArray<PW_DappModel *> *)getList;
 - (BOOL)deleteAll;
+- (NSArray<PW_DappModel *> *)getList;
 - (nullable PW_DappModel *)isExistWithUrlStr:(NSString *)urlStr;
 
 @end

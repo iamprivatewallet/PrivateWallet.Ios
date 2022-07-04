@@ -9,7 +9,6 @@
 #ifndef Macro_h
 #define Macro_h
 #import "AppDelegate.h"
-#import "LanguageTool.h"
 
 //重新定义系统的NSLog，__OPTIMIZE__ 是release 默认会加的宏,release版本不打日志
 #ifndef __OPTIMIZE__

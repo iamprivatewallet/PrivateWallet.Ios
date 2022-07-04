@@ -104,14 +104,19 @@
     }
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)updateSortIndex:(NSInteger)sortIndex address:(NSString *)address type:(NSString *)type;
 //删除钱包
 - (void)deleteWallet:(Wallet*)wallet;
+- (void)deleteAll;
 //修改钱包信息
 - (void)updateWallet:(Wallet*)wallet;
 //更新用户名

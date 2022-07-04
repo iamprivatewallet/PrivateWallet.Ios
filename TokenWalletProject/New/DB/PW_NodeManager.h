@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)saveNodeModel:(PW_NetworkModel *)model;
 - (BOOL)updateNode:(PW_NetworkModel *)model;
 - (void)deleteNodeModel:(PW_NetworkModel *)model;
+- (void)deleteAll;
 - (NSArray<PW_NetworkModel *> *)getNodeListWithChainId:(NSString *)chainId;
 - (nullable PW_NetworkModel *)getSelectedNodeWithChainId:(NSString *)chainId;
 

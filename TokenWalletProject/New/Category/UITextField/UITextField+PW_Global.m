@@ -43,6 +43,7 @@
 
 - (void)pw_setSecureTextEntry {
     self.secureTextEntry = YES;
+    self.keyboardType = UIKeyboardTypeAlphabet;
     if (@available(iOS 11.0, *)) {
         self.textContentType = UITextContentTypePassword;
     }

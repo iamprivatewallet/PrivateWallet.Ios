@@ -32,7 +32,7 @@
     if (![addr isNoEmpty]||[addr isEqualToString:@"undefined"]) {
         return nil;
     }
-    NSString * ownerStr = @"identity_name";
+    NSString * ownerStr = kDefaultUserName;
     NSString * pubkey = @"eth";
     
     NSDictionary *dic = @{

@@ -47,14 +47,19 @@
     self.authorLb.text = self.model.author;
 }
 - (void)makeViews {
-    self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.backgroundColor = [UIColor g_bgColor];
-    [self.view addSubview:self.scrollView];
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
-    [self.scrollView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    self.scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
     [self.scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
