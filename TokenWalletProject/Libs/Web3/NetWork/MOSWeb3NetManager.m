@@ -33,20 +33,5 @@ static NSString * _Nonnull ETHGasAPI = @"https://ethgasstation.info/json/ethgasA
         }
     }];
 }
-//请求gas
-+ (void)requestETHgasCompletionHandler:(void (^ _Nullable)(MOSETHGasModel * _Nullable gasModel, NSError * _Nullable error))completionHandler {
-    [AFNetworkClient requestPostWithUrl:ETHGasAPI withParameter:nil withBlock:^(id data, NSError *error) {
-        if (!error) {
-            MOSETHGasModel *model = [MOSETHGasModel mj_objectWithKeyValues:data];
-            if (completionHandler) {
-                completionHandler(model, nil);
-            }
-        }else{
-            if (completionHandler) {
-                completionHandler(nil, error);
-            }
-        }
-    }];
-}
 
 @end

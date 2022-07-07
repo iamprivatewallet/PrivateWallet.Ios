@@ -75,7 +75,7 @@ class PW_Solana: NSObject {
             PW_Solana.solana.api.getBalance(account: account, commitment: nil) { result in
                 do {
                     let balance = try result.get()
-                    completionBlock(String(balance),nil)
+                    completionBlock("\(balance)",nil)
                 }catch let error {
                     completionBlock(nil,handleError(error))
                 }

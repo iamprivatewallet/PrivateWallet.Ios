@@ -21,6 +21,7 @@
 #import "AddNewAddressVC.h"
 #import "MangeIDWalletVC.h"
 #import "FchainTool.h"
+#import "PW_WalletContractTool.h"
 
 @interface MainViewController ()
 <
@@ -363,12 +364,12 @@ BackupAlertMainViewDelegate
 //                completion(amount);
 //            }
 //        }];
-        [[PWWalletContractTool shared] balanceERC20WithAddress:self.ethWallet.address contractAddress:coin.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+        [PW_WalletContractTool balanceOfAddress:self.ethWallet.address contractAddress:coin.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
             if(coin.decimals>0){
                 NSString *newAmount = [amount stringDownDividingBy10Power:coin.decimals];
                 completion(newAmount);
             }else{
-                [[PWWalletContractTool shared] decimalsERC20WithContractAddress:coin.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
+                [PW_WalletContractTool decimalsContractAddress:coin.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                     if(errMsg==nil){
                         coin.decimals = decimals;
                         NSString *newAmount = [amount stringDownDividingBy10Power:decimals];

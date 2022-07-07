@@ -9,6 +9,7 @@
 #import <Web3WebView/MetaMaskRespModel.h>
 #import <Web3WebView/MetaMaskRepModel.h>
 #import "MOSWeb3NetManager.h"
+#import "PW_WalletContractTool.h"
 
 @implementation MetaMaskCallApi
 
@@ -93,7 +94,7 @@
         NSString *gasPrice = dataDict[@"gasPrice"];
         NSString *gas = dataDict[@"gas"];
         if (![gasPrice isNoEmpty]||![gas isNoEmpty]) {
-            [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+            [PW_WalletContractTool estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
                 if (![gasPrice isNoEmpty]) {
                     if (errorBlock) {
                         errorBlock(errorDesc);
@@ -141,7 +142,7 @@
         }
         payModel.value = authCount;
         [SVProgressHUD showWithStatus:nil];
-        [[PWWalletContractTool shared] symbolERC20WithContractAddress:to completionHandler:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
+        [PW_WalletContractTool symbolContractAddress:to completionHandler:^(NSString * _Nullable symbol, NSString * _Nullable errorDesc) {
             [SVProgressHUD dismiss];
             payModel.symbol = symbol;
             [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull payModel) {

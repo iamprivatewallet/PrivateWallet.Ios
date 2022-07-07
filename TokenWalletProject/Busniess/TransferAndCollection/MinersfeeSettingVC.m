@@ -10,6 +10,7 @@
 #import "MinerFeeCell.h"
 #import "GasPriceTableViewCell.h"
 #import "FeeCustomCell.h"
+#import "PW_WalletContractTool.h"
 
 @interface MinersfeeSettingVC ()
 <
@@ -48,14 +49,6 @@ FeeCustomCellDelegate
     }
 }
 - (void)requestEstimateGas {
-    [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
-        if(gas){
-            NSString *gas_gwei = [gasPrice stringDownDividingBy10Power:9];
-            self.gasGwei = gas_gwei;
-            self.gasStr = gas;
-            [self makeGasPriceGwei:gas_gwei];
-        }
-    }];
 //    NSDictionary *parmDic = @{
 //                    @"id":@"67",
 //                    @"jsonrpc":@"2.0",

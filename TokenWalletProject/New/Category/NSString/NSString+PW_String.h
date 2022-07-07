@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)strTo10;
 - (NSString *)strTo16;
 - (NSString *)addOxPrefix;
+- (NSString *)removeOxPrefix;
+- (NSString *)pad;
 - (NSString *)getStrTo16;
 - (NSString *)get16ToStr;
 

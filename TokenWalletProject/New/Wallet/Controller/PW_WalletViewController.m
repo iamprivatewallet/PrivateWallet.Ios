@@ -18,7 +18,6 @@
 #import "PW_SearchDappViewController.h"
 #import "PW_SearchCurrencyViewController.h"
 #import "PW_CurrencyManageViewController.h"
-#import "PW_SolanaTest.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -283,7 +282,7 @@
 - (void)loadAllBalance{
     [self refreshTotal];
     [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self loadETHBalanceWithCoin:coin completion:^(NSString *amount) {
+        [PW_ContractTool loadETHBalance:coin completion:^(NSString *amount) {
             coin.tokenAmount = amount;
             [[PW_TokenManager shared] updateCoin:coin];
             [self refreshTotal];
@@ -303,31 +302,6 @@
     [self refreshHeader];
     [[PW_WalletManager shared] updateWallet:self.currentWallet];
     [self.tableView reloadData];
-}
-//获取余额
-- (void)loadETHBalanceWithCoin:(PW_TokenModel *)coin completion:(void (^)(NSString *amount))completion {
-    if ([[coin.tokenContract lowercaseString] isEqualToString:[self.currentWallet.address lowercaseString]]) {//主币
-        [PW_ContractTool loadETHMainBalanceDecimals:coin.tokenDecimals completion:^(NSString * _Nonnull amount) {
-            if(completion&&amount!=nil) {
-                completion(amount);
-            }
-        }];
-    }else{
-        [[PWWalletContractTool shared] balanceERC20WithAddress:self.currentWallet.address contractAddress:coin.tokenContract completionHandler:^(NSString * _Nonnull amount, NSString * _Nullable errMsg) {
-            if(coin.tokenDecimals>0){
-                NSString *newAmount = [amount stringDownDividingBy10Power:coin.tokenDecimals];
-                completion(newAmount);
-            }else{
-                [[PWWalletContractTool shared] decimalsERC20WithContractAddress:coin.tokenContract completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
-                    if(errMsg==nil){
-                        coin.tokenDecimals = decimals;
-                        NSString *newAmount = [amount stringDownDividingBy10Power:decimals];
-                        completion(newAmount);
-                    }
-                }];
-            }
-        }];
-    }
 }
 #pragma mark CVN 余额获取
 - (void)loadCVNAllCoin{

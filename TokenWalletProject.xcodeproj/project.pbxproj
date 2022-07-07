@@ -179,9 +179,11 @@
 		5B02FD5C21FFF6460040025E /* FTPopOverMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B02FD5621FFF6450040025E /* FTPopOverMenu.m */; };
 		5B08D8C521F80D66002CC9A8 /* HwcCustomUISwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B08D8C321F80D66002CC9A8 /* HwcCustomUISwitch.m */; };
 		5B08D8C721F82406002CC9A8 /* cwv.js in Resources */ = {isa = PBXBuildFile; fileRef = 5B08D8C621F82406002CC9A8 /* cwv.js */; };
+		5C1042542876B53E00FB53ED /* PW_WalletContractTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1042532876B53E00FB53ED /* PW_WalletContractTool.m */; };
+		5C1042592876CE4400FB53ED /* PW_BigIntTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1042582876CE4400FB53ED /* PW_BigIntTool.swift */; };
+		5C10425C2876E34000FB53ED /* BigInt in Frameworks */ = {isa = PBXBuildFile; productRef = 5C10425B2876E34000FB53ED /* BigInt */; };
 		5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */; };
 		5C2B3E322808297800CC16CE /* PW_SearchCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */; };
-		5C3190EE285CAAF60053F572 /* web3.swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3190ED285CAAF60053F572 /* web3.swift */; };
 		5C32AB4C28631259002C7970 /* PW_GlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32AB4B28631259002C7970 /* PW_GlobalTool.m */; };
 		5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */; };
 		5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17F28094AAC0000FEE0 /* PW_CurrencyManageCell.m */; };
@@ -949,6 +951,9 @@
 		5B08D8C321F80D66002CC9A8 /* HwcCustomUISwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HwcCustomUISwitch.m; sourceTree = "<group>"; };
 		5B08D8C421F80D66002CC9A8 /* HwcCustomUISwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HwcCustomUISwitch.h; sourceTree = "<group>"; };
 		5B08D8C621F82406002CC9A8 /* cwv.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = cwv.js; sourceTree = "<group>"; };
+		5C1042522876B53E00FB53ED /* PW_WalletContractTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletContractTool.h; sourceTree = "<group>"; };
+		5C1042532876B53E00FB53ED /* PW_WalletContractTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletContractTool.m; sourceTree = "<group>"; };
+		5C1042582876CE4400FB53ED /* PW_BigIntTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PW_BigIntTool.swift; sourceTree = "<group>"; };
 		5C2B3E2D280825A900CC16CE /* PW_Web3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Web3ViewController.h; sourceTree = "<group>"; };
 		5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Web3ViewController.m; sourceTree = "<group>"; };
 		5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchCurrencyViewController.h; sourceTree = "<group>"; };
@@ -1836,7 +1841,6 @@
 				5A97223A1D4B4A1B00A77FB7 /* libz.tbd in Frameworks */,
 				5A328F351D4863BA00FDD616 /* CoreTelephony.framework in Frameworks */,
 				5A328F331D48620900FDD616 /* ImageIO.framework in Frameworks */,
-				5C3190EE285CAAF60053F572 /* web3.swift in Frameworks */,
 				5AF5D3031D2FA12C004070D7 /* AdSupport.framework in Frameworks */,
 				5AF5D2FF1D2FA113004070D7 /* Security.framework in Frameworks */,
 				5AF5D2FD1D2FA105004070D7 /* QuartzCore.framework in Frameworks */,
@@ -1844,6 +1848,7 @@
 				5AF5D2F91D2FA0E3004070D7 /* CoreData.framework in Frameworks */,
 				5AF5D2F71D2FA0D0004070D7 /* AssetsLibrary.framework in Frameworks */,
 				5AF5D2F51D2FA0C7004070D7 /* CFNetwork.framework in Frameworks */,
+				5C10425C2876E34000FB53ED /* BigInt in Frameworks */,
 				5AF5D2F31D2FA0B9004070D7 /* Foundation.framework in Frameworks */,
 				5AF5D2F11D2FA0B0004070D7 /* CoreGraphics.framework in Frameworks */,
 				5AF5D2EF1D2FA0A5004070D7 /* SystemConfiguration.framework in Frameworks */,
@@ -3708,8 +3713,11 @@
 		5CE7AD1227F99AC900E2188D /* ContractTool */ = {
 			isa = PBXGroup;
 			children = (
+				5C1042582876CE4400FB53ED /* PW_BigIntTool.swift */,
 				5CE7AD0F27F99AC300E2188D /* PW_ContractTool.h */,
 				5CE7AD1027F99AC300E2188D /* PW_ContractTool.m */,
+				5C1042522876B53E00FB53ED /* PW_WalletContractTool.h */,
+				5C1042532876B53E00FB53ED /* PW_WalletContractTool.m */,
 			);
 			path = ContractTool;
 			sourceTree = "<group>";
@@ -3911,10 +3919,10 @@
 			isa = PBXGroup;
 			children = (
 				5E079A3121D3C90900924407 /* JKBigInteger.h */,
+				5E079A3921D3C90900924407 /* JKBigInteger.m */,
+				5E079A3821D3C90900924407 /* JKBigDecimal.h */,
 				5E079A3221D3C90900924407 /* JKBigDecimal.m */,
 				5E079A3321D3C90900924407 /* LibTomMath */,
-				5E079A3821D3C90900924407 /* JKBigDecimal.h */,
-				5E079A3921D3C90900924407 /* JKBigInteger.m */,
 			);
 			path = JKBigInteger;
 			sourceTree = "<group>";
@@ -4618,7 +4626,7 @@
 			);
 			name = TokenWalletProject;
 			packageProductDependencies = (
-				5C3190ED285CAAF60053F572 /* web3.swift */,
+				5C10425B2876E34000FB53ED /* BigInt */,
 			);
 			productName = TokenWalletProject;
 			productReference = 5A8FD94C1D2DFC270015D6C0 /* TokenWalletProject.app */;
@@ -4709,7 +4717,7 @@
 			);
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
 			packageReferences = (
-				5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */,
+				5C10425A2876E34000FB53ED /* XCRemoteSwiftPackageReference "BigInt" */,
 			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
@@ -5196,6 +5204,7 @@
 				9926E16526FDC98900FDF442 /* MessageCenterItemsView.m in Sources */,
 				5C6A966B27E9CE860027D7BB /* VersionTool.m in Sources */,
 				9926E15626F33FFC00FDF442 /* CurrencyInfoModel.m in Sources */,
+				5C1042542876B53E00FB53ED /* PW_WalletContractTool.m in Sources */,
 				5AF5D15B1D2F7CBA004070D7 /* NSData+Encrypt.m in Sources */,
 				99554E6426083B1200763962 /* RootTabBarController.m in Sources */,
 				992EF17926B2511300F70A94 /* MainTableViewCell.m in Sources */,
@@ -5302,6 +5311,7 @@
 				5C7DE0E42872C1A300769CB3 /* PW_DBGlobalTool.m in Sources */,
 				99D2CA442537F81C00C1C196 /* NSDate+Helper.m in Sources */,
 				5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */,
+				5C1042592876CE4400FB53ED /* PW_BigIntTool.swift in Sources */,
 				992EF16F26B1506200F70A94 /* AboutUsViewController.m in Sources */,
 				992E0F6B26D783EF00E1C31B /* ChooseCoinTypeModel.m in Sources */,
 				5B08D8C521F80D66002CC9A8 /* HwcCustomUISwitch.m in Sources */,
@@ -6005,21 +6015,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */ = {
+		5C10425A2876E34000FB53ED /* XCRemoteSwiftPackageReference "BigInt" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/argentlabs/web3.swift";
+			repositoryURL = "https://github.com/attaswift/BigInt";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 5.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5C3190ED285CAAF60053F572 /* web3.swift */ = {
+		5C10425B2876E34000FB53ED /* BigInt */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5C3190EC285CAAF60053F572 /* XCRemoteSwiftPackageReference "web3" */;
-			productName = web3.swift;
+			package = 5C10425A2876E34000FB53ED /* XCRemoteSwiftPackageReference "BigInt" */;
+			productName = BigInt;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -14,6 +14,7 @@
 #import "AssetSortView.h"
 #import "AssetTableCell.h"
 #import "TransferDetailInfoVC.h"
+#import "PW_WalletContractTool.h"
 
 typedef enum : NSUInteger {
     kSortTypeAll,
@@ -54,12 +55,12 @@ AssetSortViewDelegate
     
     if(![self.coinModel.currentWallet.type isEqualToString:@"CVN"]&&(self.coinModel.decimals==0||![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0)){
         if(![self.coinModel.usableAmount isNoEmpty]||self.coinModel.usableAmount.doubleValue==0){
-            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [PW_WalletContractTool decimalsContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.coinModel.decimals = decimals;
                     [self loadRecordListIsMore:NO sort:0];
                 }
-                [[PWWalletContractTool shared] balanceERC20WithAddress:User_manager.currentUser.chooseWallet_address contractAddress:self.coinModel.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+                [PW_WalletContractTool balanceOfAddress:User_manager.currentUser.chooseWallet_address contractAddress:self.coinModel.tokenAddress completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
                     if(errMsg==nil){
                         self.coinModel.usableAmount = [amount stringDownDividingBy10Power:decimals];
                         [self.topView setViewWithModel:self.coinModel];
@@ -67,7 +68,7 @@ AssetSortViewDelegate
                 }];
             }];
         }else{
-            [[PWWalletContractTool shared] decimalsERC20WithContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
+            [PW_WalletContractTool decimalsContractAddress:self.coinModel.tokenAddress completionHandler:^(NSInteger decimals, NSString * _Nullable errMsg) {
                 if(errMsg==nil){
                     self.coinModel.decimals = decimals;
                     [self loadRecordListIsMore:NO sort:0];

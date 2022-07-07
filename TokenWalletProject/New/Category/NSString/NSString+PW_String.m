@@ -245,6 +245,21 @@
     }
     return [self isNoEmpty] ? [NSString stringWithFormat:@"0x%@",self] : @"0x0";
 }
+- (NSString *)removeOxPrefix {
+    NSString *str = self;
+    if([str hasPrefixOx]){
+        return [str substringFromIndex:2];
+    }
+    return str;
+}
+- (NSString *)pad {
+    NSInteger lengthOf256bits = 256 / 4;
+    NSString *string = self;
+    while (string.length < lengthOf256bits) {
+        string = PW_StrFormat(@"0%@",string);
+    }
+    return string;
+}
 - (NSString *)getStrTo16 {
     NSData *myD = [self dataUsingEncoding:NSUTF8StringEncoding];
     Byte *bytes = (Byte *)[myD bytes];
@@ -261,24 +276,39 @@
 }
 // 十六进制转换为普通字符串的。
 - (NSString *)get16ToStr {
-    NSString *hexString = self;
-    if ([hexString hasPrefix:@"0x"]) {
-        hexString = [hexString substringFromIndex:2];
-    }
-    if(hexString.length % 2 != 0) {
+//    NSString *hexString = self;
+//    if ([hexString hasPrefix:@"0x"]) {
+//        hexString = [hexString substringFromIndex:2];
+//    }
+//    if(hexString.length % 2 != 0) {
+//        return nil;
+//    }
+//    char *myBuffer = (char *)malloc((int)[hexString length] / 2 + 1);
+//    bzero(myBuffer, [hexString length] / 2 + 1);
+//    for (int i = 0; i < [hexString length] - 1; i += 2) {
+//        unsigned int anInt;
+//        NSString * hexCharStr = [hexString substringWithRange:NSMakeRange(i, 2)];
+//        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
+//        [scanner scanHexInt:&anInt];
+//        myBuffer[i / 2] = (char)anInt;
+//    }
+//    NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:NSUTF8StringEncoding];
+//    return unicodeString;
+    NSString * str = self;
+    if(str.length % 2 != 0) {
         return nil;
     }
-    char *myBuffer = (char *)malloc((int)[hexString length] / 2 + 1);
-    bzero(myBuffer, [hexString length] / 2 + 1);
-    for (int i = 0; i < [hexString length] - 1; i += 2) {
-        unsigned int anInt;
-        NSString * hexCharStr = [hexString substringWithRange:NSMakeRange(i, 2)];
-        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
-        [scanner scanHexInt:&anInt];
-        myBuffer[i / 2] = (char)anInt;
+    str = [str removeOxPrefix];
+    NSMutableString * newString = [[NSMutableString alloc] init];
+    int i = 0;
+    while (i < [str length]) {
+        NSString * hexChar = [str substringWithRange: NSMakeRange(i, 2)];
+        int value = 0;
+        sscanf([hexChar cStringUsingEncoding:NSASCIIStringEncoding], "%x", &value);
+        [newString appendFormat:@"%c", (char)value];
+        i+=2;
     }
-    NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:NSUTF8StringEncoding];
-    return unicodeString;
+    return newString;
 }
 
 @end

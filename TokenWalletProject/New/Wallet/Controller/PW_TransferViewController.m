@@ -15,6 +15,7 @@
 #import "brewchain.h"
 #import "PW_AddressBookViewController.h"
 #import "PW_ContractTool.h"
+#import "PW_WalletContractTool.h"
 
 static NSInteger SpeedFeeBtnTag = 100;
 
@@ -269,7 +270,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 - (void)requestGasData {
     NSString *tokenAddress = self.model.tokenContract;
     if (![tokenAddress isNoEmpty]||[tokenAddress.lowercaseString isEqualToString:User_manager.currentUser.chooseWallet_address.lowercaseString]) {
-        [[PWWalletContractTool shared] estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+        [PW_WalletContractTool estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
             if(gas){
                 self.gasToolModel.gas_price = gasPrice;
                 self.gasToolModel.gas = gas;
@@ -282,7 +283,7 @@ static NSInteger SpeedFeeBtnTag = 100;
             }
         }];
     }else{
-        [[PWWalletContractTool shared] estimateGasTokenToAddress:nil token:tokenAddress completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
+        [PW_WalletContractTool estimateGasTokenToAddress:nil token:tokenAddress completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
             if(gas){
                 self.gasToolModel.gas_price = gasPrice;
                 self.gasToolModel.gas = gas;
