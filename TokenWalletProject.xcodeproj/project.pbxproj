@@ -266,6 +266,9 @@
 		5C9BAB6927D9E29B0029988A /* LanguageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6827D9E29B0029988A /* LanguageTool.m */; };
 		5C9BAB6C27D9EACC0029988A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB6E27D9EACC0029988A /* InfoPlist.strings */; };
 		5C9BAB7127DA04D70029988A /* Language.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7027DA04D70029988A /* Language.plist */; };
+		5C9BC2DC2877D96900BEA0E0 /* TronWebSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9BC2DB2877D96900BEA0E0 /* TronWebSwift */; };
+		5C9BC2DE2877D98300BEA0E0 /* PW_TronContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BC2DD2877D98300BEA0E0 /* PW_TronContractTool.swift */; };
+		5C9BC2E12877DB3500BEA0E0 /* BIP39swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5C9BC2E02877DB3500BEA0E0 /* BIP39swift */; };
 		5C9C1D962862B74800F28632 /* PW_UnlockPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */; };
 		5C9C1D9A2862C3CC00F28632 /* PW_PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */; };
 		5C9C1D9E2862F4BB00F28632 /* PW_AppPwdLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */; };
@@ -1122,6 +1125,7 @@
 		5C9BAB6D27D9EACC0029988A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C9BAB6F27D9EACF0029988A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5C9BAB7027DA04D70029988A /* Language.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Language.plist; sourceTree = "<group>"; };
+		5C9BC2DD2877D98300BEA0E0 /* PW_TronContractTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PW_TronContractTool.swift; sourceTree = "<group>"; };
 		5C9C1D942862B74800F28632 /* PW_UnlockPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_UnlockPasswordViewController.h; sourceTree = "<group>"; };
 		5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_UnlockPasswordViewController.m; sourceTree = "<group>"; };
 		5C9C1D982862C3CC00F28632 /* PW_PasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_PasswordView.h; sourceTree = "<group>"; };
@@ -1837,11 +1841,13 @@
 				992E0F4B26D4DE7C00E1C31B /* Social.framework in Frameworks */,
 				79A6D3C421E0EC1300C6D173 /* libcrypto.a in Frameworks */,
 				79A6D3C521E0EC1300C6D173 /* libssl.a in Frameworks */,
+				5C9BC2DC2877D96900BEA0E0 /* TronWebSwift in Frameworks */,
 				5E079A2F21D3C7CB00924407 /* JavaScriptCore.framework in Frameworks */,
 				5A97223A1D4B4A1B00A77FB7 /* libz.tbd in Frameworks */,
 				5A328F351D4863BA00FDD616 /* CoreTelephony.framework in Frameworks */,
 				5A328F331D48620900FDD616 /* ImageIO.framework in Frameworks */,
 				5AF5D3031D2FA12C004070D7 /* AdSupport.framework in Frameworks */,
+				5C9BC2E12877DB3500BEA0E0 /* BIP39swift in Frameworks */,
 				5AF5D2FF1D2FA113004070D7 /* Security.framework in Frameworks */,
 				5AF5D2FD1D2FA105004070D7 /* QuartzCore.framework in Frameworks */,
 				5AF5D2FB1D2FA0ED004070D7 /* CoreText.framework in Frameworks */,
@@ -2666,6 +2672,7 @@
 		5AF5D22D1D2F7D03004070D7 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				5C9BC2D92877D8B600BEA0E0 /* Tron */,
 				5CA451DF2817CF03006FFA3B /* Solana */,
 				5C71192427BB7ABC00FE9B51 /* Web3 */,
 				9926E15126F1E41B00FDF442 /* SWFingerprintLock.h */,
@@ -2981,6 +2988,14 @@
 				5C8AAAFB280D3EFD00E4ED53 /* PW_RedRoseGreenFellTool.m */,
 			);
 			path = RedRoseGreenFell;
+			sourceTree = "<group>";
+		};
+		5C9BC2D92877D8B600BEA0E0 /* Tron */ = {
+			isa = PBXGroup;
+			children = (
+				5C9BC2DD2877D98300BEA0E0 /* PW_TronContractTool.swift */,
+			);
+			path = Tron;
 			sourceTree = "<group>";
 		};
 		5C9C1D972862C3B300F28632 /* PasswordView */ = {
@@ -4627,6 +4642,8 @@
 			name = TokenWalletProject;
 			packageProductDependencies = (
 				5C10425B2876E34000FB53ED /* BigInt */,
+				5C9BC2DB2877D96900BEA0E0 /* TronWebSwift */,
+				5C9BC2E02877DB3500BEA0E0 /* BIP39swift */,
 			);
 			productName = TokenWalletProject;
 			productReference = 5A8FD94C1D2DFC270015D6C0 /* TokenWalletProject.app */;
@@ -4718,6 +4735,8 @@
 			mainGroup = 5A8FD9431D2DFC270015D6C0;
 			packageReferences = (
 				5C10425A2876E34000FB53ED /* XCRemoteSwiftPackageReference "BigInt" */,
+				5C9BC2DA2877D96900BEA0E0 /* XCRemoteSwiftPackageReference "TronWebSwift" */,
+				5C9BC2DF2877DB3400BEA0E0 /* XCRemoteSwiftPackageReference "BIP39swift" */,
 			);
 			productRefGroup = 5A8FD94D1D2DFC270015D6C0 /* Products */;
 			projectDirPath = "";
@@ -5179,6 +5198,7 @@
 				5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */,
 				994AA0EC26C511DD0062F9AF /* CollectionShareView.m in Sources */,
 				5E079A3A21D3C90A00924407 /* JKBigDecimal.m in Sources */,
+				5C9BC2DE2877D98300BEA0E0 /* PW_TronContractTool.swift in Sources */,
 				77BDDCEB252AF60B0030DDAA /* MPHttpClient.m in Sources */,
 				5AF5D19E1D2F7CBA004070D7 /* NSURL+Param.m in Sources */,
 				5AF5D17E1D2F7CBA004070D7 /* NSObject+AssociatedObject.m in Sources */,
@@ -6023,6 +6043,22 @@
 				minimumVersion = 5.3.0;
 			};
 		};
+		5C9BC2DA2877D96900BEA0E0 /* XCRemoteSwiftPackageReference "TronWebSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yuzhiyou1990/TronWebSwift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.1.7;
+			};
+		};
+		5C9BC2DF2877DB3400BEA0E0 /* XCRemoteSwiftPackageReference "BIP39swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mathwallet/BIP39swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -6030,6 +6066,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C10425A2876E34000FB53ED /* XCRemoteSwiftPackageReference "BigInt" */;
 			productName = BigInt;
+		};
+		5C9BC2DB2877D96900BEA0E0 /* TronWebSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C9BC2DA2877D96900BEA0E0 /* XCRemoteSwiftPackageReference "TronWebSwift" */;
+			productName = TronWebSwift;
+		};
+		5C9BC2E02877DB3500BEA0E0 /* BIP39swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C9BC2DF2877DB3400BEA0E0 /* XCRemoteSwiftPackageReference "BIP39swift" */;
+			productName = BIP39swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

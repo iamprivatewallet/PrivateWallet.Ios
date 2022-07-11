@@ -34,10 +34,9 @@
     if (self = [super init]) {
         label = [[UILabel alloc] initWithFrame:CGRectMake(15, StatusHeight, SCREEN_WIDTH-30, NavAndStatusHeight-StatusHeight)];
         label.backgroundColor = [UIColor clearColor];
-        label.numberOfLines = 1;
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor = [UIColor g_primaryTextColor];
-        label.font = GCSFontMedium(14);
+        label.font = GCSFontMedium(15);
         label.numberOfLines = 0;
         isShowing = NO;
         
@@ -62,7 +61,7 @@
     }
     isShowing = YES;
     CGFloat text_h = [textString heightWithFont:self->label.font constrainedToWidth:SCREEN_WIDTH-30];
-    CGFloat view_h = StatusHeight+text_h+20;
+    CGFloat view_h = MAX(NavAndStatusHeight, StatusHeight+text_h+20);
     dispatch_async(dispatch_get_main_queue(), ^{
         self->label.text = textString;
         [TheAppDelegate.window addSubview:self->bgView];
@@ -83,7 +82,7 @@
     }
     isShowing = YES;
     CGFloat text_h = [textString heightWithFont:self->label.font constrainedToWidth:SCREEN_WIDTH-30];
-    CGFloat view_h = StatusHeight+text_h+20;
+    CGFloat view_h = MAX(NavAndStatusHeight, StatusHeight+text_h+20);
     dispatch_async(dispatch_get_main_queue(), ^{
         self->label.text = textString;
         [TheAppDelegate.window addSubview:self->bgView];
@@ -98,9 +97,11 @@
 }
 
 - (void)dismissToast {
-    bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);
-    [UIView animateWithDuration:.1 animations:^{
-        self->bgView.frame = CGRectMake(0,-NavAndStatusHeight, [UIScreen mainScreen].bounds.size.width, NavAndStatusHeight);
+    CGFloat text_h = [label.text heightWithFont:self->label.font constrainedToWidth:SCREEN_WIDTH-30];
+    CGFloat view_h = MAX(NavAndStatusHeight, StatusHeight+text_h+20);
+    bgView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, view_h);
+    [UIView animateWithDuration:0.25 animations:^{
+        self->bgView.frame = CGRectMake(0, -view_h, [UIScreen mainScreen].bounds.size.width, view_h);
     } completion:^(BOOL finished) {
         [self->bgView removeFromSuperview];
         self->isShowing = NO;
