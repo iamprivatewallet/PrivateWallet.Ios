@@ -12,8 +12,11 @@
 @implementation PW_ContractTool
 
 + (void)loadETHBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion {
+    if (completion==nil) {
+        return;
+    }
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
-    if ([[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {
+    if (![model.tokenContract isNoEmpty]||[[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {
         [PW_WalletContractTool getBalanceDecimals:model.tokenDecimals completionHandler:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
             if(balance!=nil) {
                 completion(balance);
@@ -38,8 +41,11 @@
 }
 
 + (void)loadCVNBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion {
+    if (completion==nil) {
+        return;
+    }
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
-    if ([[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {//主币
+    if (![model.tokenContract isNoEmpty]||[[model.tokenContract lowercaseString] isEqualToString:[walletAddress lowercaseString]]) {//主币
         [PW_ContractTool loadCVNMainBalanceDecimals:model.tokenDecimals completion:^(NSString * _Nonnull amount) {
             if(completion&&amount!=nil) {
                 completion(amount);
@@ -54,6 +60,9 @@
     }
 }
 + (void)loadCVNMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion {
+    if (completion==nil) {
+        return;
+    }
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     NSDictionary *param = @{
         @"address":[walletAddress formatDelCVN],
@@ -69,6 +78,9 @@
     }];
 }
 + (void)loadCVNTokenBalance:(NSString *)tokenAddress decimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion {
+    if (completion==nil) {
+        return;
+    }
     NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
     NSDictionary *param = @{
         @"to":tokenAddress,
@@ -88,6 +100,28 @@
             completion(nil);
         }
     }];
+}
+
++ (void)loadTronBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion {
+    if (completion==nil) {
+        return;
+    }
+    NSString *walletAddress = User_manager.currentUser.chooseWallet_address;
+    if (![model.tokenContract isNoEmpty]||[model.tokenContract.lowercaseString isEqualToString:walletAddress.lowercaseString]) {
+        [[PW_TronContractTool shared] getAccountWithAddress:walletAddress completionHandler:^(NSDictionary<NSString *,NSString *> * _Nullable result, NSString * _Nullable errMsg) {
+            if (result) {
+                NSString *amount = result[@"balance"];
+                amount = [amount stringDownDividingBy10Power:model.tokenDecimals];
+                completion(amount);
+            }
+        }];
+    }else{
+        [[PW_TronContractTool shared] balanceOfAddress:walletAddress contractAddress:model.tokenContract completionHandler:^(NSString * _Nullable amount, NSString * _Nullable errMsg) {
+            if(amount!=nil) {
+                completion(amount);
+            }
+        }];
+    }
 }
 
 @end

@@ -49,34 +49,50 @@
         [self showError:LocalizedStr(@"text_pwdDisagreeError")];
         return;
     }
-    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
-        NSDictionary *account = [PW_Solana createAccount];
-        NSString *phrase = account[@"phrase"];
-        NSString *publicKey = account[@"publicKey"];
-        NSString *secretKey = account[@"secretKey"];
+    void (^createWalletBlock)(NSString *, NSString *, NSString *) = ^(NSString *mnemonics, NSString *address, NSString *privateKey){
         Wallet *wallet = [[Wallet alloc] init];
         wallet.walletName = walletName;
         wallet.walletPassword = pwdStr;
         wallet.walletPasswordTips = @"";
         wallet.owner = User_manager.currentUser.user_name;
-        wallet.mnemonic = phrase;
-        wallet.pubKey = publicKey;
-        wallet.priKey = secretKey;
-        wallet.address = publicKey;
+        wallet.mnemonic = mnemonics;
+        wallet.pubKey = address;
+        wallet.priKey = privateKey;
+        wallet.address = address;
         wallet.type = self.walletType;
         wallet.totalBalance = 0;
         wallet.coinCount = @"0";
         wallet.isOpenID = @"0";
         PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
         vc.isFirst = YES;
-        vc.wordStr = phrase;
+        vc.wordStr = mnemonics;
         vc.wallet = wallet;
         [self.navigationController pushViewController:vc animated:YES];
+    };
+    if ([self.walletType isEqualToString:kWalletTypeTron]) {
+        [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
+        [PW_TronContractTool generateAccountWithCompletionHandler:^(NSDictionary<NSString *,NSString *> * _Nullable result, NSString * _Nullable errMsg) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            NSString *address = result[@"address"];
+            NSString *privateKey = result[@"privateKey"];
+            NSString *mnemonics = result[@"mnemonics"];
+            createWalletBlock(mnemonics,address,privateKey);
+        }];
+    }else if ([self.walletType isEqualToString:kWalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana createAccount];
+        NSString *phrase = account[@"phrase"];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
+        createWalletBlock(phrase,publicKey,secretKey);
     }else{
         //创建助记词
         [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
         [FchainTool generateMnemonicBlock:^(NSString * _Nonnull result) {
             [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
             Wallet *wallet = [[Wallet alloc] init];
             wallet.walletName = walletName;
             wallet.walletPassword = pwdStr;

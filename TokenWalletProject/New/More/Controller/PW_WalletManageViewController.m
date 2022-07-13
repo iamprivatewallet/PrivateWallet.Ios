@@ -128,20 +128,26 @@
             }];
             return;
         }
-        [[PW_WalletManager shared] deleteWallet:model];
-        [self.dataList removeObject:model];
-        [tableView reloadData];
-        if (self.dataList.count>0) {
-            if ([User_manager.currentUser.chooseWallet_address isEqualToString:model.address]) {
-                Wallet *wallet = self.dataList.firstObject;
-                [User_manager updateChooseWallet:wallet];
+        [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+            if (![pwd isEqualToString:model.walletPassword]) {
+                return [self showError:LocalizedStr(@"text_pwdError")];
             }
-        }else{
-            [User_manager logout];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [TheAppDelegate switchToCreateWalletVC];
-            });
-        }
+            [[PW_WalletManager shared] deleteWallet:model];
+            [self.dataList removeObject:model];
+            [tableView reloadData];
+            if (self.dataList.count>0) {
+                if ([User_manager.currentUser.chooseWallet_address isEqualToString:model.address]) {
+                    Wallet *wallet = self.dataList.firstObject;
+                    [User_manager updateChooseWallet:wallet];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
+                }
+            }else{
+                [User_manager logout];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [TheAppDelegate switchToCreateWalletVC];
+                });
+            }
+        }];
     }
 }
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {

@@ -101,15 +101,12 @@
     }
 }
 - (void)importPriKeyWithWallet:(Wallet *)wallet{
-    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
-        NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
-        NSString *publicKey = account[@"publicKey"];
-        NSString *secretKey = account[@"secretKey"];
+    void (^importBlock)(NSString *, NSString *) = ^(NSString *address, NSString *privateKey){
         wallet.owner = User_manager.currentUser.user_name;
         wallet.mnemonic = @"";
-        wallet.pubKey = publicKey;
-        wallet.priKey = secretKey;
-        wallet.address = publicKey;
+        wallet.pubKey = address;
+        wallet.priKey = privateKey;
+        wallet.address = address;
         wallet.isImport = @"1";
         wallet.totalBalance = 0;
         wallet.coinCount = @"0";
@@ -117,6 +114,22 @@
         [[PW_WalletManager shared] saveWallet:wallet];
         [self showSuccess:LocalizedStr(@"text_importSuccess")];
         [self.navigationController popToRootViewControllerAnimated:YES];
+    };
+    if ([self.walletType isEqualToString:kWalletTypeTron]) {
+        [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
+        [PW_TronContractTool importWithPrivateKey:wallet.priKey completionHandler:^(NSDictionary<NSString *,NSString *> * _Nullable result, NSString * _Nullable errMsg) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            NSString *address = result[@"address"];
+            NSString *privateKey = result[@"privateKey"];
+            importBlock(address,privateKey);
+        }];
+    }else if ([self.walletType isEqualToString:kWalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
+        importBlock(publicKey,secretKey);
     }else{
         [self.view showLoadingIndicator];
         self.sureBtn.userInteractionEnabled = NO;
@@ -135,16 +148,12 @@
     }
 }
 - (void)importMnemonicWithWallet:(Wallet *)wallet{
-    if ([self.walletType isEqualToString:kWalletTypeSolana]) {
-        NSDictionary *account = [PW_Solana restoreAccountWithSecretKey:wallet.priKey];
-        NSString *phrase = account[@"phrase"];
-        NSString *publicKey = account[@"publicKey"];
-        NSString *secretKey = account[@"secretKey"];
+    void (^importBlock)(NSString *, NSString *, NSString *) = ^(NSString *mnemonics, NSString *address, NSString *privateKey){
         wallet.owner = User_manager.currentUser.user_name;
-        wallet.mnemonic = phrase;
-        wallet.pubKey = publicKey;
-        wallet.priKey = secretKey;
-        wallet.address = publicKey;
+        wallet.mnemonic = mnemonics;
+        wallet.pubKey = address;
+        wallet.priKey = privateKey;
+        wallet.address = address;
         wallet.isImport = @"1";
         wallet.totalBalance = 0;
         wallet.coinCount = @"0";
@@ -152,6 +161,24 @@
         [[PW_WalletManager shared] saveWallet:wallet];
         [self showSuccess:LocalizedStr(@"text_importSuccess")];
         [self.navigationController popToRootViewControllerAnimated:YES];
+    };
+    if ([self.walletType isEqualToString:kWalletTypeTron]) {
+        [self.view showLoadingIndicator];
+        self.sureBtn.userInteractionEnabled = NO;
+        [PW_TronContractTool importWithMnemonics:wallet.mnemonic completionHandler:^(NSDictionary<NSString *,NSString *> * _Nullable result, NSString * _Nullable errMsg) {
+            [self.view hideLoadingIndicator];
+            self.sureBtn.userInteractionEnabled = YES;
+            NSString *mnemonics = result[@"mnemonics"];
+            NSString *address = result[@"address"];
+            NSString *privateKey = result[@"privateKey"];
+            importBlock(mnemonics,address,privateKey);
+        }];
+    }else if ([self.walletType isEqualToString:kWalletTypeSolana]) {
+        NSDictionary *account = [PW_Solana restoreAccountWithPhrase:[wallet.mnemonic componentsSeparatedByString:@" "]];
+        NSString *phrase = account[@"phrase"];
+        NSString *publicKey = account[@"publicKey"];
+        NSString *secretKey = account[@"secretKey"];
+        importBlock(phrase,publicKey,secretKey);
     }else{
         [self.view showLoadingIndicator];
         self.sureBtn.userInteractionEnabled = NO;

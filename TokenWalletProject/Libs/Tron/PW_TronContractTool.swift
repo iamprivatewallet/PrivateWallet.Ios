@@ -13,11 +13,32 @@ import BIP32Swift
 
 class PW_TronContractTool: NSObject {
     static private let obj = PW_TronContractTool()
-    private let provider = TronWebHttpProvider(URL(string: "https://trx.mytokenpocket.vip")!)!
-    private var tronWeb: TronWeb { return TronWeb(provider: provider) }
+    private let provider = TronWebHttpProvider(URL(string: kTronRPCUrl)!)!
+    private var tronWeb: TronWeb {return TronWeb(provider: provider)}
     private let LackInfoTip = "lack of information";
-    @objc class func shared() -> PW_TronContractTool {
+    @objc public class func shared() -> PW_TronContractTool {
         return obj
+    }
+    @objc public class func jsonRPC() -> String {
+        let urlStr = kTronRPCUrl
+        if urlStr.hasSuffix("/") {
+            return "\(urlStr)jsonrpc"
+        }
+        return "\(urlStr)/jsonrpc"
+    }
+    @objc public class func getJSONRPC(urlStr: String?) -> String {
+        guard let urlStr = urlStr else {return ""}
+        if urlStr.hasSuffix("/jsonrpc") {
+            return urlStr
+        }
+        if urlStr.hasSuffix("/") {
+            return "\(urlStr)jsonrpc"
+        }
+        return "\(urlStr)/jsonrpc"
+    }
+    @objc public class func isAddress(_ address: String?) -> Bool {
+        guard let address = address, let _ = TronAddress(address) else { return false }
+        return true
     }
     @objc public class func generateAccount(completionHandler: ((_ result: [String: String]?, _ errorDesc: String?)->())?) {
         let language: BIP39Language = .english
@@ -133,7 +154,7 @@ extension PW_TronContractTool {
 }
 
 extension PW_TronContractTool {
-    @objc public func getAccount(address: String?, completionHandler: ((_ result: [String: Any]?, _ errorDesc: String?)->())?) {
+    @objc public func getAccount(address: String?, completionHandler: ((_ result: [String: String]?, _ errorDesc: String?)->())?) {
         guard let address = address, let fromAddress = TronAddress(address) else {
             completionHandler?(nil,LackInfoTip)
             return
@@ -142,10 +163,10 @@ extension PW_TronContractTool {
             do {
                 let account = try self.provider.getAccount(fromAddress).wait()
                 debugPrint("account", account)
-                let result: [String: Any] = [
-                    "balance": account.balance,
-                    "create_time": account.createTime,
-                    "latest_opration_time": account.latestOprationTime,
+                let result: [String: String] = [
+                    "balance": "\(account.balance)",
+                    "create_time": "\(account.createTime)",
+                    "latest_opration_time": "\(account.latestOprationTime)",
                 ]
                 DispatchQueue.main.async {
                     completionHandler?(result,nil)

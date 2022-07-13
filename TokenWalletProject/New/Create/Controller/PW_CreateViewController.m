@@ -173,11 +173,7 @@
         make.top.offset(10);
         make.left.offset(15);
     }];
-    self.walletNameTF = [[UITextField alloc] init];
-    [self.walletNameTF pw_setPlaceholder:@"ETH"];
-    self.walletNameTF.font = [UIFont systemFontOfSize:14];
-    self.walletNameTF.textColor = [UIColor g_textColor];
-    self.walletNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.walletNameTF = [PW_ViewTool textFieldFont:[UIFont systemFontOfSize:14] color:[UIColor g_textColor] placeholder:@"ETH"];
     [self.walletNameView addSubview:self.walletNameTF];
     [self.walletNameTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(18);

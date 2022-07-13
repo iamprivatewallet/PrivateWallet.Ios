@@ -3410,8 +3410,6 @@
 				5CEF34CF280589410052BA15 /* PW_AddImportWalletViewController.m */,
 				5CEF34D12806BE460052BA15 /* PW_SearchDappCurrencyViewController.h */,
 				5CEF34D22806BE460052BA15 /* PW_SearchDappCurrencyViewController.m */,
-				5CE0552028605DB500B68A6B /* PW_SearchDappViewController.h */,
-				5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */,
 				5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */,
 				5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */,
 				5C36E17B28093F910000FEE0 /* PW_CurrencyManageViewController.h */,
@@ -3437,10 +3435,6 @@
 				5C7ED8732808205E00873A53 /* PW_SearchDeleteHeaderView.m */,
 				5CEF34D72806CA510052BA15 /* PW_SearchRecommendCell.h */,
 				5CEF34D82806CA510052BA15 /* PW_SearchRecommendCell.m */,
-				5CEF34DD2806DFE40052BA15 /* PW_SearchDappCell.h */,
-				5CEF34DE2806DFE40052BA15 /* PW_SearchDappCell.m */,
-				5CA2C84F2861A02C00EA46F5 /* PW_SearchHistoryDappCell.h */,
-				5CA2C8502861A02C00EA46F5 /* PW_SearchHistoryDappCell.m */,
 				5CEF34DA2806D7240052BA15 /* PW_SearchCurrencyCell.h */,
 				5CEF34DB2806D7240052BA15 /* PW_SearchCurrencyCell.m */,
 				5C36E17E28094AAC0000FEE0 /* PW_CurrencyManageCell.h */,
@@ -3617,6 +3611,8 @@
 			children = (
 				5CE7ACE527F6EE1F00E2188D /* PW_DappViewController.h */,
 				5CE7ACE627F6EE1F00E2188D /* PW_DappViewController.m */,
+				5CE0552028605DB500B68A6B /* PW_SearchDappViewController.h */,
+				5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */,
 				5C38FBCC2859BCA000D6017F /* PW_DappFavoritesViewController.h */,
 				5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */,
 				5CCE70CD28100ECF00860841 /* PW_DappRecentBrowseViewController.h */,
@@ -3641,6 +3637,10 @@
 		5CE7ACE127F6EDFB00E2188D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5CEF34DD2806DFE40052BA15 /* PW_SearchDappCell.h */,
+				5CEF34DE2806DFE40052BA15 /* PW_SearchDappCell.m */,
+				5CA2C84F2861A02C00EA46F5 /* PW_SearchHistoryDappCell.h */,
+				5CA2C8502861A02C00EA46F5 /* PW_SearchHistoryDappCell.m */,
 				5CCE70B2280FDB3C00860841 /* PW_DappBrowserCell.h */,
 				5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */,
 				5CCE70BE280FECDC00860841 /* PW_DappBrowserItemCell.h */,

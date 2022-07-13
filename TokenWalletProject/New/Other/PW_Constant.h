@@ -18,6 +18,7 @@ static NSString * _Nonnull const kDefaultUserName = @"identity_name";
 static NSString * _Nonnull const kWalletTypeETH = @"ETH";
 static NSString * _Nonnull const kWalletTypeCVN = @"CVN";
 static NSString * _Nonnull const kWalletTypeSolana = @"Solana";
+static NSString * _Nonnull const kWalletTypeTron = @"Tron";
 
 static NSString * _Nonnull const kETHChainId = @"1";
 static NSString * _Nonnull const kBSCChainId = @"56";
@@ -28,3 +29,5 @@ static NSString * _Nonnull const kETHRPCUrl = @"https://mainnet.infura.io/v3/029
 static NSString * _Nonnull const kBSCRPCUrl = @"https://bsc-dataseed2.ninicoin.io";
 static NSString * _Nonnull const kHECORPCUrl = @"https://http-mainnet.hecochain.com";
 static NSString * _Nonnull const kCVNRPCUrl = @"http://52.220.97.222:1235";
+
+static NSString * _Nonnull const kTronRPCUrl = @"https://trx.mytokenpocket.vip";

@@ -132,6 +132,8 @@
         NSString *name = [[SettingManager sharedInstance] getNodeNameWithChainId:kCVNChainId];
         NSString *node = [[SettingManager sharedInstance] getNodeWithChainId:kCVNChainId];
         [User_manager updateCurrentNode:node chainId:kCVNChainId name:name];
+    }else if([wallet.type isEqualToString:kWalletTypeTron]){
+        [User_manager updateCurrentNode:[PW_TronContractTool jsonRPC] chainId:kWalletTypeTron name:kWalletTypeTron];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
     [self closeAction];

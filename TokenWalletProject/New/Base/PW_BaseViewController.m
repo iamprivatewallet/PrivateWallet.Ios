@@ -64,10 +64,10 @@
     [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
 }
 - (void)showSuccess:(NSString *)text {
-    [PW_ToastTool showSucees:text];
+    [PW_ToastTool showSucees:text toView:self.view];
 }
 - (void)showError:(NSString *)text {
-    [PW_ToastTool showError:text];
+    [PW_ToastTool showError:text toView:self.view];
 }
 - (void)showToast:(NSString *)text {//1.5s dismiss
     [[ToastHelper sharedToastHelper] toast:text];

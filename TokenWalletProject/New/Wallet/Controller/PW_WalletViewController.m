@@ -85,7 +85,7 @@
 }
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
-        if ([result isContract]) {
+        if ([result isContract]||[PW_TronContractTool isAddress:result]) {
             PW_TransferViewController *vc = [[PW_TransferViewController alloc] init];
             vc.toAddress = result;
             [self.navigationController pushViewController:vc animated:YES];
@@ -153,7 +153,11 @@
     model.tokenContract = self.currentWallet.address;
     model.tokenAmount = @"0";
     model.price = @"0";
-    model.tokenDecimals = 18;
+    if ([user.chooseWallet_type isEqualToString:kWalletTypeTron]) {
+        model.tokenDecimals = 6;
+    }else{
+        model.tokenDecimals = 18;
+    }
     model.isDefault = YES;
     PW_TokenModel *exitModel = [[PW_TokenManager shared] isExist:user.chooseWallet_address type:user.chooseWallet_type tokenAddress:model.tokenContract chainId:model.tokenChain];
     if (exitModel==nil) {
@@ -228,27 +232,15 @@
     return isExit;
 }
 - (void)refreshBalance {
-    if ([self.currentWallet.type isEqualToString:kWalletTypeCVN]) {
-        [self loadCVNAllCoin];
-        [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
-                obj.price = NSStringWithFormat(@"%@",data);
-                [[PW_TokenManager shared] updateCoin:obj];
-                [self.tableView reloadData];
-                [self refreshCVNTotal];
-            } errBlock:nil];
-        }];
-    }else{
-        [self loadAllBalance];
-        [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
-                obj.price = NSStringWithFormat(@"%@",data);
-                [[PW_TokenManager shared] updateCoin:obj];
-                [self.tableView reloadData];
-                [self refreshTotal];
-            } errBlock:nil];
-        }];
-    }
+    [self loadAllBalance];
+    [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self pw_requestApi:WalletTokenPriceURL params:@{@"tokenSymbol":obj.tokenName} completeBlock:^(id data) {
+            obj.price = NSStringWithFormat(@"%@",data);
+            [[PW_TokenManager shared] updateCoin:obj];
+            [self.tableView reloadData];
+            [self refreshTotal];
+        } errBlock:nil];
+    }];
 }
 - (void)refreshHeader {
     self.walletNameLb.text = self.currentWallet.walletName;
@@ -278,16 +270,34 @@
     }];
     [self requestData];
 }
-#pragma mark ETH 余额获取
+#pragma mark balance
 - (void)loadAllBalance{
     [self refreshTotal];
-    [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
-        [PW_ContractTool loadETHBalance:coin completion:^(NSString *amount) {
-            coin.tokenAmount = amount;
-            [[PW_TokenManager shared] updateCoin:coin];
-            [self refreshTotal];
+    if ([self.currentWallet.type isEqualToString:kWalletTypeCVN]) {
+        [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
+            [PW_ContractTool loadCVNBalance:coin completion:^(NSString * _Nonnull amount) {
+                coin.tokenAmount = [amount stringDownDecimal:6];
+                [[PW_TokenManager shared] updateCoin:coin];
+                [self refreshTotal];
+            }];
         }];
-    }];
+    }else if([self.currentWallet.type isEqualToString:kWalletTypeTron]){
+        [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
+            [PW_ContractTool loadTronBalance:coin completion:^(NSString *amount) {
+                coin.tokenAmount = [amount stringDownDecimal:6];
+                [[PW_TokenManager shared] updateCoin:coin];
+                [self refreshTotal];
+            }];
+        }];
+    }else{
+        [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
+            [PW_ContractTool loadETHBalance:coin completion:^(NSString *amount) {
+                coin.tokenAmount = amount;
+                [[PW_TokenManager shared] updateCoin:coin];
+                [self refreshTotal];
+            }];
+        }];
+    }
 }
 - (void)refreshTotal {
     self.currentWallet.totalBalance = 0;
@@ -299,44 +309,6 @@
         }
     }];
     self.currentWallet.totalBalance = totalBalance;
-    [self refreshHeader];
-    [[PW_WalletManager shared] updateWallet:self.currentWallet];
-    [self.tableView reloadData];
-}
-#pragma mark CVN 余额获取
-- (void)loadCVNAllCoin{
-    [self refreshCVNTotal];
-    [self.coinList enumerateObjectsUsingBlock:^(PW_TokenModel * _Nonnull coin, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self loadCVNBalanceWithCoin:coin completion:^(NSString *amount) {
-            coin.tokenAmount = [amount stringDownDecimal:6];
-            [[PW_TokenManager shared] updateCoin:coin];
-            [self refreshCVNTotal];
-        }];
-    }];
-}
-- (void)loadCVNBalanceWithCoin:(PW_TokenModel *)coin completion:(void (^)(NSString *amount))completion {
-    if ([[coin.tokenContract lowercaseString] isEqualToString:[self.currentWallet.address lowercaseString]]) {//主币
-        [PW_ContractTool loadCVNMainBalanceDecimals:coin.tokenDecimals completion:^(NSString * _Nonnull amount) {
-            if(completion&&amount!=nil) {
-                completion(amount);
-            }
-        }];
-    }else{
-        [PW_ContractTool loadCVNTokenBalance:coin.tokenContract decimals:coin.tokenDecimals completion:^(NSString * _Nonnull amount) {
-            if(completion&&amount!=nil) {
-                completion(amount);
-            }
-        }];
-    }
-}
-- (void)refreshCVNTotal {
-    self.currentWallet.totalBalance = 0;
-    for (PW_TokenModel *coin in self.coinList) {
-        if([coin.tokenAmount isNoEmpty]){
-            NSString *coinUsdt = [coin.tokenAmount stringDownMultiplyingBy:coin.price decimal:8];
-            self.currentWallet.totalBalance += [coinUsdt doubleValue];
-        }
-    }
     [self refreshHeader];
     [[PW_WalletManager shared] updateWallet:self.currentWallet];
     [self.tableView reloadData];

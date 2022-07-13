@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)loadCVNMainBalanceDecimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 + (void)loadCVNTokenBalance:(NSString *)tokenAddress decimals:(NSInteger)decimals completion:(void (^)(NSString *amount))completion;
 
++ (void)loadTronBalance:(PW_TokenModel *)model completion:(void (^)(NSString *amount))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

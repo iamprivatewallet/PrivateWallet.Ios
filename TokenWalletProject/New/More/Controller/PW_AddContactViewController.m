@@ -61,9 +61,20 @@
         return;
     }
     NSString *address = [self.addressTf.text trim];
-    if (![address isContract]) {
-        [self showError:LocalizedStr(@"text_addressError")];
+    if (![address isNoEmpty]) {
+        [self showError:LocalizedStr(@"text_pleaseEnterAddress")];
         return;
+    }
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeTron]) {
+        if (![PW_TronContractTool isAddress:address]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
+    }else{
+        if (![address isContract]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
     }
     NSString *note = [self.noteTf.text trim];
     PW_AddressBookModel *model = [[PW_AddressBookModel alloc] init];
@@ -86,15 +97,20 @@
     self.subNameLb.text = self.typeModel.subTitle;
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.bounces = NO;
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
-    self.contentView.backgroundColor = [UIColor g_bgColor];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.bottom.offset(0);
@@ -155,7 +171,6 @@
     [self createNameItems];
     [self createAddressItems];
     [self createNoteItems];
-    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
 }
 - (void)createTokenItems {
     self.iconIv = [[UIImageView alloc] init];

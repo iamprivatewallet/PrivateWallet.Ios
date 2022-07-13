@@ -103,15 +103,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)makeViews {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.bounces = NO;
-    [self.view addSubview:scrollView];
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor g_bgColor];
+    [self.view addSubview:bodyView];
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
+    [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    [bodyView addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     self.contentView = [[UIView alloc] init];
-    self.contentView.backgroundColor = [UIColor g_bgColor];
     [scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.bottom.offset(0);
@@ -200,7 +205,6 @@
     [self createSymbolItems];
     [self createBlockBrowserItems];
     [self createWarnItems];
-    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
 }
 - (void)createWarnItems {
     UILabel *tipLb = [PW_ViewTool labelText:LocalizedStr(@"text_addCustomNetworkTip") fontSize:14 textColor:[UIColor g_textColor]];

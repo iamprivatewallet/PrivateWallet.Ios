@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)showError:(NSString *)error;
 + (void)showSucees:(NSString *)success;
++ (void)showError:(NSString *)error toView:(UIView *)toView;
++ (void)showSucees:(NSString *)success toView:(UIView *)toView;
 
 @end
 

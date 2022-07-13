@@ -28,34 +28,34 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_addCurrency")];
     [self makeViews];
     NSArray *list = @[
-         @{
-             @"title":kWalletTypeETH,
-             @"desc":@"Ethereum",
-             @"icon":@"icon_type_ETH",
-             @"isDefault":@"1",
-             @"isChecked":@"1"
-         },
- //        @{
- //            @"title":@"BSC",
- //            @"desc":@"bsc",
- //            @"icon":@"icon_BSC",
- //            @"isDefault":@"1",
- //            @"isChecked":@"1"
- //        },
- //        @{
- //            @"title":@"HECO",
- //            @"desc":@"heco",
- //            @"icon":@"icon_HECO",
- //            @"isDefault":@"1",
- //            @"isChecked":@"1"
- //        },
-         @{
-             @"title":kWalletTypeCVN,
-             @"desc":@"cvn",
-             @"icon":@"icon_type_CVN",
-             @"isDefault":@"0",
-             @"isChecked":@"0"
-         },
+            @{
+                @"title":kWalletTypeETH,
+                @"desc":@"Ethereum",
+                @"icon":@"icon_type_ETH",
+                @"isDefault":@"1",
+                @"isChecked":@"1"
+            },
+            @{
+                @"title":kWalletTypeCVN,
+                @"desc":@"cvn",
+                @"icon":@"icon_type_CVN",
+                @"isDefault":@"0",
+                @"isChecked":@"0"
+            },
+            @{
+                @"title":kWalletTypeTron,
+                @"detailText":@"tron",
+                @"icon":@"icon_type_TRON",
+                @"isDefault":@"0",
+                @"isChecked":@"0"
+            }
+//            @{
+//             @"title":kWalletTypeSolana,
+//             @"detailText":@"solana",
+//             @"icon":@"icon_type_SOLANA",
+//             @"isDefault":@"0",
+//             @"isChecked":@"0"
+//            }
      ];
      [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
          PW_AddCurrencyModel *model = [PW_AddCurrencyModel mj_objectWithKeyValues:obj];

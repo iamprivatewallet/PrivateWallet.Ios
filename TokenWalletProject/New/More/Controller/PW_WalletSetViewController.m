@@ -40,6 +40,14 @@
         }];
         return;
     }
+    [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+        if (![pwd isEqualToString:self.model.walletPassword]) {
+            return [self showError:LocalizedStr(@"text_pwdError")];
+        }
+        [self deleteWallet];
+    }];
+}
+- (void)deleteWallet {
     [[PW_WalletManager shared] deleteWallet:self.model];
     if (self.refreshBlock) {
         self.refreshBlock(self.model);
@@ -49,6 +57,7 @@
         if ([User_manager.currentUser.chooseWallet_address isEqualToString:self.model.address]) {
             Wallet *wallet = wallets.firstObject;
             [User_manager updateChooseWallet:wallet];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
@@ -76,15 +85,25 @@
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     PW_WalletSetModel *model3 = [PW_WalletSetModel ModelIconName:@"icon_wallet_mnemonic" title:LocalizedStr(@"text_backupMnemonics") desc:LocalizedStr(@"text_backupMnemonicsWalletDesc") actionBlock:^(PW_WalletSetModel * _Nonnull model) {
-        PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
-        vc.isFirst = NO;
-        vc.wordStr = weakSelf.model.mnemonic;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+            if (![pwd isEqualToString:weakSelf.model.walletPassword]) {
+                return [weakSelf showError:LocalizedStr(@"text_pwdError")];
+            }
+            PW_BackupWalletViewController *vc = [[PW_BackupWalletViewController alloc] init];
+            vc.isFirst = NO;
+            vc.wordStr = weakSelf.model.mnemonic;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
     }];
     PW_WalletSetModel *model4 = [PW_WalletSetModel ModelIconName:@"icon_wallet_privatekey" title:LocalizedStr(@"text_lookPrivateKey") desc:LocalizedStr(@"text_lookPrivateKeyWalletDesc") actionBlock:^(PW_WalletSetModel * _Nonnull model) {
-        PW_LookPrivateKeyViewController *vc = [[PW_LookPrivateKeyViewController alloc] init];
-        vc.model = weakSelf.model;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+        [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+            if (![pwd isEqualToString:weakSelf.model.walletPassword]) {
+                return [weakSelf showError:LocalizedStr(@"text_pwdError")];
+            }
+            PW_LookPrivateKeyViewController *vc = [[PW_LookPrivateKeyViewController alloc] init];
+            vc.model = weakSelf.model;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
     }];
     [self.dataList removeAllObjects];
     if ([self.model.mnemonic isNoEmpty]) {

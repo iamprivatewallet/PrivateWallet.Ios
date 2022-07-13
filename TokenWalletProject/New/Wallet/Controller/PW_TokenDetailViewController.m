@@ -44,7 +44,11 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_info_primary" rightAction:@selector(infoAction)];
+    if ([self.model.tId isNoEmpty]) {
+        [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail") rightImg:@"icon_info_primary" rightAction:@selector(infoAction)];
+    }else{
+        [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail")];
+    }
     [self makeViews];
     self.noDataView.offsetY = 100;
     User *user = User_manager.currentUser;

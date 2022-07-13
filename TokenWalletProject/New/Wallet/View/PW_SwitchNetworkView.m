@@ -66,7 +66,7 @@
                 if([model.chainId isEqualToString:@"168"]){
                     [self.dataList addObject:model];
                 }
-            }else{
+            }else if([walletType isEqualToString:kWalletTypeTron]&&[model.title isEqualToString:kWalletTypeTron]) {
                 [self.dataList addObject:model];
             }
         }
@@ -138,14 +138,20 @@
     Wallet *wallet = nil;
     if ([model.title isEqualToString:kWalletTypeCVN]||[model.chainId isEqualToString:kCVNChainId]) {
         wallet = [[PW_WalletManager shared] getOriginWalletWithType:kWalletTypeCVN];
-    }else{
+    }else if([model.title isEqualToString:kWalletTypeETH]){
         wallet = [[PW_WalletManager shared] getOriginWalletWithType:kWalletTypeETH];
+    }else if([model.title isEqualToString:kWalletTypeTron]){
+        wallet = [[PW_WalletManager shared] getOriginWalletWithType:kWalletTypeTron];
     }
     if (wallet&&![wallet.type isEqualToString:User_manager.currentUser.chooseWallet_type]) {
         [User_manager updateChooseWallet:wallet];
         [[NSNotificationCenter defaultCenter] postNotificationName:kChangeWalletNotification object:nil];
     }
-    [User_manager updateCurrentNode:model.rpcUrl chainId:model.chainId name:model.title];
+    if([model.title isEqualToString:kWalletTypeTron]){
+        [User_manager updateCurrentNode:[PW_TronContractTool getJSONRPCWithUrlStr:model.rpcUrl] chainId:model.chainId name:model.title];
+    }else{
+        [User_manager updateCurrentNode:model.rpcUrl chainId:model.chainId name:model.title];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:kChainNodeUpdateNotification object:nil];
     [self closeAction];
 }

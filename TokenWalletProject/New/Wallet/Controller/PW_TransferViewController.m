@@ -197,9 +197,16 @@ static NSInteger SpeedFeeBtnTag = 100;
         [self showError:LocalizedStr(@"text_pleaseEnterAddress")];
         return;
     }
-    if (![address isContract]) {
-        [self showError:LocalizedStr(@"text_addressError")];
-        return;
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeTron]) {
+        if (![PW_TronContractTool isAddress:address]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
+    }else{
+        if (![address isContract]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
     }
     self.amount = countStr;
     self.address = address;
@@ -213,13 +220,59 @@ static NSInteger SpeedFeeBtnTag = 100;
 - (void)transferAction {
     User *user = User_manager.currentUser;
     if ([user.chooseWallet_type isEqualToString:kWalletTypeCVN]) {
-        if ([self.model.tokenContract isEqualToString:user.chooseWallet_address]) {
+        if (![self.model.tokenContract isNoEmpty]||[self.model.tokenContract.lowercaseString isEqualToString:user.chooseWallet_address.lowercaseString]) {
             [self loadTransferCVNMain];
         }else{
             [self loadTransferDai];
         }
     }else if ([user.chooseWallet_type isEqualToString:kWalletTypeETH]) {
         [self loadColdWalletTransferETH];
+    }else if ([user.chooseWallet_type isEqualToString:kWalletTypeTron]) {
+        Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+        if (wallet) {
+            int64_t amount = [self.amount stringDownMultiplyingBy10Power:self.model.tokenDecimals].longLongValue;
+            [self.view showLoadingIndicator];
+            self.nextBtn.enabled = NO;
+            if (![self.model.tokenContract isNoEmpty]||[self.model.tokenContract.lowercaseString isEqualToString:user.chooseWallet_address.lowercaseString]) {
+                [[PW_TronContractTool shared] transferWithPrivateKey:wallet.priKey address:self.address amount:amount completionHandler:^(BOOL success, NSString * _Nullable hash, NSString * _Nullable errMsg) {
+                    [self.view hideLoadingIndicator];
+                    self.nextBtn.enabled = YES;
+                    if (success) {
+                        SetUserDefaultsForKey(@"0", @"isFirstTransfer");
+                        [UserDefaults synchronize];
+                        [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                        [self saveTransferRecordWithHash:hash];
+                        if (self.transferSuccessBlock) {
+                            self.transferSuccessBlock();
+                        }
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self.navigationController popViewControllerAnimated:YES];
+                        });
+                    }else{
+                        [self showError:errMsg];
+                    }
+                }];
+            }else{
+                [[PW_TronContractTool shared] transferTRC20WithPrivateKey:wallet.priKey address:self.address contractAddress:self.model.tokenContract amount:amount completionHandler:^(BOOL success, NSString * _Nullable hash, NSString * _Nullable errMsg) {
+                    [self.view hideLoadingIndicator];
+                    self.nextBtn.enabled = YES;
+                    if (success) {
+                        SetUserDefaultsForKey(@"0", @"isFirstTransfer");
+                        [UserDefaults synchronize];
+                        [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                        [self saveTransferRecordWithHash:hash];
+                        if (self.transferSuccessBlock) {
+                            self.transferSuccessBlock();
+                        }
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self.navigationController popViewControllerAnimated:YES];
+                        });
+                    }else{
+                        [self showError:errMsg];
+                    }
+                }];
+            }
+        }
     }
 }
 - (void)changeTokenAction {

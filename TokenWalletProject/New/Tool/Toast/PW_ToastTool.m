@@ -19,6 +19,12 @@
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [self showText:success isSucces:YES toView:window];
 }
++ (void)showError:(NSString *)error toView:(UIView *)toView {
+    [self showText:error isSucces:NO toView:toView];
+}
++ (void)showSucees:(NSString *)success toView:(UIView *)toView {
+    [self showText:success isSucces:YES toView:toView];
+}
 + (void)showText:(NSString *)text isSucces:(BOOL)isSuccess toView:(UIView *)view {
     if(view==nil){
         return;

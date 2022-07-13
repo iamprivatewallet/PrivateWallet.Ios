@@ -78,6 +78,8 @@
         return @"BSC";
     } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
         return @"CVN";
+    } else if ([chainId isEqualToString:kWalletTypeTron]) {
+        return @"Tron";
     } else {
         return @"ETH";
     }
@@ -92,6 +94,8 @@
         return @"BNB";
     } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
         return @"CVNT";
+    } else if ([chainId isEqualToString:kWalletTypeTron]) {
+        return @"TRX";
     } else {
         return @"ETH";
     }
@@ -114,6 +118,8 @@
         return @"Binance Smart Chain";
     } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
         return @"CVN";
+    } else if ([chainId isEqualToString:kWalletTypeTron]) {
+        return @"Tron";
     } else {
         return @"";
     }
