@@ -42,13 +42,13 @@
                 @"isDefault":@"0",
                 @"isChecked":@"0"
             },
-            @{
-                @"title":kWalletTypeTron,
-                @"detailText":@"tron",
-                @"icon":@"icon_type_TRON",
-                @"isDefault":@"0",
-                @"isChecked":@"0"
-            }
+//            @{
+//                @"title":kWalletTypeTron,
+//                @"detailText":@"tron",
+//                @"icon":@"icon_type_TRON",
+//                @"isDefault":@"0",
+//                @"isChecked":@"0"
+//            }
 //            @{
 //             @"title":kWalletTypeSolana,
 //             @"detailText":@"solana",

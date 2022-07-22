@@ -390,6 +390,7 @@
 		5CEF34DC2806D7250052BA15 /* PW_SearchCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34DB2806D7240052BA15 /* PW_SearchCurrencyCell.m */; };
 		5CEF34DF2806DFE40052BA15 /* PW_SearchDappCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34DE2806DFE40052BA15 /* PW_SearchDappCell.m */; };
 		5CEF34E22806E56C0052BA15 /* PW_TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEF34E12806E56B0052BA15 /* PW_TokenManager.m */; };
+		5CEFDB202883E98200ED3059 /* PW_PrisonBreakTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEFDB1F2883E98200ED3059 /* PW_PrisonBreakTool.m */; };
 		5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B527E45560006C8950 /* UpgradePopUpView.m */; };
 		5CFD16BA27E4967B006C8950 /* VersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD16B927E4967B006C8950 /* VersionModel.m */; };
 		5E0799A321D289C800924407 /* Tx.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0799A121D289C800924407 /* Tx.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1366,6 +1367,8 @@
 		5CEF34DE2806DFE40052BA15 /* PW_SearchDappCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SearchDappCell.m; sourceTree = "<group>"; };
 		5CEF34E02806E56B0052BA15 /* PW_TokenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenManager.h; sourceTree = "<group>"; };
 		5CEF34E12806E56B0052BA15 /* PW_TokenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenManager.m; sourceTree = "<group>"; };
+		5CEFDB1E2883E98200ED3059 /* PW_PrisonBreakTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_PrisonBreakTool.h; sourceTree = "<group>"; };
+		5CEFDB1F2883E98200ED3059 /* PW_PrisonBreakTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_PrisonBreakTool.m; sourceTree = "<group>"; };
 		5CFD16B427E45560006C8950 /* UpgradePopUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradePopUpView.h; sourceTree = "<group>"; };
 		5CFD16B527E45560006C8950 /* UpgradePopUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradePopUpView.m; sourceTree = "<group>"; };
 		5CFD16B827E4967B006C8950 /* VersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionModel.h; sourceTree = "<group>"; };
@@ -3131,6 +3134,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB76B2E27F44B640068E967 /* PW_Tool.h */,
+				5CEFDB1D2883E94000ED3059 /* PrisonBreak */,
 				5C376DEF286582D200435DEB /* SDImage */,
 				5CD7B040286448CB00148BD5 /* Vibrate */,
 				5CC641F728250B22002E1C46 /* Authentication */,
@@ -3779,6 +3783,15 @@
 				5CCE70DF2810EF7500860841 /* PW_ShareViewModel.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		5CEFDB1D2883E94000ED3059 /* PrisonBreak */ = {
+			isa = PBXGroup;
+			children = (
+				5CEFDB1E2883E98200ED3059 /* PW_PrisonBreakTool.h */,
+				5CEFDB1F2883E98200ED3059 /* PW_PrisonBreakTool.m */,
+			);
+			path = PrisonBreak;
 			sourceTree = "<group>";
 		};
 		5CFD16B727E49649006C8950 /* Global */ = {
@@ -5322,6 +5335,7 @@
 				5CD7B043286448F000148BD5 /* PW_VibrateTool.m in Sources */,
 				5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */,
 				5E0799EC21D28A3A00924407 /* GPBMessage.m in Sources */,
+				5CEFDB202883E98200ED3059 /* PW_PrisonBreakTool.m in Sources */,
 				5AF5D1571D2F7CBA004070D7 /* NSArray+SafeAccess.m in Sources */,
 				992EF16026AFF59F00F70A94 /* MangeWalletsVC.m in Sources */,
 				5AF5D1841D2F7CBA004070D7 /* NSObject+MKBlockTimer.m in Sources */,
