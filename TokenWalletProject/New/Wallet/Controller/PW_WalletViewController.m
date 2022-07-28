@@ -9,6 +9,7 @@
 #import "PW_WalletViewController.h"
 #import "PW_ScanTool.h"
 #import "PW_WalletCell.h"
+#import "PW_WalletNFTCell.h"
 #import "PW_ContractTool.h"
 #import "PW_TokenDetailViewController.h"
 #import "PW_CollectionViewController.h"
@@ -18,12 +19,16 @@
 #import "PW_SearchDappViewController.h"
 #import "PW_SearchCurrencyViewController.h"
 #import "PW_CurrencyManageViewController.h"
+#import "PW_SearchNFTViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, weak) UIView *headerView;
 
 @property (nonatomic, weak) UIView *currencyHeaderView;
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
+@property (nonatomic, weak) UIButton *menuBtn;
+@property (nonatomic, weak) UIButton *searchBtn;
 @property (nonatomic, weak) UIButton *hiddenSmallBtn;
 
 @property (nonatomic, weak) UILabel *walletNameLb;
@@ -79,10 +84,6 @@
         self.backupTipView.hidden = NO;
     }
 }
-- (void)searchAction {
-    PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 - (void)scanAction {
     [[PW_ScanTool shared] showScanWithResultBlock:^(NSString * _Nonnull result) {
         if ([result isContract]||[PW_TronContractTool isAddress:result]) {
@@ -130,9 +131,62 @@
     [UserDefaults synchronize];
     [self forceRefreshCacheCoinList];
 }
-- (void)editAction {
-    PW_CurrencyManageViewController *vc = [[PW_CurrencyManageViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+- (void)searchAction {
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    switch (index) {
+        case 0:{
+            PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:{
+            PW_SearchNFTViewController *vc = [[PW_SearchNFTViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+}
+- (void)menuChangeAction {
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    switch (index) {
+        case 0:{
+            self.hiddenSmallBtn.hidden = NO;
+            [self.hiddenSmallBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.searchBtn.mas_left).offset(-12);
+                make.centerY.offset(0);
+            }];
+        }
+            break;
+        case 1:{
+            self.hiddenSmallBtn.hidden = YES;
+            [self.hiddenSmallBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.searchBtn.mas_right);
+                make.centerY.offset(0);
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+    [self.tableView reloadData];
+}
+- (void)menuAction {
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    switch (index) {
+        case 0:{
+            PW_CurrencyManageViewController *vc = [[PW_CurrencyManageViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:{
+            
+        }
+            break;
+        default:
+            break;
+    }
 }
 - (void)addCurrencyAction {
     PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
@@ -315,18 +369,40 @@
 }
 #pragma mark - Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.coinList.count;
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    if (index==0) {
+        return self.coinList.count;
+    }
+    return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PW_WalletCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_WalletCell"];
-    NSAssert(cell, @"cell is nil");
-    cell.model = self.coinList[indexPath.row];
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    if (index==0) {
+        PW_WalletCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_WalletCell"];
+        NSAssert(cell, @"cell is nil");
+        cell.model = self.coinList[indexPath.row];
+        return cell;
+    }
+    PW_WalletNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_WalletNFTCell"];
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PW_TokenDetailViewController *vc = [PW_TokenDetailViewController new];
-    vc.model = self.coinList[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    if (index==0) {
+        PW_TokenDetailViewController *vc = [PW_TokenDetailViewController new];
+        vc.model = self.coinList[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger index = self.segmentedControl.selectedSegmentIndex;
+    if (index==0) {
+        return 75;
+    }
+    return 68;
 }
 #pragma mark - View
 - (void)makeViews {
@@ -451,30 +527,30 @@
         make.top.offset(28);
         make.left.offset(20);
         make.right.offset(-20);
-        make.height.offset(22);
+        make.height.offset(32);
     }];
-    UILabel *titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_currency") fontSize:15 textColor:[UIColor g_textColor]];
-    [headerView addSubview:titleLb];
-    [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(0);
-        make.centerY.offset(0);
+    [headerView addSubview:self.segmentedControl];
+    [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.offset(0);
     }];
-    UIButton *editBtn = [PW_ViewTool buttonImageName:@"icon_edit" target:self action:@selector(editAction)];
-    [headerView addSubview:editBtn];
-    [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(titleLb.mas_right).offset(6);
-        make.centerY.offset(0);
-    }];
-    UIButton *addBtn = [PW_ViewTool buttonImageName:@"icon_search" target:self action:@selector(searchAction)];
-    [headerView addSubview:addBtn];
-    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIButton *menuBtn = [PW_ViewTool buttonImageName:@"icon_menu_light" target:self action:@selector(menuAction)];
+    [headerView addSubview:menuBtn];
+    self.menuBtn = menuBtn;
+    UIButton *searchBtn = [PW_ViewTool buttonImageName:@"icon_search" target:self action:@selector(searchAction)];
+    [headerView addSubview:searchBtn];
+    self.searchBtn = searchBtn;
+    [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.right.offset(0);
     }];
     UIButton *hiddenSmallBtn = [PW_ViewTool buttonImageName:@"icon_switch_off" selectedImage:@"icon_switch_on" target:self action:@selector(hiddenSmallAction:)];
     [headerView addSubview:hiddenSmallBtn];
     self.hiddenSmallBtn = hiddenSmallBtn;
     [hiddenSmallBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(addBtn.mas_left).offset(-12);
+        make.right.equalTo(searchBtn.mas_left).offset(-12);
+        make.centerY.offset(0);
+    }];
+    [menuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(hiddenSmallBtn.mas_left).offset(-12);
         make.centerY.offset(0);
     }];
 }
@@ -517,35 +593,45 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[PW_WalletCell class] forCellReuseIdentifier:@"PW_WalletCell"];
+        [_tableView registerClass:[PW_WalletNFTCell class] forCellReuseIdentifier:@"PW_WalletNFTCell"];
         _tableView.rowHeight = 75;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.contentInset = UIEdgeInsetsMake(10, 0, SafeBottomInset, 0);
-        _tableView.tableFooterView = self.addCurrencyView;
+//        _tableView.tableFooterView = self.addCurrencyView;
     }
     return _tableView;
 }
-- (UIView *)addCurrencyView {
-    if (!_addCurrencyView) {
-        _addCurrencyView = [[UIView alloc] init];
-        _addCurrencyView.frame = CGRectMake(0, 0, 0, 54);
-        UIButton *addCurrencyBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addCurrency") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addCurrencyAction)];
-        addCurrencyBtn.frame = CGRectMake(20, 10, SCREEN_WIDTH-72, 44);
-        [addCurrencyBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
-        [_addCurrencyView addSubview:addCurrencyBtn];
-        [addCurrencyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(10);
-            make.left.offset(36);
-            make.right.offset(-36);
-            make.height.offset(44);
-        }];
-    }
-    return _addCurrencyView;
-}
+//- (UIView *)addCurrencyView {
+//    if (!_addCurrencyView) {
+//        _addCurrencyView = [[UIView alloc] init];
+//        _addCurrencyView.frame = CGRectMake(0, 0, 0, 54);
+//        UIButton *addCurrencyBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_addCurrency") fontSize:15 titleColor:[UIColor g_grayTextColor] imageName:@"icon_add" target:self action:@selector(addCurrencyAction)];
+//        addCurrencyBtn.frame = CGRectMake(20, 10, SCREEN_WIDTH-72, 44);
+//        [addCurrencyBtn setDottedLineColor:[UIColor g_dottedColor] lineWidth:1 length:3 space:3 radius:12];
+//        [_addCurrencyView addSubview:addCurrencyBtn];
+//        [addCurrencyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.offset(10);
+//            make.left.offset(36);
+//            make.right.offset(-36);
+//            make.height.offset(44);
+//        }];
+//    }
+//    return _addCurrencyView;
+//}
 - (NSMutableArray<PW_TokenModel *> *)coinList {
     if (!_coinList) {
         _coinList = [NSMutableArray array];
     }
     return _coinList;
+}
+- (UISegmentedControl *)segmentedControl {
+    if (!_segmentedControl) {
+        NSArray *titles = @[LocalizedStr(@"text_assets"),@"NFT"];
+        _segmentedControl = [PW_ViewTool segmentedControlWithTitles:titles];
+        _segmentedControl.selectedSegmentIndex = 0;
+        [_segmentedControl addTarget:self action:@selector(menuChangeAction) forControlEvents:UIControlEventValueChanged];
+    }
+    return _segmentedControl;
 }
 
 @end

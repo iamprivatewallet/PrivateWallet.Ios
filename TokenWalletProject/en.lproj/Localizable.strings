@@ -40,6 +40,7 @@ text_more="More";
 text_pleaseTryAgain="Please try again！";
 text_recommend="Recommend";
 text_next="Next";
+text_search="Search";
 
 tabbar_wallet="Wallet";
 tabbar_market="Market";

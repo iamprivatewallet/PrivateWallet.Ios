@@ -140,7 +140,8 @@
     if ([User_manager.currentUser.user_name isNoEmpty]) {
         [self resetTabbarVc];
         if([self.rootController isKindOfClass:[UITabBarController class]]){
-            ((UITabBarController *)self.rootController).selectedIndex = 3;
+            UITabBarController *tabbarController = ((UITabBarController *)self.rootController);
+            tabbarController.selectedIndex = tabbarController.viewControllers.count-1;
         }
         [self.rootNavigationController pushViewController:[PW_SetUpViewController new] animated:NO];
     }else{

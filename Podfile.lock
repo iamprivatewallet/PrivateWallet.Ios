@@ -14,12 +14,14 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - BigInt (5.0.0)
   - CocoaSecurity (1.2.4)
   - DZNEmptyDataSet (1.8.1)
   - FDFullscreenPopGesture (1.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - GenericJSON (2.0.1)
   - GMEllipticCurveCrypto (1.3)
   - IQKeyboardManager (6.5.6)
   - JJException (0.2.11):
@@ -70,6 +72,10 @@ PODS:
   - TweetNacl (1.0.2)
   - UICountingLabel (1.2.0)
   - "UITableView+FDTemplateLayoutCell (1.6)"
+  - web3.swift (1.2.0):
+    - BigInt (~> 5.0.0)
+    - GenericJSON (~> 2.0)
+    - secp256k1.swift (~> 0.1)
 
 DEPENDENCIES:
   - AFNetworking (= 4.0.1)
@@ -95,11 +101,14 @@ DEPENDENCIES:
   - Solana.Swift (from `https://github.com/ajamaica/Solana.Swift.git`, branch `master`)
   - SVProgressHUD
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
+  - web3.swift (= 1.2.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - BigInt
     - CocoaSecurity
+    - GenericJSON
     - JJException
     - LBXScan
     - MJExtension
@@ -111,6 +120,7 @@ SPEC REPOS:
     - Starscream
     - TweetNacl
     - "UITableView+FDTemplateLayoutCell"
+    - web3.swift
   trunk:
     - DZNEmptyDataSet
     - FDFullscreenPopGesture
@@ -138,10 +148,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  BigInt: 74b4d88367b0e819d9f77393549226d36faeb0d8
   CocoaSecurity: d288a6f87e0f363823d2cb83e753814a6944f71a
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GenericJSON: a6e74e2c457f8693caab08e0eafde7d97e6666de
   GMEllipticCurveCrypto: dff32bc22d2bfd73d6cbac841faeb40f8d79ce7f
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JJException: 738a5379392769edca40815ec14cd895a000d9e7
@@ -164,7 +176,8 @@ SPEC CHECKSUMS:
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
+  web3.swift: 5b1c6275d92cfa60e4365159057bd63a83dfb9bd
 
-PODFILE CHECKSUM: cd9f07632cb1b6310483540f9386eb73f9a51c44
+PODFILE CHECKSUM: c04c981411fb89bf1126ff4e9657a2892b94e3a1
 
 COCOAPODS: 1.11.2

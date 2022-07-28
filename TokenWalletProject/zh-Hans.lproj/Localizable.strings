@@ -40,6 +40,7 @@ text_more="更多";
 text_pleaseTryAgain="请重试！";
 text_recommend="推荐";
 text_next="下一步";
+text_search="搜索";
 
 tabbar_wallet="钱包";
 tabbar_market="市场";
@@ -178,6 +179,10 @@ text_support="支持";
 text_switchWallet="切换钱包";
 text_addFavorites="添加自选";
 text_removeFavorites="移除自选";
+
+text_searchNFTContract="搜索NFT名称或合约地址";
+text_hotSearch="热门搜索";
+text_classify="分类";
 
 text_disclaimer="免责声明";
 text_dappDisclaimer="本服务由%@提供，您在该链接的所有行为，直接由该链接单独承担。请勿访问来源不明的第三方链接，避免造成资产损失。";

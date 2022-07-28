@@ -21,6 +21,8 @@
 #define PW_NavStatusHeight  (44+[[UIApplication sharedApplication] statusBarFrame].size.height)
 #define PW_StatusHeight  [[UIApplication sharedApplication] statusBarFrame].size.height
 #define PW_SafeBottomInset [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom
+#define PW_SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define PW_SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 
 #define PW_StrFormat(...) [NSString stringWithFormat:__VA_ARGS__]
 
