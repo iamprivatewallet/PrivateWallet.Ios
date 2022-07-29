@@ -8,6 +8,7 @@
 
 #import "PW_NFTClassifyViewController.h"
 #import "PW_NFTClassifyCell.h"
+#import "PW_AllNFTViewController.h"
 
 @interface PW_NFTClassifyViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -16,6 +17,14 @@
 @end
 
 @implementation PW_NFTClassifyViewController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,10 +79,9 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    PW_AllNFTViewController *vc = [[PW_AllNFTViewController alloc] init];
+    [[PW_APPDelegate getRootCurrentNavc] pushViewController:vc animated:YES];
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {

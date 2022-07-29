@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_filtrateNFTModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_filtrateNFTView : UIView
 
+@property (nonatomic, copy) NSArray<PW_filtrateNFTModel *> *dataArr;
 @property (nonatomic, copy) void(^menuBlock)(void);
 
 @end

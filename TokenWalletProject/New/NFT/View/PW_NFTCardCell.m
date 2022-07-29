@@ -85,7 +85,7 @@
         _bodyView = [[UIView alloc] init];
         _bodyView.backgroundColor = [UIColor g_bgColor];
         [_bodyView setShadowColor:[UIColor g_shadowGrayColor] offset:CGSizeMake(0, 6) radius:8];
-        _bodyView.layer.cornerRadius = 5;
+        _bodyView.layer.cornerRadius = 6;
     }
     return _bodyView;
 }

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_filtrateNFTModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_filtrateNFTItemCell : UICollectionViewCell
+
+@property (nonatomic, strong) PW_filtrateNFTModel *model;
 
 @end
 

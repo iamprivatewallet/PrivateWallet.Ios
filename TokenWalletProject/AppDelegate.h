@@ -18,6 +18,7 @@
 - (void)switchToTabBarController;
 - (void)switchToCreateWalletVC;
 - (void)resetApp;
+- (UINavigationController *)getRootCurrentNavc;
 
 @end
 

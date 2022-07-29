@@ -114,7 +114,10 @@
     return [[UIColor g_hex:@"#CCD0D6"] alpha:0.3];
 }
 + (UIColor *)g_shadowGrayColor {
-    return [[UIColor g_hex:@"#194F7D"] alpha:0.3];
+    return [[UIColor g_hex:@"#020202"] alpha:0.2];
+}
++ (UIColor *)g_shadowPrimaryColor {
+    return [UIColor g_hex:@"#3EDC9D"];
 }
 + (UIColor *)g_textColor {
     return [UIColor g_hex:@"#333333"];

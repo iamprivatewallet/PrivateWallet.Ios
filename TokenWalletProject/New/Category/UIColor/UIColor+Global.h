@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)g_lineColor;
 + (UIColor *)g_shadowColor;
 + (UIColor *)g_shadowGrayColor;
++ (UIColor *)g_shadowPrimaryColor;
 + (UIColor *)g_textColor;
 + (UIColor *)g_whiteTextColor;
 + (UIColor *)g_boldTextColor;

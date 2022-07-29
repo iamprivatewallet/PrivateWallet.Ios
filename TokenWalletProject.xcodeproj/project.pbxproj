@@ -224,6 +224,15 @@
 		5C650C822892852700B7B3E2 /* PW_SearchRecordNFTItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C812892852700B7B3E2 /* PW_SearchRecordNFTItemCell.m */; };
 		5C650C852892997B00B7B3E2 /* PW_NFTClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C842892997B00B7B3E2 /* PW_NFTClassifyViewController.m */; };
 		5C650C8828929DA600B7B3E2 /* PW_NFTClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C8728929DA600B7B3E2 /* PW_NFTClassifyCell.m */; };
+		5C650C8B289387BE00B7B3E2 /* PW_AllNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C8A289387BE00B7B3E2 /* PW_AllNFTViewController.m */; };
+		5C650C8E2893BA2A00B7B3E2 /* PW_NFTChainTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C8D2893BA2900B7B3E2 /* PW_NFTChainTypeView.m */; };
+		5C650C912893C1C100B7B3E2 /* PW_AllNftFiltrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C902893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.m */; };
+		5C650C942893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C932893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m */; };
+		5C650C972893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C962893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.m */; };
+		5C650C9A2893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C992893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m */; };
+		5C650C9D2893E31200B7B3E2 /* PW_RecommendNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C9C2893E31200B7B3E2 /* PW_RecommendNFTViewController.m */; };
+		5C650CA02893E38600B7B3E2 /* PW_filtrateNFTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650C9F2893E38500B7B3E2 /* PW_filtrateNFTModel.m */; };
+		5C650CA32893EEB400B7B3E2 /* PW_RecommendNFTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C650CA22893EEB300B7B3E2 /* PW_RecommendNFTCell.m */; };
 		5C6712FB281131960088A1A5 /* PW_MarketHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6712FA281131960088A1A5 /* PW_MarketHeaderView.m */; };
 		5C6712FE281131EF0088A1A5 /* PW_MarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6712FD281131EF0088A1A5 /* PW_MarketCell.m */; };
 		5C671301281142780088A1A5 /* PW_MarketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C671300281142780088A1A5 /* PW_MarketModel.m */; };
@@ -1059,6 +1068,24 @@
 		5C650C842892997B00B7B3E2 /* PW_NFTClassifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTClassifyViewController.m; sourceTree = "<group>"; };
 		5C650C8628929DA600B7B3E2 /* PW_NFTClassifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTClassifyCell.h; sourceTree = "<group>"; };
 		5C650C8728929DA600B7B3E2 /* PW_NFTClassifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTClassifyCell.m; sourceTree = "<group>"; };
+		5C650C89289387BE00B7B3E2 /* PW_AllNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AllNFTViewController.h; sourceTree = "<group>"; };
+		5C650C8A289387BE00B7B3E2 /* PW_AllNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AllNFTViewController.m; sourceTree = "<group>"; };
+		5C650C8C2893BA2900B7B3E2 /* PW_NFTChainTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTChainTypeView.h; sourceTree = "<group>"; };
+		5C650C8D2893BA2900B7B3E2 /* PW_NFTChainTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTChainTypeView.m; sourceTree = "<group>"; };
+		5C650C8F2893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AllNftFiltrateViewController.h; sourceTree = "<group>"; };
+		5C650C902893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AllNftFiltrateViewController.m; sourceTree = "<group>"; };
+		5C650C922893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AllNftFiltrateGroupModel.h; sourceTree = "<group>"; };
+		5C650C932893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AllNftFiltrateGroupModel.m; sourceTree = "<group>"; };
+		5C650C952893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AllNftFiltrateCell.h; sourceTree = "<group>"; };
+		5C650C962893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AllNftFiltrateCell.m; sourceTree = "<group>"; };
+		5C650C982893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AllNftFiltrateItemCell.h; sourceTree = "<group>"; };
+		5C650C992893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AllNftFiltrateItemCell.m; sourceTree = "<group>"; };
+		5C650C9B2893E31200B7B3E2 /* PW_RecommendNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_RecommendNFTViewController.h; sourceTree = "<group>"; };
+		5C650C9C2893E31200B7B3E2 /* PW_RecommendNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_RecommendNFTViewController.m; sourceTree = "<group>"; };
+		5C650C9E2893E38500B7B3E2 /* PW_filtrateNFTModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_filtrateNFTModel.h; sourceTree = "<group>"; };
+		5C650C9F2893E38500B7B3E2 /* PW_filtrateNFTModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_filtrateNFTModel.m; sourceTree = "<group>"; };
+		5C650CA12893EEB300B7B3E2 /* PW_RecommendNFTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_RecommendNFTCell.h; sourceTree = "<group>"; };
+		5C650CA22893EEB300B7B3E2 /* PW_RecommendNFTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_RecommendNFTCell.m; sourceTree = "<group>"; };
 		5C6712F9281131960088A1A5 /* PW_MarketHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketHeaderView.h; sourceTree = "<group>"; };
 		5C6712FA281131960088A1A5 /* PW_MarketHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketHeaderView.m; sourceTree = "<group>"; };
 		5C6712FC281131EF0088A1A5 /* PW_MarketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketCell.h; sourceTree = "<group>"; };
@@ -2981,6 +3008,14 @@
 				5C650C812892852700B7B3E2 /* PW_SearchRecordNFTItemCell.m */,
 				5C650C8628929DA600B7B3E2 /* PW_NFTClassifyCell.h */,
 				5C650C8728929DA600B7B3E2 /* PW_NFTClassifyCell.m */,
+				5C650C8C2893BA2900B7B3E2 /* PW_NFTChainTypeView.h */,
+				5C650C8D2893BA2900B7B3E2 /* PW_NFTChainTypeView.m */,
+				5C650C952893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.h */,
+				5C650C962893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.m */,
+				5C650C982893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.h */,
+				5C650C992893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m */,
+				5C650CA12893EEB300B7B3E2 /* PW_RecommendNFTCell.h */,
+				5C650CA22893EEB300B7B3E2 /* PW_RecommendNFTCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2988,6 +3023,10 @@
 		5C650C5A2891489A00B7B3E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C650C9E2893E38500B7B3E2 /* PW_filtrateNFTModel.h */,
+				5C650C9F2893E38500B7B3E2 /* PW_filtrateNFTModel.m */,
+				5C650C922893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.h */,
+				5C650C932893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3001,6 +3040,12 @@
 				5C650C6028914A9800B7B3E2 /* PW_SearchNFTViewController.m */,
 				5C650C832892997B00B7B3E2 /* PW_NFTClassifyViewController.h */,
 				5C650C842892997B00B7B3E2 /* PW_NFTClassifyViewController.m */,
+				5C650C89289387BE00B7B3E2 /* PW_AllNFTViewController.h */,
+				5C650C8A289387BE00B7B3E2 /* PW_AllNFTViewController.m */,
+				5C650C8F2893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.h */,
+				5C650C902893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.m */,
+				5C650C9B2893E31200B7B3E2 /* PW_RecommendNFTViewController.h */,
+				5C650C9C2893E31200B7B3E2 /* PW_RecommendNFTViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5069,6 +5114,7 @@
 				5CA451EA28180206006FFA3B /* SeedPhraseGenerator.swift in Sources */,
 				992E0F6026D5EF9600E1C31B /* TransferPayView.m in Sources */,
 				5AF5D1931D2F7CBA004070D7 /* NSString+RegexCategory.m in Sources */,
+				5C650C972893C7BA00B7B3E2 /* PW_AllNftFiltrateCell.m in Sources */,
 				5E079A3B21D3C90A00924407 /* tommath.c in Sources */,
 				5CCE70BD280FE58000860841 /* PW_TitlesItemCell.m in Sources */,
 				5E079A0121D28A3A00924407 /* GPBCodedOutputStream.m in Sources */,
@@ -5152,6 +5198,7 @@
 				5AF5D19F1D2F7CBA004070D7 /* NSURL+QueryDictionary.m in Sources */,
 				992EF10E26AA9E5C00F70A94 /* WarningAlertSheetView.m in Sources */,
 				5AF5D1531D2F7CBA004070D7 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
+				5C650C912893C1C100B7B3E2 /* PW_AllNftFiltrateViewController.m in Sources */,
 				99D2CA462537F81C00C1C196 /* UIView+SetRect.m in Sources */,
 				992EF18A26B3DE9000F70A94 /* ManageBottomView.m in Sources */,
 				5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */,
@@ -5173,6 +5220,7 @@
 				5CB76B3E27F582190068E967 /* UIControl+PW_Block.m in Sources */,
 				5CE19F9D28192FA8008C37A3 /* PW_DappAlertTool.m in Sources */,
 				1FA8EF7821B824F900B4E28E /* TYBaseAnimation.m in Sources */,
+				5C650C8E2893BA2A00B7B3E2 /* PW_NFTChainTypeView.m in Sources */,
 				5AF5D1741D2F7CBA004070D7 /* NSInvocation+Bb.m in Sources */,
 				5AF5D15D1D2F7CBA004070D7 /* NSData+Hash.m in Sources */,
 				5CA2C8512861A02C00EA46F5 /* PW_SearchHistoryDappCell.m in Sources */,
@@ -5209,6 +5257,7 @@
 				5CB76B2127F2FD3C0068E967 /* PW_MnemonicImportViewController.m in Sources */,
 				99D804D926A6AD6100E9B5F8 /* CreateIDViewController.m in Sources */,
 				992EF10826AA70B300F70A94 /* MnemonicsConfirmVC.m in Sources */,
+				5C650C9A2893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m in Sources */,
 				5C8AAB26280D7BD900E4ED53 /* PW_ChooseAddressTypeModel.m in Sources */,
 				79AA81E521CFBCAB00C7D510 /* FSOpenSSL.mm in Sources */,
 				992E0FC126DCD6F400E1C31B /* TransferDetailInfoVC.m in Sources */,
@@ -5441,6 +5490,7 @@
 				5AF5D1961D2F7CBA004070D7 /* NSString+Score.m in Sources */,
 				5C650C7F2892843000B7B3E2 /* PW_SearchRecordNFTCell.m in Sources */,
 				5C37A8EA280FB9F100AAA728 /* UIButton+PW_Button.m in Sources */,
+				5C650C8B289387BE00B7B3E2 /* PW_AllNFTViewController.m in Sources */,
 				5C650C6D2892385600B7B3E2 /* PW_NFTSectionTitleView.m in Sources */,
 				5CB76B0F27F2E2990068E967 /* PW_FirstChooseViewController.m in Sources */,
 				5B02FD5B21FFF6460040025E /* YKUIConfig.m in Sources */,
@@ -5473,6 +5523,8 @@
 				5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */,
 				5C1042592876CE4400FB53ED /* PW_BigIntTool.swift in Sources */,
 				992EF16F26B1506200F70A94 /* AboutUsViewController.m in Sources */,
+				5C650C9D2893E31200B7B3E2 /* PW_RecommendNFTViewController.m in Sources */,
+				5C650CA02893E38600B7B3E2 /* PW_filtrateNFTModel.m in Sources */,
 				992E0F6B26D783EF00E1C31B /* ChooseCoinTypeModel.m in Sources */,
 				5B08D8C521F80D66002CC9A8 /* HwcCustomUISwitch.m in Sources */,
 				9929D59726C275230066F1D6 /* AddNewAddressVC.m in Sources */,
@@ -5494,6 +5546,7 @@
 				5AF5D1A91D2F7CBA004070D7 /* CAAnimation+EasingEquations.m in Sources */,
 				5E079A3C21D3C90A00924407 /* JKBigInteger.m in Sources */,
 				5CE0552528605E5B00B68A6B /* PW_DappSearchManager.m in Sources */,
+				5C650C942893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m in Sources */,
 				994AA0FB26CA40C50062F9AF /* GasPriceTableViewCell.m in Sources */,
 				9937C8BE2719235A0064BBC3 /* VisitDAppsRecordManager.m in Sources */,
 				992E0FC426DCDA1800E1C31B /* TransferDetailInfoCell.m in Sources */,
@@ -5515,6 +5568,7 @@
 				5A8FD9511D2DFC270015D6C0 /* main.m in Sources */,
 				5CFD16B627E45560006C8950 /* UpgradePopUpView.m in Sources */,
 				5B02FD5921FFF6460040025E /* YKYLineView.m in Sources */,
+				5C650CA32893EEB400B7B3E2 /* PW_RecommendNFTCell.m in Sources */,
 				5CE7ACC827F6E25D00E2188D /* NSArray+PW_Array.m in Sources */,
 				9929D59426C26DCB0066F1D6 /* ChooseAddressTypeVC.m in Sources */,
 				5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */,

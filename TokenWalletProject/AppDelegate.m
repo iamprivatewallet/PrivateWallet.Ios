@@ -97,7 +97,19 @@
     [SVProgressHUD setMinimumDismissTimeInterval:1.5];
     [SVProgressHUD setMinimumSize:CGSizeMake(kRealValue(100), kRealValue(40))];
 }
-
+- (UINavigationController *)getRootCurrentNavc {
+    if ([self.rootController isKindOfClass:[PW_TabBarViewController class]]) {
+        UIViewController *tabRootVc = ((UITabBarController *)self.rootController).selectedViewController;
+        if ([tabRootVc isKindOfClass:[UINavigationController class]]) {
+            return (UINavigationController *)tabRootVc;
+        }else{
+            return tabRootVc.navigationController;
+        }
+    }else if([self.rootController isKindOfClass:[UINavigationController class]]) {
+        return (UINavigationController *)self.rootController;
+    }
+    return self.rootController.navigationController;
+}
 -(void)switchToTabBarController
 {
     if (![self.rootController isKindOfClass:[PW_TabBarViewController class]]) {

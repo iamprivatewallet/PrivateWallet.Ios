@@ -17,6 +17,8 @@
 #define PW_APPBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 #define PW_APPBundleName   [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey]
 
+#define PW_APPDelegate ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+
 #define PW_IPhoneX ([[UIApplication sharedApplication] statusBarFrame].size.height>20)
 #define PW_NavStatusHeight  (44+[[UIApplication sharedApplication] statusBarFrame].size.height)
 #define PW_StatusHeight  [[UIApplication sharedApplication] statusBarFrame].size.height

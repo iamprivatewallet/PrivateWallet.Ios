@@ -26,6 +26,11 @@
     }
     return self;
 }
+- (void)setModel:(PW_filtrateNFTModel *)model {
+    _model = model;
+    self.iconIv.image = [UIImage imageNamed:model.imageName];
+    self.nameLb.text = model.title;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];

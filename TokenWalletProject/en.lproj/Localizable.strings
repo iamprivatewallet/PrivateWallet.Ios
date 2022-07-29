@@ -8,6 +8,8 @@
 
 text_cancel="Cancel";
 text_confirm="Confirm";
+text_sure="Sure";
+text_reset="Reset";
 text_changeGroup="Change the group";
 text_myUnderstand="I know";
 text_nextStep="Next Step";
