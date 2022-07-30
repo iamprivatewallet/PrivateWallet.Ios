@@ -8,9 +8,16 @@
 
 #import "PW_BaseViewController.h"
 
+typedef enum : NSUInteger {
+    PW_AllNFTAll=0,
+    PW_AllNFTNew,
+} PW_AllNFTType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_AllNFTViewController : PW_BaseViewController
+
+@property (nonatomic, assign) PW_AllNFTType type;
 
 @end
 

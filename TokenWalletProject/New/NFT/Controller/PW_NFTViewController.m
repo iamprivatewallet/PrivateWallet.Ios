@@ -14,7 +14,10 @@
 #import "PW_NFTHotspotCell.h"
 #import "PW_NFTCardCell.h"
 #import "PW_NFTClassifyViewController.h"
+#import "PW_AllNFTViewController.h"
 #import "PW_RecommendNFTViewController.h"
+#import "PW_FailarmyNFTViewController.h"
+#import "PW_RankListNFTViewController.h"
 
 @interface PW_NFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -142,17 +145,21 @@
         __weak typeof(self) weakSelf = self;
         _filtrateView.dataArr = @[
             [PW_filtrateNFTModel modelImageName:@"icon_nft_new" title:LocalizedStr(@"text_newNFT") clickBlock:^{
-                
+                PW_AllNFTViewController *vc = [PW_AllNFTViewController new];
+                vc.type = PW_AllNFTNew;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }],
             [PW_filtrateNFTModel modelImageName:@"icon_nft_recommend" title:LocalizedStr(@"text_recommend") clickBlock:^{
                 PW_RecommendNFTViewController *vc = [PW_RecommendNFTViewController new];
                 [weakSelf.navigationController pushViewController:vc animated:YES];
             }],
             [PW_filtrateNFTModel modelImageName:@"icon_nft_failarmy" title:LocalizedStr(@"text_NFTFailarmy") clickBlock:^{
-                
+                PW_FailarmyNFTViewController *vc = [PW_FailarmyNFTViewController new];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }],
-            [PW_filtrateNFTModel modelImageName:@"icon_nft_rank" title:LocalizedStr(@"text_rankingList") clickBlock:^{
-                
+            [PW_filtrateNFTModel modelImageName:@"icon_nft_rank" title:LocalizedStr(@"text_rankList") clickBlock:^{
+                PW_RankListNFTViewController *vc = [PW_RankListNFTViewController new];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }]
         ];
         _filtrateView.menuBlock = ^{

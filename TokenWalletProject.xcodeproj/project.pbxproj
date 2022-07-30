@@ -182,6 +182,10 @@
 		5C1042542876B53E00FB53ED /* PW_WalletContractTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1042532876B53E00FB53ED /* PW_WalletContractTool.m */; };
 		5C1042592876CE4400FB53ED /* PW_BigIntTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1042582876CE4400FB53ED /* PW_BigIntTool.swift */; };
 		5C10425C2876E34000FB53ED /* BigInt in Frameworks */ = {isa = PBXBuildFile; productRef = 5C10425B2876E34000FB53ED /* BigInt */; };
+		5C23659928951E5E00A203A2 /* PW_FailarmyNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23659828951E5E00A203A2 /* PW_FailarmyNFTViewController.m */; };
+		5C23659C289521E300A203A2 /* PW_RankListNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23659B289521E300A203A2 /* PW_RankListNFTViewController.m */; };
+		5C23659F2895225F00A203A2 /* PW_RankListNFTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23659E2895225F00A203A2 /* PW_RankListNFTCell.m */; };
+		5C2365A2289528F600A203A2 /* PW_FailarmyListNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */; };
 		5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */; };
 		5C2B3E322808297800CC16CE /* PW_SearchCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */; };
 		5C32AB4C28631259002C7970 /* PW_GlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32AB4B28631259002C7970 /* PW_GlobalTool.m */; };
@@ -982,6 +986,14 @@
 		5C1042522876B53E00FB53ED /* PW_WalletContractTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_WalletContractTool.h; sourceTree = "<group>"; };
 		5C1042532876B53E00FB53ED /* PW_WalletContractTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_WalletContractTool.m; sourceTree = "<group>"; };
 		5C1042582876CE4400FB53ED /* PW_BigIntTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PW_BigIntTool.swift; sourceTree = "<group>"; };
+		5C23659728951E5E00A203A2 /* PW_FailarmyNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_FailarmyNFTViewController.h; sourceTree = "<group>"; };
+		5C23659828951E5E00A203A2 /* PW_FailarmyNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_FailarmyNFTViewController.m; sourceTree = "<group>"; };
+		5C23659A289521E300A203A2 /* PW_RankListNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_RankListNFTViewController.h; sourceTree = "<group>"; };
+		5C23659B289521E300A203A2 /* PW_RankListNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_RankListNFTViewController.m; sourceTree = "<group>"; };
+		5C23659D2895225F00A203A2 /* PW_RankListNFTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_RankListNFTCell.h; sourceTree = "<group>"; };
+		5C23659E2895225F00A203A2 /* PW_RankListNFTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_RankListNFTCell.m; sourceTree = "<group>"; };
+		5C2365A0289528F600A203A2 /* PW_FailarmyListNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_FailarmyListNFTViewController.h; sourceTree = "<group>"; };
+		5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_FailarmyListNFTViewController.m; sourceTree = "<group>"; };
 		5C2B3E2D280825A900CC16CE /* PW_Web3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Web3ViewController.h; sourceTree = "<group>"; };
 		5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Web3ViewController.m; sourceTree = "<group>"; };
 		5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchCurrencyViewController.h; sourceTree = "<group>"; };
@@ -3016,6 +3028,8 @@
 				5C650C992893CBB900B7B3E2 /* PW_AllNftFiltrateItemCell.m */,
 				5C650CA12893EEB300B7B3E2 /* PW_RecommendNFTCell.h */,
 				5C650CA22893EEB300B7B3E2 /* PW_RecommendNFTCell.m */,
+				5C23659D2895225F00A203A2 /* PW_RankListNFTCell.h */,
+				5C23659E2895225F00A203A2 /* PW_RankListNFTCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3046,6 +3060,12 @@
 				5C650C902893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.m */,
 				5C650C9B2893E31200B7B3E2 /* PW_RecommendNFTViewController.h */,
 				5C650C9C2893E31200B7B3E2 /* PW_RecommendNFTViewController.m */,
+				5C23659728951E5E00A203A2 /* PW_FailarmyNFTViewController.h */,
+				5C23659828951E5E00A203A2 /* PW_FailarmyNFTViewController.m */,
+				5C2365A0289528F600A203A2 /* PW_FailarmyListNFTViewController.h */,
+				5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */,
+				5C23659A289521E300A203A2 /* PW_RankListNFTViewController.h */,
+				5C23659B289521E300A203A2 /* PW_RankListNFTViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5156,6 +5176,7 @@
 				5CE7AD0627F8628900E2188D /* PW_WalletCell.m in Sources */,
 				5CEF34C7280423700052BA15 /* PW_AddWalletViewController.m in Sources */,
 				5C71193E27BB8E0700FE9B51 /* NSString+Caculate.m in Sources */,
+				5C23659C289521E300A203A2 /* PW_RankListNFTViewController.m in Sources */,
 				5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */,
 				5AF5D16A1D2F7CBA004070D7 /* NSDictionary+JSONString.m in Sources */,
 				5C650C7C28927EA700B7B3E2 /* PW_SearchNFTSectionHeaderView.m in Sources */,
@@ -5214,6 +5235,7 @@
 				1FA8EF7421B824F900B4E28E /* TYAlertController+TransitionAnimate.m in Sources */,
 				9926E15226F1E41B00FDF442 /* SWFingerprintLock.m in Sources */,
 				5E0799ED21D28A3A00924407 /* GPBWireFormat.m in Sources */,
+				5C23659F2895225F00A203A2 /* PW_RankListNFTCell.m in Sources */,
 				1FAF8D8E21E64A12003BC8EF /* UIView+Indictor.m in Sources */,
 				5AF5D19A1D2F7CBA004070D7 /* NSString+UUID.m in Sources */,
 				5E0799F521D28A3A00924407 /* Api.pbobjc.m in Sources */,
@@ -5315,6 +5337,7 @@
 				5E7896C221ECDC2900097301 /* CACache.m in Sources */,
 				5C7ED8742808205E00873A53 /* PW_SearchDeleteHeaderView.m in Sources */,
 				5CE7ACE427F6EE1200E2188D /* PW_MarketViewController.m in Sources */,
+				5C2365A2289528F600A203A2 /* PW_FailarmyListNFTViewController.m in Sources */,
 				5AF5D1671D2F7CBA004070D7 /* NSDateFormatter+Make.m in Sources */,
 				5E0799F821D28A3A00924407 /* Empty.pbobjc.m in Sources */,
 				5AF5D1981D2F7CBA004070D7 /* NSString+Trims.m in Sources */,
@@ -5379,6 +5402,7 @@
 				5C38FBCE2859BCA000D6017F /* PW_DappFavoritesViewController.m in Sources */,
 				5AF5D1581D2F7CBA004070D7 /* NSBundle+AppIcon.m in Sources */,
 				5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */,
+				5C23659928951E5E00A203A2 /* PW_FailarmyNFTViewController.m in Sources */,
 				994AA0EC26C511DD0062F9AF /* CollectionShareView.m in Sources */,
 				5E079A3A21D3C90A00924407 /* JKBigDecimal.m in Sources */,
 				5C9BC2DE2877D98300BEA0E0 /* PW_TronContractTool.swift in Sources */,

@@ -1,36 +1,34 @@
 //
-//  PW_AllNFTViewController.m
+//  PW_FailarmyNFTViewController.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/7/29.
+//  Created by mnz on 2022/7/30.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_AllNFTViewController.h"
-#import "PW_NFTCardCell.h"
-#import "PW_NFTChainTypeView.h"
+#import "PW_FailarmyNFTViewController.h"
 #import "PW_AllNftFiltrateViewController.h"
+#import "PW_RecommendNFTCell.h"
+#import "PW_NFTChainTypeView.h"
+#import "PW_FailarmyListNFTViewController.h"
 
-@interface PW_AllNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PW_FailarmyNFTViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *chainNameLb;
 @property (nonatomic, weak) UIView *searchView;
-@property (nonatomic, strong) UITextField *searchTF;
-@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *filtrateArr;
+@property (nonatomic, strong) PW_TableView *tableView;
+@property (nonatomic, strong) UITextField *searchTF;
+@property (nonatomic, assign) BOOL isSearch;
 
 @end
 
-@implementation PW_AllNFTViewController
+@implementation PW_FailarmyNFTViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.type==PW_AllNFTNew) {
-        [self setNavNoLineTitle:LocalizedStr(@"text_newNFT")];
-    }else{
-        [self setNavNoLineTitle:@""];
-    }
+    [self setNavNoLineTitle:LocalizedStr(@"text_NFTFailarmy")];
     [self makeViews];
 }
 - (void)filtrateAction {
@@ -49,23 +47,6 @@
     };
     [view showInView:self.view];
 }
-#pragma mark - delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    return YES;
-}
-#pragma mark - collection delegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
-}
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
-    
-    return cell;
-}
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-#pragma mark - view
 - (void)makeViews {
     [self makeChainView];
     [self makeSearchView];
@@ -77,9 +58,9 @@
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
-    [contentView addSubview:self.collectionView];
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(26);
+    [contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(25);
         make.left.right.bottom.offset(0);
     }];
 }
@@ -149,23 +130,30 @@
         make.centerY.equalTo(searchView);
     }];
 }
+#pragma mark - delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PW_RecommendNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_RecommendNFTCell.class)];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PW_FailarmyListNFTViewController *vc = [[PW_FailarmyListNFTViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - lazy
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.sectionInset = UIEdgeInsetsMake(0, 34, 0, 34);
-        layout.minimumLineSpacing = 10;
-        layout.minimumInteritemSpacing = 10;
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-34*2-layout.minimumInteritemSpacing)/2, 190);
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.backgroundColor = [UIColor g_bgColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(10, 0, 20, 0);
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        [_collectionView registerClass:[PW_NFTCardCell class] forCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class)];
+- (PW_TableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[PW_TableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.rowHeight = 186;
+        _tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+        _tableView.contentOffset = CGPointMake(0, -10);
+        [_tableView registerClass:PW_RecommendNFTCell.class forCellReuseIdentifier:NSStringFromClass(PW_RecommendNFTCell.class)];
     }
-    return _collectionView;
+    return _tableView;
 }
 - (NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
     if (!_filtrateArr) {

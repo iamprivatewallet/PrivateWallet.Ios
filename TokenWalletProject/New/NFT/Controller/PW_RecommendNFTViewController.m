@@ -110,7 +110,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 186;
-        _tableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(5, 0, 20, 0);
         _tableView.contentOffset = CGPointMake(0, -5);
         [_tableView registerClass:PW_RecommendNFTCell.class forCellReuseIdentifier:NSStringFromClass(PW_RecommendNFTCell.class)];
     }

@@ -67,8 +67,8 @@
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(34);
         make.right.offset(-34);
-        make.top.offset(5);
-        make.bottom.offset(-5);
+        make.top.offset(0);
+        make.bottom.offset(-10);
     }];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(3);
@@ -82,6 +82,7 @@
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.logoIv.mas_bottom).offset(10);
         make.centerX.offset(0);
+        make.left.mas_greaterThanOrEqualTo(10);
     }];
     [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.iconIv);
@@ -143,7 +144,7 @@
 }
 - (UIImageView *)iconIv {
     if (!_iconIv) {
-        _iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_logo_big"]];
+        _iconIv = [[UIImageView alloc] init];
     }
     return _iconIv;
 }
@@ -157,6 +158,8 @@
 - (UILabel *)nameLb {
     if (!_nameLb) {
         _nameLb = [PW_ViewTool labelBoldText:@"--" fontSize:14 textColor:[UIColor whiteColor]];
+        [_nameLb setShadowColor:[UIColor g_hex:@"#000000" alpha:0.8] offset:CGSizeMake(0, 4) radius:8];
+        _nameLb.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLb;
 }

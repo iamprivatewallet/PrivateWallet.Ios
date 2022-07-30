@@ -87,7 +87,7 @@
 }
 - (UILabel *)titleLb {
     if (!_titleLb) {
-        _titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_textColor]];
+        _titleLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:13 textColor:[UIColor g_grayTextColor]];
     }
     return _titleLb;
 }

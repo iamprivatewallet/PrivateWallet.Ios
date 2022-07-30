@@ -1,17 +1,16 @@
 //
-//  PW_AllNFTViewController.m
+//  PW_FailarmyListNFTViewController.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/7/29.
+//  Created by mnz on 2022/7/30.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_AllNFTViewController.h"
+#import "PW_FailarmyListNFTViewController.h"
 #import "PW_NFTCardCell.h"
-#import "PW_NFTChainTypeView.h"
 #import "PW_AllNftFiltrateViewController.h"
 
-@interface PW_AllNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PW_FailarmyListNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) UILabel *chainNameLb;
 @property (nonatomic, weak) UIView *searchView;
@@ -21,16 +20,12 @@
 
 @end
 
-@implementation PW_AllNFTViewController
+@implementation PW_FailarmyListNFTViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.type==PW_AllNFTNew) {
-        [self setNavNoLineTitle:LocalizedStr(@"text_newNFT")];
-    }else{
-        [self setNavNoLineTitle:@""];
-    }
+    [self setNavNoLineTitle:@""];
     [self makeViews];
 }
 - (void)filtrateAction {
@@ -40,14 +35,6 @@
         self.filtrateArr = filtrateArr;
     };
     [self presentViewController:vc animated:YES completion:nil];
-}
-- (void)chainAction {
-    PW_NFTChainTypeView *view = [[PW_NFTChainTypeView alloc] init];
-    view.dataArr = @[@"全部",@"ETH",@"BSC"];
-    view.clickBlock = ^{
-        
-    };
-    [view showInView:self.view];
 }
 #pragma mark - delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -67,7 +54,6 @@
 }
 #pragma mark - view
 - (void)makeViews {
-    [self makeChainView];
     [self makeSearchView];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
@@ -81,32 +67,6 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(26);
         make.left.right.bottom.offset(0);
-    }];
-}
-- (void)makeChainView {
-    UIView *chainView = [[UIView alloc] init];
-    chainView.backgroundColor = [UIColor g_hex:@"#FFFFFF" alpha:0.2];
-    [chainView setCornerRadius:13];
-    [chainView addTapTarget:self action:@selector(chainAction)];
-    [self.view addSubview:chainView];
-    [self.naviBar addSubview:chainView];
-    [chainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-16);
-        make.centerY.equalTo(self.leftBtn).offset(0);
-        make.height.mas_equalTo(26);
-    }];
-    self.chainNameLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_chainName") fontSize:13 textColor:[UIColor whiteColor]];
-    [chainView addSubview:self.chainNameLb];
-    [self.chainNameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
-        make.right.offset(-22);
-        make.centerY.offset(0);
-    }];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_down"]];
-    [chainView addSubview:arrowIv];
-    [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-8);
-        make.centerY.offset(0);
     }];
 }
 - (void)makeSearchView {
