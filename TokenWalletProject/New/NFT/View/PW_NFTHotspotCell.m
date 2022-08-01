@@ -74,7 +74,7 @@
 }
 - (UIImageView *)iconIv {
     if (!_iconIv) {
-        _iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_logo_big"]];
+        _iconIv = [[UIImageView alloc] init];
     }
     return _iconIv;
 }

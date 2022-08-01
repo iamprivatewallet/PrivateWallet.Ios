@@ -183,6 +183,7 @@ text_addFavorites="添加自选";
 text_removeFavorites="移除自选";
 
 text_searchNFTContract="搜索NFT名称或合约地址";
+text_searchNFTID="搜索NFT名称或ID";
 text_newNFT="新NFT";
 text_NFTFailarmy="NFT合集";
 text_rankList="排行榜";
@@ -202,6 +203,10 @@ text_goodsCount="商品数量";
 text_holderCount="持有人数量";
 text_priceFloor="地板价";
 text_volume="交易量";
+text_bazaar="集市";
+text_follow="关注";
+text_searchNoDataNFT="未搜索到相关NFT";
+text_setData="设置资料";
 
 text_disclaimer="免责声明";
 text_dappDisclaimer="本服务由%@提供，您在该链接的所有行为，直接由该链接单独承担。请勿访问来源不明的第三方链接，避免造成资产损失。";

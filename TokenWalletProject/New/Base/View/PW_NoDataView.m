@@ -1,33 +1,34 @@
 //
-//  NoDataShowView.m
+//  PW_NoDataView.m
 //  TokenWalletProject
 //
-//  Created by fchain on 2021/7/28.
-//  Copyright © 2021 Zinkham. All rights reserved.
+//  Created by mnz on 2022/8/1.
+//  Copyright © 2022 . All rights reserved.
 //
 
-#import "NoDataShowView.h"
+#import "PW_NoDataView.h"
 
-@interface NoDataShowView ()
+@interface PW_NoDataView ()
 
 @property (nonatomic, strong) UIImageView *iconIv;
+@property (nonatomic, strong) UILabel *titleLb;
 
 @end
 
-@implementation NoDataShowView
+@implementation PW_NoDataView
 
-+ (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text {
-    return [self showView:view image:image text:text offsetY:-kNavBarAndStatusBarHeight];
++ (instancetype)showView:(UIView *)view {
+    return [self showView:view offsetY:-kNavBarAndStatusBarHeight];
 }
-+ (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text offsetY:(CGFloat)offsetY {
-    NoDataShowView *backView = nil;
-    for (NoDataShowView *subv in view.subviews) {
-        if ([subv isKindOfClass:[NoDataShowView class]]) {
++ (instancetype)showView:(UIView *)view offsetY:(CGFloat)offsetY {
+    PW_NoDataView *backView = nil;
+    for (PW_NoDataView *subv in view.subviews) {
+        if ([subv isKindOfClass:[PW_NoDataView class]]) {
             [subv removeFromSuperview];
         }
     }
     if (!backView) {
-        backView = [[NoDataShowView alloc] init];
+        backView = [[PW_NoDataView alloc] init];
 //        backView.backgroundColor = [UIColor whiteColor];
         [view addSubview:backView];
         [backView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -38,13 +39,11 @@
         [backView.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(0);
             make.centerX.equalTo(backView);
-            make.size.mas_equalTo(CGSizeMake(94, 94));
         }];
         
-        UILabel *title = [ZZCustomView labelInitWithView:backView text:text textColor:[UIColor g_grayTextColor] font:GCSFontRegular(13)];
-        title.textAlignment = NSTextAlignmentCenter;
-        [title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(backView.iconIv.mas_bottom).offset(15);
+        [backView addSubview:backView.titleLb];
+        [backView.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(backView.iconIv.mas_bottom).offset(30);
             make.left.right.equalTo(backView);
             make.bottom.mas_lessThanOrEqualTo(0);
         }];
@@ -60,6 +59,14 @@
         }];
     }
 }
+- (void)setImageName:(NSString *)imageName {
+    _imageName = imageName;
+    self.iconIv.image = [UIImage imageNamed:imageName];
+}
+- (void)setText:(NSString *)text {
+    _text = text;
+    self.titleLb.text = text;
+}
 - (void)dismissView {
     [self removeFromSuperview];
 }
@@ -69,6 +76,13 @@
         _iconIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_noData"]];
     }
     return _iconIv;
+}
+- (UILabel *)titleLb {
+    if (!_titleLb) {
+        _titleLb = [PW_ViewTool labelSemiboldText:LocalizedStr(@"text_noData") fontSize:16 textColor:[UIColor g_grayTextColor]];
+        _titleLb.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLb;
 }
 
 @end

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text;
 + (NoDataShowView *)showView:(UIView *)view image:(NSString *)image text:(NSString *)text offsetY:(CGFloat)offsetY;
 @property (nonatomic, assign) CGFloat offsetY;
+@property (nonatomic, copy) NSString *imageName;
 - (void)dismissView;
 
 @end

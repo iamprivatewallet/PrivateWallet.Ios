@@ -18,6 +18,8 @@
 #import "PW_RecommendNFTViewController.h"
 #import "PW_FailarmyNFTViewController.h"
 #import "PW_RankListNFTViewController.h"
+#import "PW_SeriesNFTViewController.h"
+#import "PW_PersonNFTViewController.h"
 
 @interface PW_NFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -36,7 +38,8 @@
     [self makeViews];
 }
 - (void)personalAction {
-    
+    PW_PersonNFTViewController *vc = [[PW_PersonNFTViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)searchAction {
     PW_SearchNFTViewController *searchVc = [[PW_SearchNFTViewController alloc] init];
@@ -93,8 +96,12 @@
         
         return cell;
     }
+    __weak typeof(self) weakSelf = self;
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
-    
+    cell.seriesBlock = ^{
+        PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {

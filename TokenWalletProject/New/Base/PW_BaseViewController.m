@@ -209,9 +209,9 @@
     }
 }
 #pragma make - lazy
-- (NoDataShowView *)noDataView {
+- (PW_NoDataView *)noDataView {
     if(!_noDataView) {
-        _noDataView = [NoDataShowView showView:self.view image:@"icon_noData" text:LocalizedStr(@"text_noData") offsetY:0];
+        _noDataView = [PW_NoDataView showView:self.view offsetY:0];
         _noDataView.hidden = YES;
     }
     return _noDataView;

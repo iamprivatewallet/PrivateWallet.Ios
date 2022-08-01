@@ -1,14 +1,14 @@
 //
-//  PW_NFTCardCell.m
+//  PW_SeriesNFTItemCell.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/7/28.
+//  Created by mnz on 2022/8/1.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_NFTCardCell.h"
+#import "PW_SeriesNFTItemCell.h"
 
-@interface PW_NFTCardCell ()
+@interface PW_SeriesNFTItemCell ()
 
 @property (nonatomic, strong) UIView *bodyView;
 @property (nonatomic, strong) UIImageView *iconIv;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation PW_NFTCardCell
+@implementation PW_SeriesNFTItemCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -79,13 +79,6 @@
         make.right.offset(-12);
         make.bottom.offset(-10);
     }];
-}
-- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
-    CGSize size = layoutAttributes.size;
-    size.width = (PW_SCREEN_WIDTH-34*2-10)/2;
-    size.height = 190;
-    layoutAttributes.size = size;
-    return layoutAttributes;
 }
 #pragma mark - lazy
 - (UIView *)bodyView {

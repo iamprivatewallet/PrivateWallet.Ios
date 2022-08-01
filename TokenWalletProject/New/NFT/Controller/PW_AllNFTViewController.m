@@ -10,6 +10,7 @@
 #import "PW_NFTCardCell.h"
 #import "PW_NFTChainTypeView.h"
 #import "PW_AllNftFiltrateViewController.h"
+#import "PW_SeriesNFTViewController.h"
 
 @interface PW_AllNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -59,7 +60,11 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
-    
+    __weak typeof(self) weakSelf = self;
+    cell.seriesBlock = ^{
+        PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

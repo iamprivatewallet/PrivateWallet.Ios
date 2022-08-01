@@ -1,87 +1,71 @@
 //
-//  PW_FailarmyListNFTViewController.m
+//  PW_SearchSeriesNFTViewController.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/7/30.
+//  Created by mnz on 2022/8/1.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_FailarmyListNFTViewController.h"
+#import "PW_SearchSeriesNFTViewController.h"
 #import "PW_NFTCardCell.h"
-#import "PW_AllNftFiltrateViewController.h"
-#import "PW_SeriesNFTViewController.h"
 
-@interface PW_FailarmyListNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PW_SearchSeriesNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic, strong) UILabel *chainNameLb;
-@property (nonatomic, weak) UIView *searchView;
 @property (nonatomic, strong) UITextField *searchTF;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *filtrateArr;
 
 @end
 
-@implementation PW_FailarmyListNFTViewController
+@implementation PW_SearchSeriesNFTViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setNavNoLineTitle:@""];
     [self makeViews];
+    self.noDataView.imageName = @"icon_noData_NFT";
+    self.noDataView.text = LocalizedStr(@"text_searchNoDataNFT");
+//    self.noDataView.hidden = NO;
 }
-- (void)filtrateAction {
-    PW_AllNftFiltrateViewController *vc = [[PW_AllNftFiltrateViewController alloc] init];
-    vc.filtrateArr = self.filtrateArr;
-    vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
-        self.filtrateArr = filtrateArr;
-    };
-    [self presentViewController:vc animated:YES completion:nil];
+- (void)searchAction {
+    
 }
 #pragma mark - delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    return YES;
-}
-#pragma mark - collection delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 10;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
-    __weak typeof(self) weakSelf = self;
-    cell.seriesBlock = ^{
-        PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+    
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
 }
-#pragma mark - view
+#pragma mark - views
 - (void)makeViews {
     [self makeSearchView];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchView.mas_bottom).offset(16);
+        make.top.equalTo(self.naviBar.mas_bottom).offset(16);
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     [contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(26);
+        make.top.offset(25);
         make.left.right.bottom.offset(0);
     }];
 }
 - (void)makeSearchView {
     UIView *searchView = [[UIView alloc] init];
     [self.view addSubview:searchView];
-    self.searchView = searchView;
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(10);
-        make.left.offset(30);
-        make.right.offset(-80);
+        make.centerY.equalTo(self.leftBtn);
+        make.left.offset(55);
+        make.right.offset(-72);
         make.height.offset(44);
     }];
     UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
@@ -107,10 +91,10 @@
         make.left.offset(45);
         make.right.offset(-5);
     }];
-    UIButton *filtrateBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_filtrate") fontSize:16 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(filtrateAction)];
-    [self.view addSubview:filtrateBtn];
-    [filtrateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
+    UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_search") fontSize:16 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(searchAction)];
+    [self.view addSubview:searchBtn];
+    [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-15);
         make.centerY.equalTo(searchView);
     }];
 }
@@ -131,26 +115,6 @@
         [_collectionView registerClass:[PW_NFTCardCell class] forCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class)];
     }
     return _collectionView;
-}
-- (NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
-    if (!_filtrateArr) {
-        _filtrateArr = @[
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_time") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_latest") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_oldest") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_price") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_highToLow") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_lowToHigh") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_state") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onOffer") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onBidding") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_unsold") value:@""]
-            ]]
-        ];
-    }
-    return _filtrateArr;
 }
 
 @end
