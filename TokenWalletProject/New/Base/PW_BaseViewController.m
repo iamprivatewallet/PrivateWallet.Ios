@@ -78,6 +78,12 @@
 - (void)dismissMessage {
     [[ToastHelper sharedToastHelper] dismissToast];
 }
+- (void)showLoading {
+    [SVProgressHUD show];
+}
+- (void)dismissLoading {
+    [SVProgressHUD dismiss];
+}
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (_noDataView) {

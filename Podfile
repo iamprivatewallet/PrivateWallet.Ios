@@ -27,6 +27,7 @@ pod 'ReactiveObjC', '3.1.1'
 pod 'LBXScan', '~> 2.5'
 pod 'SDCycleScrollView','1.82'
 pod 'SocketRocket', '0.6.0'
+pod 'TZImagePickerController', '3.8.3'
 end
 
 target "TokenWalletProjectTests" do

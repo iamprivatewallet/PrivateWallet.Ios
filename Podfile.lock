@@ -70,6 +70,11 @@ PODS:
   - Starscream (4.0.4)
   - SVProgressHUD (2.2.5)
   - TweetNacl (1.0.2)
+  - TZImagePickerController (3.8.3):
+    - TZImagePickerController/Basic (= 3.8.3)
+    - TZImagePickerController/Location (= 3.8.3)
+  - TZImagePickerController/Basic (3.8.3)
+  - TZImagePickerController/Location (3.8.3)
   - UICountingLabel (1.2.0)
   - "UITableView+FDTemplateLayoutCell (1.6)"
   - web3.swift (1.2.0):
@@ -100,6 +105,7 @@ DEPENDENCIES:
   - SocketRocket (= 0.6.0)
   - Solana.Swift (from `https://github.com/ajamaica/Solana.Swift.git`, branch `master`)
   - SVProgressHUD
+  - TZImagePickerController (= 3.8.3)
   - "UITableView+FDTemplateLayoutCell (= 1.6)"
   - web3.swift (= 1.2.0)
 
@@ -119,6 +125,7 @@ SPEC REPOS:
     - SocketRocket
     - Starscream
     - TweetNacl
+    - TZImagePickerController
     - "UITableView+FDTemplateLayoutCell"
     - web3.swift
   trunk:
@@ -174,10 +181,11 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
+  TZImagePickerController: e9909edbadf7381140efc5b5c9f5bdbfd630f7d4
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   web3.swift: 5b1c6275d92cfa60e4365159057bd63a83dfb9bd
 
-PODFILE CHECKSUM: c04c981411fb89bf1126ff4e9657a2892b94e3a1
+PODFILE CHECKSUM: 6f6f11e314e2780f5c247665d461876ab677a0d0
 
 COCOAPODS: 1.11.2

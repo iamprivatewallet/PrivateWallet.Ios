@@ -36,7 +36,7 @@
     }
     [UIApplication sharedApplication].statusBarHidden = NO;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     
     NSArray *wallets = [[PW_WalletManager shared] getWallets];
     User *user = User_manager.currentUser;

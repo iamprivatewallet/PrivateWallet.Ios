@@ -19,6 +19,11 @@
                                 withParameter: (NSDictionary *)parameter
                                 withBlock:(void(^)(id data, NSError *error))block;
 
++(NSURLSessionDataTask *)requestUploadWithUrl:(NSString *)urlString
+                                    mediaData:(NSArray *)mediaDatas
+                                withParameter:(NSDictionary *)parameter
+                                withBlock:(void(^)(id data, NSError *error))block;
+
 +(NSString *)signWithParmString:(NSDictionary *)parmDic;
 
 @end

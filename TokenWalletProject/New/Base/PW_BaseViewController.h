@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showToast:(NSString *)text;
 - (void)showMessage:(NSString *)text;
 - (void)dismissMessage;
+- (void)showLoading;
+- (void)dismissLoading;
 
 @property (nonatomic, strong) UIImageView *bgIv;
 @property (nonatomic, strong) UIView *naviBar;

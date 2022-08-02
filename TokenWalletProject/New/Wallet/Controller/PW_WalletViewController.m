@@ -20,6 +20,8 @@
 #import "PW_SearchCurrencyViewController.h"
 #import "PW_CurrencyManageViewController.h"
 #import "PW_SearchNFTViewController.h"
+#import "PW_PersonNFTViewController.h"
+#import "PW_HoldNFTViewController.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -181,7 +183,8 @@
         }
             break;
         case 1:{
-            
+            PW_PersonNFTViewController *vc = [[PW_PersonNFTViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         default:
@@ -394,7 +397,8 @@
         vc.model = self.coinList[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        
+        PW_HoldNFTViewController *vc = [[PW_HoldNFTViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

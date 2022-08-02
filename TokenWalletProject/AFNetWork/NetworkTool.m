@@ -56,5 +56,29 @@
         }
     }];
 }
++ (void)uploadMediaData:(NSArray *)mediaData path:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
+    [AFNetworkClient requestUploadWithUrl:NSStringWithFormat(@"%@/%@",APPWalletBaseURL,path) mediaData:mediaData withParameter:params withBlock:^(id data, NSError *error) {
+        if(error==nil){
+            NSInteger code = [data[@"code"] integerValue];
+            if(code==1){
+                if(completeBlock) {
+                    completeBlock(data[@"data"]);
+                }
+            }else{
+                NSString *msg = data[@"msg"];
+                if(![msg isNoEmpty]) {
+                    msg = data[@"message"];
+                }
+                if(errBlock) {
+                    errBlock(msg);
+                }
+            }
+        }else{
+            if(errBlock) {
+                errBlock(error.localizedDescription);
+            }
+        }
+    }];
+}
 
 @end

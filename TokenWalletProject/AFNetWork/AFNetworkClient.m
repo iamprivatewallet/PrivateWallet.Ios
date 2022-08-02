@@ -9,6 +9,7 @@
 #import "AFNetworkClient.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import "UserManager.h"
+#import <Photos/Photos.h>>
 
 @interface AFNetworkClient()
 {
@@ -57,6 +58,44 @@
     reParam[@"languageCode"] = languageCode;
     NSDictionary *headers = @{@"languageCode":languageCode};
     return [[AFNetworkClient sessionManager] POST:urlString parameters:reParam headers:headers progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        block(responseObject, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
++(NSURLSessionDataTask *)requestUploadWithUrl:(NSString *)urlString
+                                    mediaData:(NSArray *)mediaDatas
+                                withParameter:(NSDictionary *)parameter
+                                    withBlock:(void(^)(id data, NSError *error))block {
+    return [[AFNetworkClient sessionManager] POST:urlString parameters:parameter headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        if (mediaDatas.count > 0) {
+            NSObject *firstObj = [mediaDatas objectAtIndex:0];
+            if ([firstObj isKindOfClass:[UIImage class]]) {// 图片
+                for(NSInteger i=0; i<mediaDatas.count;i++){
+                    UIImage *eachImg = [mediaDatas objectAtIndex:i];
+                    //NSData *eachImgData = UIImagePNGRepresentation(eachImg);
+                    NSData *eachImgData = UIImageJPEGRepresentation(eachImg, 0.8);
+                    [formData appendPartWithFileData:eachImgData name:@"file" fileName:[NSString stringWithFormat:@"img%ld.png", i+1] mimeType:@"image/png"];
+                }
+            }else if([firstObj isKindOfClass:[PHAsset class]]){// 视频
+                PHAsset *asset = [mediaDatas objectAtIndex:0];
+                if (asset != nil && asset.mediaType == PHAssetMediaTypeVideo) {
+                    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+                    options.version = PHVideoRequestOptionsVersionCurrent;
+                    options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+                    PHImageManager *manager = [PHImageManager defaultManager];
+                    [manager requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+                        AVURLAsset *urlAsset = (AVURLAsset *)asset;
+                        NSURL *url = urlAsset.URL;
+                        NSData *data = [NSData dataWithContentsOfURL:url];
+                        [formData appendPartWithFileData:data name:@"file" fileName:@"video1.mov" mimeType:@"video/quicktime"];
+                    }];
+                }
+            }
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         block(responseObject, nil);
