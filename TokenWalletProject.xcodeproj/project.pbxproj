@@ -222,6 +222,9 @@
 		5C38FBCE2859BCA000D6017F /* PW_DappFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBCD2859BCA000D6017F /* PW_DappFavoritesViewController.m */; };
 		5C38FBD12859C20100D6017F /* PW_DappFavoritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */; };
 		5C38FBD42859C81900D6017F /* PW_DappFavoritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */; };
+		5C394E21289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E20289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m */; };
+		5C394E24289A575C0054FA2E /* PW_NFTTokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E23289A575C0054FA2E /* PW_NFTTokenDetailCell.m */; };
+		5C394E27289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E26289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m */; };
 		5C62CF9627FB0AAC00C1C5DC /* Web3WebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */; };
 		5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */; };
 		5C62CF9C27FD223100C1C5DC /* PW_TokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */; };
@@ -1087,6 +1090,12 @@
 		5C38FBD02859C20100D6017F /* PW_DappFavoritesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappFavoritesCell.m; sourceTree = "<group>"; };
 		5C38FBD22859C81900D6017F /* PW_DappFavoritesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappFavoritesManager.h; sourceTree = "<group>"; };
 		5C38FBD32859C81900D6017F /* PW_DappFavoritesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappFavoritesManager.m; sourceTree = "<group>"; };
+		5C394E1F289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTTokenDetailHeaderView.h; sourceTree = "<group>"; };
+		5C394E20289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTokenDetailHeaderView.m; sourceTree = "<group>"; };
+		5C394E22289A575C0054FA2E /* PW_NFTTokenDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTTokenDetailCell.h; sourceTree = "<group>"; };
+		5C394E23289A575C0054FA2E /* PW_NFTTokenDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTokenDetailCell.m; sourceTree = "<group>"; };
+		5C394E25289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTTokenDetailSectionHeaderView.h; sourceTree = "<group>"; };
+		5C394E26289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTokenDetailSectionHeaderView.m; sourceTree = "<group>"; };
 		5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Web3WebView.framework; sourceTree = "<group>"; };
 		5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenDetailViewController.h; sourceTree = "<group>"; };
 		5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenDetailViewController.m; sourceTree = "<group>"; };
@@ -3704,6 +3713,12 @@
 				5C6A276C28992C7E0069C942 /* PW_HoldNFTHeaderView.m */,
 				5C6A276E2899336C0069C942 /* PW_HoldNFTItemCell.h */,
 				5C6A276F2899336C0069C942 /* PW_HoldNFTItemCell.m */,
+				5C394E1F289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.h */,
+				5C394E20289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m */,
+				5C394E25289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.h */,
+				5C394E26289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m */,
+				5C394E22289A575C0054FA2E /* PW_NFTTokenDetailCell.h */,
+				5C394E23289A575C0054FA2E /* PW_NFTTokenDetailCell.m */,
 				5C62CF9A27FD223000C1C5DC /* PW_TokenDetailCell.h */,
 				5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */,
 				5C7ED85E2807F83800873A53 /* PW_AddCurrencyCell.h */,
@@ -5405,6 +5420,7 @@
 				790521F121D0EBBD00ABF6D5 /* Wallet.m in Sources */,
 				5CEF34A427FE72330052BA15 /* PW_CollectionViewController.m in Sources */,
 				992E0FBB26DCBBA000E1C31B /* AllAssetTableCell.m in Sources */,
+				5C394E27289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m in Sources */,
 				992E0F2D26CCD9CC00E1C31B /* ETHNodeList.m in Sources */,
 				5C15D24A2897BBCC00FE5025 /* PW_MoreAlertViewController.m in Sources */,
 				5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */,
@@ -5412,6 +5428,7 @@
 				5AF5D33F1D335C9A004070D7 /* DTConstants.m in Sources */,
 				5AF5D1871D2F7CBA004070D7 /* NSRunLoop+PerformBlock.m in Sources */,
 				5AF5D1821D2F7CBA004070D7 /* NSObject+GCD.m in Sources */,
+				5C394E24289A575C0054FA2E /* PW_NFTTokenDetailCell.m in Sources */,
 				5AF5D3451D335C9A004070D7 /* NSDate+DateTools.m in Sources */,
 				5C7ED86E2808137F00873A53 /* NSNotification+PW_Notification.m in Sources */,
 				992EF19A26B8DCB400F70A94 /* ManageTopTableViewCell.m in Sources */,
@@ -5475,6 +5492,7 @@
 				992E0F4926D4DE1100E1C31B /* CustomActivity.m in Sources */,
 				99D02DD226DF6B5A0097F84B /* CustomNodeVC.m in Sources */,
 				1FA8EF7521B824F900B4E28E /* UIView+TYAutoLayout.m in Sources */,
+				5C394E21289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m in Sources */,
 				992E0F5126D4E7D800E1C31B /* AssetBottomView.m in Sources */,
 				5C8AAADC280C125400E4ED53 /* PW_SetUpViewController.m in Sources */,
 				790521F521D0EC8700ABF6D5 /* WalletManager.m in Sources */,
@@ -6383,24 +6401,24 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/attaswift/BigInt";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 5.3.0;
+				kind = exactVersion;
+				version = 5.3.0;
 			};
 		};
 		5C9BC2DA2877D96900BEA0E0 /* XCRemoteSwiftPackageReference "TronWebSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yuzhiyou1990/TronWebSwift";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.1.7;
+				kind = exactVersion;
+				version = 3.1.7;
 			};
 		};
 		5C9BC2DF2877DB3400BEA0E0 /* XCRemoteSwiftPackageReference "BIP39swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mathwallet/BIP39swift";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.1;
+				kind = exactVersion;
+				version = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

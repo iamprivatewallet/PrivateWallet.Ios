@@ -107,7 +107,7 @@
         make.right.offset(-22);
         make.centerY.offset(0);
     }];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_down"]];
+    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_triangle_down"]];
     [chainView addSubview:arrowIv];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-8);

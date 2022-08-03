@@ -77,6 +77,7 @@
         self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
         [UITextField appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         [UITextView appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        [UIScrollView appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     } else {
         // Fallback on earlier versions
     }

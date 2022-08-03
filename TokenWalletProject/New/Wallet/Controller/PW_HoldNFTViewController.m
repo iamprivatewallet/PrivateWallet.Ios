@@ -12,6 +12,7 @@
 #import "PW_HoldNFTHeaderView.h"
 #import "PW_HoldNFTItemCell.h"
 #import "PW_SearchHoldNFTViewController.h"
+#import "PW_NFTTokenDetailViewController.h"
 
 @interface PW_HoldNFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -54,7 +55,8 @@
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_NFTTokenDetailViewController *vc = [[PW_NFTTokenDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat hiddenHeight = 64;
@@ -137,7 +139,7 @@
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(self.headerHeight, 0, 20, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(self.headerHeight, 0, 0, 0);
         _collectionView.contentOffset = CGPointZero;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -150,7 +152,7 @@
     if (!_flowLayout) {
         _flowLayout = [[UICollectionViewFlowLayout alloc] init];
         _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _flowLayout.sectionInset = UIEdgeInsetsMake(20, 34, 0, 34);
+        _flowLayout.sectionInset = UIEdgeInsetsMake(20, 34, 20+PW_SafeBottomInset, 34);
         _flowLayout.minimumLineSpacing = 10;
         _flowLayout.minimumInteritemSpacing = 10;
         CGFloat width = (PW_SCREEN_WIDTH-34*2-self.flowLayout.minimumInteritemSpacing)/2;

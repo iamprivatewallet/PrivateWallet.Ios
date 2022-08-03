@@ -90,7 +90,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 130;
-        _tableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+        _tableView.contentInset = UIEdgeInsetsMake(5, 0, 10, 0);
         _tableView.contentOffset = CGPointMake(0, -5);
         [_tableView registerClass:PW_NFTClassifyCell.class forCellReuseIdentifier:NSStringFromClass(PW_NFTClassifyCell.class)];
     }

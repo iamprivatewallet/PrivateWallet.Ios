@@ -24,6 +24,9 @@
         make.left.top.right.offset(0);
     }];
 }
+- (void)dealloc {
+    NSLog(@"%@-dealloc",self);
+}
 - (UIUserInterfaceStyle)overrideUserInterfaceStyle {
     return UIUserInterfaceStyleDark;
 }
@@ -86,6 +89,9 @@
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    if (_naviBar) {
+        [self.view bringSubviewToFront:_naviBar];
+    }
     if (_noDataView) {
         [self.view bringSubviewToFront:_noDataView];
     }

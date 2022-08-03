@@ -427,7 +427,7 @@
         make.centerY.offset(0);
         make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.5);
     }];
-    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_down"]];
+    UIImageView *arrowIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_triangle_down"]];
     [walletNameView addSubview:arrowIv];
     [arrowIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(nameLb.mas_right).offset(2);
