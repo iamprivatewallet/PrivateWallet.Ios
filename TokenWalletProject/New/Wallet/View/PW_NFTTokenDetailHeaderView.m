@@ -48,7 +48,9 @@
     return self;
 }
 - (void)transferAction {
-    
+    if (self.transferBlock) {
+        self.transferBlock();
+    }
 }
 - (void)addRemoveAction {
     
@@ -148,12 +150,14 @@
         make.width.height.mas_equalTo(12);
         make.centerY.equalTo(self.lastTransactionPriceLb);
         make.right.equalTo(self.lastTransactionPriceLb.mas_left).offset(-3);
+        make.left.mas_greaterThanOrEqualTo(0);
     }];
     [self.lastTransactionPriceLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.offset(0);
     }];
     [self.lastTransactionPriceTipLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.offset(0);
+        make.left.mas_greaterThanOrEqualTo(0);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(rightView.mas_bottom).offset(20);

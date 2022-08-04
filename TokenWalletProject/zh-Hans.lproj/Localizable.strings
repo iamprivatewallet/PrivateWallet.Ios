@@ -227,6 +227,14 @@ text_collectionSeries="集合系列";
 text_tokenStandard="代币标准";
 text_network="网络";
 text_transactionRecord="交易记录";
+text_transferSuccess="转账成功";
+text_source="来源";
+text_data="资料";
+text_offer="报价";
+text_deal="交易";
+text_buyer="买家";
+text_seller="卖家";
+text_type="类型";
 
 text_disclaimer="免责声明";
 text_dappDisclaimer="本服务由%@提供，您在该链接的所有行为，直接由该链接单独承担。请勿访问来源不明的第三方链接，避免造成资产损失。";

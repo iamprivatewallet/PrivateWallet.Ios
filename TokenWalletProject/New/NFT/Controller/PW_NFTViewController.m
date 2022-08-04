@@ -20,6 +20,7 @@
 #import "PW_RankListNFTViewController.h"
 #import "PW_SeriesNFTViewController.h"
 #import "PW_PersonNFTViewController.h"
+#import "PW_NFTDetailViewController.h"
 
 @interface PW_NFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -122,7 +123,8 @@
     return nil;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - lazy
 - (UICollectionView *)collectionView {

@@ -1,15 +1,15 @@
 //
-//  PW_TokenTradeDetailViewController.m
+//  PW_NFTTradeDetailViewController.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/4/8.
+//  Created by mnz on 2022/8/3.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_TokenTradeDetailViewController.h"
+#import "PW_NFTTradeDetailViewController.h"
 #import "PW_WebViewController.h"
 
-@interface PW_TokenTradeDetailViewController ()
+@interface PW_NFTTradeDetailViewController ()
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *baseView;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation PW_TokenTradeDetailViewController
+@implementation PW_NFTTradeDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,27 +54,14 @@
     }];
     UIImageView *stateIv = [[UIImageView alloc] init];
     [self.contentView addSubview:stateIv];
-    NSString *amountStr = NSStringWithFormat(@"%@%@ %@",self.model.isOut?@"-":@"+",self.model.value,self.model.tokenName);
-    UILabel *amountLb = [PW_ViewTool labelBoldText:amountStr fontSize:23 textColor:[UIColor g_grayTextColor]];
-    [self.contentView addSubview:amountLb];
-    UILabel *stateLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_textColor]];
+    UILabel *stateLb = [PW_ViewTool labelMediumText:@"" fontSize:14 textColor:[UIColor g_successColor]];
     [self.contentView addSubview:stateLb];
-    NSString *imageName = @"icon_trade_pending";
-    stateLb.text = LocalizedStr(@"text_pending");
-    if(self.model.transactionStatus<0){
-        imageName = @"icon_trade_fail";
-        stateLb.text = LocalizedStr(@"text_tradeFail");
-        stateLb.textColor = [UIColor g_errorColor];
-    }else if(self.model.transactionStatus>0){
-        if (self.model.isOut) {
-            imageName = @"icon_trade_out";
-        }else{
-            imageName = @"icon_trade_in";
-        }
-        stateLb.text = LocalizedStr(@"text_collectionSuccess");
-        stateLb.textColor = [UIColor g_successColor];
-    }
-    stateIv.image = [UIImage imageNamed:imageName];
+    UILabel *nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:18 textColor:[UIColor g_textColor]];
+    [self.contentView addSubview:nameLb];
+    UILabel *tokenIdLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_grayTextColor]];
+    [self.contentView addSubview:tokenIdLb];
+    stateLb.text = LocalizedStr(@"text_transferSuccess");
+    stateIv.image = [UIImage imageNamed:@"icon_nft_trade_in"];
     [stateIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(20);
         make.centerX.offset(0);
@@ -83,14 +70,18 @@
         make.top.equalTo(stateIv.mas_bottom).offset(2);
         make.centerX.offset(0);
     }];
-    [amountLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(stateLb.mas_bottom).offset(8);
-        make.centerX.offset(-5);
+    [nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(stateLb.mas_bottom).offset(0);
+        make.centerX.offset(0);
+    }];
+    [tokenIdLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(nameLb.mas_bottom).offset(3);
+        make.centerX.offset(0);
     }];
     self.baseView = [[UIView alloc] init];
     [self.contentView addSubview:self.baseView];
     [self.baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(amountLb.mas_bottom).offset(20);
+        make.top.equalTo(tokenIdLb.mas_bottom).offset(32);
         make.left.offset(36);
         make.right.offset(-36);
         make.bottom.offset(-20);

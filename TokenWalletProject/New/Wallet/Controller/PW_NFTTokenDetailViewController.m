@@ -10,6 +10,8 @@
 #import "PW_NFTTokenDetailHeaderView.h"
 #import "PW_NFTTokenDetailSectionHeaderView.h"
 #import "PW_NFTTokenDetailCell.h"
+#import "PW_TransferNFTViewController.h"
+#import "PW_NFTTradeDetailViewController.h"
 
 @interface PW_NFTTokenDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -31,6 +33,10 @@
 - (void)marketSeeAction {
     
 }
+- (void)transferAction {
+    PW_TransferNFTViewController *vc = [[PW_TransferNFTViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
@@ -43,7 +49,8 @@
     return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(PW_NFTTokenDetailSectionHeaderView.class)];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_NFTTradeDetailViewController *vc = [[PW_NFTTradeDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat hiddenHeight = 64;
@@ -83,6 +90,10 @@
 - (PW_NFTTokenDetailHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[PW_NFTTokenDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 755)];
+        __weak typeof(self) weakSelf = self;
+        _headerView.transferBlock = ^{
+            [weakSelf transferAction];
+        };
     }
     return _headerView;
 }

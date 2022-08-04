@@ -225,6 +225,8 @@
 		5C394E21289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E20289A13E00054FA2E /* PW_NFTTokenDetailHeaderView.m */; };
 		5C394E24289A575C0054FA2E /* PW_NFTTokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E23289A575C0054FA2E /* PW_NFTTokenDetailCell.m */; };
 		5C394E27289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E26289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m */; };
+		5C394E2A289A65090054FA2E /* PW_TransferNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E29289A65090054FA2E /* PW_TransferNFTViewController.m */; };
+		5C394E2D289A87E30054FA2E /* PW_NFTTradeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C394E2C289A87E30054FA2E /* PW_NFTTradeDetailViewController.m */; };
 		5C62CF9627FB0AAC00C1C5DC /* Web3WebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */; };
 		5C62CF9927FC14BE00C1C5DC /* PW_TokenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */; };
 		5C62CF9C27FD223100C1C5DC /* PW_TokenDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C62CF9B27FD223000C1C5DC /* PW_TokenDetailCell.m */; };
@@ -322,6 +324,8 @@
 		5C9C1D962862B74800F28632 /* PW_UnlockPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D952862B74800F28632 /* PW_UnlockPasswordViewController.m */; };
 		5C9C1D9A2862C3CC00F28632 /* PW_PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */; };
 		5C9C1D9E2862F4BB00F28632 /* PW_AppPwdLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */; };
+		5C9C8850289B77E50049AF48 /* PW_NFTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C884F289B77E50049AF48 /* PW_NFTDetailViewController.m */; };
+		5C9C8853289BA8E00049AF48 /* PW_NFTDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9C8852289BA8E00049AF48 /* PW_NFTDetailHeaderView.m */; };
 		5CA0F143280E551500DE8DDB /* PW_NetworkManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F142280E551500DE8DDB /* PW_NetworkManageViewController.m */; };
 		5CA0F146280E56DC00DE8DDB /* PW_NetworkManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F145280E56DC00DE8DDB /* PW_NetworkManageCell.m */; };
 		5CA0F149280E5A9800DE8DDB /* PW_NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0F148280E5A9800DE8DDB /* PW_NetworkManager.m */; };
@@ -390,6 +394,9 @@
 		5CCE70EC2811055F00860841 /* PW_MarketMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EB2811055F00860841 /* PW_MarketMenuView.m */; };
 		5CCE70EF2811073C00860841 /* PW_MarketMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */; };
 		5CCE70F22811087800860841 /* PW_MarketMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70F12811087800860841 /* PW_MarketMenuModel.m */; };
+		5CD33DD1289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD0289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m */; };
+		5CD33DD4289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */; };
+		5CD33DD7289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */; };
 		5CD7B043286448F000148BD5 /* PW_VibrateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B042286448F000148BD5 /* PW_VibrateTool.m */; };
 		5CD7B04628645AA600148BD5 /* PW_DappItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B04528645AA600148BD5 /* PW_DappItemCell.m */; };
 		5CD7B04A2864633500148BD5 /* PW_AppAuthLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B0492864633500148BD5 /* PW_AppAuthLockView.m */; };
@@ -1096,6 +1103,10 @@
 		5C394E23289A575C0054FA2E /* PW_NFTTokenDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTokenDetailCell.m; sourceTree = "<group>"; };
 		5C394E25289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTTokenDetailSectionHeaderView.h; sourceTree = "<group>"; };
 		5C394E26289A583B0054FA2E /* PW_NFTTokenDetailSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTokenDetailSectionHeaderView.m; sourceTree = "<group>"; };
+		5C394E28289A65090054FA2E /* PW_TransferNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TransferNFTViewController.h; sourceTree = "<group>"; };
+		5C394E29289A65090054FA2E /* PW_TransferNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TransferNFTViewController.m; sourceTree = "<group>"; };
+		5C394E2B289A87E30054FA2E /* PW_NFTTradeDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTTradeDetailViewController.h; sourceTree = "<group>"; };
+		5C394E2C289A87E30054FA2E /* PW_NFTTradeDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTTradeDetailViewController.m; sourceTree = "<group>"; };
 		5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Web3WebView.framework; sourceTree = "<group>"; };
 		5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_TokenDetailViewController.h; sourceTree = "<group>"; };
 		5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_TokenDetailViewController.m; sourceTree = "<group>"; };
@@ -1283,6 +1294,10 @@
 		5C9C1D992862C3CC00F28632 /* PW_PasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_PasswordView.m; sourceTree = "<group>"; };
 		5C9C1D9C2862F4BB00F28632 /* PW_AppPwdLockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AppPwdLockView.h; sourceTree = "<group>"; };
 		5C9C1D9D2862F4BB00F28632 /* PW_AppPwdLockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AppPwdLockView.m; sourceTree = "<group>"; };
+		5C9C884E289B77E50049AF48 /* PW_NFTDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailViewController.h; sourceTree = "<group>"; };
+		5C9C884F289B77E50049AF48 /* PW_NFTDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailViewController.m; sourceTree = "<group>"; };
+		5C9C8851289BA8E00049AF48 /* PW_NFTDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailHeaderView.h; sourceTree = "<group>"; };
+		5C9C8852289BA8E00049AF48 /* PW_NFTDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailHeaderView.m; sourceTree = "<group>"; };
 		5CA0F141280E551500DE8DDB /* PW_NetworkManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NetworkManageViewController.h; sourceTree = "<group>"; };
 		5CA0F142280E551500DE8DDB /* PW_NetworkManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NetworkManageViewController.m; sourceTree = "<group>"; };
 		5CA0F144280E56DC00DE8DDB /* PW_NetworkManageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NetworkManageCell.h; sourceTree = "<group>"; };
@@ -1413,6 +1428,12 @@
 		5CCE70EE2811073C00860841 /* PW_MarketMenuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuItemCell.m; sourceTree = "<group>"; };
 		5CCE70F02811087800860841 /* PW_MarketMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_MarketMenuModel.h; sourceTree = "<group>"; };
 		5CCE70F12811087800860841 /* PW_MarketMenuModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_MarketMenuModel.m; sourceTree = "<group>"; };
+		5CD33DCF289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailDataSectionHeaderView.h; sourceTree = "<group>"; };
+		5CD33DD0289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailDataSectionHeaderView.m; sourceTree = "<group>"; };
+		5CD33DD2289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailOfferSectionHeaderView.h; sourceTree = "<group>"; };
+		5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailOfferSectionHeaderView.m; sourceTree = "<group>"; };
+		5CD33DD5289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailDealSectionHeaderView.h; sourceTree = "<group>"; };
+		5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailDealSectionHeaderView.m; sourceTree = "<group>"; };
 		5CD7B041286448F000148BD5 /* PW_VibrateTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_VibrateTool.h; sourceTree = "<group>"; };
 		5CD7B042286448F000148BD5 /* PW_VibrateTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_VibrateTool.m; sourceTree = "<group>"; };
 		5CD7B04428645AA600148BD5 /* PW_DappItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappItemCell.h; sourceTree = "<group>"; };
@@ -3117,6 +3138,14 @@
 				5C15D2432897917400FE5025 /* PW_SeriesNFTItemCell.m */,
 				5C15D2452897943000FE5025 /* PW_FollowSeriesNFTItemCell.h */,
 				5C15D2462897943000FE5025 /* PW_FollowSeriesNFTItemCell.m */,
+				5C9C8851289BA8E00049AF48 /* PW_NFTDetailHeaderView.h */,
+				5C9C8852289BA8E00049AF48 /* PW_NFTDetailHeaderView.m */,
+				5CD33DCF289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.h */,
+				5CD33DD0289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m */,
+				5CD33DD2289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.h */,
+				5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */,
+				5CD33DD5289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.h */,
+				5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */,
 				5C15D24E2897BE9D00FE5025 /* PW_MoreAlertCell.h */,
 				5C15D24F2897BE9D00FE5025 /* PW_MoreAlertCell.m */,
 			);
@@ -3165,6 +3194,8 @@
 				5C15D2582897D27100FE5025 /* PW_SearchSeriesNFTViewController.m */,
 				5C15D25E2897E13000FE5025 /* PW_SetDataViewController.h */,
 				5C15D25F2897E13000FE5025 /* PW_SetDataViewController.m */,
+				5C9C884E289B77E50049AF48 /* PW_NFTDetailViewController.h */,
+				5C9C884F289B77E50049AF48 /* PW_NFTDetailViewController.m */,
 				5C15D2482897BBCC00FE5025 /* PW_MoreAlertViewController.h */,
 				5C15D2492897BBCC00FE5025 /* PW_MoreAlertViewController.m */,
 			);
@@ -3670,6 +3701,10 @@
 				5C6A27722899361D0069C942 /* PW_SearchHoldNFTViewController.m */,
 				5C6A2765289925780069C942 /* PW_NFTTokenDetailViewController.h */,
 				5C6A2766289925780069C942 /* PW_NFTTokenDetailViewController.m */,
+				5C394E28289A65090054FA2E /* PW_TransferNFTViewController.h */,
+				5C394E29289A65090054FA2E /* PW_TransferNFTViewController.m */,
+				5C394E2B289A87E30054FA2E /* PW_NFTTradeDetailViewController.h */,
+				5C394E2C289A87E30054FA2E /* PW_NFTTradeDetailViewController.m */,
 				5C62CF9727FC14BD00C1C5DC /* PW_TokenDetailViewController.h */,
 				5C62CF9827FC14BD00C1C5DC /* PW_TokenDetailViewController.m */,
 				5CEF34B928001F9B0052BA15 /* PW_TokenTradeDetailViewController.h */,
@@ -5266,6 +5301,7 @@
 				5C8AAB17280D629600E4ED53 /* PW_AddressBookModel.m in Sources */,
 				5C37A8C5280E9ED400AAA728 /* PW_WalletManageViewController.m in Sources */,
 				5C37A8D7280EBB2400AAA728 /* PW_WalletSetModel.m in Sources */,
+				5C9C8853289BA8E00049AF48 /* PW_NFTDetailHeaderView.m in Sources */,
 				99D2CA292537F7EC00C1C196 /* ZZCustomView.m in Sources */,
 				5C8AAB08280D466400E4ED53 /* PW_NodeManager.m in Sources */,
 				9926E00826E632DD00FDF442 /* ReadServiceView.m in Sources */,
@@ -5286,6 +5322,7 @@
 				99D2CA2A2537F7EC00C1C196 /* MPTools.m in Sources */,
 				7918E5EB21B27E8800A21339 /* SGQRCodeObtainConfigure.m in Sources */,
 				5C8AAAEB280C22EB00E4ED53 /* PW_LanguageModel.m in Sources */,
+				5C394E2D289A87E30054FA2E /* PW_NFTTradeDetailViewController.m in Sources */,
 				99D804CE26A585E000E9B5F8 /* MainViewController.m in Sources */,
 				992E0FBE26DCBD7A00E1C31B /* AssetEditCell.m in Sources */,
 				5AF5D19D1D2F7CBA004070D7 /* NSTimer+Blocks.m in Sources */,
@@ -5519,6 +5556,7 @@
 				5C37A8D1280EB14400AAA728 /* PW_WalletManager.m in Sources */,
 				5AF5D1691D2F7CBA004070D7 /* NSDictionary+Block.m in Sources */,
 				5C9457B1285729B100CC60B7 /* PW_DappChainBrowserItemCell.m in Sources */,
+				5CD33DD1289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m in Sources */,
 				5CCE70CC28100CF400860841 /* PW_DappManager.m in Sources */,
 				5C15D25D2897D9FC00FE5025 /* PW_NoDataView.m in Sources */,
 				5CA0F146280E56DC00DE8DDB /* PW_NetworkManageCell.m in Sources */,
@@ -5746,6 +5784,7 @@
 				5AF5D1561D2F7CBA004070D7 /* NSArray+Block.m in Sources */,
 				5CEF34DF2806DFE40052BA15 /* PW_SearchDappCell.m in Sources */,
 				992E0F2E26CCD9CC00E1C31B /* ETHNoce.m in Sources */,
+				5CD33DD4289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m in Sources */,
 				5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */,
 				5CA0F14C280E64D500DE8DDB /* PW_AddCustomNetworkViewController.m in Sources */,
 				5CB8BB9927E1C6D800C73976 /* MessageTransferCell.m in Sources */,
@@ -5794,6 +5833,7 @@
 				992EF18426B2B2A300F70A94 /* ManageWalletCell.m in Sources */,
 				9926E15926FB1A2200FDF442 /* CVNServerMananger.m in Sources */,
 				5C15D2532897CD4900FE5025 /* PW_PersonNFTViewController.m in Sources */,
+				5CD33DD7289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m in Sources */,
 				5C9C1D962862B74800F28632 /* PW_UnlockPasswordViewController.m in Sources */,
 				992E0F7426D8D95D00E1C31B /* MyAllAssetsVC.m in Sources */,
 				992E0F7126D8D94700E1C31B /* MainAssetManageVC.m in Sources */,
@@ -5816,6 +5856,7 @@
 				992E0F5726D4FDA900E1C31B /* AssetSortView.m in Sources */,
 				5AF5D1751D2F7CBA004070D7 /* NSInvocation+Block.m in Sources */,
 				5CE7ACED27F6EE9600E2188D /* PW_NavigationController.m in Sources */,
+				5C394E2A289A65090054FA2E /* PW_TransferNFTViewController.m in Sources */,
 				5CA6B89F282A0C7800D3C6B4 /* NSString+PW_Rule.m in Sources */,
 				5CCE70E02810EF7600860841 /* PW_ShareViewModel.m in Sources */,
 				992EF17626B250C000F70A94 /* MainTopWalletView.m in Sources */,
@@ -5825,6 +5866,7 @@
 				5C7ED85D2807EF6D00873A53 /* PW_AddCurrencyViewController.m in Sources */,
 				5AF5D1711D2F7CBA004070D7 /* NSFileManager+Paths.m in Sources */,
 				5C71193027BB7ABC00FE9B51 /* MOSWeb3NetManager.m in Sources */,
+				5C9C8850289B77E50049AF48 /* PW_NFTDetailViewController.m in Sources */,
 				992EF20726BBBA9B00F70A94 /* IDInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
