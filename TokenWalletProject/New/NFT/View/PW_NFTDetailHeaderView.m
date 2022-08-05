@@ -47,7 +47,8 @@
     [self addSubview:self.iconIv];
     [self addSubview:self.contentView];
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(0);
+        make.top.offset(-PW_NavStatusHeight);
+        make.left.right.offset(0);
         make.height.mas_equalTo(310);
     }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {

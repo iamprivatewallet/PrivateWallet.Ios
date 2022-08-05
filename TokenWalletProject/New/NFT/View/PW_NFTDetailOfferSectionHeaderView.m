@@ -22,6 +22,7 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
+        self.contentView.backgroundColor = [UIColor g_bgColor];
         [self makeViews];
     }
     return self;
@@ -38,15 +39,15 @@
         make.left.offset(30);
         make.right.offset(-30);
         make.height.mas_equalTo(35);
-        make.top.offset(20);
+        make.top.offset(5);
     }];
     [self.priceLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(30);
-        make.bottom.offset(0);
+        make.bottom.offset(-5);
     }];
     [self.buyerLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-30);
-        make.bottom.offset(0);
+        make.bottom.offset(-5);
     }];
 }
 #pragma mark - lazy

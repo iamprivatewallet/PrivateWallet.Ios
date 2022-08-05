@@ -202,6 +202,10 @@
 		5C2365A2289528F600A203A2 /* PW_FailarmyListNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */; };
 		5C2B3E2F280825A900CC16CE /* PW_Web3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */; };
 		5C2B3E322808297800CC16CE /* PW_SearchCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */; };
+		5C2B841A289CC278006ED96D /* PW_NFTDetailPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B8419289CC278006ED96D /* PW_NFTDetailPropertyCell.m */; };
+		5C2B8420289CCC09006ED96D /* PW_NFTDetailOfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B841F289CCC09006ED96D /* PW_NFTDetailOfferCell.m */; };
+		5C2B8423289CCC17006ED96D /* PW_NFTDetailDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B8422289CCC17006ED96D /* PW_NFTDetailDealCell.m */; };
+		5C2B8429289D0F6E006ED96D /* PW_PendingAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2B8428289D0F6D006ED96D /* PW_PendingAlertViewController.m */; };
 		5C32AB4C28631259002C7970 /* PW_GlobalTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32AB4B28631259002C7970 /* PW_GlobalTool.m */; };
 		5C36E17D28093F910000FEE0 /* PW_CurrencyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17C28093F910000FEE0 /* PW_CurrencyManageViewController.m */; };
 		5C36E18028094AAC0000FEE0 /* PW_CurrencyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C36E17F28094AAC0000FEE0 /* PW_CurrencyManageCell.m */; };
@@ -1055,6 +1059,14 @@
 		5C2B3E2E280825A900CC16CE /* PW_Web3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Web3ViewController.m; sourceTree = "<group>"; };
 		5C2B3E302808297800CC16CE /* PW_SearchCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_SearchCurrencyViewController.h; sourceTree = "<group>"; };
 		5C2B3E312808297800CC16CE /* PW_SearchCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SearchCurrencyViewController.m; sourceTree = "<group>"; };
+		5C2B8418289CC278006ED96D /* PW_NFTDetailPropertyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailPropertyCell.h; sourceTree = "<group>"; };
+		5C2B8419289CC278006ED96D /* PW_NFTDetailPropertyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailPropertyCell.m; sourceTree = "<group>"; };
+		5C2B841E289CCC09006ED96D /* PW_NFTDetailOfferCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailOfferCell.h; sourceTree = "<group>"; };
+		5C2B841F289CCC09006ED96D /* PW_NFTDetailOfferCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailOfferCell.m; sourceTree = "<group>"; };
+		5C2B8421289CCC17006ED96D /* PW_NFTDetailDealCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailDealCell.h; sourceTree = "<group>"; };
+		5C2B8422289CCC17006ED96D /* PW_NFTDetailDealCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailDealCell.m; sourceTree = "<group>"; };
+		5C2B8427289D0F6D006ED96D /* PW_PendingAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_PendingAlertViewController.h; sourceTree = "<group>"; };
+		5C2B8428289D0F6D006ED96D /* PW_PendingAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_PendingAlertViewController.m; sourceTree = "<group>"; };
 		5C32AB4A28631259002C7970 /* PW_GlobalTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_GlobalTool.h; sourceTree = "<group>"; };
 		5C32AB4B28631259002C7970 /* PW_GlobalTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_GlobalTool.m; sourceTree = "<group>"; };
 		5C34201727D7421900A2630B /* brewchain.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = brewchain.js; sourceTree = "<group>"; };
@@ -3009,6 +3021,35 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5C2B8424289D00DF006ED96D /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				5C15D2482897BBCC00FE5025 /* PW_MoreAlertViewController.h */,
+				5C15D2492897BBCC00FE5025 /* PW_MoreAlertViewController.m */,
+				5C2B8427289D0F6D006ED96D /* PW_PendingAlertViewController.h */,
+				5C2B8428289D0F6D006ED96D /* PW_PendingAlertViewController.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		5C2B8425289D00F4006ED96D /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				5C15D24B2897BC4400FE5025 /* PW_MoreAlertModel.h */,
+				5C15D24C2897BC4400FE5025 /* PW_MoreAlertModel.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		5C2B8426289D00FE006ED96D /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				5C15D24E2897BE9D00FE5025 /* PW_MoreAlertCell.h */,
+				5C15D24F2897BE9D00FE5025 /* PW_MoreAlertCell.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 		5C36E18128094BB90000FEE0 /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -3094,6 +3135,7 @@
 		5C650C592891489500B7B3E2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5C2B8426289D00FE006ED96D /* Alert */,
 				5C650C6228922B6600B7B3E2 /* PW_filtrateNFTView.h */,
 				5C650C6328922B6600B7B3E2 /* PW_filtrateNFTView.m */,
 				5C650C6528922E1300B7B3E2 /* PW_filtrateNFTItemCell.h */,
@@ -3142,12 +3184,16 @@
 				5C9C8852289BA8E00049AF48 /* PW_NFTDetailHeaderView.m */,
 				5CD33DCF289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.h */,
 				5CD33DD0289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m */,
+				5C2B8418289CC278006ED96D /* PW_NFTDetailPropertyCell.h */,
+				5C2B8419289CC278006ED96D /* PW_NFTDetailPropertyCell.m */,
 				5CD33DD2289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.h */,
 				5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */,
+				5C2B841E289CCC09006ED96D /* PW_NFTDetailOfferCell.h */,
+				5C2B841F289CCC09006ED96D /* PW_NFTDetailOfferCell.m */,
 				5CD33DD5289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.h */,
 				5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */,
-				5C15D24E2897BE9D00FE5025 /* PW_MoreAlertCell.h */,
-				5C15D24F2897BE9D00FE5025 /* PW_MoreAlertCell.m */,
+				5C2B8421289CCC17006ED96D /* PW_NFTDetailDealCell.h */,
+				5C2B8422289CCC17006ED96D /* PW_NFTDetailDealCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3155,12 +3201,11 @@
 		5C650C5A2891489A00B7B3E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C2B8425289D00F4006ED96D /* Alert */,
 				5C650C9E2893E38500B7B3E2 /* PW_filtrateNFTModel.h */,
 				5C650C9F2893E38500B7B3E2 /* PW_filtrateNFTModel.m */,
 				5C650C922893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.h */,
 				5C650C932893C64900B7B3E2 /* PW_AllNftFiltrateGroupModel.m */,
-				5C15D24B2897BC4400FE5025 /* PW_MoreAlertModel.h */,
-				5C15D24C2897BC4400FE5025 /* PW_MoreAlertModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3168,6 +3213,7 @@
 		5C650C5B2891489F00B7B3E2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5C2B8424289D00DF006ED96D /* Alert */,
 				5C650C5C289148B300B7B3E2 /* PW_NFTViewController.h */,
 				5C650C5D289148B300B7B3E2 /* PW_NFTViewController.m */,
 				5C650C5F28914A9800B7B3E2 /* PW_SearchNFTViewController.h */,
@@ -3196,8 +3242,6 @@
 				5C15D25F2897E13000FE5025 /* PW_SetDataViewController.m */,
 				5C9C884E289B77E50049AF48 /* PW_NFTDetailViewController.h */,
 				5C9C884F289B77E50049AF48 /* PW_NFTDetailViewController.m */,
-				5C15D2482897BBCC00FE5025 /* PW_MoreAlertViewController.h */,
-				5C15D2492897BBCC00FE5025 /* PW_MoreAlertViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5316,6 +5360,7 @@
 				5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */,
 				5C6712FB281131960088A1A5 /* PW_MarketHeaderView.m in Sources */,
 				994AA0F826CA3CE10062F9AF /* MinerFeeCell.m in Sources */,
+				5C2B8423289CCC17006ED96D /* PW_NFTDetailDealCell.m in Sources */,
 				5AF5D16C1D2F7CBA004070D7 /* NSDictionary+SafeAccess.m in Sources */,
 				7918E5D321B2677100A21339 /* UIViewExt.m in Sources */,
 				5E0799F621D28A3A00924407 /* Duration.pbobjc.m in Sources */,
@@ -5539,6 +5584,7 @@
 				5C15D2562897CDE100FE5025 /* PW_PersonNFTHeaderView.m in Sources */,
 				5AF5D19B1D2F7CBA004070D7 /* NSString+XML.m in Sources */,
 				992EF16626B136FB00F70A94 /* AddressBookViewController.m in Sources */,
+				5C2B8420289CCC09006ED96D /* PW_NFTDetailOfferCell.m in Sources */,
 				5C6712FE281131EF0088A1A5 /* PW_MarketCell.m in Sources */,
 				992E0F7726D8D97A00E1C31B /* SearchViewController.m in Sources */,
 				5AF5D1A31D2F7CBA004070D7 /* NSUserDefaults+iCloudSync.m in Sources */,
@@ -5793,6 +5839,7 @@
 				5C37A8DA280EC29F00AAA728 /* PW_ChangeWalletNameViewController.m in Sources */,
 				5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */,
 				992EF16926B137F700F70A94 /* NoDataShowView.m in Sources */,
+				5C2B8429289D0F6E006ED96D /* PW_PendingAlertViewController.m in Sources */,
 				5AF5D1831D2F7CBA004070D7 /* NSObject+KVOBlocks.m in Sources */,
 				99D02DD926DF6BF30097F84B /* NodeChangeView.m in Sources */,
 				5AF5D1721D2F7CBA004070D7 /* NSHTTPCookieStorage+FreezeDry.m in Sources */,
@@ -5813,6 +5860,7 @@
 				994AA0E526C4B91C0062F9AF /* TransferViewController.m in Sources */,
 				5CA3463E280BF60F00E18D92 /* PW_ShareAppTool.m in Sources */,
 				99D2CA2B2537F7EC00C1C196 /* AppCustomCommFunctionManager.m in Sources */,
+				5C2B841A289CC278006ED96D /* PW_NFTDetailPropertyCell.m in Sources */,
 				5E079A0A21D3C08700924407 /* bips.mm in Sources */,
 				5CEF34D62806C9540052BA15 /* PW_DappModel.m in Sources */,
 				9926E14C26EF340400FDF442 /* WebViewController.m in Sources */,
