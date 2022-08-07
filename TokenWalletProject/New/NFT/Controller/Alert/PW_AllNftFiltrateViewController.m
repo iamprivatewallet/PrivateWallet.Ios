@@ -55,6 +55,10 @@
 - (void)closeAction {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self addContentAnimation];
+}
 - (void)makeViews {
     self.contentView = [[UIView alloc] init];
     self.contentView.backgroundColor = [UIColor g_bgColor];
@@ -102,6 +106,12 @@
         make.left.equalTo(resetBtn.mas_right).offset(20);
         make.bottom.width.height.equalTo(resetBtn);
         make.right.offset(-35);
+    }];
+}
+- (void)addContentAnimation {
+    self.contentView.transform = CGAffineTransformMakeTranslation(0, self.contentView.bounds.size.height);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.contentView.transform = CGAffineTransformIdentity;
     }];
 }
 #pragma mark - delegate

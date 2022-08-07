@@ -132,7 +132,7 @@
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(30);
         make.right.offset(-30);
-        make.bottom.offset(0);
+        make.top.equalTo(self.logoIv.mas_bottom).offset(25);
         make.height.mas_equalTo(1);
     }];
 }

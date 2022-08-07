@@ -78,6 +78,9 @@
         [UITextField appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         [UITextView appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         [UIScrollView appearance].overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        if (@available(iOS 15.0, *)) {
+            [UITableView appearance].sectionHeaderTopPadding = 0;
+        }
     } else {
         // Fallback on earlier versions
     }

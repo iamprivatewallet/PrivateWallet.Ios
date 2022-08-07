@@ -63,6 +63,10 @@
     }];
     [self refreshContentView];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self addContentAnimation];
+}
 - (void)refreshContentView {
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.contentView addSubview:self.stateIv];
@@ -143,6 +147,12 @@
             make.centerX.offset(0);
         }];
     }
+}
+- (void)addContentAnimation {
+    self.contentView.transform = CGAffineTransformMakeTranslation(0, self.contentView.bounds.size.height);
+    [UIView animateWithDuration:0.25 animations:^{
+        self.contentView.transform = CGAffineTransformIdentity;
+    }];
 }
 - (void)addAnimation {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];

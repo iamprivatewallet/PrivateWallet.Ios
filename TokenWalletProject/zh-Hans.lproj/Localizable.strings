@@ -243,6 +243,13 @@ text_makeOver="转让";
 text_lease="出租";
 text_sell="出售";
 text_auction="竞拍";
+text_bid="出价";
+text_inputPrice="输入价格";
+text_confirmPurchase="确认购买";
+text_NFTName="NFT名称";
+text_transferAmount="转账金额";
+text_confirmCancel="确认取消";
+text_withdrawOfferTip="撤回报价，你将失去获得该NFT的机会，确认要撤回吗？";
 
 text_disclaimer="免责声明";
 text_dappDisclaimer="本服务由%@提供，您在该链接的所有行为，直接由该链接单独承担。请勿访问来源不明的第三方链接，避免造成资产损失。";

@@ -40,7 +40,7 @@
     vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
         self.filtrateArr = filtrateArr;
     };
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)chainAction {
     PW_NFTChainTypeView *view = [[PW_NFTChainTypeView alloc] init];

@@ -15,6 +15,9 @@
 #import "PW_NFTDetailOfferCell.h"
 #import "PW_NFTDetailDealCell.h"
 #import "PW_PendingAlertViewController.h"
+#import "PW_OfferNFTAlertViewController.h"
+#import "PW_ConfirmPurchaseNFTAlertViewController.h"
+#import "PW_CancelOfferNFTAlertViewController.h"
 
 @interface PW_NFTDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -79,19 +82,23 @@
 //    vc.type = PW_PendingAlertSuccess;
 //    vc.text = @"View on ETH chain";
 //    vc.type = PW_PendingAlertError;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)offerAction {
-    
+    PW_OfferNFTAlertViewController *vc = [[PW_OfferNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)buyAction {
-    
+    PW_ConfirmPurchaseNFTAlertViewController *vc = [[PW_ConfirmPurchaseNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)cancelOfferAction {
-    
+    PW_CancelOfferNFTAlertViewController *vc = [[PW_CancelOfferNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)updateOfferAction {
-    
+    PW_OfferNFTAlertViewController *vc = [[PW_OfferNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 //owner
 - (void)withdrawAction {
@@ -227,7 +234,7 @@
 - (void)refreshBottomView {
     self.bottomView.hidden = NO;
     [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    BOOL isOwner = NO;
+    BOOL isOwner = YES;
     if (isOwner) {
         //在售竞拍
         [self.bottomView addSubview:self.withdrawBtn];
@@ -304,10 +311,10 @@
 //        }];
     }else{
         //未授权
-        [self.bottomView addSubview:self.approveBtn];
-        [self.approveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.offset(0);
-        }];
+//        [self.bottomView addSubview:self.approveBtn];
+//        [self.approveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.offset(0);
+//        }];
         //授权后
 //        [self.bottomView addSubview:self.offerBtn];
 //        [self.bottomView addSubview:self.buyBtn];
@@ -320,16 +327,16 @@
 //            make.width.mas_equalTo(self.offerBtn);
 //        }];
         //参与竞拍后
-//        [self.bottomView addSubview:self.cancelOfferBtn];
-//        [self.bottomView addSubview:self.updateOfferBtn];
-//        [self.cancelOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.top.bottom.offset(0);
-//        }];
-//        [self.updateOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.cancelOfferBtn.mas_right).offset(20);
-//            make.top.right.bottom.offset(0);
-//            make.width.mas_equalTo(self.cancelOfferBtn);
-//        }];
+        [self.bottomView addSubview:self.cancelOfferBtn];
+        [self.bottomView addSubview:self.updateOfferBtn];
+        [self.cancelOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.offset(0);
+        }];
+        [self.updateOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.cancelOfferBtn.mas_right).offset(20);
+            make.top.right.bottom.offset(0);
+            make.width.mas_equalTo(self.cancelOfferBtn);
+        }];
         //未出售
 //        self.bottomView.hidden = YES;
     }
@@ -349,6 +356,9 @@
         _tableView.clipsToBounds = NO;
         _tableView.rowHeight = 28;
         _tableView.sectionHeaderHeight = 80;
+        if (@available(iOS 15.0, *)) {
+            _tableView.sectionHeaderTopPadding = 0;
+        }
         _tableView.tableHeaderView = self.headerView;
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 10+PW_SafeBottomInset+60, 0);
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -357,7 +367,7 @@
 }
 - (PW_NFTDetailHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[PW_NFTDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 430-PW_NavStatusHeight)];
+        _headerView = [[PW_NFTDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 450-PW_NavStatusHeight)];
     }
     return _headerView;
 }

@@ -72,7 +72,7 @@ static NSInteger FollowMenuIndex = 2;
     vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
         self.filtrateArr = filtrateArr;
     };
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)refreshSegment {
     if (self.segmentIndex==FollowMenuIndex) {
