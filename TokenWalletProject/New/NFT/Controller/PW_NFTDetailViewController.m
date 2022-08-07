@@ -15,9 +15,13 @@
 #import "PW_NFTDetailOfferCell.h"
 #import "PW_NFTDetailDealCell.h"
 #import "PW_PendingAlertViewController.h"
-#import "PW_OfferNFTAlertViewController.h"
+#import "PW_BidNFTAlertViewController.h"
 #import "PW_ConfirmPurchaseNFTAlertViewController.h"
-#import "PW_CancelOfferNFTAlertViewController.h"
+#import "PW_ConfirmNFTAlertViewController.h"
+#import "PW_OfferNFTAlertViewController.h"
+#import "PW_TransferNFTAlertViewController.h"
+#import "PW_PutawaySellNFTAlertViewController.h"
+#import "PW_PutawayAuctionNFTAlertViewController.h"
 
 @interface PW_NFTDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -78,14 +82,14 @@
 - (void)approveAction {
     PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
     vc.type = PW_PendingAlertPending;
-    vc.text = @"Approve ETH";
+    vc.msg = @"Approve ETH";
 //    vc.type = PW_PendingAlertSuccess;
-//    vc.text = @"View on ETH chain";
+//    vc.msg = @"View on ETH chain";
 //    vc.type = PW_PendingAlertError;
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)offerAction {
-    PW_OfferNFTAlertViewController *vc = [[PW_OfferNFTAlertViewController alloc] init];
+    PW_BidNFTAlertViewController *vc = [[PW_BidNFTAlertViewController alloc] init];
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)buyAction {
@@ -93,31 +97,40 @@
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)cancelOfferAction {
-    PW_CancelOfferNFTAlertViewController *vc = [[PW_CancelOfferNFTAlertViewController alloc] init];
+    PW_ConfirmNFTAlertViewController *vc = [[PW_ConfirmNFTAlertViewController alloc] init];
+    vc.titleStr = LocalizedStr(@"text_confirmCancel");
+    vc.descStr = LocalizedStr(@"text_withdrawOfferTip");
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)updateOfferAction {
-    PW_OfferNFTAlertViewController *vc = [[PW_OfferNFTAlertViewController alloc] init];
+    PW_BidNFTAlertViewController *vc = [[PW_BidNFTAlertViewController alloc] init];
     [self presentViewController:vc animated:NO completion:nil];
 }
 //owner
 - (void)withdrawAction {
-    
+    PW_ConfirmNFTAlertViewController *vc = [[PW_ConfirmNFTAlertViewController alloc] init];
+    vc.titleStr = LocalizedStr(@"text_withdraw");
+    vc.descStr = LocalizedStr(@"text_withdrawNFTTip");
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)transferAction {
-    
+    PW_TransferNFTAlertViewController *vc = [[PW_TransferNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)ownerOfferAction {
-    
+    PW_OfferNFTAlertViewController *vc = [[PW_OfferNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)leaseAction {
     
 }
 - (void)sellAction {
-    
+    PW_PutawaySellNFTAlertViewController *vc = [[PW_PutawaySellNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)auctionAction {
-    
+    PW_PutawayAuctionNFTAlertViewController *vc = [[PW_PutawayAuctionNFTAlertViewController alloc] init];
+    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)segmentChange:(NSInteger)index {
     self.segmentIndex = index;
@@ -237,22 +250,22 @@
     BOOL isOwner = YES;
     if (isOwner) {
         //在售竞拍
-        [self.bottomView addSubview:self.withdrawBtn];
-        [self.bottomView addSubview:self.transferBtn];
-        [self.bottomView addSubview:self.ownerOfferBtn];
-        [self.withdrawBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.bottom.offset(0);
-        }];
-        [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.withdrawBtn.mas_right).offset(10);
-            make.top.bottom.offset(0);
-            make.width.equalTo(self.withdrawBtn);
-        }];
-        [self.ownerOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.transferBtn.mas_right).offset(10);
-            make.top.bottom.right.offset(0);
-            make.width.equalTo(self.withdrawBtn);
-        }];
+//        [self.bottomView addSubview:self.withdrawBtn];
+//        [self.bottomView addSubview:self.transferBtn];
+//        [self.bottomView addSubview:self.ownerOfferBtn];
+//        [self.withdrawBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.top.bottom.offset(0);
+//        }];
+//        [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.withdrawBtn.mas_right).offset(10);
+//            make.top.bottom.offset(0);
+//            make.width.equalTo(self.withdrawBtn);
+//        }];
+//        [self.ownerOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.transferBtn.mas_right).offset(10);
+//            make.top.bottom.right.offset(0);
+//            make.width.equalTo(self.withdrawBtn);
+//        }];
         //在售非竞拍
 //        [self.bottomView addSubview:self.withdrawBtn];
 //        [self.bottomView addSubview:self.transferBtn];
@@ -265,50 +278,50 @@
 //            make.width.equalTo(self.withdrawBtn);
 //        }];
         //未出售
-//        [self.bottomView addSubview:self.groupBtnView];
-//        [self.bottomView addSubview:self.auctionBtn];
-//        [self.groupBtnView addSubview:self.leaseBtn];
-//        [self.groupBtnView addSubview:self.sellBtn];
-//        [self.groupBtnView addSubview:self.transferBtn];
-//        UIView *line1View = [[UIView alloc] init];
-//        line1View.backgroundColor = [UIColor colorWithWhite:1 alpha:0.15];
-//        [self.groupBtnView addSubview:line1View];
-//        UIView *line2View = [[UIView alloc] init];
-//        line2View.backgroundColor = [UIColor colorWithWhite:1 alpha:0.15];
-//        [self.groupBtnView addSubview:line2View];
-//        [self.groupBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.top.bottom.offset(0);
-//        }];
-//        [self.auctionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.groupBtnView.mas_right).offset(10);
-//            make.top.bottom.right.offset(0);
-//            make.width.mas_equalTo(110);
-//        }];
-//        [self.leaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.top.bottom.offset(0);
-//        }];
-//        [self.sellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.leaseBtn.mas_right);
-//            make.top.bottom.offset(0);
-//            make.width.equalTo(self.leaseBtn);
-//        }];
-//        [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.sellBtn.mas_right);
-//            make.top.bottom.right.offset(0);
-//            make.width.equalTo(self.leaseBtn);
-//        }];
-//        [line1View mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.leaseBtn.mas_right);
-//            make.height.mas_equalTo(12);
-//            make.width.mas_equalTo(1);
-//            make.centerY.offset(0);
-//        }];
-//        [line2View mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.sellBtn.mas_right);
-//            make.height.mas_equalTo(12);
-//            make.width.mas_equalTo(1);
-//            make.centerY.offset(0);
-//        }];
+        [self.bottomView addSubview:self.groupBtnView];
+        [self.bottomView addSubview:self.auctionBtn];
+        [self.groupBtnView addSubview:self.leaseBtn];
+        [self.groupBtnView addSubview:self.sellBtn];
+        [self.groupBtnView addSubview:self.transferBtn];
+        UIView *line1View = [[UIView alloc] init];
+        line1View.backgroundColor = [UIColor colorWithWhite:1 alpha:0.15];
+        [self.groupBtnView addSubview:line1View];
+        UIView *line2View = [[UIView alloc] init];
+        line2View.backgroundColor = [UIColor colorWithWhite:1 alpha:0.15];
+        [self.groupBtnView addSubview:line2View];
+        [self.groupBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.offset(0);
+        }];
+        [self.auctionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.groupBtnView.mas_right).offset(10);
+            make.top.bottom.right.offset(0);
+            make.width.mas_equalTo(110);
+        }];
+        [self.leaseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.bottom.offset(0);
+        }];
+        [self.sellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leaseBtn.mas_right);
+            make.top.bottom.offset(0);
+            make.width.equalTo(self.leaseBtn);
+        }];
+        [self.transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.sellBtn.mas_right);
+            make.top.bottom.right.offset(0);
+            make.width.equalTo(self.leaseBtn);
+        }];
+        [line1View mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leaseBtn.mas_right);
+            make.height.mas_equalTo(12);
+            make.width.mas_equalTo(1);
+            make.centerY.offset(0);
+        }];
+        [line2View mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.sellBtn.mas_right);
+            make.height.mas_equalTo(12);
+            make.width.mas_equalTo(1);
+            make.centerY.offset(0);
+        }];
     }else{
         //未授权
 //        [self.bottomView addSubview:self.approveBtn];

@@ -1,21 +1,21 @@
 //
-//  PW_OfferNFTAlertSectionHeaderView.m
+//  PW_BidNFTAlertSectionHeaderView.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/8/7.
+//  Created by mnz on 2022/8/6.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_OfferNFTAlertSectionHeaderView.h"
+#import "PW_BidNFTAlertSectionHeaderView.h"
 
-@interface PW_OfferNFTAlertSectionHeaderView ()
+@interface PW_BidNFTAlertSectionHeaderView ()
 
 @property (nonatomic, strong) UILabel *priceLb;
 @property (nonatomic, strong) UILabel *buyerLb;
 
 @end
 
-@implementation PW_OfferNFTAlertSectionHeaderView
+@implementation PW_BidNFTAlertSectionHeaderView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
@@ -33,7 +33,7 @@
         make.centerY.offset(0);
     }];
     [self.buyerLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-60);
+        make.right.offset(-30);
         make.centerY.offset(0);
     }];
 }

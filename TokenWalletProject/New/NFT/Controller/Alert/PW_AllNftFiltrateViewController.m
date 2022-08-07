@@ -12,20 +12,12 @@
 @interface PW_AllNftFiltrateViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) PW_TableView *tableView;
-@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *dataArr;
 
 @end
 
 @implementation PW_AllNftFiltrateViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    }
-    return self;
-}
 - (void)setFiltrateArr:(NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
     _filtrateArr = filtrateArr;
     [self resetAction];
@@ -34,8 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor g_maskColor];
-    [self clearBackground];
     [self makeViews];
 }
 - (void)resetAction {
@@ -52,22 +42,12 @@
     }
     [self closeAction];
 }
-- (void)closeAction {
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self addContentAnimation];
-}
 - (void)makeViews {
-    self.contentView = [[UIView alloc] init];
-    self.contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.offset(0);
         make.height.mas_equalTo(465+PW_SafeBottomInset);
     }];
-    [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
     UIView *headerView = [[UIView alloc] init];
     [self.contentView addSubview:headerView];
     [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,9 +61,8 @@
     [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.centerY.offset(0);
     }];
-    UIButton *closeBtn = [PW_ViewTool buttonImageName:@"icon_close" target:self action:@selector(closeAction)];
-    [headerView addSubview:closeBtn];
-    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [headerView addSubview:self.closeBtn];
+    [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(0);
         make.top.bottom.offset(0);
     }];
@@ -106,12 +85,6 @@
         make.left.equalTo(resetBtn.mas_right).offset(20);
         make.bottom.width.height.equalTo(resetBtn);
         make.right.offset(-35);
-    }];
-}
-- (void)addContentAnimation {
-    self.contentView.transform = CGAffineTransformMakeTranslation(0, self.contentView.bounds.size.height);
-    [UIView animateWithDuration:0.25 animations:^{
-        self.contentView.transform = CGAffineTransformIdentity;
     }];
 }
 #pragma mark - delegate

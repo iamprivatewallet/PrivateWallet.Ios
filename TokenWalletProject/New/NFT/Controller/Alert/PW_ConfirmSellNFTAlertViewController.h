@@ -1,18 +1,16 @@
 //
-//  PW_CancelOfferNFTAlertViewController.h
+//  PW_ConfirmSellNFTAlertViewController.h
 //  TokenWalletProject
 //
 //  Created by mnz on 2022/8/7.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import "PW_BaseViewController.h"
+#import "PW_BaseAlertViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PW_CancelOfferNFTAlertViewController : PW_BaseViewController
-
-- (void)show;
+@interface PW_ConfirmSellNFTAlertViewController : PW_BaseAlertViewController
 
 @end
 

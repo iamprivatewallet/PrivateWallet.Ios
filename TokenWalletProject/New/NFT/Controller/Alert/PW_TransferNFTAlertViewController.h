@@ -1,16 +1,16 @@
 //
-//  PW_OfferNFTAlertSectionHeaderView.h
+//  PW_TransferNFTAlertViewController.h
 //  TokenWalletProject
 //
 //  Created by mnz on 2022/8/7.
 //  Copyright © 2022 . All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PW_BaseAlertViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PW_OfferNFTAlertSectionHeaderView : UITableViewHeaderFooterView
+@interface PW_TransferNFTAlertViewController : PW_BaseAlertViewController
 
 @end
 
