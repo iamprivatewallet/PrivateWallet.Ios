@@ -8,10 +8,13 @@
 
 #import "PW_SDImageTool.h"
 #import <SDWebImage/SDImageCache.h>
+#import <SDImageSVGCoder.h>
 
 @implementation PW_SDImageTool
 
 + (void)setup {
+    SDImageSVGCoder *SVGCoder = [SDImageSVGCoder sharedCoder];
+    [[SDImageCodersManager sharedManager] addCoder:SVGCoder];
     [SDImageCache sharedImageCache].config.maxDiskAge = 7*24*3600;//3 day
 }
 + (void)clear {

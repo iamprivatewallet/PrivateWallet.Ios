@@ -37,6 +37,9 @@
     PW_TransferNFTViewController *vc = [[PW_TransferNFTViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)requestData {
+    
+}
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;

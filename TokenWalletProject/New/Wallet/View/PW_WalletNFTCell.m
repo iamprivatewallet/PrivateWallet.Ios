@@ -28,6 +28,12 @@
     }
     return self;
 }
+- (void)setModel:(PW_NFTCollectionModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
+    self.nameLb.text = model.slug;
+    self.countLb.text = @(model.numOwners).stringValue;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];

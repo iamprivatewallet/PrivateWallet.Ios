@@ -25,6 +25,21 @@
     }
     return self;
 }
+- (void)setDataArr:(NSArray<PW_NFTBannerModel *> *)dataArr {
+    _dataArr = dataArr;
+    NSMutableArray *array = [NSMutableArray array];
+    for (PW_NFTBannerModel *model in dataArr) {
+        [array addObject:model.imgH5];
+    }
+    self.sdScrollView.imageURLStringsGroup = array;
+}
+#pragma mark - delegate
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    PW_NFTBannerModel *model = self.dataArr[index];
+    if (self.clickBlock) {
+        self.clickBlock(model);
+    }
+}
 - (void)makeViews {
     UIView *bodyView = [[UIView alloc] init];
     bodyView.layer.cornerRadius = 5;

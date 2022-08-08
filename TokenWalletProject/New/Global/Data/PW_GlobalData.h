@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PW_TokenModel.h"
+#import "PW_NFTClassifyModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<PW_TokenModel *> *coinList;
 @property (nonatomic, strong) PW_TokenModel *mainTokenModel;
 - (void)updateCoinList:(NSArray<PW_TokenModel *> *)coinList;
+
+@property (nonatomic, strong) NSArray<PW_NFTClassifyModel *> *nftClassifyArr;
 
 @end
 

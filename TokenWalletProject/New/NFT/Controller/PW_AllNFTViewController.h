@@ -7,6 +7,7 @@
 //
 
 #import "PW_BaseViewController.h"
+#import "PW_NFTClassifyModel.h"
 
 typedef enum : NSUInteger {
     PW_AllNFTAll=0,
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_AllNFTViewController : PW_BaseViewController
 
 @property (nonatomic, assign) PW_AllNFTType type;
+@property (nonatomic, strong) PW_NFTClassifyModel *model;
 
 @end
 

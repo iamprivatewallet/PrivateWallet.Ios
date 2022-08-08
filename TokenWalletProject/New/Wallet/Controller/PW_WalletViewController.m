@@ -22,6 +22,7 @@
 #import "PW_SearchNFTViewController.h"
 #import "PW_PersonNFTViewController.h"
 #import "PW_HoldNFTViewController.h"
+#import "PW_NFTAssetModel.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -45,6 +46,8 @@
 
 @property (nonatomic, strong) NSMutableArray<PW_TokenModel *> *coinList;
 @property (nonatomic, strong) Wallet *currentWallet;
+
+@property (nonatomic, strong) PW_NFTAssetModel *nftAssetModel;
 
 @end
 
@@ -76,6 +79,7 @@
     [super viewDidAppear:animated];
     [self refreshBalance];
     [self showBackupView];
+    [self requestNFTData];
 }
 - (void)showBackupView {
     if ([User_manager isBackup]) {
@@ -194,6 +198,18 @@
 - (void)addCurrencyAction {
     PW_SearchCurrencyViewController *vc = [[PW_SearchCurrencyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)requestNFTData {
+    User *user = User_manager.currentUser;
+    NSString *chainId = user.current_chainId;
+    [self pw_requestNFTApi:NFTWalletMainURL params:@{@"chainId":chainId,@"address":user.chooseWallet_address} completeBlock:^(id  _Nonnull data) {
+        self.nftAssetModel = [PW_NFTAssetModel mj_objectWithKeyValues:data];
+        if (self.segmentedControl.selectedSegmentIndex==1) {
+            [self.tableView reloadData];
+        }
+    } errBlock:^(NSString * _Nonnull msg) {
+        
+    }];
 }
 - (void)requestData {
     [self refreshHeader];
@@ -376,6 +392,7 @@
     if (index==0) {
         return self.coinList.count;
     }
+//    return self.nftAssetModel.collections.count;
     return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -387,7 +404,7 @@
         return cell;
     }
     PW_WalletNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_WalletNFTCell"];
-    
+//    cell.model = self.nftAssetModel.collections[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -398,6 +415,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         PW_HoldNFTViewController *vc = [[PW_HoldNFTViewController alloc] init];
+//        vc.model = self.nftAssetModel.collections[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

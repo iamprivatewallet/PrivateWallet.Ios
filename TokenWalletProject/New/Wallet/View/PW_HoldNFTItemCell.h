@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_NFTTokenModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_HoldNFTItemCell : UICollectionViewCell
+
+@property (nonatomic, strong) PW_NFTTokenModel *model;
 
 @end
 

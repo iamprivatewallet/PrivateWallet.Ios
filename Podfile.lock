@@ -58,9 +58,11 @@ PODS:
   - ReactiveObjC (3.1.1)
   - SDCycleScrollView (1.82):
     - SDWebImage (>= 5.0.0)
-  - SDWebImage (5.11.1):
-    - SDWebImage/Core (= 5.11.1)
-  - SDWebImage/Core (5.11.1)
+  - SDWebImage (5.13.2):
+    - SDWebImage/Core (= 5.13.2)
+  - SDWebImage/Core (5.13.2)
+  - SDWebImageSVGCoder (1.6.1):
+    - SDWebImage/Core (~> 5.6)
   - secp256k1.swift (0.1.4)
   - SocketRocket (0.6.0)
   - Solana.Swift (1.1):
@@ -101,7 +103,8 @@ DEPENDENCIES:
   - RDVTabBarController
   - ReactiveObjC (= 3.1.1)
   - SDCycleScrollView (= 1.82)
-  - SDWebImage (= 5.11.1)
+  - SDWebImage (= 5.13.2)
+  - SDWebImageSVGCoder (= 1.6.1)
   - SocketRocket (= 0.6.0)
   - Solana.Swift (from `https://github.com/ajamaica/Solana.Swift.git`, branch `master`)
   - SVProgressHUD
@@ -121,6 +124,7 @@ SPEC REPOS:
     - ReactiveObjC
     - SDCycleScrollView
     - SDWebImage
+    - SDWebImageSVGCoder
     - secp256k1.swift
     - SocketRocket
     - Starscream
@@ -174,7 +178,8 @@ SPEC CHECKSUMS:
   RDVTabBarController: 28a5c6546b9991cf2712d59947324c6b06603e14
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDCycleScrollView: a0d74c3384caa72bdfc81470bdbc8c14b3e1fbcf
-  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
+  SDWebImageSVGCoder: 6fc109f9c2a82ab44510fff410b88b1a6c271ee8
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Solana.Swift: f72466e11f836aa8ccb840d780f39c69a9289c97
@@ -186,6 +191,6 @@ SPEC CHECKSUMS:
   "UITableView+FDTemplateLayoutCell": 5c949b4a5059c404b442926c0e80f81d10a2d66f
   web3.swift: 5b1c6275d92cfa60e4365159057bd63a83dfb9bd
 
-PODFILE CHECKSUM: 6f6f11e314e2780f5c247665d461876ab677a0d0
+PODFILE CHECKSUM: 3efc3d6dcd3e23a09add5ad4235e65e76936f151
 
 COCOAPODS: 1.11.2

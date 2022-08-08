@@ -9,6 +9,7 @@
 #import "PW_SearchHoldNFTViewController.h"
 #import "PW_HoldNFTItemCell.h"
 #import "PW_SegmentedControl.h"
+#import "PW_NFTTokenDetailViewController.h"
 
 @interface PW_SearchHoldNFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
 
@@ -18,6 +19,10 @@
 @property (nonatomic, strong) PW_SegmentedControl *segmentedControl;
 @property (nonatomic, assign) NSInteger segmentIndex;
 @property (nonatomic, weak) UITextField *searchTF;
+@property (nonatomic, strong) NSMutableArray<PW_NFTTokenModel *> *dataArr;
+
+@property (nonatomic, assign) NSInteger marketStatus;
+@property (nonatomic, assign) NSInteger pageNumber;
 
 @end
 
@@ -29,22 +34,60 @@
     [self makeViews];
     self.noDataView.imageName = @"icon_noData_NFT";
     self.noDataView.text = LocalizedStr(@"text_searchNoDataNFT");
-//    self.noDataView.hidden = NO;
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    [self forceRefreshData];
 }
 - (void)closeAction {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (void)forceRefreshData {
+    [self.dataArr removeAllObjects];
+    [self.collectionView reloadData];
+    self.noDataView.hidden = self.dataArr.count>0;
+    self.pageNumber = 0;
+    [self requestData];
+}
+- (void)requestData {
+    User *user = User_manager.currentUser;
+    NSString *chainId = user.current_chainId;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetOwnerPageURL params:@{@"chainId":chainId,@"address":user.chooseWallet_address,@"slug":self.model.slug,@"search":self.searchTF.text,@"marketStatus":@(self.segmentIndex),@"pageNumber":@(self.pageNumber)} completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        NSNumber *totalPages = data[@"totalPages"];
+        if (self.pageNumber>=totalPages.integerValue) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.collectionView.mj_footer resetNoMoreData];
+            [self.collectionView.mj_footer endRefreshing];
+        }
+        self.pageNumber++;
+        NSArray *array = [PW_NFTTokenModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        [self.dataArr addObjectsFromArray:array];
+        [self.collectionView reloadData];
+        self.noDataView.hidden = self.dataArr.count>0;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self dismissLoading];
+        [self showError:msg];
+        [self.collectionView.mj_footer endRefreshing];
+    }];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self forceRefreshData];
+    return YES;
+}
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_HoldNFTItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_HoldNFTItemCell.class) forIndexPath:indexPath];
-    
+    cell.model = self.dataArr[indexPath.item];
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_NFTTokenDetailViewController *vc = [[PW_NFTTokenDetailViewController alloc] init];
+    vc.model = self.dataArr[indexPath.item];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)makeViews {
     [self makeSearchView];
@@ -92,7 +135,6 @@
     searchTF.delegate = self;
     searchTF.borderStyle = UITextBorderStyleNone;
     searchTF.returnKeyType = UIReturnKeySearch;
-    searchTF.enablesReturnKeyAutomatically = YES;
     [searchView addSubview:searchTF];
     self.searchTF = searchTF;
     [searchTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -146,10 +188,16 @@
         __weak typeof(self) weakSelf = self;
         _segmentedControl.didClick = ^(NSInteger index) {
             weakSelf.segmentIndex = index;
-            [weakSelf.collectionView reloadData];
+            [weakSelf forceRefreshData];
         };
     }
     return _segmentedControl;
+}
+- (NSMutableArray<PW_NFTTokenModel *> *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
 }
 
 @end

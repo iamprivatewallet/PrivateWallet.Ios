@@ -37,7 +37,7 @@
 }
 - (void)seriesAction {
     if (self.seriesBlock) {
-        self.seriesBlock();
+        self.seriesBlock(self.model);
     }
 }
 - (void)makeViews {

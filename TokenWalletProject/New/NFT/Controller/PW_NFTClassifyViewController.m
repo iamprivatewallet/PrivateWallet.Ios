@@ -13,6 +13,7 @@
 @interface PW_NFTClassifyViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) PW_TableView *tableView;
+@property (nonatomic, strong) NSArray<PW_NFTClassifyModel *> *dataArr;
 
 @end
 
@@ -32,9 +33,22 @@
     self.view.backgroundColor = [UIColor g_maskColor];
     [self clearBackground];
     [self makeViews];
+    [self requestData];
 }
 - (void)closeAction {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)requestData {
+    if (self.dataArr!=nil&&self.dataArr.count>0) {
+        return;
+    }
+    [self pw_requestNFTApi:NFTSearchCategoryURL params:nil completeBlock:^(id  _Nonnull data) {
+        self.dataArr = [PW_NFTClassifyModel mj_objectArrayWithKeyValuesArray:data];
+        [PW_GlobalData shared].nftClassifyArr = self.dataArr;
+        [self.tableView reloadData];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+    }];
 }
 - (void)makeViews {
     UIView *contentView = [[UIView alloc] init];
@@ -72,15 +86,17 @@
 }
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTClassifyCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_NFTClassifyCell.class)];
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self dismissViewControllerAnimated:NO completion:nil];
     PW_AllNFTViewController *vc = [[PW_AllNFTViewController alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [[PW_APPDelegate getRootCurrentNavc] pushViewController:vc animated:YES];
 }
 #pragma mark - lazy
@@ -95,6 +111,12 @@
         [_tableView registerClass:PW_NFTClassifyCell.class forCellReuseIdentifier:NSStringFromClass(PW_NFTClassifyCell.class)];
     }
     return _tableView;
+}
+- (NSArray<PW_NFTClassifyModel *> *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [PW_GlobalData shared].nftClassifyArr;
+    }
+    return _dataArr;
 }
 
 @end

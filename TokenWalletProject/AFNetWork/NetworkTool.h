@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 + (void)uploadMediaData:(NSArray *)mediaData path:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 
++ (void)requestNFTApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

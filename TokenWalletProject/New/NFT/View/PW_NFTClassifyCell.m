@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIView *bodyView;
 @property (nonatomic, strong) UIImageView *iconIv;
+@property (nonatomic, strong) UILabel *titleLb;
 
 @end
 
@@ -25,9 +26,15 @@
     }
     return self;
 }
+- (void)setModel:(PW_NFTClassifyModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+    self.titleLb.text = model.name;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];
+    [self.bodyView addSubview:self.titleLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(34);
         make.right.offset(-34);
@@ -37,6 +44,10 @@
     [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(3);
         make.right.bottom.offset(3);
+    }];
+    [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bodyView.mas_right).offset(-84);
+        make.centerY.offset(-3);
     }];
 }
 #pragma mark - lazy
@@ -54,6 +65,12 @@
         _iconIv = [[UIImageView alloc] init];
     }
     return _iconIv;
+}
+- (UILabel *)titleLb {
+    if (!_titleLb) {
+        _titleLb = [PW_ViewTool labelMediumText:@"--" fontSize:21 textColor:[UIColor whiteColor]];
+    }
+    return _titleLb;
 }
 
 @end

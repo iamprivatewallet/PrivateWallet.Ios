@@ -24,6 +24,10 @@
     }
     return self;
 }
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLb.text = title;
+}
 - (void)makeViews {
     [self addSubview:self.titleLb];
     [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {

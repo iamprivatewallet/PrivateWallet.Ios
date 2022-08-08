@@ -21,11 +21,14 @@
 #import "PW_SeriesNFTViewController.h"
 #import "PW_PersonNFTViewController.h"
 #import "PW_NFTDetailViewController.h"
+#import "PW_NFTMarketModel.h"
+#import "PW_WebViewController.h"
 
 @interface PW_NFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) PW_filtrateNFTView *filtrateView;
+@property (nonatomic, strong) PW_NFTMarketModel *model;
 
 @end
 
@@ -37,6 +40,8 @@
     [self setNavNoLineTitle:@"" rightImg:@"icon_scan_white" rightAction:@selector(personalAction)];
     [self setupNavBgPurple];
     [self makeViews];
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    [self.collectionView.mj_header beginRefreshing];
 }
 - (void)personalAction {
     PW_PersonNFTViewController *vc = [[PW_PersonNFTViewController alloc] init];
@@ -45,6 +50,17 @@
 - (void)searchAction {
     PW_SearchNFTViewController *searchVc = [[PW_SearchNFTViewController alloc] init];
     [self.navigationController pushViewController:searchVc animated:YES];
+}
+- (void)requestData {
+    User *user = User_manager.currentUser;
+    [self pw_requestNFTApi:NFTSearchMarketURL params:@{@"chainId":user.current_chainId} completeBlock:^(id  _Nonnull data) {
+        [self.collectionView.mj_header endRefreshing];
+        self.model = [PW_NFTMarketModel mj_objectWithKeyValues:data];
+        [self.collectionView reloadData];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self.collectionView.mj_header endRefreshing];
+    }];
 }
 - (void)makeViews {
     UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_searchNFTContract") fontSize:12 titleColor:[UIColor g_whiteTextColor] imageName:@"icon_search_white" target:self action:@selector(searchAction)];
@@ -85,22 +101,24 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section==1) {
-        return 3;
+        return self.model.collections.count;
     }else if(section==2) {
-        return 5;
+        return self.model.assets.count;
     }
     return 0;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==1) {
         PW_NFTHotspotCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTHotspotCell.class) forIndexPath:indexPath];
-        
+        cell.model = self.model.collections[indexPath.item];
         return cell;
     }
     __weak typeof(self) weakSelf = self;
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
-    cell.seriesBlock = ^{
+    cell.model = self.model.assets[indexPath.item];
+    cell.seriesBlock = ^(PW_NFTTokenModel * _Nonnull model) {
         PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+        vc.slug = model.slug;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     return cell;
@@ -115,16 +133,38 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         if (indexPath.section==0) {
             PW_NFTHeaderView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(PW_NFTHeaderView.class) forIndexPath:indexPath];
+            view.dataArr = self.model.banners;
+            __weak typeof(self) weakSelf = self;
+            view.clickBlock = ^(PW_NFTBannerModel * _Nonnull model) {
+                if ([model.clickUrl isNoEmpty]) {
+                    PW_WebViewController *vc = [[PW_WebViewController alloc] init];
+                    vc.titleStr = model.title;
+                    vc.urlStr = model.clickUrl;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+            };
             return view;
         }
         PW_NFTSectionTitleView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass(PW_NFTSectionTitleView.class) forIndexPath:indexPath];
+        if (indexPath.section==1) {
+            view.title = LocalizedStr(@"text_hotFailarmy");
+        }else if(indexPath.section==2) {
+            view.title = LocalizedStr(@"text_fashionNFT");
+        }
         return view;
     }
     return nil;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if(indexPath.section==1) {
+        PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+        vc.slug = self.model.collections[indexPath.item].slug;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.section==2) {
+        PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+        vc.model = self.model.assets[indexPath.item];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 #pragma mark - lazy
 - (UICollectionView *)collectionView {
@@ -137,7 +177,7 @@
         layout.estimatedItemSize = CGSizeMake(SCREEN_WIDTH-34*2, 145);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(10, 0, 20, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(5, 0, 20, 0);
         _collectionView.contentOffset = CGPointZero;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;

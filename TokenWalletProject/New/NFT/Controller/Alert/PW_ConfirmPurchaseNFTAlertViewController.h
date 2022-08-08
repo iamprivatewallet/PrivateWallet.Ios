@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_ConfirmPurchaseNFTAlertViewController : PW_BaseAlertViewController
 
+@property (nonatomic, copy) void(^sureBlock)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -66,6 +66,9 @@
 - (void)pw_requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
     [NetworkTool requestWallet:path params:params completeBlock:completeBlock errBlock:errBlock];
 }
+- (void)pw_requestNFTApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock {
+    [NetworkTool requestNFTApi:path params:params completeBlock:completeBlock errBlock:errBlock];
+}
 - (void)showSuccess:(NSString *)text {
     [PW_ToastTool showSucees:text toView:self.view];
 }
@@ -87,8 +90,8 @@
 - (void)dismissLoading {
     [SVProgressHUD dismiss];
 }
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if (_naviBar) {
         [self.view bringSubviewToFront:_naviBar];
     }

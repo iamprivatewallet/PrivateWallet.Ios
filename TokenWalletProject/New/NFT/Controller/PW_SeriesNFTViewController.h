@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_SeriesNFTViewController : PW_BaseViewController
 
+@property (nonatomic, copy) NSString *slug;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -61,8 +61,9 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
     __weak typeof(self) weakSelf = self;
-    cell.seriesBlock = ^{
+    cell.seriesBlock = ^(PW_NFTTokenModel * _Nonnull model) {
         PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+        vc.slug = model.slug;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     return cell;

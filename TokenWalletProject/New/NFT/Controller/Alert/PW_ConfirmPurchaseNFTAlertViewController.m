@@ -23,7 +23,9 @@
     [self makeViews];
 }
 - (void)sureAction {
-    
+    if (self.sureBlock) {
+        self.sureBlock();
+    }
 }
 #pragma mark - views
 - (void)makeViews {

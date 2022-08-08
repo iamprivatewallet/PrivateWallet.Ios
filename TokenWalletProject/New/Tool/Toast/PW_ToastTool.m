@@ -36,6 +36,7 @@
     }
     NSString *imageName = isSuccess?@"icon_success_toast":@"icon_warn_toast";
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    [view bringSubviewToFront:HUD];
     HUD.mode = MBProgressHUDModeCustomView;
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];

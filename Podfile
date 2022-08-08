@@ -3,7 +3,8 @@ source 'https://github.com/CocoaPods/specs.git'
 target "TokenWalletProject" do
 use_frameworks!
 
-pod 'SDWebImage', '5.11.1'
+pod 'SDWebImage', '5.13.2'
+pod 'SDWebImageSVGCoder', '1.6.1'
 pod 'AFNetworking', '4.0.1'
 pod 'FDFullscreenPopGesture'
 pod 'UITableView+FDTemplateLayoutCell', '1.6'

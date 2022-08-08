@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_NFTSectionTitleView : UICollectionReusableView
 
+@property (nonatomic, copy) NSString *title;
+
 @end
 
 NS_ASSUME_NONNULL_END

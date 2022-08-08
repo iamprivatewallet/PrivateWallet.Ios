@@ -54,4 +54,32 @@ static NSString * const WalletMessageSysItemURL = @"api/wallet/message/sys/item"
 //Banner
 static NSString * const WalletBannerListURL = @"api/wallet/banner/list";
 
+//NFT
+static NSString * const APPNFTBaseURL = @"https://nft.privatex.ai";
+
+//NFT资产
+static NSString * const NFTWalletMainURL = @"api/nft/wallet/main";
+//持有NFT
+static NSString * const NFTAssetOwnerPageURL = @"api/nft/asset/owner/page";
+//NFT详情
+static NSString * const NFTAssetItemURL = @"api/nft/asset/item";
+//NFT市场
+static NSString * const NFTSearchMarketURL = @"api/nft/search/market";
+//NFT搜索
+static NSString * const NFTSearchMainURL = @"api/nft/search/main";
+//NFT分页列表
+static NSString * const NFTAssetPageURL = @"api/nft/asset/page";
+//NFT合集分页列表
+static NSString * const NFTCollectionPageURL = @"api/nft/collection/page";
+//NFT合集详情
+static NSString * const NFTCollectionItemURL = @"api/nft/collection/item";
+//NFT关注/取消关注
+static NSString * const NFTAssetFollowURL = @"api/nft/asset/follow";
+//个人资料
+static NSString * const NFTWalletInfoURL = @"api/nft/wallet/info";
+//设置个人资料
+static NSString * const NFTWalletInfoEditURL = @"api/nft/wallet/info/edit";
+//NFT栏目列表
+static NSString * const NFTSearchCategoryURL = @"api/nft/search/category";
+
 #endif /* Urls_h */

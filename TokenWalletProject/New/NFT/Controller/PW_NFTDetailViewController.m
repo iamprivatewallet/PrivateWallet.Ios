@@ -22,6 +22,7 @@
 #import "PW_TransferNFTAlertViewController.h"
 #import "PW_PutawaySellNFTAlertViewController.h"
 #import "PW_PutawayAuctionNFTAlertViewController.h"
+#import "PW_DappAlertTool.h"
 
 @interface PW_NFTDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -80,13 +81,19 @@
 }
 //visitor
 - (void)approveAction {
-    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
-    vc.type = PW_PendingAlertPending;
-    vc.msg = @"Approve ETH";
-//    vc.type = PW_PendingAlertSuccess;
-//    vc.msg = @"View on ETH chain";
-//    vc.type = PW_PendingAlertError;
-    [self presentViewController:vc animated:NO completion:nil];
+    PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
+    [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull model) {
+        
+    } closeBlock:^{
+        
+    }];
+//    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+//    vc.type = PW_PendingAlertPending;
+//    vc.msg = @"Approve ETH";
+////    vc.type = PW_PendingAlertSuccess;
+////    vc.msg = @"View on ETH chain";
+////    vc.type = PW_PendingAlertError;
+//    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)offerAction {
     PW_BidNFTAlertViewController *vc = [[PW_BidNFTAlertViewController alloc] init];
@@ -94,6 +101,14 @@
 }
 - (void)buyAction {
     PW_ConfirmPurchaseNFTAlertViewController *vc = [[PW_ConfirmPurchaseNFTAlertViewController alloc] init];
+    vc.sureBlock = ^{
+        PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
+        [PW_DappAlertTool showDappConfirmPayInfo:payModel sureBlock:^(PW_DappPayModel * _Nonnull model) {
+            
+        } closeBlock:^{
+            
+        }];
+    };
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)cancelOfferAction {
@@ -247,7 +262,7 @@
 - (void)refreshBottomView {
     self.bottomView.hidden = NO;
     [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    BOOL isOwner = YES;
+    BOOL isOwner = NO;
     if (isOwner) {
         //在售竞拍
 //        [self.bottomView addSubview:self.withdrawBtn];
@@ -329,27 +344,27 @@
 //            make.edges.offset(0);
 //        }];
         //授权后
-//        [self.bottomView addSubview:self.offerBtn];
-//        [self.bottomView addSubview:self.buyBtn];
-//        [self.offerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.top.bottom.offset(0);
-//        }];
-//        [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.offerBtn.mas_right).offset(20);
-//            make.top.right.bottom.offset(0);
-//            make.width.mas_equalTo(self.offerBtn);
-//        }];
-        //参与竞拍后
-        [self.bottomView addSubview:self.cancelOfferBtn];
-        [self.bottomView addSubview:self.updateOfferBtn];
-        [self.cancelOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.bottomView addSubview:self.offerBtn];
+        [self.bottomView addSubview:self.buyBtn];
+        [self.offerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.bottom.offset(0);
         }];
-        [self.updateOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.cancelOfferBtn.mas_right).offset(20);
+        [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.offerBtn.mas_right).offset(20);
             make.top.right.bottom.offset(0);
-            make.width.mas_equalTo(self.cancelOfferBtn);
+            make.width.mas_equalTo(self.offerBtn);
         }];
+        //参与竞拍后
+//        [self.bottomView addSubview:self.cancelOfferBtn];
+//        [self.bottomView addSubview:self.updateOfferBtn];
+//        [self.cancelOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.top.bottom.offset(0);
+//        }];
+//        [self.updateOfferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.cancelOfferBtn.mas_right).offset(20);
+//            make.top.right.bottom.offset(0);
+//            make.width.mas_equalTo(self.cancelOfferBtn);
+//        }];
         //未出售
 //        self.bottomView.hidden = YES;
     }

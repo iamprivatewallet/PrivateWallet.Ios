@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)requestData;
 - (void)pw_requestApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 - (void)pw_requestWallet:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
+- (void)pw_requestNFTApi:(NSString *)path params:(nullable NSDictionary *)params completeBlock:(void(^_Nonnull)(id data))completeBlock errBlock:(void(^_Nullable)(NSString * _Nonnull msg))errBlock;
 - (void)showSuccess:(NSString *)text;
 - (void)showError:(NSString *)text;
 - (void)showToast:(NSString *)text;
