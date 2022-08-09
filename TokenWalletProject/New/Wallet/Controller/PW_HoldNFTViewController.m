@@ -69,6 +69,10 @@
     [self pw_requestNFTApi:NFTAssetOwnerPageURL params:@{@"chainId":chainId,@"address":user.chooseWallet_address,@"slug":self.model.slug,@"marketStatus":@(self.segmentIndex),@"pageNumber":@(self.pageNumber)} completeBlock:^(id  _Nonnull data) {
         [self dismissLoading];
         NSNumber *totalPages = data[@"totalPages"];
+        NSArray *array = [PW_NFTTokenModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        if (array&&array.count>0) {
+            self.pageNumber++;
+        }
         [self.collectionView.mj_header endRefreshing];
         if (self.pageNumber>=totalPages.integerValue) {
             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
@@ -76,8 +80,6 @@
             [self.collectionView.mj_footer resetNoMoreData];
             [self.collectionView.mj_footer endRefreshing];
         }
-        self.pageNumber++;
-        NSArray *array = [PW_NFTTokenModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
         [self.dataArr addObjectsFromArray:array];
         [self.collectionView reloadData];
     } errBlock:^(NSString * _Nonnull msg) {

@@ -29,11 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *amount;
 @property (nonatomic, copy) NSString *totalVolume;
 
+@property (nonatomic, assign) BOOL isFollow;
 @property (nonatomic, assign) NSInteger follows;
 @property (nonatomic, assign) NSInteger saleStatus;
 @property (nonatomic, assign) NSInteger marketStatus;
 @property (nonatomic, copy) NSString *assetContract;
 @property (nonatomic, copy) NSString *slug;
+
+@property (nonatomic, assign) NSInteger hotValue;
+@property (nonatomic, assign) BOOL isHot;
+@property (nonatomic, copy) NSString *search;
 
 @end
 

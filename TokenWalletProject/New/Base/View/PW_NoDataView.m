@@ -17,6 +17,24 @@
 
 @implementation PW_NoDataView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.userInteractionEnabled = NO;
+        [self addSubview:self.iconIv];
+        [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.centerX.offset(0);
+        }];
+        [self addSubview:self.titleLb];
+        [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.iconIv.mas_bottom).offset(30);
+            make.left.right.offset(0);
+            make.bottom.mas_lessThanOrEqualTo(0);
+        }];
+    }
+    return self;
+}
+
 + (instancetype)showView:(UIView *)view {
     return [self showView:view offsetY:-kNavBarAndStatusBarHeight];
 }
@@ -34,18 +52,6 @@
         [backView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.width.equalTo(view);
             make.centerY.offset(offsetY);
-        }];
-        [backView addSubview:backView.iconIv];
-        [backView.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(0);
-            make.centerX.equalTo(backView);
-        }];
-        
-        [backView addSubview:backView.titleLb];
-        [backView.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(backView.iconIv.mas_bottom).offset(30);
-            make.left.right.equalTo(backView);
-            make.bottom.mas_lessThanOrEqualTo(0);
         }];
     }
     return backView;

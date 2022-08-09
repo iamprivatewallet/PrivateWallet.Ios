@@ -90,8 +90,8 @@
 - (void)dismissLoading {
     [SVProgressHUD dismiss];
 }
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (_naviBar) {
         [self.view bringSubviewToFront:_naviBar];
     }

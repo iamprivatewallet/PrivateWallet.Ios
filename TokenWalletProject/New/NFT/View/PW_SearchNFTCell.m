@@ -28,6 +28,21 @@
     }
     return self;
 }
+- (void)setCollectionModel:(PW_NFTCollectionModel *)collectionModel {
+    _collectionModel = collectionModel;
+    self.countLb.hidden = NO;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:collectionModel.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_default"]];
+    self.nameLb.text = collectionModel.name;
+    self.chainTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",collectionModel.chainId)];
+}
+- (void)setAccountModel:(PW_NFTAccountModel *)accountModel {
+    _accountModel = accountModel;
+    self.countLb.hidden = YES;
+}
+- (void)setItemModel:(PW_NFTItemModel *)itemModel {
+    _itemModel = itemModel;
+    self.countLb.hidden = YES;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.iconIv];
     [self.contentView addSubview:self.nameLb];

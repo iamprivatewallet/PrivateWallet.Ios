@@ -29,10 +29,19 @@
     }
     return self;
 }
+- (void)setModel:(PW_NFTTokenModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageThumbnailUrl]];
+    self.nameLb.text = model.name;
+    self.chainTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.priceLb.text = model.ethPrice;
+    [self.seriesBtn setTitle:model.slug forState:UIControlStateNormal];
+    [self.collectBtn setTitle:@(model.follows).stringValue forState:UIControlStateNormal];
+    self.collectBtn.selected = model.isFollow;
+}
 - (void)collectAction {
-    self.collectBtn.selected = !self.collectBtn.isSelected;
     if (self.collectBlock) {
-        self.collectBlock(self.collectBtn.selected);
+        self.collectBlock(self.model);
     }
 }
 - (void)seriesAction {
@@ -74,6 +83,7 @@
     [self.seriesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(12);
         make.centerY.equalTo(self.collectBtn);
+        make.right.mas_lessThanOrEqualTo(self.collectBtn.mas_left).offset(-5);
     }];
     [self.collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-12);
@@ -106,6 +116,7 @@
 - (UILabel *)nameLb {
     if (!_nameLb) {
         _nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:15 textColor:[UIColor g_textColor]];
+        _nameLb.numberOfLines = 1;
     }
     return _nameLb;
 }
@@ -131,6 +142,7 @@
     if (!_collectBtn) {
         _collectBtn = [PW_ViewTool buttonTitle:@"--" fontSize:12 titleColor:[UIColor g_grayTextColor] imageName:@"icon_collect" target:self action:@selector(collectAction)];
         [_collectBtn setImage:[UIImage imageNamed:@"icon_collect_selected"] forState:UIControlStateSelected];
+        [_collectBtn setRequiredHorizontal];
     }
     return _collectBtn;
 }

@@ -9,6 +9,7 @@
 #ifndef GlobalCategory_h
 #define GlobalCategory_h
 
+#import "UIScrollView+PW_Inset.h"
 #import "UIColor+Global.h"
 #import "UITextField+PW_Global.h"
 #import "UIControl+PW_Block.h"

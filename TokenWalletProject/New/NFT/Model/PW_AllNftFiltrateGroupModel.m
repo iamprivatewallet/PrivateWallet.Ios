@@ -10,15 +10,17 @@
 
 @implementation PW_AllNftFiltrateGroupModel
 
-+ (instancetype)modelTitle:(NSString *)title items:(NSArray<PW_AllNftFiltrateItemModel *> *)items {
++ (instancetype)modelTitle:(NSString *)title key:(NSString *)key items:(NSArray<PW_AllNftFiltrateItemModel *> *)items {
     PW_AllNftFiltrateGroupModel *model = [PW_AllNftFiltrateGroupModel new];
     model.title = title;
+    model.key = key;
     model.items = items;
     return model;
 }
 - (id)mutableCopyWithZone:(NSZone *)zone {
     PW_AllNftFiltrateGroupModel *model = [PW_AllNftFiltrateGroupModel allocWithZone:zone];
     model.title = _title;
+    model.key = _key;
     NSMutableArray *array = [NSMutableArray array];
     for (PW_AllNftFiltrateItemModel *old in _items) {
         [array addObject:[old mutableCopy]];

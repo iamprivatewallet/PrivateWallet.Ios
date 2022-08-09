@@ -32,7 +32,7 @@
         make.height.mas_equalTo(0);
     }];
 }
-- (void)setDataArr:(NSArray *)dataArr {
+- (void)setDataArr:(NSArray<PW_NFTSearchDBModel *> *)dataArr {
     _dataArr = dataArr;
     [self refreshData];
 }
@@ -51,15 +51,13 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_SearchRecordNFTItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_SearchRecordNFTItemCell.class) forIndexPath:indexPath];
-    NSMutableString *str = [NSMutableString stringWithString:@"Test "];
-    for (NSInteger i=0; i<indexPath.item; i++) {
-        [str appendString:@"T "];
-    }
-    cell.title = str;
+    cell.title = self.dataArr[indexPath.item].text;
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.didClick) {
+        self.didClick(self.dataArr[indexPath.item]);
+    }
 }
 #pragma mark - lazy
 - (UICollectionView *)collectionView {

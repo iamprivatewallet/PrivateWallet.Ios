@@ -42,7 +42,7 @@
     _dataArr = dataArr;
     [self.tableView reloadData];
     [self.tableView layoutIfNeeded];
-    CGFloat height = self.tableView.contentSize.height+20;
+    CGFloat height = self.tableView.contentSize.height;
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.top.offset(10);
@@ -75,13 +75,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTChainTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_NFTChainTypeCell.class)];
-    
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self dismiss];
     if (self.clickBlock) {
-        self.clickBlock();
+        PW_NFTChainTypeModel *model = self.dataArr[indexPath.row];
+        self.clickBlock(model);
     }
 }
 #pragma mark - lazy
@@ -122,13 +123,18 @@
 @end
 @implementation PW_NFTChainTypeCell
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self makeViews];
     }
     return self;
+}
+- (void)setModel:(PW_NFTChainTypeModel *)model {
+    _model = model;
+    self.iconIv.image = [UIImage imageNamed:model.imageName];
+    self.nameLb.text = model.title;
 }
 - (void)makeViews {
     [self.contentView addSubview:self.iconIv];
@@ -156,6 +162,18 @@
         _nameLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:15 textColor:[UIColor g_textColor]];
     }
     return _nameLb;
+}
+
+@end
+
+@implementation PW_NFTChainTypeModel
+
++ (instancetype)modelWithTitle:(NSString *)title imageName:(NSString *)imageName chainId:(NSString *)chainId {
+    PW_NFTChainTypeModel *model = [[PW_NFTChainTypeModel alloc] init];
+    model.title = title;
+    model.imageName = imageName;
+    model.chainId = chainId;
+    return model;
 }
 
 @end

@@ -7,16 +7,18 @@
 //
 
 #import "PW_RecommendNFTViewController.h"
-#import "PW_AllNftFiltrateViewController.h"
 #import "PW_RecommendNFTCell.h"
+#import "PW_SeriesNFTViewController.h"
 
 @interface PW_RecommendNFTViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, weak) UIView *searchView;
-@property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *filtrateArr;
 @property (nonatomic, strong) PW_TableView *tableView;
 @property (nonatomic, strong) UITextField *searchTF;
 @property (nonatomic, assign) BOOL isSearch;
+
+@property (nonatomic, strong) NSMutableArray<PW_NFTCollectionModel *> *dataArr;
+@property (nonatomic, assign) NSInteger pageNumber;
 
 @end
 
@@ -27,14 +29,47 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_recommend")];
     [self makeViews];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    [self.tableView resetMJFooterBottom];
+    [self requestData];
 }
-- (void)filtrateAction {
-    PW_AllNftFiltrateViewController *vc = [[PW_AllNftFiltrateViewController alloc] init];
-    vc.filtrateArr = self.filtrateArr;
-    vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
-        self.filtrateArr = filtrateArr;
-    };
-    [self presentViewController:vc animated:NO completion:nil];
+- (void)requestData {
+    self.pageNumber = 0;
+    [self.dataArr removeAllObjects];
+    [self.tableView reloadData];
+    self.noDataView.hidden = self.dataArr.count>0;
+    [self footerRefresh];
+}
+- (void)footerRefresh {
+    [self.searchTF resignFirstResponder];
+    NSString *searchStr = self.searchTF.text.trim;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"chainId"] = User_manager.currentUser.current_chainId;
+    params[@"search"] = searchStr;
+    params[@"pageNumber"] = @(self.pageNumber).stringValue;
+    params[@"categorySlug"] = @"top";
+    [self showLoading];
+    [self pw_requestNFTApi:NFTCollectionPageURL params:params completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        NSNumber *totalPages = data[@"totalPages"];
+        NSArray *array = [PW_NFTCollectionModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        if (array&&array.count>0) {
+            self.pageNumber++;
+        }
+        if (self.pageNumber>=totalPages.integerValue) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer resetNoMoreData];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        [self.dataArr addObjectsFromArray:array];
+        [self.tableView reloadData];
+        self.noDataView.hidden = self.dataArr.count>0;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+        [self.tableView.mj_footer endRefreshing];
+    }];
 }
 - (void)makeViews {
     [self makeSearchView];
@@ -59,7 +94,7 @@
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(10);
         make.left.offset(30);
-        make.right.offset(-80);
+        make.right.offset(-30);
         make.height.offset(44);
     }];
     UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
@@ -85,23 +120,25 @@
         make.left.offset(45);
         make.right.offset(-5);
     }];
-    UIButton *filtrateBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_filtrate") fontSize:16 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(filtrateAction)];
-    [self.view addSubview:filtrateBtn];
-    [filtrateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.centerY.equalTo(searchView);
-    }];
+}
+#pragma mark - delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self requestData];
+    return YES;
 }
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_RecommendNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_RecommendNFTCell.class)];
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
+    vc.slug = self.dataArr[indexPath.row].slug;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - lazy
 - (PW_TableView *)tableView {
@@ -116,25 +153,11 @@
     }
     return _tableView;
 }
-- (NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
-    if (!_filtrateArr) {
-        _filtrateArr = @[
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_time") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_latest") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_oldest") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_price") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_highToLow") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_lowToHigh") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_state") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onOffer") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onBidding") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_unsold") value:@""]
-            ]]
-        ];
+- (NSMutableArray<PW_NFTCollectionModel *> *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
     }
-    return _filtrateArr;
+    return _dataArr;
 }
 
 @end

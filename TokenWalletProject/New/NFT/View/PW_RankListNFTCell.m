@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UIView *bodyView;
 @property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *nameLb;
-@property (nonatomic, strong) UILabel *typeLb;
+@property (nonatomic, strong) UIButton *seriesBtn;
 @property (nonatomic, strong) UIImageView *chainTypeIv;
 @property (nonatomic, strong) UILabel *priceLb;
 @property (nonatomic, strong) UIImageView *rankIv;
@@ -31,11 +31,36 @@
     }
     return self;
 }
+- (void)setIndex:(NSInteger)index {
+    _index = index;
+    self.rankLb.hidden = YES;
+    self.rankIv.hidden = YES;
+    if (index>=0&&index<=2) {
+        self.rankIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_nft_rank_%ld",index+1)];
+        self.rankIv.hidden = NO;
+    }else{
+        self.rankLb.hidden = NO;
+    }
+    self.rankLb.text = @(index).stringValue;
+}
+- (void)setModel:(PW_NFTTokenModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageThumbnailUrl]];
+    self.nameLb.text = model.name;
+    [self.seriesBtn setTitle:model.slug forState:UIControlStateNormal];
+    self.chainTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.priceLb.text = model.ethPrice;
+}
+- (void)seriesAction {
+    if (self.seriesBlock) {
+        self.seriesBlock(self.model);
+    }
+}
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];
     [self.bodyView addSubview:self.nameLb];
-    [self.bodyView addSubview:self.typeLb];
+    [self.bodyView addSubview:self.seriesBtn];
     [self.bodyView addSubview:self.chainTypeIv];
     [self.bodyView addSubview:self.priceLb];
     [self.bodyView addSubview:self.rankIv];
@@ -57,7 +82,7 @@
         make.top.equalTo(self.iconIv);
         make.right.mas_lessThanOrEqualTo(-60);
     }];
-    [self.typeLb mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.seriesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLb);
         make.top.equalTo(self.nameLb.mas_bottom).offset(5);
         make.right.mas_lessThanOrEqualTo(-60);
@@ -103,11 +128,11 @@
     }
     return _nameLb;
 }
-- (UILabel *)typeLb {
-    if (!_typeLb) {
-        _typeLb = [PW_ViewTool labelSemiboldText:@"--" fontSize:12 textColor:[UIColor g_primaryNFTColor]];
+- (UIButton *)seriesBtn {
+    if (!_seriesBtn) {
+        _seriesBtn = [PW_ViewTool buttonSemiboldTitle:@"--" fontSize:12 titleColor:[UIColor g_primaryNFTColor] imageName:nil target:self action:@selector(seriesAction)];
     }
-    return _typeLb;
+    return _seriesBtn;
 }
 - (UIImageView *)chainTypeIv {
     if (!_chainTypeIv) {

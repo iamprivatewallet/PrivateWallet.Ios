@@ -7,10 +7,13 @@
 //
 
 #import "PW_BaseViewController.h"
+#import "PW_NFTCollectionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_FailarmyListNFTViewController : PW_BaseViewController
+
+@property (nonatomic, strong) PW_NFTCollectionModel *model;
 
 @end
 

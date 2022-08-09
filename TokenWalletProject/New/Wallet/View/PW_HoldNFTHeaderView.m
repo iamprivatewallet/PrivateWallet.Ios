@@ -33,7 +33,7 @@
 }
 - (void)setModel:(PW_NFTCollectionModel *)model {
     _model = model;
-    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_default"]];
     self.nameLb.text = model.slug;
     self.amountsLb.text = @(model.totalSupply).stringValue;
     self.onOfferLb.text = @(model.totalSales).stringValue;

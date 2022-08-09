@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_SearchRecordNFTCell : PW_BaseTableCell
 
-@property (nonatomic, copy) NSArray *dataArr;
+@property (nonatomic, copy) NSArray<PW_NFTSearchDBModel *> *dataArr;
 @property (nonatomic, copy) void(^heightBlock)(CGFloat height);
+@property (nonatomic, copy) void(^didClick)(PW_NFTSearchDBModel *model);
 
 @end
 

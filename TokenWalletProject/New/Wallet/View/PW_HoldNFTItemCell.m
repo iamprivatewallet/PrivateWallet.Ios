@@ -27,7 +27,7 @@
 }
 - (void)setModel:(PW_NFTTokenModel *)model {
     _model = model;
-    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_default"]];
     self.nameLb.text = model.name;
 }
 - (void)makeViews {

@@ -21,6 +21,7 @@
     [[PW_DappSearchManager shared] deleteAll];
     [[PW_DappFavoritesManager shared] deleteAll];
     [[PW_MarketManager shared] deleteAll];
+    [[PW_NFTSearchManager shared] deleteAll];
 }
 
 @end

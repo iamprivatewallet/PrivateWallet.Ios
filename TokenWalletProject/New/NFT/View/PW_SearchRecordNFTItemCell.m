@@ -11,7 +11,7 @@
 @interface PW_SearchRecordNFTItemCell ()
 
 @property (nonatomic, strong) UIView *bodyView;
-@property (nonatomic, strong) UIImageView *iconIv;
+//@property (nonatomic, strong) UIImageView *iconIv;
 @property (nonatomic, strong) UILabel *nameLb;
 
 @end
@@ -32,24 +32,25 @@
 }
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
-    [self.bodyView addSubview:self.iconIv];
+//    [self.bodyView addSubview:self.iconIv];
     [self.bodyView addSubview:self.nameLb];
     [self.bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
-    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
-        make.width.height.mas_equalTo(28);
-        make.centerY.offset(0);
-    }];
+//    [self.iconIv mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.offset(12);
+//        make.width.height.mas_equalTo(28);
+//        make.centerY.offset(0);
+//    }];
     [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconIv.mas_right).offset(10);
+//        make.left.equalTo(self.iconIv.mas_right).offset(10);
+        make.left.offset(10);
         make.centerY.offset(0);
     }];
 }
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
     CGSize size = layoutAttributes.size;
-    size.width = [self.nameLb.text boundingRectWithSize:CGSizeMake(MAXFLOAT, size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:14]} context:nil].size.width+48+12;
+    size.width = [self.nameLb.text boundingRectWithSize:CGSizeMake(MAXFLOAT, size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont pw_mediumFontOfSize:14]} context:nil].size.width+20;
     layoutAttributes.size = size;
     return layoutAttributes;
 }
@@ -63,13 +64,13 @@
     }
     return _bodyView;
 }
-- (UIImageView *)iconIv {
-    if (!_iconIv) {
-        _iconIv = [[UIImageView alloc] init];
-        [_iconIv setCornerRadius:14];
-    }
-    return _iconIv;
-}
+//- (UIImageView *)iconIv {
+//    if (!_iconIv) {
+//        _iconIv = [[UIImageView alloc] init];
+//        [_iconIv setCornerRadius:14];
+//    }
+//    return _iconIv;
+//}
 - (UILabel *)nameLb {
     if (!_nameLb) {
         _nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:14 textColor:[UIColor g_textColor]];

@@ -16,10 +16,15 @@
 
 @property (nonatomic, strong) UILabel *chainNameLb;
 @property (nonatomic, weak) UIView *searchView;
-@property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *filtrateArr;
 @property (nonatomic, strong) PW_TableView *tableView;
 @property (nonatomic, strong) UITextField *searchTF;
 @property (nonatomic, assign) BOOL isSearch;
+
+@property (nonatomic, strong) PW_NFTChainTypeModel *chainTypeModel;
+@property (nonatomic, copy) NSArray<PW_NFTChainTypeModel *> *chainTypeArr;
+
+@property (nonatomic, strong) NSMutableArray<PW_NFTCollectionModel *> *dataArr;
+@property (nonatomic, assign) NSInteger pageNumber;
 
 @end
 
@@ -30,22 +35,58 @@
     
     [self setNavNoLineTitle:LocalizedStr(@"text_NFTFailarmy")];
     [self makeViews];
-}
-- (void)filtrateAction {
-    PW_AllNftFiltrateViewController *vc = [[PW_AllNftFiltrateViewController alloc] init];
-    vc.filtrateArr = self.filtrateArr;
-    vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
-        self.filtrateArr = filtrateArr;
-    };
-    [self presentViewController:vc animated:NO completion:nil];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    [self.tableView resetMJFooterBottom];
+    [self requestData];
 }
 - (void)chainAction {
     PW_NFTChainTypeView *view = [[PW_NFTChainTypeView alloc] init];
-    view.dataArr = @[@"全部",@"ETH",@"BSC"];
-    view.clickBlock = ^{
-        
+    view.dataArr = self.chainTypeArr;
+    __weak typeof(self) weakSelf = self;
+    view.clickBlock = ^(PW_NFTChainTypeModel * _Nonnull model) {
+        weakSelf.chainTypeModel = model;
+        weakSelf.chainNameLb.text = model.title;
+        [weakSelf requestData];
     };
     [view showInView:self.view];
+}
+- (void)requestData {
+    self.pageNumber = 0;
+    [self.dataArr removeAllObjects];
+    [self.tableView reloadData];
+    self.noDataView.hidden = self.dataArr.count>0;
+    [self footerRefresh];
+}
+- (void)footerRefresh {
+    [self.searchTF resignFirstResponder];
+    NSString *searchStr = self.searchTF.text.trim;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"chainId"] = self.chainTypeModel.chainId;
+    params[@"search"] = searchStr;
+    params[@"pageNumber"] = @(self.pageNumber).stringValue;
+    params[@"categorySlug"] = @"top";
+    [self showLoading];
+    [self pw_requestNFTApi:NFTCollectionPageURL params:params completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        NSNumber *totalPages = data[@"totalPages"];
+        NSArray *array = [PW_NFTCollectionModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        if (array&&array.count>0) {
+            self.pageNumber++;
+        }
+        if (self.pageNumber>=totalPages.integerValue) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.tableView.mj_footer resetNoMoreData];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        [self.dataArr addObjectsFromArray:array];
+        [self.tableView reloadData];
+        self.noDataView.hidden = self.dataArr.count>0;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+        [self.tableView.mj_footer endRefreshing];
+    }];
 }
 - (void)makeViews {
     [self makeChainView];
@@ -97,7 +138,7 @@
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.naviBar.mas_bottom).offset(10);
         make.left.offset(30);
-        make.right.offset(-80);
+        make.right.offset(-30);
         make.height.offset(44);
     }];
     UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
@@ -123,23 +164,24 @@
         make.left.offset(45);
         make.right.offset(-5);
     }];
-    UIButton *filtrateBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_filtrate") fontSize:16 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(filtrateAction)];
-    [self.view addSubview:filtrateBtn];
-    [filtrateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-25);
-        make.centerY.equalTo(searchView);
-    }];
+}
+#pragma mark - delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self requestData];
+    return YES;
 }
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_RecommendNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_RecommendNFTCell.class)];
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PW_FailarmyListNFTViewController *vc = [[PW_FailarmyListNFTViewController alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - lazy
@@ -155,25 +197,26 @@
     }
     return _tableView;
 }
-- (NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
-    if (!_filtrateArr) {
-        _filtrateArr = @[
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_time") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_latest") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_oldest") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_price") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_highToLow") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_lowToHigh") value:@""]
-            ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_state") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onOffer") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onBidding") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_unsold") value:@""]
-            ]]
-        ];
+- (PW_NFTChainTypeModel *)chainTypeModel {
+    if (!_chainTypeModel) {
+        _chainTypeModel = self.chainTypeArr.firstObject;
     }
-    return _filtrateArr;
+    return _chainTypeModel;
+}
+- (NSArray<PW_NFTChainTypeModel *> *)chainTypeArr {
+    if (!_chainTypeArr) {
+        PW_NFTChainTypeModel *allModel = [PW_NFTChainTypeModel modelWithTitle:LocalizedStr(@"text_all") imageName:@"icon_type_all" chainId:nil];
+        PW_NFTChainTypeModel *ethModel = [PW_NFTChainTypeModel modelWithTitle:@"Ethereum" imageName:@"icon_type_1" chainId:@"1"];
+        PW_NFTChainTypeModel *bscModel = [PW_NFTChainTypeModel modelWithTitle:@"BSC" imageName:@"icon_type_56" chainId:@"56"];
+        _chainTypeArr = @[allModel,ethModel,bscModel];
+    }
+    return _chainTypeArr;
+}
+- (NSMutableArray<PW_NFTCollectionModel *> *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
 }
 
 @end

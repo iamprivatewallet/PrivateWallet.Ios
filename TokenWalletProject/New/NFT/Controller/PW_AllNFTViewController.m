@@ -11,6 +11,7 @@
 #import "PW_NFTChainTypeView.h"
 #import "PW_AllNftFiltrateViewController.h"
 #import "PW_SeriesNFTViewController.h"
+#import "PW_NFTDetailViewController.h"
 
 @interface PW_AllNFTViewController () <UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -19,6 +20,12 @@
 @property (nonatomic, strong) UITextField *searchTF;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, copy) NSArray<PW_AllNftFiltrateGroupModel *> *filtrateArr;
+
+@property (nonatomic, strong) NSMutableArray<PW_NFTTokenModel *> *dataArr;
+@property (nonatomic, assign) NSInteger pageNumber;
+
+@property (nonatomic, strong) PW_NFTChainTypeModel *chainTypeModel;
+@property (nonatomic, copy) NSArray<PW_NFTChainTypeModel *> *chainTypeArr;
 
 @end
 
@@ -30,46 +37,131 @@
     if (self.type==PW_AllNFTNew) {
         [self setNavNoLineTitle:LocalizedStr(@"text_newNFT")];
     }else{
-        [self setNavNoLineTitle:@""];
+        [self setNavNoLineTitle:self.model.name];
     }
     [self makeViews];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    [self.collectionView resetMJFooterBottom];
+    [self requestData];
 }
 - (void)filtrateAction {
     PW_AllNftFiltrateViewController *vc = [[PW_AllNftFiltrateViewController alloc] init];
     vc.filtrateArr = self.filtrateArr;
     vc.sureBlock = ^(NSArray<PW_AllNftFiltrateGroupModel *> * _Nonnull filtrateArr) {
         self.filtrateArr = filtrateArr;
+        [self requestData];
     };
     [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)chainAction {
     PW_NFTChainTypeView *view = [[PW_NFTChainTypeView alloc] init];
-    view.dataArr = @[@"全部",@"ETH",@"BSC"];
-    view.clickBlock = ^{
-        
+    view.dataArr = self.chainTypeArr;
+    __weak typeof(self) weakSelf = self;
+    view.clickBlock = ^(PW_NFTChainTypeModel * _Nonnull model) {
+        weakSelf.chainTypeModel = model;
+        weakSelf.chainNameLb.text = model.title;
+        [weakSelf requestData];
     };
     [view showInView:self.view];
 }
+- (void)requestData {
+    self.pageNumber = 0;
+    [self.dataArr removeAllObjects];
+    [self.collectionView reloadData];
+    self.noDataView.hidden = self.dataArr.count>0;
+    [self footerRefresh];
+}
+- (void)footerRefresh {
+    [self.searchTF resignFirstResponder];
+    NSString *searchStr = self.searchTF.text.trim;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"chainId"] = self.chainTypeModel.chainId;
+    params[@"search"] = searchStr;
+    params[@"pageNumber"] = @(self.pageNumber).stringValue;
+    if (self.type==PW_AllNFTAll) {
+        params[@"slug"] = self.model.slug;
+    }else if(self.type==PW_AllNFTNew){
+        params[@"categorySlug"] = @"new";
+    }
+    for (PW_AllNftFiltrateGroupModel *gModel in self.filtrateArr) {
+        for (PW_AllNftFiltrateItemModel *model in gModel.items) {
+            if (model.selected) {
+                params[gModel.key] = model.value;
+                break;
+            }
+        }
+    }
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetPageURL params:params completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        NSNumber *totalPages = data[@"totalPages"];
+        NSArray *array = [PW_NFTTokenModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        if (array&&array.count>0) {
+            self.pageNumber++;
+        }
+        if (self.pageNumber>=totalPages.integerValue) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.collectionView.mj_footer resetNoMoreData];
+            [self.collectionView.mj_footer endRefreshing];
+        }
+        [self.dataArr addObjectsFromArray:array];
+        [self.collectionView reloadData];
+        self.noDataView.hidden = self.dataArr.count>0;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+        [self.collectionView.mj_footer endRefreshing];
+    }];
+}
+- (void)nftFollowWithModel:(PW_NFTTokenModel *)model {
+    User *user = User_manager.currentUser;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetFollowURL params:@{
+        @"tokenId":model.tokenId,
+        @"assetContract":model.assetContract,
+        @"address":user.chooseWallet_address,
+        @"status":model.isFollow?@"0":@"1",
+    } completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        model.isFollow = !model.isFollow;
+        if (model.isFollow) {
+            model.follows++;
+        }else{
+            model.follows--;
+        }
+        [self.collectionView reloadData];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
+}
 #pragma mark - delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self requestData];
     return YES;
 }
 #pragma mark - collection delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class) forIndexPath:indexPath];
+    cell.model = self.dataArr[indexPath.item];
     __weak typeof(self) weakSelf = self;
     cell.seriesBlock = ^(PW_NFTTokenModel * _Nonnull model) {
         PW_SeriesNFTViewController *vc = [[PW_SeriesNFTViewController alloc] init];
         vc.slug = model.slug;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
+    cell.collectBlock = ^(PW_NFTTokenModel * _Nonnull model) {
+        [weakSelf nftFollowWithModel:model];
+    };
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - view
 - (void)makeViews {
@@ -166,7 +258,8 @@
         layout.itemSize = CGSizeMake((SCREEN_WIDTH-34*2-layout.minimumInteritemSpacing)/2, 190);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor g_bgColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(10, 0, 20, 0);
+        _collectionView.contentInset = UIEdgeInsetsMake(10, 0, PW_SafeBottomInset+20, 0);
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[PW_NFTCardCell class] forCellWithReuseIdentifier:NSStringFromClass(PW_NFTCardCell.class)];
@@ -176,22 +269,43 @@
 - (NSArray<PW_AllNftFiltrateGroupModel *> *)filtrateArr {
     if (!_filtrateArr) {
         _filtrateArr = @[
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_time") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_latest") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_oldest") value:@""]
+            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_time") key:@"orderTime" items:@[
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_latest") value:@"1"],
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_oldest") value:@"2"]
             ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_price") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_highToLow") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_lowToHigh") value:@""]
+            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_price") key:@"orderPrice" items:@[
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_highToLow") value:@"1"],
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_lowToHigh") value:@"2"]
             ]],
-            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_state") items:@[
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onOffer") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onBidding") value:@""],
-                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_unsold") value:@""]
+            [PW_AllNftFiltrateGroupModel modelTitle:LocalizedStr(@"text_state") key:@"saleStatus" items:@[
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onOffer") value:@"1"],
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_onBidding") value:@"2"],
+                [PW_AllNftFiltrateItemModel modelTitle:LocalizedStr(@"text_unsold") value:@"3"]
             ]]
         ];
     }
     return _filtrateArr;
+}
+- (NSMutableArray<PW_NFTTokenModel *> *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
+}
+- (PW_NFTChainTypeModel *)chainTypeModel {
+    if (!_chainTypeModel) {
+        _chainTypeModel = self.chainTypeArr.firstObject;
+    }
+    return _chainTypeModel;
+}
+- (NSArray<PW_NFTChainTypeModel *> *)chainTypeArr {
+    if (!_chainTypeArr) {
+        PW_NFTChainTypeModel *allModel = [PW_NFTChainTypeModel modelWithTitle:LocalizedStr(@"text_all") imageName:@"icon_type_all" chainId:nil];
+        PW_NFTChainTypeModel *ethModel = [PW_NFTChainTypeModel modelWithTitle:@"Ethereum" imageName:@"icon_type_1" chainId:@"1"];
+        PW_NFTChainTypeModel *bscModel = [PW_NFTChainTypeModel modelWithTitle:@"BSC" imageName:@"icon_type_56" chainId:@"56"];
+        _chainTypeArr = @[allModel,ethModel,bscModel];
+    }
+    return _chainTypeArr;
 }
 
 @end

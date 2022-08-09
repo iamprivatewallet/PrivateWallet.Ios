@@ -20,5 +20,6 @@
 #import "PW_DappSearchManager.h"
 #import "PW_DappFavoritesManager.h"
 #import "PW_MarketManager.h"
+#import "PW_NFTSearchManager.h"
 
 #endif /* PW_DBGlobal_h */

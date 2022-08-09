@@ -28,7 +28,7 @@
 }
 - (void)setModel:(PW_NFTClassifyModel *)model {
     _model = model;
-    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.bannerImageUrl]];
     self.titleLb.text = model.name;
 }
 - (void)makeViews {

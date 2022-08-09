@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_AllNftFiltrateGroupModel : PW_BaseModel <NSMutableCopying>
 
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSArray<PW_AllNftFiltrateItemModel *> *items;
-+ (instancetype)modelTitle:(NSString *)title items:(NSArray<PW_AllNftFiltrateItemModel *> *)items;
++ (instancetype)modelTitle:(NSString *)title key:(NSString *)key items:(NSArray<PW_AllNftFiltrateItemModel *> *)items;
 
 @end
 

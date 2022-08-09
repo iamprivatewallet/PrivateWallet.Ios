@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_NFTCardCell : UICollectionViewCell
 
 @property (nonatomic, strong) PW_NFTTokenModel *model;
-@property (nonatomic, copy) void(^collectBlock)(BOOL isCollect);
+@property (nonatomic, copy) void(^collectBlock)(PW_NFTTokenModel *model);
 @property (nonatomic, copy) void(^seriesBlock)(PW_NFTTokenModel *model);
 
 @end

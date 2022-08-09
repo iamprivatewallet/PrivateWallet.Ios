@@ -39,6 +39,18 @@
     }
     return self;
 }
+- (void)setModel:(PW_NFTCollectionModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.bannerImageUrl]];
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+    self.nameLb.text = model.name;
+    self.goodsCountLb.text = @(model.totalSupply).stringValue;
+    self.holderCountLb.text = @(model.numOwners).stringValue;
+    self.priceFloorCoinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.priceFloorLb.text = model.floorPrice;
+    self.volumeCoinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.volumeLb.text = @(model.totalSales).stringValue;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.bodyView];
     [self.bodyView addSubview:self.iconIv];
