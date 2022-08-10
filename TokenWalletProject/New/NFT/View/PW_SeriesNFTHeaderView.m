@@ -43,7 +43,7 @@
     return self;
 }
 - (void)copyAction {
-    
+    [self.model.payoutAddress pasteboardToast:YES];
 }
 - (void)unfoldAction {
     self.unfoldBtn.selected = !self.unfoldBtn.isSelected;
@@ -54,6 +54,24 @@
         self.unfoldBtn.transform = CGAffineTransformIdentity;
         self.descLb.numberOfLines = 3;
     }
+    if (self.heightBlock) {
+        self.heightBlock();
+    }
+}
+- (void)setModel:(PW_NFTCollectionModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.bannerImageUrl]];
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+    self.nameLb.text = model.name;
+    self.coinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.addressLb.text = [model.payoutAddress showShortAddress];
+    self.goodsCountLb.text = @(model.totalSupply).stringValue;
+    self.holderCountLb.text = @(model.numOwners).stringValue;
+    self.priceFloorCoinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.priceFloorLb.text = model.floorPrice;
+    self.volumeCoinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.chainId)];
+    self.volumeLb.text = model.totalVolume;
+    self.descLb.text = model.desc;
     if (self.heightBlock) {
         self.heightBlock();
     }
@@ -180,7 +198,7 @@
 - (UIImageView *)iconIv {
     if (!_iconIv) {
         _iconIv = [[UIImageView alloc] init];
-        _iconIv.backgroundColor = [UIColor lightGrayColor];
+        _iconIv.backgroundColor = [UIColor g_grayBgColor];
     }
     return _iconIv;
 }

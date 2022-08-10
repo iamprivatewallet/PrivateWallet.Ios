@@ -29,8 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dismissLoading;
 
 @property (nonatomic, strong) UIImageView *bgIv;
-@property (nonatomic, strong) UIView *naviBar;
-@property (nonatomic, strong) UILabel *titleLable;
+@property (nonatomic, strong) UIView *navBar;
+@property (nonatomic, strong) UIView *navContentView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 
@@ -39,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setupNavBgRed;
 - (void)setupNavBgGreen;
 - (void)setupNavBgPurple;//紫色
+- (void)setupNavBgBlue;
 - (void)clearBackground;
 - (void)setNavNoLineTitle:(NSString *)title;
 - (void)setNavNoLineTitle:(NSString *)title rightTitle:(nullable NSString *)rightTitle rightAction:(nullable SEL)rightAction;

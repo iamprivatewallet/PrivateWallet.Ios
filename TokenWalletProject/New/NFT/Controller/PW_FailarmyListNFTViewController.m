@@ -135,6 +135,7 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - view
@@ -159,7 +160,7 @@
     [self.view addSubview:searchView];
     self.searchView = searchView;
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(10);
+        make.top.equalTo(self.navBar.mas_bottom).offset(10);
         make.left.offset(30);
         make.right.offset(-80);
         make.height.offset(44);

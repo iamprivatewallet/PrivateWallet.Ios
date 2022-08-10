@@ -23,11 +23,11 @@
 #import "PW_PutawaySellNFTAlertViewController.h"
 #import "PW_PutawayAuctionNFTAlertViewController.h"
 #import "PW_DappAlertTool.h"
+#import "PW_NFTDetailModel.h"
+#import "PW_ShareAppTool.h"
 
 @interface PW_NFTDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UIView *navView;
-@property (nonatomic, strong) UIView *navContentView;
 @property (nonatomic, strong) UILabel *titleLb;
 @property (nonatomic, strong) UIButton *backBtn;
 @property (nonatomic, strong) UIButton *collectBtn;
@@ -51,6 +51,8 @@
 @property (nonatomic, strong) UIButton *sellBtn;//出售
 @property (nonatomic, strong) UIButton *auctionBtn;//竞拍
 
+@property (nonatomic, strong) PW_NFTDetailModel *detailModel;
+
 
 @end
 
@@ -69,6 +71,7 @@
             weakSelf.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10+PW_SafeBottomInset+60, 0);
         }
     }];
+    [self requestData];
 }
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
@@ -77,7 +80,7 @@
     
 }
 - (void)shareAction {
-    
+    [PW_ShareAppTool showShareApp];
 }
 //visitor
 - (void)approveAction {
@@ -151,10 +154,33 @@
     self.segmentIndex = index;
     [self.tableView reloadData];
 }
+- (void)refreshUI {
+    self.collectBtn.selected = self.detailModel.isFollow;
+    self.headerView.model = self.detailModel;
+    [self.tableView reloadData];
+}
+#pragma mark - api
+- (void)requestData {
+    User *user = User_manager.currentUser;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetItemURL params:@{
+        @"chainId":user.current_chainId,
+        @"tokenId":self.model.tokenId,
+        @"assetContract":self.model.assetContract,
+        @"address":user.chooseWallet_address,
+    } completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        self.detailModel = [PW_NFTDetailModel mj_objectWithKeyValues:data];
+        [self refreshUI];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
+}
 #pragma mark - tableDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.segmentIndex==0) {
-        return 30;
+        return self.detailModel.traits.count;
     }else if (self.segmentIndex==1) {
         return 30;
     }
@@ -163,7 +189,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.segmentIndex==0) {
         PW_NFTDetailPropertyCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_NFTDetailPropertyCell.class)];
-        
+        cell.model = self.detailModel.traits[indexPath.row];
         return cell;
     }else if (self.segmentIndex==1) {
         PW_NFTDetailOfferCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(PW_NFTDetailOfferCell.class)];
@@ -182,6 +208,7 @@
     if (self.segmentIndex==0) {
         if (section==0) {
             PW_NFTDetailDataSectionHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(PW_NFTDetailDataSectionHeaderView.class)];
+            view.model = self.detailModel;
             view.index = self.segmentIndex;
             view.segmentIndexBlock = ^(NSInteger index) {
                 [weakSelf segmentChange:index];
@@ -214,7 +241,7 @@
     CGFloat hiddenHeight = PW_NavStatusHeight;
     CGFloat alpha = scrollView.contentOffset.y/hiddenHeight;
     alpha = MIN(1,MAX(0,alpha));
-    self.navView.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
+    self.navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
     self.titleLb.alpha = alpha;
 }
 #pragma mark - views
@@ -231,8 +258,8 @@
         make.height.mas_equalTo(50);
         make.bottom.offset(-PW_SafeBottomInset-10);
     }];
-    [self.view addSubview:self.navView];
-    [self.navView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.navBar];
+    [self.navBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.offset(0);
         make.height.mas_equalTo(PW_NavStatusHeight);
     }];
@@ -398,23 +425,6 @@
         _headerView = [[PW_NFTDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, 0, 450-PW_NavStatusHeight)];
     }
     return _headerView;
-}
-- (UIView *)navView {
-    if (!_navView) {
-        _navView = [[UIView alloc] init];
-        [_navView addSubview:self.navContentView];
-        [self.navContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.offset(0);
-            make.height.mas_equalTo(44);
-        }];
-    }
-    return _navView;
-}
-- (UIView *)navContentView {
-    if (!_navContentView) {
-        _navContentView = [[UIView alloc] init];
-    }
-    return _navContentView;
 }
 - (UILabel *)titleLb {
     if (!_titleLb) {

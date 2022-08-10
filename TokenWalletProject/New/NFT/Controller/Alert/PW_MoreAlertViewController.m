@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor g_maskColor];
     [self clearBackground];
     [self makeViews];
 }

@@ -59,14 +59,14 @@
     CGFloat hiddenHeight = 64;
     CGFloat alpha = scrollView.contentOffset.y/hiddenHeight;
     alpha = MIN(1,MAX(0,alpha));
-    self.naviBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
+    self.navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
 }
 #pragma mark - views
 - (void)makeViews {
-    [self.naviBar addSubview:self.marketSeeView];
+    [self.navContentView addSubview:self.marketSeeView];
     [self.marketSeeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-16);
-        make.centerY.equalTo(self.leftBtn);
+        make.centerY.offset(0);
         make.height.mas_equalTo(26);
     }];
     [self.view addSubview:self.tableView];

@@ -131,7 +131,7 @@
 - (void)makeViews {
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
     [self.contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];

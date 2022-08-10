@@ -70,18 +70,18 @@
     [searchBtn setBackgroundImage:[UIImage imageNamed:@"icon_search_bg"] forState:UIControlStateNormal];
     searchBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.naviBar addSubview:searchBtn];
+    [self.navContentView addSubview:searchBtn];
     [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(20);
         make.right.offset(-60);
-        make.height.offset(35);
-        make.bottom.offset(-5);
+        make.height.offset(40);
+        make.centerY.offset(0);
     }];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];

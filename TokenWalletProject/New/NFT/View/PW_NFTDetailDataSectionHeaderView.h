@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_NFTDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_NFTDetailDataSectionHeaderView : UITableViewHeaderFooterView
 
 @property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) PW_NFTDetailModel *model;
 @property (nonatomic, copy) void(^segmentIndexBlock)(NSInteger index);
 
 @end

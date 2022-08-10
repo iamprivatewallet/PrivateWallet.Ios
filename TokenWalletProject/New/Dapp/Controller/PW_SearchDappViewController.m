@@ -44,10 +44,10 @@
     UIView *searchView = [[UIView alloc] init];
     [self.view addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(StatusHeight+5);
+        make.top.offset(PW_StatusHeight+5);
         make.left.offset(18);
         make.right.offset(-55);
-        make.height.offset(46);
+        make.height.offset(40);
     }];
     UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
     [searchView addSubview:bgIv];

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_NFTCollectionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_SeriesNFTHeaderView : UIView
 
+@property (nonatomic, strong) PW_NFTCollectionModel *model;
 @property (nonatomic, copy) void(^heightBlock)(void);
 
 @end

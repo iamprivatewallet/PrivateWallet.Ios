@@ -75,7 +75,7 @@
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     [self.view addSubview:scrollView];
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(0);
+        make.top.equalTo(self.navBar.mas_bottom).offset(0);
         make.left.right.bottom.offset(0);
     }];
     self.contentView = [[UIView alloc] init];

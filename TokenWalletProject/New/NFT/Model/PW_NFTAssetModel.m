@@ -2,7 +2,7 @@
 //  PW_NFTAssetModel.m
 //  TokenWalletProject
 //
-//  Created by mnz on 2022/8/8.
+//  Created by mnz on 2022/8/10.
 //  Copyright © 2022 . All rights reserved.
 //
 
@@ -10,11 +10,8 @@
 
 @implementation PW_NFTAssetModel
 
-+ (NSDictionary *)mj_objectClassInArray {
-    return @{
-        @"collections":[PW_NFTCollectionModel class],
-        @"tokens":[PW_NFTTokenModel class],
-    };
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"cId":@"id",@"desc":@"description"};
 }
 
 @end

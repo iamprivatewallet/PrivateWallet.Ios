@@ -22,7 +22,7 @@
 #import "PW_SearchNFTViewController.h"
 #import "PW_PersonNFTViewController.h"
 #import "PW_HoldNFTViewController.h"
-#import "PW_NFTAssetModel.h"
+#import "PW_NFTWalletAssetModel.h"
 
 @interface PW_WalletViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -47,7 +47,7 @@
 @property (nonatomic, strong) NSMutableArray<PW_TokenModel *> *coinList;
 @property (nonatomic, strong) Wallet *currentWallet;
 
-@property (nonatomic, strong) PW_NFTAssetModel *nftAssetModel;
+@property (nonatomic, strong) PW_NFTWalletAssetModel *nftWalletAssetModel;
 
 @end
 
@@ -203,7 +203,7 @@
     User *user = User_manager.currentUser;
     NSString *chainId = user.current_chainId;
     [self pw_requestNFTApi:NFTWalletMainURL params:@{@"chainId":chainId,@"address":user.chooseWallet_address} completeBlock:^(id  _Nonnull data) {
-        self.nftAssetModel = [PW_NFTAssetModel mj_objectWithKeyValues:data];
+        self.nftWalletAssetModel = [PW_NFTWalletAssetModel mj_objectWithKeyValues:data];
         if (self.segmentedControl.selectedSegmentIndex==1) {
             [self.tableView reloadData];
         }
@@ -392,7 +392,7 @@
     if (index==0) {
         return self.coinList.count;
     }
-//    return self.nftAssetModel.collections.count;
+//    return self.nftWalletAssetModel.collections.count;
     return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -404,7 +404,7 @@
         return cell;
     }
     PW_WalletNFTCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PW_WalletNFTCell"];
-//    cell.model = self.nftAssetModel.collections[indexPath.row];
+//    cell.model = self.nftWalletAssetModel.collections[indexPath.row];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -415,7 +415,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         PW_HoldNFTViewController *vc = [[PW_HoldNFTViewController alloc] init];
-//        vc.model = self.nftAssetModel.collections[indexPath.row];
+//        vc.model = self.nftWalletAssetModel.collections[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -430,12 +430,12 @@
 - (void)makeViews {
     UIView *walletNameView = [[UIView alloc] init];
     [walletNameView setBorderColor:[UIColor g_primaryColor] width:1 radius:8];
-    [self.naviBar addSubview:walletNameView];
+    [self.navContentView addSubview:walletNameView];
     [walletNameView addTapTarget:self action:@selector(changeWalletAction)];
     [walletNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.offset(28);
-        make.left.equalTo(self.naviBar).offset(CGFloatScale(18));
-        make.centerY.equalTo(self.titleLable.mas_centerY);
+        make.left.offset(CGFloatScale(18));
+        make.centerY.offset(0);
     }];
     UILabel *nameLb = [PW_ViewTool labelMediumText:@"--" fontSize:12 textColor:[UIColor whiteColor]];
     [walletNameView addSubview:nameLb];

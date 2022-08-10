@@ -118,7 +118,7 @@
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.bottom.right.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];

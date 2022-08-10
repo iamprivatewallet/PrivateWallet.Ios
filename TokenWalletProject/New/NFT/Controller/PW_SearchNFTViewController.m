@@ -181,12 +181,12 @@
 #pragma mark - views
 - (void)makeViews {
     UIView *searchView = [[UIView alloc] init];
-    [self.naviBar addSubview:searchView];
+    [self.navContentView addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.leftBtn);
+        make.centerY.offset(0);
         make.left.equalTo(self.leftBtn.mas_right).offset(18);
         make.right.offset(-72);
-        make.height.offset(46);
+        make.height.offset(44);
     }];
     UIImageView *bgIv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_search_bg"]];
     [searchView addSubview:bgIv];
@@ -213,16 +213,16 @@
         make.right.offset(-5);
     }];
     UIButton *searchBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_search") fontSize:16 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(searchAction)];
-    [self.naviBar addSubview:searchBtn];
+    [self.navContentView addSubview:searchBtn];
     [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-14);
-        make.centerY.equalTo(searchView).offset(0);
+        make.centerY.offset(0);
     }];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(searchView.mas_bottom).offset(20);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
     [contentView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];

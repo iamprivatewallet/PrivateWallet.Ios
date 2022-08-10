@@ -107,11 +107,11 @@
     CGFloat hiddenHeight = 64;
     CGFloat alpha = (self.headerHeight+scrollView.contentOffset.y)/hiddenHeight;
     alpha = MIN(1,MAX(0,alpha));
-    self.naviBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
+    self.navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
     self.gradientView.alpha = 1-alpha;
 }
 - (void)makeViews {
-    [self.naviBar insertSubview:self.gradientView atIndex:0];
+    [self.navBar insertSubview:self.gradientView atIndex:0];
     [self.gradientView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
@@ -140,16 +140,16 @@
         make.left.offset(30);
         make.right.offset(-30);
         make.height.mas_equalTo(35);
-        make.top.greaterThanOrEqualTo(self.naviBar.mas_bottom).offset(5).priorityHigh();
+        make.top.greaterThanOrEqualTo(self.navBar.mas_bottom).offset(5).priorityHigh();
         make.bottom.offset(-5);
     }];
 }
 - (void)makeSearchView {
     UIView *searchView = [[UIView alloc] init];
     [searchView addTapTarget:self action:@selector(searchAction)];
-    [self.naviBar addSubview:searchView];
+    [self.navContentView addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.leftBtn);
+        make.centerY.offset(0);
         make.left.offset(55);
         make.right.offset(-72);
         make.height.offset(40);
@@ -173,7 +173,7 @@
         make.right.offset(-5);
     }];
     UIButton *menuBtn = [PW_ViewTool buttonImageName:@"icon_menu_bg" target:self action:@selector(menuAction)];
-    [self.naviBar addSubview:menuBtn];
+    [self.navContentView addSubview:menuBtn];
     [menuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(searchView);
         make.right.offset(-8);

@@ -8,6 +8,7 @@
 
 #import "PW_SetDataViewController.h"
 #import <TZImagePickerController.h>
+#import "PW_NFTProfileModel.h"
 
 @interface PW_SetDataViewController ()
 
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) UIImageView *backgroundIv;
 @property (nonatomic, strong) UIButton *deleteBgBtn;
 
+@property (nonatomic, strong) PW_NFTProfileModel *model;
+
 @end
 
 @implementation PW_SetDataViewController
@@ -35,10 +38,44 @@
 - (void)deleteAvatarAction {
     self.avatarIv.image = nil;
     self.deleteAvatarBtn.hidden = YES;
+    self.model.profileImgUrl = nil;
 }
 - (void)deleteBgAction {
     self.backgroundIv.image = nil;
     self.deleteBgBtn.hidden = YES;
+    self.model.bannerImageUrl = nil;
+}
+- (void)sureAction {
+    NSString *nickName = self.nickNameTf.text.trim;
+    NSString *desc = self.synopsisTv.text.trim;
+    if (![nickName isNoEmpty]) {
+        return;
+    }
+    if (![desc isNoEmpty]) {
+        return;
+    }
+    if (![self.model.profileImgUrl isNoEmpty]) {
+        return;
+    }
+    if (![self.model.bannerImageUrl isNoEmpty]) {
+        return;
+    }
+    NSString *address = User_manager.currentUser.chooseWallet_address;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTWalletInfoEditURL params:@{
+        @"address":address,
+        @"profileImgUrl":self.model.profileImgUrl,
+        @"bannerImageUrl":self.model.bannerImageUrl,
+        @"username":nickName,
+        @"description":desc,
+    } completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        [self showSuccess:LocalizedStr(@"text_saveSuccess")];
+        [self.navigationController popViewControllerAnimated:YES];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
 }
 - (void)uploadAvatarAction {
     TZImagePickerController *vc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:nil];
@@ -80,15 +117,32 @@
     }];
     [self presentViewController:vc animated:YES completion:nil];
 }
-- (void)sureAction {
-    
+- (void)refreshUI {
+    self.nickNameTf.text = self.model.username;
+    self.synopsisTv.text = self.model.desc;
+    [self.avatarIv sd_setImageWithURL:[NSURL URLWithString:self.model.profileImgUrl]];
+    [self.backgroundIv sd_setImageWithURL:[NSURL URLWithString:self.model.bannerImageUrl]];
 }
+#pragma mark - api
+- (void)requestData {
+    NSString *address = User_manager.currentUser.chooseWallet_address;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTWalletInfoURL params:@{@"address":address} completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        self.model = [PW_NFTProfileModel mj_objectWithKeyValues:data];
+        [self refreshUI];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
+}
+#pragma mark - views
 - (void)makeViews {
     UIView *bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = [UIColor g_bgColor];
     [self.view addSubview:bodyView];
     [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.right.bottom.offset(0);
     }];
     [bodyView setRadius:24 corners:(UIRectCornerTopLeft | UIRectCornerTopRight)];
@@ -293,6 +347,12 @@
         _deleteBgBtn.hidden = YES;
     }
     return _deleteBgBtn;
+}
+- (PW_NFTProfileModel *)model {
+    if (!_model) {
+        _model = [[PW_NFTProfileModel alloc] init];
+    }
+    return _model;
 }
 
 @end

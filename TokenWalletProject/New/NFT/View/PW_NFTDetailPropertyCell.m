@@ -24,6 +24,11 @@
     }
     return self;
 }
+- (void)setModel:(PW_NFTTraitModel *)model {
+    _model = model;
+    self.titleLb.text = model.traitType;
+    self.descLb.text = model.traitValue;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.titleLb];
     [self.contentView addSubview:self.descLb];

@@ -7,10 +7,13 @@
 //
 
 #import "PW_BaseTableCell.h"
+#import "PW_NFTTraitModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_NFTDetailPropertyCell : PW_BaseTableCell
+
+@property (nonatomic, strong) PW_NFTTraitModel *model;
 
 @end
 

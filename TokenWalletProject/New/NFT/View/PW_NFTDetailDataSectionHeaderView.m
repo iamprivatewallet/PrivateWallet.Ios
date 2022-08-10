@@ -40,6 +40,13 @@
 - (void)copyTokenIdAction {
     
 }
+- (void)setModel:(PW_NFTDetailModel *)model {
+    _model = model;
+    self.tokenStandardLb.text = model.assetContract.schemaName;
+//    self.networkLb.text = @"";
+    self.contractAddressLb.text = [model.assetContract.address showShortAddress];
+    self.tokenIdLb.text = model.asset.tokenId;
+}
 - (void)makeViews {
     [self.contentView addSubview:self.segmentedControl];
     [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {

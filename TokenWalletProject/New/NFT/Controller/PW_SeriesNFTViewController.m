@@ -14,6 +14,9 @@
 #import "PW_AllNftFiltrateViewController.h"
 #import "PW_MoreAlertViewController.h"
 #import "PW_SearchSeriesNFTViewController.h"
+#import "PW_NFTCollectionModel.h"
+#import "PW_SetDataViewController.h"
+#import "PW_ShareAppTool.h"
 
 static NSInteger FollowMenuIndex = 2;
 
@@ -30,6 +33,8 @@ static NSInteger FollowMenuIndex = 2;
 @property (nonatomic, assign) NSInteger segmentIndex;
 @property (nonatomic, assign) NSInteger typesettingIndex;
 
+@property (nonatomic, strong) PW_NFTCollectionModel *model;
+
 @end
 
 @implementation PW_SeriesNFTViewController
@@ -41,8 +46,8 @@ static NSInteger FollowMenuIndex = 2;
     [self clearBackground];
     self.view.backgroundColor = [UIColor blackColor];
     [self makeViews];
-    [self.view bringSubviewToFront:self.naviBar];
     [self refreshHeaderHeight];
+    [self requestData];
 }
 - (void)searchAction {
     PW_SearchSeriesNFTViewController *vc = [[PW_SearchSeriesNFTViewController alloc] init];
@@ -50,14 +55,15 @@ static NSInteger FollowMenuIndex = 2;
 }
 - (void)moreAction {
     PW_MoreAlertModel *shareModel = [PW_MoreAlertModel modelIconName:@"icon_sheet_share" title:LocalizedStr(@"text_share") didClick:^(PW_MoreAlertModel * _Nonnull model) {
-        
+        [PW_ShareAppTool showShareApp];
     }];
     BOOL isFollow = NO;
     PW_MoreAlertModel *followModel = [PW_MoreAlertModel modelIconName:isFollow?@"icon_sheet_favorite_full":@"icon_sheet_favorite" title:LocalizedStr(@"text_follow") didClick:^(PW_MoreAlertModel * _Nonnull model) {
         
     }];
     PW_MoreAlertModel *setupModel = [PW_MoreAlertModel modelIconName:@"icon_sheet_setup" title:LocalizedStr(@"text_setup") didClick:^(PW_MoreAlertModel * _Nonnull model) {
-        
+        PW_SetDataViewController *vc = [[PW_SetDataViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     PW_MoreAlertViewController *vc = [[PW_MoreAlertViewController alloc] init];
     vc.dataArr = @[shareModel,followModel,setupModel];
@@ -112,6 +118,17 @@ static NSInteger FollowMenuIndex = 2;
         make.top.offset(-self.headerHeight).priorityMedium();
     }];
 }
+- (void)requestData {
+    [self showLoading];
+    [self pw_requestNFTApi:NFTCollectionItemURL params:@{@"slug":self.slug} completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        self.model = [PW_NFTCollectionModel mj_objectWithKeyValues:data];
+        self.headerView.model = self.model;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
+}
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 10;
@@ -133,12 +150,12 @@ static NSInteger FollowMenuIndex = 2;
     CGFloat hiddenHeight = 64;
     CGFloat alpha = (self.headerHeight+scrollView.contentOffset.y)/hiddenHeight;
     alpha = MIN(1,MAX(0,alpha));
-    self.naviBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
+    self.navBar.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
     self.gradientView.alpha = 1-alpha;
 }
 #pragma mark - view
 - (void)makeViews {
-    [self.naviBar insertSubview:self.gradientView atIndex:0];
+    [self.navBar insertSubview:self.gradientView atIndex:0];
     [self.gradientView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
@@ -165,16 +182,16 @@ static NSInteger FollowMenuIndex = 2;
     [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.height.mas_equalTo(35);
-        make.top.greaterThanOrEqualTo(self.naviBar.mas_bottom).offset(5).priorityHigh();
+        make.top.greaterThanOrEqualTo(self.navBar.mas_bottom).offset(5).priorityHigh();
         make.bottom.offset(-5);
     }];
 }
 - (void)makeSearchView {
     UIView *searchView = [[UIView alloc] init];
     [searchView addTapTarget:self action:@selector(searchAction)];
-    [self.naviBar addSubview:searchView];
+    [self.navContentView addSubview:searchView];
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.leftBtn);
+        make.centerY.offset(0);
         make.left.offset(55);
         make.right.offset(-72);
         make.height.offset(40);
@@ -200,10 +217,10 @@ static NSInteger FollowMenuIndex = 2;
     UIButton *moreBtn = [PW_ViewTool buttonImageName:@"icon_more" target:self action:@selector(moreAction)];
     moreBtn.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
     [moreBtn setCornerRadius:16];
-    [self.naviBar addSubview:moreBtn];
+    [self.navContentView addSubview:moreBtn];
     [moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(32);
-        make.centerY.equalTo(searchView);
+        make.centerY.offset(0);
         make.right.offset(-20);
     }];
 }

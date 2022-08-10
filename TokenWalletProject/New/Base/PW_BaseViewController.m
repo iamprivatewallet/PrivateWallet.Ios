@@ -51,6 +51,9 @@
 - (void)setupNavBgPurple {
     self.bgIv.image = [UIImage imageNamed:@"icon_nav_purple"];
 }
+- (void)setupNavBgBlue {
+    self.bgIv.image = [UIImage imageNamed:@"icon_nav_blue"];
+}
 - (void)clearBackground {
     [self.bgIv removeFromSuperview];
 }
@@ -92,8 +95,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (_naviBar) {
-        [self.view bringSubviewToFront:_naviBar];
+    if (_navBar) {
+        [self.view bringSubviewToFront:_navBar];
     }
     if (_noDataView) {
         [self.view bringSubviewToFront:_noDataView];
@@ -143,40 +146,33 @@
     [self initBarWithTitle:title leftImg:leftImage leftTitle:leftTitle leftAction:leftAction rightTitle:nil rightImage:nil rightAction:nil isNoLine:isNoLine];
 }
 -(void)initBarWithTitle:(NSString*)title leftImg:(NSString *)leftImage leftTitle:(NSString *)leftTitle leftAction:(SEL)leftAction rightTitle:(NSString *)rightTitle rightImage:(NSString *)rightImage rightAction:(SEL)rightAction isNoLine:(BOOL)isNoLine {
-    [self.view addSubview:self.naviBar];
-    [self.naviBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view);
-        make.height.mas_equalTo(44 + kStatusBarHeight);
+    [self.view addSubview:self.navBar];
+    [self.navBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.mas_equalTo(PW_NavStatusHeight);
     }];
     if (!isNoLine) {
         UIView *line = [[UIView alloc] init];
         line.backgroundColor = RGBACOLOR(0, 0, 0, 0.2);
-        [self.naviBar addSubview:line];
+        [self.navContentView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.naviBar.mas_bottom).offset(-0.5);
-            make.left.right.equalTo(self.naviBar);
+            make.left.right.bottom.offset(0);
             make.height.mas_equalTo(0.5);
         }];
     }
-    
 //    if (title) {
-    _titleLable = [UILabel new];
-    [self.naviBar addSubview:_titleLable];
-    [_titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.naviBar.mas_bottom).offset(-22);
-        make.centerX.equalTo(self.naviBar);
+    [self.navContentView addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.navContentView);
         make.height.mas_equalTo(25);
         make.width.mas_lessThanOrEqualTo(SCREEN_WIDTH*0.75);
     }];
-    _titleLable.font = [UIFont pw_mediumFontOfSize:20];
-    [_titleLable setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
-    _titleLable.text = title;
+    self.titleLabel.text = title;
 //    }
     
     if (leftImage||[leftTitle isNoEmpty]) {
         _leftBtn = [UIButton new];
-        [self.naviBar addSubview:_leftBtn];
+        [self.navContentView addSubview:_leftBtn];
         if (leftTitle) {
             [_leftBtn setTitle:leftTitle forState:UIControlStateNormal];
             [_leftBtn setTitleColor:[UIColor g_whiteTextColor] forState:UIControlStateNormal];
@@ -184,7 +180,7 @@
             [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.offset(CGFloatScale(18));
                 make.height.mas_equalTo(44);
-                make.centerY.equalTo(_titleLable.mas_centerY);
+                make.centerY.equalTo(self.titleLabel.mas_centerY);
             }];
         }else{
             [_leftBtn setImage:ImageNamed(leftImage) forState:UIControlStateNormal];
@@ -192,7 +188,7 @@
                 make.left.offset(CGFloatScale(10));
                 make.width.mas_equalTo(40);
                 make.height.mas_equalTo(44);
-                make.centerY.equalTo(_titleLable.mas_centerY);
+                make.centerY.equalTo(_titleLabel.mas_centerY);
             }];
         }
         if (leftAction) {
@@ -200,14 +196,14 @@
         }
     }
     if (rightImage||[rightTitle isNoEmpty]) {
-        _rightBtn = [[UIButton alloc]initWithFrame:CGRectZero];
+        _rightBtn = [[UIButton alloc] init];
         _rightBtn.titleLabel.font = [UIFont pw_mediumFontOfSize:15];
         [_rightBtn setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_rightBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-        [self.naviBar addSubview:_rightBtn];
+        [self.navContentView addSubview:_rightBtn];
         [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.offset(-CGFloatScale(20));
-            make.centerY.equalTo(self.titleLable.mas_centerY);
+            make.centerY.equalTo(self.titleLabel.mas_centerY);
         }];
         if (rightImage) {
             [_rightBtn setImage:ImageNamed(rightImage) forState:UIControlStateNormal];
@@ -231,12 +227,32 @@
     }
     return _noDataView;
 }
-- (UIView *)naviBar {
-    if (!_naviBar) {
-        _naviBar = [[UIView alloc] init];
-        _naviBar.backgroundColor = [UIColor clearColor];
+- (UIView *)navBar {
+    if (!_navBar) {
+        _navBar = [[UIView alloc] init];
+        _navBar.backgroundColor = [UIColor clearColor];
+        [_navBar addSubview:self.navContentView];
+        [self.navContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.offset(0);
+            make.height.mas_equalTo(44);
+        }];
     }
-    return _naviBar;
+    return _navBar;
+}
+- (UIView *)navContentView {
+    if (!_navContentView) {
+        _navContentView = [[UIView alloc] init];
+        _navContentView.backgroundColor = [UIColor clearColor];
+    }
+    return _navContentView;
+}
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [UILabel new];
+        _titleLabel.font = [UIFont pw_mediumFontOfSize:20];
+        [_titleLabel setShadowColor:[UIColor g_shadowColor] offset:CGSizeMake(0, 3) radius:8];
+    }
+    return _titleLabel;
 }
 - (UIImageView *)bgIv {
     if (!_bgIv) {

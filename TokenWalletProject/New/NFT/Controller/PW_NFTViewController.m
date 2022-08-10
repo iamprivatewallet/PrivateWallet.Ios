@@ -37,8 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavNoLineTitle:@"" rightImg:@"icon_scan_white" rightAction:@selector(personalAction)];
-    [self setupNavBgPurple];
+    [self setNavNoLineTitle:@"" rightImg:@"icon_personal" rightAction:@selector(personalAction)];
+    [self setupNavBgBlue];
     [self makeViews];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
     [self.collectionView.mj_header beginRefreshing];
@@ -67,12 +67,12 @@
     [searchBtn setBackgroundImage:[UIImage imageNamed:@"icon_search_bg"] forState:UIControlStateNormal];
     searchBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.naviBar addSubview:searchBtn];
+    [self.navContentView addSubview:searchBtn];
     [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(20);
         make.right.offset(-60);
-        make.height.offset(35);
-        make.bottom.offset(-5);
+        make.height.offset(40);
+        make.centerY.offset(0);
     }];
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor g_bgColor];

@@ -43,6 +43,19 @@
 - (void)shareAction {
     
 }
+- (void)setModel:(PW_NFTDetailModel *)model {
+    _model = model;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.collection.bannerImageUrl]];
+    self.ownerLb.text = model.assetContract.owner;
+//    self.sourceLb.text = @"";
+    self.titleLb.text = model.collection.name;
+    self.coinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.asset.chainId)];
+    self.priceLb.text = model.asset.ethPrice;
+    self.uPriceLb.text = PW_StrFormat(@"≈ $%@",model.asset.usdPrice);
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.collection.imageUrl]];
+    self.nameLb.text = model.collection.slug;
+    [self.collectBtn setTitle:@(model.asset.follows).stringValue forState:UIControlStateNormal];
+}
 - (void)makeViews {
     [self addSubview:self.iconIv];
     [self addSubview:self.contentView];

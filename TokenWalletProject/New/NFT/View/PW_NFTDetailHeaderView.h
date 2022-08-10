@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PW_NFTDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_NFTDetailHeaderView : UIView
+
+@property (nonatomic, strong) PW_NFTDetailModel *model;
 
 @end
 

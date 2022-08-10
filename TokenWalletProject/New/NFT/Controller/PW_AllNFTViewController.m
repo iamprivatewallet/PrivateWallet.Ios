@@ -161,6 +161,7 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+    vc.model = self.dataArr[indexPath.item];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - view
@@ -187,10 +188,10 @@
     [chainView setCornerRadius:13];
     [chainView addTapTarget:self action:@selector(chainAction)];
     [self.view addSubview:chainView];
-    [self.naviBar addSubview:chainView];
+    [self.navContentView addSubview:chainView];
     [chainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-16);
-        make.centerY.equalTo(self.leftBtn).offset(0);
+        make.centerY.offset(0);
         make.height.mas_equalTo(26);
     }];
     self.chainNameLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_chainName") fontSize:13 textColor:[UIColor whiteColor]];
@@ -212,7 +213,7 @@
     [self.view addSubview:searchView];
     self.searchView = searchView;
     [searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(10);
+        make.top.equalTo(self.navBar.mas_bottom).offset(10);
         make.left.offset(30);
         make.right.offset(-80);
         make.height.offset(44);

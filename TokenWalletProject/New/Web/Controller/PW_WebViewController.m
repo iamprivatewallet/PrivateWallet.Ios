@@ -61,7 +61,7 @@
         }
     }else if([keyPath isEqualToString:@"title"]){
         NSString *title = self.webView.title;
-        self.titleLable.text = title;
+        self.titleLabel.text = title;
     }else{
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }

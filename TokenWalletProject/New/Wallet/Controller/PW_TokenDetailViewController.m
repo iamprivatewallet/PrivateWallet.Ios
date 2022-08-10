@@ -257,7 +257,7 @@ typedef enum : NSUInteger {
     self.topView = [[UIView alloc] init];
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.naviBar.mas_bottom).offset(15);
+        make.top.equalTo(self.navBar.mas_bottom).offset(15);
         make.left.right.offset(0);
         make.height.offset(90);
     }];
