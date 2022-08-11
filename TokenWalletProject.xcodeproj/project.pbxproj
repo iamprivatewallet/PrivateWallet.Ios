@@ -403,6 +403,8 @@
 		5CC544ED28A2586700D895D4 /* UIScrollView+PW_Inset.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC544EC28A2586700D895D4 /* UIScrollView+PW_Inset.m */; };
 		5CC641F5282506C6002E1C46 /* PW_AppLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */; };
 		5CC641FA28250B32002E1C46 /* PW_AuthenticationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */; };
+		5CCBD7AC28A4C54000EFA24A /* PWWalletERC721ContractTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBD7AB28A4C54000EFA24A /* PWWalletERC721ContractTool.swift */; };
+		5CCBD7B728A4EA1C00EFA24A /* PW_Web3Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBD7B628A4EA1C00EFA24A /* PW_Web3Test.m */; };
 		5CCE70B4280FDB3C00860841 /* PW_DappBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */; };
 		5CCE70B7280FDE5800860841 /* PW_BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B6280FDE5800860841 /* PW_BannerModel.m */; };
 		5CCE70BA280FE41200860841 /* PW_TitlesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE70B9280FE41200860841 /* PW_TitlesHeaderView.m */; };
@@ -1480,6 +1482,9 @@
 		5CC641F4282506C6002E1C46 /* PW_AppLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AppLockViewController.m; sourceTree = "<group>"; };
 		5CC641F828250B31002E1C46 /* PW_AuthenticationTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AuthenticationTool.h; sourceTree = "<group>"; };
 		5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_AuthenticationTool.m; sourceTree = "<group>"; };
+		5CCBD7AB28A4C54000EFA24A /* PWWalletERC721ContractTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWWalletERC721ContractTool.swift; sourceTree = "<group>"; };
+		5CCBD7B528A4EA1C00EFA24A /* PW_Web3Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_Web3Test.h; sourceTree = "<group>"; };
+		5CCBD7B628A4EA1C00EFA24A /* PW_Web3Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_Web3Test.m; sourceTree = "<group>"; };
 		5CCE70B2280FDB3C00860841 /* PW_DappBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappBrowserCell.h; sourceTree = "<group>"; };
 		5CCE70B3280FDB3C00860841 /* PW_DappBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappBrowserCell.m; sourceTree = "<group>"; };
 		5CCE70B5280FDE5800860841 /* PW_BannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_BannerModel.h; sourceTree = "<group>"; };
@@ -3406,6 +3411,7 @@
 		5C71192427BB7ABC00FE9B51 /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				5CCBD7B428A4E9EF00EFA24A /* Contract */,
 				5C71192527BB7ABC00FE9B51 /* NetWork */,
 				5C71192B27BB7ABC00FE9B51 /* Web3WebView */,
 			);
@@ -3437,8 +3443,6 @@
 			isa = PBXGroup;
 			children = (
 				5C71193A27BB860500FE9B51 /* WQJLog.swift */,
-				5CB9CDA728698DE000EED1BE /* PWWalletABIFunction.swift */,
-				5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */,
 				5C71192C27BB7ABC00FE9B51 /* MetaMaskCallApi.h */,
 				5C71192E27BB7ABC00FE9B51 /* MetaMaskCallApi.m */,
 				5C62CF9527FB0AAC00C1C5DC /* Web3WebView.framework */,
@@ -3739,6 +3743,18 @@
 				5CC641F928250B31002E1C46 /* PW_AuthenticationTool.m */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		5CCBD7B428A4E9EF00EFA24A /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				5CB9CDA728698DE000EED1BE /* PWWalletABIFunction.swift */,
+				5CA2E2C327BE4FF7002E2930 /* PWWalletContractTool.swift */,
+				5CCBD7AB28A4C54000EFA24A /* PWWalletERC721ContractTool.swift */,
+				5CCBD7B528A4EA1C00EFA24A /* PW_Web3Test.h */,
+				5CCBD7B628A4EA1C00EFA24A /* PW_Web3Test.m */,
+			);
+			path = Contract;
 			sourceTree = "<group>";
 		};
 		5CCE70D328101DF100860841 /* Model */ = {
@@ -5360,11 +5376,11 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GMEllipticCurveCrypto/GMEllipticCurveCrypto.framework",
-				"${BUILT_PRODUCTS_DIR}/GenericJSON/GenericJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JJException/JJException.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
@@ -5374,6 +5390,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
@@ -5387,19 +5404,19 @@
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
+				"${BUILT_PRODUCTS_DIR}/Web3/Web3.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
-				"${BUILT_PRODUCTS_DIR}/web3.swift/web3.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GMEllipticCurveCrypto.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GenericJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJException.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
@@ -5409,6 +5426,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
@@ -5422,8 +5440,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5591,6 +5609,7 @@
 				5C2976C628A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m in Sources */,
 				5CD7B04628645AA600148BD5 /* PW_DappItemCell.m in Sources */,
 				5CA451E42817D28A006FFA3B /* PW_Solana.swift in Sources */,
+				5CCBD7AC28A4C54000EFA24A /* PWWalletERC721ContractTool.swift in Sources */,
 				5AF5D19F1D2F7CBA004070D7 /* NSURL+QueryDictionary.m in Sources */,
 				992EF10E26AA9E5C00F70A94 /* WarningAlertSheetView.m in Sources */,
 				5AF5D1531D2F7CBA004070D7 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
@@ -5898,6 +5917,7 @@
 				5CB8BBA627E1CDCB00C73976 /* MessageSystemCell.m in Sources */,
 				5AF5D1AB1D2F7CBA004070D7 /* CAMediaTimingFunction+AdditionalEquations.m in Sources */,
 				5C36E18528094BD20000FEE0 /* PW_GlobalData.m in Sources */,
+				5CCBD7B728A4EA1C00EFA24A /* PW_Web3Test.m in Sources */,
 				5C8AAB11280D618100E4ED53 /* PW_AddressBookViewController.m in Sources */,
 				5AF5D1511D2F7CBA004070D7 /* NSManagedObjectContext+FetchRequestsConstructors.m in Sources */,
 				5CC641F5282506C6002E1C46 /* PW_AppLockViewController.m in Sources */,
