@@ -42,12 +42,15 @@
     if (self.dataArr!=nil&&self.dataArr.count>0) {
         return;
     }
+    [self showLoading];
     [self pw_requestNFTApi:NFTSearchCategoryURL params:nil completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
         self.dataArr = [PW_NFTClassifyModel mj_objectArrayWithKeyValuesArray:data];
         [PW_GlobalData shared].nftClassifyArr = self.dataArr;
         [self.tableView reloadData];
     } errBlock:^(NSString * _Nonnull msg) {
         [self showError:msg];
+        [self dismissLoading];
     }];
 }
 - (void)makeViews {

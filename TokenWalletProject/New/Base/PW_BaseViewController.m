@@ -88,10 +88,12 @@
     [[ToastHelper sharedToastHelper] dismissToast];
 }
 - (void)showLoading {
-    [SVProgressHUD show];
+//    [SVProgressHUD show];
+    [self.view showLoadingIndicator];
 }
 - (void)dismissLoading {
-    [SVProgressHUD dismiss];
+//    [SVProgressHUD dismiss];
+    [self.view hideLoadingIndicator];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

@@ -32,6 +32,8 @@ static NSInteger FollowMenuIndex = 2;
 @property (nonatomic, assign) NSInteger segmentIndex;
 @property (nonatomic, assign) NSInteger typesettingIndex;
 
+@property (nonatomic, strong) PW_NFTProfileModel *model;
+
 @end
 
 @implementation PW_PersonNFTViewController
@@ -44,6 +46,7 @@ static NSInteger FollowMenuIndex = 2;
     [self clearBackground];
     self.view.backgroundColor = [UIColor blackColor];
     [self makeViews];
+    [self requestPersonalData];
 }
 - (void)searchAction {
     PW_SearchSeriesNFTViewController *vc = [[PW_SearchSeriesNFTViewController alloc] init];
@@ -94,6 +97,19 @@ static NSInteger FollowMenuIndex = 2;
         size.height = 205;
     }
     self.flowLayout.itemSize = size;
+}
+#pragma mark - api
+- (void)requestPersonalData {
+    NSString *address = User_manager.currentUser.chooseWallet_address;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTWalletInfoURL params:@{@"address":address} completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        self.model = [PW_NFTProfileModel mj_objectWithKeyValues:data];
+        self.headerView.model = self.model;
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
 }
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

@@ -101,4 +101,18 @@ class PWWalletERC721ContractTool: NSObject {
             completionHandler?(nil, error.localizedDescription)
         }
     }
+    @objc
+    public func test(contract: String?, completionHandler: ((_ result: String?, _ errorDesc: String?)->())?) {
+        guard let contract = contract else { completionHandler?(nil,"error"); return }
+        if contract == "" { completionHandler?(nil,"error"); return }
+        let contractJsonABI = "".data(using: .utf8)!
+        guard let ethContract = try? web3.eth.Contract(json: contractJsonABI, abiKey: nil, address: EthereumAddress(hexString: contract)) else { completionHandler?(nil,"error"); return }
+        firstly {
+            try ethContract["balanceOf"]!(EthereumAddress(hex: "0x3edB3b95DDe29580FFC04b46A68a31dD46106a4a", eip55: true)).call()
+        }.done { outputs in
+            debugPrint(outputs["_balance"] as? BigUInt ?? 0)
+        }.catch { error in
+            debugPrint(error)
+        }
+    }
 }

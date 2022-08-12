@@ -75,7 +75,7 @@
 }
 #pragma mark - UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    [PW_VibrateTool peekVibrate];
+    [PW_VibrationTool light];
 }
 
 @end

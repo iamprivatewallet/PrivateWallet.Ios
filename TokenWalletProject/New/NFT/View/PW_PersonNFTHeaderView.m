@@ -33,6 +33,15 @@
 - (void)copyAction {
     
 }
+- (void)setModel:(PW_NFTProfileModel *)model {
+    _model = model;
+    User *user = User_manager.currentUser;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.bannerImageUrl]];
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.profileImgUrl]];
+    self.nameLb.text = model.username;
+    self.coinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",user.current_chainId)];
+    self.addressLb.text = [user.chooseWallet_address showShortAddress];
+}
 - (void)makeViews {
     [self addSubview:self.iconIv];
     [self addSubview:self.bgView];

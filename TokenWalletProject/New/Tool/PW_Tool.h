@@ -11,7 +11,6 @@
 
 #import "PW_PrisonBreakTool.h"
 #import "PW_SDImageTool.h"
-#import "PW_VibrateTool.h"
 #import "PW_ToastTool.h"
 #import "PW_ViewTool.h"
 #import "PW_TipTool.h"

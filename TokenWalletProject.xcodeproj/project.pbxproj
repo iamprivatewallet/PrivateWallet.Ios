@@ -362,6 +362,7 @@
 		5CA451EA28180206006FFA3B /* SeedPhraseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451E928180205006FFA3B /* SeedPhraseGenerator.swift */; };
 		5CA451ED2818F848006FFA3B /* PW_SolanaTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */; };
 		5CA6B89F282A0C7800D3C6B4 /* NSString+PW_Rule.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA6B89E282A0C7800D3C6B4 /* NSString+PW_Rule.m */; };
+		5CAD0AA928A5F414007019D8 /* PW_VibrationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD0AA828A5F414007019D8 /* PW_VibrationTool.swift */; };
 		5CB119D728097F2E0006BEFB /* PW_ChooseCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */; };
 		5CB119DA28097F970006BEFB /* PW_ChooseCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119D928097F970006BEFB /* PW_ChooseCurrencyCell.m */; };
 		5CB119DD280AAE6B0006BEFB /* PW_TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB119DC280AAE6B0006BEFB /* PW_TransferViewController.m */; };
@@ -433,7 +434,6 @@
 		5CD33DD1289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD0289BD35100877119 /* PW_NFTDetailDataSectionHeaderView.m */; };
 		5CD33DD4289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */; };
 		5CD33DD7289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */; };
-		5CD7B043286448F000148BD5 /* PW_VibrateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B042286448F000148BD5 /* PW_VibrateTool.m */; };
 		5CD7B04628645AA600148BD5 /* PW_DappItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B04528645AA600148BD5 /* PW_DappItemCell.m */; };
 		5CD7B04A2864633500148BD5 /* PW_AppAuthLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD7B0492864633500148BD5 /* PW_AppAuthLockView.m */; };
 		5CE0552228605DB500B68A6B /* PW_SearchDappViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE0552128605DB500B68A6B /* PW_SearchDappViewController.m */; };
@@ -1402,6 +1402,7 @@
 		5CA451EC2818F845006FFA3B /* PW_SolanaTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_SolanaTest.m; sourceTree = "<group>"; };
 		5CA6B89D282A0C7800D3C6B4 /* NSString+PW_Rule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+PW_Rule.h"; sourceTree = "<group>"; };
 		5CA6B89E282A0C7800D3C6B4 /* NSString+PW_Rule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+PW_Rule.m"; sourceTree = "<group>"; };
+		5CAD0AA828A5F414007019D8 /* PW_VibrationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PW_VibrationTool.swift; sourceTree = "<group>"; };
 		5CB119D528097F2E0006BEFB /* PW_ChooseCurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyViewController.h; sourceTree = "<group>"; };
 		5CB119D628097F2E0006BEFB /* PW_ChooseCurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ChooseCurrencyViewController.m; sourceTree = "<group>"; };
 		5CB119D828097F970006BEFB /* PW_ChooseCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ChooseCurrencyCell.h; sourceTree = "<group>"; };
@@ -1541,8 +1542,6 @@
 		5CD33DD3289BD36400877119 /* PW_NFTDetailOfferSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailOfferSectionHeaderView.m; sourceTree = "<group>"; };
 		5CD33DD5289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTDetailDealSectionHeaderView.h; sourceTree = "<group>"; };
 		5CD33DD6289BD3D500877119 /* PW_NFTDetailDealSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTDetailDealSectionHeaderView.m; sourceTree = "<group>"; };
-		5CD7B041286448F000148BD5 /* PW_VibrateTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_VibrateTool.h; sourceTree = "<group>"; };
-		5CD7B042286448F000148BD5 /* PW_VibrateTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_VibrateTool.m; sourceTree = "<group>"; };
 		5CD7B04428645AA600148BD5 /* PW_DappItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappItemCell.h; sourceTree = "<group>"; };
 		5CD7B04528645AA600148BD5 /* PW_DappItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappItemCell.m; sourceTree = "<group>"; };
 		5CD7B0482864633500148BD5 /* PW_AppAuthLockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_AppAuthLockView.h; sourceTree = "<group>"; };
@@ -3813,8 +3812,7 @@
 		5CD7B040286448CB00148BD5 /* Vibrate */ = {
 			isa = PBXGroup;
 			children = (
-				5CD7B041286448F000148BD5 /* PW_VibrateTool.h */,
-				5CD7B042286448F000148BD5 /* PW_VibrateTool.m */,
+				5CAD0AA828A5F414007019D8 /* PW_VibrationTool.swift */,
 			);
 			path = Vibrate;
 			sourceTree = "<group>";
@@ -5614,6 +5612,7 @@
 				992EF10E26AA9E5C00F70A94 /* WarningAlertSheetView.m in Sources */,
 				5AF5D1531D2F7CBA004070D7 /* NSPersistentStoreCoordinator+Custom.m in Sources */,
 				5C650C912893C1C100B7B3E2 /* PW_AllNftFiltrateViewController.m in Sources */,
+				5CAD0AA928A5F414007019D8 /* PW_VibrationTool.swift in Sources */,
 				5CCFF72B28A35BB200438245 /* PW_NFTTraitModel.m in Sources */,
 				99D2CA462537F81C00C1C196 /* UIView+SetRect.m in Sources */,
 				992EF18A26B3DE9000F70A94 /* ManageBottomView.m in Sources */,
@@ -5958,7 +5957,6 @@
 				9926DFFC26E0C07B00FDF442 /* NodeModel.m in Sources */,
 				5C37A8E0280ECF0F00AAA728 /* PW_ChangePwdViewController.m in Sources */,
 				5CEF34B127FEC8220052BA15 /* PW_SharePayTool.m in Sources */,
-				5CD7B043286448F000148BD5 /* PW_VibrateTool.m in Sources */,
 				5CB76B3527F45D2A0068E967 /* PW_ViewTool.m in Sources */,
 				5E0799EC21D28A3A00924407 /* GPBMessage.m in Sources */,
 				5CEFDB202883E98200ED3059 /* PW_PrisonBreakTool.m in Sources */,
@@ -6339,7 +6337,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6487,7 +6485,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
