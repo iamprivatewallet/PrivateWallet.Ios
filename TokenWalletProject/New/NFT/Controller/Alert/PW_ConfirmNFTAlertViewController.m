@@ -23,7 +23,10 @@
     [self makeViews];
 }
 - (void)sureAction {
-    
+    [self closeAction];
+    if (self.sureBlock) {
+        self.sureBlock();
+    }
 }
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;

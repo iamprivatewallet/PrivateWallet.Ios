@@ -17,7 +17,10 @@
 #import "PW_NFTCollectionModel.h"
 #import "PW_SetDataViewController.h"
 #import "PW_ShareAppTool.h"
+#import "PW_NFTDetailViewController.h"
 
+static NSInteger MarketMenuIndex = 0;
+static NSInteger CollectMenuIndex = 1;
 static NSInteger FollowMenuIndex = 2;
 
 @interface PW_SeriesNFTViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -34,6 +37,12 @@ static NSInteger FollowMenuIndex = 2;
 @property (nonatomic, assign) NSInteger typesettingIndex;
 
 @property (nonatomic, strong) PW_NFTCollectionModel *model;
+@property (nonatomic, strong) NSMutableArray<PW_NFTTokenModel *> *marketArr;
+@property (nonatomic, assign) NSInteger marketPageNumber;
+@property (nonatomic, strong) NSMutableArray<PW_NFTTokenModel *> *collectArr;
+@property (nonatomic, assign) NSInteger collectPageNumber;
+@property (nonatomic, strong) NSMutableArray<PW_NFTCollectionModel *> *followArr;
+@property (nonatomic, assign) NSInteger followPageNumber;
 
 @end
 
@@ -45,9 +54,14 @@ static NSInteger FollowMenuIndex = 2;
     [self setNavNoLineTitle:@""];
     [self clearBackground];
     self.view.backgroundColor = [UIColor blackColor];
+    self.noDataView.offsetY = PW_SCREEN_HEIGHT*0.25;
     [self makeViews];
     [self refreshHeaderHeight];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    [self.collectionView resetMJFooterBottom];
     [self requestData];
+    [self requestNFTDataWithIndex:MarketMenuIndex];
+    [self requestNFTDataWithIndex:CollectMenuIndex];
 }
 - (void)searchAction {
     PW_SearchSeriesNFTViewController *vc = [[PW_SearchSeriesNFTViewController alloc] init];
@@ -118,6 +132,7 @@ static NSInteger FollowMenuIndex = 2;
         make.top.offset(-self.headerHeight).priorityMedium();
     }];
 }
+#pragma mark - api
 - (void)requestData {
     [self showLoading];
     [self pw_requestNFTApi:NFTCollectionItemURL params:@{@"slug":self.slug} completeBlock:^(id  _Nonnull data) {
@@ -129,22 +144,105 @@ static NSInteger FollowMenuIndex = 2;
         [self dismissLoading];
     }];
 }
+- (void)headerRefresh {
+    [self requestNFTDataWithIndex:self.segmentIndex isRefresh:YES];
+}
+- (void)footerRefresh {
+    [self requestNFTDataWithIndex:self.segmentIndex];
+}
+- (void)requestNFTDataWithIndex:(NSInteger)index {
+    [self requestNFTDataWithIndex:index isRefresh:NO];
+}
+- (void)requestNFTDataWithIndex:(NSInteger)index isRefresh:(BOOL)isRefresh {
+    User *user = User_manager.currentUser;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"chainId"] = user.current_chainId;
+    params[@"slug"] = self.slug;
+    NSInteger pageNumber = 0;
+    if (index==MarketMenuIndex) {
+        if (isRefresh) {
+            self.marketPageNumber = 0;
+            [self.marketArr removeAllObjects];
+            [self.collectionView reloadData];
+            self.noDataView.hidden = self.marketArr.count>0;
+        }
+        pageNumber = self.marketPageNumber;
+    }else if(index==CollectMenuIndex) {
+        if (isRefresh) {
+            self.collectPageNumber = 0;
+            [self.collectArr removeAllObjects];
+            [self.collectionView reloadData];
+            self.noDataView.hidden = self.collectArr.count>0;
+        }
+        pageNumber = self.collectPageNumber;
+        params[@"address"] = @"";
+    }
+    params[@"pageNumber"] = @(pageNumber).stringValue;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetPageURL params:params completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        NSNumber *totalPages = data[@"totalPages"];
+        NSArray *array = [PW_NFTTokenModel mj_objectArrayWithKeyValuesArray:data[@"content"]];
+        if (array&&array.count>0) {
+            if (index==MarketMenuIndex) {
+                self.marketPageNumber++;
+                [self.marketArr addObjectsFromArray:array];
+                self.noDataView.hidden = self.marketArr.count>0;
+            }else if(index==CollectMenuIndex) {
+                self.collectPageNumber++;
+                [self.collectArr addObjectsFromArray:array];
+                self.noDataView.hidden = self.collectArr.count>0;
+            }
+        }
+        if (pageNumber>=totalPages.integerValue) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [self.collectionView.mj_footer resetNoMoreData];
+            [self.collectionView.mj_footer endRefreshing];
+        }
+        [self.collectionView reloadData];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+        [self.collectionView.mj_footer endRefreshing];
+    }];
+}
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    if (self.segmentIndex==MarketMenuIndex) {
+        return self.marketArr.count;
+    }
+    if (self.segmentIndex==CollectMenuIndex) {
+        return self.collectArr.count;
+    }
+    return self.followArr.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.segmentIndex==FollowMenuIndex) {
         PW_FollowSeriesNFTItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_FollowSeriesNFTItemCell.class) forIndexPath:indexPath];
-        
+        cell.model = self.followArr[indexPath.item];
         return cell;
     }
     PW_SeriesNFTItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PW_SeriesNFTItemCell.class) forIndexPath:indexPath];
-    
+    if (self.segmentIndex==MarketMenuIndex) {
+        cell.model = self.marketArr[indexPath.item];
+    }else if (self.segmentIndex==CollectMenuIndex) {
+        cell.model = self.collectArr[indexPath.item];
+    }
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.segmentIndex==MarketMenuIndex) {
+        PW_NFTTokenModel *model = self.marketArr[indexPath.item];
+        PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (self.segmentIndex==CollectMenuIndex) {
+        PW_NFTTokenModel *model = self.collectArr[indexPath.item];
+        PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat hiddenHeight = 64;
@@ -310,6 +408,24 @@ static NSInteger FollowMenuIndex = 2;
         ];
     }
     return _filtrateArr;
+}
+- (NSMutableArray<PW_NFTTokenModel *> *)marketArr {
+    if (!_marketArr) {
+        _marketArr = [[NSMutableArray alloc] init];
+    }
+    return _marketArr;
+}
+- (NSMutableArray<PW_NFTTokenModel *> *)collectArr {
+    if (!_collectArr) {
+        _collectArr = [[NSMutableArray alloc] init];
+    }
+    return _collectArr;
+}
+- (NSMutableArray<PW_NFTCollectionModel *> *)followArr {
+    if (!_followArr) {
+        _followArr = [[NSMutableArray alloc] init];
+    }
+    return _followArr;
 }
 
 @end

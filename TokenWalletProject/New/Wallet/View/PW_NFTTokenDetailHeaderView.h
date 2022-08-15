@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PW_NFTTokenDetailHeaderView : UIView
 
 @property (nonatomic, copy) void(^transferBlock)(void);
+@property (nonatomic, copy, nullable) void(^addRemoveMarketBlock)(void);
 
 @end
 

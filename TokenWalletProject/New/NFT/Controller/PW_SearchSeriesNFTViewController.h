@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PW_SearchSeriesNFTViewController : PW_BaseViewController
 
+@property (nonatomic, copy, nullable) NSString *slug;
+
 @end
 
 NS_ASSUME_NONNULL_END

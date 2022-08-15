@@ -53,7 +53,9 @@
     }
 }
 - (void)addRemoveAction {
-    
+    if (self.addRemoveMarketBlock) {
+        self.addRemoveMarketBlock();
+    }
 }
 - (void)copyAction {
     

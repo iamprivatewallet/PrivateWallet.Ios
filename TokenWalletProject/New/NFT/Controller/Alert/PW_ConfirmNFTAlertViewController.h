@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *titleStr;
 @property (nonatomic, copy) NSString *descStr;
+@property (nonatomic, copy, nullable) void(^sureBlock)(void);
 
 @end
 

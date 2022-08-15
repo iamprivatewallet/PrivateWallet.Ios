@@ -12,6 +12,7 @@
 #import "PW_NFTTokenDetailCell.h"
 #import "PW_TransferNFTViewController.h"
 #import "PW_NFTTradeDetailViewController.h"
+#import "PW_ConfirmNFTAlertViewController.h"
 
 @interface PW_NFTTokenDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -35,6 +36,14 @@
 }
 - (void)transferAction {
     PW_TransferNFTViewController *vc = [[PW_TransferNFTViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)addRemoveMarketAction {
+    PW_ConfirmNFTAlertViewController *vc = [[PW_ConfirmNFTAlertViewController alloc] init];
+//    vc.titleStr = LocalizedStr(@"text_add");
+//    vc.descStr = PW_StrFormat(LocalizedStr(@"text_addNFTMarketTip"),@"");
+    vc.titleStr = LocalizedStr(@"text_remove");
+    vc.descStr = PW_StrFormat(LocalizedStr(@"text_removeNFTMarketTip"),@"");
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)requestData {
@@ -96,6 +105,9 @@
         __weak typeof(self) weakSelf = self;
         _headerView.transferBlock = ^{
             [weakSelf transferAction];
+        };
+        _headerView.addRemoveMarketBlock = ^{
+            [weakSelf addRemoveMarketAction];
         };
     }
     return _headerView;
