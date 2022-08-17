@@ -13,12 +13,15 @@
 #import "PW_TransferNFTViewController.h"
 #import "PW_NFTTradeDetailViewController.h"
 #import "PW_ConfirmNFTAlertViewController.h"
+#import "PW_NFTDetailViewController.h"
 
 @interface PW_NFTTokenDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) PW_TableView *tableView;
 @property (nonatomic, strong) PW_NFTTokenDetailHeaderView *headerView;
 @property (nonatomic, strong) UIView *marketSeeView;
+
+@property (nonatomic, strong) PW_NFTDetailModel *detailModel;
 
 @end
 
@@ -30,12 +33,16 @@
     [self setNavNoLineTitle:LocalizedStr(@"text_tokenDetail")];
     [self clearBackground];
     [self makeViews];
+    [self requestData];
 }
 - (void)marketSeeAction {
-    
+    PW_NFTDetailViewController *vc = [[PW_NFTDetailViewController alloc] init];
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)transferAction {
     PW_TransferNFTViewController *vc = [[PW_TransferNFTViewController alloc] init];
+    vc.model = self.model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)addRemoveMarketAction {
@@ -46,8 +53,28 @@
     vc.descStr = PW_StrFormat(LocalizedStr(@"text_removeNFTMarketTip"),@"");
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)refreshUI {
+//    self.marketSeeView.hidden = self.detailModel.;
+    self.headerView.model = self.detailModel;
+    [self.tableView reloadData];
+}
+#pragma mark - api
 - (void)requestData {
-    
+    User *user = User_manager.currentUser;
+    [self showLoading];
+    [self pw_requestNFTApi:NFTAssetItemURL params:@{
+        @"chainId":user.current_chainId,
+        @"tokenId":self.model.tokenId,
+        @"assetContract":self.model.assetContract,
+        @"address":user.chooseWallet_address,
+    } completeBlock:^(id  _Nonnull data) {
+        [self dismissLoading];
+        self.detailModel = [PW_NFTDetailModel mj_objectWithKeyValues:data];
+        [self refreshUI];
+    } errBlock:^(NSString * _Nonnull msg) {
+        [self showError:msg];
+        [self dismissLoading];
+    }];
 }
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -115,6 +142,7 @@
 - (UIView *)marketSeeView {
     if (!_marketSeeView) {
         _marketSeeView = [[UIView alloc] init];
+        _marketSeeView.hidden = YES;
         [_marketSeeView addTapTarget:self action:@selector(marketSeeAction)];
         [_marketSeeView setBorderColor:[UIColor colorWithWhite:1 alpha:0.2] width:1 radius:13];
         UILabel *titleLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_marketToSee") fontSize:12 textColor:[UIColor whiteColor]];

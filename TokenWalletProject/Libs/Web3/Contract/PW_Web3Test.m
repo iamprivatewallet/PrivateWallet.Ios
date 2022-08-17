@@ -17,6 +17,9 @@
     NSString *address = @"0xdb942296564963d49a21bc17cf764f82564856e9";
     NSString *toAddress = @"0x2093c44a1990fDdD1f2976A70e1B525510530401";
     NSString *tokenId = @"21000000001";
+    [[PWWalletERC721ContractTool shared] estimateGasWithContract:contract to:toAddress completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
+        NSLog(@"%@==%@==%@",gas,gasPrice,errorDesc);
+    }];
 //    [[PWWalletERC721ContractTool shared] balanceOfContract:contract address:address completionHandler:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
 //        NSLog(@"%@===%@",balance,errorDesc);
 //    }];

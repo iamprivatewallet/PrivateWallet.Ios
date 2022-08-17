@@ -28,6 +28,23 @@ class PWWalletERC721ContractTool: NSObject {
         web3 = Web3(rpcURL: urlStr)
     }
     @objc
+    public func estimateGas(contract: String?, to: String?, completionHandler: ((_ gas: String?, _ gasPrice: String?, _ errorDesc: String?)->())?) {
+        guard let contract = contract, let to = to else { completionHandler?(nil,nil,"error"); return }
+        if contract == "" || to == "" { completionHandler?(nil,nil,"error"); return }
+        guard let toAddress = EthereumAddress(hexString: to) else { completionHandler?(nil,nil,"error"); return }
+        let erc721 = GenericERC721Contract(address: EthereumAddress(hexString: contract), eth: web3.eth)
+        let call = EthereumCall(to: toAddress)
+        erc721.estimateGas(call) { result, error in
+            let gas = "\(result?.quantity ?? 0)"
+            erc721.eth.gasPrice(response: { resp in
+                let errDesc = error?.localizedDescription ?? resp.error?.localizedDescription
+                let gasPrice = "\(resp.result?.quantity ?? 0)"
+                debugPrint("\(gas)==\(gasPrice)==\(errDesc)")
+                completionHandler?(gas,gasPrice,errDesc)
+            })
+        }
+    }
+    @objc
     public func balanceOf(contract: String?, address: String?, completionHandler: ((_ result: String?, _ errorDesc: String?)->())?) {
         guard let contract = contract, let address = address else { completionHandler?(nil,"error"); return }
         if contract == "" || address == "" { completionHandler?(nil,"error"); return }

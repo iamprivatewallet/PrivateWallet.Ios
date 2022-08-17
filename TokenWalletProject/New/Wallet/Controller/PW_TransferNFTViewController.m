@@ -18,7 +18,6 @@ static NSInteger SpeedFeeBtnTag = 100;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *sendingView;
-@property (nonatomic, strong) UIView *transferCountView;
 @property (nonatomic, strong) UIView *receiveAddressView;
 @property (nonatomic, strong) UIView *minersFeeView;
 
@@ -26,8 +25,6 @@ static NSInteger SpeedFeeBtnTag = 100;
 @property (nonatomic, strong) UIImageView *logoIv;
 @property (nonatomic, strong) UILabel *nameLb;
 @property (nonatomic, strong) UILabel *tokenIdLb;
-@property (nonatomic, strong) UILabel *balanceLb;
-@property (nonatomic, strong) UITextField *countTF;
 @property (nonatomic, strong) UITextField *addressTF;
 @property (nonatomic, strong) UILabel *minersFeeLb;
 @property (nonatomic, strong) UILabel *minersFeeUTLb;
@@ -47,7 +44,6 @@ static NSInteger SpeedFeeBtnTag = 100;
 @property (nonatomic, strong) PW_GasModel *customGasModel;
 
 @property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *amount;
 
 @end
 
@@ -132,9 +128,6 @@ static NSInteger SpeedFeeBtnTag = 100;
         [strongSelf refreshGasUI];
     }];
 }
-- (void)allAction {
-    
-}
 - (void)addressBookAction {
     PW_AddressBookViewController *vc = [[PW_AddressBookViewController alloc] init];
     vc.chooseBlock = ^(PW_AddressBookModel * _Nonnull model) {
@@ -160,7 +153,50 @@ static NSInteger SpeedFeeBtnTag = 100;
     self.selectedSpeedFeeBtn = btn;
 }
 - (void)nextAction {
-    
+    NSString *address = [self.addressTF.text trim];
+    if (![address isNoEmpty]) {
+        [self showError:LocalizedStr(@"text_pleaseEnterAddress")];
+        return;
+    }
+    if ([User_manager.currentUser.chooseWallet_type isEqualToString:kWalletTypeTron]) {
+        if (![PW_TronContractTool isAddress:address]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
+    }else{
+        if (![address isContract]) {
+            [self showError:LocalizedStr(@"text_addressError")];
+            return;
+        }
+    }
+    self.address = address;
+    [PW_TipTool showPayCheckBlock:^(NSString * _Nonnull pwd) {
+        if (![pwd isEqualToString:User_manager.currentUser.user_pass]) {
+            return [self showError:LocalizedStr(@"text_pwdError")];
+        }
+        [self transferAction];
+    }];
+}
+- (void)transferAction {
+    User *user = User_manager.currentUser;
+    NSString *tokenAddress = self.model.assetContract;
+    if ([user.chooseWallet_type isEqualToString:kWalletTypeETH]) {
+        PW_GasModel *gasModel = [self getCurrentGasModel];
+        Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+        [[PWWalletERC721ContractTool shared] transferWithPrivateKey:wallet.priKey contract:tokenAddress to:self.address tokenId:self.model.tokenId gas:gasModel.gas gasPrice:gasModel.gas_price completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
+            if ([result isNoEmpty]) {
+                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+                if (self.transferSuccessBlock) {
+                    self.transferSuccessBlock();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showError:errorDesc];
+            }
+        }];
+    }
 }
 - (void)refreshGasUI {
     PW_GasModel *gasModel = [self getCurrentGasModel];
@@ -174,8 +210,7 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 #pragma mark - request
 - (void)requestGasData {
-//    NSString *tokenAddress = self.model.tokenContract;
-    NSString *tokenAddress = @"";
+    NSString *tokenAddress = self.model.assetContract;
     if (![tokenAddress isNoEmpty]||[tokenAddress.lowercaseString isEqualToString:User_manager.currentUser.chooseWallet_address.lowercaseString]) {
         [PW_WalletContractTool estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
             if(gas){
@@ -213,7 +248,7 @@ static NSInteger SpeedFeeBtnTag = 100;
                     };
     [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
         if (data) {
-//            self.model.nonce = data[@"result"];
+            self.model.nonce = data[@"result"];
         }
     }];
 }
@@ -252,17 +287,10 @@ static NSInteger SpeedFeeBtnTag = 100;
         make.right.offset(-34);
         make.height.mas_equalTo(100);
     }];
-    [self.contentView addSubview:self.transferCountView];
     [self.contentView addSubview:self.receiveAddressView];
     [self.contentView addSubview:self.minersFeeView];
-    [self.transferCountView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(34);
-        make.right.offset(-34);
-        make.top.equalTo(self.sendingView.mas_bottom).offset(18);
-        make.height.offset(80);
-    }];
     [self.receiveAddressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.transferCountView.mas_bottom).offset(18);
+        make.top.equalTo(self.sendingView.mas_bottom).offset(18);
         make.left.offset(34);
         make.right.offset(-34);
         make.height.offset(80);
@@ -274,7 +302,6 @@ static NSInteger SpeedFeeBtnTag = 100;
         make.bottom.offset(-10);
     }];
     [self createSendingAddressItems];
-    [self createTransferCountItems];
     [self createReceiveAddressItems];
     [self createMinersFeeItems];
 }
@@ -290,7 +317,7 @@ static NSInteger SpeedFeeBtnTag = 100;
     [self.sendAddressLb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(tipLb);
         make.left.equalTo(tipLb.mas_right);
-        make.right.offset(-10);
+        make.right.mas_lessThanOrEqualTo(-10);
     }];
     [self.sendingView addSubview:self.logoIv];
     [self.sendingView addSubview:self.nameLb];
@@ -309,37 +336,6 @@ static NSInteger SpeedFeeBtnTag = 100;
         make.left.equalTo(self.logoIv.mas_right).offset(10);
         make.right.offset(-5);
         make.bottom.equalTo(self.logoIv);
-    }];
-}
-- (void)createTransferCountItems {
-    UILabel *tipLb = [PW_ViewTool labelMediumText:LocalizedStr(@"text_transferCount") fontSize:20 textColor:[UIColor g_textColor]];
-    [self.transferCountView addSubview:tipLb];
-    self.balanceLb = [PW_ViewTool labelText:NSStringWithFormat(@"%@:%@",LocalizedStr(@"text_balance"),@"0.0") fontSize:14 textColor:[UIColor g_grayTextColor]];
-    [self.transferCountView addSubview:self.balanceLb];
-    self.countTF = [PW_ViewTool textFieldFont:[UIFont pw_regularFontOfSize:22] color:[UIColor g_primaryColor] placeholder:@"0.0"];
-    self.countTF.keyboardType = UIKeyboardTypeDecimalPad;
-    [self.transferCountView addSubview:self.countTF];
-    UIButton *allBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_all") fontSize:18 titleColor:[UIColor g_primaryColor] imageName:nil target:self action:@selector(allAction)];
-    [allBtn setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [allBtn setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-    [self.transferCountView addSubview:allBtn];
-    [tipLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
-        make.top.offset(14);
-    }];
-    [self.balanceLb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-18);
-        make.centerY.equalTo(tipLb);
-    }];
-    [self.countTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(18);
-        make.bottom.offset(-10);
-        make.height.offset(35);
-        make.right.equalTo(allBtn.mas_left).offset(-10);
-    }];
-    [allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-18);
-        make.centerY.equalTo(self.countTF);
     }];
 }
 - (void)createReceiveAddressItems {
@@ -551,14 +547,6 @@ static NSInteger SpeedFeeBtnTag = 100;
         _tokenIdLb.numberOfLines = 0;
     }
     return _tokenIdLb;
-}
-- (UIView *)transferCountView {
-    if (!_transferCountView) {
-        _transferCountView = [[UIView alloc] init];
-        _transferCountView.backgroundColor = [UIColor g_bgCardColor];
-        [_transferCountView setBorderColor:[UIColor g_borderColor] width:1 radius:8];
-    }
-    return _transferCountView;
 }
 - (UIView *)receiveAddressView {
     if (!_receiveAddressView) {

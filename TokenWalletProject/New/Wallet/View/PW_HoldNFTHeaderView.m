@@ -121,7 +121,7 @@
 - (UIImageView *)iconIv {
     if (!_iconIv) {
         _iconIv = [[UIImageView alloc] init];
-        _iconIv.backgroundColor = [UIColor lightGrayColor];
+        _iconIv.backgroundColor = [UIColor g_bgCardColor];
     }
     return _iconIv;
 }

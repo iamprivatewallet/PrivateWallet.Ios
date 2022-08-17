@@ -32,6 +32,7 @@
 -(int)getNodeChainId;
 -(NSString *)getChainType;
 -(NSString *)getChainCoinName;
+-(NSString *)getNetworkNameWithChainId:(NSString *)chainId;
 -(NSString *)getNodeNameWithChainId:(NSString *)chainId;
 -(NSArray *)getNodeArrayWithChainId:(NSString *)chainId;
 -(void)getNodeChainIdWithCompletionHandler:(void (^ _Nullable)(NSString * _Nullable chainId))completionHandler;

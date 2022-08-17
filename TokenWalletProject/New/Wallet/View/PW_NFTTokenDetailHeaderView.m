@@ -58,13 +58,31 @@
     }
 }
 - (void)copyAction {
-    
-}
-- (void)copyTokenIdAction {
-    
+    [self.model.asset.tokenId pasteboardToast:YES];
 }
 - (void)copyAddressAction {
-    
+    [self.model.asset.assetContract pasteboardToast:YES];
+}
+- (void)copyTokenIdAction {
+    [self.model.asset.tokenId pasteboardToast:YES];
+}
+- (void)setModel:(PW_NFTDetailModel *)model {
+    _model = model;
+    [self.bgIv sd_setImageWithURL:[NSURL URLWithString:model.asset.imageUrl]];
+    [self.logoIv sd_setImageWithURL:[NSURL URLWithString:model.collection.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_default"]];
+    self.failarmyNameLb.text = model.collection.name;
+    self.failarmyTokenIdLb.text = model.asset.tokenId;
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.asset.imageUrl]];
+//    self.addRemoveBtn.selected = ;
+    self.addRemoveTipLb.text = @"";
+    self.titleLb.text = model.asset.name;
+    self.coinTypeIv.image = [UIImage imageNamed:PW_StrFormat(@"icon_small_chain_%@",model.asset.chainId)];
+    self.lastTransactionPriceLb.text = model.asset.ethPrice;
+    self.nameLb.text = model.collection.name;
+    self.tokenStandardLb.text = model.assetContract.schemaName;
+    self.networkLb.text = [[SettingManager sharedInstance] getNetworkNameWithChainId:model.asset.chainId];
+    self.addressLb.text = model.asset.assetContract;
+    self.tokenIdLb.text = model.asset.tokenId;
 }
 - (void)makeViews {
     [self addSubview:self.bgIv];

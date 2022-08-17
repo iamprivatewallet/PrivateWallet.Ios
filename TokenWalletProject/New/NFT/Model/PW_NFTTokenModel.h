@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isHot;
 @property (nonatomic, copy) NSString *search;
 
+@property (nonatomic, copy) NSString *nonce;
+
 @end
 
 NS_ASSUME_NONNULL_END

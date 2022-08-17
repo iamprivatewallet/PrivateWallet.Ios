@@ -30,7 +30,7 @@
 }
 - (void)setModel:(PW_NFTCollectionModel *)model {
     _model = model;
-    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_token_default"]];
+    [self.iconIv sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[UIImage imageNamed:@"icon_default"]];
     self.nameLb.text = model.slug;
     self.countLb.text = @(model.numOwners).stringValue;
 }

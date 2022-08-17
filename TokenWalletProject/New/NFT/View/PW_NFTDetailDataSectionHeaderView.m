@@ -35,15 +35,15 @@
     self.segmentedControl.selectedIndex = index;
 }
 - (void)copyContractAddressAction {
-    
+    [self.model.assetContract.address pasteboardToast:YES];
 }
 - (void)copyTokenIdAction {
-    
+    [self.model.asset.tokenId pasteboardToast:YES];
 }
 - (void)setModel:(PW_NFTDetailModel *)model {
     _model = model;
     self.tokenStandardLb.text = model.assetContract.schemaName;
-//    self.networkLb.text = @"";
+    self.networkLb.text = [[SettingManager sharedInstance] getNetworkNameWithChainId:model.asset.chainId];
     self.contractAddressLb.text = [model.assetContract.address showShortAddress];
     self.tokenIdLb.text = model.asset.tokenId;
 }

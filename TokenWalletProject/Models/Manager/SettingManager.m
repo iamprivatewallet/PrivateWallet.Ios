@@ -84,6 +84,21 @@
         return @"ETH";
     }
 }
+-(NSString *)getNetworkNameWithChainId:(NSString *)chainId {
+    if ([chainId isEqualToString:kETHChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kETHChainId]) {
+        return @"ETH";
+    } else if ([chainId isEqualToString:kHECOChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kHECOChainId]) {
+        return @"HECO";
+    } else if ([chainId isEqualToString:kBSCChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kBSCChainId]) {
+        return @"BSC";
+    } else if ([chainId isEqualToString:kCVNChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kCVNChainId]) {
+        return @"CVN";
+    } else if ([chainId isEqualToString:kWalletTypeTron]) {
+        return @"Tron";
+    } else {
+        return @"ETH";
+    }
+}
 -(NSString *)getChainCoinName {
     NSString *chainId = User_manager.currentUser.current_chainId;
     if ([chainId isEqualToString:kETHChainId]||[@(chainId.stringTo10).stringValue isEqualToString:kETHChainId]) {
