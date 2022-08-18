@@ -42,21 +42,24 @@
         make.left.bottom.right.offset(0);
         make.height.mas_greaterThanOrEqualTo(366);
     }];
-    [self.view addSubview:self.closeBtn];
-    [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(15);
-        make.right.offset(-30);
-        make.width.height.mas_equalTo(24);
-    }];
     [self refreshContentView];
 }
 - (void)refreshContentView {
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.contentView addSubview:self.closeBtn];
+    [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(15);
+        make.right.offset(-30);
+        make.width.height.mas_equalTo(24);
+    }];
     [self.contentView addSubview:self.stateIv];
     [self.stateIv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(62);
         make.centerX.offset(0);
     }];
+    self.msgLb.font = [UIFont pw_semiBoldFontOfSize:17];
+    self.msgLb.textColor = [UIColor g_primaryNFTColor];
+    [self.stateIv.layer removeAllAnimations];
     if (self.type==PW_PendingAlertPending) {
         self.stateIv.image = [UIImage imageNamed:@"icon_pending"];
         [self addAnimation];
@@ -86,7 +89,7 @@
             make.top.equalTo(self.descLb.mas_bottom).offset(15);
             make.centerX.offset(0);
             make.left.mas_greaterThanOrEqualTo(50);
-            make.bottom.mas_equalTo(65);
+            make.bottom.mas_lessThanOrEqualTo(-65);
         }];
     }else if(self.type==PW_PendingAlertSuccess) {
         self.stateIv.image = [UIImage imageNamed:@"icon_success"];
@@ -110,12 +113,13 @@
             make.width.mas_equalTo(142);
             make.height.mas_equalTo(50);
             make.centerX.offset(0);
-            make.bottom.mas_equalTo(56);
+            make.bottom.mas_lessThanOrEqualTo(-56);
         }];
     }else if(self.type==PW_PendingAlertError) {
         self.stateIv.image = [UIImage imageNamed:@"icon_fail"];
-        UILabel *textLb = [PW_ViewTool labelSemiboldText:self.msg?self.msg:@"Error" fontSize:17 textColor:[UIColor g_errorColor]];
-        textLb.textAlignment = NSTextAlignmentCenter;
+        self.msgLb.textColor = [UIColor g_errorColor];
+        self.msgLb.text = self.msg?self.msg:@"Error";
+        self.msgLb.font = [UIFont pw_semiBoldFontOfSize:21];
         [self.contentView addSubview:self.msgLb];
         [self.msgLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.stateIv.mas_bottom).offset(16);
@@ -136,7 +140,7 @@
             make.width.mas_equalTo(142);
             make.height.mas_equalTo(50);
             make.centerX.offset(0);
-            make.bottom.mas_equalTo(56);
+            make.bottom.mas_lessThanOrEqualTo(-56);
         }];
     }
 }

@@ -25,18 +25,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isNeedAnimation = YES;
     self.view.backgroundColor = [UIColor g_maskColor];
     [self clearBackground];
 }
 - (void)show {
     [[PW_APPDelegate getRootCurrentNavc] presentViewController:self animated:NO completion:nil];
 }
+- (void)showInVc:(UIViewController *)vc {
+    [vc presentViewController:self animated:NO completion:nil];
+}
 - (void)closeAction {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self closeWithCompletion:nil];
+}
+- (void)closeWithCompletion:(void (^ __nullable)(void))completion {
+    [self dismissViewControllerAnimated:NO completion:completion];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self addContentAnimation];
+    if (self.isNeedAnimation) {
+        [self addContentAnimation];
+    }
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];

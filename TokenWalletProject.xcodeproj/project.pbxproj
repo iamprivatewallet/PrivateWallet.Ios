@@ -200,7 +200,6 @@
 		5C23659C289521E300A203A2 /* PW_RankListNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23659B289521E300A203A2 /* PW_RankListNFTViewController.m */; };
 		5C23659F2895225F00A203A2 /* PW_RankListNFTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23659E2895225F00A203A2 /* PW_RankListNFTCell.m */; };
 		5C2365A2289528F600A203A2 /* PW_FailarmyListNFTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */; };
-		5C2976C628A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2976C528A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m */; };
 		5C2976CC28A0C7E200CF382A /* PW_NFTWalletAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2976CB28A0C7E200CF382A /* PW_NFTWalletAssetModel.m */; };
 		5C2976CF28A0C88800CF382A /* PW_NFTCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2976CE28A0C88800CF382A /* PW_NFTCollectionModel.m */; };
 		5C2976D228A0C89600CF382A /* PW_NFTTokenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2976D128A0C89600CF382A /* PW_NFTTokenModel.m */; };
@@ -1087,8 +1086,6 @@
 		5C23659E2895225F00A203A2 /* PW_RankListNFTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_RankListNFTCell.m; sourceTree = "<group>"; };
 		5C2365A0289528F600A203A2 /* PW_FailarmyListNFTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_FailarmyListNFTViewController.h; sourceTree = "<group>"; };
 		5C2365A1289528F600A203A2 /* PW_FailarmyListNFTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_FailarmyListNFTViewController.m; sourceTree = "<group>"; };
-		5C2976C428A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ConfirmInfoAlertViewController.h; sourceTree = "<group>"; };
-		5C2976C528A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ConfirmInfoAlertViewController.m; sourceTree = "<group>"; };
 		5C2976CA28A0C7E200CF382A /* PW_NFTWalletAssetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTWalletAssetModel.h; sourceTree = "<group>"; };
 		5C2976CB28A0C7E200CF382A /* PW_NFTWalletAssetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_NFTWalletAssetModel.m; sourceTree = "<group>"; };
 		5C2976CD28A0C88800CF382A /* PW_NFTCollectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_NFTCollectionModel.h; sourceTree = "<group>"; };
@@ -3126,8 +3123,6 @@
 				5C650C902893C1C000B7B3E2 /* PW_AllNftFiltrateViewController.m */,
 				5C2B8427289D0F6D006ED96D /* PW_PendingAlertViewController.h */,
 				5C2B8428289D0F6D006ED96D /* PW_PendingAlertViewController.m */,
-				5C2976C428A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.h */,
-				5C2976C528A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m */,
 				5C7AFF12289F6DF2008C46D2 /* PW_BidNFTAlertViewController.h */,
 				5C7AFF13289F6DF3008C46D2 /* PW_BidNFTAlertViewController.m */,
 				5C7AFF15289F6F2E008C46D2 /* PW_ConfirmPurchaseNFTAlertViewController.h */,
@@ -5604,7 +5599,6 @@
 				5CCE70C3280FEDF500860841 /* PW_DappChainCell.m in Sources */,
 				5CCE70DA28101FE700860841 /* PW_DappMoreContentView.m in Sources */,
 				5CC544E028A218DF00D895D4 /* PW_NFTSearchManager.m in Sources */,
-				5C2976C628A0BF6400CF382A /* PW_ConfirmInfoAlertViewController.m in Sources */,
 				5CD7B04628645AA600148BD5 /* PW_DappItemCell.m in Sources */,
 				5CA451E42817D28A006FFA3B /* PW_Solana.swift in Sources */,
 				5CCBD7AC28A4C54000EFA24A /* PWWalletERC721ContractTool.swift in Sources */,

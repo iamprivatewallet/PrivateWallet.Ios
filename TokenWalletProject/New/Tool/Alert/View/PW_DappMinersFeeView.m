@@ -60,17 +60,12 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 - (void)setToolModel:(PW_GasToolModel *)toolModel {
     _toolModel = toolModel;
-    _gasModel = toolModel.recommendModel;;
+    _gasModel = toolModel.recommendModel;
+    self.customGasModel = [toolModel.recommendModel mutableCopy];
     _title = LocalizedStr(@"text_avg");
     self.sliderView.minimumValue = [toolModel.slowModel.gas_price doubleValue];
     self.sliderView.maximumValue = [toolModel.soonModel.gas_price doubleValue];
     [self refreshGasUI];
-}
-- (void)setGasModel:(PW_GasModel * _Nonnull)gasModel {
-    _gasModel = gasModel;
-    if (_customGasModel==nil) {
-        _customGasModel = [gasModel mutableCopy];
-    }
 }
 - (void)setGas:(PW_GasModel *)gasModel title:(NSString *)title {
     _gasModel = gasModel;
@@ -111,6 +106,13 @@ static NSInteger SpeedFeeBtnTag = 100;
             [strongSelf setGas:strongSelf.toolModel.soonModel title:btn.titleLabel.text];
         }
         [strongSelf refreshGasUI];
+    }];
+    [RACObserve(self, customGasModel) subscribeNext:^(id  _Nullable x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.gasPriceTF.text = strongSelf.customGasModel.gas_gwei;
+        [strongSelf.gasPriceTF pw_setPlaceholder:strongSelf.customGasModel.gas_gwei];
+        strongSelf.gasTF.text = strongSelf.customGasModel.gas;
+        [strongSelf.gasTF pw_setPlaceholder:strongSelf.customGasModel.gas];
     }];
     [self.gasPriceTF.rac_textSignal subscribeNext:^(NSString * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;

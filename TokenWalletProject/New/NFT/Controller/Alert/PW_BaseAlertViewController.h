@@ -14,8 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIButton *closeBtn;
+@property (nonatomic, assign) BOOL isNeedAnimation;
 - (void)show;
+- (void)showInVc:(UIViewController *)vc;
 - (void)closeAction;
+- (void)closeWithCompletion:(void (^ __nullable)(void))completion;
 
 @end
 

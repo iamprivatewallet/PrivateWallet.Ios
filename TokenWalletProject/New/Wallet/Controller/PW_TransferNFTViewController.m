@@ -210,34 +210,18 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 #pragma mark - request
 - (void)requestGasData {
-    NSString *tokenAddress = self.model.assetContract;
-    if (![tokenAddress isNoEmpty]||[tokenAddress.lowercaseString isEqualToString:User_manager.currentUser.chooseWallet_address.lowercaseString]) {
-        [PW_WalletContractTool estimateGasToAddress:nil completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
-            if(gas){
-                self.gasToolModel.gas_price = gasPrice;
-                self.gasToolModel.gas = gas;
-                self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-                self.gasModel = self.gasToolModel.recommendModel;;
-                self.customGasModel = [self.gasModel mutableCopy];
-                self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
-                self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
-                [self refreshGasUI];
-            }
-        }];
-    }else{
-        [PW_WalletContractTool estimateGasTokenToAddress:nil token:tokenAddress completionHandler:^(NSString * _Nullable gasPrice, NSString * _Nullable gas, NSString * _Nullable errorDesc) {
-            if(gas){
-                self.gasToolModel.gas_price = gasPrice;
-                self.gasToolModel.gas = gas;
-                self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-                self.gasModel = self.gasToolModel.recommendModel;;
-                self.customGasModel = [self.gasModel mutableCopy];
-                self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
-                self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
-                [self refreshGasUI];
-            }
-        }];
-    }
+    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
+        if([gas isNoEmpty]){
+            self.gasToolModel.gas_price = gasPrice;
+            self.gasToolModel.gas = gas;
+            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+            self.gasModel = self.gasToolModel.recommendModel;;
+            self.customGasModel = [self.gasModel mutableCopy];
+            self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
+            self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
+            [self refreshGasUI];
+        }
+    }];
 }
 - (void)loadDataForNonce {
     NSDictionary *parmDic = @{

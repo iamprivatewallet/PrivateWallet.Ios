@@ -25,6 +25,7 @@
 #import "PW_DappAlertTool.h"
 #import "PW_NFTDetailModel.h"
 #import "PW_ShareAppTool.h"
+#import "PW_Web3Test.h"
 
 @interface PW_NFTDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -53,6 +54,8 @@
 
 @property (nonatomic, strong) PW_NFTDetailModel *detailModel;
 
+@property (nonatomic, strong) PW_GasToolModel *gasToolModel;
+@property (nonatomic, assign) BOOL isApproved;
 
 @end
 
@@ -72,6 +75,8 @@
         }
     }];
     [self requestData];
+    [self requestGasData];
+    [self requestApprove];
 }
 - (void)backAction {
     [self.navigationController popViewControllerAnimated:YES];
@@ -84,19 +89,48 @@
 }
 //visitor
 - (void)approveAction {
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
     PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
+    payModel.value = @"1";
+    payModel.symbol = self.detailModel.asset.symbol;
+    payModel.paymentAddress = wallet.address;
+    payModel.acceptAddress = @"";//合约地址
+    payModel.gasToolModel.gas_price = [self.gasToolModel.gas_price strTo10];
+    payModel.gasToolModel.gas = [self.gasToolModel.gas strTo10];
+    payModel.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
     [PW_DappAlertTool showDappAuthorizationConfirm:payModel sureBlock:^(PW_DappPayModel * _Nonnull model) {
-        
+        PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+        vc.type = PW_PendingAlertPending;
+        vc.msg = PW_StrFormat(@"Approve %@",self.detailModel.asset.name);
+        [self presentViewController:vc animated:NO completion:nil];
+        __weak typeof(vc) weakVc = vc;
+        [[PWWalletERC721ContractTool shared] approveWithPrivateKey:wallet.priKey contract:self.model.assetContract to:@"" tokenId:self.model.tokenId gas:model.gasModel.gas gasPrice:model.gasModel.gas_price completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+            __strong typeof(weakVc) strongVc = weakVc;
+            if ([hash isNoEmpty]) {
+                if(strongVc){
+                    strongVc.type = PW_PendingAlertSuccess;
+                    strongVc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
+                }else{
+                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+                    vc.type = PW_PendingAlertSuccess;
+                    vc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
+                    [self presentViewController:vc animated:NO completion:nil];
+                }
+            }else{
+                if (strongVc) {
+                    strongVc.type = PW_PendingAlertError;
+                }else{
+                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+                    vc.type = PW_PendingAlertError;
+                    [self presentViewController:vc animated:NO completion:nil];
+                }
+            }
+        }];
     } closeBlock:^{
-        
+        PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+        vc.type = PW_PendingAlertError;
+        [self presentViewController:vc animated:NO completion:nil];
     }];
-//    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
-//    vc.type = PW_PendingAlertPending;
-//    vc.msg = @"Approve ETH";
-////    vc.type = PW_PendingAlertSuccess;
-////    vc.msg = @"View on ETH chain";
-////    vc.type = PW_PendingAlertError;
-//    [self presentViewController:vc animated:NO completion:nil];
 }
 - (void)offerAction {
     PW_BidNFTAlertViewController *vc = [[PW_BidNFTAlertViewController alloc] init];
@@ -158,6 +192,23 @@
     self.collectBtn.selected = self.detailModel.isFollow;
     self.headerView.model = self.detailModel;
     [self.tableView reloadData];
+    [self refreshBottomView];
+}
+#pragma mark - request
+- (void)requestGasData {
+    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
+        if([gas isNoEmpty]){
+            self.gasToolModel.gas_price = gasPrice;
+            self.gasToolModel.gas = gas;
+            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+        }
+    }];
+}
+- (void)requestApprove {
+    [[PWWalletERC721ContractTool shared] getApprovedWithContract:self.model.assetContract tokenId:self.model.tokenId completionHandler:^(BOOL isApproved, NSString * _Nullable errorDesc) {
+        self.isApproved = isApproved;
+        [self refreshBottomView];
+    }];
 }
 #pragma mark - api
 - (void)requestData {
@@ -287,9 +338,10 @@
     [self refreshBottomView];
 }
 - (void)refreshBottomView {
+    User *user = User_manager.currentUser;
     self.bottomView.hidden = NO;
     [self.bottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    BOOL isOwner = NO;
+    BOOL isOwner = [self.detailModel.asset.owner isEqualToString:user.chooseWallet_address];
     if (isOwner) {
         //在售竞拍
 //        [self.bottomView addSubview:self.withdrawBtn];
@@ -365,22 +417,23 @@
             make.centerY.offset(0);
         }];
     }else{
-        //未授权
-//        [self.bottomView addSubview:self.approveBtn];
-//        [self.approveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.offset(0);
-//        }];
-        //授权后
-        [self.bottomView addSubview:self.offerBtn];
-        [self.bottomView addSubview:self.buyBtn];
-        [self.offerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.bottom.offset(0);
-        }];
-        [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.offerBtn.mas_right).offset(20);
-            make.top.right.bottom.offset(0);
-            make.width.mas_equalTo(self.offerBtn);
-        }];
+        if (!self.isApproved) {//未授权
+            [self.bottomView addSubview:self.approveBtn];
+            [self.approveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.offset(0);
+            }];
+        }else{//授权后
+            [self.bottomView addSubview:self.offerBtn];
+            [self.bottomView addSubview:self.buyBtn];
+            [self.offerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.bottom.offset(0);
+            }];
+            [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.offerBtn.mas_right).offset(20);
+                make.top.right.bottom.offset(0);
+                make.width.mas_equalTo(self.offerBtn);
+            }];
+        }
         //参与竞拍后
 //        [self.bottomView addSubview:self.cancelOfferBtn];
 //        [self.bottomView addSubview:self.updateOfferBtn];
@@ -532,6 +585,12 @@
         _auctionBtn = [PW_ViewTool buttonSemiboldTitle:LocalizedStr(@"text_auction") fontSize:15 titleColor:[UIColor g_primaryTextColor] cornerRadius:8 backgroundColor:[UIColor g_primaryColor] target:self action:@selector(auctionAction)];
     }
     return _auctionBtn;
+}
+- (PW_GasToolModel *)gasToolModel {
+    if (!_gasToolModel) {
+        _gasToolModel = [[PW_GasToolModel alloc] init];
+    }
+    return _gasToolModel;
 }
 
 @end

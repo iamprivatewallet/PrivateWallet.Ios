@@ -23,15 +23,15 @@
 //    [[PWWalletERC721ContractTool shared] balanceOfContract:contract address:address completionHandler:^(NSString * _Nullable balance, NSString * _Nullable errorDesc) {
 //        NSLog(@"%@===%@",balance,errorDesc);
 //    }];
-    [[PWWalletERC721ContractTool shared] approveWithPrivateKey:privateKey contract:contract to:toContract tokenId:tokenId gas:@"100000" gasPrice:@"5" completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
-        
-    }];
-//    [[PWWalletERC721ContractTool shared] getApprovedWithContract:contract tokenId:tokenId completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
+//    [[PWWalletERC721ContractTool shared] approveWithPrivateKey:privateKey contract:contract to:toContract tokenId:tokenId gas:@"100000" gasPrice:@"5" completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
 //
 //    }];
-    [[PWWalletERC721ContractTool shared] transferWithPrivateKey:privateKey contract:contract to:toAddress tokenId:tokenId gas:@"100000" gasPrice:@"5" completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-        
+    [[PWWalletERC721ContractTool shared] getApprovedWithContract:contract tokenId:tokenId completionHandler:^(BOOL isApproved, NSString * _Nullable errorDesc) {
+
     }];
+//    [[PWWalletERC721ContractTool shared] transferWithPrivateKey:privateKey contract:contract to:toAddress tokenId:tokenId gas:@"100000" gasPrice:@"5" completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//
+//    }];
 }
 
 @end

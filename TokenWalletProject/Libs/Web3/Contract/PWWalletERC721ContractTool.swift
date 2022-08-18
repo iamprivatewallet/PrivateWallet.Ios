@@ -29,9 +29,13 @@ class PWWalletERC721ContractTool: NSObject {
     }
     @objc
     public func estimateGas(contract: String?, to: String?, completionHandler: ((_ gas: String?, _ gasPrice: String?, _ errorDesc: String?)->())?) {
-        guard let contract = contract, let to = to else { completionHandler?(nil,nil,"error"); return }
-        if contract == "" || to == "" { completionHandler?(nil,nil,"error"); return }
-        guard let toAddress = EthereumAddress(hexString: to) else { completionHandler?(nil,nil,"error"); return }
+        var toStr = to ?? ""
+        if toStr == "" {
+            toStr = "0x0000000000000000000000000000000000000000"
+        }
+        guard let contract = contract else { completionHandler?(nil,nil,"error"); return }
+        if contract == "" { completionHandler?(nil,nil,"error"); return }
+        guard let toAddress = EthereumAddress(hexString: toStr) else { completionHandler?(nil,nil,"error"); return }
         let erc721 = GenericERC721Contract(address: EthereumAddress(hexString: contract), eth: web3.eth)
         let call = EthereumCall(to: toAddress)
         erc721.estimateGas(call) { result, error in
@@ -82,14 +86,15 @@ class PWWalletERC721ContractTool: NSObject {
         }
     }
     @objc
-    public func getApproved(contract: String?, tokenId: String?, completionHandler: ((_ result: String?, _ errorDesc: String?)->())?) {
-        guard let contract = contract, let tokenId = tokenId else { completionHandler?(nil,"error"); return }
-        if contract == "" { completionHandler?(nil,"error"); return }
+    public func getApproved(contract: String?, tokenId: String?, completionHandler: ((_ result: Bool, _ errorDesc: String?)->())?) {
+        guard let contract = contract, let tokenId = tokenId else { completionHandler?(false,"error"); return }
+        if contract == "" || tokenId == "" { completionHandler?(false,"error"); return }
         let erc721 = GenericERC721Contract(address: EthereumAddress(hexString: contract), eth: web3.eth)
         erc721.getApproved(tokenId: BigUInt(stringLiteral: tokenId)).call { result, error in
             let approved = (result?["_approved"] as? EthereumAddress)?.hex(eip55: false) ?? ""
-            debugPrint("\(approved)===\(error?.localizedDescription)")
-            completionHandler?(approved,error?.localizedDescription)
+            let isApproved = approved == "0x0000000000000000000000000000000000000000"
+            debugPrint("\(isApproved)===\(error?.localizedDescription)")
+            completionHandler?(isApproved,error?.localizedDescription)
         }
     }
     @objc
