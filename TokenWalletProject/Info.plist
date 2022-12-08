@@ -117,6 +117,8 @@
 	<string>Private Wallet想要访问您的相机</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Private Wallet想要访问验证面容</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Private Wallet想要访问您的位置</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Private Wallet想要访问您的位置</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
