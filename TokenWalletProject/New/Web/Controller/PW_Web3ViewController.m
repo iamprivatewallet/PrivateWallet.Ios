@@ -14,7 +14,7 @@
 #import "PW_WebViewController.h"
 #import "PW_WalletListView.h"
 
-@interface PW_Web3ViewController ()
+@interface PW_Web3ViewController () <WKUIDelegate>
 
 @property (nonatomic, strong) UIView *navContentView;
 @property (nonatomic, strong) Web3WebView *webView;
@@ -84,6 +84,7 @@
     }];
     [self createNavItems];
     self.webView = [[Web3WebView alloc] init];
+    self.webView.DSUIDelegate = self;
 //    self.webView = [[WKWebView alloc] init];
     // UI代理
 //    self.webView.UIDelegate = self;
@@ -243,6 +244,14 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView removeObserver:self forKeyPath:@"title"];
     [self.webView removeObserver:self forKeyPath:@"canGoBack"];
+}
+
+#pragma mark - delegate
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    if(!navigationAction.targetFrame.mainFrame){
+        [webView loadRequest:navigationAction.request];
+    }
+    return nil;
 }
 
 @end

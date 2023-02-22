@@ -648,7 +648,8 @@
 }
 - (UISegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
-        NSArray *titles = @[LocalizedStr(@"text_assets"),@"NFT"];
+        NSArray *titles = @[LocalizedStr(@"text_assets")];
+//        NSArray *titles = @[LocalizedStr(@"text_assets"),@"NFT"];
         _segmentedControl = [PW_ViewTool segmentedControlWithTitles:titles];
         _segmentedControl.selectedSegmentIndex = 0;
         [_segmentedControl addTarget:self action:@selector(menuChangeAction) forControlEvents:UIControlEventValueChanged];

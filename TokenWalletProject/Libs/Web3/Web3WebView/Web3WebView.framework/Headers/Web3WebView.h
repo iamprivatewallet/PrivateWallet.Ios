@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Web3WebView : WKWebView
 
+@property (nullable, nonatomic, weak) id <WKUIDelegate> DSUIDelegate;
 @property (nonatomic, strong) MetaMaskPushConfigModel *config;
 
 - (instancetype)initWithFrame:(CGRect)frame config:(MetaMaskPushConfigModel *)config;

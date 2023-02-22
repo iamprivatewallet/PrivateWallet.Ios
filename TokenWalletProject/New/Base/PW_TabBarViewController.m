@@ -50,9 +50,9 @@
     PW_NavigationController *marketNac = [[PW_NavigationController alloc] initWithRootViewController:marketVc];
     marketNac.tabBarItem = [self tabbarItemTitle:LocalizedStr(@"tabbar_market") imageNamed:@"icon_tabbar_market"];
     
-    PW_NFTViewController *nftVc = [PW_NFTViewController new];
-    PW_NavigationController *ntfNac = [[PW_NavigationController alloc] initWithRootViewController:nftVc];
-    ntfNac.tabBarItem = [self tabbarItemTitle:@"NFT" imageNamed:@"icon_tabbar_nft"];
+//    PW_NFTViewController *nftVc = [PW_NFTViewController new];
+//    PW_NavigationController *ntfNac = [[PW_NavigationController alloc] initWithRootViewController:nftVc];
+//    ntfNac.tabBarItem = [self tabbarItemTitle:@"NFT" imageNamed:@"icon_tabbar_nft"];
     
     PW_DappViewController *dappVc = [PW_DappViewController new];
     PW_NavigationController *dappNac = [[PW_NavigationController alloc] initWithRootViewController:dappVc];
@@ -62,7 +62,8 @@
     PW_NavigationController *moreNac = [[PW_NavigationController alloc] initWithRootViewController:moreVc];
     moreNac.tabBarItem = [self tabbarItemTitle:LocalizedStr(@"tabbar_more") imageNamed:@"icon_tabbar_more"];
     
-    self.viewControllers = @[walletNac,marketNac,ntfNac,dappNac,moreNac];
+    self.viewControllers = @[walletNac,marketNac,dappNac,moreNac];
+//    self.viewControllers = @[walletNac,marketNac,ntfNac,dappNac,moreNac];
 }
 - (UITabBarItem *)tabbarItemTitle:(NSString *)title imageNamed:(NSString *)imageNamed {
     UITabBarItem *item = [[UITabBarItem alloc] init];
