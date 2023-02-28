@@ -183,19 +183,19 @@ static NSInteger SpeedFeeBtnTag = 100;
     if ([user.chooseWallet_type isEqualToString:kWalletTypeETH]) {
         PW_GasModel *gasModel = [self getCurrentGasModel];
         Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-        [[PWWalletERC721ContractTool shared] transferWithPrivateKey:wallet.priKey contract:tokenAddress to:self.address tokenId:self.model.tokenId gas:gasModel.gas gasPrice:gasModel.gas_price completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
-            if ([result isNoEmpty]) {
-                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
-                if (self.transferSuccessBlock) {
-                    self.transferSuccessBlock();
-                }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
-            }else{
-                [self showError:errorDesc];
-            }
-        }];
+//        [[PWWalletERC721ContractTool shared] transferWithPrivateKey:wallet.priKey contract:tokenAddress to:self.address tokenId:self.model.tokenId gas:gasModel.gas gasPrice:gasModel.gas_price completionHandler:^(NSString * _Nullable result, NSString * _Nullable errorDesc) {
+//            if ([result isNoEmpty]) {
+//                [self showSuccess:LocalizedStr(@"text_transactionBroadcast")];
+//                if (self.transferSuccessBlock) {
+//                    self.transferSuccessBlock();
+//                }
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                });
+//            }else{
+//                [self showError:errorDesc];
+//            }
+//        }];
     }
 }
 - (void)refreshGasUI {
@@ -210,18 +210,18 @@ static NSInteger SpeedFeeBtnTag = 100;
 }
 #pragma mark - request
 - (void)requestGasData {
-    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
-        if([gas isNoEmpty]){
-            self.gasToolModel.gas_price = gasPrice;
-            self.gasToolModel.gas = gas;
-            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-            self.gasModel = self.gasToolModel.recommendModel;;
-            self.customGasModel = [self.gasModel mutableCopy];
-            self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
-            self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
-            [self refreshGasUI];
-        }
-    }];
+//    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
+//        if([gas isNoEmpty]){
+//            self.gasToolModel.gas_price = gasPrice;
+//            self.gasToolModel.gas = gas;
+//            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+//            self.gasModel = self.gasToolModel.recommendModel;;
+//            self.customGasModel = [self.gasModel mutableCopy];
+//            self.sliderView.minimumValue = [self.gasToolModel.slowModel.gas_price doubleValue];
+//            self.sliderView.maximumValue = [self.gasToolModel.soonModel.gas_price doubleValue];
+//            [self refreshGasUI];
+//        }
+//    }];
 }
 - (void)loadDataForNonce {
     NSDictionary *parmDic = @{

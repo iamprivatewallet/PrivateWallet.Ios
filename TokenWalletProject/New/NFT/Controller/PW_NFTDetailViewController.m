@@ -104,28 +104,28 @@
         vc.msg = PW_StrFormat(@"Approve %@",self.detailModel.asset.name);
         [self presentViewController:vc animated:NO completion:nil];
         __weak typeof(vc) weakVc = vc;
-        [[PWWalletERC721ContractTool shared] approveWithPrivateKey:wallet.priKey contract:self.model.assetContract to:@"" tokenId:self.model.tokenId gas:model.gasModel.gas gasPrice:model.gasModel.gas_price completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-            __strong typeof(weakVc) strongVc = weakVc;
-            if ([hash isNoEmpty]) {
-                if(strongVc){
-                    strongVc.type = PW_PendingAlertSuccess;
-                    strongVc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
-                }else{
-                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
-                    vc.type = PW_PendingAlertSuccess;
-                    vc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
-                    [self presentViewController:vc animated:NO completion:nil];
-                }
-            }else{
-                if (strongVc) {
-                    strongVc.type = PW_PendingAlertError;
-                }else{
-                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
-                    vc.type = PW_PendingAlertError;
-                    [self presentViewController:vc animated:NO completion:nil];
-                }
-            }
-        }];
+//        [[PWWalletERC721ContractTool shared] approveWithPrivateKey:wallet.priKey contract:self.model.assetContract to:@"" tokenId:self.model.tokenId gas:model.gasModel.gas gasPrice:model.gasModel.gas_price completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//            __strong typeof(weakVc) strongVc = weakVc;
+//            if ([hash isNoEmpty]) {
+//                if(strongVc){
+//                    strongVc.type = PW_PendingAlertSuccess;
+//                    strongVc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
+//                }else{
+//                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+//                    vc.type = PW_PendingAlertSuccess;
+//                    vc.msg = PW_StrFormat(@"View on %@ chain",[[SettingManager sharedInstance] getChainType]);
+//                    [self presentViewController:vc animated:NO completion:nil];
+//                }
+//            }else{
+//                if (strongVc) {
+//                    strongVc.type = PW_PendingAlertError;
+//                }else{
+//                    PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
+//                    vc.type = PW_PendingAlertError;
+//                    [self presentViewController:vc animated:NO completion:nil];
+//                }
+//            }
+//        }];
     } closeBlock:^{
         PW_PendingAlertViewController *vc = [[PW_PendingAlertViewController alloc] init];
         vc.type = PW_PendingAlertError;
@@ -196,19 +196,19 @@
 }
 #pragma mark - request
 - (void)requestGasData {
-    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
-        if([gas isNoEmpty]){
-            self.gasToolModel.gas_price = gasPrice;
-            self.gasToolModel.gas = gas;
-            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
-        }
-    }];
+//    [[PWWalletERC721ContractTool shared] estimateGasWithContract:self.model.assetContract to:nil completionHandler:^(NSString * _Nullable gas, NSString * _Nullable gasPrice, NSString * _Nullable errorDesc) {
+//        if([gas isNoEmpty]){
+//            self.gasToolModel.gas_price = gasPrice;
+//            self.gasToolModel.gas = gas;
+//            self.gasToolModel.price = [PW_GlobalData shared].mainTokenModel.price;
+//        }
+//    }];
 }
 - (void)requestApprove {
-    [[PWWalletERC721ContractTool shared] getApprovedWithContract:self.model.assetContract tokenId:self.model.tokenId completionHandler:^(BOOL isApproved, NSString * _Nullable errorDesc) {
-        self.isApproved = isApproved;
-        [self refreshBottomView];
-    }];
+//    [[PWWalletERC721ContractTool shared] getApprovedWithContract:self.model.assetContract tokenId:self.model.tokenId completionHandler:^(BOOL isApproved, NSString * _Nullable errorDesc) {
+//        self.isApproved = isApproved;
+//        [self refreshBottomView];
+//    }];
 }
 #pragma mark - api
 - (void)requestData {

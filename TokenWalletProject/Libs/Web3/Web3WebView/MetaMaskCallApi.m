@@ -305,23 +305,39 @@
 //签名
 - (void)signDataWithMessage:(NSString *)message address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
-        NSString *sign = NSStringWithFormat(@"0x%@",result);
-        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-            if (errorDesc!=nil&&errorDesc.length>0) {
-                DSError *error = [[DSError alloc] init];
-                error.message = errorDesc;
-                error.code = -1;
-                respModel.error = error;
-            }
-            if (hash!=nil) {
-                respModel.result = @[hash];
-            }
-            if (completionHandler) {
-                completionHandler(respModel);
-            }
-        }];
-    }];
+    NSString *result = [PWWalletTool signMessageWithPrivateKey:wallet.priKey msg:message];
+    if (result!=nil) {
+        respModel.result = result;
+    }else{
+        DSError *error = [[DSError alloc] init];
+        error.message = @"sign error";
+        error.code = -1;
+        respModel.error = error;
+    }
+    if (completionHandler) {
+        completionHandler(respModel);
+    }
+//    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
+//        NSString *sign = NSStringWithFormat(@"0x%@",result);
+//        respModel.result = sign.lowercaseString;
+//        if (completionHandler) {
+//            completionHandler(respModel);
+//        }
+//        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//            if (errorDesc!=nil&&errorDesc.length>0) {
+//                DSError *error = [[DSError alloc] init];
+//                error.message = errorDesc;
+//                error.code = -1;
+//                respModel.error = error;
+//            }
+//            if (hash!=nil) {
+//                respModel.result = @[hash];
+//            }
+//            if (completionHandler) {
+//                completionHandler(respModel);
+//            }
+//        }];
+//    }];
 }
 - (void)signDataWithDict:(NSDictionary *)dict address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];

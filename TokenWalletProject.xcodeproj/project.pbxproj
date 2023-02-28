@@ -442,6 +442,7 @@
 		5CE19FA028192FDE008C37A3 /* PW_AlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19F9F28192FDE008C37A3 /* PW_AlertTool.m */; };
 		5CE19FA328193390008C37A3 /* PW_DappPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA228193390008C37A3 /* PW_DappPayModel.m */; };
 		5CE19FA6281A5028008C37A3 /* PW_DappMinersFeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE19FA5281A5028008C37A3 /* PW_DappMinersFeeView.m */; };
+		5CE4EA1A29ADFF1600139ABA /* PWWalletTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE4EA1929ADFF1600139ABA /* PWWalletTool.swift */; };
 		5CE7ACBD27F5CE6200E2188D /* PW_ScanTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */; };
 		5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACBF27F5D68300E2188D /* PW_ScanViewController.m */; };
 		5CE7ACC427F5DC6B00E2188D /* NSString+PW_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7ACC327F5DC6B00E2188D /* NSString+PW_String.m */; };
@@ -1557,6 +1558,7 @@
 		5CE19FA228193390008C37A3 /* PW_DappPayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappPayModel.m; sourceTree = "<group>"; };
 		5CE19FA4281A5028008C37A3 /* PW_DappMinersFeeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_DappMinersFeeView.h; sourceTree = "<group>"; };
 		5CE19FA5281A5028008C37A3 /* PW_DappMinersFeeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_DappMinersFeeView.m; sourceTree = "<group>"; };
+		5CE4EA1929ADFF1600139ABA /* PWWalletTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWWalletTool.swift; sourceTree = "<group>"; };
 		5CE7ACBB27F5CE6100E2188D /* PW_ScanTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanTool.h; sourceTree = "<group>"; };
 		5CE7ACBC27F5CE6200E2188D /* PW_ScanTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PW_ScanTool.m; sourceTree = "<group>"; };
 		5CE7ACBE27F5D68300E2188D /* PW_ScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PW_ScanViewController.h; sourceTree = "<group>"; };
@@ -3405,6 +3407,7 @@
 		5C71192427BB7ABC00FE9B51 /* Web3 */ = {
 			isa = PBXGroup;
 			children = (
+				5CE4EA1829ADFF0300139ABA /* Private */,
 				5CCBD7B428A4E9EF00EFA24A /* Contract */,
 				5C71192527BB7ABC00FE9B51 /* NetWork */,
 				5C71192B27BB7ABC00FE9B51 /* Web3WebView */,
@@ -3828,6 +3831,14 @@
 				5CE0552B28606C9600B68A6B /* PW_LockTool.m */,
 			);
 			path = Lock;
+			sourceTree = "<group>";
+		};
+		5CE4EA1829ADFF0300139ABA /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				5CE4EA1929ADFF1600139ABA /* PWWalletTool.swift */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		5CE7ACBA27F5CE4900E2188D /* Scan */ = {
@@ -5369,21 +5380,21 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaSecurity/CocoaSecurity.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GMEllipticCurveCrypto/GMEllipticCurveCrypto.framework",
+				"${BUILT_PRODUCTS_DIR}/GenericJSON/GenericJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JJException/JJException.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/LBXScan/LBXScan.framework",
+				"${BUILT_PRODUCTS_DIR}/Logging/Logging.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
@@ -5397,29 +5408,29 @@
 				"${BUILT_PRODUCTS_DIR}/TweetNacl/TweetNacl.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
-				"${BUILT_PRODUCTS_DIR}/Web3/Web3.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+				"${BUILT_PRODUCTS_DIR}/web3.swift/web3.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaSecurity.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GMEllipticCurveCrypto.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GenericJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJException.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LBXScan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Logging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
@@ -5433,8 +5444,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TweetNacl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5531,6 +5542,7 @@
 				5CE7ACC027F5D68300E2188D /* PW_ScanViewController.m in Sources */,
 				9937C8B7271672810064BBC3 /* BrowseModel.m in Sources */,
 				5CB8BBB527E212A700C73976 /* BrowseWebViewController.m in Sources */,
+				5CE4EA1A29ADFF1600139ABA /* PWWalletTool.swift in Sources */,
 				5C2976CF28A0C88800CF382A /* PW_NFTCollectionModel.m in Sources */,
 				5C6712FB281131960088A1A5 /* PW_MarketHeaderView.m in Sources */,
 				994AA0F826CA3CE10062F9AF /* MinerFeeCell.m in Sources */,
@@ -6331,7 +6343,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6479,7 +6491,7 @@
 					include,
 				);
 				INFOPLIST_FILE = TokenWalletProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
