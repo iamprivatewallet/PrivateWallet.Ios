@@ -304,19 +304,35 @@
 }
 //签名
 - (void)signDataWithMessage:(NSString *)message address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
-    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-    NSString *result = [PWWalletTool signMessageWithPrivateKey:wallet.priKey msg:message];
-    if (result!=nil) {
-        respModel.result = result;
-    }else{
+    NSString *content = [PWWalletTool getMessageWithMsg:message];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"Authorization of signature" message:content preferredStyle:UIAlertControllerStyleAlert];
+    alertC.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"Sure" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+        NSString *result = [PWWalletTool signMessageWithPrivateKey:wallet.priKey msg:message];
+        if (result!=nil) {
+            respModel.result = result;
+        }else{
+            DSError *error = [[DSError alloc] init];
+            error.message = @"sign error";
+            error.code = -1;
+            respModel.error = error;
+        }
+        if (completionHandler) {
+            completionHandler(respModel);
+        }
+    }];
+    [alertC addAction:sureAction];
+    [alertC addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         DSError *error = [[DSError alloc] init];
-        error.message = @"sign error";
+        error.message = @"sign cancel";
         error.code = -1;
         respModel.error = error;
-    }
-    if (completionHandler) {
-        completionHandler(respModel);
-    }
+        if (completionHandler) {
+            completionHandler(respModel);
+        }
+    }]];
+    [TheAppDelegate.rootNavigationController presentViewController:alertC animated:YES completion:nil];
 //    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
 //        NSString *sign = NSStringWithFormat(@"0x%@",result);
 //        respModel.result = sign.lowercaseString;
@@ -347,23 +363,24 @@
         data = [NSData new];
     }
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
-        NSString *sign = NSStringWithFormat(@"0x%@",result);
-        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-            if (errorDesc!=nil&&errorDesc.length>0) {
-                DSError *error = [[DSError alloc] init];
-                error.message = errorDesc;
-                error.code = -1;
-                respModel.error = error;
-            }
-            if (hash!=nil) {
-                respModel.result = @[hash];
-            }
-            if (completionHandler) {
-                completionHandler(respModel);
-            }
-        }];
-    }];
+    [self signDataWithMessage:message address:address respModel:respModel completionHandler:completionHandler];
+//    [FchainTool genSign:wallet.priKey content:message type:Ethereum block:^(NSString * _Nonnull result) {
+//        NSString *sign = NSStringWithFormat(@"0x%@",result);
+//        [self ETHTransferWithSign:sign completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//            if (errorDesc!=nil&&errorDesc.length>0) {
+//                DSError *error = [[DSError alloc] init];
+//                error.message = errorDesc;
+//                error.code = -1;
+//                respModel.error = error;
+//            }
+//            if (hash!=nil) {
+//                respModel.result = @[hash];
+//            }
+//            if (completionHandler) {
+//                completionHandler(respModel);
+//            }
+//        }];
+//    }];
 }
 /**
  * 方法示例  第一个方法注释 适用于下面所有方法

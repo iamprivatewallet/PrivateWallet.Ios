@@ -27,17 +27,20 @@ class TestEthereumKeyStorage: EthereumSingleKeyStorageProtocol {
 
 class PWWalletTool:NSObject {
     @objc class func signMessage(privateKey: String, msg: String) -> String? {
+        let message = self.getMessage(msg: msg)
+        guard let message = message else { return nil }
+        let account = try? EthereumAccount(keyStorage: TestEthereumKeyStorage(privateKey: privateKey))
+        guard let data = message.data(using: .ascii) else { return nil }
+        return try? account?.signMessage(message: data)
+    }
+    @objc class func getMessage(msg: String) -> String? {
         var content = msg
         if(content.hasPrefix("0x")){
             content = String(content[content.index(content.startIndex, offsetBy: 2)...])
         }
         let res = content.hexadecimal()
         guard let res = res else { return nil }
-        let message = String(data: res, encoding: .utf8)
-        guard let message = message else { return nil }
-        let account = try? EthereumAccount(keyStorage: TestEthereumKeyStorage(privateKey: privateKey))
-        guard let data = message.data(using: .ascii) else { return nil }
-        return try? account?.signMessage(message: data)
+        return String(data: res, encoding: .utf8)
     }
 }
 

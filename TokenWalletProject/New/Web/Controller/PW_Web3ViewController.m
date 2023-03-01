@@ -83,7 +83,9 @@
         make.height.offset(kNavBarHeight);
     }];
     [self createNavItems];
-    self.webView = [[Web3WebView alloc] init];
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.allowsInlineMediaPlayback = YES;
+    self.webView = [[Web3WebView alloc] initWithFrame:CGRectZero configuration:configuration];
     self.webView.DSUIDelegate = self;
 //    self.webView = [[WKWebView alloc] init];
     // UI代理

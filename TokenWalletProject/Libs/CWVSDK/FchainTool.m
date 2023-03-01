@@ -265,7 +265,9 @@
 
 //根据私钥导入钱包
 + (void)importPriKey:(Wallet *)model errorBlock:(void(^)(NSString *errorType))block{
-    
+    if([model.priKey hasPrefix:@"0x"]) {
+        model.priKey = [model.priKey substringFromIndex:2];
+    }
     NSArray * array = [[PW_WalletManager shared] selctWalletWithPrikey:model.priKey type:model.type];
     if (!array || array == nil || array.count>0) {
         block(@"1");
@@ -286,7 +288,7 @@
     
     NSString * wName = [NSString stringWithFormat:@"%@-%@",model.type,[CATCommon getRandomStringWithNum:4]];
 
-    if ([address isEqualToString:@"undefined"]) {
+    if (address==nil||[address isEqualToString:@""]||[address isEqualToString:@"undefined"]) {
         block(@"2");
         return;
     }
