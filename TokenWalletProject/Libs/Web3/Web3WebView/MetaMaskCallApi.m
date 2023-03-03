@@ -48,7 +48,7 @@
         [self ethBlockNumber:model completionHandler:completionHandler];
     }else if([model.method isEqualToString:@"eth_call"]){
         [self ethCall:model completionHandler:completionHandler];
-    }else if([model.method isEqualToString:@"eth_getTransactionReceipt"]){//根据hash查询交易信息
+    }else if([model.method isEqualToString:@"eth_getTransactionReceipt"]||[model.method isEqualToString:@"eth_getTransactionByHash"]){//根据hash查询交易信息
 //        MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
 //        respModel.id = model.id;
 //        respModel.jsonrpc = model.jsonrpc;
@@ -121,9 +121,21 @@
 }
 - (void)sendTransaction:(MetaMaskRepModel *)model dict:(NSDictionary *)dataDict completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {
     NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
+    NSString *gasPrice = dataDictNew[@"gasPrice"];
+    if(gasPrice){
+        [self sendTransactionGasPrice:gasPrice model:model dict:dataDict completionHandler:completionHandler errorBlock:errorBlock];
+    }else{
+        [PWWalletTool getGasPriceWithRpcUrl:User_manager.currentUser.current_Node completionHandler:^(NSString * _Nullable gasPrice) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self sendTransactionGasPrice:[gasPrice strTo16] model:model dict:dataDict completionHandler:completionHandler errorBlock:errorBlock];
+            });
+        }];
+    }
+}
+- (void)sendTransactionGasPrice:(NSString *)gasPrice model:(MetaMaskRepModel *)model dict:(NSDictionary *)dataDict completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {
+    NSMutableDictionary *dataDictNew = [NSMutableDictionary dictionaryWithDictionary:dataDict];
     NSString *data = dataDictNew[@"data"];
     NSString *to = dataDictNew[@"to"];
-    NSString *gasPrice = dataDictNew[@"gasPrice"];
     NSString *gas = dataDictNew[@"gas"];
     NSString *from = dataDictNew[@"from"];
     PW_DappPayModel *payModel = [[PW_DappPayModel alloc] init];
@@ -202,88 +214,110 @@
     }
 }
 - (void)callTransaction:(MetaMaskRepModel *)model dataDictNew:(NSMutableDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler errorBlock:(void(^)(NSString *errorDesc))errorBlock {
-    if(dataDictNew[@"value"]==nil){
-        dataDictNew[@"value"] = dataDictNew[@"data"];
-    }
-    MetaMaskRepModel *tempModel = [[MetaMaskRepModel alloc] init];
-    tempModel.id = model.id;
-    tempModel.jsonrpc = model.jsonrpc;
-    tempModel.method = @"eth_getTransactionCount";
-    //pending latest
+    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+    NSString *dataStr = dataDictNew[@"data"];
+    NSString *valueStr = dataDictNew[@"value"];
     [SVProgressHUD showWithStatus:nil];
-    tempModel.params = [NSMutableArray arrayWithArray:@[[self getCurrentAddress],@"latest"]];
-    [self requestWithModel:tempModel completionHandler:^(MetaMaskRespModel * _Nullable value) {
+    [PWWalletTool sendRawTransactionWithRpcUrl:User_manager.currentUser.current_Node privateKey:wallet.priKey to:dataDictNew[@"to"] value:[valueStr strTo10] dataStr:dataStr gasPrice:[dataDictNew[@"gasPrice"] strTo10] gasLimit:[dataDictNew[@"gas"] strTo10] completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errStr) {
+        NSLog(@"hash====%@",hash);
         [SVProgressHUD dismiss];
-        if (value.result==nil) {
-            if (completionHandler) {
-                completionHandler(value);
+        if (hash==nil) {
+            if (errorBlock) {
+                errorBlock(errStr);
             }
             return;
         }
-        dataDictNew[@"nonce"] = value.result;
-        [SVProgressHUD showWithStatus:nil];
-        [self sendTransactionDict:dataDictNew completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
-            [SVProgressHUD dismiss];
-            if (hash==nil) {
-                if (errorBlock) {
-                    errorBlock(errorDesc);
-                }
-                return;
-            }
-            MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
-            respModel.id = model.id;
-            respModel.jsonrpc = model.jsonrpc;
-            respModel.rawResponse = @"";
-            respModel.result = @[hash];
-            if (completionHandler) {
-                completionHandler(respModel);
-            }
-        }];
-    }];
-}
-// 获取ETH 签名
-- (void)sendTransactionDict:(NSDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
-    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
-    NSDictionary *dic = @{
-        @"nonce":dataDictNew[@"nonce"],
-        @"to_addr":dataDictNew[@"to"],
-        @"value":@"0x0",
-        @"data":dataDictNew[@"data"],
-        @"gas_price":dataDictNew[@"gasPrice"],
-        @"gas":dataDictNew[@"gas"],
-        @"prikey":wallet.priKey
-    };
-    [FchainTool genETHTransactionSign:dic isToken:NO block:^(NSString * _Nonnull result) {
-        NSString *sign = NSStringWithFormat(@"0x%@",result);
-        [self ETHTransferWithSign:sign completionHandler:block];
-    }];
-}
-//ETH 转账
--(void)ETHTransferWithSign:(NSString *)sign completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
-    NSDictionary *parmDic = @{
-                @"id":@"67",
-                @"jsonrpc":@"2.0",
-                @"method":@"eth_sendRawTransaction",
-                @"params":@[sign]
-                };
-    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
-        if (data) {
-            if (data[@"error"]) {
-                if(block){
-                    block(nil,data[@"error"][@"message"]);
-                }
-            }else{
-                if (block) {
-                    block(data[@"result"],nil);
-                }
-            }
-        }else{
-            if(block){
-                block(nil,error.localizedDescription);
-            }
+        MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
+        respModel.id = model.id;
+        respModel.jsonrpc = model.jsonrpc;
+        respModel.rawResponse = @"";
+        respModel.result = hash;
+        if (completionHandler) {
+            completionHandler(respModel);
         }
     }];
+//    if(dataDictNew[@"value"]==nil){
+//        dataDictNew[@"value"] = dataDictNew[@"data"];
+//    }
+//    MetaMaskRepModel *tempModel = [[MetaMaskRepModel alloc] init];
+//    tempModel.id = model.id;
+//    tempModel.jsonrpc = model.jsonrpc;
+//    tempModel.method = @"eth_getTransactionCount";
+//    //pending latest
+//    [SVProgressHUD showWithStatus:nil];
+//    tempModel.params = [NSMutableArray arrayWithArray:@[[self getCurrentAddress],@"latest"]];
+//    [self requestWithModel:tempModel completionHandler:^(MetaMaskRespModel * _Nullable value) {
+//        [SVProgressHUD dismiss];
+//        if (value.result==nil) {
+//            if (completionHandler) {
+//                completionHandler(value);
+//            }
+//            return;
+//        }
+//        dataDictNew[@"nonce"] = value.result;
+//        [SVProgressHUD showWithStatus:nil];
+//        [self sendTransactionDict:dataDictNew completionHandler:^(NSString * _Nullable hash, NSString * _Nullable errorDesc) {
+//            [SVProgressHUD dismiss];
+//            if (hash==nil) {
+//                if (errorBlock) {
+//                    errorBlock(errorDesc);
+//                }
+//                return;
+//            }
+//            MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
+//            respModel.id = model.id;
+//            respModel.jsonrpc = model.jsonrpc;
+//            respModel.rawResponse = @"";
+//            respModel.result = hash;
+//            if (completionHandler) {
+//                completionHandler(respModel);
+//            }
+//        }];
+//    }];
 }
+//// 获取ETH 签名
+//- (void)sendTransactionDict:(NSDictionary *)dataDictNew completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
+//    Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
+//    NSDictionary *dic = @{
+//        @"nonce":dataDictNew[@"nonce"],
+//        @"to_addr":dataDictNew[@"to"],
+//        @"value":dataDictNew[@"value"]?:@"0x0",
+//        @"data":dataDictNew[@"data"],
+//        @"gas_price":dataDictNew[@"gasPrice"],
+//        @"gas":dataDictNew[@"gas"],
+//        @"prikey":wallet.priKey
+//    };
+//    [FchainTool genETHTransactionSign:dic isToken:NO block:^(NSString * _Nonnull result) {
+//        NSString *sign = NSStringWithFormat(@"0x%@",result);
+//        [self ETHTransferWithSign:sign completionHandler:block];
+//    }];
+//}
+////ETH 转账
+//-(void)ETHTransferWithSign:(NSString *)sign completionHandler:(void (^ _Nullable)(NSString * _Nullable hash, NSString * _Nullable errorDesc))block {
+//    NSDictionary *parmDic = @{
+//                @"id":@"67",
+//                @"jsonrpc":@"2.0",
+//                @"method":@"eth_sendRawTransaction",
+//                @"params":@[sign]
+//                };
+//    [AFNetworkClient requestPostWithUrl:User_manager.currentUser.current_Node withParameter:parmDic withBlock:^(id data, NSError *error) {
+//        if (data) {
+//            if (data[@"error"]) {
+//                if(block){
+//                    block(nil,data[@"error"][@"message"]);
+//                }
+//            }else{
+//                if (block) {
+//                    block(data[@"result"],nil);
+//                }
+//            }
+//        }else{
+//            if(block){
+//                block(nil,error.localizedDescription);
+//            }
+//        }
+//    }];
+//}
 - (void)requestWithModel:(MetaMaskRepModel *)model completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     MetaMaskRespModel *respModel = [[MetaMaskRespModel alloc]init];
     respModel.id = model.id;

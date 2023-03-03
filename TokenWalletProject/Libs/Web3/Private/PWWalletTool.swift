@@ -8,6 +8,7 @@
 
 import Foundation
 import web3
+import BigInt
 
 class TestEthereumKeyStorage: EthereumSingleKeyStorageProtocol {
     
@@ -26,6 +27,37 @@ class TestEthereumKeyStorage: EthereumSingleKeyStorageProtocol {
 }
 
 class PWWalletTool:NSObject {
+    @objc class func getGasPrice(rpcUrl: String?) async -> String? {
+        guard let rpcUrl = rpcUrl, let clientUrl = URL(string: rpcUrl) else { return nil }
+        let client = EthereumHttpClient(url: clientUrl)
+        let gasPrice = try? await client.eth_gasPrice()
+        return "\(gasPrice ?? 0)"
+    }
+    @objc class func sendRawTransaction(rpcUrl: String?, privateKey: String, to: String, value: String?, dataStr: String?, gasPrice: String, gasLimit: String, completionHandler: ((_ hash: String?, _ errStr: String?) -> ())?) {
+        guard var dataStr = dataStr else {
+            completionHandler?(nil,"error")
+            return;
+        }
+        if(dataStr.hasPrefix("0x")){
+            dataStr = String(dataStr[dataStr.index(dataStr.startIndex, offsetBy: 2)...])
+        }
+        let account = try? EthereumAccount(keyStorage: TestEthereumKeyStorage(privateKey: privateKey))
+        guard let rpcUrl = rpcUrl, let account = account, let clientUrl = URL(string: rpcUrl), let value = BigUInt(value ?? "0"), let data = dataStr.hexadecimal(), let gasPrice = BigUInt(gasPrice), let gasLimit = BigUInt(gasLimit) else {
+            completionHandler?(nil,"error")
+            return;
+        }
+        let client = EthereumHttpClient(url: clientUrl)
+        let transaction = EthereumTransaction(from: account.address, to: EthereumAddress(to), value:value, data: data, gasPrice: gasPrice, gasLimit: gasLimit)
+        client.eth_sendRawTransaction(transaction, withAccount: account, completionHandler: { result in
+            do {
+                let hash = try result.get()
+                completionHandler?(hash,nil)
+            } catch let err {
+                completionHandler?(nil,err.localizedDescription)
+            }
+        })
+//        return try? await client.eth_sendRawTransaction(transaction, withAccount: account)
+    }
     @objc class func signMessage(privateKey: String, msg: String) -> String? {
         let message = self.getMessage(msg: msg)
         guard let message = message else { return nil }
