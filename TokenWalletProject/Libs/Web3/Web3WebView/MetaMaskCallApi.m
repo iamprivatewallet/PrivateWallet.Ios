@@ -392,7 +392,12 @@
 - (void)signDataWithDict:(NSDictionary *)dict address:(NSString *)address respModel:(MetaMaskRespModel *)respModel completionHandler:(void (^ _Nullable)(MetaMaskRespModel * _Nullable value))completionHandler {
     Wallet *wallet = [[SettingManager sharedInstance] getCurrentWallet];
     NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    NSDictionary *jsonObj = @{};
+    if([dict isKindOfClass:[NSString class]]){
+        NSData *jsonData = [((NSString *)dict) dataUsingEncoding:NSUTF8StringEncoding];
+        jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    }
+    NSData *data = [NSJSONSerialization dataWithJSONObject:jsonObj options:NSJSONWritingPrettyPrinted error:&error];
     if(error){
         data = [NSData new];
     }

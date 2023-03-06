@@ -51,9 +51,13 @@ class PWWalletTool:NSObject {
         client.eth_sendRawTransaction(transaction, withAccount: account, completionHandler: { result in
             do {
                 let hash = try result.get()
-                completionHandler?(hash,nil)
+                DispatchQueue.main.async {
+                    completionHandler?(hash,nil)
+                }
             } catch let err {
-                completionHandler?(nil,err.localizedDescription)
+                DispatchQueue.main.async {
+                    completionHandler?(nil,err.localizedDescription)
+                }
             }
         })
 //        return try? await client.eth_sendRawTransaction(transaction, withAccount: account)
